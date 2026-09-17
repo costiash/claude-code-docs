@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-17T01:40:31.023875Z",
+  "generated_at": "2026-09-17T06:15:57.588099Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1060,8 +1060,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "052f866f40dcd71b55f3f4b6f05f5e361573aa38b4db0bf55e6178631b1b8449",
-      "lastmod": "2026-09-16T19:42:26.281Z",
+      "sha256": "3b2476ef129a40f7ea055bae089c5ee17031f1d872a7cd8518be258bb98de749",
+      "lastmod": "2026-09-17T04:04:13.071Z",
       "fetch_status": "ok"
     },
     {
@@ -1379,8 +1379,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "94ac427b5b58b688da9e67844e474caaec004be5dfa564847aa9fc4f8b628282",
-      "lastmod": "2026-09-15T22:32:07.844Z",
+      "sha256": "67dccd0f48a35655d560f921f3974ed2a8c50fb999a9859439d3748dd8a48221",
+      "lastmod": "2026-09-17T04:04:13.042Z",
       "fetch_status": "ok"
     },
     {
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
       "title": "Monitoring",
       "category": "claude_code",
-      "sha256": "cb0e2e3223fa1f7e1b205140b537482aa0a6d3da557188f1202853cd504a8aa6",
-      "lastmod": "2026-09-16T19:42:26.267Z",
+      "sha256": "84ac804235de9291c5f3e789974cc5f2258d9a09df4bec9c55ed21708815e0fd",
+      "lastmod": "2026-09-17T03:58:52.103Z",
       "fetch_status": "ok"
     },
     {
@@ -1555,8 +1555,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-marketplaces.md",
       "title": "Create and distribute a plugin marketplace",
       "category": "claude_code",
-      "sha256": "417eeebe9a3a635e4b1d1db6e7e13e113a1534a153a61f905f36b7e2cb24a74f",
-      "lastmod": "2026-09-16T18:53:27.546Z",
+      "sha256": "31e8773f0cff90d72c6ef8530ba3a6c52438c47c95cb419be4fff315d7ec47f5",
+      "lastmod": "2026-09-17T04:04:13.043Z",
       "fetch_status": "ok"
     },
     {
@@ -1830,8 +1830,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "286bf81d860ce958eb10f6833854461a1b5655b7401dc032ded4a8c684cdce2b",
-      "lastmod": "2026-09-16T19:54:23.033Z",
+      "sha256": "8fdd564085ed6e40e0f4e1ba962c9cdc483b85c33fd2ef59806cfed4f081fc66",
+      "lastmod": "2026-09-17T04:04:13.058Z",
       "fetch_status": "ok"
     },
     {
@@ -2292,8 +2292,8 @@
       "md_url": "https://code.claude.com/docs/en/worktrees.md",
       "title": "Run parallel sessions with worktrees",
       "category": "claude_code",
-      "sha256": "709fa008b76c334107db4abe02772ce824ebebbc18919f0921046ef5642c7494",
-      "lastmod": "2026-09-12T02:10:19.629Z",
+      "sha256": "69cbc30b83b71144bc9f98e200fc12f679765cab9ce6f01e5292b9646d926f17",
+      "lastmod": "2026-09-17T04:04:13.039Z",
       "fetch_status": "ok"
     },
     {
