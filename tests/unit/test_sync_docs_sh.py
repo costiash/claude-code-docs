@@ -90,6 +90,85 @@ class TestFirstRunAndUpdate:
         r = run_hook(home, origin)
         assert "up-to-date" in context_of(r) or "updated" in context_of(r)
 
+    def _fake_git_clone(self, tmp_path, sibling: str):
+        """A git whose `clone` fails the way the loser of a first-run race
+        does: the target dir already exists (a sibling session's clone got
+        there first), so it exits at once. `sibling` models that sibling:
+        "lands" creates the dir and writes the manifest ~1s LATER, in the
+        background, the way a real checkout finishes after the loser has
+        already failed; "hangs" creates the dir and never finishes; "dies"
+        creates the dir and removes it ~1s later (its own clone failed and
+        git cleaned up); "none" means no sibling at all (plain failure,
+        nothing left behind).
+        Every other subcommand goes to the real git."""
+        real_git = shutil.which("git")
+        fake = tmp_path / "bin"
+        fake.mkdir()
+        manifest = "'{\"pages\":[{\"id\":\"p1\"},{\"id\":\"p2\"}]}'"
+        if sibling == "lands":
+            plant = (
+                'target="${@: -1}"; mkdir -p "$target"; '
+                f"(sleep 1; printf '%s' {manifest} > \"$target/paths_manifest.json\") "
+                ">/dev/null 2>&1 & disown; "
+            )
+        elif sibling == "hangs":
+            plant = 'target="${@: -1}"; mkdir -p "$target"; '
+        elif sibling == "dies":
+            plant = (
+                'target="${@: -1}"; mkdir -p "$target"; '
+                '(sleep 1; rm -rf "$target") >/dev/null 2>&1 & disown; '
+            )
+        else:
+            plant = ""
+        (fake / "git").write_text(
+            "#!/bin/bash\n"
+            f'case "$1" in clone) {plant}exit 128 ;; *) exec "{real_git}" "$@" ;; esac\n'
+        )
+        (fake / "git").chmod(0o755)
+        return f"{fake}:{os.environ['PATH']}"
+
+    def test_first_run_clone_lost_race_reports_success(self, tmp_path, origin):
+        """Two first-run sessions start together; the sibling's clone wins.
+        Ours fails instantly on the existing target while the sibling is
+        still checking out — the hook must wait for the manifest and report
+        the install, not 'Failed to clone'."""
+        home = tmp_path / "home"
+        home.mkdir()
+        r = run_hook(home, origin, path=self._fake_git_clone(tmp_path, "lands"))
+        assert r.returncode == 0
+        ctx = context_of(r)
+        assert ctx.startswith("Claude documentation installed (2 pages indexed)."), ctx
+        assert "Failed to clone" not in ctx
+
+    def test_first_run_sibling_still_installing_is_reported(self, tmp_path, origin):
+        """The sibling's checkout outlives our bounded wait: say so, do not
+        claim failure (the sibling is still working) or success."""
+        home = tmp_path / "home"
+        home.mkdir()
+        r = run_hook(home, origin, budget="3", path=self._fake_git_clone(tmp_path, "hangs"))
+        assert r.returncode == 0
+        ctx = context_of(r)
+        assert ctx.startswith("Another session is installing Claude documentation"), ctx
+
+    def test_first_run_sibling_clone_dies_reports_failure(self, tmp_path, origin):
+        """The sibling's clone fails after creating the dir (git removes it):
+        stop waiting as soon as the dir is gone and report the failure."""
+        home = tmp_path / "home"
+        home.mkdir()
+        r = run_hook(home, origin, budget="8", path=self._fake_git_clone(tmp_path, "dies"))
+        assert r.returncode == 0
+        assert context_of(r).startswith("Failed to clone Claude documentation."), context_of(r)
+        assert not (home / ".claude-code-docs").exists()
+
+    def test_first_run_clone_failure_still_reported(self, tmp_path, origin):
+        """A clone that fails and leaves nothing behind is still a failure."""
+        home = tmp_path / "home"
+        home.mkdir()
+        r = run_hook(home, origin, path=self._fake_git_clone(tmp_path, "none"))
+        assert r.returncode == 0
+        assert context_of(r).startswith("Failed to clone Claude documentation.")
+        assert not (home / ".claude-code-docs").exists()
+
 
 class TestSyncLockDelegation:
     def test_hook_cleans_legacy_lock_and_still_syncs(self, tmp_path, origin):

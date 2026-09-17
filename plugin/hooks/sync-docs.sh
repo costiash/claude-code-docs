@@ -221,10 +221,33 @@ if [ ! -d "$DOCS_DIR" ]; then
         output_context "Claude docs is being repaired by another session; it will be ready on the next session start."
         exit 0
     fi
+    INSTALLED_NOTE="Pages download to the local cache in the background; /docs works immediately (missing pages fetch on demand)."
     if run_with_timeout "$(cap 30)" git clone --depth 1 "$REPO_URL" "$DOCS_DIR" >/dev/null 2>&1; then
         prune_swap_orphans
         maybe_background_sync
-        output_context "Claude documentation installed ($(doc_count) pages indexed). Pages download to the local cache in the background; /docs works immediately (missing pages fetch on demand)."
+        output_context "Claude documentation installed ($(doc_count) pages indexed). $INSTALLED_NOTE"
+    elif [ -d "$DOCS_DIR" ]; then
+        # Lost a first-run race. git removes a target directory it created
+        # itself when the clone fails, so a DOCS_DIR that survives our failed
+        # clone was created by a sibling session whose clone started first;
+        # ours aborted the moment it saw the directory, long before the
+        # sibling's checkout could land the manifest. Give it a bounded
+        # moment, then report honestly either way instead of a bogus failure.
+        # A directory that vanishes mid-wait means the sibling's clone failed
+        # too (git cleaned up after it): stop waiting and report the failure.
+        wait_secs=$(cap 10); waited=0
+        while [ ! -f "$MANIFEST" ] && [ -d "$DOCS_DIR" ] && [ "$waited" -lt "$wait_secs" ]; do
+            sleep 1; waited=$((waited + 1))
+        done
+        if [ -f "$MANIFEST" ]; then
+            prune_swap_orphans
+            maybe_background_sync
+            output_context "Claude documentation installed ($(doc_count) pages indexed). $INSTALLED_NOTE"
+        elif [ -d "$DOCS_DIR" ]; then
+            output_context "Another session is installing Claude documentation; it will be ready on the next session start."
+        else
+            output_context "Failed to clone Claude documentation. Run: git clone $REPO_URL $DOCS_DIR"
+        fi
     else
         output_context "Failed to clone Claude documentation. Run: git clone $REPO_URL $DOCS_DIR"
     fi
