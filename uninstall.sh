@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-# Claude Code Docs — Uninstaller v2.0.3
+# Claude Code Docs — Uninstaller v2.1.0
 
-echo "Claude Code Docs — Uninstaller v2.0.3"
+echo "Claude Code Docs — Uninstaller v2.1.0"
 echo "====================================="
 echo ""
 

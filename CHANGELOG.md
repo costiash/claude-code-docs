@@ -5,6 +5,53 @@ All notable changes to claude-code-docs will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-09-17
+
+A polish release from a clean-machine walkthrough of the install path. Three
+small things a first-time user could hit are fixed, the `/docs` help block now
+lists every route it can actually take, the README carries install numbers
+that were measured rather than estimated, and the plugin gains an (empty for
+now) `agents/` directory in preparation for the 2.2 specialist agents.
+
+### Fixed
+- **Two sessions starting at once no longer report a failed install.** When two
+  first-run sessions raced, the second `git clone` aborted within milliseconds
+  because the first had already created the directory, and the hook told the
+  user the install had failed while it was in fact completing next door. The
+  hook now recognises a surviving directory as a sibling's clone (git removes
+  a directory it created itself when a clone fails), waits a bounded moment
+  for the manifest inside the hook's time budget, and reports "installed" or
+  "another session is installing" honestly. Verified with real concurrent
+  runs; messages on every other path are byte-identical.
+- **`uninstall.sh` told the truth only interactively.** Run without a terminal
+  it keeps the local docs and prints a manual hint, but still ended with
+  "Uninstall complete." The closing line now says what happened and where the
+  docs were kept, and the manual `rm -rf` hint is shell-quoted so it is safe
+  to paste whatever the home directory path contains.
+- **Broad searches printed `sort: write failed: Broken pipe` on stderr.** The
+  content search ignores SIGPIPE so it survives an early-closing reader, and
+  child processes inherit that, so the sort feeding `head -20` complained on
+  any query with more candidates than a pipe buffer. Both ranking pipelines
+  are quiet now; genuine errors (no index and no cache, no keywords) still
+  report on stderr with exit 1.
+
+### Added
+- **`/docs status`** runs `fetch-docs.sh status` and presents its five
+  counts (manifest pages, syncable, cached, pending, stale), explaining that
+  its exit code 2 means "pages pending" rather than an error.
+- **`plugin/agents/`** scaffold, documented in the maintainer topology, ready
+  for the auto-namespaced `claude-docs:*` agents that ship in 2.2.
+
+### Changed
+- **The `/docs` help block lists every route.** `--stats` and `uninstall` were
+  routed but never advertised; they are now, alongside `status`.
+- **README install numbers are measured.** Three fresh-machine runs against
+  the 838-page manifest: first session ready in 1–2 s, full page cache in
+  about 45–50 s, cache about 50 MB, metadata clone about 4–5 MB (the clone
+  size in the comparison table moves from ~3 MB to ~4 MB accordingly).
+- New offline tests cover the hook race, the uninstaller's non-interactive
+  output, and the search script's stderr on both search strategies.
+
 ## [2.0.3] - 2026-09-17
 
 Three CI workflows had been red for weeks without biting: the 3-hourly manifest
