@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-18T00:20:14.733748Z",
+  "generated_at": "2026-09-18T03:13:43.731987Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "dc422c8244c3797f8baffe6ead02b74551c368901e693e27452bb17bb8551d45",
+      "sha256": "5da0235f1b51628a11b290f4f612fdd5423cbcf137b2b3ad180a306bccc3182f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "a530867b2983fc2815231161c6107c467338211cf6da9610dfaa48a05e3f4934",
-      "lastmod": "2026-09-17T22:43:00.103Z",
+      "sha256": "91154c90ef0f2959a50159a5f76238255d87034bd33fbf4b9423df03d3ebf53c",
+      "lastmod": "2026-09-18T02:21:19.373Z",
       "fetch_status": "ok"
     },
     {
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/discover-plugins.md",
       "title": "Discover and install prebuilt plugins through marketplaces",
       "category": "claude_code",
-      "sha256": "b5235a7b83b95192aeadfc078fcbd424ecdeb949fa88bc5bfd82513d6e633b11",
-      "lastmod": "2026-09-16T18:53:27.529Z",
+      "sha256": "2600fca633e0c31edd0ac5a0f8816e1fedee1f554c4c3ed6acc393966b2a1784",
+      "lastmod": "2026-09-18T01:33:14.483Z",
       "fetch_status": "ok"
     },
     {
@@ -1533,8 +1533,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-dependencies.md",
       "title": "Constrain plugin dependency versions",
       "category": "claude_code",
-      "sha256": "00a0c4ecf579422dcf1e8cced5d41ef0cbc0f9f49875495f08db3bee04237cfd",
-      "lastmod": "2026-09-15T21:20:07.903Z",
+      "sha256": "51a35b04e9dca54f568fcd70351f8db009aa75a40cdb87a34e5a4b309c93d434",
+      "lastmod": "2026-09-18T01:33:14.484Z",
       "fetch_status": "ok"
     },
     {
@@ -1566,8 +1566,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-marketplaces.md",
       "title": "Create and distribute a plugin marketplace",
       "category": "claude_code",
-      "sha256": "31e8773f0cff90d72c6ef8530ba3a6c52438c47c95cb419be4fff315d7ec47f5",
-      "lastmod": "2026-09-17T04:04:13.043Z",
+      "sha256": "6564466c4d9d9e93a67ddbcd1781fe4cf73ec1aa06a41383eeb47f6637b0a689",
+      "lastmod": "2026-09-18T01:33:14.482Z",
       "fetch_status": "ok"
     },
     {
@@ -1599,8 +1599,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins-reference.md",
       "title": "Plugins reference",
       "category": "claude_code",
-      "sha256": "d5de53e3435750235e0cd4549b51f1bf19ad8b622a5ff945901d8484f0cedba2",
-      "lastmod": "2026-09-16T18:53:27.543Z",
+      "sha256": "5c1824cd1851c35e079c72db49e383bac26cd376fddb6b96ca6df2ecf980e544",
+      "lastmod": "2026-09-18T01:33:14.479Z",
       "fetch_status": "ok"
     },
     {
@@ -1676,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/sandboxing.md",
       "title": "Configure the sandboxed Bash tool",
       "category": "claude_code",
-      "sha256": "f4aea577087c100af55310a11beb32fc079684124c00d34d487bd7c9be9419b6",
-      "lastmod": "2026-09-15T23:26:05.918Z",
+      "sha256": "c1b48d15ec7181a1839b6c519757fd51d499ec72c6718a6296d7a8629baa18d0",
+      "lastmod": "2026-09-18T01:24:23.913Z",
       "fetch_status": "ok"
     },
     {
