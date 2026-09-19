@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T03:14:53.170216Z",
+  "generated_at": "2026-09-19T06:15:51.563550Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9140,38 +9140,38 @@
       ],
       "terms": {
         "fix": 3316,
-        "session": 1491,
+        "session": 1492,
         "now": 1201,
-        "claude": 905,
-        "add": 693,
+        "claude": 907,
+        "add": 694,
         "instead": 622,
         "tool": 591,
         "after": 583,
         "improv": 552,
         "command": 549,
-        "update": 546,
+        "update": 548,
         "prompt": 531,
         "agent": 528,
-        "mode": 498,
-        "show": 481,
+        "mode": 501,
+        "show": 482,
         "background": 472,
-        "code": 438,
+        "code": 439,
         "being": 431,
         "error": 420,
         "fail": 415,
         "model": 380,
         "plugin": 359,
         "mcp": 353,
-        "server": 350,
-        "chang": 343,
+        "server": 352,
+        "chang": 344,
         "terminal": 323,
         "file": 297,
         "window": 293,
-        "description": 289,
+        "description": 290,
         "permission": 285,
-        "label": 276,
+        "label": 277,
+        "auto": 271,
         "setting": 269,
-        "auto": 268,
         "vscode": 267,
         "remote": 257,
         "runn": 245,
@@ -9190,7 +9190,7 @@
         "work": 206,
         "while": 204
       },
-      "word_count": 114989
+      "word_count": 115060
     },
     {
       "filename": "claude-code__channels.md",
@@ -15684,7 +15684,7 @@
           "level": 4
         },
         {
-          "text": "Penerapan",
+          "text": "Penyebaran",
           "level": 4
         },
         {
@@ -15810,7 +15810,7 @@
           "level": 5
         },
         {
-          "text": "Crea con Claude Code",
+          "text": "Sviluppa con Claude Code",
           "level": 3
         },
         {
@@ -16072,11 +16072,11 @@
           "level": 4
         },
         {
-          "text": "\u30af\u30e9\u30a6\u30c9\u5185\u306e Claude Code",
+          "text": "Claude Code \u30af\u30e9\u30a6\u30c9\u7248",
           "level": 5
         },
         {
-          "text": "Claude Code\uff08\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248\uff09",
+          "text": "Claude Code \u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248",
           "level": 5
         },
         {
@@ -16128,7 +16128,7 @@
           "level": 4
         },
         {
-          "text": "\u30c7\u30d7\u30ed\u30a4\u30e1\u30f3\u30c8",
+          "text": "\u30c7\u30d7\u30ed\u30a4",
           "level": 4
         },
         {
@@ -16212,7 +16212,7 @@
           "level": 4
         },
         {
-          "text": "\u30b3\u30a2\u30b3\u30f3\u30bb\u30d7\u30c8",
+          "text": "\u30b3\u30a2\u6982\u5ff5",
           "level": 4
         },
         {
@@ -16308,7 +16308,7 @@
         "diff": 3,
         "gitlab": 3
       },
-      "word_count": 2017
+      "word_count": 2018
     },
     {
       "filename": "claude-code__docs___llms__ko.md",

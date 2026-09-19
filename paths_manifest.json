@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T03:14:50.286207Z",
+  "generated_at": "2026-09-19T06:15:49.505310Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "a739ba546e1775c60beefa53510ad652137c32629159b54f8292c2afefa6abbe",
-      "lastmod": "2026-09-19T00:14:24.913Z",
+      "sha256": "837a9299c3415beb26ac7a75847154cbb89e996dc7e4f9ab2a8e6609031c85bb",
+      "lastmod": "2026-09-19T03:19:54.918Z",
       "fetch_status": "ok"
     },
     {
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (197 pages)",
       "category": "claude_code",
-      "sha256": "166e96a9fa2ff6dcb5a5c77ec8f9da9901d537378ffa1005e22b1dc958ead4ee",
+      "sha256": "4723ce304b62336fc08874554e447963a111905576f590703d378c06045dc1c2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (197 pages)",
       "category": "claude_code",
-      "sha256": "44f4547e7c3a22dc176cde595777f0fe8ab6d33def4874615cb59258904e036a",
+      "sha256": "d36cac015ee0fb24d23d0ee9b9960df81f75a8fbef29d95bf8febe29f2e9312d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (196 pages)",
       "category": "claude_code",
-      "sha256": "d5e63e8d4d7993e066bbf427dcd10c2120d55b7db2139ea3b149ed82845eebb4",
+      "sha256": "07cd793d6baee5c96c82717faf243db4dea530a3649cdf3460350742d1995401",
       "lastmod": null,
       "fetch_status": "ok"
     },
