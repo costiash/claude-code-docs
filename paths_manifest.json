@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T00:21:31.502981Z",
+  "generated_at": "2026-09-19T03:14:50.286207Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "1f84b39533e276c6a5026c2c6a79fa1ccd293af9ab8d78c1b78e8890ab363563",
+      "sha256": "5222e915289dd1c7bc2414e8c3b61db277c1a493f2477c30909462a48571ec0a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "57c3146669dc557a6eb153f7b841b92180753bf85f5cdf812028a02b0d7578ed",
-      "lastmod": "2026-09-18T18:19:04.216Z",
+      "sha256": "a739ba546e1775c60beefa53510ad652137c32629159b54f8292c2afefa6abbe",
+      "lastmod": "2026-09-19T00:14:24.913Z",
       "fetch_status": "ok"
     },
     {
@@ -642,8 +642,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code in the cloud",
       "category": "claude_code",
-      "sha256": "167c5456e0649ced062e5fe06757ebf69ae6499e50fd5970db137b90427eec27",
-      "lastmod": "2026-09-17T23:23:33.822Z",
+      "sha256": "bff22aa7961d6269538c6b0522696bbb6955b71feb02b6311b60a5b68566a6e2",
+      "lastmod": "2026-09-19T00:12:42.475Z",
       "fetch_status": "ok"
     },
     {
@@ -719,8 +719,8 @@
       "md_url": "https://code.claude.com/docs/en/cloud-environments.md",
       "title": "Configure cloud environments",
       "category": "claude_code",
-      "sha256": "db58720701ea159ee6bf0e3fe20f6b49187717497d49d781fee242038c76a200",
-      "lastmod": "2026-09-18T17:18:43.292Z",
+      "sha256": "396efc0ddb0ff3f3f9284900a03645401d039b5cd4759fcc68b5156bf5161dee",
+      "lastmod": "2026-09-19T00:12:42.493Z",
       "fetch_status": "ok"
     },
     {
@@ -961,7 +961,7 @@
       "md_url": "https://code.claude.com/docs/_llms/de.md",
       "title": "German (197 pages)",
       "category": "claude_code",
-      "sha256": "f0ed81130847e204b5ee2d42aff2f31eb72353d37510ed2028feabfff53bce98",
+      "sha256": "99fc52b93b8baccfa7cc603dd50c53b06555859e8f149411759be4c42963d105",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -972,7 +972,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (197 pages)",
       "category": "claude_code",
-      "sha256": "7b55428fe6250810640e5078de11e7f1e28a1751efd657d64536f49f245d2619",
+      "sha256": "cf967ea2c51b226e52ff328f8f98264b0054ceacd1bc5b8be9b7ef896d4b6141",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/fr.md",
       "title": "French (197 pages)",
       "category": "claude_code",
-      "sha256": "3bc95b154b5c4de371ff3f4dccc7296fb4c1d00214f871d7dcb0ce95b7d7b64c",
+      "sha256": "fd189ce58e84d0396ce6e8c5b0ca00277a3e8644ba8c28f5ce6ccda03947ba49",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (197 pages)",
       "category": "claude_code",
-      "sha256": "07ea06279dea6077cb15e198bc6d1ee14a20c4059c47be3fa83d5dff390a1a4e",
+      "sha256": "166e96a9fa2ff6dcb5a5c77ec8f9da9901d537378ffa1005e22b1dc958ead4ee",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (197 pages)",
       "category": "claude_code",
-      "sha256": "966ea9ff8473950785aea849e86e58b83454c898f3b7d3fac39c84e882b834c9",
+      "sha256": "44f4547e7c3a22dc176cde595777f0fe8ab6d33def4874615cb59258904e036a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (196 pages)",
       "category": "claude_code",
-      "sha256": "48f65d9e50f25f9dc92fe6cd1e61a42dccfc0f8a08e7c8b518f2ab534b532c89",
+      "sha256": "d5e63e8d4d7993e066bbf427dcd10c2120d55b7db2139ea3b149ed82845eebb4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1027,7 +1027,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (197 pages)",
       "category": "claude_code",
-      "sha256": "314e3cd28237a7d4085b2bdcbbd9cec5e48eda9fb08a16b20b0763950705617f",
+      "sha256": "a7f780c9b86519b48256ab5a8365781c3216eb0aef1929098c413869968cf0ed",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1049,7 +1049,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ru.md",
       "title": "Russian (197 pages)",
       "category": "claude_code",
-      "sha256": "c04330145bb38ff9ba882418bfa5f6943d91d10877c1188cdcb582a9bd206a00",
+      "sha256": "785bd5af96fc228f15bf8f95e5c79e69641192df9057b3d1df34e1bb2936a315",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1060,7 +1060,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-hant.md",
       "title": "Traditional Chinese (197 pages)",
       "category": "claude_code",
-      "sha256": "823213ca7c23a172e0be69ccdaabc201a6f6ef36d033c5f2a79e3b22161e0590",
+      "sha256": "85e2b826f52edd29f1a8b26d333cc4812e1b32a2f5f61738223db0373d0eccda",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1082,8 +1082,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "d869e681b979e9fa112ff40ce61a633ff8dd30e46243f5f21e5024a474613803",
-      "lastmod": "2026-09-18T21:45:38.745Z",
+      "sha256": "6e9fc3562d08087f694491df1e6c04f293222df3f8a1ae3f1066db1b573bdf8b",
+      "lastmod": "2026-09-19T00:12:42.508Z",
       "fetch_status": "ok"
     },
     {
@@ -1500,8 +1500,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "80d07bdc833ffe40c358b2bcc3a9135e15fd0988d964b2922c0456c77c74df16",
-      "lastmod": "2026-09-18T22:58:21.528Z",
+      "sha256": "581e2ab28eff24b699a8201d90468437aac16aa6108225646d5d8d41422f913d",
+      "lastmod": "2026-09-19T02:19:49.889Z",
       "fetch_status": "ok"
     },
     {
@@ -1654,8 +1654,8 @@
       "md_url": "https://code.claude.com/docs/en/routines.md",
       "title": "Automate work with routines",
       "category": "claude_code",
-      "sha256": "d76aa5af0d53c71ec2496c591db62a2774baf98e4455e5876adc328eaf1e5d2d",
-      "lastmod": "2026-09-17T23:02:57.953Z",
+      "sha256": "a893163ca0f7d804962a6b304a30944fa95c84f781c7d61b59b38de2d3b51fc0",
+      "lastmod": "2026-09-19T00:12:42.477Z",
       "fetch_status": "ok"
     },
     {
@@ -1743,7 +1743,7 @@
       "title": "Deploy self-hosted environments to production",
       "category": "claude_code",
       "sha256": "559c0fec720c2ed971c18ca44670e70197c250494da93f0ddff4bbb02176db38",
-      "lastmod": "2026-09-15T21:15:54.542Z",
+      "lastmod": "2026-09-19T00:12:42.493Z",
       "fetch_status": "ok"
     },
     {
@@ -1776,7 +1776,7 @@
       "title": "Self-hosted environments reference",
       "category": "claude_code",
       "sha256": "642bceb936e97d57536c3502bda57ba87980c26598dd14c4d959dd3fe0a8c478",
-      "lastmod": "2026-09-15T21:15:54.544Z",
+      "lastmod": "2026-09-19T00:12:42.491Z",
       "fetch_status": "ok"
     },
     {
@@ -1875,7 +1875,7 @@
       "title": "Claude Code in Slack",
       "category": "claude_code",
       "sha256": "7a58fa817787846249f962a5a17f00a5104b1848172a8ce0df1627bd885bd0f2",
-      "lastmod": "2026-09-15T22:32:07.750Z",
+      "lastmod": "2026-09-19T00:12:42.492Z",
       "fetch_status": "ok"
     },
     {
@@ -1996,7 +1996,7 @@
       "title": "Get started with Claude Code in the cloud",
       "category": "claude_code",
       "sha256": "56b31df35fcb954fd588a4c61e1e936bc79a0b6614b442cc4ae49436a1c5c510",
-      "lastmod": "2026-09-17T23:02:57.954Z",
+      "lastmod": "2026-09-19T00:12:42.473Z",
       "fetch_status": "ok"
     },
     {
