@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T06:15:49.505310Z",
+  "generated_at": "2026-09-20T21:12:25.108194Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -466,8 +466,8 @@
       "md_url": "https://code.claude.com/docs/en/artifacts.md",
       "title": "Share session output as artifacts",
       "category": "claude_code",
-      "sha256": "5452dc9afd6f3d30827bdb0186b3d6d966df2381dc8896a9d3efb894345f30e6",
-      "lastmod": "2026-09-18T17:18:43.291Z",
+      "sha256": "1498338d2eb7a4ef60daca4ec77e7e1a52400e55dddbc2e56ce7db39148eb59d",
+      "lastmod": "2026-09-20T20:37:30.286Z",
       "fetch_status": "ok"
     },
     {
@@ -741,8 +741,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "ba8c67752aac27c6a43317bb5f6abc1a26750c84c50e5e5e40fe8a8929e5601a",
-      "lastmod": "2026-09-18T17:18:43.298Z",
+      "sha256": "e39a4d537052f0537a4dd27ad7e59775662faba8adfa7b5f20b31211c0c476b0",
+      "lastmod": "2026-09-20T20:37:30.297Z",
       "fetch_status": "ok"
     },
     {

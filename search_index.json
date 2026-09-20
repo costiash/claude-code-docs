@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-19T06:15:51.563550Z",
+  "generated_at": "2026-09-20T21:12:28.827085Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -8525,10 +8525,10 @@
         }
       ],
       "terms": {
-        "claude": 134,
+        "claude": 133,
         "artifact": 132,
         "page": 94,
-        "publish": 42,
+        "publish": 41,
         "session": 40,
         "connector": 39,
         "viewer": 34,
@@ -8543,40 +8543,40 @@
         "comment": 23,
         "read": 21,
         "link": 20,
+        "each": 20,
         "turn": 19,
         "open": 19,
         "data": 19,
-        "each": 19,
         "control": 18,
         "shar": 17,
-        "version": 16,
         "own": 16,
         "setting": 16,
+        "version": 15,
         "prompt": 15,
         "off": 15,
         "reply": 15,
         "through": 14,
         "back": 14,
-        "account": 14,
         "public": 13,
         "set": 13,
         "one": 13,
         "without": 13,
         "download": 13,
+        "account": 13,
         "enterprise": 12,
         "someone": 12,
         "design": 12,
         "instead": 12,
         "also": 12,
         "team": 11,
+        "browser": 11,
         "tool": 11,
         "such": 11,
         "stop": 11,
         "thread": 11,
-        "block": 11,
-        "live": 10
+        "block": 11
       },
-      "word_count": 5285
+      "word_count": 5270
     },
     {
       "filename": "claude-code__authentication.md",
@@ -11903,11 +11903,11 @@
         }
       ],
       "terms": {
-        "claude": 150,
+        "claude": 149,
         "code": 103,
         "session": 75,
         "command": 61,
-        "run": 58,
+        "run": 57,
         "skill": 43,
         "requir": 43,
         "open": 40,
@@ -11949,12 +11949,12 @@
         "project": 15,
         "plan": 15,
         "list": 15,
-        "view": 15,
         "type": 14,
         "such": 14,
-        "finish": 14
+        "finish": 14,
+        "change": 14
       },
-      "word_count": 6968
+      "word_count": 6949
     },
     {
       "filename": "claude-code__common-workflows.md",
