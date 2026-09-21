@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T00:21:44.538831Z",
+  "generated_at": "2026-09-21T15:13:48.723000Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -1619,10 +1619,10 @@
         }
       ],
       "terms": {
-        "fix": 3315,
-        "session": 1492,
+        "fix": 3314,
+        "session": 1491,
         "now": 1201,
-        "claude": 904,
+        "claude": 903,
         "add": 694,
         "instead": 622,
         "tool": 591,
@@ -1634,7 +1634,7 @@
         "mode": 501,
         "show": 482,
         "background": 472,
-        "code": 436,
+        "code": 434,
         "being": 431,
         "error": 420,
         "fail": 415,
@@ -1649,7 +1649,7 @@
         "permission": 285,
         "auto": 271,
         "setting": 269,
-        "vscode": 267,
+        "vscode": 266,
         "remote": 257,
         "runn": 245,
         "hook": 239,
@@ -1661,16 +1661,16 @@
         "longer": 225,
         "skill": 224,
         "only": 216,
-        "open": 212,
+        "open": 211,
         "subagent": 210,
         "text": 206,
         "work": 206,
         "while": 204,
-        "conversation": 199,
         "start": 199,
+        "conversation": 198,
         "control": 198
       },
-      "word_count": 113398
+      "word_count": 113381
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -9139,10 +9139,10 @@
         }
       ],
       "terms": {
-        "fix": 3316,
-        "session": 1492,
+        "fix": 3315,
+        "session": 1491,
         "now": 1201,
-        "claude": 907,
+        "claude": 906,
         "add": 694,
         "instead": 622,
         "tool": 591,
@@ -9155,7 +9155,7 @@
         "mode": 501,
         "show": 482,
         "background": 472,
-        "code": 439,
+        "code": 437,
         "being": 431,
         "error": 420,
         "fail": 415,
@@ -9172,7 +9172,7 @@
         "label": 277,
         "auto": 271,
         "setting": 269,
-        "vscode": 267,
+        "vscode": 266,
         "remote": 257,
         "runn": 245,
         "hook": 239,
@@ -9184,13 +9184,13 @@
         "longer": 225,
         "skill": 224,
         "only": 216,
-        "open": 212,
+        "open": 211,
         "subagent": 210,
         "text": 206,
         "work": 206,
         "while": 204
       },
-      "word_count": 115060
+      "word_count": 115043
     },
     {
       "filename": "claude-code__channels.md",
