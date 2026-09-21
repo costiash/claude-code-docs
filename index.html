@@ -3,35 +3,1098 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Claude Code Docs — Community Plugin for the Official Claude Documentation</title>
-  <meta name="description" content="Community Claude Code plugin with auto-discovery Skill. Live searchable index of the official Claude documentation — API, Agent SDK, Claude Code CLI, and 6 language SDKs — fetched fresh from Anthropic's servers on demand. AI-powered search via /docs command.">
-  <meta name="keywords" content="Claude Code, Claude API, Anthropic, documentation, Claude Code Plugin, auto-discovery, AI search, Agent SDK, developer tools, CLI">
-  <link rel="canonical" href="https://github.com/costiash/claude-code-docs">
-  <meta property="og:title" content="Claude Code Docs — Community Plugin for the Official Claude Documentation">
-  <meta property="og:description" content="Community Claude Code plugin with auto-discovery Skill. Every official Claude doc page, fetched live from the source. Covers API, Agent SDK, CLI, and 6 language SDKs.">
-  <meta property="og:url" content="https://github.com/costiash/claude-code-docs">
+  <title>Claude Code Docs — Every official Claude doc page, always live</title>
+  <meta name="description" content="Community Claude Code plugin that indexes every official Claude documentation page — API, Agent SDK, Claude Code CLI — and fetches each page live from Anthropic's servers. Re-indexed every 3 hours. Pure bash + curl + jq.">
+  <meta name="keywords" content="Claude Code, Claude API, Anthropic, documentation, Claude Code plugin, auto-discovery, Agent SDK, developer tools, CLI, /docs">
+  <link rel="canonical" href="https://costiash.github.io/claude-code-docs/">
+  <meta property="og:title" content="Claude Code Docs — Every official Claude doc page, always live">
+  <meta property="og:description" content="A 3 MB map of the entire Claude documentation set. Your Claude reads the real, current page from Anthropic — never a stale copy. Two commands to install.">
+  <meta property="og:url" content="https://costiash.github.io/claude-code-docs/">
   <meta property="og:type" content="website">
-  <meta http-equiv="refresh" content="3;url=https://github.com/costiash/claude-code-docs">
+  <meta property="og:image" content="https://costiash.github.io/claude-code-docs/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Claude Code Docs: the Claude Code plugin for every official Claude doc page, always live, never redistributed.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Claude Code Docs — Every official Claude doc page, always live">
+  <meta name="twitter:description" content="Community Claude Code plugin. A 3 MB map of the whole Claude documentation set; your Claude reads the real, current page from Anthropic. Two commands to install.">
+  <meta name="twitter:image" content="https://costiash.github.io/claude-code-docs/og-image.png">
+  <meta name="theme-color" content="#0b0b0e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0e'/%3E%3Cpath d='M20 18h24M20 32h24M20 46h14' stroke='%23f5a623' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Claude Code Docs",
+    "alternateName": "claude-code-docs",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "macOS, Linux",
+    "url": "https://costiash.github.io/claude-code-docs/",
+    "codeRepository": "https://github.com/costiash/claude-code-docs",
+    "description": "Community Claude Code plugin that indexes every official Claude documentation page and fetches each page live from Anthropic's servers. Auto-discovery, /docs lookups, interactive courses, and changelog reports.",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "costiash", "url": "https://github.com/costiash" },
+    "keywords": "Claude Code, Claude Code plugin, Claude documentation, Anthropic API, Agent SDK, developer tools"
+  }
+  </script>
+  <script>document.documentElement.classList.add("js");</script>
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; max-width: 600px; margin: 80px auto; padding: 0 20px; text-align: center; color: #e0e0e0; background: #0d1117; }
-    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    p { color: #8b949e; line-height: 1.6; }
-    a { color: #58a6ff; }
-    code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
-    .install { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; margin: 24px 0; text-align: left; overflow-x: auto; }
-    .install code { background: none; padding: 0; }
-    .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #58a6ff; margin-bottom: 6px; }
+    :root {
+      --bg: #0b0b0e;
+      --bg-2: #101015;
+      --surface: #15151c;
+      --surface-2: #1b1b24;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #ece9e3;
+      --text-2: #b3afa7;
+      --muted: #8a867f;
+      --amber: #f5a623;
+      --amber-2: #ffc457;
+      --amber-deep: #b8701a;
+      --amber-glow: rgba(245, 166, 35, 0.18);
+      --green: #6ee7a0;
+      --red: #f87171;
+      --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --radius: 14px;
+      --max: 1120px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    a { color: var(--amber-2); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    code, kbd, pre { font-family: var(--mono); }
+    code { font-size: 0.9em; background: rgba(255, 255, 255, 0.06); padding: 2px 6px; border-radius: 6px; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .wrap { width: min(var(--max), 100% - 32px); margin-inline: auto; position: relative; z-index: 1; }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background: rgba(11, 11, 14, 0.7);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .nav.scrolled { border-bottom-color: var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; letter-spacing: -0.01em; }
+    .brand:hover { text-decoration: none; }
+    .brand svg { width: 26px; height: 26px; }
+    .brand .tag { font-family: var(--mono); font-size: 11px; color: var(--muted); font-weight: 400; padding: 2px 7px; border: 1px solid var(--line); border-radius: 999px; }
+    .nav-links { display: flex; gap: 6px; align-items: center; }
+    .nav-links a { color: var(--text-2); font-size: 14px; padding: 8px 12px; border-radius: 8px; }
+    .nav-links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); text-decoration: none; }
+    .nav-links .gh { display: inline-flex; align-items: center; gap: 7px; color: var(--text); border: 1px solid var(--line-strong); margin-left: 6px; }
+    .nav-links .gh svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 720px) {
+      .nav-links a:not(.gh) { display: none; }
+      .brand { white-space: nowrap; }
+      .brand .tag { display: none; }
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 10px; font-weight: 600; font-size: 15px;
+      border: 1px solid var(--line-strong); color: var(--text); background: var(--surface);
+      transition: transform 0.2s var(--ease), background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); background: var(--surface-2); border-color: rgba(255, 255, 255, 0.22); }
+    .btn.primary { background: var(--amber); color: #1a1205; border-color: var(--amber); }
+    .btn.primary:hover { background: var(--amber-2); border-color: var(--amber-2); }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 96px 0 72px; overflow: hidden; }
+    .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.7; }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 50% 0%, var(--amber-glow), transparent 70%),
+        linear-gradient(to bottom, transparent 40%, var(--bg) 100%);
+    }
+    .hero .wrap { text-align: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--amber-2); border: 1px solid rgba(245, 166, 35, 0.3); background: rgba(245, 166, 35, 0.06);
+      padding: 6px 12px; border-radius: 999px;
+    }
+    .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(110, 231, 160, 0.2); }
+    h1 {
+      font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em;
+      font-size: clamp(42px, 7vw, 82px); line-height: 1.02; margin: 26px auto 20px; max-width: 17ch;
+    }
+    h1 em { font-style: italic; color: var(--amber-2); }
+    .lede { font-size: clamp(17px, 2vw, 20px); color: var(--text-2); max-width: 62ch; margin: 0 auto 36px; }
+    .lede strong { color: var(--text); font-weight: 500; }
+
+    .install {
+      max-width: 640px; margin: 0 auto; text-align: left;
+      background: rgba(21, 21, 28, 0.85); border: 1px solid var(--line-strong); border-radius: var(--radius);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+    .install .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .install .bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3a44; display: inline-block; }
+    .install .bar i:nth-child(1) { background: #ff5f57; } .install .bar i:nth-child(2) { background: #febc2e; } .install .bar i:nth-child(3) { background: #28c840; }
+    .install .bar span { margin-left: 6px; }
+    .cmd { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+    .cmd + .cmd { border-top: 1px solid var(--line); }
+    .cmd .prompt { color: var(--amber); font-family: var(--mono); user-select: none; }
+    .cmd code { background: none; padding: 0; font-size: 14px; flex: 1; white-space: nowrap; overflow-x: auto; color: var(--text); }
+    .copy {
+      flex: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+      font-family: var(--mono); font-size: 12px; color: var(--muted);
+      background: transparent; border: 1px solid var(--line); border-radius: 7px; padding: 5px 9px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .copy:hover { color: var(--text); border-color: var(--line-strong); background: rgba(255, 255, 255, 0.04); }
+    .copy.done { color: var(--green); border-color: rgba(110, 231, 160, 0.4); }
+    .copy svg { width: 13px; height: 13px; }
+    .sub { margin: 18px 0 0; color: var(--muted); font-size: 14px; }
+    .sub code { font-size: 13px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin: 56px auto 0; max-width: 900px; }
+    .stat { background: var(--bg-2); padding: 20px 16px; text-align: center; }
+    .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1; color: var(--text); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .stat span { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--mono); }
+    .stat .live { color: var(--green); }
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .cmd code { white-space: pre-wrap; word-break: break-all; font-size: 13px; }
+      .eyebrow { font-size: 11px; }
+    }
+
+    /* ---------- Sections ---------- */
+    section { padding: 88px 0; position: relative; }
+    section + section { border-top: 1px solid var(--line); }
+    .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-2); margin: 0 0 14px; }
+    h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 4.5vw, 50px); line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 16px; max-width: 22ch; }
+    h2 em { font-style: italic; color: var(--amber-2); }
+    .intro { color: var(--text-2); font-size: 17px; max-width: 64ch; margin: 0 0 44px; }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.01em; }
+
+    /* ---------- How it works ---------- */
+    .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 14px; }
+    .node { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
+    .node::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, transparent, var(--amber), transparent); opacity: 0.6; }
+    .node .n { font-family: var(--mono); font-size: 12px; color: var(--amber-2); margin-bottom: 12px; }
+    .node p { margin: 0; color: var(--text-2); font-size: 15px; }
+    .node .where { margin-top: 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .arrow { display: flex; align-items: center; justify-content: center; color: var(--amber-deep); }
+    .arrow svg { width: 28px; height: 28px; }
+    .arrow svg path { stroke-dasharray: 6 4; animation: dash 1.2s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -20; } }
+    @media (max-width: 820px) {
+      .flow { grid-template-columns: 1fr; }
+      .arrow svg { transform: rotate(90deg); }
+    }
+    .callout { margin-top: 28px; padding: 18px 22px; border-left: 3px solid var(--amber); background: rgba(245, 166, 35, 0.05); border-radius: 0 12px 12px 0; color: var(--text-2); font-size: 15px; }
+    .callout strong { color: var(--text); }
+
+    /* ---------- Comparison table ---------- */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 14.5px; }
+    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg-2); }
+    tr:last-child td { border-bottom: 0; }
+    td:first-child { color: var(--text-2); font-weight: 500; }
+    td.us, th.us { background: rgba(245, 166, 35, 0.06); color: var(--text); font-weight: 500; border-left: 1px solid rgba(245, 166, 35, 0.25); }
+    th.us { color: var(--amber-2); }
+    td.bad { color: var(--red); }
+
+    /* ---------- Feature grid ---------- */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px;
+      transition: transform 0.3s var(--ease), border-color 0.3s, background 0.3s; position: relative;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(245, 166, 35, 0.35); background: var(--surface-2); }
+    .card .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: rgba(245, 166, 35, 0.1); border: 1px solid rgba(245, 166, 35, 0.25); margin-bottom: 16px; color: var(--amber-2); }
+    .card .ic svg { width: 18px; height: 18px; }
+    .card p { margin: 0; color: var(--text-2); font-size: 14.5px; }
+    .card code { font-size: 12.5px; }
+    .card .pill { position: absolute; top: 18px; right: 18px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-2); border: 1px solid rgba(245, 166, 35, 0.3); padding: 3px 7px; border-radius: 999px; }
+
+    /* ---------- Watch it work ---------- */
+    .wk { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 20px; align-items: start; }
+    @media (max-width: 960px) { .wk { grid-template-columns: 1fr; } }
+    .wk-session { background: #0a0a0d; border: 1px solid var(--line-strong); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); overflow: hidden; }
+    .wk-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--bg-2); }
+    .wk-head i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .wk-head i:nth-child(1) { background: #ff5f57; } .wk-head i:nth-child(2) { background: #febc2e; } .wk-head i:nth-child(3) { background: #28c840; }
+    .wk-head span { margin-left: 6px; }
+    .wk-head .replay { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: 7px; padding: 4px 10px; cursor: pointer; }
+    .wk-head .replay:hover { color: var(--text); border-color: var(--line-strong); }
+    .wk-log { padding: 16px 18px 18px; min-height: 560px; font-family: var(--mono); font-size: 13px; line-height: 1.7; }
+    .wk-log > * { opacity: 0; transform: translateY(6px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease); }
+    .wk-log > .on { opacity: 1; transform: none; }
+    .wk-user { display: flex; gap: 10px; padding: 10px 12px; margin: 0 0 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); border-radius: 10px; font-family: var(--sans); font-size: 14.5px; color: var(--text); }
+    .wk-user .who { flex: none; font-family: var(--mono); font-size: 11px; color: var(--muted); padding-top: 3px; }
+    .wk-user .txt::after { content: "▍"; color: var(--amber); animation: blink 1s steps(2) infinite; }
+    .wk-user.done .txt::after { content: ""; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .wk-line { display: flex; gap: 10px; align-items: baseline; color: var(--text-2); margin: 2px 0; }
+    .wk-line .tag { flex: none; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); min-width: 64px; text-align: center; }
+    .wk-line .tag.skill { color: var(--amber-2); border-color: rgba(245, 166, 35, 0.35); background: rgba(245, 166, 35, 0.07); }
+    .wk-line .tag.tool { color: #9ecbff; border-color: rgba(158, 203, 255, 0.35); background: rgba(158, 203, 255, 0.07); }
+    .wk-line .tag.hook { color: var(--red); border-color: rgba(248, 113, 113, 0.35); background: rgba(248, 113, 113, 0.07); }
+    .wk-line .tag.ok { color: var(--green); border-color: rgba(110, 231, 160, 0.35); background: rgba(110, 231, 160, 0.07); }
+    .wk-line .k { color: var(--amber-2); } .wk-line .g { color: var(--green); } .wk-line .m { color: var(--muted); }
+    .wk-think { margin: 10px 0; padding: 10px 14px; border-left: 2px solid rgba(245, 166, 35, 0.5); color: var(--text-2); font-family: var(--sans); font-size: 13.5px; font-style: italic; }
+    .wk-think .lbl { display: block; font-family: var(--mono); font-style: normal; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-2); margin-bottom: 4px; }
+    .wk-think p { margin: 4px 0; opacity: 0; transition: opacity 0.4s; }
+    .wk-think p.on { opacity: 1; }
+    .wk-think cite { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .wk-code { margin: 6px 0 10px 74px; padding: 10px 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); border-radius: 8px; font-size: 12px; line-height: 1.55; color: var(--text-2); white-space: pre; overflow-x: auto; }
+    .wk-code .s { color: var(--amber-2); } .wk-code .c { color: var(--muted); } .wk-code .b { color: var(--green); } .wk-code .add { color: var(--green); }
+    .wk-final { margin-top: 12px; padding: 12px 14px; background: rgba(110, 231, 160, 0.05); border: 1px solid rgba(110, 231, 160, 0.25); border-radius: 10px; font-family: var(--sans); font-size: 14px; color: var(--text); }
+    .wk-final .src { margin-top: 8px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); line-height: 1.6; }
+    .wk-final .src a { color: var(--amber-2); }
+    @media (max-width: 640px) { .wk-code { margin-left: 0; } .wk-line .tag { min-width: 0; } }
+
+    .wk-side { display: grid; gap: 14px; }
+    @media (min-width: 961px) { .wk-side { position: sticky; top: 80px; } }
+    .wk-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+    .wk-panel h4 { margin: 0 0 10px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-2); font-weight: 500; }
+    .wk-panel ul { list-style: none; margin: 0; padding: 0; }
+    .wk-panel li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; padding: 6px 0; font-size: 13.5px; color: var(--muted); border-bottom: 1px solid var(--line); transition: color 0.4s; }
+    .wk-panel li:last-child { border-bottom: 0; }
+    .wk-panel li .dot { width: 14px; height: 14px; margin-top: 4px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; transition: background 0.3s, border-color 0.3s; }
+    .wk-panel li .dot svg { width: 9px; height: 9px; opacity: 0; }
+    .wk-panel li.on { color: var(--text-2); }
+    .wk-panel li.on b { color: var(--text); }
+    .wk-panel li.on .dot { background: rgba(110, 231, 160, 0.15); border-color: var(--green); }
+    .wk-panel li.on .dot svg { opacity: 1; }
+    .wk-panel li b { font-weight: 500; display: block; }
+    .wk-panel li small { font-family: var(--mono); font-size: 11px; }
+    .wk-cost { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .wk-cost div { text-align: center; padding: 10px 6px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; }
+    .wk-cost b { display: block; font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1; color: var(--text); }
+    .wk-cost span { display: block; margin-top: 5px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .wk-panel.warn { border-color: rgba(248, 113, 113, 0.25); background: rgba(248, 113, 113, 0.04); }
+    .wk-panel.warn h4 { color: var(--red); }
+    .wk-panel.warn p { margin: 0; font-size: 13.5px; color: var(--text-2); }
+    .wk-panel.warn code { font-size: 12px; }
+
+    /* ---------- Search demo ---------- */
+    .demo { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start; }
+    @media (max-width: 900px) { .demo { grid-template-columns: 1fr; } }
+    .search { background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); }
+    .search .field { display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 16px; border-bottom: 1px solid var(--line); }
+    .search .field svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
+    .search input { flex: 1; background: none; border: 0; color: var(--text); font: 15px var(--sans); padding: 12px 0; outline: none; min-width: 0; }
+    .search input::placeholder { color: var(--muted); }
+    .search .status { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; padding: 4px 8px; }
+    .results { list-style: none; margin: 0; padding: 6px; min-height: 240px; max-height: 420px; overflow-y: auto; }
+    .results li a { display: block; padding: 12px 12px; border-radius: 9px; color: var(--text); }
+    .results li a:hover, .results li a:focus-visible { background: rgba(255, 255, 255, 0.05); text-decoration: none; }
+    .results .t { font-weight: 500; font-size: 15px; }
+    .results .m { display: flex; gap: 10px; align-items: center; margin-top: 4px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+    .results .cat { color: var(--amber-2); }
+    .results .empty { padding: 40px 16px; text-align: center; color: var(--muted); font-size: 14px; }
+    .results mark { background: rgba(245, 166, 35, 0.25); color: var(--text); border-radius: 3px; padding: 0 1px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid var(--line); }
+    .chip { font-family: var(--mono); font-size: 12px; color: var(--text-2); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+    .chip:hover { color: var(--text); border-color: var(--line-strong); }
+    .demo-notes { color: var(--text-2); font-size: 15px; }
+    .demo-notes ul { padding-left: 18px; margin: 14px 0 0; }
+    .demo-notes li { margin: 8px 0; }
+    .demo-notes li strong { color: var(--text); font-weight: 500; }
+
+    /* ---------- Coverage ---------- */
+    .cov { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 40px; }
+    @media (max-width: 720px) { .cov { grid-template-columns: 1fr; } }
+    .bar-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .bar-row .lbl { font-size: 14.5px; }
+    .bar-row .cnt { font-family: var(--mono); font-size: 13px; color: var(--amber-2); font-variant-numeric: tabular-nums; }
+    .bar-row .track { grid-column: 1 / -1; height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 999px; overflow: hidden; }
+    .bar-row .fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--amber-deep), var(--amber-2)); border-radius: 999px; transition: width 1.1s var(--ease); }
+    .sources { margin-top: 26px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 18px; }
+    .sources span::before { content: "↗ "; color: var(--amber-deep); }
+
+    /* ---------- Terminal ---------- */
+    .term { background: #0a0a0d; border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); }
+    .tabs { display: flex; gap: 2px; padding: 8px 8px 0; background: var(--bg-2); border-bottom: 1px solid var(--line); overflow-x: auto; }
+    .tab { font-family: var(--mono); font-size: 12.5px; color: var(--muted); background: none; border: 1px solid transparent; border-bottom: 0; padding: 9px 14px; border-radius: 8px 8px 0 0; cursor: pointer; white-space: nowrap; }
+    .tab[aria-selected="true"] { color: var(--text); background: #0a0a0d; border-color: var(--line); position: relative; top: 1px; }
+    .pane { display: none; padding: 20px 22px; font-family: var(--mono); font-size: 13.5px; line-height: 1.75; overflow-x: auto; }
+    .pane[data-active] { display: block; }
+    .pane .p { color: var(--amber); }
+    .pane .c { color: var(--muted); }
+    .pane .o { color: var(--text-2); }
+    .pane .g { color: var(--green); }
+    .pane .k { color: var(--amber-2); }
+    .pane pre { margin: 0; white-space: pre; }
+
+    /* ---------- Two-col (team + safety) ---------- */
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+    .code-block { position: relative; background: #0a0a0d; border: 1px solid var(--line); border-radius: 12px; margin: 18px 0 0; }
+    .code-block pre { margin: 0; padding: 18px 18px; font-size: 13px; line-height: 1.6; overflow-x: auto; color: var(--text-2); }
+    .code-block .copy { position: absolute; top: 10px; right: 10px; background: var(--surface); }
+    .code-block .s { color: var(--amber-2); } .code-block .b { color: var(--green); }
+    .guards { display: grid; gap: 10px; margin-top: 18px; }
+    .guard { display: grid; grid-template-columns: 26px 1fr; gap: 12px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; font-size: 14.5px; color: var(--text-2); }
+    .guard b { color: var(--text); font-weight: 500; display: block; margin-bottom: 2px; }
+    .guard .sh { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: rgba(110, 231, 160, 0.1); color: var(--green); border: 1px solid rgba(110, 231, 160, 0.25); }
+    .guard .sh svg { width: 14px; height: 14px; }
+
+    /* ---------- Footer ---------- */
+    footer { border-top: 1px solid var(--line); padding: 56px 0 40px; color: var(--muted); font-size: 14px; }
+    footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+    @media (max-width: 720px) { footer .cols { grid-template-columns: 1fr; } }
+    footer h4 { margin: 0 0 12px; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-2); font-weight: 500; }
+    footer ul { list-style: none; padding: 0; margin: 0; }
+    footer li { margin: 8px 0; }
+    footer a { color: var(--text-2); }
+    footer a:hover { color: var(--amber-2); }
+    footer .fine { border-top: 1px solid var(--line); padding-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; font-size: 13px; }
+
+    /* ---------- Reveal ---------- */
+    html.js .rv { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    html.js .rv.in { opacity: 1; transform: none; }
+    .rv.d1 { transition-delay: 0.08s; } .rv.d2 { transition-delay: 0.16s; } .rv.d3 { transition-delay: 0.24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      html.js .rv, .rv { opacity: 1; transform: none; transition: none; transition-delay: 0s; }
+      .arrow svg path { animation: none; }
+      .hero canvas { display: none; }
+      .bar-row .fill { transition: none; }
+      .card, .btn { transition: none; }
+    }
   </style>
 </head>
 <body>
-  <h1>Claude Code Docs</h1>
-  <p>Community Claude Code plugin with auto-discovery Skill and AI-powered search across the official Claude documentation.</p>
-  <div class="install">
-    <div class="label">Install</div>
-    <code>/plugin marketplace add costiash/claude-code-docs</code><br>
-    <code>/plugin install claude-docs@claude-code-docs</code>
-  </div>
-  <p>Redirecting to <a href="https://github.com/costiash/claude-code-docs">GitHub repository</a>...</p>
-  <p style="font-size: 0.85rem; margin-top: 40px;">multi-language SDK coverage &middot; auto-updated every 3 hours &middot; no Python runtime — pure bash + curl + jq</p>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Claude Code Docs, back to top">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#15151c" stroke="rgba(255,255,255,.12)"/><path d="M20 18h24M20 32h24M20 46h14" stroke="#f5a623" stroke-width="6" stroke-linecap="round"/></svg>
+        <span>Claude Code Docs</span>
+        <span class="tag" id="nav-version">plugin</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#how">How it works</a>
+        <a href="#watch">Watch it work</a>
+        <a href="#features">Features</a>
+        <a href="#search">Try search</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#safety">Safety</a>
+        <a class="gh" href="https://github.com/costiash/claude-code-docs">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <span class="eyebrow rv"><i class="dot" aria-hidden="true"></i> Community plugin · re-indexed every 3 hours</span>
+        <h1 id="hero-title" class="rv d1">The Claude Code plugin for <em>every</em> official Claude doc page.</h1>
+        <p class="lede rv d2"><strong>Always live, never redistributed.</strong> A 3 MB map of the whole Claude documentation set, installed in seconds. Your Claude reads the <strong>real, current page</strong> straight from Anthropic before it answers, instead of guessing from training data.</p>
+
+        <div class="install rv d3" role="group" aria-label="Install commands">
+          <div class="bar"><i></i><i></i><i></i><span>claude code · two commands</span></div>
+          <div class="cmd"><span class="prompt" aria-hidden="true">›</span><code id="cmd1">/plugin marketplace add costiash/claude-code-docs</code><button class="copy" data-copy="#cmd1" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>copy</button></div>
+          <div class="cmd"><span class="prompt" aria-hidden="true">›</span><code id="cmd2">/plugin install claude-docs@claude-code-docs</code><button class="copy" data-copy="#cmd2" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>copy</button></div>
+        </div>
+        <p class="sub rv d3">No Python. No MCP server. No API keys. The client is pure <code>bash</code> + <code>curl</code> + <code>jq</code>.</p>
+
+        <div class="stats rv d3" aria-label="Live index statistics">
+          <div class="stat"><b id="st-pages">839</b><span>pages indexed</span></div>
+          <div class="stat"><b id="st-ok">100%</b><span>fetched ok</span></div>
+          <div class="stat"><b id="st-updated">today</b><span id="st-updated-lbl">last re-index</span></div>
+          <div class="stat"><b>~3 MB</b><span>clone size</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <p class="kicker rv">How it works</p>
+        <h2 id="how-title" class="rv">The architecture <em>nobody else</em> uses.</h2>
+        <p class="intro rv d1">Most docs tools either <strong>mirror</strong> the docs into a repo (stale between syncs, ~100 MB clones, redistributes content that isn't theirs) or run an <strong>MCP server</strong> (another process, network round-trips, answers that flood your context). This does neither.</p>
+
+        <div class="flow">
+          <div class="node rv">
+            <div class="n">01 · every 3 hours</div>
+            <h3>GitHub Actions builds the map</h3>
+            <p>CI reads Anthropic's two <code>llms.txt</code> files and two sitemaps, then commits a page manifest and a prose-free search index. Metadata only.</p>
+            <div class="where">runs on: github.com</div>
+          </div>
+          <div class="arrow rv d1" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14h20"/><path d="M17 8l6 6-6 6" stroke-dasharray="0"/></svg></div>
+          <div class="node rv d1">
+            <div class="n">02 · each session</div>
+            <h3>Your machine syncs the map</h3>
+            <p>A SessionStart hook hard-syncs the ~3 MB metadata repo and re-fetches only the pages that changed, in the background.</p>
+            <div class="where">lives in: ~/.claude-code-docs/</div>
+          </div>
+          <div class="arrow rv d2" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 14h20"/><path d="M17 8l6 6-6 6" stroke-dasharray="0"/></svg></div>
+          <div class="node rv d2">
+            <div class="n">03 · on demand</div>
+            <h3>Claude reads the real page</h3>
+            <p>Search hits the index in shell. Claude fetches only the pages it needs, <code>.md</code> straight from Anthropic's servers, into a local cache.</p>
+            <div class="where">fetched from: platform.claude.com · code.claude.com</div>
+          </div>
+        </div>
+
+        <div class="callout rv">
+          <strong>The compliance point is not a footnote.</strong> This repository contains zero documentation prose, not at the tip and not anywhere in its history. What you install is a map. The territory always comes fresh from Anthropic.
+        </div>
+
+        <div class="table-wrap rv" style="margin-top:44px">
+          <table>
+            <caption class="sr-only">Comparison of documentation approaches</caption>
+            <thead>
+              <tr><th scope="col"></th><th scope="col">Web search</th><th scope="col">Docs mirrors</th><th scope="col">MCP docs servers</th><th scope="col" class="us">This plugin</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Freshness</td><td>Search-engine lag</td><td>Stale between syncs</td><td>Usually current</td><td class="us">Live page, every read</td></tr>
+              <tr><td>Claude docs coverage</td><td>Hit-or-miss</td><td>Often partial</td><td>Generic libraries</td><td class="us">Every page, both sites</td></tr>
+              <tr><td>Runtime dependencies</td><td>None</td><td>git + disk</td><td>MCP server + config</td><td class="us">bash, curl, jq</td></tr>
+              <tr><td>Context cost per answer</td><td>Whole pages of noise</td><td>Full file reads</td><td>Large tool payloads</td><td class="us">Index hit → one targeted page</td></tr>
+              <tr><td>Redistributes Anthropic's docs</td><td>No</td><td class="bad">Yes, wholesale</td><td>Varies</td><td class="us">Never. You fetch from the source.</td></tr>
+              <tr><td>Clone size</td><td>—</td><td>~100 MB</td><td>—</td><td class="us">~3 MB</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WATCH IT WORK ================= -->
+    <section id="watch" aria-labelledby="watch-title">
+      <div class="wrap">
+        <p class="kicker rv">Watch it work</p>
+        <h2 id="watch-title" class="rv">From question to <em>working hook</em>, grounded the whole way.</h2>
+        <p class="intro rv d1">A replay of a typical task, with illustrative timings. The user asks for a hook. The plugin finds the two official pages, Claude reasons from what they actually say, then writes, registers, and tests the hook. Every fact in the reasoning comes from the pages shown on the right.</p>
+
+        <div class="wk">
+          <div class="wk-session rv" id="wk">
+            <div class="wk-head"><i></i><i></i><i></i><span>claude code · session replay</span><button class="replay" type="button" id="wk-replay">↻ replay</button></div>
+            <div class="wk-log" id="wk-log" aria-live="polite">
+              <div class="wk-user" data-step="1"><span class="who">you</span><span class="txt" id="wk-typed"></span></div>
+
+              <div class="wk-line" data-step="2"><span class="tag skill">claude-docs</span><span>documentation question detected → <span class="k">content-search.sh</span> hooks block protected files</span></div>
+              <div class="wk-line" data-step="3"><span class="tag skill">index</span><span>2 hits in <span class="g">4.1 ms</span> · <span class="k">Automate actions with hooks</span> · <span class="k">Hooks reference</span></span></div>
+              <div class="wk-line" data-step="4"><span class="tag skill">read</span><span>~/.claude-code-docs/cache/claude-code__hooks-guide.md <span class="m">· cached, synced 3h ago</span></span></div>
+              <div class="wk-line" data-step="5"><span class="tag skill">read</span><span>~/.claude-code-docs/cache/claude-code__hooks.md <span class="m">· cached, synced 3h ago</span></span></div>
+
+              <div class="wk-think" data-step="6">
+                <span class="lbl">reasoning · grounded</span>
+                <p data-fact="a">The guide has a recipe for exactly this: a <b>PreToolUse</b> hook with matcher <b>Edit|Write</b> that runs a script. <cite>hooks-guide → Block edits to protected files</cite></p>
+                <p data-fact="b">The script must <b>exit 2</b> to block. The reference is explicit that exit 1 is only a non-blocking error, and stderr becomes Claude's feedback. <cite>hooks → Exit code 2</cite></p>
+                <p data-fact="c">The user wants this shared with the team, so it goes in <b>.claude/settings.json</b>, the project-scoped file that can be committed. <cite>hooks-guide → Configure hook location</cite></p>
+                <p data-fact="d">Path via <b>"$CLAUDE_PROJECT_DIR"</b> so it resolves on every teammate's machine, and the script must be executable. <cite>hooks-guide → Register the hook</cite></p>
+                <p data-fact="e">PreToolUse hooks fire before any permission-mode check, in every mode including <b>bypassPermissions</b>, so a blocking hook is policy users can't switch off. Worth telling the user. <cite>hooks-guide → Hooks and permission modes</cite></p>
+              </div>
+
+              <div class="wk-line" data-step="7"><span class="tag tool">write</span><span>.claude/hooks/protect-files.sh</span></div>
+              <div class="wk-code" data-step="7"><span class="c">#!/bin/bash</span>
+INPUT=$(cat)
+FILE_PATH=$(echo "$INPUT" | jq -r <span class="s">'.tool_input.file_path // empty'</span>)
+FILE_PATH="${FILE_PATH//\\//}"   <span class="c"># normalise Windows separators, as the guide does</span>
+PROTECTED_PATTERNS=(<span class="s">".env"</span> <span class="s">"package-lock.json"</span> <span class="s">".git/"</span>)
+for pattern in "${PROTECTED_PATTERNS[@]}"; do
+  if [[ "$FILE_PATH" == *"$pattern"* ]]; then
+    echo <span class="s">"Blocked: $FILE_PATH matches protected pattern '$pattern'"</span> >&2
+    exit 2   <span class="c"># exit 2 = block; stderr becomes Claude's feedback</span>
+  fi
+done
+exit 0</div>
+              <div class="wk-line" data-step="8"><span class="tag tool">bash</span><span>chmod +x .claude/hooks/protect-files.sh</span></div>
+              <div class="wk-line" data-step="9"><span class="tag tool">edit</span><span>.claude/settings.json</span></div>
+              <div class="wk-code" data-step="9"><span class="add">+ "hooks": {
++   "PreToolUse": [{
++     "matcher": "Edit|Write",
++     "hooks": [{
++       "type": "command",
++       "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh"
++     }]
++   }]
++ }</span></div>
+
+              <div class="wk-line" data-step="10"><span class="tag tool">test</span><span>Edit <span class="k">.env</span> <span class="m">· add a comment, as the guide's test step suggests</span></span></div>
+              <div class="wk-line" data-step="11"><span class="tag hook">PreToolUse</span><span>protect-files.sh → <span class="m">stderr:</span> Blocked: .env matches protected pattern '.env' <span class="m">· exit 2</span></span></div>
+              <div class="wk-line" data-step="12"><span class="tag ok">blocked</span><span class="g">Edit never ran. Hook works.</span></div>
+
+              <div class="wk-final" data-step="13">
+                Done. The hook lives in <code>.claude/settings.json</code> so it ships with the repo. It blocks edits to <code>.env</code>, <code>package-lock.json</code>, and anything under <code>.git/</code>. PreToolUse hooks run in every permission mode, so this is policy, not a suggestion. Add more patterns in <code>.claude/hooks/protect-files.sh</code>.
+                <div class="src">Sources:<br><a href="https://code.claude.com/docs/en/hooks-guide#block-edits-to-protected-files">code.claude.com/docs/en/hooks-guide#block-edits-to-protected-files</a><br><a href="https://code.claude.com/docs/en/hooks#exit-code-2">code.claude.com/docs/en/hooks#exit-code-2</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wk-side">
+            <div class="wk-panel rv d1">
+              <h4>Grounding trace</h4>
+              <ul>
+                <li data-on="3"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span><b>Index searched in shell</b><small>search_index.json · no LLM tokens spent</small></span></li>
+                <li data-on="4"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span><b>Automate actions with hooks</b><small>code.claude.com/docs/en/hooks-guide · live copy</small></span></li>
+                <li data-on="5"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span><b>Hooks reference</b><small>code.claude.com/docs/en/hooks · live copy</small></span></li>
+              </ul>
+            </div>
+            <div class="wk-panel rv d2">
+              <h4>Facts pulled from the pages</h4>
+              <ul>
+                <li data-fact="a"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span>PreToolUse + matcher <code>Edit|Write</code></span></li>
+                <li data-fact="b"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span>Exit 2 blocks. Exit 1 does not.</span></li>
+                <li data-fact="c"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span>Project scope → <code>.claude/settings.json</code></span></li>
+                <li data-fact="d"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span><code>$CLAUDE_PROJECT_DIR</code> path + <code>chmod +x</code></span></li>
+                <li data-fact="e"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></span><span>Runs in every permission mode</span></li>
+              </ul>
+            </div>
+            <div class="wk-panel rv d3">
+              <h4>Context cost</h4>
+              <div class="wk-cost"><div><b id="wk-c1">0</b><span>pages read</span></div><div><b id="wk-c2">0</b><span>web searches</span></div><div><b id="wk-c3">0</b><span>guesses</span></div></div>
+            </div>
+            <div class="wk-panel warn rv d3">
+              <h4>Without the plugin</h4>
+              <p>Claude answers from training data. The likely slip here is <code>exit 1</code>, the conventional failure code. The reference states that exit 1 is treated as a non-blocking error and the edit proceeds. The hook would look right and silently do nothing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <p class="kicker rv">What you get</p>
+        <h2 id="features-title" class="rv">Answers that <em>cite</em> the docs, not vibes.</h2>
+        <p class="intro rv d1">On your first session after install, Claude clones the metadata, warms the page cache in the background, and activates the skills. That's the whole setup.</p>
+
+        <div class="grid">
+          <div class="card rv">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M5 17l.8 2 2 .8-2 .8L5 22l-.8-1.4-2-.8 2-.8z"/><path d="M19 15l.6 1.4 1.4.6-1.4.6L19 19l-.6-1.4-1.4-.6 1.4-.6z"/></svg></div>
+            <span class="pill">the one you'll forget is on</span>
+            <h3>Auto-discovery</h3>
+            <p>Ask anything about Claude Code, the API, SDKs, or prompting. Claude reads the relevant docs before answering. No prefix, no command. Your answers are just correct.</p>
+          </div>
+          <div class="card rv d1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6l4 4-4 4"/><path d="M12 16h8"/></svg></div>
+            <h3><code>/docs</code> skill</h3>
+            <p>Explicit lookups when you want them: <code>/docs hooks</code>, <code>/docs extended thinking</code>, <code>/docs Agent SDK sessions</code>. Plain-English questions work too.</p>
+          </div>
+          <div class="card rv d2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5a1 1 0 011-1h9l5 5v10a1 1 0 01-1 1H5a1 1 0 01-1-1z"/><path d="M14 4v5h5"/><path d="M8 13h8M8 17h5"/></svg></div>
+            <span class="pill">unique</span>
+            <h3>Interactive courses</h3>
+            <p><code>/docs --course hooks</code> turns any topic into a self-contained animated HTML course: protocol diagrams, quizzes, line-by-line code translations. One file, opens in your browser.</p>
+          </div>
+          <div class="card rv">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+            <h3>Changelog reports</h3>
+            <p><code>/docs --report 7d</code> gives a visual HTML report of every added, changed, and removed page, grouped by category, each with a one-click "Create Course" button.</p>
+          </div>
+          <div class="card rv d1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div>
+            <h3>Token-efficient by design</h3>
+            <p>Search runs in shell against a prose-free index. Claude's context only ever pays for the specific pages it reads, never for the search itself.</p>
+          </div>
+          <div class="card rv d2">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 12a8 8 0 11-2.3-5.7"/><path d="M20 4v5h-5"/></svg></div>
+            <h3>Session-start auto-updates</h3>
+            <p>Metadata syncs and changed pages re-fetch in the background every session. No cron jobs, no manual pulls. <code>/docs -t</code> checks freshness; <code>/docs sync</code> forces it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SEARCH DEMO ================= -->
+    <section id="search" aria-labelledby="search-title">
+      <div class="wrap">
+        <p class="kicker rv">Try it</p>
+        <h2 id="search-title" class="rv">Search the <em>real</em> index. Right here.</h2>
+        <p class="intro rv d1">This is the same search index the plugin ships, loaded into your browser and searched with plain JavaScript. Every result links to the official page.</p>
+
+        <div class="demo">
+          <div class="search rv" role="search">
+            <div class="field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <label class="sr-only" for="q">Search the Claude documentation index</label>
+              <input id="q" type="search" placeholder="hooks matcher, prompt caching, agent sdk python…" autocomplete="off" spellcheck="false">
+              <span class="status" id="q-status" aria-live="polite">idle</span>
+            </div>
+            <ul class="results" id="results" aria-label="Search results"><li class="empty">Start typing. The index loads on first keystroke.</li></ul>
+            <div class="chips" aria-label="Example searches">
+              <button class="chip" type="button" data-q="hooks matcher">hooks matcher</button>
+              <button class="chip" type="button" data-q="prompt caching">prompt caching</button>
+              <button class="chip" type="button" data-q="agent sdk sessions">agent sdk sessions</button>
+              <button class="chip" type="button" data-q="extended thinking">extended thinking</button>
+              <button class="chip" type="button" data-q="mcp server">mcp server</button>
+            </div>
+          </div>
+          <div class="demo-notes rv d1">
+            <h3>What you're looking at</h3>
+            <p>The plugin commits two files. A <strong>manifest</strong> maps every page to its official URL, category, and content hash. A <strong>search index</strong> holds each page's title, headings, and a lossy bag of stemmed terms with counts.</p>
+            <ul>
+              <li><strong>Lossy on purpose.</strong> You cannot rebuild a page from the index. That is what makes it safe to commit.</li>
+              <li><strong>Same data, different engine.</strong> Inside Claude Code the search runs in shell with <code>jq</code>. Here it runs in your browser. The hits come from identical files.</li>
+              <li><strong>Every result is a real link.</strong> Click one and you land on Anthropic's page, not a copy.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COVERAGE ================= -->
+    <section id="coverage" aria-labelledby="coverage-title">
+      <div class="wrap">
+        <p class="kicker rv">Coverage</p>
+        <h2 id="coverage-title" class="rv">Both sites. <em>Every</em> page.</h2>
+        <p class="intro rv d1">Discovery is the union of two <code>llms.txt</code> files and two sitemaps, keyed by canonical URL. The numbers below come from the live manifest served next to this page.</p>
+        <div class="cov rv" id="cov"><div class="bar-row"><span class="lbl">Claude API</span><span class="cnt">387 pages</span><div class="track"><div class="fill" style="width:100.0%"></div></div></div><div class="bar-row"><span class="lbl">Claude Code CLI</span><span class="cnt">177 pages</span><div class="track"><div class="fill" style="width:45.7%"></div></div></div><div class="bar-row"><span class="lbl">Claude Documentation</span><span class="cnt">157 pages</span><div class="track"><div class="fill" style="width:40.6%"></div></div></div><div class="bar-row"><span class="lbl">Agents &amp; Tools</span><span class="cnt">42 pages</span><div class="track"><div class="fill" style="width:10.9%"></div></div></div><div class="bar-row"><span class="lbl">Claude Agent SDK</span><span class="cnt">32 pages</span><div class="track"><div class="fill" style="width:8.3%"></div></div></div><div class="bar-row"><span class="lbl">Release Notes</span><span class="cnt">21 pages</span><div class="track"><div class="fill" style="width:5.4%"></div></div></div><div class="bar-row"><span class="lbl">About Claude</span><span class="cnt">14 pages</span><div class="track"><div class="fill" style="width:3.6%"></div></div></div><div class="bar-row"><span class="lbl">Testing &amp; Evaluation</span><span class="cnt">7 pages</span><div class="track"><div class="fill" style="width:2.0%"></div></div></div><div class="bar-row"><span class="lbl">Getting Started</span><span class="cnt">1 page</span><div class="track"><div class="fill" style="width:2.0%"></div></div></div><div class="bar-row"><span class="lbl">Resources</span><span class="cnt">1 page</span><div class="track"><div class="fill" style="width:2.0%"></div></div></div></div>
+        <div class="sources rv d1" id="sources">
+          <span>platform.claude.com/llms.txt</span><span>platform.claude.com/sitemap.xml</span><span>code.claude.com/docs/llms.txt</span><span>code.claude.com/docs/sitemap.xml</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= USAGE ================= -->
+    <section id="usage" aria-labelledby="usage-title">
+      <div class="wrap">
+        <p class="kicker rv">Usage</p>
+        <h2 id="usage-title" class="rv">Or just <em>ask.</em></h2>
+        <p class="intro rv d1">With the plugin installed you don't need <code>/docs</code> at all. Claude recognizes a documentation question and reads the relevant docs before answering. The command is there when you want control.</p>
+
+        <div class="term rv" id="term">
+          <div class="tabs" role="tablist" aria-label="Usage examples">
+            <button class="tab" role="tab" aria-selected="true" aria-controls="pane-1" id="tab-1" type="button">lookups</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="pane-2" id="tab-2" type="button">natural language</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="pane-3" id="tab-3" type="button">courses &amp; reports</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="pane-4" id="tab-4" type="button">freshness</button>
+          </div>
+          <div class="pane" id="pane-1" role="tabpanel" aria-labelledby="tab-1" data-active><pre><span class="p">›</span> /docs hooks              <span class="c"># Claude Code hooks</span>
+<span class="p">›</span> /docs mcp                <span class="c"># MCP server configuration</span>
+<span class="p">›</span> /docs agent sdk python   <span class="c"># Agent SDK Python guide</span>
+<span class="p">›</span> /docs what's new         <span class="c"># added / changed / removed pages</span>
+
+<span class="o">Reading</span> <span class="k">code.claude.com/docs/en/hooks</span> <span class="o">…</span>
+<span class="g">✓</span> <span class="o">Answer grounded in 1 page, with source link.</span></pre></div>
+          <div class="pane" id="pane-2" role="tabpanel" aria-labelledby="tab-2"><pre><span class="p">›</span> /docs what are the best practices for Agent SDK in Python?
+<span class="p">›</span> /docs explain the differences between hooks and MCP
+<span class="p">›</span> /docs how do I configure extended thinking for the API?
+<span class="p">›</span> /docs show me all Agent SDK pages
+
+<span class="o">Claude finds the right docs, reads them, and synthesizes</span>
+<span class="o">a clear answer with source links.</span></pre></div>
+          <div class="pane" id="pane-3" role="tabpanel" aria-labelledby="tab-3"><pre><span class="p">›</span> /docs --course hooks           <span class="c"># interactive HTML course</span>
+<span class="p">›</span> /docs --course tool use        <span class="c"># deep dive into the Tool Use API</span>
+<span class="p">›</span> /docs --course prompt caching  <span class="c"># master caching, visually</span>
+
+<span class="p">›</span> /docs --report                 <span class="c"># last 7 days of doc changes</span>
+<span class="p">›</span> /docs --report 24h             <span class="c"># last 24 hours</span>
+<span class="p">›</span> /docs --report 30d             <span class="c"># last 30 days</span>
+
+<span class="g">✓</span> <span class="o">Saved to</span> <span class="k">~/.claude-code-docs/courses/</span></pre></div>
+          <div class="pane" id="pane-4" role="tabpanel" aria-labelledby="tab-4"><pre><span class="p">›</span> /docs -t                 <span class="c"># check freshness, read-only</span>
+<span class="p">›</span> /docs sync               <span class="c"># fetch changed pages now</span>
+
+<span class="o">Manifest:</span>  <span class="g">up to date</span>  <span class="c">(re-indexed upstream every 3 hours)</span>
+<span class="o">Cache:</span>     <span class="g">839 / 839</span>  <span class="c">pages fetched ok</span>
+<span class="o">Stale:</span>     <span class="g">0</span></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TEAM + SAFETY ================= -->
+    <section id="safety" aria-labelledby="safety-title">
+      <div class="wrap">
+        <div class="two">
+          <div>
+            <p class="kicker rv">Teams</p>
+            <h2 class="rv" style="font-size:clamp(28px,3.5vw,38px)">Roll it out to <em>everyone</em>.</h2>
+            <p class="intro rv d1" style="margin-bottom:0">Commit this to your project's <code>.claude/settings.json</code>. When a teammate trusts the folder, Claude Code prompts them to install the marketplace and plugin. No manual setup.</p>
+            <div class="code-block rv d1">
+              <button class="copy" data-copy="#team-json" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>copy</button>
+<pre id="team-json">{
+  <span class="s">"extraKnownMarketplaces"</span>: {
+    <span class="s">"claude-code-docs"</span>: {
+      <span class="s">"source"</span>: {
+        <span class="s">"source"</span>: <span class="s">"github"</span>,
+        <span class="s">"repo"</span>: <span class="s">"costiash/claude-code-docs"</span>
+      }
+    }
+  },
+  <span class="s">"enabledPlugins"</span>: {
+    <span class="s">"claude-docs@claude-code-docs"</span>: <span class="b">true</span>
+  }
+}</pre>
+            </div>
+          </div>
+          <div>
+            <p class="kicker rv">Safety</p>
+            <h2 id="safety-title" class="rv" style="font-size:clamp(28px,3.5vw,38px)">Fail-closed at <em>every</em> layer.</h2>
+            <p class="intro rv d1" style="margin-bottom:0">A bad upstream day can delay an update. It cannot corrupt your docs. These guards exist because a broken sitemap once tried to delete most of the documentation in a single sync.</p>
+            <div class="guards">
+              <div class="guard rv d1"><div class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></div><div><b>Discovery floor</b>Too few pages found means a broken source, never "these pages are gone". The run aborts before anything is written.</div></div>
+              <div class="guard rv d2"><div class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></div><div><b>Removal ceiling</b>A manifest transition that drops too large a share of live pages is refused instead of committed.</div></div>
+              <div class="guard rv d3"><div class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></div><div><b>Carry-forward</b>A page that fails to fetch stays in the manifest marked stale. A transient error never drops a page.</div></div>
+              <div class="guard rv d3"><div class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></div><div><b>Independent CI re-check</b>Every rule is re-run as a <code>jq</code> check before commit, pinned to the Python constants by tests. Bypassing one layer is not enough.</div></div>
+              <div class="guard rv d3"><div class="sh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg></div><div><b>Hardened client</b>Domain allowlist, HTTPS-only with no redirects, atomic writes, sha256 integrity checks, path-traversal protection. 230+ automated tests on Linux and macOS.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section aria-labelledby="cta-title" style="text-align:center">
+      <div class="wrap">
+        <h2 id="cta-title" class="rv" style="margin-inline:auto">Two commands. <em>Correct answers.</em></h2>
+        <p class="intro rv d1" style="margin-inline:auto">Install takes seconds. Uninstall is one command too: <code>/plugin uninstall claude-docs@claude-code-docs</code>.</p>
+        <div class="rv d2" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a class="btn primary" href="#top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>
+            Back to install
+          </a>
+          <a class="btn" href="https://github.com/costiash/claude-code-docs#readme">Read the README</a>
+          <a class="btn" href="https://github.com/costiash/claude-code-docs/blob/main/ARCHITECTURE.md">Architecture</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <h4>Claude Code Docs</h4>
+          <p style="margin:0;max-width:44ch">A community plugin. Documentation content belongs to Anthropic and is fetched from their servers at runtime. Tool code is open source under the MIT License.</p>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <ul>
+            <li><a href="https://github.com/costiash/claude-code-docs">Repository</a></li>
+            <li><a href="https://github.com/costiash/claude-code-docs/blob/main/ARCHITECTURE.md">Architecture</a></li>
+            <li><a href="https://github.com/costiash/claude-code-docs/blob/main/CONTRIBUTING.md">Contributing</a></li>
+            <li><a href="https://github.com/costiash/claude-code-docs/blob/main/CHANGELOG.md">Changelog</a></li>
+            <li><a href="https://github.com/costiash/claude-code-docs/blob/main/UNINSTALL.md">Uninstall</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Acknowledgments</h4>
+          <ul>
+            <li><a href="https://github.com/ericbuess/claude-code-docs">Eric Buess</a>, who pioneered <code>/docs</code></li>
+            <li><a href="https://github.com/zarazhangrui/codebase-to-course">codebase-to-course</a>, course inspiration</li>
+            <li><a href="https://www.anthropic.com/">Anthropic</a>, for Claude Code and the docs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fine">
+        <span>MIT License · not affiliated with Anthropic</span>
+        <span id="foot-generated">Manifest generated 2026-09-21</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var LABELS = {
+      claude_code: "Claude Code CLI", agent_sdk: "Claude Agent SDK", api_reference: "Claude API",
+      agents_and_tools: "Agents & Tools", core_documentation: "Claude Documentation", about_claude: "About Claude",
+      get_started: "Getting Started", test_and_evaluate: "Testing & Evaluation", prompt_library: "Prompt Library",
+      release_notes: "Release Notes", resources: "Resources"
+    };
+    // Fallback snapshot, used when the manifest cannot be fetched (e.g. opened from disk).
+    var FALLBACK = {
+      generated_at: "2026-09-21T00:21:40Z", total: 839, ok: 839,
+      cats: { api_reference: 387, claude_code: 177, core_documentation: 157, agents_and_tools: 42, agent_sdk: 32, release_notes: 21, about_claude: 14, test_and_evaluate: 7, get_started: 1, resources: 1 }
+    };
+
+    /* ---------- nav shadow ---------- */
+    var nav = $("#nav");
+    var onScroll = function () { nav.classList.toggle("scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+    /* ---------- reveal on scroll ---------- */
+    var rv = $$(".rv");
+    if (reduced || !("IntersectionObserver" in window)) {
+      rv.forEach(function (el) { el.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+      rv.forEach(function (el) { io.observe(el); });
+    }
+
+    /* ---------- copy buttons ---------- */
+    $$(".copy").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = $(btn.getAttribute("data-copy"));
+        var text = target ? target.textContent : "";
+        var done = function () {
+          var label = btn.lastChild;
+          btn.classList.add("done"); label.textContent = "copied";
+          setTimeout(function () { btn.classList.remove("done"); label.textContent = "copy"; }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+        } else { fallbackCopy(text); done(); }
+      });
+    });
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (e) { /* ignore */ }
+      document.body.removeChild(ta);
+    }
+
+    /* ---------- terminal tabs ---------- */
+    var tabs = $$(".tab", $("#term"));
+    tabs.forEach(function (tab, i) {
+      var activate = function () {
+        tabs.forEach(function (t) { t.setAttribute("aria-selected", "false"); });
+        $$(".pane", $("#term")).forEach(function (p) { p.removeAttribute("data-active"); });
+        tab.setAttribute("aria-selected", "true");
+        $("#" + tab.getAttribute("aria-controls")).setAttribute("data-active", "");
+      };
+      tab.addEventListener("click", activate);
+      tab.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        var j = e.key === "ArrowRight" ? i + 1 : i - 1;
+        e.preventDefault(); tabs[(j + tabs.length) % tabs.length].focus(); tabs[(j + tabs.length) % tabs.length].click();
+      });
+    });
+
+    /* ---------- live stats + coverage from the manifest ---------- */
+    function relTime(iso) {
+      var t = Date.parse(iso); if (isNaN(t)) return { v: "recently", l: "last re-index" };
+      var mins = Math.max(0, Math.round((Date.now() - t) / 60000));
+      if (mins < 60) return { v: mins + "m", l: "since last re-index" };
+      var h = Math.round(mins / 60);
+      if (h < 48) return { v: h + "h", l: "since last re-index" };
+      return { v: Math.round(h / 24) + "d", l: "since last re-index" };
+    }
+    function renderStats(d) {
+      $("#st-pages").textContent = d.total.toLocaleString();
+      $("#st-ok").textContent = Math.round((d.ok / d.total) * 100) + "%";
+      var r = relTime(d.generated_at);
+      $("#st-updated").textContent = r.v; $("#st-updated-lbl").textContent = r.l;
+      $("#foot-generated").textContent = "Manifest generated " + (d.generated_at || "").slice(0, 10);
+    }
+    function renderCoverage(cats) {
+      var entries = Object.keys(cats).map(function (k) { return [k, cats[k]]; }).sort(function (a, b) { return b[1] - a[1]; });
+      var max = entries.length ? entries[0][1] : 1;
+      var box = $("#cov"); box.innerHTML = "";
+      entries.forEach(function (e) {
+        var row = document.createElement("div"); row.className = "bar-row";
+        row.innerHTML = '<span class="lbl"></span><span class="cnt"></span><div class="track"><div class="fill"></div></div>';
+        $(".lbl", row).textContent = LABELS[e[0]] || e[0];
+        $(".cnt", row).textContent = e[1] + (e[1] === 1 ? " page" : " pages");
+        box.appendChild(row);
+        var fill = $(".fill", row);
+        requestAnimationFrame(function () { requestAnimationFrame(function () { fill.style.width = Math.max(2, (e[1] / max) * 100) + "%"; }); });
+      });
+    }
+    renderStats(FALLBACK); renderCoverage(FALLBACK.cats);
+    fetch("paths_manifest.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (m) {
+        var pages = m.pages || []; var cats = {}; var ok = 0;
+        pages.forEach(function (p) { cats[p.category] = (cats[p.category] || 0) + 1; if (p.fetch_status === "ok") ok++; });
+        renderStats({ generated_at: m.generated_at, total: pages.length, ok: ok });
+        renderCoverage(cats);
+        $$(".stat b").forEach(function (b, i) { if (i < 3) b.classList.add("live"); });
+        var v = $("#nav-version"); v.textContent = "live · " + pages.length + " pages";
+      }).catch(function () { /* keep the snapshot */ });
+
+    /* ---------- in-browser search over the real index ---------- */
+    var q = $("#q"), status = $("#q-status"), results = $("#results");
+    var index = null, loading = null;
+    function setStatus(s) { status.textContent = s; }
+    function loadIndex() {
+      if (index) return Promise.resolve(index);
+      if (loading) return loading;
+      setStatus("loading index…");
+      loading = fetch("search_index.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (j) { index = j.pages || []; setStatus(index.length + " pages"); return index; })
+        .catch(function () { loading = null; setStatus("offline"); results.innerHTML = '<li class="empty">The index could not be loaded here. Inside Claude Code it is on disk, so this never happens there.</li>'; throw new Error("index"); });
+      return loading;
+    }
+    function tokens(s) { return s.toLowerCase().replace(/[^a-z0-9+#./\- ]/g, " ").split(/\s+/).filter(function (t) { return t.length > 1; }); }
+    function stem(t) { return t.replace(/(ing|ings|ers|er|es|s|ed)$/, "").replace(/(tion|sion)$/, "").slice(0, 8); }
+    function score(p, toks, whole) {
+      var s = 0, title = p.title.toLowerCase(), heads = null;
+      if (whole.length > 2 && title.indexOf(whole) !== -1) s += 60;
+      if (whole.length > 2 && p.url.toLowerCase().indexOf(whole.replace(/\s+/g, "-")) !== -1) s += 40;
+      var terms = p.terms || {}; var keys = null;
+      toks.forEach(function (t) {
+        if (title.indexOf(t) !== -1) s += 14;
+        if (p.url.toLowerCase().indexOf(t) !== -1) s += 8;
+        if (heads === null) heads = (p.headings || []).map(function (h) { return h.text.toLowerCase(); }).join(" | ");
+        if (heads.indexOf(t) !== -1) s += 5;
+        var st = stem(t);
+        if (terms[t] !== undefined) s += Math.min(terms[t], 24) / 2;
+        else {
+          if (keys === null) keys = Object.keys(terms);
+          for (var i = 0; i < keys.length; i++) { if (keys[i].indexOf(st) === 0) { s += Math.min(terms[keys[i]], 24) / 3; break; } }
+        }
+      });
+      return s;
+    }
+    function hl(text, toks) {
+      var esc = text.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; });
+      if (!toks.length) return esc;
+      var re = new RegExp("(" + toks.map(function (t) { return t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")", "ig");
+      return esc.replace(re, "<mark>$1</mark>");
+    }
+    var timer = null;
+    function run() {
+      var raw = q.value.trim();
+      if (!raw) { results.innerHTML = '<li class="empty">Start typing. The index loads on first keystroke.</li>'; setStatus(index ? index.length + " pages" : "idle"); return; }
+      loadIndex().then(function (idx) {
+        var toks = tokens(raw), whole = raw.toLowerCase();
+        var t0 = performance.now();
+        var hits = idx.filter(function (p) { return p.id !== "changelog"; }).map(function (p) { return { p: p, s: score(p, toks, whole) }; }).filter(function (h) { return h.s > 6; })
+          .sort(function (a, b) { return b.s - a.s || a.p.title.localeCompare(b.p.title); }).slice(0, 8);
+        var ms = (performance.now() - t0).toFixed(1);
+        setStatus(hits.length + " hits · " + ms + " ms");
+        if (!hits.length) { results.innerHTML = '<li class="empty">No pages match. Try fewer or different words.</li>'; return; }
+        results.innerHTML = hits.map(function (h) {
+          var p = h.p, host = p.url.replace(/^https?:\/\//, "").split("/")[0];
+          return '<li><a href="' + p.url + '" target="_blank" rel="noopener"><div class="t">' + hl(p.title, toks) + '</div><div class="m"><span class="cat">' + (LABELS[p.category] || p.category) + '</span><span>' + host + '</span><span>' + (p.word_count || 0).toLocaleString() + ' words</span></div></a></li>';
+        }).join("");
+      }).catch(function () { /* status already set */ });
+    }
+    q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(run, 120); });
+    q.addEventListener("focus", function () { loadIndex().catch(function () {}); }, { once: true });
+    $$(".chip").forEach(function (c) { c.addEventListener("click", function () { q.value = c.getAttribute("data-q"); q.focus(); run(); }); });
+
+    /* ---------- session replay ---------- */
+    (function () {
+      var root = $("#wk"); if (!root) return;
+      var log = $("#wk-log"), typed = $("#wk-typed"), userBox = $(".wk-user", root);
+      var PROMPT = "Add a hook that stops you from editing .env and lock files. Follow the official best practices, and make it something the whole team gets.";
+      var STEPS = [ // [step id, delay ms after previous]
+        [2, 700], [3, 700], [4, 600], [5, 500], [6, 500], [7, 4200], [8, 500], [9, 700], [10, 1000], [11, 900], [12, 500], [13, 700]
+      ];
+      var FACTS = ["a", "b", "c", "d", "e"];
+      var timers = [], playing = false;
+      function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+      function reset() {
+        timers.forEach(clearTimeout); timers = []; playing = false;
+        $$("[data-step]", log).forEach(function (el) { el.classList.remove("on"); });
+        $$(".wk-think p", log).forEach(function (el) { el.classList.remove("on"); });
+        $$(".wk-side li", root.parentNode).forEach(function (el) { el.classList.remove("on"); });
+        userBox.classList.remove("done"); typed.textContent = "";
+        ["#wk-c1", "#wk-c2", "#wk-c3"].forEach(function (id) { $(id).textContent = "0"; });
+      }
+      function showStep(n) {
+        $$('[data-step="' + n + '"]', log).forEach(function (el) { el.classList.add("on"); });
+        $$('.wk-side li[data-on="' + n + '"]', root.parentNode).forEach(function (el) { el.classList.add("on"); });
+        if (n === 4) $("#wk-c1").textContent = "1";
+        if (n === 5) $("#wk-c1").textContent = "2";
+        if (n === 6) FACTS.forEach(function (f, i) { later(function () {
+          $$('[data-fact="' + f + '"]', root.parentNode).forEach(function (el) { el.classList.add("on"); });
+        }, 500 + i * 650); });
+      }
+      function play() {
+        reset(); playing = true;
+        userBox.classList.add("on");
+        if (reduced) {
+          typed.textContent = PROMPT; userBox.classList.add("done");
+          STEPS.forEach(function (st) { $$('[data-step="' + st[0] + '"]', log).forEach(function (el) { el.classList.add("on"); }); });
+          $$(".wk-think p, .wk-side li", root.parentNode).forEach(function (el) { el.classList.add("on"); });
+          $("#wk-c1").textContent = "2"; return;
+        }
+        var i = 0;
+        (function type() {
+          if (i <= PROMPT.length) { typed.textContent = PROMPT.slice(0, i); i += 2; later(type, 22); return; }
+          userBox.classList.add("done");
+          var t = 500;
+          STEPS.forEach(function (st) { t += st[1]; later(function () { showStep(st[0]); }, t); });
+          later(function () { playing = false; }, t + 400);
+        })();
+      }
+      $("#wk-replay").addEventListener("click", play);
+      if ("IntersectionObserver" in window) {
+        var seen = false;
+        var wio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting && !seen) { seen = true; play(); wio.disconnect(); } });
+        }, { threshold: 0.25 });
+        wio.observe(root);
+      } else { play(); }
+    })();
+
+    /* ---------- hero particle field ---------- */
+    var canvas = $("#field");
+    if (!reduced && canvas && canvas.getContext) {
+      var ctx = canvas.getContext("2d"), W = 0, H = 0, pts = [], raf = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var resize = function () {
+        var r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
+        canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var n = Math.round(Math.min(90, (W * H) / 14000)); pts = [];
+        for (var i = 0; i < n; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18, r: 1 + Math.random() * 1.4 });
+      };
+      var draw = function () {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < pts.length; i++) {
+          var p = pts[i]; p.x += p.vx; p.y += p.vy;
+          if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10; if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
+        }
+        ctx.lineWidth = 1;
+        for (i = 0; i < pts.length; i++) for (var j = i + 1; j < pts.length; j++) {
+          var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = dx * dx + dy * dy;
+          if (d < 130 * 130) { ctx.strokeStyle = "rgba(245,166,35," + (0.16 * (1 - Math.sqrt(d) / 130)).toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); }
+        }
+        ctx.fillStyle = "rgba(255,196,87,0.55)";
+        for (i = 0; i < pts.length; i++) { ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, pts[i].r, 0, Math.PI * 2); ctx.fill(); }
+        raf = requestAnimationFrame(draw);
+      };
+      resize(); draw();
+      window.addEventListener("resize", resize);
+      document.addEventListener("visibilitychange", function () { if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(draw); });
+    }
+  })();
+  </script>
 </body>
 </html>

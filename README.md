@@ -1,5 +1,7 @@
 # Claude Code Documentation Tool
 
+**Website:** [costiash.github.io/claude-code-docs](https://costiash.github.io/claude-code-docs/) — live index stats, try the search in your browser, and watch a grounded hook build step by step.
+
 [![Last Update](https://img.shields.io/github/last-commit/costiash/claude-code-docs/main.svg?label=docs%20updated)](https://github.com/costiash/claude-code-docs/commits/main)
 [![Tests](https://github.com/costiash/claude-code-docs/actions/workflows/test.yml/badge.svg)](https://github.com/costiash/claude-code-docs/actions)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
