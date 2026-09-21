@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T15:13:46.228237Z",
+  "generated_at": "2026-09-21T18:14:25.226377Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "17c833c69ac7d9c16c48993110880e13cefbf0fb61509fa2f656a87e09d1a834",
-      "lastmod": "2026-09-18T22:58:21.557Z",
+      "sha256": "d3b7d62cedb16fce1fc09f715543cb291b899b47a4beaab09f9629ddf9d1d636",
+      "lastmod": "2026-09-21T16:25:24.728Z",
       "fetch_status": "ok"
     },
     {
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "98334d9d22a0f7fb9cd93b108e5ba48ddad767952f1922e1c3ab74a0e96ca505",
-      "lastmod": "2026-09-15T22:32:07.853Z",
+      "sha256": "a50163d776d222e11a9f89a7617761c53bcc95862e6298a5821d998d20306ebe",
+      "lastmod": "2026-09-21T17:18:00.516Z",
       "fetch_status": "ok"
     },
     {
@@ -1841,8 +1841,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "ac4329e74a5b56185b5b1a0cc65f7b7916463ff7e87a5b3ac62c82a181ce2b17",
-      "lastmod": "2026-09-18T20:16:47.571Z",
+      "sha256": "bc0b4067fdb5e6cd610687425ea90f87a217291a73e9979e3e562760d1bf6d1d",
+      "lastmod": "2026-09-21T16:25:24.724Z",
       "fetch_status": "ok"
     },
     {
