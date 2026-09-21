@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T21:12:25.108194Z",
+  "generated_at": "2026-09-21T00:21:40.765118Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (197 pages)",
       "category": "claude_code",
-      "sha256": "4723ce304b62336fc08874554e447963a111905576f590703d378c06045dc1c2",
+      "sha256": "f096664bfa8e75abb577175f78aca4cf9d676187c3c5189226504c43d8d46f46",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (197 pages)",
       "category": "claude_code",
-      "sha256": "d36cac015ee0fb24d23d0ee9b9960df81f75a8fbef29d95bf8febe29f2e9312d",
+      "sha256": "44f4547e7c3a22dc176cde595777f0fe8ab6d33def4874615cb59258904e036a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (196 pages)",
       "category": "claude_code",
-      "sha256": "07cd793d6baee5c96c82717faf243db4dea530a3649cdf3460350742d1995401",
+      "sha256": "74a7e131bb1ca9f16a986a0a381f25e69dea2d636d600fafdf7887cd38ff4c51",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1027,7 +1027,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (197 pages)",
       "category": "claude_code",
-      "sha256": "a7f780c9b86519b48256ab5a8365781c3216eb0aef1929098c413869968cf0ed",
+      "sha256": "1e99122a54b032f504f85ce180b269c72426c19fedd2cbaa8ef770c96a8c3e67",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1060,7 +1060,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-hant.md",
       "title": "Traditional Chinese (197 pages)",
       "category": "claude_code",
-      "sha256": "85e2b826f52edd29f1a8b26d333cc4812e1b32a2f5f61738223db0373d0eccda",
+      "sha256": "6058301c05937cff83956f09fa467dae42a0dc5e5e71393065b65a29d6245d4c",
       "lastmod": null,
       "fetch_status": "ok"
     },

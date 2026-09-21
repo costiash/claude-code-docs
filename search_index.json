@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T21:12:28.827085Z",
+  "generated_at": "2026-09-21T00:21:44.538831Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15580,7 +15580,7 @@
           "level": 4
         },
         {
-          "text": "Penerapan",
+          "text": "Penyebaran",
           "level": 4
         },
         {
@@ -15810,7 +15810,7 @@
           "level": 5
         },
         {
-          "text": "Sviluppa con Claude Code",
+          "text": "Crea con Claude Code",
           "level": 3
         },
         {
@@ -16072,11 +16072,11 @@
           "level": 4
         },
         {
-          "text": "Claude Code \u30af\u30e9\u30a6\u30c9\u7248",
+          "text": "\u30af\u30e9\u30a6\u30c9\u5185\u306e Claude Code",
           "level": 5
         },
         {
-          "text": "Claude Code \u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248",
+          "text": "Claude Code\uff08\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248\uff09",
           "level": 5
         },
         {
@@ -16128,7 +16128,7 @@
           "level": 4
         },
         {
-          "text": "\u30c7\u30d7\u30ed\u30a4",
+          "text": "\u30c7\u30d7\u30ed\u30a4\u30e1\u30f3\u30c8",
           "level": 4
         },
         {
@@ -16212,7 +16212,7 @@
           "level": 4
         },
         {
-          "text": "\u30b3\u30a2\u6982\u5ff5",
+          "text": "\u30b3\u30a2\u30b3\u30f3\u30bb\u30d7\u30c8",
           "level": 4
         },
         {
@@ -16232,7 +16232,7 @@
           "level": 4
         },
         {
-          "text": "\u30c7\u30d7\u30ed\u30a4\u30e1\u30f3\u30c8",
+          "text": "\u30c7\u30d7\u30ed\u30a4",
           "level": 4
         },
         {
@@ -16308,7 +16308,7 @@
         "diff": 3,
         "gitlab": 3
       },
-      "word_count": 2018
+      "word_count": 2017
     },
     {
       "filename": "claude-code__docs___llms__ko.md",
@@ -16434,7 +16434,7 @@
           "level": 4
         },
         {
-          "text": "\uc124\uc815",
+          "text": "\uad6c\uc131",
           "level": 3
         },
         {
@@ -17240,7 +17240,7 @@
           "level": 5
         },
         {
-          "text": "\u4f7f\u7528\u91cf\u548c\u6210\u672c",
+          "text": "\u4f7f\u7528\u91cf\u8207\u6210\u672c",
           "level": 4
         },
         {
@@ -17304,7 +17304,7 @@
           "level": 4
         },
         {
-          "text": "\u5efa\u7acb\u4ee3\u7406",
+          "text": "\u5efa\u7acb\u4ee3\u7406\u7a0b\u5f0f",
           "level": 4
         },
         {
