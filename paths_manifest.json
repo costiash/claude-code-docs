@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T18:15:06.389618Z",
+  "generated_at": "2026-09-22T21:13:47.446537Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/features-overview.md",
       "title": "Extend Claude Code",
       "category": "claude_code",
-      "sha256": "3cc109dc8db7ebab9b5e087e315ac0d65b406c567991fae2206dcc82333a077d",
-      "lastmod": "2026-09-22T03:29:07.783Z",
+      "sha256": "249aeb54eb58c38762730a1b09e35284a39999d82bf1d611a31002b5f4aaab1c",
+      "lastmod": "2026-09-22T19:59:56.274Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1478,8 @@
       "md_url": "https://code.claude.com/docs/en/output-styles.md",
       "title": "Output styles",
       "category": "claude_code",
-      "sha256": "a0f74016e10aadf73f49b825dcbc95066b566a67ec2d30b4342afcaccbd68e51",
-      "lastmod": "2026-09-22T17:25:51.615Z",
+      "sha256": "ae43865588976c81ad1002e2274261c63b1c9291838c1bdc065dae0fb2e59b5e",
+      "lastmod": "2026-09-22T20:16:40.497Z",
       "fetch_status": "ok"
     },
     {
