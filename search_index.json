@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T06:17:01.412939Z",
+  "generated_at": "2026-09-22T15:13:26.511747Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -2256,7 +2256,7 @@
         "cli": 4,
         "without": 4
       },
-      "word_count": 2424
+      "word_count": 2426
     },
     {
       "filename": "claude-code__agent-sdk__configuration.md",
@@ -2606,7 +2606,7 @@
         "raw": 6,
         "content": 6
       },
-      "word_count": 4498
+      "word_count": 4499
     },
     {
       "filename": "claude-code__agent-sdk__examples.md",
@@ -4666,12 +4666,12 @@
         "task": 35,
         "such": 33,
         "return": 32,
+        "example": 32,
         "server": 32,
         "only": 31,
         "set": 31,
         "requir": 31,
         "python": 30,
-        "example": 30,
         "later": 30,
         "messag": 29,
         "configuration": 29,
@@ -4690,7 +4690,7 @@
         "parameter": 23,
         "mode": 23
       },
-      "word_count": 18499
+      "word_count": 18501
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -4762,11 +4762,11 @@
         "note": 8,
         "codegroup": 8,
         "fix": 7,
+        "example": 7,
         "find": 6,
         "bug": 6,
         "instead": 6,
         "platform": 6,
-        "example": 6,
         "api": 6,
         "key": 6,
         "configure": 6,
@@ -4792,7 +4792,7 @@
         "aws": 4,
         "credential": 4
       },
-      "word_count": 1920
+      "word_count": 1921
     },
     {
       "filename": "claude-code__agent-sdk__secure-deployment.md",
@@ -5776,7 +5776,7 @@
         "any": 7,
         "delegat": 7
       },
-      "word_count": 5112
+      "word_count": 5116
     },
     {
       "filename": "claude-code__agent-sdk__todo-tracking.md",
@@ -7192,7 +7192,7 @@
         "value": 42,
         "report": 42
       },
-      "word_count": 31509
+      "word_count": 31513
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -7399,6 +7399,7 @@
         "need": 15,
         "tab": 14,
         "each": 13,
+        "example": 13,
         "return": 12,
         "ask": 12,
         "call": 12,
@@ -7417,7 +7418,6 @@
         "mode": 8,
         "python": 8,
         "typescript": 8,
-        "example": 8,
         "answer": 8,
         "select": 8,
         "code": 7,
@@ -7436,7 +7436,7 @@
         "run": 6,
         "display": 6
       },
-      "word_count": 4329
+      "word_count": 4334
     },
     {
       "filename": "claude-code__agent-teams.md",
@@ -9700,7 +9700,7 @@
         "workflow": 6,
         "verify": 6,
         "check": 6,
-        "enable": 6
+        "later": 6
       },
       "word_count": 2514
     },
@@ -12104,7 +12104,7 @@
         "explor": 5,
         "prs": 5
       },
-      "word_count": 2480
+      "word_count": 2481
     },
     {
       "filename": "claude-code__communications-kit.md",
@@ -24626,7 +24626,7 @@
         "mcp": 5,
         "own": 5
       },
-      "word_count": 1960
+      "word_count": 1992
     },
     {
       "filename": "claude-code__permission-modes.md",
@@ -25836,7 +25836,7 @@
         "every": 27,
         "place": 27
       },
-      "word_count": 14282
+      "word_count": 14283
     },
     {
       "filename": "claude-code__plugin-relevance.md",
@@ -26382,7 +26382,7 @@
         "script": 25,
         "without": 24
       },
-      "word_count": 13726
+      "word_count": 13727
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -26780,7 +26780,7 @@
         "get": 4,
         "featur": 4
       },
-      "word_count": 1773
+      "word_count": 1805
     },
     {
       "filename": "claude-code__remote-control.md",
@@ -28588,9 +28588,9 @@
         "proces": 14,
         "counter": 14,
         "metric": 13,
+        "later": 13,
         "hold": 13,
         "count": 13,
-        "later": 12,
         "git": 12,
         "still": 11,
         "startup": 11,
@@ -30390,7 +30390,7 @@
         "available": 7,
         "see": 7
       },
-      "word_count": 12661
+      "word_count": 12664
     },
     {
       "filename": "claude-code__slack.md",
@@ -30564,7 +30564,7 @@
         "full": 6,
         "control": 6
       },
-      "word_count": 2080
+      "word_count": 2081
     },
     {
       "filename": "claude-code__statusline.md",
@@ -30704,6 +30704,7 @@
         "usage": 14,
         "cost": 14,
         "row": 14,
+        "example": 14,
         "frame": 14,
         "nibzeslajvh": 14,
         "ydoq": 14,
@@ -30711,10 +30712,9 @@
         "png": 14,
         "percentage": 14,
         "response": 14,
-        "example": 13,
         "second": 13
       },
-      "word_count": 7680
+      "word_count": 7681
     },
     {
       "filename": "claude-code__sub-agents.md",
@@ -32172,8 +32172,8 @@
         "extension": 66,
         "conversation": 54,
         "tab": 54,
+        "later": 50,
         "requir": 49,
-        "later": 48,
         "prompt": 42,
         "click": 39,
         "window": 38,
@@ -32216,7 +32216,7 @@
         "turn": 16,
         "fil": 15
       },
-      "word_count": 9284
+      "word_count": 9285
     },
     {
       "filename": "claude-code__web-quickstart.md",
