@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T18:15:19.839062Z",
+  "generated_at": "2026-09-23T21:14:10.819869Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "8bda81336bb640dac39827d6d28367b0d1ad27eba49693265bcc4afa5d5cd2ec",
+      "sha256": "499201fae85cdd03c65362157c10ff787e28c984470ddbd0fb7090591b12e45d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "0032b6f97053c8be88243c6814c3cdd843733cfae7baa249386b959b897f9663",
-      "lastmod": "2026-09-22T16:48:35.254Z",
+      "sha256": "b69d1e0ee85902b604cbffc0c59cd32b8102a830bbdc54d7a440cfc2de0cbb74",
+      "lastmod": "2026-09-23T19:28:13.234Z",
       "fetch_status": "ok"
     },
     {
@@ -642,8 +642,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code in the cloud",
       "category": "claude_code",
-      "sha256": "d04bb7a4e226669025f3e4a9d743c119e8ff412772cbeb4ab1792ac8851d7727",
-      "lastmod": "2026-09-22T16:28:44.718Z",
+      "sha256": "e5c3075568d1e5c4fd6a162db1df70ca6d4d62649646522db14f1509d5f5b526",
+      "lastmod": "2026-09-23T18:54:39.442Z",
       "fetch_status": "ok"
     },
     {
@@ -719,8 +719,8 @@
       "md_url": "https://code.claude.com/docs/en/cloud-environments.md",
       "title": "Configure cloud environments",
       "category": "claude_code",
-      "sha256": "c9d63745241928252951155fd9168e02986c527c665779691bf43bd97ce81a2b",
-      "lastmod": "2026-09-22T01:47:04.533Z",
+      "sha256": "d15e4a152e8a4cf38ff0af39789a5b663045c5497b2e7b618de265a37d2f5ab6",
+      "lastmod": "2026-09-23T18:54:39.444Z",
       "fetch_status": "ok"
     },
     {
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "9a21dd1e8a8cbc10ddae2a490f693fe2516538d52a0a4594add63537821e3431",
-      "lastmod": "2026-09-23T01:47:01.480Z",
+      "sha256": "00b2d4746a0cdcc9f6c48dc559f08a388c8bf5ba96c807ee74677cda5bbabc27",
+      "lastmod": "2026-09-23T19:37:28.919Z",
       "fetch_status": "ok"
     },
     {
@@ -1104,8 +1104,8 @@
       "md_url": "https://code.claude.com/docs/en/feature-availability.md",
       "title": "Feature availability",
       "category": "claude_code",
-      "sha256": "83284c85d33a8f28c46c0cb27ebe5cd5df4dbd2205170a2cc99efc1c84a04528",
-      "lastmod": "2026-09-18T22:48:22.109Z",
+      "sha256": "b5a050a0fafbeae368bacf276fc8f9ec67144d1409f3651ef24c503d1b24b2c7",
+      "lastmod": "2026-09-23T19:37:28.890Z",
       "fetch_status": "ok"
     },
     {
@@ -1192,8 +1192,8 @@
       "md_url": "https://code.claude.com/docs/en/glossary.md",
       "title": "Glossary",
       "category": "claude_code",
-      "sha256": "6f3e7f5f81253a17d2e0af58fea59cba41244eb793d1841086185b6d928590a5",
-      "lastmod": "2026-09-22T17:25:51.614Z",
+      "sha256": "6bb9373f9c5efcf494c42bdebc2c1cc19e026abaf523a74da998daa9f84623c3",
+      "lastmod": "2026-09-23T19:37:28.899Z",
       "fetch_status": "ok"
     },
     {
@@ -1412,8 +1412,8 @@
       "md_url": "https://code.claude.com/docs/en/memory.md",
       "title": "How Claude remembers your project",
       "category": "claude_code",
-      "sha256": "998bfbe601b48a8447870289bc007333c5fa8e14ee06eb8e53ceff723f3a29c3",
-      "lastmod": "2026-09-22T17:25:51.616Z",
+      "sha256": "cf73d3a512d5bab41ed6f22adeb7751ef7e97f022addcf22da091b3830192a8f",
+      "lastmod": "2026-09-23T19:37:28.900Z",
       "fetch_status": "ok"
     },
     {
@@ -1995,8 +1995,8 @@
       "md_url": "https://code.claude.com/docs/en/web-quickstart.md",
       "title": "Get started with Claude Code in the cloud",
       "category": "claude_code",
-      "sha256": "56b31df35fcb954fd588a4c61e1e936bc79a0b6614b442cc4ae49436a1c5c510",
-      "lastmod": "2026-09-19T00:12:42.473Z",
+      "sha256": "a7da7908371a2bc762d9927ddd3933480e4d3f63c0fc6cc9d3f74c88364db3b4",
+      "lastmod": "2026-09-23T18:54:39.439Z",
       "fetch_status": "ok"
     },
     {
