@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T00:20:48.949888Z",
+  "generated_at": "2026-09-23T03:14:23.718492Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -8537,18 +8537,18 @@
         }
       ],
       "terms": {
-        "claude": 133,
-        "artifact": 132,
+        "claude": 137,
+        "artifact": 135,
         "page": 94,
         "publish": 41,
         "session": 40,
         "connector": 39,
+        "code": 35,
+        "ask": 35,
         "viewer": 34,
-        "ask": 33,
-        "code": 32,
         "see": 29,
+        "organization": 27,
         "file": 26,
-        "organization": 25,
         "share": 24,
         "plan": 24,
         "call": 24,
@@ -8563,18 +8563,19 @@
         "shar": 17,
         "own": 16,
         "setting": 16,
+        "through": 15,
         "prompt": 15,
         "off": 15,
         "reply": 15,
         "version": 14,
-        "through": 14,
         "back": 14,
+        "one": 14,
         "public": 13,
         "set": 13,
-        "one": 13,
         "without": 13,
         "download": 13,
         "account": 13,
+        "load": 13,
         "enterprise": 12,
         "someone": 12,
         "design": 12,
@@ -8585,10 +8586,9 @@
         "tool": 11,
         "such": 11,
         "stop": 11,
-        "thread": 11,
-        "block": 11
+        "thread": 11
       },
-      "word_count": 5268
+      "word_count": 5339
     },
     {
       "filename": "claude-code__authentication.md",
@@ -14476,7 +14476,7 @@
           "level": 4
         },
         {
-          "text": "\u5236\u54c1",
+          "text": "\u5236\u54c1\u5e93",
           "level": 4
         },
         {
@@ -14903,11 +14903,11 @@
         }
       ],
       "terms": {
-        "sie": 328,
-        "claude": 264,
-        "und": 247,
-        "code": 193,
-        "mit": 116,
+        "sie": 329,
+        "claude": 263,
+        "und": 248,
+        "code": 192,
+        "mit": 117,
         "die": 93,
         "agent": 53,
         "auf": 53,
@@ -14917,20 +14917,20 @@
         "ein": 43,
         "aus": 42,
         "sdk": 40,
+        "oder": 38,
         "plugin": 36,
-        "oder": 36,
         "ihre": 35,
         "sitzungen": 34,
         "tool": 32,
         "hren": 32,
         "cloud": 31,
         "gateway": 31,
-        "ber": 30,
+        "ber": 29,
         "eine": 28,
         "dem": 28,
+        "wie": 27,
         "den": 27,
         "app": 26,
-        "wie": 26,
         "konfigurieren": 26,
         "woche": 25,
         "hook": 24,
@@ -14938,11 +14938,11 @@
         "sitzung": 24,
         "referenz": 24,
         "desktop": 23,
+        "einem": 22,
         "berpr": 21,
-        "einem": 21,
+        "einen": 20,
         "agenten": 20,
         "ausf": 19,
-        "einen": 19,
         "skill": 18,
         "verwenden": 18,
         "erstellen": 18,
@@ -14954,7 +14954,7 @@
         "cli": 15,
         "auto": 14
       },
-      "word_count": 5360
+      "word_count": 5371
     },
     {
       "filename": "claude-code__docs___llms__es.md",
@@ -15179,8 +15179,8 @@
       "terms": {
         "claude": 269,
         "code": 180,
-        "con": 115,
-        "para": 107,
+        "con": 116,
+        "para": 106,
         "que": 61,
         "una": 60,
         "agent": 56,
@@ -15203,10 +15203,10 @@
         "mcp": 24,
         "puerta": 24,
         "digo": 20,
-        "uso": 20,
         "skill": 19,
         "autom": 19,
         "por": 19,
+        "uso": 19,
         "ejecutar": 18,
         "archivo": 17,
         "tarea": 17,
@@ -15228,7 +15228,7 @@
         "configure": 14,
         "sus": 14
       },
-      "word_count": 6424
+      "word_count": 6438
     },
     {
       "filename": "claude-code__docs___llms__fr.md",
@@ -15454,16 +15454,16 @@
         "les": 283,
         "claude": 268,
         "code": 200,
-        "des": 170,
-        "avec": 106,
-        "pour": 103,
+        "des": 169,
+        "avec": 107,
+        "pour": 102,
         "agent": 84,
         "dan": 79,
         "votre": 77,
         "session": 71,
         "une": 70,
         "sur": 53,
-        "que": 43,
+        "que": 44,
         "sdk": 40,
         "plugin": 36,
         "outil": 35,
@@ -15493,16 +15493,16 @@
         "depui": 17,
         "serveur": 17,
         "fichier": 16,
+        "int": 16,
         "contr": 16,
         "desktop": 15,
-        "int": 15,
         "vos": 15,
         "couvrez": 15,
         "cuter": 15,
         "skill": 14,
         "command": 14
       },
-      "word_count": 6421
+      "word_count": 6440
     },
     {
       "filename": "claude-code__docs___llms__id.md",
@@ -15700,7 +15700,7 @@
           "level": 4
         },
         {
-          "text": "Penyebaran",
+          "text": "Penerapan",
           "level": 4
         },
         {
@@ -15826,7 +15826,7 @@
           "level": 5
         },
         {
-          "text": "Sviluppa con Claude Code",
+          "text": "Crea con Claude Code",
           "level": 3
         },
         {
@@ -16001,13 +16001,13 @@
       "terms": {
         "claude": 268,
         "code": 181,
-        "per": 120,
-        "con": 112,
+        "per": 119,
+        "con": 113,
         "che": 52,
         "agent": 44,
         "sdk": 40,
         "una": 40,
-        "del": 40,
+        "del": 39,
         "sessioni": 37,
         "dei": 37,
         "plugin": 36,
@@ -16015,8 +16015,8 @@
         "sessione": 33,
         "cloud": 33,
         "modalit": 32,
+        "come": 31,
         "gateway": 31,
-        "come": 30,
         "app": 26,
         "strumenti": 26,
         "configurazione": 26,
@@ -16050,7 +16050,7 @@
         "impostazioni": 15,
         "ambienti": 15
       },
-      "word_count": 6119
+      "word_count": 6137
     },
     {
       "filename": "claude-code__docs___llms__jp.md",
@@ -16076,7 +16076,7 @@
           "level": 4
         },
         {
-          "text": "\u30b3\u30a2\u30b3\u30f3\u30bb\u30d7\u30c8",
+          "text": "\u30b3\u30a2\u6982\u5ff5",
           "level": 4
         },
         {
@@ -16088,11 +16088,11 @@
           "level": 4
         },
         {
-          "text": "\u30af\u30e9\u30a6\u30c9\u5185\u306e Claude Code",
+          "text": "Claude Code \u30af\u30e9\u30a6\u30c9\u7248",
           "level": 5
         },
         {
-          "text": "Claude Code \u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248",
+          "text": "Claude Code\uff08\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248\uff09",
           "level": 5
         },
         {
@@ -16228,7 +16228,7 @@
           "level": 4
         },
         {
-          "text": "\u30b3\u30a2\u30b3\u30f3\u30bb\u30d7\u30c8",
+          "text": "\u30b3\u30a2\u6982\u5ff5",
           "level": 4
         },
         {
@@ -16240,7 +16240,7 @@
           "level": 4
         },
         {
-          "text": "\u52d5\u4f5c\u3092\u30ab\u30b9\u30bf\u30de\u30a4\u30ba\u3059\u308b",
+          "text": "\u52d5\u4f5c\u3092\u30ab\u30b9\u30bf\u30de\u30a4\u30ba",
           "level": 4
         },
         {
@@ -16450,7 +16450,7 @@
           "level": 4
         },
         {
-          "text": "\uad6c\uc131",
+          "text": "\uc124\uc815",
           "level": 3
         },
         {
@@ -16598,7 +16598,7 @@
         "kubernet": 3,
         "opentelemetry": 3
       },
-      "word_count": 4559
+      "word_count": 4569
     },
     {
       "filename": "claude-code__docs___llms__pt-br.md",
@@ -16764,7 +16764,7 @@
           "level": 4
         },
         {
-          "text": "Agent SDK",
+          "text": "SDK do Agent",
           "level": 3
         },
         {
@@ -16823,8 +16823,8 @@
       "terms": {
         "claude": 269,
         "code": 180,
-        "para": 134,
-        "com": 115,
+        "para": 133,
+        "com": 116,
         "ses": 69,
         "que": 67,
         "agent": 63,
@@ -16836,7 +16836,7 @@
         "plugin": 36,
         "ncia": 36,
         "ferramenta": 35,
-        "como": 32,
+        "como": 33,
         "modo": 31,
         "gateway": 31,
         "aplicativo": 26,
@@ -16852,7 +16852,7 @@
         "skill": 19,
         "por": 19,
         "partir": 19,
-        "uso": 19,
+        "uso": 18,
         "hospedado": 18,
         "arquivo": 17,
         "tarefa": 17,
@@ -16872,7 +16872,7 @@
         "executar": 14,
         "vei": 14
       },
-      "word_count": 6183
+      "word_count": 6200
     },
     {
       "filename": "claude-code__docs___llms__ru.md",
@@ -17146,7 +17146,7 @@
         "sandbox": 4,
         "bash": 4
       },
-      "word_count": 5363
+      "word_count": 5375
     },
     {
       "filename": "claude-code__docs___llms__zh-hant.md",
@@ -17184,7 +17184,7 @@
           "level": 4
         },
         {
-          "text": "\u96f2\u7aef Claude Code",
+          "text": "Claude Code \u96f2\u7aef\u7248",
           "level": 5
         },
         {
@@ -17320,7 +17320,7 @@
           "level": 4
         },
         {
-          "text": "\u5efa\u7acb\u4ee3\u7406\u7a0b\u5f0f",
+          "text": "\u5efa\u7acb\u4ee3\u7406",
           "level": 4
         },
         {
@@ -17467,18 +17467,18 @@
         }
       ],
       "terms": {
-        "claude": 395,
+        "claude": 400,
         "set": 356,
-        "code": 309,
-        "default": 158,
-        "model": 142,
-        "session": 142,
-        "tool": 102,
+        "code": 314,
+        "default": 160,
+        "model": 143,
+        "session": 143,
+        "tool": 103,
+        "requir": 98,
         "see": 97,
-        "requir": 96,
-        "later": 95,
+        "later": 97,
         "variable": 85,
-        "server": 79,
+        "server": 80,
         "command": 78,
         "turn": 73,
         "agent": 72,
@@ -17498,10 +17498,10 @@
         "run": 50,
         "only": 50,
         "api": 50,
-        "mcp": 48,
+        "mcp": 50,
         "override": 47,
         "read": 46,
-        "window": 45,
+        "window": 46,
         "also": 44,
         "bash": 43,
         "auto": 43,
@@ -17513,12 +17513,12 @@
         "prompt": 37,
         "google": 37,
         "timeout": 36,
+        "flag": 35,
+        "appli": 35,
         "terminal": 35,
-        "first": 35,
-        "bedrock": 35,
-        "millisecond": 35
+        "first": 35
       },
-      "word_count": 19407
+      "word_count": 19516
     },
     {
       "filename": "claude-code__errors.md",
@@ -23133,11 +23133,11 @@
         }
       ],
       "terms": {
-        "mcp": 188,
-        "claude": 140,
+        "mcp": 189,
+        "claude": 141,
         "server": 90,
         "json": 51,
-        "code": 43,
+        "code": 44,
         "tool": 41,
         "name": 27,
         "list": 26,
@@ -23174,6 +23174,7 @@
         "support": 9,
         "setting": 9,
         "get": 9,
+        "max": 9,
         "callback": 9,
         "port": 9,
         "read": 8,
@@ -23181,10 +23182,9 @@
         "directory": 8,
         "stdio": 8,
         "default": 8,
-        "such": 8,
-        "search": 8
+        "such": 8
       },
-      "word_count": 15636
+      "word_count": 15663
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -24294,8 +24294,8 @@
       ],
       "terms": {
         "event": 269,
-        "claude": 219,
-        "code": 197,
+        "claude": 225,
+        "code": 203,
         "tool": 153,
         "attribut": 150,
         "session": 112,
@@ -24308,14 +24308,14 @@
         "per": 72,
         "such": 71,
         "metric": 69,
+        "requir": 68,
+        "later": 68,
         "span": 68,
-        "requir": 63,
-        "later": 63,
         "user": 61,
         "api": 60,
+        "hook": 57,
         "value": 55,
         "manag": 54,
-        "hook": 52,
         "one": 52,
         "default": 52,
         "includ": 51,
@@ -24337,14 +24337,14 @@
         "logg": 39,
         "trac": 37,
         "correlation": 37,
+        "file": 36,
         "command": 36,
         "proces": 36,
-        "file": 35,
         "log": 35,
         "emitt": 35,
         "example": 34
       },
-      "word_count": 16683
+      "word_count": 16775
     },
     {
       "filename": "claude-code__network-config.md",
@@ -25825,58 +25825,58 @@
         }
       ],
       "terms": {
-        "plugin": 331,
-        "marketplace": 226,
-        "claude": 207,
-        "code": 191,
+        "plugin": 332,
+        "marketplace": 222,
+        "claude": 208,
+        "code": 192,
         "directory": 105,
         "command": 101,
         "install": 93,
         "entry": 92,
         "user": 91,
-        "run": 87,
-        "path": 80,
+        "run": 90,
+        "path": 78,
         "source": 73,
         "add": 64,
-        "git": 59,
         "see": 59,
         "field": 59,
         "name": 58,
-        "repository": 57,
-        "url": 57,
+        "git": 57,
+        "repository": 54,
         "set": 54,
-        "check": 53,
+        "check": 52,
+        "url": 50,
         "version": 49,
         "str": 49,
         "file": 48,
-        "only": 47,
         "setting": 46,
-        "host": 43,
+        "only": 45,
         "such": 43,
+        "host": 42,
         "sourc": 42,
         "github": 39,
-        "each": 39,
+        "each": 38,
         "one": 36,
         "requir": 36,
         "doesn": 35,
         "marketplac": 34,
         "load": 34,
-        "organization": 34,
         "fil": 33,
         "same": 33,
-        "fail": 32,
-        "update": 30,
+        "organization": 33,
+        "fail": 33,
+        "update": 32,
         "download": 30,
         "skill": 29,
-        "server": 29,
+        "place": 29,
         "accept": 29,
-        "default": 29,
         "manag": 29,
         "list": 28,
-        "every": 27,
-        "place": 27
+        "server": 27,
+        "without": 27,
+        "also": 27
       },
-      "word_count": 14283
+      "word_count": 14216
     },
     {
       "filename": "claude-code__plugin-relevance.md",
@@ -26081,43 +26081,45 @@
         }
       ],
       "terms": {
-        "plugin": 171,
+        "plugin": 173,
+        "claude": 50,
         "skill": 49,
-        "claude": 48,
-        "code": 34,
+        "code": 36,
         "directory": 32,
         "step": 28,
+        "load": 24,
         "create": 22,
         "hook": 22,
         "install": 20,
         "see": 20,
-        "load": 20,
         "root": 19,
         "agent": 18,
         "test": 18,
-        "add": 16,
+        "add": 17,
         "server": 15,
+        "each": 15,
         "marketplace": 15,
         "folder": 14,
         "run": 14,
-        "each": 14,
         "configuration": 13,
         "manifest": 13,
         "file": 11,
         "name": 11,
         "one": 11,
+        "session": 11,
         "custom": 10,
-        "session": 10,
         "lsp": 10,
+        "project": 9,
+        "flag": 9,
         "title": 9,
         "chang": 9,
-        "project": 8,
         "version": 8,
         "tip": 8,
         "start": 8,
-        "flag": 8,
+        "path": 8,
         "user": 8,
         "only": 8,
+        "setting": 8,
         "check": 8,
         "without": 8,
         "mcp": 7,
@@ -26128,11 +26130,9 @@
         "monitor": 7,
         "component": 7,
         "fil": 7,
-        "setting": 7,
-        "complete": 6,
-        "creat": 6
+        "complete": 6
       },
-      "word_count": 3439
+      "word_count": 3498
     },
     {
       "filename": "claude-code__plugins-reference.md",
@@ -30382,23 +30382,27 @@
           "level": 3
         },
         {
+          "text": "Personal skills disappeared",
+          "level": 3
+        },
+        {
           "text": "Related resources",
           "level": 2
         }
       ],
       "terms": {
-        "skill": 169,
-        "claude": 119,
+        "skill": 175,
+        "claude": 122,
         "name": 45,
-        "code": 31,
+        "code": 33,
         "command": 31,
         "run": 25,
         "description": 24,
         "plugin": 20,
         "tool": 19,
         "context": 19,
+        "file": 17,
         "bundl": 17,
-        "file": 15,
         "agent": 15,
         "true": 15,
         "work": 14,
@@ -30409,36 +30413,36 @@
         "project": 13,
         "model": 13,
         "bash": 13,
+        "sync": 12,
         "disable": 12,
         "fork": 12,
+        "load": 11,
         "only": 11,
         "app": 11,
-        "sync": 11,
         "review": 11,
         "user": 11,
         "allow": 11,
-        "load": 10,
+        "list": 10,
         "yaml": 10,
         "false": 10,
         "theme": 10,
         "null": 10,
+        "create": 9,
         "directory": 9,
-        "list": 9,
         "script": 9,
         "commit": 9,
         "json": 9,
         "argument": 9,
-        "create": 8,
+        "before": 8,
         "step": 8,
         "frontmatter": 8,
         "session": 8,
         "chang": 8,
         "test": 8,
         "budget": 8,
-        "available": 7,
-        "see": 7
+        "available": 7
       },
-      "word_count": 12742
+      "word_count": 12846
     },
     {
       "filename": "claude-code__slack.md",
@@ -31869,44 +31873,44 @@
         }
       ],
       "terms": {
-        "review": 77,
-        "claude": 62,
+        "review": 83,
+        "claude": 67,
         "code": 53,
         "run": 41,
         "branch": 35,
+        "session": 33,
         "post": 31,
-        "session": 29,
         "finding": 22,
         "ultrareview": 21,
+        "cloud": 20,
+        "launch": 20,
         "request": 20,
-        "launch": 19,
-        "cloud": 18,
+        "before": 18,
+        "account": 18,
         "pull": 18,
         "usage": 18,
-        "before": 16,
         "base": 15,
         "subcommand": 15,
         "credit": 15,
-        "account": 14,
         "repository": 14,
         "bill": 14,
         "work": 13,
         "free": 12,
         "instead": 12,
+        "finish": 12,
         "local": 11,
-        "start": 10,
+        "start": 11,
         "without": 10,
         "interactive": 10,
         "diff": 9,
         "github": 9,
-        "finish": 9,
+        "runn": 9,
         "same": 9,
         "file": 8,
         "only": 8,
         "noth": 8,
         "against": 8,
         "comment": 8,
-        "runn": 8,
         "sandbox": 7,
         "requir": 7,
         "default": 7,
@@ -31915,12 +31919,12 @@
         "keep": 7,
         "pas": 7,
         "commit": 7,
+        "also": 7,
         "refus": 7,
         "later": 7,
-        "print": 7,
-        "available": 6
+        "tell": 7
       },
-      "word_count": 2858
+      "word_count": 2973
     },
     {
       "filename": "claude-code__voice-dictation.md",
@@ -31950,6 +31954,10 @@
           "level": 2
         },
         {
+          "text": "Cancel a recording",
+          "level": 2
+        },
+        {
           "text": "Change the dictation language",
           "level": 2
         },
@@ -31971,58 +31979,58 @@
         }
       ],
       "terms": {
-        "record": 32,
-        "dictation": 31,
-        "key": 25,
-        "code": 24,
-        "claude": 24,
+        "record": 35,
+        "dictation": 34,
+        "claude": 27,
+        "key": 27,
+        "code": 26,
+        "prompt": 24,
         "tap": 23,
-        "microphone": 22,
-        "prompt": 20,
-        "hold": 20,
-        "mode": 19,
+        "microphone": 23,
+        "hold": 21,
+        "mode": 20,
         "run": 18,
         "voice": 17,
         "input": 17,
         "terminal": 17,
+        "start": 16,
         "setting": 14,
-        "start": 13,
         "audio": 12,
+        "first": 12,
         "enable": 11,
-        "first": 11,
+        "transcript": 11,
         "language": 11,
         "maco": 10,
         "again": 9,
         "install": 9,
+        "while": 8,
+        "doe": 8,
         "default": 8,
         "warmup": 8,
-        "transcript": 8,
         "step": 8,
         "available": 7,
+        "before": 7,
         "speak": 7,
+        "typ": 7,
         "message": 7,
-        "while": 7,
         "session": 7,
         "transcription": 7,
-        "doe": 7,
+        "only": 7,
         "trigger": 7,
         "system": 7,
         "show": 7,
+        "stop": 7,
         "repeat": 7,
+        "insert": 7,
         "word": 7,
         "app": 7,
-        "before": 6,
-        "typ": 6,
+        "instead": 6,
         "send": 6,
-        "only": 6,
+        "text": 6,
         "window": 6,
-        "example": 6,
-        "permission": 6,
-        "empty": 6,
-        "bind": 6,
-        "statu": 6
+        "example": 6
       },
-      "word_count": 2590
+      "word_count": 2737
     },
     {
       "filename": "claude-code__vs-code.md",
@@ -32053,6 +32061,10 @@
         },
         {
           "text": "Reference files and folders",
+          "level": 3
+        },
+        {
+          "text": "Paste text",
           "level": 3
         },
         {
@@ -32209,58 +32221,58 @@
         }
       ],
       "terms": {
-        "claude": 228,
-        "code": 188,
-        "session": 98,
-        "open": 90,
+        "claude": 242,
+        "code": 197,
+        "session": 100,
+        "open": 92,
         "extension": 66,
-        "conversation": 54,
+        "conversation": 56,
+        "later": 56,
         "tab": 54,
-        "later": 50,
-        "requir": 49,
-        "prompt": 42,
-        "click": 39,
+        "requir": 54,
+        "prompt": 46,
+        "click": 40,
         "window": 38,
-        "plugin": 36,
-        "command": 34,
+        "file": 37,
+        "plugin": 37,
+        "command": 36,
+        "select": 34,
         "group": 34,
-        "file": 33,
-        "see": 31,
-        "show": 30,
-        "select": 30,
+        "see": 33,
+        "show": 32,
+        "editor": 29,
         "install": 28,
-        "editor": 28,
         "panel": 28,
         "permission": 28,
+        "mode": 28,
+        "also": 27,
+        "start": 26,
         "setting": 26,
         "cli": 25,
-        "start": 25,
         "icon": 25,
         "new": 25,
-        "also": 24,
+        "text": 25,
+        "run": 24,
         "step": 24,
-        "run": 23,
-        "mode": 23,
+        "box": 24,
+        "add": 24,
+        "change": 23,
+        "terminal": 22,
         "list": 22,
-        "change": 22,
-        "add": 22,
         "edit": 21,
-        "terminal": 21,
-        "instead": 20,
-        "box": 20,
-        "dialog": 19,
-        "sign": 18,
-        "only": 18,
+        "instead": 21,
+        "dialog": 21,
+        "such": 20,
+        "plan": 19,
+        "sign": 19,
+        "appear": 19,
+        "only": 19,
+        "type": 19,
         "read": 18,
         "while": 18,
-        "linux": 17,
-        "appear": 17,
-        "chang": 16,
-        "text": 16,
-        "turn": 16,
-        "fil": 15
+        "linux": 17
       },
-      "word_count": 9285
+      "word_count": 9671
     },
     {
       "filename": "claude-code__web-quickstart.md",
