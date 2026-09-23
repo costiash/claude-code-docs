@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T03:14:23.718492Z",
+  "generated_at": "2026-09-23T18:15:23.644023Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -34844,13 +34844,13 @@
       ],
       "terms": {
         "model": 85,
-        "claude": 62,
+        "claude": 60,
         "retirement": 30,
-        "deprecat": 24,
+        "deprecat": 23,
         "retir": 21,
-        "note": 20,
         "active": 19,
         "anthropic": 19,
+        "note": 18,
         "replacement": 17,
         "recommend": 16,
         "date": 16,
@@ -34866,16 +34866,14 @@
         "deprecation": 9,
         "november": 9,
         "developer": 9,
-        "see": 7,
         "april": 7,
         "haiku": 7,
+        "see": 6,
         "parameter": 6,
         "usage": 6,
-        "mytho": 6,
         "october": 6,
         "follow": 5,
         "before": 5,
-        "migration": 5,
         "september": 5,
         "july": 5,
         "platform": 4,
@@ -34885,16 +34883,18 @@
         "request": 4,
         "statu": 4,
         "help": 4,
-        "guide": 4,
+        "migration": 4,
         "current": 4,
+        "mytho": 4,
         "august": 4,
         "were": 4,
         "dat": 3,
         "customer": 3,
         "page": 3,
-        "list": 3
+        "list": 3,
+        "support": 3
       },
-      "word_count": 1696
+      "word_count": 1677
     },
     {
       "filename": "docs__en__about-claude__models__choosing-a-model.md",
@@ -34937,29 +34937,27 @@
         }
       ],
       "terms": {
-        "claude": 40,
-        "model": 36,
-        "opu": 19,
+        "claude": 37,
+        "model": 35,
         "start": 15,
+        "opu": 15,
         "cost": 13,
-        "card": 12,
-        "new": 10,
+        "card": 10,
         "fable": 9,
         "agentic": 8,
         "work": 8,
-        "title": 7,
-        "http": 7,
-        "platform": 7,
-        "com": 7,
-        "doc": 7,
+        "new": 8,
         "need": 7,
         "application": 7,
         "cod": 7,
+        "title": 6,
+        "http": 6,
+        "platform": 6,
+        "com": 6,
+        "doc": 6,
         "effort": 6,
         "capability": 6,
         "task": 6,
-        "icon": 6,
-        "href": 6,
         "capabiliti": 5,
         "spe": 5,
         "test": 5,
@@ -34969,6 +34967,8 @@
         "approach": 5,
         "lower": 5,
         "see": 5,
+        "icon": 5,
+        "href": 5,
         "choos": 4,
         "pric": 4,
         "performance": 4,
@@ -34978,17 +34978,17 @@
         "think": 4,
         "agent": 4,
         "sonnet": 4,
-        "sparkle": 4,
-        "what": 4,
         "two": 3,
         "consider": 3,
         "specific": 3,
         "meet": 3,
         "research": 3,
         "output": 3,
-        "both": 3
+        "both": 3,
+        "development": 3,
+        "intelligence": 3
       },
-      "word_count": 984
+      "word_count": 967
     },
     {
       "filename": "docs__en__about-claude__models__migration-guide.md",
@@ -35457,58 +35457,58 @@
         }
       ],
       "terms": {
-        "claude": 153,
-        "mtok": 135,
-        "token": 116,
-        "pric": 90,
-        "tool": 60,
+        "claude": 150,
+        "mtok": 138,
+        "token": 118,
+        "pric": 83,
+        "tool": 65,
         "opu": 49,
-        "model": 42,
-        "input": 39,
-        "standard": 34,
-        "ccu": 34,
+        "model": 45,
+        "input": 37,
+        "ccu": 36,
+        "standard": 33,
         "per": 33,
-        "cache": 29,
+        "cache": 31,
+        "cloud": 30,
+        "prompt": 30,
         "api": 28,
-        "cloud": 25,
-        "prompt": 25,
-        "platform": 24,
+        "platform": 25,
         "bill": 24,
         "request": 24,
-        "note": 23,
         "aws": 23,
         "usage": 23,
+        "see": 22,
         "cost": 22,
-        "sonnet": 21,
-        "see": 21,
+        "google": 20,
+        "sonnet": 20,
         "discount": 20,
-        "output": 19,
-        "google": 18,
-        "cach": 18,
+        "sup": 18,
+        "output": 17,
         "bedrock": 17,
         "additional": 17,
+        "limit": 16,
         "appli": 16,
+        "cach": 16,
         "session": 16,
         "about": 15,
-        "multiplier": 15,
+        "retir": 15,
+        "available": 15,
         "web": 15,
         "search": 15,
-        "limit": 14,
         "price": 14,
+        "multiplier": 14,
         "marketplace": 14,
         "endpoint": 14,
         "unit": 14,
         "batch": 14,
+        "hour": 13,
+        "note": 13,
         "rat": 13,
         "mode": 13,
         "detail": 12,
-        "sup": 12,
-        "retir": 12,
-        "except": 12,
-        "content": 12,
-        "available": 12
+        "except": 12
       },
-      "word_count": 4973
+      "word_count": 5064
     },
     {
       "filename": "docs__en__about-claude__use-case-guides__commerce-agents.md",
@@ -38664,7 +38664,7 @@
         "parallel": 3,
         "check": 3
       },
-      "word_count": 16597
+      "word_count": 16810
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__code-execution-tool.md",
@@ -39755,29 +39755,29 @@
         }
       ],
       "terms": {
-        "tool": 147,
+        "tool": 152,
         "claude": 57,
-        "token": 38,
+        "token": 39,
         "card": 32,
         "call": 25,
         "agent": 21,
         "title": 18,
+        "platform": 18,
         "http": 17,
-        "platform": 17,
         "com": 17,
         "doc": 17,
         "icon": 16,
         "href": 16,
-        "see": 12,
+        "see": 13,
+        "model": 13,
         "request": 12,
         "server": 12,
-        "model": 12,
         "anthropic": 10,
         "search": 10,
         "code": 10,
+        "prompt": 10,
         "client": 9,
         "web": 9,
-        "prompt": 9,
         "opu": 9,
         "api": 8,
         "schema": 8,
@@ -39796,17 +39796,17 @@
         "bas": 5,
         "application": 5,
         "result": 5,
+        "system": 5,
         "pric": 5,
         "additional": 5,
+        "any": 5,
+        "retir": 5,
+        "cloud": 5,
         "description": 4,
         "execute": 4,
-        "return": 4,
-        "codegroup": 4,
-        "defin": 4,
-        "such": 4,
-        "send": 4
+        "return": 4
       },
-      "word_count": 3952
+      "word_count": 3967
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__parallel-tool-use.md",
@@ -40706,9 +40706,9 @@
         "modify": 14,
         "turn": 14,
         "state": 13,
+        "php": 13,
         "schema": 13,
         "java": 12,
-        "php": 12,
         "block": 12,
         "inside": 12,
         "get": 12,
@@ -40717,11 +40717,11 @@
         "json": 11,
         "history": 11,
         "request": 10,
+        "ruby": 10,
         "before": 10,
         "assistant": 10,
         "type": 9,
         "run": 9,
-        "ruby": 9,
         "iteration": 9,
         "content": 8,
         "parameter": 8,
@@ -40738,7 +40738,7 @@
         "note": 6,
         "input": 6
       },
-      "word_count": 6580
+      "word_count": 6582
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__tool-search-tool.md",
@@ -41171,29 +41171,31 @@
         }
       ],
       "terms": {
-        "fetch": 72,
-        "tool": 66,
+        "fetch": 74,
+        "tool": 68,
         "web": 48,
-        "claude": 45,
+        "claude": 46,
         "content": 32,
-        "url": 27,
+        "url": 31,
+        "api": 22,
+        "result": 22,
         "note": 20,
-        "api": 20,
-        "result": 20,
         "filter": 17,
         "see": 15,
-        "only": 13,
+        "only": 14,
         "token": 13,
         "search": 13,
         "code": 12,
         "response": 12,
+        "appear": 12,
         "data": 11,
         "document": 11,
+        "user": 11,
         "limit": 11,
         "request": 11,
+        "error": 11,
         "dynamic": 10,
         "parameter": 10,
-        "error": 10,
         "pdf": 9,
         "available": 9,
         "return": 9,
@@ -41201,28 +41203,26 @@
         "specific": 8,
         "cache": 8,
         "server": 8,
-        "user": 8,
         "client": 8,
+        "text": 8,
         "domain": 8,
         "page": 8,
         "support": 7,
+        "such": 7,
+        "prompt": 7,
         "citation": 7,
         "later": 7,
         "execution": 7,
         "http": 6,
         "context": 6,
         "version": 6,
+        "also": 6,
         "anthropic": 6,
         "enabl": 6,
-        "appear": 6,
         "conversation": 6,
-        "text": 6,
-        "call": 6,
-        "block": 6,
-        "turn": 6,
-        "codegroup": 6
+        "credential": 6
       },
-      "word_count": 3802
+      "word_count": 3914
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__web-search-tool.md",
@@ -46951,58 +46951,58 @@
         }
       ],
       "terms": {
-        "tool": 2785,
-        "call": 1436,
+        "tool": 3413,
+        "call": 1514,
+        "member": 1486,
+        "model": 1450,
+        "default": 1403,
         "format": 1397,
-        "model": 1266,
-        "default": 1260,
-        "user": 1207,
+        "user": 1239,
+        "content": 1103,
         "workspace": 1076,
-        "content": 1012,
+        "server": 1046,
         "session": 982,
-        "member": 963,
-        "time": 942,
-        "server": 939,
-        "request": 903,
-        "agent": 829,
-        "only": 764,
+        "request": 947,
+        "time": 944,
+        "block": 871,
+        "agent": 855,
+        "only": 847,
+        "per": 829,
+        "return": 813,
+        "result": 765,
         "date": 758,
-        "return": 747,
+        "input": 753,
+        "token": 746,
         "judg": 742,
-        "token": 734,
-        "result": 685,
-        "block": 678,
-        "input": 675,
-        "execution": 642,
+        "value": 714,
+        "whether": 707,
+        "must": 667,
+        "execution": 660,
+        "enabl": 650,
         "high": 624,
-        "per": 622,
-        "value": 609,
-        "whether": 603,
-        "key": 583,
-        "minlength": 580,
+        "name": 611,
+        "key": 609,
+        "minlength": 603,
+        "toolset": 592,
         "rfc": 566,
-        "must": 563,
         "event": 524,
         "evaluat": 520,
-        "name": 516,
+        "response": 514,
         "confirmation": 514,
+        "api": 505,
+        "each": 501,
+        "one": 497,
         "risk": 496,
-        "response": 493,
-        "header": 493,
+        "header": 495,
         "timestamp": 493,
-        "each": 491,
         "safe": 488,
-        "api": 485,
         "error": 485,
-        "one": 485,
-        "identifier": 457,
-        "organization": 453,
-        "maxlength": 450,
-        "enabl": 448,
-        "memory": 442,
-        "example": 438
+        "resolv": 479,
+        "same": 477,
+        "maxlength": 465,
+        "list": 457
       },
-      "word_count": 280888
+      "word_count": 301973
     },
     {
       "filename": "docs__en__api__beta-headers.md",
@@ -47529,7 +47529,7 @@
         "high": 414,
         "server": 389,
         "user": 373,
-        "agent": 358,
+        "agent": 371,
         "confirmation": 342,
         "safe": 342,
         "risk": 342,
@@ -47559,22 +47559,22 @@
         "reach": 171,
         "judgement": 171,
         "permission": 170,
-        "intelligence": 143,
-        "cod": 143,
+        "intelligence": 156,
+        "cod": 156,
         "default": 118,
+        "runn": 95,
         "maxlength": 95,
+        "powerful": 91,
+        "long": 91,
         "minlength": 90,
         "effort": 85,
         "format": 84,
-        "runn": 82,
         "manag": 81,
-        "powerful": 78,
-        "long": 78,
         "must": 75,
         "resolv": 75,
         "beta": 70
       },
-      "word_count": 35355
+      "word_count": 35522
     },
     {
       "filename": "docs__en__api__beta__agents__archive.md",
@@ -47613,8 +47613,8 @@
         "call": 56,
         "judg": 33,
         "high": 27,
+        "agent": 24,
         "user": 24,
-        "agent": 23,
         "server": 23,
         "execution": 22,
         "confirmation": 22,
@@ -47624,10 +47624,10 @@
         "model": 15,
         "session": 14,
         "each": 13,
+        "intelligence": 12,
+        "cod": 12,
         "input": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -47648,11 +47648,11 @@
         "judgement": 11,
         "ask": 11,
         "format": 9,
+        "powerful": 7,
+        "long": 7,
+        "runn": 7,
         "resolv": 7,
         "workspace": 6,
-        "powerful": 6,
-        "long": 6,
-        "runn": 6,
         "archive": 5,
         "effort": 5,
         "version": 4,
@@ -47660,7 +47660,7 @@
         "reason": 4,
         "depth": 4
       },
-      "word_count": 2286
+      "word_count": 2301
     },
     {
       "filename": "docs__en__api__beta__agents__create.md",
@@ -47698,9 +47698,9 @@
         "tool": 157,
         "call": 114,
         "judg": 66,
+        "agent": 56,
         "high": 56,
         "server": 56,
-        "agent": 54,
         "user": 48,
         "execution": 44,
         "confirmation": 44,
@@ -47714,10 +47714,10 @@
         "configuration": 30,
         "allow": 26,
         "cannot": 26,
+        "intelligence": 24,
+        "cod": 24,
         "input": 24,
         "content": 24,
-        "intelligence": 22,
-        "cod": 22,
         "permission": 22,
         "policy": 22,
         "automatically": 22,
@@ -47737,16 +47737,16 @@
         "maxlength": 20,
         "must": 18,
         "minlength": 18,
+        "runn": 15,
         "effort": 15,
         "claude": 14,
+        "powerful": 14,
+        "long": 14,
         "depth": 14,
-        "runn": 13,
         "reason": 13,
-        "powerful": 12,
-        "long": 12,
         "available": 12
       },
-      "word_count": 5289
+      "word_count": 5315
     },
     {
       "filename": "docs__en__api__beta__agents__list.md",
@@ -47785,7 +47785,7 @@
         "call": 56,
         "judg": 33,
         "high": 27,
-        "agent": 25,
+        "agent": 26,
         "user": 24,
         "server": 23,
         "execution": 22,
@@ -47798,10 +47798,10 @@
         "each": 13,
         "format": 12,
         "before": 12,
+        "intelligence": 12,
+        "cod": 12,
         "input": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -47821,18 +47821,18 @@
         "judgement": 11,
         "ask": 11,
         "time": 8,
+        "powerful": 7,
+        "long": 7,
+        "runn": 7,
         "resolv": 7,
         "workspace": 6,
-        "powerful": 6,
-        "long": 6,
-        "runn": 6,
         "list": 5,
         "date": 5,
         "default": 5,
         "effort": 5,
         "return": 4
       },
-      "word_count": 2365
+      "word_count": 2380
     },
     {
       "filename": "docs__en__api__beta__agents__retrieve.md",
@@ -47875,7 +47875,7 @@
         "call": 56,
         "judg": 33,
         "high": 27,
-        "agent": 24,
+        "agent": 25,
         "user": 24,
         "server": 23,
         "execution": 22,
@@ -47886,10 +47886,10 @@
         "model": 15,
         "session": 14,
         "each": 13,
+        "intelligence": 12,
+        "cod": 12,
         "input": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -47910,19 +47910,19 @@
         "judgement": 11,
         "ask": 11,
         "format": 10,
+        "powerful": 7,
+        "long": 7,
+        "runn": 7,
         "resolv": 7,
         "version": 6,
         "workspace": 6,
-        "powerful": 6,
-        "long": 6,
-        "runn": 6,
         "effort": 5,
         "get": 4,
         "int": 4,
         "time": 4,
         "reason": 4
       },
-      "word_count": 2307
+      "word_count": 2322
     },
     {
       "filename": "docs__en__api__beta__agents__update.md",
@@ -47966,7 +47966,7 @@
         "judg": 66,
         "server": 57,
         "high": 56,
-        "agent": 52,
+        "agent": 54,
         "user": 48,
         "execution": 44,
         "confirmation": 44,
@@ -47980,10 +47980,10 @@
         "configuration": 30,
         "cannot": 28,
         "allow": 26,
+        "intelligence": 24,
+        "cod": 24,
         "input": 24,
         "content": 24,
-        "intelligence": 22,
-        "cod": 22,
         "permission": 22,
         "policy": 22,
         "automatically": 22,
@@ -48004,15 +48004,15 @@
         "maxlength": 20,
         "minlength": 17,
         "omit": 15,
+        "runn": 15,
         "effort": 15,
         "claude": 14,
+        "powerful": 14,
+        "long": 14,
         "depth": 14,
-        "runn": 13,
-        "reason": 13,
-        "version": 12,
-        "powerful": 12
+        "reason": 13
       },
-      "word_count": 5419
+      "word_count": 5445
     },
     {
       "filename": "docs__en__api__beta__agents__versions.md",
@@ -48060,8 +48060,8 @@
         "judg": 33,
         "high": 27,
         "user": 24,
+        "agent": 23,
         "server": 23,
-        "agent": 22,
         "execution": 22,
         "confirmation": 22,
         "safe": 22,
@@ -48070,11 +48070,11 @@
         "model": 15,
         "session": 14,
         "each": 13,
+        "intelligence": 12,
+        "cod": 12,
         "input": 12,
         "version": 11,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -48095,18 +48095,18 @@
         "judgement": 11,
         "ask": 11,
         "format": 10,
+        "powerful": 7,
+        "long": 7,
+        "runn": 7,
         "resolv": 7,
         "workspace": 6,
-        "powerful": 6,
-        "long": 6,
-        "runn": 6,
         "effort": 5,
         "default": 4,
         "int": 4,
         "time": 4,
         "reason": 4
       },
-      "word_count": 2333
+      "word_count": 2348
     },
     {
       "filename": "docs__en__api__beta__agents__versions__list.md",
@@ -48149,8 +48149,8 @@
         "call": 56,
         "judg": 33,
         "high": 27,
+        "agent": 24,
         "user": 24,
-        "agent": 23,
         "server": 23,
         "execution": 22,
         "confirmation": 22,
@@ -48160,10 +48160,10 @@
         "model": 15,
         "session": 14,
         "each": 13,
+        "intelligence": 12,
+        "cod": 12,
         "input": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -48185,18 +48185,18 @@
         "ask": 11,
         "version": 10,
         "format": 10,
+        "powerful": 7,
+        "long": 7,
+        "runn": 7,
         "resolv": 7,
         "workspace": 6,
-        "powerful": 6,
-        "long": 6,
-        "runn": 6,
         "list": 5,
         "effort": 5,
         "default": 4,
         "int": 4,
         "time": 4
       },
-      "word_count": 2333
+      "word_count": 2348
     },
     {
       "filename": "docs__en__api__beta__deployment_runs.md",
@@ -48398,7 +48398,7 @@
         "version": 5,
         "one": 5
       },
-      "word_count": 3008
+      "word_count": 3016
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__list.md",
@@ -48484,7 +48484,7 @@
         "version": 2,
         "request": 2
       },
-      "word_count": 988
+      "word_count": 992
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__retrieve.md",
@@ -48570,7 +48570,7 @@
         "null": 2,
         "trigger": 2
       },
-      "word_count": 807
+      "word_count": 811
     },
     {
       "filename": "docs__en__api__beta__deployments.md",
@@ -48968,7 +48968,7 @@
         "block": 40,
         "variant": 39
       },
-      "word_count": 21729
+      "word_count": 21761
     },
     {
       "filename": "docs__en__api__beta__deployments__archive.md",
@@ -49054,7 +49054,7 @@
         "sent": 3,
         "must": 3
       },
-      "word_count": 1845
+      "word_count": 1849
     },
     {
       "filename": "docs__en__api__beta__deployments__create.md",
@@ -49140,7 +49140,7 @@
         "field": 6,
         "day": 6
       },
-      "word_count": 3102
+      "word_count": 3106
     },
     {
       "filename": "docs__en__api__beta__deployments__list.md",
@@ -49226,7 +49226,7 @@
         "per": 3,
         "int": 3
       },
-      "word_count": 1964
+      "word_count": 1968
     },
     {
       "filename": "docs__en__api__beta__deployments__pause.md",
@@ -49312,7 +49312,7 @@
         "sent": 3,
         "must": 3
       },
-      "word_count": 1845
+      "word_count": 1849
     },
     {
       "filename": "docs__en__api__beta__deployments__retrieve.md",
@@ -49398,7 +49398,7 @@
         "sent": 3,
         "must": 3
       },
-      "word_count": 1840
+      "word_count": 1844
     },
     {
       "filename": "docs__en__api__beta__deployments__run.md",
@@ -49484,7 +49484,7 @@
         "null": 2,
         "trigger": 2
       },
-      "word_count": 811
+      "word_count": 815
     },
     {
       "filename": "docs__en__api__beta__deployments__unpause.md",
@@ -49570,7 +49570,7 @@
         "sent": 3,
         "must": 3
       },
-      "word_count": 1845
+      "word_count": 1849
     },
     {
       "filename": "docs__en__api__beta__deployments__update.md",
@@ -49660,7 +49660,7 @@
         "turn": 6,
         "each": 6
       },
-      "word_count": 3132
+      "word_count": 3136
     },
     {
       "filename": "docs__en__api__beta__dreams.md",
@@ -49914,7 +49914,7 @@
         "before": 23,
         "beta": 22
       },
-      "word_count": 10605
+      "word_count": 10625
     },
     {
       "filename": "docs__en__api__beta__dreams__archive.md",
@@ -50000,7 +50000,7 @@
         "entry": 3,
         "minlength": 3
       },
-      "word_count": 1430
+      "word_count": 1434
     },
     {
       "filename": "docs__en__api__beta__dreams__cancel.md",
@@ -50086,7 +50086,7 @@
         "list": 3,
         "entry": 3
       },
-      "word_count": 1427
+      "word_count": 1431
     },
     {
       "filename": "docs__en__api__beta__dreams__create.md",
@@ -50172,7 +50172,7 @@
         "cancel": 4,
         "keep": 4
       },
-      "word_count": 1961
+      "word_count": 1965
     },
     {
       "filename": "docs__en__api__beta__dreams__list.md",
@@ -50258,7 +50258,7 @@
         "get": 3,
         "first": 3
       },
-      "word_count": 1595
+      "word_count": 1599
     },
     {
       "filename": "docs__en__api__beta__dreams__retrieve.md",
@@ -50344,7 +50344,7 @@
         "fail": 3,
         "list": 3
       },
-      "word_count": 1405
+      "word_count": 1409
     },
     {
       "filename": "docs__en__api__beta__environments.md",
@@ -50822,7 +50822,7 @@
         "creat": 17,
         "poll": 17
       },
-      "word_count": 9430
+      "word_count": 9486
     },
     {
       "filename": "docs__en__api__beta__environments__archive.md",
@@ -50908,7 +50908,7 @@
         "new": 1,
         "session": 1
       },
-      "word_count": 620
+      "word_count": 624
     },
     {
       "filename": "docs__en__api__beta__environments__create.md",
@@ -50994,7 +50994,7 @@
         "readable": 2,
         "name": 2
       },
-      "word_count": 1048
+      "word_count": 1052
     },
     {
       "filename": "docs__en__api__beta__environments__delete.md",
@@ -51073,7 +51073,7 @@
         "default": 1,
         "identifier": 1
       },
-      "word_count": 259
+      "word_count": 263
     },
     {
       "filename": "docs__en__api__beta__environments__list.md",
@@ -51159,7 +51159,7 @@
         "claude": 1,
         "com": 1
       },
-      "word_count": 687
+      "word_count": 691
     },
     {
       "filename": "docs__en__api__beta__environments__retrieve.md",
@@ -51245,7 +51245,7 @@
         "specify": 1,
         "version": 1
       },
-      "word_count": 609
+      "word_count": 613
     },
     {
       "filename": "docs__en__api__beta__environments__update.md",
@@ -51335,7 +51335,7 @@
         "must": 2,
         "omitt": 2
       },
-      "word_count": 1041
+      "word_count": 1045
     },
     {
       "filename": "docs__en__api__beta__environments__work.md",
@@ -51645,7 +51645,7 @@
         "queue": 9,
         "specify": 8
       },
-      "word_count": 4764
+      "word_count": 4796
     },
     {
       "filename": "docs__en__api__beta__environments__work__ack.md",
@@ -51731,7 +51731,7 @@
         "receipt": 1,
         "transition": 1
       },
-      "word_count": 504
+      "word_count": 508
     },
     {
       "filename": "docs__en__api__beta__environments__work__heartbeat.md",
@@ -51821,7 +51821,7 @@
         "query": 1,
         "desir": 1
       },
-      "word_count": 365
+      "word_count": 369
     },
     {
       "filename": "docs__en__api__beta__environments__work__list.md",
@@ -51911,7 +51911,7 @@
         "invoke": 1,
         "directly": 1
       },
-      "word_count": 519
+      "word_count": 523
     },
     {
       "filename": "docs__en__api__beta__environments__work__poll.md",
@@ -52001,7 +52001,7 @@
         "need": 1,
         "invoke": 1
       },
-      "word_count": 565
+      "word_count": 569
     },
     {
       "filename": "docs__en__api__beta__environments__work__retrieve.md",
@@ -52087,7 +52087,7 @@
         "includ": 1,
         "here": 1
       },
-      "word_count": 545
+      "word_count": 549
     },
     {
       "filename": "docs__en__api__beta__environments__work__stats.md",
@@ -52173,7 +52173,7 @@
         "use": 1,
         "redi": 1
       },
-      "word_count": 351
+      "word_count": 355
     },
     {
       "filename": "docs__en__api__beta__environments__work__stop.md",
@@ -52263,7 +52263,7 @@
         "sdk": 1,
         "cli": 1
       },
-      "word_count": 568
+      "word_count": 572
     },
     {
       "filename": "docs__en__api__beta__environments__work__update.md",
@@ -52353,7 +52353,7 @@
         "built": 1,
         "sdk": 1
       },
-      "word_count": 587
+      "word_count": 591
     },
     {
       "filename": "docs__en__api__beta__files.md",
@@ -52547,7 +52547,7 @@
         "parameter": 5,
         "plu": 5
       },
-      "word_count": 2186
+      "word_count": 2206
     },
     {
       "filename": "docs__en__api__beta__files__delete.md",
@@ -52626,7 +52626,7 @@
         "default": 1,
         "response": 1
       },
-      "word_count": 255
+      "word_count": 259
     },
     {
       "filename": "docs__en__api__beta__files__download.md",
@@ -52690,7 +52690,7 @@
         "must": 1,
         "match": 1
       },
-      "word_count": 212
+      "word_count": 216
     },
     {
       "filename": "docs__en__api__beta__files__list.md",
@@ -52776,7 +52776,7 @@
         "get": 1,
         "query": 1
       },
-      "word_count": 578
+      "word_count": 582
     },
     {
       "filename": "docs__en__api__beta__files__retrieve_metadata.md",
@@ -52862,7 +52862,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 427
+      "word_count": 431
     },
     {
       "filename": "docs__en__api__beta__files__upload.md",
@@ -52948,7 +52948,7 @@
         "need": 1,
         "act": 1
       },
-      "word_count": 495
+      "word_count": 499
     },
     {
       "filename": "docs__en__api__beta__memory_stores.md",
@@ -53410,7 +53410,7 @@
         "unique": 18,
         "attach": 18
       },
-      "word_count": 9916
+      "word_count": 9972
     },
     {
       "filename": "docs__en__api__beta__memory_stores__archive.md",
@@ -53496,7 +53496,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 478
+      "word_count": 482
     },
     {
       "filename": "docs__en__api__beta__memory_stores__create.md",
@@ -53582,7 +53582,7 @@
         "user": 2,
         "pair": 2
       },
-      "word_count": 573
+      "word_count": 577
     },
     {
       "filename": "docs__en__api__beta__memory_stores__delete.md",
@@ -53668,7 +53668,7 @@
         "retrievable": 1,
         "response": 1
       },
-      "word_count": 297
+      "word_count": 301
     },
     {
       "filename": "docs__en__api__beta__memory_stores__list.md",
@@ -53754,7 +53754,7 @@
         "http": 1,
         "platform": 1
       },
-      "word_count": 587
+      "word_count": 591
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories.md",
@@ -54016,7 +54016,7 @@
         "rfc": 12,
         "date": 12
       },
-      "word_count": 5371
+      "word_count": 5391
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__create.md",
@@ -54110,7 +54110,7 @@
         "contain": 2,
         "character": 2
       },
-      "word_count": 741
+      "word_count": 745
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__delete.md",
@@ -54200,7 +54200,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 362
+      "word_count": 366
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__list.md",
@@ -54290,7 +54290,7 @@
         "opaque": 2,
         "cursor": 2
       },
-      "word_count": 915
+      "word_count": 919
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__retrieve.md",
@@ -54380,7 +54380,7 @@
         "time": 2,
         "within": 2
       },
-      "word_count": 650
+      "word_count": 654
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__update.md",
@@ -54474,7 +54474,7 @@
         "version": 2,
         "example": 2
       },
-      "word_count": 872
+      "word_count": 876
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions.md",
@@ -54652,7 +54652,7 @@
         "date": 10,
         "lineage": 10
       },
-      "word_count": 4415
+      "word_count": 4427
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__list.md",
@@ -54742,7 +54742,7 @@
         "next": 3,
         "service": 3
       },
-      "word_count": 1236
+      "word_count": 1240
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__redact.md",
@@ -54828,7 +54828,7 @@
         "date": 2,
         "retrieve": 2
       },
-      "word_count": 950
+      "word_count": 954
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__retrieve.md",
@@ -54918,7 +54918,7 @@
         "select": 2,
         "endpoint": 2
       },
-      "word_count": 1044
+      "word_count": 1048
     },
     {
       "filename": "docs__en__api__beta__memory_stores__retrieve.md",
@@ -55004,7 +55004,7 @@
         "act": 1,
         "one": 1
       },
-      "word_count": 465
+      "word_count": 469
     },
     {
       "filename": "docs__en__api__beta__memory_stores__update.md",
@@ -55094,7 +55094,7 @@
         "post": 1,
         "requir": 1
       },
-      "word_count": 588
+      "word_count": 592
     },
     {
       "filename": "docs__en__api__beta__messages.md",
@@ -55824,11 +55824,27 @@
           "level": 3
         },
         {
+          "text": "Beta MCP Tool",
+          "level": 3
+        },
+        {
           "text": "Beta MCP Tool Config",
           "level": 3
         },
         {
           "text": "Beta MCP Tool Default Config",
+          "level": 3
+        },
+        {
+          "text": "Beta MCP Tool Listing Block",
+          "level": 3
+        },
+        {
+          "text": "Beta MCP Tool Listing Block Param",
+          "level": 3
+        },
+        {
+          "text": "Beta MCP Tool Param",
           "level": 3
         },
         {
@@ -55981,6 +55997,38 @@
         },
         {
           "text": "Beta Request Tool Removal Block",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Addition Block",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Change MCP Tool Reference",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Change MCP Toolset Reference",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Change Tool Reference",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Input Schema",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Removal Block",
+          "level": 3
+        },
+        {
+          "text": "Beta Response Tool Union",
           "level": 3
         },
         {
@@ -56157,6 +56205,14 @@
         },
         {
           "text": "Beta Tool Change MCP Toolset Reference",
+          "level": 3
+        },
+        {
+          "text": "Beta Tool Change Tool Definition",
+          "level": 3
+        },
+        {
+          "text": "Beta Tool Change Tool Definition Param",
           "level": 3
         },
         {
@@ -56553,58 +56609,58 @@
         }
       ],
       "terms": {
-        "tool": 2186,
-        "member": 1819,
-        "block": 1607,
-        "model": 1573,
-        "default": 1450,
-        "token": 911,
-        "result": 867,
-        "content": 798,
-        "toolset": 786,
-        "per": 776,
-        "request": 767,
-        "enabl": 691,
-        "minimum": 659,
-        "cache": 606,
-        "input": 595,
-        "same": 524,
-        "schema": 510,
-        "every": 481,
-        "load": 481,
-        "number": 468,
-        "serv": 447,
-        "whether": 441,
-        "value": 429,
-        "must": 424,
-        "server": 422,
-        "create": 421,
-        "control": 413,
-        "config": 403,
-        "only": 385,
-        "whose": 383,
-        "text": 381,
-        "false": 380,
-        "breakpoint": 374,
-        "pattern": 365,
-        "output": 362,
-        "resolv": 362,
-        "used": 359,
-        "search": 359,
-        "prompt": 353,
-        "offer": 350,
-        "beta": 347,
-        "overrid": 346,
-        "defer": 341,
-        "documentation": 340,
-        "resolve": 336,
-        "withheld": 336,
-        "think": 333,
-        "intelligence": 324,
-        "cod": 324,
-        "maxlength": 323
+        "tool": 6373,
+        "member": 5940,
+        "model": 2988,
+        "block": 2910,
+        "default": 2528,
+        "toolset": 2521,
+        "per": 2411,
+        "enabl": 2265,
+        "schema": 1783,
+        "load": 1669,
+        "content": 1512,
+        "result": 1507,
+        "every": 1465,
+        "same": 1386,
+        "whether": 1273,
+        "must": 1256,
+        "serv": 1253,
+        "value": 1233,
+        "false": 1229,
+        "input": 1192,
+        "config": 1171,
+        "whose": 1151,
+        "overrid": 1149,
+        "resolv": 1132,
+        "offer": 1130,
+        "defer": 1128,
+        "cache": 1124,
+        "documentation": 1108,
+        "resolve": 1104,
+        "withheld": 1104,
+        "true": 1074,
+        "request": 1036,
+        "only": 1029,
+        "nam": 1021,
+        "token": 1007,
+        "server": 867,
+        "control": 864,
+        "create": 860,
+        "call": 840,
+        "prompt": 837,
+        "minimum": 835,
+        "name": 834,
+        "breakpoint": 825,
+        "search": 824,
+        "includ": 817,
+        "return": 794,
+        "reference": 739,
+        "number": 724,
+        "used": 695,
+        "fetch": 633
       },
-      "word_count": 155029
+      "word_count": 300547
     },
     {
       "filename": "docs__en__api__beta__messages__batches.md",
@@ -56799,58 +56855,58 @@
         }
       ],
       "terms": {
-        "default": 540,
-        "tool": 526,
-        "model": 463,
-        "request": 385,
-        "block": 367,
-        "token": 326,
-        "result": 268,
-        "member": 266,
-        "message": 228,
-        "number": 199,
-        "content": 187,
-        "minimum": 183,
+        "tool": 1595,
+        "member": 1297,
+        "default": 821,
+        "model": 801,
+        "block": 721,
+        "toolset": 562,
+        "per": 529,
+        "enabl": 494,
+        "request": 456,
+        "result": 428,
+        "schema": 401,
+        "load": 377,
+        "content": 364,
+        "token": 350,
+        "same": 338,
+        "every": 326,
+        "input": 320,
+        "value": 286,
+        "must": 286,
+        "whether": 286,
+        "serv": 285,
+        "cache": 275,
+        "false": 273,
+        "only": 272,
+        "whose": 264,
+        "number": 263,
+        "true": 255,
+        "overrid": 251,
+        "resolv": 246,
+        "defer": 246,
+        "offer": 245,
+        "documentation": 242,
+        "config": 241,
+        "nam": 240,
+        "resolve": 240,
+        "withheld": 240,
+        "server": 238,
+        "message": 233,
+        "minimum": 227,
+        "used": 207,
+        "return": 205,
+        "create": 202,
+        "prompt": 202,
+        "name": 202,
+        "search": 201,
+        "includ": 198,
+        "call": 191,
+        "reference": 189,
         "batch": 181,
-        "input": 174,
-        "cache": 146,
-        "same": 124,
-        "used": 123,
-        "output": 123,
-        "server": 120,
-        "per": 120,
-        "toolset": 119,
-        "response": 118,
-        "error": 114,
-        "text": 113,
-        "only": 111,
-        "one": 106,
-        "think": 105,
-        "entry": 104,
-        "enabl": 100,
-        "create": 94,
-        "pattern": 93,
-        "retry": 93,
-        "search": 85,
-        "schema": 85,
-        "return": 83,
-        "serv": 83,
-        "prompt": 82,
-        "turn": 82,
-        "process": 81,
-        "value": 81,
-        "code": 81,
-        "time": 80,
-        "load": 80,
-        "must": 78,
-        "end": 78,
-        "whether": 78,
-        "every": 77,
-        "fallback": 77,
-        "execution": 76,
-        "context": 76
+        "entry": 178
       },
-      "word_count": 42962
+      "word_count": 79541
     },
     {
       "filename": "docs__en__api__beta__messages__batches__cancel.md",
@@ -56936,7 +56992,7 @@
         "platform": 1,
         "claude": 1
       },
-      "word_count": 760
+      "word_count": 764
     },
     {
       "filename": "docs__en__api__beta__messages__batches__create.md",
@@ -56971,58 +57027,58 @@
         }
       ],
       "terms": {
-        "tool": 294,
-        "member": 262,
-        "model": 151,
-        "block": 147,
-        "toolset": 111,
-        "per": 107,
-        "enabl": 100,
-        "content": 99,
-        "default": 87,
-        "schema": 81,
-        "load": 76,
-        "request": 74,
-        "every": 69,
-        "cache": 66,
-        "same": 63,
+        "tool": 331,
+        "member": 265,
+        "model": 157,
+        "block": 153,
+        "toolset": 118,
+        "per": 108,
+        "enabl": 102,
+        "content": 100,
+        "default": 88,
+        "schema": 85,
+        "request": 77,
+        "load": 77,
+        "every": 70,
+        "cache": 67,
+        "same": 65,
+        "only": 62,
         "must": 62,
         "control": 62,
         "whether": 62,
-        "only": 61,
+        "value": 61,
         "result": 61,
         "create": 60,
-        "value": 60,
+        "server": 58,
+        "serv": 57,
         "breakpoint": 55,
-        "serv": 55,
+        "offer": 53,
         "false": 53,
         "whose": 52,
-        "offer": 51,
+        "input": 52,
         "true": 51,
+        "overrid": 51,
         "documentation": 50,
-        "input": 50,
         "resolv": 50,
-        "overrid": 50,
+        "defer": 50,
         "config": 49,
-        "defer": 49,
         "nam": 48,
+        "return": 48,
         "resolve": 48,
         "withheld": 48,
+        "call": 47,
+        "message": 46,
         "prompt": 46,
-        "return": 46,
-        "message": 45,
-        "call": 45,
-        "server": 40,
-        "includ": 39,
-        "name": 39,
-        "maxlength": 35,
+        "name": 46,
+        "includ": 42,
+        "reference": 37,
+        "maxlength": 36,
         "batch": 34,
+        "minlength": 34,
         "token": 34,
-        "minimum": 34,
-        "pattern": 33,
-        "reference": 33
+        "minimum": 34
       },
-      "word_count": 15976
+      "word_count": 16763
     },
     {
       "filename": "docs__en__api__beta__messages__batches__delete.md",
@@ -57108,7 +57164,7 @@
         "match": 1,
         "return": 1
       },
-      "word_count": 299
+      "word_count": 303
     },
     {
       "filename": "docs__en__api__beta__messages__batches__list.md",
@@ -57194,7 +57250,7 @@
         "expir": 2,
         "statu": 2
       },
-      "word_count": 838
+      "word_count": 842
     },
     {
       "filename": "docs__en__api__beta__messages__batches__results.md",
@@ -57225,58 +57281,58 @@
         }
       ],
       "terms": {
-        "default": 105,
-        "model": 78,
-        "token": 73,
-        "request": 67,
-        "tool": 58,
-        "block": 55,
-        "result": 52,
-        "minimum": 37,
-        "number": 35,
-        "input": 31,
-        "output": 26,
-        "error": 24,
-        "text": 24,
-        "entry": 24,
-        "response": 23,
-        "used": 23,
-        "message": 22,
-        "content": 22,
-        "think": 21,
-        "retry": 21,
-        "one": 20,
-        "server": 20,
-        "cache": 20,
-        "code": 18,
-        "were": 18,
-        "fallback": 18,
-        "execution": 17,
-        "reason": 16,
-        "same": 15,
-        "turn": 15,
-        "pattern": 15,
-        "context": 15,
-        "search": 13,
-        "iteration": 13,
-        "alway": 12,
-        "count": 12,
-        "advisor": 12,
-        "trigger": 12,
-        "intelligence": 12,
-        "cod": 12,
-        "category": 12,
-        "api": 11,
-        "type": 11,
-        "generat": 11,
-        "array": 11,
-        "cit": 11,
-        "web": 11,
-        "compaction": 11,
-        "refusal": 11,
-        "could": 11
+        "tool": 316,
+        "member": 258,
+        "default": 175,
+        "model": 161,
+        "block": 142,
+        "toolset": 111,
+        "per": 105,
+        "enabl": 98,
+        "result": 92,
+        "request": 84,
+        "token": 79,
+        "schema": 79,
+        "load": 75,
+        "same": 68,
+        "input": 67,
+        "content": 66,
+        "every": 63,
+        "serv": 57,
+        "value": 56,
+        "must": 56,
+        "whether": 56,
+        "false": 55,
+        "whose": 53,
+        "cache": 52,
+        "true": 51,
+        "number": 51,
+        "overrid": 50,
+        "resolv": 49,
+        "defer": 49,
+        "only": 48,
+        "minimum": 48,
+        "nam": 48,
+        "config": 48,
+        "resolve": 48,
+        "offer": 48,
+        "documentation": 48,
+        "withheld": 48,
+        "server": 45,
+        "used": 44,
+        "search": 42,
+        "entry": 41,
+        "includ": 39,
+        "name": 39,
+        "prompt": 39,
+        "return": 38,
+        "reference": 38,
+        "create": 36,
+        "call": 36,
+        "fetch": 32,
+        "text": 30
       },
-      "word_count": 6197
+      "word_count": 15144
     },
     {
       "filename": "docs__en__api__beta__messages__batches__retrieve.md",
@@ -57362,7 +57418,7 @@
         "doc": 1,
         "messag": 1
       },
-      "word_count": 720
+      "word_count": 724
     },
     {
       "filename": "docs__en__api__beta__messages__count_tokens.md",
@@ -57397,58 +57453,58 @@
         }
       ],
       "terms": {
-        "tool": 294,
-        "member": 262,
-        "block": 145,
-        "model": 132,
-        "toolset": 111,
-        "per": 107,
-        "enabl": 100,
-        "content": 97,
-        "schema": 81,
-        "default": 77,
-        "load": 74,
-        "every": 67,
+        "tool": 331,
+        "member": 265,
+        "block": 151,
+        "model": 138,
+        "toolset": 118,
+        "per": 108,
+        "enabl": 102,
+        "content": 98,
+        "schema": 85,
+        "default": 78,
+        "load": 75,
+        "every": 68,
+        "cache": 62,
         "control": 62,
-        "cache": 61,
         "whether": 60,
+        "same": 60,
         "must": 59,
-        "same": 58,
+        "value": 55,
         "create": 55,
         "breakpoint": 55,
-        "value": 54,
+        "serv": 55,
         "result": 53,
-        "serv": 53,
         "false": 53,
-        "only": 51,
+        "only": 52,
+        "input": 52,
+        "server": 52,
+        "offer": 52,
         "true": 51,
-        "input": 50,
-        "offer": 50,
+        "overrid": 51,
         "resolv": 50,
-        "overrid": 50,
+        "defer": 50,
         "config": 49,
-        "whose": 49,
         "documentation": 49,
-        "defer": 49,
+        "whose": 49,
         "nam": 48,
         "resolve": 48,
         "withheld": 48,
-        "call": 45,
-        "return": 44,
+        "call": 47,
+        "return": 46,
+        "name": 45,
+        "includ": 43,
         "prompt": 41,
-        "includ": 40,
-        "name": 38,
-        "request": 37,
-        "server": 34,
+        "request": 40,
+        "reference": 36,
         "search": 33,
         "system": 32,
         "pattern": 32,
-        "reference": 32,
-        "minimum": 30,
-        "token": 29,
-        "maxlength": 29
+        "via": 32,
+        "minlength": 30,
+        "minimum": 30
       },
-      "word_count": 14308
+      "word_count": 15095
     },
     {
       "filename": "docs__en__api__beta__messages__create.md",
@@ -57483,58 +57539,58 @@
         }
       ],
       "terms": {
-        "tool": 358,
-        "member": 263,
-        "model": 246,
-        "block": 226,
-        "default": 176,
-        "content": 130,
-        "token": 129,
-        "request": 118,
-        "per": 114,
-        "toolset": 113,
-        "enabl": 100,
-        "result": 99,
-        "input": 90,
-        "cache": 89,
-        "schema": 82,
-        "same": 78,
-        "load": 77,
-        "minimum": 74,
-        "create": 69,
-        "every": 69,
-        "only": 67,
-        "whether": 67,
-        "value": 66,
-        "server": 66,
-        "serv": 64,
-        "must": 63,
-        "number": 62,
-        "control": 62,
-        "used": 57,
-        "whose": 56,
-        "prompt": 55,
-        "breakpoint": 55,
-        "return": 55,
-        "false": 55,
-        "output": 53,
-        "resolv": 52,
-        "response": 51,
-        "nam": 51,
-        "offer": 51,
-        "true": 51,
-        "overrid": 50,
-        "config": 49,
-        "documentation": 49,
-        "defer": 49,
-        "one": 48,
-        "resolve": 48,
-        "withheld": 48,
-        "pattern": 47,
-        "search": 46,
-        "think": 46
+        "tool": 654,
+        "member": 523,
+        "model": 335,
+        "block": 320,
+        "default": 247,
+        "toolset": 229,
+        "per": 217,
+        "enabl": 200,
+        "content": 175,
+        "schema": 164,
+        "load": 152,
+        "request": 139,
+        "result": 139,
+        "token": 135,
+        "same": 133,
+        "every": 132,
+        "input": 128,
+        "cache": 122,
+        "whether": 119,
+        "value": 118,
+        "serv": 116,
+        "must": 115,
+        "server": 112,
+        "only": 108,
+        "false": 108,
+        "whose": 104,
+        "true": 102,
+        "offer": 101,
+        "overrid": 101,
+        "resolv": 100,
+        "defer": 99,
+        "config": 97,
+        "documentation": 97,
+        "create": 96,
+        "nam": 96,
+        "resolve": 96,
+        "withheld": 96,
+        "control": 90,
+        "return": 87,
+        "prompt": 85,
+        "minimum": 85,
+        "name": 85,
+        "breakpoint": 83,
+        "includ": 83,
+        "call": 83,
+        "used": 78,
+        "number": 78,
+        "search": 75,
+        "reference": 74,
+        "entry": 68
       },
-      "word_count": 22565
+      "word_count": 32334
     },
     {
       "filename": "docs__en__api__beta__models.md",
@@ -57684,7 +57740,7 @@
         "get": 4,
         "response": 4
       },
-      "word_count": 2821
+      "word_count": 2829
     },
     {
       "filename": "docs__en__api__beta__models__list.md",
@@ -57770,7 +57826,7 @@
         "http": 1,
         "platform": 1
       },
-      "word_count": 943
+      "word_count": 947
     },
     {
       "filename": "docs__en__api__beta__models__retrieve.md",
@@ -57856,7 +57912,7 @@
         "resolve": 1,
         "path": 1
       },
-      "word_count": 805
+      "word_count": 809
     },
     {
       "filename": "docs__en__api__beta__organization.md",
@@ -60322,7 +60378,7 @@
         "range": 107,
         "list": 105
       },
-      "word_count": 63313
+      "word_count": 63465
     },
     {
       "filename": "docs__en__api__beta__organization__analytics.md",
@@ -63160,7 +63216,7 @@
         "exclusive": 2,
         "multiple": 2
       },
-      "word_count": 1101
+      "word_count": 1105
     },
     {
       "filename": "docs__en__api__beta__organization__cost_report__retrieve.md",
@@ -63246,7 +63302,7 @@
         "api": 1,
         "organization": 1
       },
-      "word_count": 709
+      "word_count": 713
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys.md",
@@ -64350,7 +64406,7 @@
         "true": 21,
         "assertion": 21
       },
-      "word_count": 10868
+      "word_count": 10920
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers.md",
@@ -64564,7 +64620,7 @@
         "identity": 12,
         "default": 12
       },
-      "word_count": 5069
+      "word_count": 5089
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
@@ -64650,7 +64706,7 @@
         "without": 2,
         "creat": 2
       },
-      "word_count": 769
+      "word_count": 773
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
@@ -64736,7 +64792,7 @@
         "maximum": 3,
         "reject": 3
       },
-      "word_count": 1063
+      "word_count": 1067
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
@@ -64822,7 +64878,7 @@
         "discovery": 2,
         "custom": 2
       },
-      "word_count": 763
+      "word_count": 767
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
@@ -64908,7 +64964,7 @@
         "pem": 2,
         "tls": 2
       },
-      "word_count": 730
+      "word_count": 734
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
@@ -64998,7 +65054,7 @@
         "anthropic": 3,
         "document": 3
       },
-      "word_count": 1092
+      "word_count": 1096
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
@@ -65292,7 +65348,7 @@
         "non": 17,
         "example": 17
       },
-      "word_count": 7373
+      "word_count": 7405
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
@@ -65378,7 +65434,7 @@
         "optional": 2,
         "anthropic": 2
       },
-      "word_count": 904
+      "word_count": 908
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
@@ -65464,7 +65520,7 @@
         "second": 4,
         "bind": 4
       },
-      "word_count": 1384
+      "word_count": 1388
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
@@ -65550,7 +65606,7 @@
         "cel": 2,
         "valu": 2
       },
-      "word_count": 838
+      "word_count": 842
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
@@ -65636,7 +65692,7 @@
         "chosen": 2,
         "one": 2
       },
-      "word_count": 848
+      "word_count": 852
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
@@ -65726,7 +65782,7 @@
         "api": 3,
         "organization": 3
       },
-      "word_count": 1456
+      "word_count": 1460
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
@@ -65880,7 +65936,7 @@
         "scop": 2,
         "require": 2
       },
-      "word_count": 1127
+      "word_count": 1139
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
@@ -65970,7 +66026,7 @@
         "service": 1,
         "account": 1
       },
-      "word_count": 409
+      "word_count": 413
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
@@ -66060,7 +66116,7 @@
         "explicit": 1,
         "only": 1
       },
-      "word_count": 408
+      "word_count": 412
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
@@ -66146,7 +66202,7 @@
         "parameter": 1,
         "optional": 1
       },
-      "word_count": 289
+      "word_count": 293
     },
     {
       "filename": "docs__en__api__beta__organization__invites.md",
@@ -66912,7 +66968,7 @@
         "example": 9,
         "path": 8
       },
-      "word_count": 3743
+      "word_count": 3779
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__archive.md",
@@ -66998,7 +67054,7 @@
         "irreversible": 1,
         "every": 1
       },
-      "word_count": 418
+      "word_count": 422
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__list.md",
@@ -67084,7 +67140,7 @@
         "should": 1,
         "wif": 1
       },
-      "word_count": 504
+      "word_count": 508
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__retrieve.md",
@@ -67170,7 +67226,7 @@
         "request": 1,
         "must": 1
       },
-      "word_count": 384
+      "word_count": 388
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__reveal_token.md",
@@ -67256,7 +67312,7 @@
         "until": 1,
         "expos": 1
       },
-      "word_count": 319
+      "word_count": 323
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__rotate_token.md",
@@ -67346,7 +67402,7 @@
         "captur": 1,
         "operational": 1
       },
-      "word_count": 334
+      "word_count": 338
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates.md",
@@ -67524,7 +67580,7 @@
         "work": 4,
         "dur": 4
       },
-      "word_count": 1749
+      "word_count": 1765
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__archive.md",
@@ -67610,7 +67666,7 @@
         "record": 1,
         "retain": 1
       },
-      "word_count": 399
+      "word_count": 403
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__create.md",
@@ -67700,7 +67756,7 @@
         "should": 1,
         "wif": 1
       },
-      "word_count": 435
+      "word_count": 439
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__list.md",
@@ -67790,7 +67846,7 @@
         "continue": 1,
         "work": 1
       },
-      "word_count": 450
+      "word_count": 454
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__retrieve.md",
@@ -67876,7 +67932,7 @@
         "request": 1,
         "must": 1
       },
-      "word_count": 370
+      "word_count": 374
     },
     {
       "filename": "docs__en__api__beta__organization__rate_limits.md",
@@ -69949,7 +70005,7 @@
         "console": 8,
         "specify": 8
       },
-      "word_count": 3948
+      "word_count": 3980
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
@@ -70035,7 +70091,7 @@
         "original": 1,
         "any": 1
       },
-      "word_count": 469
+      "word_count": 473
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
@@ -70121,7 +70177,7 @@
         "http": 1,
         "platform": 1
       },
-      "word_count": 535
+      "word_count": 539
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
@@ -70207,7 +70263,7 @@
         "manage": 1,
         "wif": 1
       },
-      "word_count": 481
+      "word_count": 485
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
@@ -70293,7 +70349,7 @@
         "return": 1,
         "nam": 1
       },
-      "word_count": 428
+      "word_count": 432
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
@@ -70383,7 +70439,7 @@
         "post": 1,
         "acces": 1
       },
-      "word_count": 524
+      "word_count": 528
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
@@ -70537,7 +70593,7 @@
         "example": 3,
         "list": 3
       },
-      "word_count": 1291
+      "word_count": 1303
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
@@ -70627,7 +70683,7 @@
         "create": 1,
         "same": 1
       },
-      "word_count": 424
+      "word_count": 428
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
@@ -70717,7 +70773,7 @@
         "rule": 1,
         "key": 1
       },
-      "word_count": 513
+      "word_count": 517
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
@@ -70803,7 +70859,7 @@
         "against": 1,
         "persist": 1
       },
-      "word_count": 325
+      "word_count": 329
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits.md",
@@ -72003,7 +72059,7 @@
         "breakdown": 6,
         "estimat": 6
       },
-      "word_count": 2695
+      "word_count": 2699
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report__retrieve_claude_code.md",
@@ -72171,7 +72227,7 @@
         "requir": 2,
         "support": 2
       },
-      "word_count": 1033
+      "word_count": 1037
     },
     {
       "filename": "docs__en__api__beta__organization__users.md",
@@ -73107,7 +73163,7 @@
         "against": 15,
         "group": 15
       },
-      "word_count": 7716
+      "word_count": 7740
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__archive.md",
@@ -73275,7 +73331,7 @@
         "unles": 2,
         "geographic": 2
       },
-      "word_count": 972
+      "word_count": 976
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
@@ -74350,7 +74406,7 @@
         "true": 4,
         "hold": 4
       },
-      "word_count": 1995
+      "word_count": 2015
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
@@ -74440,7 +74496,7 @@
         "determin": 1,
         "scop": 1
       },
-      "word_count": 450
+      "word_count": 454
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
@@ -74530,7 +74586,7 @@
         "each": 1,
         "entry": 1
       },
-      "word_count": 430
+      "word_count": 434
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
@@ -74616,7 +74672,7 @@
         "explicit": 1,
         "row": 1
       },
-      "word_count": 316
+      "word_count": 320
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
@@ -74702,7 +74758,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 379
+      "word_count": 383
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
@@ -74792,7 +74848,7 @@
         "one": 1,
         "only": 1
       },
-      "word_count": 408
+      "word_count": 412
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
@@ -75551,7 +75607,7 @@
         "session": 699,
         "judg": 676,
         "server": 673,
-        "agent": 595,
+        "agent": 613,
         "user": 554,
         "high": 546,
         "event": 530,
@@ -75591,12 +75647,12 @@
         "decid": 220,
         "far": 220,
         "error": 219,
+        "intelligence": 216,
+        "cod": 216,
         "int": 212,
-        "identifier": 205,
-        "intelligence": 198,
-        "cod": 198
+        "identifier": 205
       },
-      "word_count": 84946
+      "word_count": 85164
     },
     {
       "filename": "docs__en__api__beta__sessions__archive.md",
@@ -75639,8 +75695,8 @@
         "high": 27,
         "user": 27,
         "server": 27,
+        "agent": 23,
         "confirmation": 23,
-        "agent": 22,
         "execution": 22,
         "safe": 22,
         "risk": 22,
@@ -75650,11 +75706,11 @@
         "each": 14,
         "input": 14,
         "configuration": 12,
+        "intelligence": 12,
+        "cod": 12,
         "automatically": 12,
         "before": 12,
         "reach": 12,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "approv": 11,
@@ -75674,15 +75730,15 @@
         "int": 11,
         "store": 10,
         "resolv": 9,
+        "runn": 8,
         "token": 8,
         "timestamp": 8,
         "rfc": 8,
         "date": 8,
         "workspace": 7,
-        "runn": 7,
-        "memory": 7
+        "powerful": 7
       },
-      "word_count": 3461
+      "word_count": 3476
     },
     {
       "filename": "docs__en__api__beta__sessions__create.md",
@@ -75722,8 +75778,8 @@
         "judg": 66,
         "server": 59,
         "session": 56,
+        "agent": 56,
         "high": 56,
-        "agent": 54,
         "user": 53,
         "confirmation": 45,
         "execution": 44,
@@ -75741,13 +75797,13 @@
         "default": 26,
         "input": 26,
         "cannot": 26,
+        "intelligence": 24,
+        "cod": 24,
         "before": 24,
         "allow": 24,
         "reach": 24,
         "policy": 23,
         "automatically": 23,
-        "intelligence": 22,
-        "cod": 22,
         "permission": 22,
         "approv": 22,
         "without": 22,
@@ -75761,14 +75817,14 @@
         "ask": 22,
         "time": 20,
         "int": 15,
+        "runn": 15,
         "effort": 15,
         "must": 14,
         "name": 14,
-        "store": 14,
-        "claude": 13,
-        "runn": 13
+        "powerful": 14,
+        "long": 14
       },
-      "word_count": 7273
+      "word_count": 7299
     },
     {
       "filename": "docs__en__api__beta__sessions__delete.md",
@@ -75844,7 +75900,7 @@
         "delet": 1,
         "response": 1
       },
-      "word_count": 245
+      "word_count": 249
     },
     {
       "filename": "docs__en__api__beta__sessions__events.md",
@@ -75963,6 +76019,10 @@
         },
         {
           "text": "Beta Managed Agents Agent Custom Tool Use Event",
+          "level": 3
+        },
+        {
+          "text": "Beta Managed Agents Agent Evaluated Permission",
           "level": 3
         },
         {
@@ -76291,7 +76351,7 @@
         "tool": 496,
         "format": 482,
         "content": 449,
-        "agent": 382,
+        "agent": 388,
         "session": 370,
         "error": 306,
         "result": 297,
@@ -76319,8 +76379,8 @@
         "judg": 170,
         "input": 169,
         "type": 162,
-        "evaluat": 143,
-        "permission": 138,
+        "evaluat": 144,
+        "permission": 139,
         "high": 138,
         "request": 130,
         "via": 121,
@@ -76338,7 +76398,7 @@
         "int": 101,
         "block": 101
       },
-      "word_count": 47161
+      "word_count": 47176
     },
     {
       "filename": "docs__en__api__beta__sessions__events__list.md",
@@ -76384,7 +76444,7 @@
         "call": 62,
         "content": 56,
         "server": 54,
-        "agent": 50,
+        "agent": 51,
         "time": 49,
         "thread": 49,
         "error": 48,
@@ -76428,7 +76488,7 @@
         "resolv": 17,
         "should": 17
       },
-      "word_count": 7749
+      "word_count": 7750
     },
     {
       "filename": "docs__en__api__beta__sessions__events__send.md",
@@ -76518,7 +76578,7 @@
         "interrupt": 6,
         "correspond": 6
       },
-      "word_count": 2558
+      "word_count": 2562
     },
     {
       "filename": "docs__en__api__beta__sessions__events__stream.md",
@@ -76563,7 +76623,7 @@
         "session": 66,
         "content": 64,
         "call": 62,
-        "agent": 57,
+        "agent": 58,
         "server": 55,
         "error": 51,
         "thread": 49,
@@ -76608,7 +76668,7 @@
         "message": 17,
         "minlength": 17
       },
-      "word_count": 8017
+      "word_count": 8018
     },
     {
       "filename": "docs__en__api__beta__sessions__list.md",
@@ -76651,8 +76711,8 @@
         "user": 28,
         "high": 27,
         "server": 27,
+        "agent": 26,
         "time": 26,
-        "agent": 25,
         "confirmation": 24,
         "execution": 22,
         "safe": 22,
@@ -76666,10 +76726,10 @@
         "automatically": 13,
         "date": 12,
         "configuration": 12,
+        "intelligence": 12,
+        "cod": 12,
         "reach": 12,
         "store": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "approv": 11,
@@ -76690,11 +76750,11 @@
         "resolv": 9,
         "return": 8,
         "memory": 8,
+        "runn": 8,
         "token": 8,
-        "timestamp": 8,
-        "rfc": 8
+        "timestamp": 8
       },
-      "word_count": 3745
+      "word_count": 3760
     },
     {
       "filename": "docs__en__api__beta__sessions__resources.md",
@@ -76924,7 +76984,7 @@
         "str": 7,
         "attachment": 7
       },
-      "word_count": 3435
+      "word_count": 3455
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__add.md",
@@ -77014,7 +77074,7 @@
         "mount": 1,
         "container": 1
       },
-      "word_count": 324
+      "word_count": 328
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__delete.md",
@@ -77090,7 +77150,7 @@
         "deletion": 1,
         "response": 1
       },
-      "word_count": 247
+      "word_count": 251
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__list.md",
@@ -77180,7 +77240,7 @@
         "query": 1,
         "maximum": 1
       },
-      "word_count": 608
+      "word_count": 612
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__retrieve.md",
@@ -77266,7 +77326,7 @@
         "need": 1,
         "act": 1
       },
-      "word_count": 525
+      "word_count": 529
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__update.md",
@@ -77356,7 +77416,7 @@
         "value": 1,
         "need": 1
       },
-      "word_count": 558
+      "word_count": 562
     },
     {
       "filename": "docs__en__api__beta__sessions__retrieve.md",
@@ -77399,8 +77459,8 @@
         "high": 27,
         "user": 27,
         "server": 27,
+        "agent": 23,
         "confirmation": 23,
-        "agent": 22,
         "execution": 22,
         "safe": 22,
         "risk": 22,
@@ -77410,11 +77470,11 @@
         "each": 14,
         "input": 14,
         "configuration": 12,
+        "intelligence": 12,
+        "cod": 12,
         "automatically": 12,
         "before": 12,
         "reach": 12,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "approv": 11,
@@ -77434,15 +77494,15 @@
         "int": 11,
         "store": 10,
         "resolv": 9,
+        "runn": 8,
         "token": 8,
         "timestamp": 8,
         "rfc": 8,
         "date": 8,
         "workspace": 7,
-        "runn": 7,
-        "memory": 7
+        "powerful": 7
       },
-      "word_count": 3458
+      "word_count": 3473
     },
     {
       "filename": "docs__en__api__beta__sessions__threads.md",
@@ -77625,8 +77685,8 @@
         "server": 271,
         "thread": 252,
         "judg": 243,
+        "agent": 231,
         "content": 227,
-        "agent": 224,
         "user": 201,
         "high": 198,
         "execution": 196,
@@ -77658,17 +77718,17 @@
         "allow": 86,
         "cannot": 86,
         "text": 86,
+        "intelligence": 84,
+        "cod": 84,
         "token": 84,
         "before": 84,
         "configuration": 83,
         "execute": 83,
         "deny": 83,
         "ask": 83,
-        "without": 82,
-        "turn": 80,
-        "approv": 80
+        "runn": 82
       },
-      "word_count": 33875
+      "word_count": 33930
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__archive.md",
@@ -77717,13 +77777,13 @@
         "evaluat": 22,
         "session": 21,
         "format": 19,
+        "agent": 15,
         "model": 15,
-        "agent": 14,
         "each": 13,
         "input": 13,
+        "intelligence": 12,
+        "cod": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -77744,17 +77804,17 @@
         "judgement": 11,
         "ask": 11,
         "time": 10,
-        "runn": 9,
+        "runn": 10,
         "int": 9,
         "token": 8,
+        "powerful": 7,
+        "long": 7,
         "workspace": 6,
         "resolv": 6,
-        "powerful": 6,
-        "long": 6,
         "turn": 5,
         "effort": 5
       },
-      "word_count": 2649
+      "word_count": 2664
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events.md",
@@ -77831,8 +77891,8 @@
         "session": 133,
         "call": 124,
         "content": 120,
+        "agent": 109,
         "server": 109,
-        "agent": 107,
         "thread": 105,
         "error": 99,
         "time": 82,
@@ -77876,7 +77936,7 @@
         "whether": 34,
         "resolv": 34
       },
-      "word_count": 15611
+      "word_count": 15613
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__list.md",
@@ -77923,7 +77983,7 @@
         "content": 56,
         "thread": 54,
         "server": 54,
-        "agent": 50,
+        "agent": 51,
         "error": 48,
         "time": 41,
         "client": 41,
@@ -77966,7 +78026,7 @@
         "should": 17,
         "return": 16
       },
-      "word_count": 7594
+      "word_count": 7595
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__stream.md",
@@ -78011,7 +78071,7 @@
         "session": 68,
         "content": 64,
         "call": 62,
-        "agent": 57,
+        "agent": 58,
         "server": 55,
         "thread": 54,
         "error": 51,
@@ -78056,7 +78116,7 @@
         "message": 17,
         "minlength": 17
       },
-      "word_count": 8027
+      "word_count": 8028
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__list.md",
@@ -78109,13 +78169,13 @@
         "session": 21,
         "thread": 21,
         "format": 20,
+        "agent": 15,
         "model": 15,
-        "agent": 14,
         "input": 13,
+        "intelligence": 12,
+        "cod": 12,
         "each": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -78137,16 +78197,16 @@
         "ask": 11,
         "int": 10,
         "time": 10,
-        "runn": 9,
+        "runn": 10,
         "token": 8,
+        "powerful": 7,
+        "long": 7,
         "workspace": 6,
         "resolv": 6,
-        "powerful": 6,
-        "long": 6,
         "only": 5,
         "turn": 5
       },
-      "word_count": 2688
+      "word_count": 2703
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__retrieve.md",
@@ -78195,13 +78255,13 @@
         "evaluat": 22,
         "session": 21,
         "format": 19,
+        "agent": 15,
         "model": 15,
-        "agent": 14,
         "each": 13,
         "input": 13,
+        "intelligence": 12,
+        "cod": 12,
         "configuration": 11,
-        "intelligence": 11,
-        "cod": 11,
         "permission": 11,
         "policy": 11,
         "automatically": 11,
@@ -78222,17 +78282,17 @@
         "judgement": 11,
         "ask": 11,
         "time": 10,
-        "runn": 9,
+        "runn": 10,
         "int": 9,
         "token": 8,
+        "powerful": 7,
+        "long": 7,
         "workspace": 6,
         "resolv": 6,
-        "powerful": 6,
-        "long": 6,
         "turn": 5,
         "effort": 5
       },
-      "word_count": 2646
+      "word_count": 2661
     },
     {
       "filename": "docs__en__api__beta__sessions__update.md",
@@ -78285,8 +78345,8 @@
         "evaluat": 44,
         "whether": 33,
         "format": 31,
+        "agent": 29,
         "each": 29,
-        "agent": 28,
         "configuration": 28,
         "input": 26,
         "cannot": 26,
@@ -78314,15 +78374,15 @@
         "minlength": 14,
         "name": 13,
         "int": 12,
+        "intelligence": 12,
+        "cod": 12,
         "claude": 11,
         "only": 11,
         "one": 11,
         "must": 11,
-        "overrid": 11,
-        "enabl": 11,
-        "currency": 11
+        "overrid": 11
       },
-      "word_count": 5746
+      "word_count": 5761
     },
     {
       "filename": "docs__en__api__beta__skills.md",
@@ -78624,7 +78684,7 @@
         "sent": 9,
         "match": 9
       },
-      "word_count": 3965
+      "word_count": 4001
     },
     {
       "filename": "docs__en__api__beta__skills__create.md",
@@ -78710,7 +78770,7 @@
         "plugin": 2,
         "title": 1
       },
-      "word_count": 509
+      "word_count": 513
     },
     {
       "filename": "docs__en__api__beta__skills__delete.md",
@@ -78794,7 +78854,7 @@
         "default": 1,
         "response": 1
       },
-      "word_count": 274
+      "word_count": 278
     },
     {
       "filename": "docs__en__api__beta__skills__list.md",
@@ -78880,7 +78940,7 @@
         "sample": 2,
         "resolv": 2
       },
-      "word_count": 574
+      "word_count": 578
     },
     {
       "filename": "docs__en__api__beta__skills__retrieve.md",
@@ -78966,7 +79026,7 @@
         "specify": 1,
         "want": 1
       },
-      "word_count": 458
+      "word_count": 462
     },
     {
       "filename": "docs__en__api__beta__skills__versions.md",
@@ -79164,7 +79224,7 @@
         "file": 5,
         "return": 5
       },
-      "word_count": 2046
+      "word_count": 2066
     },
     {
       "filename": "docs__en__api__beta__skills__versions__create.md",
@@ -79254,7 +79314,7 @@
         "match": 1,
         "body": 1
       },
-      "word_count": 427
+      "word_count": 431
     },
     {
       "filename": "docs__en__api__beta__skills__versions__delete.md",
@@ -79340,7 +79400,7 @@
         "match": 1,
         "return": 1
       },
-      "word_count": 308
+      "word_count": 312
     },
     {
       "filename": "docs__en__api__beta__skills__versions__download.md",
@@ -79418,7 +79478,7 @@
         "omit": 1,
         "sent": 1
       },
-      "word_count": 261
+      "word_count": 265
     },
     {
       "filename": "docs__en__api__beta__skills__versions__list.md",
@@ -79508,7 +79568,7 @@
         "specify": 1,
         "want": 1
       },
-      "word_count": 475
+      "word_count": 479
     },
     {
       "filename": "docs__en__api__beta__skills__versions__retrieve.md",
@@ -79594,7 +79654,7 @@
         "one": 1,
         "belong": 1
       },
-      "word_count": 420
+      "word_count": 424
     },
     {
       "filename": "docs__en__api__beta__tunnels.md",
@@ -79928,7 +79988,7 @@
         "belong": 10,
         "specific": 10
       },
-      "word_count": 4103
+      "word_count": 4143
     },
     {
       "filename": "docs__en__api__beta__tunnels__archive.md",
@@ -80014,7 +80074,7 @@
         "certificate": 1,
         "same": 1
       },
-      "word_count": 409
+      "word_count": 413
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates.md",
@@ -80192,7 +80252,7 @@
         "specify": 4,
         "version": 4
       },
-      "word_count": 1727
+      "word_count": 1743
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__archive.md",
@@ -80278,7 +80338,7 @@
         "permitt": 1,
         "reject": 1
       },
-      "word_count": 410
+      "word_count": 414
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__create.md",
@@ -80368,7 +80428,7 @@
         "gateway": 1,
         "server": 1
       },
-      "word_count": 425
+      "word_count": 429
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__list.md",
@@ -80458,7 +80518,7 @@
         "dur": 1,
         "migration": 1
       },
-      "word_count": 450
+      "word_count": 454
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__retrieve.md",
@@ -80544,7 +80604,7 @@
         "only": 1,
         "need": 1
       },
-      "word_count": 374
+      "word_count": 378
     },
     {
       "filename": "docs__en__api__beta__tunnels__create.md",
@@ -80630,7 +80690,7 @@
         "allocat": 1,
         "fresh": 1
       },
-      "word_count": 412
+      "word_count": 416
     },
     {
       "filename": "docs__en__api__beta__tunnels__list.md",
@@ -80716,7 +80776,7 @@
         "dur": 1,
         "migration": 1
       },
-      "word_count": 451
+      "word_count": 455
     },
     {
       "filename": "docs__en__api__beta__tunnels__retrieve.md",
@@ -80802,7 +80862,7 @@
         "only": 1,
         "need": 1
       },
-      "word_count": 370
+      "word_count": 374
     },
     {
       "filename": "docs__en__api__beta__tunnels__reveal_token.md",
@@ -80888,7 +80948,7 @@
         "appear": 1,
         "intermediary": 1
       },
-      "word_count": 353
+      "word_count": 357
     },
     {
       "filename": "docs__en__api__beta__tunnels__rotate_token.md",
@@ -80978,7 +81038,7 @@
         "after": 1,
         "path": 1
       },
-      "word_count": 368
+      "word_count": 372
     },
     {
       "filename": "docs__en__api__beta__user_profiles.md",
@@ -81192,7 +81252,7 @@
         "minlength": 13,
         "maxlength": 13
       },
-      "word_count": 6450
+      "word_count": 6470
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create.md",
@@ -81278,7 +81338,7 @@
         "grant": 4,
         "request": 3
       },
-      "word_count": 1457
+      "word_count": 1461
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create_enrollment_url.md",
@@ -81364,7 +81424,7 @@
         "alway": 1,
         "timestamp": 1
       },
-      "word_count": 303
+      "word_count": 307
     },
     {
       "filename": "docs__en__api__beta__user_profiles__list.md",
@@ -81450,7 +81510,7 @@
         "only": 2,
         "credential": 2
       },
-      "word_count": 1009
+      "word_count": 1013
     },
     {
       "filename": "docs__en__api__beta__user_profiles__retrieve.md",
@@ -81536,7 +81596,7 @@
         "under": 2,
         "anthropic": 2
       },
-      "word_count": 883
+      "word_count": 887
     },
     {
       "filename": "docs__en__api__beta__user_profiles__update.md",
@@ -81626,7 +81686,7 @@
         "grant": 4,
         "profil": 3
       },
-      "word_count": 1487
+      "word_count": 1491
     },
     {
       "filename": "docs__en__api__beta__vaults.md",
@@ -82036,7 +82096,7 @@
         "against": 14,
         "placeholder": 14
       },
-      "word_count": 7342
+      "word_count": 7394
     },
     {
       "filename": "docs__en__api__beta__vaults__archive.md",
@@ -82122,7 +82182,7 @@
         "readable": 1,
         "name": 1
       },
-      "word_count": 327
+      "word_count": 331
     },
     {
       "filename": "docs__en__api__beta__vaults__create.md",
@@ -82208,7 +82268,7 @@
         "character": 1,
         "minlength": 1
       },
-      "word_count": 369
+      "word_count": 373
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials.md",
@@ -82598,7 +82658,7 @@
         "vault": 21,
         "authenticat": 21
       },
-      "word_count": 8550
+      "word_count": 8578
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__archive.md",
@@ -82684,7 +82744,7 @@
         "entry": 2,
         "domain": 2
       },
-      "word_count": 689
+      "word_count": 693
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__create.md",
@@ -82774,7 +82834,7 @@
         "any": 3,
         "network": 3
       },
-      "word_count": 1193
+      "word_count": 1197
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__delete.md",
@@ -82851,7 +82911,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 265
+      "word_count": 269
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__list.md",
@@ -82941,7 +83001,7 @@
         "placeholder": 2,
         "any": 2
       },
-      "word_count": 741
+      "word_count": 745
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md",
@@ -83027,7 +83087,7 @@
         "specify": 1,
         "version": 1
       },
-      "word_count": 581
+      "word_count": 585
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__retrieve.md",
@@ -83113,7 +83173,7 @@
         "entry": 2,
         "domain": 2
       },
-      "word_count": 686
+      "word_count": 690
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__update.md",
@@ -83203,7 +83263,7 @@
         "name": 3,
         "key": 3
       },
-      "word_count": 1114
+      "word_count": 1118
     },
     {
       "filename": "docs__en__api__beta__vaults__delete.md",
@@ -83279,7 +83339,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 255
+      "word_count": 259
     },
     {
       "filename": "docs__en__api__beta__vaults__list.md",
@@ -83365,7 +83425,7 @@
         "act": 1,
         "one": 1
       },
-      "word_count": 377
+      "word_count": 381
     },
     {
       "filename": "docs__en__api__beta__vaults__retrieve.md",
@@ -83451,7 +83511,7 @@
         "readable": 1,
         "name": 1
       },
-      "word_count": 324
+      "word_count": 328
     },
     {
       "filename": "docs__en__api__beta__vaults__update.md",
@@ -83541,7 +83601,7 @@
         "updat": 1,
         "character": 1
       },
-      "word_count": 388
+      "word_count": 392
     },
     {
       "filename": "docs__en__api__beta__webhooks.md",
@@ -83858,28 +83918,28 @@
         }
       ],
       "terms": {
-        "claude": 34,
+        "claude": 33,
         "routine": 26,
-        "code": 22,
+        "code": 21,
+        "api": 18,
         "token": 17,
-        "api": 15,
         "session": 14,
-        "endpoint": 11,
+        "endpoint": 12,
         "trigger": 10,
-        "request": 10,
-        "header": 9,
-        "run": 9,
+        "request": 9,
         "routin": 8,
         "creat": 8,
-        "usage": 8,
         "error": 8,
         "limit": 7,
-        "return": 7,
+        "run": 7,
         "platform": 6,
+        "web": 6,
+        "return": 6,
+        "per": 6,
+        "usage": 6,
+        "header": 6,
         "str": 6,
         "description": 5,
-        "new": 5,
-        "web": 5,
         "call": 5,
         "account": 5,
         "sdk": 5,
@@ -83888,28 +83948,28 @@
         "type": 5,
         "url": 4,
         "http": 4,
+        "send": 4,
         "response": 4,
-        "caller": 4,
         "anthropic": 4,
-        "requir": 4,
-        "per": 4,
+        "one": 4,
+        "new": 4,
         "bearer": 4,
         "key": 4,
         "add": 4,
         "see": 4,
         "doe": 4,
+        "fir": 4,
+        "fire": 3,
         "start": 3,
-        "send": 3,
-        "beta": 3,
-        "version": 3,
-        "continue": 3,
-        "one": 3,
+        "caller": 3,
         "alert": 3,
+        "requir": 3,
         "authentication": 3,
+        "only": 3,
         "support": 3,
         "subscription": 3
       },
-      "word_count": 1312
+      "word_count": 1285
     },
     {
       "filename": "docs__en__api__claude-platform-on-aws-iam-actions.md",
@@ -84127,12 +84187,12 @@
       ],
       "terms": {
         "model": 45,
-        "intelligence": 36,
-        "cod": 36,
-        "agent": 27,
-        "long": 19,
-        "powerful": 18,
-        "runn": 18,
+        "intelligence": 39,
+        "cod": 39,
+        "agent": 30,
+        "long": 22,
+        "powerful": 21,
+        "runn": 21,
         "completion": 15,
         "stop": 12,
         "prompt": 10,
@@ -84148,6 +84208,8 @@
         "our": 7,
         "maximum": 7,
         "complete": 7,
+        "knowledge": 6,
+        "work": 6,
         "most": 6,
         "capable": 6,
         "biology": 6,
@@ -84173,11 +84235,9 @@
         "valu": 4,
         "sequence": 4,
         "recommend": 3,
-        "using": 3,
-        "header": 3,
-        "request": 3
+        "using": 3
       },
-      "word_count": 1565
+      "word_count": 1602
     },
     {
       "filename": "docs__en__api__completions__create.md",
@@ -84213,12 +84273,12 @@
       ],
       "terms": {
         "model": 32,
-        "intelligence": 24,
-        "cod": 24,
-        "agent": 18,
-        "long": 13,
-        "powerful": 12,
-        "runn": 12,
+        "intelligence": 26,
+        "cod": 26,
+        "agent": 20,
+        "long": 15,
+        "powerful": 14,
+        "runn": 14,
         "completion": 10,
         "stop": 9,
         "prompt": 8,
@@ -84244,6 +84304,8 @@
         "parameter": 4,
         "token": 4,
         "minimum": 4,
+        "knowledge": 4,
+        "work": 4,
         "most": 4,
         "capable": 4,
         "biology": 4,
@@ -84259,11 +84321,9 @@
         "example": 3,
         "number": 3,
         "reach": 3,
-        "task": 3,
-        "generation": 3,
-        "object": 3
+        "task": 3
       },
-      "word_count": 1258
+      "word_count": 1284
     },
     {
       "filename": "docs__en__api__compliance.md",
@@ -85234,58 +85294,58 @@
         }
       ],
       "terms": {
-        "default": 8445,
-        "actor": 5642,
-        "organization": 3911,
-        "activity": 3117,
-        "assert": 2538,
-        "format": 2202,
-        "account": 2178,
-        "provider": 2066,
-        "issuer": 2055,
-        "party": 2030,
-        "user": 1948,
-        "api": 1730,
-        "email": 1608,
-        "anthropic": 1574,
-        "federation": 1565,
-        "bound": 1562,
-        "oidc": 1553,
-        "verifi": 1545,
-        "aws": 1534,
-        "attest": 1529,
-        "customer": 1527,
-        "federat": 1527,
-        "credential": 1256,
-        "null": 1160,
-        "identifier": 1156,
-        "token": 1145,
-        "service": 1115,
-        "via": 1090,
-        "identity": 1079,
-        "without": 1079,
-        "external": 1074,
-        "device": 1046,
-        "present": 1041,
-        "system": 1041,
-        "act": 1036,
-        "perform": 1032,
-        "authenticat": 1026,
-        "register": 1026,
-        "gcp": 1021,
-        "automat": 1019,
-        "occurr": 1017,
-        "azure": 1014,
-        "project": 921,
-        "request": 820,
+        "default": 8495,
+        "actor": 5675,
+        "organization": 3938,
+        "activity": 3135,
+        "assert": 2553,
+        "format": 2214,
+        "account": 2190,
+        "provider": 2078,
+        "issuer": 2067,
+        "party": 2042,
+        "user": 1957,
+        "api": 1739,
+        "email": 1617,
+        "anthropic": 1583,
+        "federation": 1574,
+        "bound": 1571,
+        "oidc": 1562,
+        "verifi": 1554,
+        "aws": 1543,
+        "attest": 1538,
+        "customer": 1536,
+        "federat": 1536,
+        "credential": 1265,
+        "null": 1166,
+        "identifier": 1162,
+        "token": 1152,
+        "service": 1121,
+        "via": 1096,
+        "identity": 1085,
+        "without": 1085,
+        "external": 1080,
+        "device": 1052,
+        "present": 1047,
+        "system": 1047,
+        "act": 1042,
+        "perform": 1038,
+        "authenticat": 1032,
+        "register": 1032,
+        "gcp": 1027,
+        "automat": 1025,
+        "occurr": 1023,
+        "azure": 1020,
+        "project": 924,
+        "request": 823,
         "claude": 787,
-        "key": 712,
-        "admin": 700,
-        "time": 698,
-        "name": 648,
-        "date": 609
+        "key": 715,
+        "admin": 712,
+        "time": 701,
+        "name": 655,
+        "date": 612
       },
-      "word_count": 341837
+      "word_count": 343853
     },
     {
       "filename": "docs__en__api__compliance__activities.md",
@@ -85332,58 +85392,58 @@
         }
       ],
       "terms": {
-        "default": 16653,
-        "actor": 11271,
-        "organization": 7253,
-        "activity": 6181,
-        "assert": 5070,
-        "account": 4276,
-        "provider": 4128,
-        "issuer": 4102,
-        "format": 4080,
-        "party": 4056,
-        "user": 3536,
-        "api": 3315,
-        "email": 3146,
-        "anthropic": 3116,
-        "federation": 3110,
-        "oidc": 3090,
-        "bound": 3084,
-        "verifi": 3074,
-        "aws": 3064,
-        "attest": 3054,
-        "federat": 3052,
-        "customer": 3048,
-        "credential": 2448,
-        "token": 2204,
-        "service": 2196,
-        "identifier": 2188,
-        "null": 2180,
-        "identity": 2138,
-        "external": 2128,
-        "via": 2115,
-        "device": 2082,
-        "system": 2078,
-        "present": 2073,
-        "without": 2070,
-        "perform": 2060,
-        "act": 2060,
-        "register": 2048,
-        "authenticat": 2041,
-        "gcp": 2040,
-        "automat": 2034,
-        "occurr": 2032,
-        "azure": 2028,
-        "project": 1546,
-        "request": 1456,
-        "admin": 1294,
-        "key": 1278,
-        "name": 1234,
+        "default": 16753,
+        "actor": 11337,
+        "organization": 7301,
+        "activity": 6217,
+        "assert": 5100,
+        "account": 4300,
+        "provider": 4152,
+        "issuer": 4126,
+        "format": 4104,
+        "party": 4080,
+        "user": 3554,
+        "api": 3333,
+        "email": 3164,
+        "anthropic": 3134,
+        "federation": 3128,
+        "oidc": 3108,
+        "bound": 3102,
+        "verifi": 3092,
+        "aws": 3082,
+        "attest": 3072,
+        "federat": 3070,
+        "customer": 3066,
+        "credential": 2464,
+        "token": 2218,
+        "service": 2208,
+        "identifier": 2200,
+        "null": 2192,
+        "identity": 2150,
+        "external": 2140,
+        "via": 2127,
+        "device": 2094,
+        "system": 2090,
+        "present": 2085,
+        "without": 2082,
+        "perform": 2072,
+        "act": 2072,
+        "register": 2060,
+        "authenticat": 2053,
+        "gcp": 2052,
+        "automat": 2046,
+        "occurr": 2044,
+        "azure": 2040,
+        "project": 1552,
+        "request": 1462,
+        "admin": 1312,
+        "key": 1284,
+        "name": 1248,
         "claude": 1169,
-        "sync": 1156,
-        "fail": 1140
+        "sync": 1166,
+        "fail": 1146
       },
-      "word_count": 638888
+      "word_count": 642806
     },
     {
       "filename": "docs__en__api__compliance__activities__list.md",
@@ -85418,58 +85478,58 @@
         }
       ],
       "terms": {
-        "default": 8333,
-        "actor": 5642,
-        "organization": 3783,
-        "activity": 3107,
-        "assert": 2535,
-        "account": 2157,
-        "provider": 2066,
-        "issuer": 2055,
-        "format": 2045,
-        "party": 2028,
-        "user": 1833,
-        "api": 1697,
-        "email": 1581,
-        "anthropic": 1570,
-        "federation": 1565,
-        "oidc": 1553,
-        "bound": 1544,
-        "verifi": 1542,
-        "aws": 1534,
-        "attest": 1529,
-        "federat": 1527,
-        "customer": 1525,
-        "credential": 1256,
-        "token": 1120,
-        "service": 1111,
-        "identifier": 1095,
-        "null": 1094,
-        "identity": 1078,
-        "external": 1074,
-        "via": 1073,
-        "device": 1046,
-        "without": 1043,
-        "system": 1041,
-        "present": 1038,
-        "act": 1036,
-        "perform": 1032,
-        "register": 1026,
-        "authenticat": 1022,
-        "gcp": 1021,
-        "occurr": 1017,
-        "automat": 1017,
-        "azure": 1014,
-        "project": 820,
-        "request": 776,
+        "default": 8383,
+        "actor": 5675,
+        "organization": 3810,
+        "activity": 3125,
+        "assert": 2550,
+        "account": 2169,
+        "provider": 2078,
+        "issuer": 2067,
+        "format": 2057,
+        "party": 2040,
+        "user": 1842,
+        "api": 1706,
+        "email": 1590,
+        "anthropic": 1579,
+        "federation": 1574,
+        "oidc": 1562,
+        "bound": 1553,
+        "verifi": 1551,
+        "aws": 1543,
+        "attest": 1538,
+        "federat": 1536,
+        "customer": 1534,
+        "credential": 1265,
+        "token": 1127,
+        "service": 1117,
+        "identifier": 1101,
+        "null": 1100,
+        "identity": 1084,
+        "external": 1080,
+        "via": 1079,
+        "device": 1052,
+        "without": 1049,
+        "system": 1047,
+        "present": 1044,
+        "act": 1042,
+        "perform": 1038,
+        "register": 1032,
+        "authenticat": 1028,
+        "gcp": 1027,
+        "occurr": 1023,
+        "automat": 1023,
+        "azure": 1020,
+        "project": 823,
+        "request": 779,
         "claude": 717,
-        "admin": 699,
-        "key": 661,
-        "name": 622,
-        "sync": 591,
-        "fail": 589
+        "admin": 711,
+        "key": 664,
+        "name": 629,
+        "sync": 597,
+        "fail": 592
       },
-      "word_count": 326509
+      "word_count": 328525
     },
     {
       "filename": "docs__en__api__compliance__apps.md",
@@ -94330,7 +94390,7 @@
         "true": 234,
         "return": 232
       },
-      "word_count": 111282
+      "word_count": 111381
     },
     {
       "filename": "docs__en__api__messages__batches.md",
@@ -94560,11 +94620,11 @@
         "every": 66,
         "must": 66,
         "think": 65,
+        "intelligence": 65,
+        "cod": 65,
         "cache": 63,
         "output": 63,
         "same": 61,
-        "intelligence": 60,
-        "cod": 60,
         "return": 59,
         "api": 58,
         "create": 58,
@@ -94576,7 +94636,7 @@
         "minlength": 52,
         "resolv": 52
       },
-      "word_count": 26817
+      "word_count": 26872
     },
     {
       "filename": "docs__en__api__messages__batches__cancel.md",
@@ -94748,7 +94808,7 @@
         "used": 26,
         "name": 26
       },
-      "word_count": 12520
+      "word_count": 12531
     },
     {
       "filename": "docs__en__api__messages__batches__delete.md",
@@ -94966,11 +95026,11 @@
         "output": 13,
         "search": 13,
         "think": 13,
+        "intelligence": 13,
+        "cod": 13,
         "response": 12,
         "content": 12,
         "pattern": 12,
-        "intelligence": 12,
-        "cod": 12,
         "message": 11,
         "generat": 11,
         "web": 11,
@@ -94979,19 +95039,20 @@
         "api": 10,
         "used": 10,
         "input": 10,
+        "agent": 10,
         "reason": 9,
         "cit": 9,
         "count": 9,
         "srvtoolu": 9,
-        "agent": 9,
         "type": 8,
         "alway": 8,
         "server": 8,
         "invocation": 8,
+        "long": 8,
+        "runn": 8,
         "one": 7,
         "back": 7,
-        "long": 7,
-        "runn": 7,
+        "powerful": 7,
         "category": 7,
         "single": 6,
         "field": 6,
@@ -94999,10 +95060,9 @@
         "container": 6,
         "minlength": 6,
         "turn": 6,
-        "powerful": 6,
-        "non": 6
+        "work": 6
       },
-      "word_count": 3058
+      "word_count": 3069
     },
     {
       "filename": "docs__en__api__messages__batches__retrieve.md",
@@ -95174,7 +95234,7 @@
         "via": 23,
         "request": 21
       },
-      "word_count": 11389
+      "word_count": 11400
     },
     {
       "filename": "docs__en__api__messages__create.md",
@@ -95260,7 +95320,7 @@
         "fetch": 32,
         "number": 31
       },
-      "word_count": 15283
+      "word_count": 15305
     },
     {
       "filename": "docs__en__api__models.md",
@@ -95406,7 +95466,7 @@
         "batch": 4,
         "citation": 4
       },
-      "word_count": 2449
+      "word_count": 2457
     },
     {
       "filename": "docs__en__api__models__list.md",
@@ -95492,7 +95552,7 @@
         "doc": 1,
         "get": 1
       },
-      "word_count": 851
+      "word_count": 855
     },
     {
       "filename": "docs__en__api__models__retrieve.md",
@@ -95578,7 +95638,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 713
+      "word_count": 717
     },
     {
       "filename": "docs__en__api__overview.md",
@@ -97298,11 +97358,11 @@
         "message": 43,
         "process": 42,
         "result": 42,
-        "mtok": 36,
+        "mtok": 38,
         "claude": 33,
         "messag": 20,
         "accordion": 18,
-        "limit": 15,
+        "limit": 16,
         "large": 14,
         "codegroup": 14,
         "each": 13,
@@ -97316,15 +97376,15 @@
         "cach": 11,
         "within": 10,
         "after": 10,
+        "available": 10,
         "cache": 10,
+        "model": 10,
         "prompt": 10,
+        "see": 9,
         "creat": 9,
-        "available": 9,
-        "model": 9,
         "search": 9,
         "pric": 9,
         "cost": 8,
-        "see": 8,
         "rate": 8,
         "because": 8,
         "using": 8,
@@ -97336,14 +97396,14 @@
         "provid": 7,
         "doe": 7,
         "output": 7,
+        "cloud": 7,
         "proces": 6,
         "asynchronously": 6,
         "need": 6,
         "note": 6,
-        "example": 6,
-        "day": 6
+        "example": 6
       },
-      "word_count": 7010
+      "word_count": 7062
     },
     {
       "filename": "docs__en__build-with-claude__cache-diagnostics.md",
@@ -97642,7 +97702,7 @@
         }
       ],
       "terms": {
-        "claude": 62,
+        "claude": 56,
         "tab": 42,
         "bedrock": 34,
         "global": 30,
@@ -97652,27 +97712,28 @@
         "model": 21,
         "region": 19,
         "step": 18,
-        "opu": 17,
-        "anthropic": 16,
+        "only": 15,
         "acces": 14,
-        "only": 13,
+        "opu": 13,
         "support": 12,
         "role": 12,
         "api": 11,
-        "fable": 10,
         "endpoint": 10,
         "available": 9,
         "see": 9,
         "asia": 9,
         "pacific": 9,
+        "anthropic": 8,
+        "fable": 8,
         "token": 8,
         "tool": 8,
         "europe": 8,
         "open": 7,
-        "preview": 7,
+        "mytho": 7,
         "request": 7,
         "through": 6,
-        "mytho": 6,
+        "preview": 6,
+        "availability": 6,
         "service": 6,
         "feature": 5,
         "account": 5,
@@ -97684,16 +97745,15 @@
         "manag": 4,
         "infrastructure": 4,
         "note": 4,
-        "haiku": 4,
+        "invitation": 4,
         "credential": 4,
         "admin": 4,
         "developer": 4,
         "identity": 4,
         "bearer": 4,
-        "client": 4,
-        "tip": 4
+        "client": 4
       },
-      "word_count": 2037
+      "word_count": 2061
     },
     {
       "filename": "docs__en__build-with-claude__claude-in-microsoft-foundry.md",
@@ -97808,7 +97868,7 @@
         }
       ],
       "terms": {
-        "claude": 85,
+        "claude": 87,
         "foundry": 62,
         "model": 55,
         "azure": 55,
@@ -97842,6 +97902,7 @@
         "sdk": 10,
         "detail": 10,
         "entra": 10,
+        "limit": 10,
         "endpoint": 9,
         "authentication": 9,
         "standard": 9,
@@ -97853,13 +97914,12 @@
         "sonnet": 8,
         "create": 8,
         "rate": 8,
-        "limit": 8,
         "solution": 8,
         "using": 7,
         "bill": 7,
         "usage": 7
       },
-      "word_count": 4000
+      "word_count": 4024
     },
     {
       "filename": "docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md",
@@ -98068,7 +98128,7 @@
         }
       ],
       "terms": {
-        "claude": 51,
+        "claude": 53,
         "platform": 29,
         "agent": 26,
         "model": 22,
@@ -98082,6 +98142,7 @@
         "anthropic": 10,
         "codegroup": 10,
         "sonnet": 10,
+        "availability": 9,
         "tool": 9,
         "pric": 9,
         "title": 8,
@@ -98092,12 +98153,12 @@
         "regional": 8,
         "support": 7,
         "see": 7,
-        "availability": 7,
         "global": 7,
         "multi": 7,
         "client": 6,
         "sdk": 6,
         "through": 5,
+        "limit": 5,
         "available": 4,
         "set": 4,
         "using": 4,
@@ -98116,10 +98177,9 @@
         "url": 3,
         "access": 3,
         "information": 3,
-        "any": 3,
-        "code": 3
+        "any": 3
       },
-      "word_count": 2916
+      "word_count": 2934
     },
     {
       "filename": "docs__en__build-with-claude__claude-platform-on-aws.md",
@@ -98635,40 +98695,42 @@
       ],
       "terms": {
         "block": 53,
-        "request": 50,
+        "request": 52,
+        "compaction": 35,
+        "send": 33,
         "summary": 32,
-        "compaction": 31,
-        "send": 30,
         "turn": 25,
         "claude": 22,
         "call": 22,
         "message": 19,
         "messag": 18,
+        "return": 16,
         "after": 16,
         "tool": 16,
         "conversation": 15,
-        "return": 15,
         "api": 14,
         "summariz": 14,
         "beta": 13,
         "compact": 13,
+        "error": 13,
         "one": 12,
         "model": 12,
-        "error": 12,
         "think": 11,
+        "runner": 11,
+        "later": 10,
         "prompt": 10,
         "summarization": 10,
         "first": 9,
         "carri": 9,
-        "later": 9,
         "continue": 8,
         "parameter": 8,
         "header": 8,
         "every": 8,
         "keep": 8,
         "add": 8,
-        "runner": 8,
         "next": 7,
+        "any": 7,
+        "before": 7,
         "token": 7,
         "count": 7,
         "last": 7,
@@ -98681,11 +98743,9 @@
         "response": 6,
         "read": 6,
         "exactly": 6,
-        "see": 6,
-        "same": 6,
-        "any": 6
+        "see": 6
       },
-      "word_count": 4915
+      "word_count": 4985
     },
     {
       "filename": "docs__en__build-with-claude__compaction-thinking-blocks.md",
@@ -98901,7 +98961,7 @@
         "older": 4,
         "fable": 4
       },
-      "word_count": 9860
+      "word_count": 9871
     },
     {
       "filename": "docs__en__build-with-claude__context-editing.md",
@@ -99087,7 +99147,7 @@
         "cli": 10,
         "java": 10
       },
-      "word_count": 8955
+      "word_count": 8977
     },
     {
       "filename": "docs__en__build-with-claude__context-windows.md",
@@ -99469,8 +99529,8 @@
       ],
       "terms": {
         "think": 96,
-        "claude": 52,
-        "model": 29,
+        "claude": 47,
+        "model": 30,
         "budget": 25,
         "mode": 21,
         "manual": 20,
@@ -99482,7 +99542,6 @@
         "support": 13,
         "tool": 13,
         "token": 12,
-        "opu": 11,
         "see": 10,
         "only": 10,
         "where": 10,
@@ -99491,6 +99550,7 @@
         "prompt": 9,
         "block": 9,
         "header": 9,
+        "opu": 8,
         "platform": 7,
         "set": 7,
         "reason": 7,
@@ -99519,7 +99579,7 @@
         "earlier": 4,
         "mod": 4
       },
-      "word_count": 2396
+      "word_count": 2384
     },
     {
       "filename": "docs__en__build-with-claude__fallback-credit.md",
@@ -99665,13 +99725,13 @@
       ],
       "terms": {
         "fast": 47,
-        "claude": 46,
         "mode": 44,
-        "opu": 32,
+        "claude": 44,
+        "opu": 31,
         "token": 17,
         "request": 16,
+        "model": 15,
         "note": 15,
-        "model": 14,
         "pric": 14,
         "limit": 14,
         "standard": 13,
@@ -99682,10 +99742,10 @@
         "error": 11,
         "support": 9,
         "platform": 8,
+        "see": 8,
         "api": 8,
         "card": 8,
         "per": 7,
-        "see": 6,
         "return": 6,
         "codegroup": 6,
         "title": 5,
@@ -100035,7 +100095,7 @@
         "content": 3,
         "context": 3
       },
-      "word_count": 11770
+      "word_count": 11845
     },
     {
       "filename": "docs__en__build-with-claude__mid-conversation-effort-example.md",
@@ -100199,7 +100259,7 @@
         "system": 48,
         "claude": 47,
         "block": 39,
-        "request": 38,
+        "request": 37,
         "user": 32,
         "after": 29,
         "cach": 28,
@@ -100243,7 +100303,7 @@
         "same": 11,
         "earlier": 11
       },
-      "word_count": 10671
+      "word_count": 10662
     },
     {
       "filename": "docs__en__build-with-claude__multilingual-support.md",
@@ -100894,7 +100954,7 @@
         "mtok": 90,
         "breakpoint": 89,
         "token": 89,
-        "claude": 72,
+        "claude": 73,
         "tool": 54,
         "content": 50,
         "system": 46,
@@ -100907,11 +100967,11 @@
         "input": 33,
         "think": 32,
         "see": 30,
+        "opu": 30,
         "note": 29,
-        "opu": 29,
         "api": 28,
+        "read": 28,
         "last": 27,
-        "read": 27,
         "automatic": 26,
         "hit": 26,
         "hour": 25,
@@ -100937,7 +100997,7 @@
         "example": 18,
         "invalidat": 18
       },
-      "word_count": 16750
+      "word_count": 16756
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md",
@@ -101108,9 +101168,9 @@
         }
       ],
       "terms": {
-        "claude": 103,
+        "claude": 101,
         "prompt": 58,
-        "opu": 26,
+        "opu": 24,
         "model": 22,
         "fable": 20,
         "think": 17,
@@ -101127,10 +101187,10 @@
         "differenc": 10,
         "tag": 10,
         "formatt": 9,
-        "see": 9,
         "progres": 9,
         "document": 9,
         "mytho": 8,
+        "see": 8,
         "updat": 8,
         "accordion": 8,
         "token": 8,
@@ -101142,7 +101202,6 @@
         "build": 7,
         "cover": 7,
         "specific": 7,
-        "new": 7,
         "follow": 7,
         "task": 7,
         "user": 7,
@@ -101157,9 +101216,10 @@
         "href": 6,
         "best": 5,
         "xml": 5,
-        "system": 5
+        "system": 5,
+        "new": 5
       },
-      "word_count": 8031
+      "word_count": 8013
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__overview.md",
@@ -101430,9 +101490,9 @@
         }
       ],
       "terms": {
-        "claude": 46,
+        "claude": 45,
         "fable": 39,
-        "model": 30,
+        "model": 29,
         "tool": 27,
         "turn": 25,
         "effort": 24,
@@ -101459,7 +101519,6 @@
         "each": 10,
         "level": 9,
         "one": 9,
-        "earlier": 9,
         "keep": 9,
         "append": 9,
         "only": 9,
@@ -101470,6 +101529,7 @@
         "test": 8,
         "search": 8,
         "subagent": 8,
+        "earlier": 8,
         "time": 8,
         "instruction": 8,
         "history": 7,
@@ -101477,11 +101537,11 @@
         "positiv": 7,
         "without": 7,
         "loop": 7,
-        "les": 7,
         "lead": 7,
-        "follow": 7
+        "follow": 7,
+        "likely": 7
       },
-      "word_count": 6619
+      "word_count": 6610
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-4-8.md",
@@ -101536,17 +101596,17 @@
         }
       ],
       "terms": {
-        "claude": 41,
+        "claude": 43,
         "opu": 36,
         "prompt": 30,
-        "model": 25,
-        "effort": 23,
+        "model": 23,
+        "effort": 22,
         "tool": 13,
         "token": 13,
         "user": 12,
-        "default": 10,
         "cod": 10,
         "usage": 10,
+        "default": 9,
         "intelligence": 9,
         "cas": 9,
         "task": 8,
@@ -101587,7 +101647,7 @@
         "also": 5,
         "test": 5
       },
-      "word_count": 2420
+      "word_count": 2411
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-5.md",
@@ -101630,37 +101690,37 @@
         }
       ],
       "terms": {
-        "claude": 34,
-        "opu": 27,
+        "claude": 33,
+        "opu": 26,
         "model": 20,
         "prompt": 19,
-        "think": 19,
+        "think": 17,
         "task": 15,
         "instruction": 13,
         "effort": 12,
-        "disabl": 10,
         "work": 10,
+        "disabl": 9,
         "agentic": 8,
         "subagent": 8,
         "prior": 8,
         "tool": 8,
-        "see": 7,
         "cost": 7,
         "call": 7,
         "response": 6,
         "delegation": 6,
         "well": 6,
-        "default": 6,
         "own": 6,
         "user": 6,
         "add": 6,
         "verification": 6,
         "tag": 6,
         "correction": 5,
+        "see": 5,
         "perform": 5,
         "run": 5,
         "code": 5,
         "token": 5,
+        "default": 5,
         "effective": 5,
         "agent": 5,
         "fac": 5,
@@ -101681,7 +101741,117 @@
         "control": 4,
         "step": 4
       },
-      "word_count": 1751
+      "word_count": 1731
+    },
+    {
+      "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-5-5.md",
+      "id": "docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5",
+      "title": "Prompting Claude Opus 5.5",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5",
+      "headings": [
+        {
+          "text": "Capabilities relevant to prompting",
+          "level": 2
+        },
+        {
+          "text": "Calibrate effort",
+          "level": 2
+        },
+        {
+          "text": "Prompts written for thinking disabled",
+          "level": 2
+        },
+        {
+          "text": "Unattended agentic runs",
+          "level": 2
+        },
+        {
+          "text": "Safeguard refusals",
+          "level": 2
+        },
+        {
+          "text": "User-facing progress updates",
+          "level": 2
+        },
+        {
+          "text": "Explore context in multi-app workflows",
+          "level": 2
+        },
+        {
+          "text": "Time signals for multiagent harnesses",
+          "level": 2
+        },
+        {
+          "text": "Thinking instructions in chat system prompts",
+          "level": 2
+        },
+        {
+          "text": "Mark pasted text in user messages",
+          "level": 2
+        },
+        {
+          "text": "Tools for complex visual inputs",
+          "level": 2
+        },
+        {
+          "text": "Frontend design defaults",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 54,
+        "opu": 50,
+        "model": 45,
+        "think": 43,
+        "prompt": 36,
+        "tool": 27,
+        "work": 26,
+        "task": 25,
+        "effort": 23,
+        "user": 20,
+        "turn": 20,
+        "instruction": 19,
+        "such": 19,
+        "text": 15,
+        "end": 14,
+        "block": 14,
+        "updat": 13,
+        "see": 13,
+        "test": 13,
+        "keep": 13,
+        "agent": 12,
+        "long": 12,
+        "system": 12,
+        "run": 11,
+        "first": 11,
+        "default": 11,
+        "one": 11,
+        "own": 11,
+        "progres": 10,
+        "chang": 10,
+        "start": 10,
+        "stop": 10,
+        "rather": 10,
+        "message": 10,
+        "add": 10,
+        "call": 10,
+        "input": 9,
+        "token": 9,
+        "without": 9,
+        "level": 9,
+        "agentic": 9,
+        "request": 9,
+        "want": 9,
+        "time": 9,
+        "answer": 9,
+        "anthropic": 9,
+        "also": 9,
+        "reason": 9,
+        "earlier": 9,
+        "budget": 9
+      },
+      "word_count": 3969
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-sonnet-5.md",
@@ -101866,29 +102036,29 @@
         }
       ],
       "terms": {
-        "model": 104,
-        "fallback": 79,
+        "model": 108,
+        "fallback": 81,
         "request": 75,
+        "block": 41,
         "refusal": 39,
-        "block": 39,
-        "claude": 30,
+        "claude": 37,
         "retry": 23,
         "response": 21,
+        "api": 21,
         "declin": 20,
-        "api": 19,
         "server": 19,
         "one": 19,
         "middleware": 18,
         "output": 18,
         "any": 17,
+        "fable": 16,
         "side": 16,
+        "every": 16,
         "refus": 15,
         "nam": 15,
         "attempt": 15,
         "stream": 15,
-        "fable": 14,
         "category": 14,
-        "every": 14,
         "entry": 14,
         "turn": 14,
         "credit": 13,
@@ -101908,16 +102078,16 @@
         "content": 11,
         "set": 10,
         "list": 10,
+        "conversation": 10,
         "http": 9,
         "error": 9,
         "bill": 9,
         "client": 9,
         "result": 9,
         "field": 9,
-        "step": 9,
-        "title": 8
+        "step": 9
       },
-      "word_count": 6108
+      "word_count": 6160
     },
     {
       "filename": "docs__en__build-with-claude__search-results.md",
@@ -102889,7 +103059,7 @@
       ],
       "terms": {
         "think": 95,
-        "claude": 44,
+        "claude": 46,
         "turn": 31,
         "effort": 30,
         "request": 24,
@@ -102901,9 +103071,9 @@
         "token": 17,
         "steer": 16,
         "output": 16,
+        "model": 15,
         "reason": 15,
         "title": 14,
-        "model": 14,
         "guidance": 12,
         "tool": 11,
         "each": 9,
@@ -102914,6 +103084,7 @@
         "note": 8,
         "where": 8,
         "conversation": 8,
+        "default": 8,
         "chang": 8,
         "cache": 8,
         "bill": 8,
@@ -102922,7 +103093,6 @@
         "response": 7,
         "need": 7,
         "full": 7,
-        "default": 7,
         "only": 7,
         "doesn": 7,
         "cost": 6,
@@ -102939,7 +103109,7 @@
         "build": 5,
         "pric": 5
       },
-      "word_count": 3986
+      "word_count": 3998
     },
     {
       "filename": "docs__en__build-with-claude__thinking-tool-workflows.md",
@@ -103674,21 +103844,22 @@
         }
       ],
       "terms": {
-        "claude": 59,
+        "claude": 60,
         "tool": 57,
-        "think": 51,
+        "think": 52,
         "model": 18,
         "codegroup": 16,
         "api": 15,
         "block": 14,
-        "adaptive": 12,
+        "adaptive": 13,
+        "only": 12,
         "response": 11,
-        "only": 11,
         "manual": 11,
         "using": 10,
         "parameter": 10,
         "request": 9,
         "support": 9,
+        "opu": 9,
         "event": 9,
         "stream": 8,
         "exclude": 8,
@@ -103699,7 +103870,6 @@
         "java": 8,
         "php": 8,
         "ruby": 8,
-        "opu": 8,
         "content": 8,
         "reason": 8,
         "default": 7,
@@ -103725,7 +103895,7 @@
         "each": 5,
         "detail": 5
       },
-      "word_count": 3273
+      "word_count": 3283
     },
     {
       "filename": "docs__en__cli-sdks-libraries__cli__apply.md",
@@ -107915,8 +108085,8 @@
         }
       ],
       "terms": {
-        "chat": 59,
-        "project": 44,
+        "chat": 60,
+        "project": 45,
         "content": 31,
         "file": 31,
         "endpoint": 29,
@@ -107928,24 +108098,24 @@
         "artifact": 19,
         "delete": 17,
         "compliance": 16,
-        "messag": 15,
+        "messag": 16,
         "api": 14,
+        "one": 14,
         "each": 14,
         "metadata": 14,
         "attachment": 13,
         "only": 13,
         "return": 13,
-        "one": 13,
         "text": 13,
         "organization": 12,
         "get": 12,
         "name": 12,
         "page": 11,
         "delet": 11,
+        "message": 11,
         "response": 11,
         "retrieve": 10,
         "upload": 10,
-        "message": 10,
         "filter": 9,
         "generat": 9,
         "key": 8,
@@ -107961,12 +108131,12 @@
         "scope": 6,
         "full": 6,
         "under": 6,
+        "new": 6,
         "request": 6,
         "pas": 6,
-        "bound": 6,
-        "any": 6
+        "bound": 6
       },
-      "word_count": 2626
+      "word_count": 2657
     },
     {
       "filename": "docs__en__manage-claude__compliance-errors.md",
@@ -108433,58 +108603,58 @@
         }
       ],
       "terms": {
-        "session": 164,
-        "claude": 70,
+        "session": 167,
+        "claude": 74,
         "endpoint": 53,
-        "return": 52,
+        "return": 53,
         "user": 43,
+        "transcript": 38,
         "local": 38,
-        "transcript": 37,
         "content": 37,
         "api": 33,
+        "call": 32,
         "organization": 29,
         "compliance": 28,
         "list": 28,
-        "call": 27,
         "messag": 27,
+        "tool": 25,
+        "block": 25,
         "retention": 24,
         "request": 24,
         "key": 23,
-        "block": 22,
-        "tool": 21,
         "result": 21,
+        "code": 20,
         "message": 20,
-        "run": 18,
+        "run": 19,
+        "each": 19,
         "remote": 18,
-        "each": 17,
+        "default": 18,
+        "only": 17,
         "captur": 17,
-        "default": 17,
-        "only": 16,
         "carri": 16,
         "response": 15,
-        "code": 14,
+        "cowork": 14,
+        "through": 14,
         "client": 14,
         "see": 14,
         "period": 14,
+        "example": 14,
+        "pas": 14,
         "app": 13,
-        "cowork": 13,
-        "through": 13,
         "set": 13,
         "conversation": 13,
         "one": 13,
-        "example": 13,
-        "pas": 13,
         "cloud": 12,
+        "appear": 12,
         "page": 11,
         "new": 11,
         "assistant": 11,
         "data": 11,
         "anthropic": 11,
         "read": 11,
-        "valu": 11,
-        "doe": 11
+        "valu": 11
       },
-      "word_count": 5303
+      "word_count": 5450
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -111672,9 +111842,9 @@
       ],
       "terms": {
         "fil": 25,
-        "session": 16,
         "agent": 15,
-        "file": 15,
+        "session": 15,
+        "file": 13,
         "codegroup": 12,
         "upload": 9,
         "list": 9,
@@ -111705,8 +111875,6 @@
         "new": 2,
         "copi": 2,
         "multiple": 2,
-        "multifileexample": 2,
-        "cli": 2,
         "support": 2,
         "remove": 2,
         "resourc": 2,
@@ -111720,9 +111888,11 @@
         "plac": 2,
         "description": 1,
         "process": 1,
-        "featuremetadata": 1
+        "featuremetadata": 1,
+        "topic": 1,
+        "overview": 1
       },
-      "word_count": 1991
+      "word_count": 1982
     },
     {
       "filename": "docs__en__managed-agents__github.md",
@@ -113626,9 +113796,9 @@
         "model": 53,
         "think": 48,
         "tool": 48,
-        "request": 35,
         "conversation": 34,
         "see": 31,
+        "request": 30,
         "opu": 29,
         "message": 27,
         "chang": 26,
@@ -113659,7 +113829,6 @@
         "system": 14,
         "instruction": 14,
         "retention": 14,
-        "file": 13,
         "output": 13,
         "return": 13,
         "after": 13,
@@ -113668,9 +113837,10 @@
         "level": 13,
         "every": 13,
         "send": 13,
-        "each": 13
+        "each": 13,
+        "code": 12
       },
-      "word_count": 9355
+      "word_count": 9310
     },
     {
       "filename": "docs__en__models__fable-5-1__overview.md",
@@ -113737,8 +113907,8 @@
         "prompt": 11,
         "icon": 11,
         "href": 11,
-        "pric": 10,
         "token": 10,
+        "pric": 9,
         "mtok": 9,
         "input": 7,
         "price": 7,
@@ -113772,7 +113942,7 @@
         "extend": 3,
         "same": 3
       },
-      "word_count": 1078
+      "word_count": 1074
     },
     {
       "filename": "docs__en__models__fable-5-1__whats-new-fable-5-1.md",
@@ -114198,9 +114368,9 @@
         "token": 10,
         "icon": 10,
         "href": 10,
-        "pric": 9,
         "mtok": 9,
         "prompt": 9,
+        "pric": 8,
         "mytho": 8,
         "opu": 8,
         "api": 8,
@@ -114236,7 +114406,7 @@
         "word": 3,
         "introduc": 3
       },
-      "word_count": 927
+      "word_count": 923
     },
     {
       "filename": "docs__en__models__haiku-4-5__migration-guide.md",
@@ -114374,9 +114544,9 @@
         "api": 9,
         "icon": 9,
         "href": 9,
-        "pric": 8,
         "bedrock": 8,
         "ids": 7,
+        "pric": 7,
         "latency": 7,
         "extend": 7,
         "input": 6,
@@ -114408,7 +114578,7 @@
         "manual": 3,
         "reliable": 3
       },
-      "word_count": 902
+      "word_count": 898
     },
     {
       "filename": "docs__en__models__mythos-5-1__overview.md",
@@ -114454,8 +114624,8 @@
         "card": 12,
         "token": 10,
         "fable": 9,
-        "pric": 9,
         "mtok": 9,
+        "pric": 8,
         "opu": 8,
         "platform": 7,
         "think": 7,
@@ -114498,7 +114668,7 @@
         "reliable": 3,
         "feature": 3
       },
-      "word_count": 819
+      "word_count": 815
     },
     {
       "filename": "docs__en__models__mythos-5__overview.md",
@@ -114547,10 +114717,10 @@
         "card": 14,
         "output": 11,
         "token": 10,
-        "pric": 9,
         "mtok": 9,
         "platform": 8,
         "fable": 8,
+        "pric": 8,
         "opu": 8,
         "title": 7,
         "http": 7,
@@ -114592,7 +114762,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 805
+      "word_count": 801
     },
     {
       "filename": "docs__en__models__opus-4-5__overview.md",
@@ -114636,8 +114806,8 @@
       ],
       "terms": {
         "claude": 56,
-        "opu": 34,
-        "model": 26,
+        "opu": 33,
+        "model": 25,
         "card": 18,
         "platform": 13,
         "output": 12,
@@ -114647,10 +114817,10 @@
         "com": 9,
         "mtok": 9,
         "doc": 8,
-        "pric": 8,
         "api": 8,
         "icon": 8,
         "href": 8,
+        "pric": 7,
         "ids": 6,
         "input": 6,
         "price": 6,
@@ -114682,11 +114852,11 @@
         "word": 3,
         "full": 3,
         "list": 3,
-        "earlier": 3,
         "reliable": 3,
-        "invokemodel": 3
+        "invokemodel": 3,
+        "cloud": 3
       },
-      "word_count": 836
+      "word_count": 828
     },
     {
       "filename": "docs__en__models__opus-4-6__overview.md",
@@ -114730,8 +114900,8 @@
       ],
       "terms": {
         "claude": 55,
-        "opu": 34,
-        "model": 26,
+        "opu": 33,
+        "model": 25,
         "card": 18,
         "platform": 13,
         "output": 13,
@@ -114741,10 +114911,10 @@
         "com": 9,
         "mtok": 9,
         "doc": 8,
-        "pric": 8,
         "api": 8,
         "icon": 8,
         "href": 8,
+        "pric": 7,
         "ids": 6,
         "input": 6,
         "price": 6,
@@ -114776,11 +114946,11 @@
         "word": 3,
         "full": 3,
         "list": 3,
-        "earlier": 3,
         "reliable": 3,
-        "invokemodel": 3
+        "invokemodel": 3,
+        "cloud": 3
       },
-      "word_count": 843
+      "word_count": 835
     },
     {
       "filename": "docs__en__models__opus-4-7__overview.md",
@@ -114834,9 +115004,9 @@
         "title": 8,
         "http": 8,
         "com": 8,
-        "pric": 8,
         "api": 8,
         "doc": 7,
+        "pric": 7,
         "icon": 7,
         "href": 7,
         "input": 6,
@@ -114874,7 +115044,7 @@
         "text": 3,
         "reference": 2
       },
-      "word_count": 811
+      "word_count": 807
     },
     {
       "filename": "docs__en__models__opus-4-8__overview.md",
@@ -114930,10 +115100,10 @@
         "mtok": 9,
         "prompt": 9,
         "doc": 8,
-        "pric": 8,
         "api": 8,
         "icon": 8,
         "href": 8,
+        "pric": 7,
         "input": 6,
         "price": 6,
         "think": 6,
@@ -114968,17 +115138,57 @@
         "reference": 2,
         "lifecycle": 2
       },
-      "word_count": 821
+      "word_count": 817
     },
     {
-      "filename": "docs__en__models__opus-5__migration-guide.md",
-      "id": "docs/en/models/opus-5/migration-guide",
+      "filename": "docs__en__models__opus-5-5__migration-guide.md",
+      "id": "docs/en/models/opus-5-5/migration-guide",
       "title": "Migration guide",
       "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/models/opus-5/migration-guide",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide",
       "headings": [
         {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.8",
+          "text": "What every request to Claude Opus 5.5 must satisfy",
+          "level": 2
+        },
+        {
+          "text": "Handle thinking in every response",
+          "level": 2
+        },
+        {
+          "text": "Migration checklist by starting model",
+          "level": 2
+        },
+        {
+          "text": "Every starting model",
+          "level": 3
+        },
+        {
+          "text": "Claude Opus 4.8 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Claude Opus 4.7 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Claude Opus 4.6 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Claude Opus 4.5 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Claude 4.1 or earlier",
+          "level": 3
+        },
+        {
+          "text": "Claude Sonnet 5 only",
+          "level": 3
+        },
+        {
+          "text": "Migrating to Claude Opus 5.5 from Claude Opus 5",
           "level": 2
         },
         {
@@ -114987,6 +115197,30 @@
         },
         {
           "text": "Breaking changes",
+          "level": 3
+        },
+        {
+          "text": "Thinking can't be disabled",
+          "level": 4
+        },
+        {
+          "text": "Forced tool use is not supported",
+          "level": 4
+        },
+        {
+          "text": "Thinking blocks are tied to the model and the conversation",
+          "level": 4
+        },
+        {
+          "text": "The `computer_20251124` computer use tool is not supported on the Claude API and Google Cloud",
+          "level": 4
+        },
+        {
+          "text": "Text between tool calls is returned in thinking blocks",
+          "level": 3
+        },
+        {
+          "text": "Safety classifiers and fallback",
           "level": 3
         },
         {
@@ -114994,20 +115228,8 @@
           "level": 3
         },
         {
-          "text": "Migration checklist",
-          "level": 3
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.7",
+          "text": "Migrating to Claude Opus 5.5 from Claude Opus 4.8",
           "level": 2
-        },
-        {
-          "text": "Update your model name",
-          "level": 3
-        },
-        {
-          "text": "Breaking changes",
-          "level": 3
         },
         {
           "text": "What changed",
@@ -115018,23 +115240,19 @@
           "level": 3
         },
         {
-          "text": "Migration checklist",
-          "level": 3
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Opus 4.6 and earlier Opus models",
+          "text": "Migrating to Claude Opus 5.5 from Claude Opus 4.7",
           "level": 2
         },
         {
-          "text": "Update your model name",
+          "text": "What changed",
           "level": 3
+        },
+        {
+          "text": "Migrating to Claude Opus 5.5 from Claude Opus 4.6 and earlier Opus models",
+          "level": 2
         },
         {
           "text": "Breaking changes",
-          "level": 3
-        },
-        {
-          "text": "Choosing an effort level",
           "level": 3
         },
         {
@@ -115042,20 +115260,8 @@
           "level": 3
         },
         {
-          "text": "Recommended changes",
-          "level": 3
-        },
-        {
-          "text": "Migration checklist",
-          "level": 3
-        },
-        {
           "text": "Migrating from Claude Opus 4.5 or earlier",
           "level": 3
-        },
-        {
-          "text": "Update your model name",
-          "level": 4
         },
         {
           "text": "Breaking changes",
@@ -115078,86 +115284,74 @@
           "level": 4
         },
         {
-          "text": "Migration checklist (from Claude Opus 4.5 or earlier)",
-          "level": 3
-        },
-        {
-          "text": "Migrating to Claude Opus 5 from Claude Sonnet 5",
+          "text": "Migrating to Claude Opus 5.5 from Claude Sonnet 5",
           "level": 2
-        },
-        {
-          "text": "Update your model name",
-          "level": 3
         },
         {
           "text": "What changed",
           "level": 3
-        },
-        {
-          "text": "Migration checklist",
-          "level": 3
         }
       ],
       "terms": {
-        "claude": 250,
-        "opu": 231,
-        "think": 150,
-        "model": 114,
-        "effort": 98,
-        "token": 87,
-        "prompt": 70,
-        "tool": 64,
-        "request": 59,
-        "block": 57,
-        "chang": 53,
-        "see": 51,
-        "earlier": 46,
-        "default": 43,
-        "beta": 43,
-        "output": 42,
-        "task": 40,
-        "run": 39,
-        "return": 37,
-        "remove": 37,
-        "parameter": 34,
-        "without": 31,
-        "response": 31,
-        "field": 29,
-        "support": 28,
-        "header": 28,
-        "update": 28,
-        "per": 26,
-        "text": 26,
-        "migrat": 25,
-        "api": 25,
-        "code": 25,
-        "workload": 24,
-        "error": 24,
-        "length": 24,
-        "break": 22,
-        "content": 22,
-        "before": 21,
-        "set": 21,
-        "level": 21,
-        "lower": 20,
-        "verification": 20,
-        "instruction": 19,
-        "disabl": 18,
-        "codegroup": 18,
-        "pric": 17,
-        "instead": 17,
-        "cost": 17,
-        "cache": 17,
-        "budget": 17
+        "claude": 232,
+        "opu": 182,
+        "think": 94,
+        "model": 88,
+        "tool": 69,
+        "block": 47,
+        "see": 44,
+        "chang": 41,
+        "earlier": 40,
+        "prompt": 40,
+        "request": 36,
+        "every": 36,
+        "effort": 36,
+        "token": 34,
+        "return": 31,
+        "beta": 31,
+        "code": 28,
+        "header": 27,
+        "codegroup": 26,
+        "default": 25,
+        "text": 25,
+        "remove": 24,
+        "api": 23,
+        "section": 23,
+        "migrat": 22,
+        "run": 22,
+        "parameter": 21,
+        "handle": 20,
+        "response": 19,
+        "support": 19,
+        "before": 18,
+        "after": 18,
+        "call": 18,
+        "accept": 18,
+        "error": 17,
+        "first": 17,
+        "field": 17,
+        "update": 17,
+        "conversation": 17,
+        "break": 16,
+        "any": 15,
+        "change": 15,
+        "output": 15,
+        "reject": 15,
+        "computer": 15,
+        "reason": 15,
+        "stop": 15,
+        "work": 14,
+        "later": 14,
+        "sonnet": 13
       },
-      "word_count": 10696
+      "word_count": 9373
     },
     {
-      "filename": "docs__en__models__opus-5__overview.md",
-      "id": "docs/en/models/opus-5/overview",
-      "title": "Claude Opus 5",
+      "filename": "docs__en__models__opus-5-5__overview.md",
+      "id": "docs/en/models/opus-5-5/overview",
+      "title": "Claude Opus 5.5",
       "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/models/opus-5/overview",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
       "headings": [
         {
           "text": "Overview",
@@ -115201,112 +115395,112 @@
         }
       ],
       "terms": {
-        "claude": 69,
-        "opu": 40,
-        "model": 26,
-        "card": 24,
-        "platform": 16,
-        "output": 14,
-        "token": 13,
-        "title": 12,
-        "http": 12,
-        "com": 12,
-        "doc": 11,
-        "think": 11,
-        "api": 11,
-        "prompt": 11,
-        "icon": 11,
-        "href": 11,
-        "effort": 10,
+        "claude": 56,
+        "opu": 23,
+        "model": 22,
+        "card": 20,
+        "output": 16,
+        "think": 16,
+        "platform": 14,
+        "token": 14,
+        "api": 12,
+        "prompt": 12,
+        "com": 11,
+        "title": 10,
+        "http": 10,
+        "doc": 9,
         "pric": 9,
         "mtok": 9,
-        "default": 7,
-        "adaptive": 7,
-        "input": 6,
+        "effort": 9,
+        "icon": 9,
+        "href": 9,
+        "adaptive": 8,
+        "knowledge": 7,
+        "input": 7,
+        "text": 7,
+        "latency": 7,
         "price": 6,
         "batch": 6,
         "ids": 5,
         "context": 5,
+        "build": 5,
         "max": 5,
-        "knowledge": 5,
+        "default": 5,
+        "value": 5,
         "cutoff": 5,
         "system": 5,
-        "overview": 4,
+        "work": 4,
+        "tool": 4,
+        "alway": 4,
+        "jun": 4,
         "about": 4,
-        "value": 4,
         "cardgroup": 4,
-        "build": 4,
-        "statu": 3,
+        "overview": 3,
         "window": 3,
         "limit": 3,
-        "resourc": 3,
-        "current": 3,
-        "july": 3,
-        "see": 3,
-        "new": 3,
-        "chang": 3,
-        "sonnet": 3,
-        "word": 3,
-        "support": 3,
-        "beta": 3,
-        "cach": 3,
-        "full": 3
+        "september": 3,
+        "runn": 3,
+        "per": 3,
+        "block": 3,
+        "google": 3,
+        "cloud": 3,
+        "fable": 3
       },
-      "word_count": 1000
+      "word_count": 1052
     },
     {
-      "filename": "docs__en__models__opus-5__whats-new-opus-5.md",
-      "id": "docs/en/models/opus-5/whats-new-opus-5",
+      "filename": "docs__en__models__opus-5-5__whats-new-opus-5-5.md",
+      "id": "docs/en/models/opus-5-5/whats-new-opus-5-5",
       "title": "What's new",
       "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/models/opus-5/whats-new-opus-5",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5",
       "headings": [
         {
           "text": "New model",
           "level": 2
         },
         {
-          "text": "New features",
+          "text": "Breaking changes",
           "level": 2
         },
         {
-          "text": "Mid-conversation tool changes (beta)",
+          "text": "Thinking can't be disabled",
           "level": 3
         },
         {
-          "text": "Default fallbacks mode",
+          "text": "Forced tool use is not supported",
           "level": 3
         },
         {
-          "text": "Lower prompt cache minimum",
+          "text": "Thinking blocks are tied to the model and the conversation",
           "level": 3
+        },
+        {
+          "text": "The `computer_20251124` computer use tool is not supported on the Claude API and Google Cloud",
+          "level": 3
+        },
+        {
+          "text": "Feature support",
+          "level": 2
         },
         {
           "text": "Fast mode",
           "level": 3
         },
         {
-          "text": "Behavior changes",
+          "text": "Define tools in a message (beta)",
+          "level": 3
+        },
+        {
+          "text": "Compact on demand (beta)",
+          "level": 3
+        },
+        {
+          "text": "Behavior differences",
           "level": 2
         },
         {
-          "text": "Thinking on by default",
-          "level": 3
-        },
-        {
-          "text": "Effort matters more",
-          "level": 3
-        },
-        {
-          "text": "Disabling thinking requires effort `high` or below",
-          "level": 3
-        },
-        {
-          "text": "Model behavior differences",
-          "level": 3
-        },
-        {
-          "text": "Capability improvements",
+          "text": "Refusals and fallback",
           "level": 2
         },
         {
@@ -115318,7 +115512,7 @@
           "level": 2
         },
         {
-          "text": "Migration guide",
+          "text": "Migrate from Claude Opus 5",
           "level": 2
         },
         {
@@ -115327,58 +115521,156 @@
         }
       ],
       "terms": {
-        "claude": 73,
+        "claude": 85,
         "opu": 49,
-        "think": 32,
-        "model": 25,
-        "effort": 23,
-        "token": 22,
-        "default": 15,
-        "prompt": 15,
-        "card": 14,
-        "see": 13,
-        "tool": 13,
-        "chang": 12,
-        "platform": 11,
-        "disabl": 10,
-        "mode": 10,
-        "work": 9,
-        "output": 9,
-        "pric": 9,
-        "per": 9,
-        "available": 9,
-        "block": 9,
-        "title": 8,
-        "new": 8,
+        "model": 42,
+        "tool": 35,
+        "think": 31,
+        "block": 26,
+        "see": 21,
+        "api": 15,
+        "request": 14,
+        "effort": 13,
+        "prompt": 13,
+        "platform": 12,
+        "support": 12,
+        "conversation": 12,
+        "beta": 12,
+        "card": 12,
+        "change": 11,
+        "return": 10,
+        "cloud": 10,
+        "com": 9,
+        "google": 9,
+        "text": 9,
         "http": 8,
-        "com": 8,
-        "doc": 8,
-        "step": 8,
-        "level": 8,
-        "code": 7,
-        "request": 7,
-        "fast": 7,
-        "without": 7,
-        "icon": 7,
-        "href": 7,
-        "task": 6,
-        "api": 6,
-        "behavior": 5,
-        "conversation": 5,
-        "beta": 5,
-        "keep": 5,
-        "through": 5,
-        "guide": 5,
-        "build": 5,
-        "overview": 4,
-        "change": 4,
-        "reason": 4,
-        "agentic": 4,
-        "long": 4,
-        "mid": 4,
-        "break": 4
+        "earlier": 8,
+        "call": 8,
+        "default": 8,
+        "set": 8,
+        "header": 8,
+        "migration": 8,
+        "guide": 8,
+        "after": 8,
+        "title": 7,
+        "doc": 7,
+        "pric": 7,
+        "per": 7,
+        "token": 7,
+        "computer": 7,
+        "between": 7,
+        "run": 7,
+        "read": 7,
+        "refusal": 7,
+        "fallback": 7,
+        "work": 6,
+        "input": 6,
+        "code": 6,
+        "fable": 6,
+        "without": 6,
+        "mid": 6,
+        "message": 6,
+        "icon": 6
       },
-      "word_count": 2192
+      "word_count": 2204
+    },
+    {
+      "filename": "docs__en__models__opus-5__overview.md",
+      "id": "docs/en/models/opus-5/overview",
+      "title": "Claude Opus 5",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/models/opus-5/overview",
+      "headings": [
+        {
+          "text": "How it compares to the current lineup",
+          "level": 2
+        },
+        {
+          "text": "Specifications",
+          "level": 2
+        },
+        {
+          "text": "Model IDs",
+          "level": 3
+        },
+        {
+          "text": "Pricing",
+          "level": 3
+        },
+        {
+          "text": "Capabilities",
+          "level": 3
+        },
+        {
+          "text": "Availability",
+          "level": 3
+        },
+        {
+          "text": "Good to know",
+          "level": 2
+        },
+        {
+          "text": "Resources",
+          "level": 2
+        },
+        {
+          "text": "Reference",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 56,
+        "opu": 34,
+        "model": 26,
+        "card": 18,
+        "output": 14,
+        "platform": 13,
+        "token": 13,
+        "prompt": 11,
+        "api": 10,
+        "title": 9,
+        "http": 9,
+        "com": 9,
+        "mtok": 9,
+        "doc": 8,
+        "icon": 8,
+        "href": 8,
+        "pric": 7,
+        "input": 6,
+        "price": 6,
+        "think": 6,
+        "adaptive": 6,
+        "batch": 6,
+        "ids": 5,
+        "context": 5,
+        "max": 5,
+        "effort": 5,
+        "knowledge": 5,
+        "cutoff": 5,
+        "system": 5,
+        "current": 4,
+        "default": 4,
+        "about": 4,
+        "value": 4,
+        "cardgroup": 4,
+        "overview": 3,
+        "statu": 3,
+        "window": 3,
+        "limit": 3,
+        "resourc": 3,
+        "legacy": 3,
+        "july": 3,
+        "see": 3,
+        "sonnet": 3,
+        "word": 3,
+        "support": 3,
+        "beta": 3,
+        "cach": 3,
+        "full": 3,
+        "list": 3,
+        "reliable": 3
+      },
+      "word_count": 864
     },
     {
       "filename": "docs__en__models__overview.md",
@@ -115460,7 +115752,7 @@
         "jun": 4,
         "sooner": 4
       },
-      "word_count": 1332
+      "word_count": 1331
     },
     {
       "filename": "docs__en__models__sonnet-4-5__overview.md",
@@ -115516,10 +115808,10 @@
         "mtok": 9,
         "opu": 9,
         "doc": 8,
-        "pric": 8,
         "api": 8,
         "icon": 8,
         "href": 8,
+        "pric": 7,
         "ids": 6,
         "input": 6,
         "price": 6,
@@ -115554,7 +115846,7 @@
         "list": 3,
         "earlier": 3
       },
-      "word_count": 837
+      "word_count": 833
     },
     {
       "filename": "docs__en__models__sonnet-4-6__overview.md",
@@ -115610,10 +115902,10 @@
         "mtok": 9,
         "opu": 9,
         "doc": 8,
-        "pric": 8,
         "api": 8,
         "icon": 8,
         "href": 8,
+        "pric": 7,
         "ids": 6,
         "input": 6,
         "price": 6,
@@ -115648,7 +115940,7 @@
         "invokemodel": 3,
         "cloud": 3
       },
-      "word_count": 839
+      "word_count": 835
     },
     {
       "filename": "docs__en__models__sonnet-5__migration-guide.md",
@@ -115825,11 +116117,11 @@
         "mtok": 9,
         "effort": 9,
         "doc": 8,
-        "pric": 8,
         "opu": 8,
         "icon": 8,
         "href": 8,
         "context": 7,
+        "pric": 7,
         "adaptive": 7,
         "prompt": 7,
         "window": 6,
@@ -115860,7 +116152,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 955
+      "word_count": 951
     },
     {
       "filename": "docs__en__models__sonnet-5__whats-new-sonnet-5.md",
@@ -117115,6 +117407,42 @@
         "july": 1
       },
       "word_count": 3267
+    },
+    {
+      "filename": "docs__en__release-notes__system-prompts__claude-opus-5-5.md",
+      "id": "docs/en/release-notes/system-prompts/claude-opus-5-5",
+      "title": "Claude Opus 5.5",
+      "category": "release_notes",
+      "url": "https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-5-5",
+      "headings": [
+        {
+          "text": "September 22, 2026",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 7,
+        "opu": 3,
+        "system": 3,
+        "prompt": 3,
+        "app": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "release": 1,
+        "not": 1,
+        "description": 1,
+        "see": 1,
+        "updat": 1,
+        "core": 1,
+        "ios": 1,
+        "android": 1,
+        "september": 1
+      },
+      "word_count": 4162
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-sonnet-3-5.md",
