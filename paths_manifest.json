@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T21:13:47.446537Z",
+  "generated_at": "2026-09-23T00:20:45.138163Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -236,7 +236,7 @@
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
       "sha256": "5b93af3e83c065a06740439e03a741c11f59360a369870e1a7ec4d3eea89721e",
-      "lastmod": "2026-09-22T16:28:44.725Z",
+      "lastmod": "2026-09-22T23:25:56.588Z",
       "fetch_status": "ok"
     },
     {
@@ -379,7 +379,7 @@
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
       "sha256": "9af1bb4e47dfd941aaf9cf56071a6dfb6a9d36bd0eb5af387e9d5d14f4c14ac4",
-      "lastmod": "2026-09-22T17:07:55.838Z",
+      "lastmod": "2026-09-22T23:25:56.579Z",
       "fetch_status": "ok"
     },
     {
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (197 pages)",
       "category": "claude_code",
-      "sha256": "f096664bfa8e75abb577175f78aca4cf9d676187c3c5189226504c43d8d46f46",
+      "sha256": "e62ee451fb2f7d4b7bed737007b51e2ea0b92e2483975888ed944e400299009c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/overview.md",
       "title": "Overview",
       "category": "claude_code",
-      "sha256": "576551461e047ed0df94aafbda23f73a806102a1c0c3f82782fa63a4997218e4",
-      "lastmod": "2026-09-22T14:15:08.174Z",
+      "sha256": "09ff036a7c2b9c0afe3c9ecf29d34a8ea23e14aec8400c10737a06c91082149b",
+      "lastmod": "2026-09-22T23:25:56.406Z",
       "fetch_status": "ok"
     },
     {
@@ -1610,8 +1610,8 @@
       "md_url": "https://code.claude.com/docs/en/prompt-caching.md",
       "title": "How Claude Code uses prompt caching",
       "category": "claude_code",
-      "sha256": "acac43956aa1988b1c898436f5ba47755b34666c7e12f6d690fe3dcc3b9cf4d6",
-      "lastmod": "2026-09-22T16:28:44.691Z",
+      "sha256": "e9556f4a9fe255a0dddc4486316624d203d0110497b6a74de71e2ac16d903fd0",
+      "lastmod": "2026-09-22T23:19:25.436Z",
       "fetch_status": "ok"
     },
     {
@@ -1632,8 +1632,8 @@
       "md_url": "https://code.claude.com/docs/en/quickstart.md",
       "title": "Quickstart",
       "category": "claude_code",
-      "sha256": "b2a18814970ef2448d127569f699176c8da3ba6c16359bee1c07364db6de8837",
-      "lastmod": "2026-09-22T14:15:08.176Z",
+      "sha256": "da9ce9f25fa205a6e26c438c1dd05a8d1b407aa7cb1e3d34e82a2a4cebe5a97a",
+      "lastmod": "2026-09-22T23:25:56.404Z",
       "fetch_status": "ok"
     },
     {

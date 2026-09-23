@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T21:13:51.252754Z",
+  "generated_at": "2026-09-23T00:20:48.949888Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15596,7 +15596,7 @@
           "level": 4
         },
         {
-          "text": "Penyebaran",
+          "text": "Penerapan",
           "level": 4
         },
         {
@@ -15726,18 +15726,18 @@
       ],
       "terms": {
         "claude": 268,
-        "dan": 244,
+        "dan": 245,
         "code": 181,
         "yang": 124,
-        "dengan": 115,
-        "untuk": 107,
-        "anda": 102,
+        "dengan": 116,
+        "untuk": 106,
+        "anda": 103,
         "sesi": 66,
         "agent": 44,
         "sdk": 40,
         "dari": 40,
+        "atau": 37,
         "plugin": 36,
-        "atau": 35,
         "dalam": 35,
         "cloud": 32,
         "konfigurasi": 31,
@@ -15746,23 +15746,23 @@
         "gateway": 31,
         "lingkungan": 28,
         "aplikasi": 26,
+        "sendiri": 25,
         "referensi": 25,
         "minggu": 25,
         "hook": 24,
         "mcp": 24,
-        "sendiri": 24,
         "desktop": 23,
         "jalankan": 23,
         "alat": 22,
         "host": 22,
         "pengaturan": 21,
         "skill": 19,
-        "penggunaan": 19,
         "server": 19,
         "kode": 18,
         "apa": 18,
         "secara": 18,
         "dapat": 18,
+        "penggunaan": 18,
         "gunakan": 17,
         "melalui": 17,
         "otomati": 16,
@@ -15776,7 +15776,7 @@
         "prompt": 14,
         "pelajari": 14
       },
-      "word_count": 5294
+      "word_count": 5306
     },
     {
       "filename": "claude-code__docs___llms__it.md",
@@ -24666,7 +24666,7 @@
         "mcp": 5,
         "own": 5
       },
-      "word_count": 1992
+      "word_count": 1962
     },
     {
       "filename": "claude-code__permission-modes.md",
@@ -26588,10 +26588,10 @@
         "conversation": 59,
         "turn": 52,
         "session": 52,
-        "cach": 45,
+        "cach": 46,
         "prefix": 44,
         "prompt": 41,
-        "model": 40,
+        "model": 41,
         "read": 40,
         "tool": 40,
         "chang": 30,
@@ -26632,7 +26632,7 @@
         "match": 12,
         "imag": 12
       },
-      "word_count": 5540
+      "word_count": 5549
     },
     {
       "filename": "claude-code__prompt-library.md",
@@ -26828,7 +26828,7 @@
         "get": 4,
         "featur": 4
       },
-      "word_count": 1805
+      "word_count": 1775
     },
     {
       "filename": "claude-code__remote-control.md",
