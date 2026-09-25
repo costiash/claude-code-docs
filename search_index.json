@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-24T21:14:29.248145Z",
+  "generated_at": "2026-09-25T00:20:57.975846Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -3835,20 +3835,20 @@
         }
       ],
       "terms": {
+        "mode": 64,
         "tool": 63,
-        "mode": 63,
         "permission": 46,
         "rul": 44,
+        "claude": 35,
         "call": 35,
-        "claude": 34,
         "approv": 33,
         "step": 30,
         "allow": 28,
         "callback": 25,
         "auto": 25,
+        "code": 23,
         "hook": 23,
         "deny": 23,
-        "code": 22,
         "rule": 21,
         "match": 20,
         "path": 17,
@@ -3868,6 +3868,7 @@
         "even": 11,
         "fall": 11,
         "need": 11,
+        "before": 10,
         "agent": 10,
         "sdk": 10,
         "ask": 10,
@@ -3876,7 +3877,6 @@
         "list": 10,
         "canusetool": 10,
         "session": 10,
-        "before": 9,
         "mod": 9,
         "request": 9,
         "removal": 9,
@@ -3886,7 +3886,7 @@
         "flow": 9,
         "reach": 9
       },
-      "word_count": 2878
+      "word_count": 2907
     },
     {
       "filename": "claude-code__agent-sdk__plugins.md",
@@ -3912,7 +3912,7 @@
           "level": 2
         },
         {
-          "text": "Using plugin skills",
+          "text": "Use plugin skills",
           "level": 2
         },
         {
@@ -4652,36 +4652,36 @@
       ],
       "terms": {
         "tool": 135,
-        "claude": 84,
+        "claude": 86,
         "session": 78,
         "type": 72,
+        "sdk": 67,
         "field": 67,
-        "sdk": 66,
         "input": 64,
+        "code": 59,
         "description": 59,
-        "code": 57,
         "hook": 52,
         "subagent": 50,
         "output": 49,
-        "agent": 46,
+        "agent": 47,
         "see": 46,
         "model": 46,
         "message": 44,
         "prompt": 41,
+        "cli": 39,
         "permission": 39,
-        "cli": 38,
         "call": 37,
         "result": 37,
         "default": 36,
-        "identifier": 36,
         "name": 36,
         "task": 35,
+        "identifier": 35,
         "such": 33,
         "return": 32,
         "example": 32,
         "server": 32,
+        "set": 32,
         "only": 31,
-        "set": 31,
         "requir": 31,
         "python": 30,
         "later": 30,
@@ -4702,7 +4702,7 @@
         "parameter": 23,
         "mode": 23
       },
-      "word_count": 18504
+      "word_count": 18548
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -4753,27 +4753,28 @@
         }
       ],
       "terms": {
-        "agent": 40,
+        "agent": 39,
         "tab": 24,
-        "sdk": 22,
+        "sdk": 21,
         "claude": 18,
         "code": 15,
         "run": 14,
         "python": 13,
         "install": 13,
         "title": 12,
-        "see": 12,
         "typescript": 11,
         "set": 11,
+        "see": 11,
         "step": 10,
         "tool": 10,
         "project": 9,
         "environment": 9,
         "file": 8,
+        "fix": 8,
         "create": 8,
+        "error": 8,
         "note": 8,
         "codegroup": 8,
-        "fix": 7,
         "example": 7,
         "find": 6,
         "bug": 6,
@@ -4784,27 +4785,26 @@
         "configure": 6,
         "build": 5,
         "work": 5,
+        "without": 5,
         "fil": 5,
         "handl": 5,
-        "error": 5,
         "binary": 5,
         "variable": 5,
         "call": 5,
+        "authentication": 5,
         "loop": 5,
         "option": 5,
         "each": 5,
         "quickstart": 4,
         "read": 4,
-        "without": 4,
         "some": 4,
         "automatically": 4,
         "package": 4,
         "use": 4,
         "need": 4,
-        "aws": 4,
-        "credential": 4
+        "aws": 4
       },
-      "word_count": 1921
+      "word_count": 1938
     },
     {
       "filename": "claude-code__agent-sdk__secure-deployment.md",
@@ -6032,38 +6032,45 @@
       ],
       "terms": {
         "sdk": 32,
-        "error": 22,
-        "message": 22,
-        "code": 20,
-        "cli": 15,
+        "error": 24,
+        "code": 21,
+        "cli": 21,
+        "message": 21,
+        "claude": 16,
+        "exit": 15,
         "install": 15,
-        "claude": 14,
+        "file": 13,
         "python": 13,
-        "file": 12,
-        "exit": 12,
-        "typescript": 11,
+        "proces": 12,
+        "result": 11,
+        "output": 11,
         "path": 10,
-        "result": 10,
+        "typescript": 10,
         "before": 9,
         "run": 9,
         "bundl": 9,
-        "proces": 9,
+        "troubleshoot": 8,
         "fix": 8,
-        "see": 8,
+        "without": 8,
+        "agent": 7,
+        "fail": 7,
+        "see": 7,
         "report": 7,
-        "cause": 6,
+        "page": 6,
+        "cover": 6,
+        "hook": 6,
         "executable": 6,
         "set": 6,
-        "without": 6,
         "native": 6,
         "batch": 6,
         "script": 6,
         "window": 6,
         "rais": 6,
         "one": 6,
-        "output": 6,
+        "structur": 5,
+        "cause": 5,
+        "skill": 5,
         "connect": 5,
-        "fail": 5,
         "point": 5,
         "platform": 5,
         "same": 5,
@@ -6072,17 +6079,10 @@
         "binary": 5,
         "both": 5,
         "text": 5,
-        "agent": 4,
-        "launch": 4,
-        "miss": 4,
-        "command": 4,
-        "confirm": 4,
-        "shim": 4,
-        "image": 4,
-        "end": 4,
-        "cover": 4
+        "such": 4,
+        "section": 4
       },
-      "word_count": 1638
+      "word_count": 1918
     },
     {
       "filename": "claude-code__agent-sdk__typescript.md",
@@ -7678,7 +7678,7 @@
         "request": 12,
         "iterm": 12
       },
-      "word_count": 5648
+      "word_count": 5645
     },
     {
       "filename": "claude-code__agent-view.md",
@@ -8005,7 +8005,7 @@
         "claude": 21,
         "one": 18,
         "run": 16,
-        "each": 16,
+        "each": 15,
         "work": 13,
         "task": 12,
         "view": 11,
@@ -8038,7 +8038,6 @@
         "once": 4,
         "several": 4,
         "cloud": 4,
-        "open": 4,
         "off": 4,
         "start": 4,
         "many": 4,
@@ -8048,9 +8047,10 @@
         "tool": 4,
         "command": 4,
         "whether": 3,
-        "own": 3
+        "own": 3,
+        "open": 3
       },
-      "word_count": 1181
+      "word_count": 1175
     },
     {
       "filename": "claude-code__amazon-bedrock.md",
@@ -8199,27 +8199,30 @@
         "bedrock": 69,
         "amazon": 67,
         "credential": 50,
-        "aws": 48,
+        "aws": 49,
         "region": 38,
         "default": 34,
         "profile": 33,
         "set": 30,
         "account": 27,
+        "inference": 27,
+        "mantle": 27,
         "version": 25,
-        "inference": 25,
-        "mantle": 25,
-        "request": 24,
+        "request": 25,
         "api": 22,
+        "prefix": 21,
         "through": 20,
-        "prefix": 20,
         "before": 18,
+        "iam": 17,
+        "see": 17,
         "setting": 17,
-        "see": 16,
         "resolv": 16,
         "instead": 15,
         "each": 15,
         "check": 15,
         "opu": 15,
+        "token": 15,
+        "configuration": 14,
         "example": 14,
         "sonnet": 14,
         "pin": 14,
@@ -8227,24 +8230,21 @@
         "without": 14,
         "endpoint": 14,
         "file": 13,
-        "iam": 13,
-        "configuration": 13,
         "only": 13,
         "step": 13,
         "wizard": 13,
         "variabl": 13,
+        "error": 13,
         "ids": 13,
-        "token": 13,
         "gateway": 13,
         "sso": 12,
         "run": 12,
         "acces": 11,
         "command": 11,
         "pinn": 11,
-        "alia": 11,
-        "need": 10
+        "alia": 11
       },
-      "word_count": 5230
+      "word_count": 5313
     },
     {
       "filename": "claude-code__analytics.md",
@@ -9014,7 +9014,7 @@
         "own": 9,
         "directly": 9
       },
-      "word_count": 5387
+      "word_count": 5378
     },
     {
       "filename": "claude-code__champion-kit.md",
@@ -9438,7 +9438,7 @@
         "preview": 10,
         "one": 10
       },
-      "word_count": 6117
+      "word_count": 6112
     },
     {
       "filename": "claude-code__checkpointing.md",
@@ -9509,11 +9509,11 @@
         }
       ],
       "terms": {
-        "claude": 26,
-        "code": 24,
+        "claude": 25,
+        "code": 23,
         "checkpoint": 20,
-        "session": 20,
         "edit": 19,
+        "session": 19,
         "rewind": 18,
         "conversation": 17,
         "file": 14,
@@ -9522,8 +9522,8 @@
         "turn": 11,
         "fil": 11,
         "chang": 10,
-        "run": 10,
         "restore": 10,
+        "run": 9,
         "keep": 8,
         "menu": 8,
         "message": 8,
@@ -9532,13 +9532,13 @@
         "before": 6,
         "snapshot": 6,
         "after": 6,
-        "list": 6,
         "point": 6,
         "option": 6,
         "restor": 6,
         "doesn": 6,
         "start": 5,
         "input": 5,
+        "list": 5,
         "messag": 5,
         "select": 5,
         "revert": 5,
@@ -9546,21 +9546,21 @@
         "each": 4,
         "send": 4,
         "note": 4,
-        "instead": 4,
         "while": 4,
         "current": 4,
         "here": 4,
         "summary": 4,
         "context": 4,
         "only": 4,
-        "version": 4,
         "command": 4,
         "subagent": 4,
         "skill": 4,
         "symlink": 4,
-        "hard": 4
+        "hard": 4,
+        "link": 4,
+        "path": 4
       },
-      "word_count": 1275
+      "word_count": 1254
     },
     {
       "filename": "claude-code__chrome.md",
@@ -9818,23 +9818,24 @@
       ],
       "terms": {
         "gateway": 167,
-        "claude": 113,
-        "code": 68,
+        "claude": 116,
+        "code": 71,
         "developer": 57,
         "sign": 52,
+        "manag": 49,
         "setting": 49,
-        "manag": 47,
         "block": 44,
         "policy": 39,
         "model": 35,
+        "only": 35,
         "session": 35,
+        "set": 35,
         "run": 34,
-        "only": 33,
-        "set": 32,
-        "source": 29,
+        "source": 32,
         "step": 28,
         "key": 27,
         "desktop": 27,
+        "parent": 26,
         "own": 25,
         "idp": 25,
         "server": 25,
@@ -9848,17 +9849,16 @@
         "upstream": 24,
         "lock": 24,
         "machine": 24,
-        "parent": 24,
+        "any": 23,
         "client": 22,
         "connect": 22,
-        "any": 22,
         "cli": 21,
         "per": 19,
+        "doesn": 18,
         "check": 18,
         "available": 17,
         "credential": 17,
         "need": 17,
-        "doesn": 17,
         "platform": 16,
         "provider": 16,
         "cover": 16,
@@ -9866,9 +9866,9 @@
         "support": 16,
         "every": 16,
         "request": 16,
-        "admin": 16
+        "allowlist": 16
       },
-      "word_count": 7094
+      "word_count": 7159
     },
     {
       "filename": "claude-code__claude-apps-gateway-config.md",
@@ -10993,9 +10993,9 @@
         }
       ],
       "terms": {
-        "claude": 63,
+        "claude": 62,
         "aws": 60,
-        "code": 32,
+        "code": 31,
         "platform": 27,
         "credential": 23,
         "api": 21,
@@ -11040,11 +11040,11 @@
         "default": 5,
         "subscription": 5,
         "configur": 5,
-        "requir": 5,
         "sdk": 5,
-        "precedence": 5
+        "precedence": 5,
+        "gateway": 5
       },
-      "word_count": 2279
+      "word_count": 2271
     },
     {
       "filename": "claude-code__claude-projects.md",
@@ -11195,58 +11195,58 @@
         }
       ],
       "terms": {
-        "thread": 274,
-        "project": 265,
-        "claude": 148,
-        "work": 92,
+        "thread": 278,
+        "project": 268,
+        "claude": 156,
+        "work": 93,
+        "cloud": 88,
         "one": 73,
-        "start": 69,
-        "session": 65,
+        "start": 72,
         "repository": 63,
+        "session": 62,
         "github": 57,
         "conversation": 55,
-        "new": 45,
-        "cloud": 43,
-        "repositori": 43,
+        "new": 43,
         "each": 42,
+        "add": 42,
         "environment": 42,
+        "repositori": 41,
         "open": 41,
-        "add": 40,
-        "need": 36,
-        "every": 35,
+        "need": 40,
+        "code": 35,
+        "run": 35,
         "request": 35,
-        "code": 33,
+        "every": 34,
+        "setting": 34,
         "pull": 32,
-        "setting": 32,
+        "ask": 31,
+        "task": 30,
+        "app": 29,
         "reach": 29,
-        "run": 29,
         "step": 29,
         "message": 29,
-        "app": 28,
-        "ask": 28,
-        "task": 27,
+        "own": 27,
         "instruction": 26,
         "send": 26,
-        "own": 26,
         "fil": 25,
-        "memory": 24,
         "limit": 24,
         "plan": 23,
         "once": 23,
-        "turn": 22,
+        "turn": 23,
+        "memory": 22,
+        "only": 22,
+        "list": 21,
+        "machine": 21,
         "see": 21,
-        "only": 21,
         "acces": 21,
         "don": 20,
-        "list": 20,
         "usage": 20,
         "setup": 20,
         "model": 20,
-        "overview": 19,
-        "wait": 19,
-        "set": 18
+        "runn": 19,
+        "overview": 19
       },
-      "word_count": 8329
+      "word_count": 8528
     },
     {
       "filename": "claude-code__claude-security.md",
@@ -11321,7 +11321,7 @@
         "finding": 16,
         "step": 16,
         "one": 13,
-        "install": 11,
+        "install": 12,
         "repository": 11,
         "each": 11,
         "session": 10,
@@ -11329,10 +11329,10 @@
         "request": 10,
         "commit": 10,
         "agent": 9,
+        "find": 9,
         "only": 9,
         "scann": 9,
         "codebase": 8,
-        "find": 8,
         "such": 8,
         "pull": 8,
         "tool": 8,
@@ -11360,7 +11360,7 @@
         "start": 5,
         "offer": 5
       },
-      "word_count": 1930
+      "word_count": 1935
     },
     {
       "filename": "claude-code__claude-tag.md",
@@ -11462,14 +11462,14 @@
       ],
       "terms": {
         "session": 100,
-        "claude": 93,
-        "code": 70,
+        "claude": 91,
+        "code": 68,
         "prompt": 50,
         "flag": 42,
-        "requir": 39,
+        "requir": 37,
         "mode": 35,
-        "later": 34,
         "start": 32,
+        "later": 32,
         "tool": 29,
         "see": 28,
         "default": 27,
@@ -11512,7 +11512,7 @@
         "before": 10,
         "url": 10
       },
-      "word_count": 5652
+      "word_count": 5638
     },
     {
       "filename": "claude-code__cloud-environments.md",
@@ -11669,7 +11669,7 @@
       "terms": {
         "environment": 190,
         "session": 146,
-        "claude": 89,
+        "claude": 85,
         "com": 79,
         "cloud": 79,
         "org": 76,
@@ -11683,8 +11683,8 @@
         "start": 40,
         "network": 39,
         "www": 39,
-        "code": 37,
         "default": 36,
+        "code": 35,
         "proxy": 34,
         "accordion": 34,
         "one": 33,
@@ -11714,11 +11714,11 @@
         "self": 18,
         "shar": 18,
         "tool": 18,
-        "instead": 18,
         "read": 18,
-        "need": 17
+        "need": 17,
+        "open": 17
       },
-      "word_count": 6906
+      "word_count": 6874
     },
     {
       "filename": "claude-code__code-review.md",
@@ -11934,7 +11934,7 @@
         "run": 57,
         "skill": 44,
         "requir": 43,
-        "open": 40,
+        "open": 39,
         "later": 37,
         "available": 35,
         "see": 31,
@@ -11968,17 +11968,17 @@
         "such": 16,
         "while": 16,
         "dialog": 16,
+        "change": 16,
         "own": 16,
         "app": 16,
         "start": 15,
         "project": 15,
-        "change": 15,
         "plan": 15,
         "list": 15,
         "type": 14,
         "finish": 14
       },
-      "word_count": 6993
+      "word_count": 7001
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -13632,7 +13632,7 @@
         "view": 9,
         "ctrl": 9
       },
-      "word_count": 11886
+      "word_count": 11863
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -14227,196 +14227,6 @@
       "word_count": 2192
     },
     {
-      "filename": "claude-code__discover-plugins.md",
-      "id": "claude-code/discover-plugins",
-      "title": "Discover and install prebuilt plugins through marketplaces",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/discover-plugins",
-      "headings": [
-        {
-          "text": "Discover and install prebuilt plugins through marketplaces",
-          "level": 1
-        },
-        {
-          "text": "How marketplaces work",
-          "level": 2
-        },
-        {
-          "text": "Official Anthropic marketplace",
-          "level": 2
-        },
-        {
-          "text": "Code intelligence",
-          "level": 3
-        },
-        {
-          "text": "What Claude gains from code intelligence plugins",
-          "level": 4
-        },
-        {
-          "text": "External integrations",
-          "level": 3
-        },
-        {
-          "text": "Automatic security review",
-          "level": 3
-        },
-        {
-          "text": "Development workflows",
-          "level": 3
-        },
-        {
-          "text": "Output styles",
-          "level": 3
-        },
-        {
-          "text": "Community marketplace",
-          "level": 2
-        },
-        {
-          "text": "Try it: add the demo marketplace",
-          "level": 2
-        },
-        {
-          "text": "Add marketplaces",
-          "level": 2
-        },
-        {
-          "text": "Add from GitHub",
-          "level": 3
-        },
-        {
-          "text": "Add from other Git hosts",
-          "level": 3
-        },
-        {
-          "text": "Add from local paths",
-          "level": 3
-        },
-        {
-          "text": "Add from remote URLs",
-          "level": 3
-        },
-        {
-          "text": "Add from claude.ai",
-          "level": 3
-        },
-        {
-          "text": "Install plugins",
-          "level": 2
-        },
-        {
-          "text": "Add a marketplace and install in one command",
-          "level": 3
-        },
-        {
-          "text": "Manage installed plugins",
-          "level": 2
-        },
-        {
-          "text": "Apply plugin changes without restarting",
-          "level": 3
-        },
-        {
-          "text": "Manage marketplaces",
-          "level": 2
-        },
-        {
-          "text": "Use the interactive interface",
-          "level": 3
-        },
-        {
-          "text": "Use CLI commands",
-          "level": 3
-        },
-        {
-          "text": "Configure auto-updates",
-          "level": 3
-        },
-        {
-          "text": "Configure team marketplaces",
-          "level": 2
-        },
-        {
-          "text": "Security",
-          "level": 2
-        },
-        {
-          "text": "Troubleshooting",
-          "level": 2
-        },
-        {
-          "text": "/plugin command not recognized",
-          "level": 3
-        },
-        {
-          "text": "Common issues",
-          "level": 3
-        },
-        {
-          "text": "Code intelligence issues",
-          "level": 3
-        },
-        {
-          "text": "Next steps",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "plugin": 191,
-        "claude": 110,
-        "install": 87,
-        "code": 86,
-        "marketplace": 75,
-        "add": 61,
-        "marketplac": 41,
-        "command": 34,
-        "run": 33,
-        "server": 29,
-        "see": 28,
-        "session": 27,
-        "list": 22,
-        "without": 20,
-        "also": 19,
-        "step": 19,
-        "url": 19,
-        "skill": 18,
-        "name": 18,
-        "before": 16,
-        "tab": 16,
-        "update": 16,
-        "auto": 16,
-        "language": 15,
-        "show": 15,
-        "detail": 15,
-        "scope": 15,
-        "open": 14,
-        "updat": 14,
-        "repository": 14,
-        "load": 13,
-        "error": 13,
-        "project": 13,
-        "such": 13,
-        "source": 13,
-        "git": 12,
-        "host": 12,
-        "reload": 12,
-        "refresh": 12,
-        "available": 11,
-        "agent": 11,
-        "own": 11,
-        "instead": 11,
-        "disable": 11,
-        "catalog": 10,
-        "yourself": 10,
-        "enable": 10,
-        "organization": 10,
-        "using": 10,
-        "view": 10
-      },
-      "word_count": 5115
-    },
-    {
       "filename": "claude-code__docs___llms__cn.md",
       "id": "claude-code/docs/_llms/cn",
       "title": "Chinese (197 pages)",
@@ -14637,15 +14447,15 @@
         }
       ],
       "terms": {
-        "claude": 268,
-        "code": 179,
+        "claude": 269,
+        "code": 180,
         "agent": 47,
-        "sdk": 40,
+        "sdk": 39,
         "mcp": 24,
         "hook": 23,
         "desktop": 17,
         "skill": 17,
-        "cli": 15,
+        "cli": 17,
         "cloud": 15,
         "platform": 12,
         "google": 11,
@@ -14657,16 +14467,16 @@
         "bedrock": 9,
         "microsoft": 8,
         "foundry": 8,
-        "typescript": 8,
         "anthropic": 7,
         "subagent": 7,
+        "typescript": 7,
         "opu": 7,
         "json": 6,
         "git": 6,
-        "python": 6,
         "llm": 6,
         "app": 5,
         "server": 5,
+        "python": 5,
         "gateway": 5,
         "ide": 4,
         "setting": 4,
@@ -14911,21 +14721,21 @@
         }
       ],
       "terms": {
-        "sie": 329,
-        "claude": 263,
-        "und": 248,
-        "code": 192,
-        "mit": 117,
+        "sie": 328,
+        "claude": 264,
+        "und": 246,
+        "code": 193,
+        "mit": 116,
         "die": 93,
         "agent": 53,
         "auf": 53,
         "von": 48,
         "das": 46,
-        "der": 46,
-        "ein": 43,
+        "der": 45,
+        "ein": 44,
         "aus": 42,
-        "sdk": 40,
-        "oder": 38,
+        "sdk": 39,
+        "oder": 39,
         "plugin": 36,
         "ihre": 35,
         "sitzungen": 34,
@@ -14937,9 +14747,9 @@
         "eine": 28,
         "dem": 28,
         "wie": 27,
-        "den": 27,
         "app": 26,
         "konfigurieren": 26,
+        "den": 26,
         "woche": 25,
         "hook": 24,
         "mcp": 24,
@@ -14956,13 +14766,13 @@
         "erstellen": 18,
         "modu": 18,
         "ihrem": 17,
+        "cli": 17,
         "erfahren": 16,
         "fen": 15,
         "ihr": 15,
-        "cli": 15,
         "auto": 14
       },
-      "word_count": 5371
+      "word_count": 5370
     },
     {
       "filename": "claude-code__docs___llms__es.md",
@@ -15185,19 +14995,19 @@
         }
       ],
       "terms": {
-        "claude": 269,
-        "code": 180,
-        "con": 116,
-        "para": 106,
-        "que": 61,
+        "claude": 270,
+        "code": 181,
+        "con": 115,
+        "para": 105,
         "una": 60,
+        "que": 60,
         "agent": 56,
         "del": 49,
-        "sdk": 40,
         "sesion": 40,
         "configuraci": 40,
-        "los": 37,
+        "sdk": 39,
         "plugin": 36,
+        "los": 36,
         "herramienta": 35,
         "sesi": 34,
         "las": 33,
@@ -15213,11 +15023,12 @@
         "digo": 20,
         "skill": 19,
         "autom": 19,
-        "por": 19,
         "uso": 19,
+        "por": 18,
         "ejecutar": 18,
         "archivo": 17,
         "tarea": 17,
+        "cli": 17,
         "nube": 17,
         "servidor": 17,
         "agente": 17,
@@ -15226,17 +15037,16 @@
         "autohospedado": 16,
         "desktop": 15,
         "comando": 15,
-        "cada": 15,
-        "cli": 15,
         "problema": 15,
         "cloud": 15,
         "subagent": 14,
+        "cada": 14,
         "modelo": 14,
         "configurar": 14,
         "configure": 14,
         "sus": 14
       },
-      "word_count": 6438
+      "word_count": 6439
     },
     {
       "filename": "claude-code__docs___llms__fr.md",
@@ -16007,14 +15817,14 @@
         }
       ],
       "terms": {
-        "claude": 268,
-        "code": 181,
-        "per": 119,
-        "con": 113,
-        "che": 52,
+        "claude": 269,
+        "code": 182,
+        "per": 118,
+        "con": 112,
+        "che": 51,
         "agent": 44,
-        "sdk": 40,
         "una": 40,
+        "sdk": 39,
         "del": 39,
         "sessioni": 37,
         "dei": 37,
@@ -16047,6 +15857,7 @@
         "scopri": 17,
         "lavoro": 17,
         "eseguire": 17,
+        "cli": 17,
         "esegui": 17,
         "dal": 16,
         "configura": 16,
@@ -16054,7 +15865,6 @@
         "self": 16,
         "file": 15,
         "auto": 15,
-        "cli": 15,
         "impostazioni": 15,
         "ambienti": 15
       },
@@ -17475,33 +17285,33 @@
         }
       ],
       "terms": {
-        "claude": 399,
-        "set": 356,
-        "code": 313,
-        "default": 160,
+        "claude": 402,
+        "set": 362,
+        "code": 316,
+        "default": 159,
+        "session": 144,
         "model": 143,
-        "session": 143,
-        "tool": 103,
+        "tool": 104,
+        "see": 98,
         "requir": 98,
-        "see": 97,
         "later": 97,
-        "variable": 85,
-        "server": 80,
+        "setting": 87,
+        "variable": 86,
+        "server": 79,
         "command": 78,
-        "turn": 73,
-        "agent": 72,
-        "setting": 67,
-        "such": 66,
+        "turn": 74,
+        "agent": 70,
+        "such": 68,
         "request": 65,
+        "off": 65,
         "value": 63,
-        "off": 60,
         "background": 60,
         "mode": 58,
         "before": 55,
-        "platform": 54,
+        "instead": 54,
         "file": 53,
-        "instead": 53,
         "sett": 52,
+        "platform": 52,
         "disable": 51,
         "run": 50,
         "api": 50,
@@ -17509,24 +17319,24 @@
         "only": 49,
         "override": 47,
         "window": 46,
-        "read": 45,
+        "shell": 45,
         "also": 44,
+        "read": 44,
         "bash": 43,
         "auto": 43,
-        "gateway": 41,
-        "cloud": 41,
-        "still": 40,
-        "shell": 39,
+        "still": 42,
+        "ignor": 41,
+        "gateway": 40,
+        "cloud": 40,
+        "prompt": 38,
         "wait": 38,
-        "prompt": 37,
-        "google": 37,
-        "timeout": 36,
+        "variabl": 37,
+        "timeout": 37,
+        "google": 36,
         "flag": 35,
-        "appli": 35,
-        "terminal": 35,
-        "first": 35
+        "appli": 35
       },
-      "word_count": 19501
+      "word_count": 19687
     },
     {
       "filename": "claude-code__errors.md",
@@ -17581,6 +17391,10 @@
         },
         {
           "text": "Auto mode cannot determine the safety of an action",
+          "level": 3
+        },
+        {
+          "text": "The server returned no safety verdict",
           "level": 3
         },
         {
@@ -18133,28 +17947,28 @@
         }
       ],
       "terms": {
-        "claude": 354,
-        "error": 109,
-        "code": 90,
+        "claude": 362,
+        "error": 114,
+        "code": 93,
         "login": 85,
-        "anthropic": 78,
+        "anthropic": 79,
+        "json": 72,
         "model": 71,
-        "json": 71,
         "mcp": 69,
         "session": 67,
         "authentication": 62,
         "api": 60,
-        "request": 54,
+        "request": 56,
         "setting": 48,
+        "plugin": 48,
         "fail": 45,
-        "plugin": 43,
         "path": 43,
+        "name": 42,
         "token": 41,
-        "name": 37,
-        "command": 36,
+        "command": 37,
+        "server": 36,
         "statu": 34,
         "remote": 34,
-        "server": 33,
         "tool": 33,
         "limit": 32,
         "agent": 32,
@@ -18165,26 +17979,26 @@
         "file": 26,
         "read": 26,
         "add": 26,
-        "update": 25,
-        "refus": 25,
+        "update": 26,
+        "refus": 26,
+        "prompt": 25,
+        "compact": 25,
         "com": 24,
         "network": 24,
         "usage": 24,
         "control": 24,
         "oauth": 24,
-        "prompt": 24,
         "resume": 24,
         "run": 24,
-        "compact": 24,
         "connect": 23,
         "output": 22,
         "cannot": 22,
         "too": 22,
         "response": 22,
-        "disable": 21,
-        "check": 20
+        "check": 21,
+        "disable": 21
       },
-      "word_count": 57331
+      "word_count": 58721
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -18599,44 +18413,44 @@
       "terms": {
         "claude": 88,
         "code": 87,
-        "terminal": 63,
-        "scroll": 48,
+        "terminal": 64,
+        "scroll": 50,
         "fullscreen": 41,
         "click": 41,
         "session": 37,
         "render": 35,
+        "mouse": 33,
         "start": 33,
-        "mouse": 32,
         "conversation": 27,
         "selection": 24,
         "tmux": 23,
         "work": 23,
         "mode": 22,
         "sett": 22,
+        "wheel": 22,
         "screen": 20,
         "open": 20,
-        "wheel": 20,
         "key": 20,
         "classic": 18,
         "renderer": 18,
         "run": 17,
         "set": 16,
+        "select": 16,
+        "show": 16,
         "dialog": 15,
-        "show": 15,
         "keep": 14,
+        "while": 14,
         "doesn": 14,
         "after": 14,
-        "select": 14,
         "iterm": 13,
-        "while": 13,
         "inside": 13,
         "instead": 13,
         "off": 13,
         "native": 13,
         "send": 13,
         "output": 12,
+        "window": 12,
         "relaunch": 12,
-        "window": 11,
         "also": 11,
         "turn": 11,
         "text": 11,
@@ -18648,7 +18462,7 @@
         "print": 10,
         "other": 10
       },
-      "word_count": 4495
+      "word_count": 4538
     },
     {
       "filename": "claude-code__gateways.md",
@@ -18861,10 +18675,10 @@
         }
       ],
       "terms": {
-        "claude": 139,
+        "claude": 138,
         "github": 94,
-        "code": 74,
-        "workflow": 62,
+        "code": 73,
+        "workflow": 61,
         "action": 54,
         "run": 42,
         "repository": 35,
@@ -18890,10 +18704,10 @@
         "issue": 14,
         "instead": 13,
         "file": 12,
-        "before": 12,
         "only": 12,
         "each": 12,
         "step": 12,
+        "before": 11,
         "respond": 11,
         "check": 11,
         "organization": 11,
@@ -18912,7 +18726,7 @@
         "add": 8,
         "authentication": 8
       },
-      "word_count": 3942
+      "word_count": 3933
     },
     {
       "filename": "claude-code__github-actions-cloud-providers.md",
@@ -19140,7 +18954,7 @@
         "webhook": 8,
         "acces": 8
       },
-      "word_count": 2601
+      "word_count": 2603
     },
     {
       "filename": "claude-code__gitlab-ci-cd.md",
@@ -19640,7 +19454,7 @@
         "terminal": 8,
         "same": 8
       },
-      "word_count": 3439
+      "word_count": 3440
     },
     {
       "filename": "claude-code__goal.md",
@@ -20046,7 +19860,7 @@
         "runn": 9,
         "request": 9
       },
-      "word_count": 4229
+      "word_count": 4230
     },
     {
       "filename": "claude-code__hooks.md",
@@ -20686,13 +20500,13 @@
       ],
       "terms": {
         "hook": 716,
-        "claude": 499,
-        "code": 384,
+        "claude": 497,
+        "code": 383,
         "field": 266,
         "tool": 263,
         "run": 244,
         "event": 182,
-        "session": 180,
+        "session": 179,
         "command": 144,
         "input": 138,
         "block": 137,
@@ -20736,7 +20550,7 @@
         "each": 63,
         "any": 62
       },
-      "word_count": 33944
+      "word_count": 33911
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -20876,8 +20690,8 @@
       ],
       "terms": {
         "hook": 215,
-        "claude": 138,
-        "code": 99,
+        "claude": 137,
+        "code": 98,
         "tool": 71,
         "command": 64,
         "event": 54,
@@ -20926,7 +20740,7 @@
         "start": 16,
         "show": 16
       },
-      "word_count": 8419
+      "word_count": 8413
     },
     {
       "filename": "claude-code__how-claude-code-works.md",
@@ -21291,58 +21105,58 @@
         }
       ],
       "terms": {
-        "claude": 197,
-        "code": 150,
+        "claude": 201,
+        "code": 151,
         "prompt": 91,
-        "command": 80,
+        "command": 83,
         "session": 64,
-        "mode": 52,
-        "turn": 52,
-        "pres": 46,
+        "mode": 54,
+        "turn": 53,
+        "pres": 47,
+        "input": 46,
         "one": 46,
-        "input": 45,
         "line": 44,
         "text": 43,
         "open": 43,
         "run": 42,
         "word": 42,
+        "background": 38,
         "start": 36,
         "terminal": 35,
-        "background": 35,
         "after": 34,
         "task": 34,
         "list": 33,
+        "key": 32,
         "show": 31,
-        "key": 29,
         "character": 29,
-        "end": 29,
+        "work": 29,
         "such": 28,
+        "end": 28,
         "see": 27,
-        "work": 26,
+        "only": 26,
+        "send": 26,
         "wait": 26,
         "file": 25,
         "cursor": 25,
         "history": 25,
         "while": 25,
+        "queu": 25,
         "doesn": 25,
         "search": 24,
+        "shell": 24,
+        "runn": 23,
         "conversation": 23,
-        "only": 23,
         "answer": 23,
-        "queu": 23,
-        "send": 23,
-        "without": 23,
+        "next": 23,
         "requir": 23,
         "later": 23,
         "type": 23,
         "shortcut": 22,
         "suggestion": 22,
-        "next": 22,
-        "panel": 21,
-        "match": 21,
-        "request": 21
+        "without": 21,
+        "panel": 21
       },
-      "word_count": 9826
+      "word_count": 9928
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -21658,6 +21472,10 @@
           "level": 2
         },
         {
+          "text": "Text fields",
+          "level": 2
+        },
+        {
           "text": "Vim mode interaction",
           "level": 2
         },
@@ -21668,46 +21486,47 @@
       ],
       "terms": {
         "action": 101,
-        "ctrl": 67,
-        "context": 44,
+        "ctrl": 69,
+        "key": 49,
+        "context": 45,
         "default": 41,
-        "key": 41,
+        "claude": 31,
+        "code": 28,
         "description": 28,
         "down": 27,
-        "claude": 26,
         "available": 26,
-        "code": 25,
+        "bind": 26,
         "scroll": 25,
-        "bind": 24,
         "open": 22,
         "mode": 22,
+        "escape": 19,
         "shift": 19,
         "shortcut": 18,
-        "escape": 18,
         "file": 17,
+        "binding": 17,
         "select": 17,
         "selection": 17,
         "view": 16,
+        "such": 16,
         "terminal": 16,
-        "enter": 15,
-        "binding": 14,
-        "tab": 14,
+        "enter": 16,
+        "tab": 15,
+        "panel": 14,
         "list": 14,
+        "chord": 14,
         "diff": 13,
-        "panel": 13,
-        "such": 13,
-        "chord": 13,
+        "one": 13,
+        "field": 12,
+        "dialog": 12,
         "unbound": 12,
         "previou": 12,
         "option": 12,
-        "one": 12,
         "viewport": 12,
-        "dialog": 11,
+        "active": 12,
         "footer": 11,
         "toggle": 11,
         "next": 11,
         "later": 11,
-        "active": 11,
         "before": 10,
         "show": 10,
         "session": 10,
@@ -21715,10 +21534,9 @@
         "vim": 10,
         "keyboard": 9,
         "history": 9,
-        "search": 9,
-        "agent": 9
+        "search": 9
       },
-      "word_count": 4381
+      "word_count": 4547
     },
     {
       "filename": "claude-code__large-codebases.md",
@@ -22771,58 +22589,58 @@
         }
       ],
       "terms": {
-        "claude": 145,
-        "manag": 138,
-        "source": 128,
-        "code": 121,
-        "setting": 112,
+        "claude": 148,
+        "manag": 141,
+        "source": 130,
+        "code": 124,
+        "setting": 113,
         "key": 98,
         "policy": 80,
         "file": 53,
         "value": 53,
         "admin": 44,
+        "only": 44,
         "server": 43,
         "session": 43,
-        "only": 43,
         "read": 42,
         "every": 41,
-        "one": 38,
+        "one": 40,
+        "appli": 38,
+        "list": 35,
+        "set": 35,
         "sourc": 34,
-        "appli": 34,
         "each": 34,
-        "list": 33,
-        "set": 33,
         "entry": 30,
         "mdm": 27,
+        "block": 26,
         "registry": 26,
         "machine": 25,
         "user": 25,
-        "block": 25,
+        "parent": 24,
         "developer": 23,
         "see": 23,
         "run": 23,
+        "later": 23,
         "rank": 23,
-        "enforc": 22,
-        "parent": 21,
-        "later": 21,
+        "enforc": 23,
+        "any": 21,
         "invalid": 21,
         "host": 20,
-        "any": 20,
         "lock": 20,
         "deliver": 19,
         "under": 19,
         "highest": 19,
         "rul": 18,
+        "suppli": 18,
         "such": 18,
         "combin": 17,
         "same": 17,
         "fil": 17,
         "hkcu": 17,
-        "until": 17,
-        "deploy": 16,
-        "other": 16
+        "requir": 17,
+        "until": 17
       },
-      "word_count": 6669
+      "word_count": 6728
     },
     {
       "filename": "claude-code__mcp.md",
@@ -23141,8 +22959,8 @@
         }
       ],
       "terms": {
-        "mcp": 189,
-        "claude": 141,
+        "mcp": 190,
+        "claude": 142,
         "server": 90,
         "json": 51,
         "code": 44,
@@ -23192,7 +23010,7 @@
         "default": 8,
         "such": 8
       },
-      "word_count": 15663
+      "word_count": 15654
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -24302,19 +24120,19 @@
       ],
       "terms": {
         "event": 269,
-        "claude": 225,
-        "code": 203,
+        "claude": 227,
+        "code": 205,
         "tool": 153,
         "attribut": 150,
         "session": 112,
+        "set": 104,
         "request": 102,
-        "set": 97,
         "plugin": 84,
         "only": 79,
-        "setting": 77,
+        "setting": 78,
         "name": 74,
+        "such": 72,
         "per": 72,
-        "such": 71,
         "metric": 69,
         "requir": 68,
         "later": 68,
@@ -24322,8 +24140,8 @@
         "user": 61,
         "api": 60,
         "hook": 57,
+        "manag": 56,
         "value": 55,
-        "manag": 54,
         "one": 52,
         "default": 52,
         "includ": 51,
@@ -24332,27 +24150,27 @@
         "standard": 46,
         "agent": 46,
         "prompt": 45,
+        "content": 45,
         "nam": 45,
-        "content": 44,
+        "each": 43,
         "server": 43,
         "mcp": 42,
-        "each": 42,
         "run": 41,
         "under": 41,
         "attribute": 41,
-        "export": 40,
         "error": 40,
+        "export": 39,
         "logg": 39,
+        "file": 37,
         "trac": 37,
         "correlation": 37,
-        "file": 36,
         "command": 36,
         "proces": 36,
         "log": 35,
         "emitt": 35,
         "example": 34
       },
-      "word_count": 16775
+      "word_count": 16859
     },
     {
       "filename": "claude-code__network-config.md",
@@ -24762,57 +24580,57 @@
       ],
       "terms": {
         "mode": 226,
-        "claude": 169,
-        "session": 136,
-        "code": 128,
+        "claude": 178,
+        "session": 146,
+        "code": 134,
         "permission": 108,
         "auto": 100,
-        "classifier": 79,
+        "classifier": 81,
         "start": 77,
         "prompt": 74,
-        "command": 58,
-        "run": 54,
-        "read": 53,
-        "action": 51,
-        "set": 49,
-        "plan": 49,
-        "block": 49,
-        "default": 48,
+        "command": 59,
+        "action": 55,
+        "run": 55,
+        "read": 54,
+        "plan": 52,
+        "set": 50,
+        "block": 50,
+        "default": 49,
         "setting": 43,
-        "such": 42,
+        "such": 43,
         "path": 41,
+        "review": 40,
+        "later": 39,
+        "ask": 38,
         "work": 38,
-        "ask": 36,
+        "check": 37,
         "allow": 36,
-        "check": 35,
-        "later": 35,
         "mod": 34,
+        "also": 33,
         "rul": 33,
+        "before": 32,
         "without": 32,
-        "before": 31,
-        "review": 31,
-        "also": 31,
+        "doesn": 32,
+        "only": 31,
         "file": 30,
-        "only": 30,
         "approv": 30,
+        "own": 30,
         "available": 29,
-        "doesn": 29,
-        "own": 29,
+        "request": 29,
         "edit": 28,
+        "terminal": 28,
         "tool": 27,
-        "terminal": 27,
-        "request": 27,
         "model": 26,
         "instead": 26,
         "still": 26,
         "manual": 25,
         "one": 25,
+        "server": 25,
+        "see": 24,
         "push": 24,
-        "switch": 23,
-        "extension": 23,
-        "see": 23
+        "switch": 23
       },
-      "word_count": 10229
+      "word_count": 10570
     },
     {
       "filename": "claude-code__permissions.md",
@@ -24967,7 +24785,7 @@
         "rule": 152,
         "match": 143,
         "code": 136,
-        "command": 117,
+        "command": 118,
         "rul": 104,
         "tool": 101,
         "directory": 90,
@@ -24990,8 +24808,8 @@
         "trust": 38,
         "every": 35,
         "repository": 35,
+        "mode": 33,
         "pattern": 33,
-        "mode": 32,
         "add": 32,
         "project": 32,
         "work": 31,
@@ -25002,11 +24820,11 @@
         "one": 29,
         "each": 28,
         "fil": 28,
+        "also": 28,
         "still": 27,
         "without": 27,
         "same": 27,
         "call": 27,
-        "also": 27,
         "set": 26,
         "name": 26,
         "sandbox": 26,
@@ -25014,7 +24832,7 @@
         "includ": 25,
         "server": 25
       },
-      "word_count": 10429
+      "word_count": 10447
     },
     {
       "filename": "claude-code__platforms.md",
@@ -25109,116 +24927,6 @@
         "agent": 3
       },
       "word_count": 1132
-    },
-    {
-      "filename": "claude-code__plugin-dependencies.md",
-      "id": "claude-code/plugin-dependencies",
-      "title": "Constrain plugin dependency versions",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugin-dependencies",
-      "headings": [
-        {
-          "text": "Constrain plugin dependency versions",
-          "level": 1
-        },
-        {
-          "text": "Why constrain dependency versions",
-          "level": 2
-        },
-        {
-          "text": "Declare a dependency with a version constraint",
-          "level": 2
-        },
-        {
-          "text": "Bundle plugins for a team",
-          "level": 2
-        },
-        {
-          "text": "Depend on a plugin from another marketplace",
-          "level": 2
-        },
-        {
-          "text": "Test a plugin and its dependency locally",
-          "level": 2
-        },
-        {
-          "text": "Tag plugin releases for version resolution",
-          "level": 2
-        },
-        {
-          "text": "How constraints interact",
-          "level": 2
-        },
-        {
-          "text": "Enable or disable a plugin with dependencies",
-          "level": 2
-        },
-        {
-          "text": "Remove orphaned auto-installed dependencies",
-          "level": 2
-        },
-        {
-          "text": "Resolve dependency errors",
-          "level": 2
-        },
-        {
-          "text": "See also",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "plugin": 104,
-        "dependency": 68,
-        "install": 56,
-        "marketplace": 44,
-        "version": 38,
-        "code": 28,
-        "claude": 28,
-        "tag": 25,
-        "dependenci": 21,
-        "constraint": 17,
-        "one": 17,
-        "error": 15,
-        "nam": 14,
-        "entry": 13,
-        "range": 13,
-        "auto": 13,
-        "list": 12,
-        "load": 11,
-        "resolv": 10,
-        "satisfi": 10,
-        "run": 10,
-        "disabl": 10,
-        "repository": 10,
-        "command": 10,
-        "constrain": 9,
-        "set": 9,
-        "depend": 9,
-        "declar": 9,
-        "update": 9,
-        "name": 9,
-        "enable": 9,
-        "local": 9,
-        "copy": 9,
-        "folder": 9,
-        "enabl": 9,
-        "without": 8,
-        "same": 8,
-        "resolve": 8,
-        "team": 8,
-        "requir": 8,
-        "fail": 8,
-        "check": 8,
-        "fetch": 7,
-        "field": 7,
-        "add": 7,
-        "pas": 7,
-        "scope": 7,
-        "each": 6,
-        "see": 6,
-        "manifest": 6
-      },
-      "word_count": 2981
     },
     {
       "filename": "claude-code__plugin-evals.md",
@@ -25389,84 +25097,166 @@
         }
       ],
       "terms": {
-        "run": 207,
-        "plugin": 141,
+        "run": 210,
+        "plugin": 144,
         "case": 113,
-        "grader": 76,
-        "claude": 65,
-        "directory": 57,
+        "grader": 79,
+        "claude": 67,
+        "directory": 58,
         "tool": 50,
-        "each": 41,
-        "one": 41,
+        "each": 43,
+        "file": 40,
         "suite": 40,
-        "file": 39,
-        "score": 36,
-        "code": 34,
-        "under": 34,
+        "one": 40,
+        "score": 39,
+        "code": 35,
+        "under": 35,
+        "server": 34,
         "eval": 33,
+        "only": 33,
+        "mock": 33,
         "prompt": 32,
-        "only": 32,
-        "server": 32,
-        "mock": 31,
+        "such": 31,
         "call": 30,
+        "set": 30,
         "arm": 30,
-        "such": 29,
+        "pas": 29,
+        "every": 29,
         "list": 29,
         "cas": 28,
-        "pas": 28,
         "model": 28,
         "scor": 27,
         "grant": 27,
         "skill": 26,
-        "every": 26,
-        "set": 26,
         "read": 26,
         "result": 25,
         "fil": 25,
         "see": 24,
         "report": 24,
-        "start": 23,
+        "start": 24,
+        "need": 23,
         "agent": 22,
         "without": 22,
         "answer": 22,
+        "command": 21,
+        "ask": 21,
         "first": 21,
-        "need": 21,
         "default": 21,
         "baseline": 20,
-        "ask": 20,
         "load": 20,
+        "trust": 20,
         "field": 20,
-        "mcp": 20,
-        "write": 19,
-        "judge": 19
+        "mcp": 20
       },
-      "word_count": 8622
+      "word_count": 8787
     },
     {
-      "filename": "claude-code__plugin-hints.md",
-      "id": "claude-code/plugin-hints",
+      "filename": "claude-code__plugins__anthropic-marketplaces.md",
+      "id": "claude-code/plugins/anthropic-marketplaces",
+      "title": "Anthropic's marketplaces",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/anthropic-marketplaces",
+      "headings": [
+        {
+          "text": "Anthropic's marketplaces",
+          "level": 1
+        },
+        {
+          "text": "Anthropic's marketplaces",
+          "level": 2
+        },
+        {
+          "text": "The demo marketplace in `anthropics/claude-code`",
+          "level": 3
+        },
+        {
+          "text": "Find plugins in the official marketplace",
+          "level": 2
+        },
+        {
+          "text": "Browse and install from Anthropic's marketplaces",
+          "level": 2
+        },
+        {
+          "text": "Add the community or demo marketplace",
+          "level": 3
+        },
+        {
+          "text": "Third-party marketplaces",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 38,
+        "marketplace": 33,
+        "claude": 20,
+        "marketplac": 20,
+        "install": 20,
+        "code": 19,
+        "add": 19,
+        "anthropic": 16,
+        "official": 12,
+        "see": 12,
+        "session": 11,
+        "demo": 10,
+        "repository": 10,
+        "community": 9,
+        "one": 9,
+        "name": 9,
+        "own": 6,
+        "run": 6,
+        "each": 5,
+        "catalog": 5,
+        "github": 5,
+        "other": 5,
+        "publish": 4,
+        "find": 4,
+        "author": 4,
+        "third": 4,
+        "party": 4,
+        "file": 3,
+        "discover": 3,
+        "before": 3,
+        "nam": 3,
+        "browse": 3,
+        "three": 3,
+        "page": 3,
+        "such": 3,
+        "set": 3,
+        "isn": 3,
+        "list": 3,
+        "tab": 3,
+        "search": 3,
+        "web": 3,
+        "documentation": 2,
+        "index": 2,
+        "com": 2,
+        "pag": 2,
+        "where": 2,
+        "type": 2,
+        "after": 2,
+        "distinguish": 2,
+        "note": 2
+      },
+      "word_count": 1037
+    },
+    {
+      "filename": "claude-code__plugins__cli-hints.md",
+      "id": "claude-code/plugins/cli-hints",
       "title": "Recommend your plugin from your CLI",
       "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugin-hints",
+      "url": "https://code.claude.com/docs/en/plugins/cli-hints",
       "headings": [
         {
           "text": "Recommend your plugin from your CLI",
           "level": 1
         },
         {
-          "text": "How it works",
-          "level": 2
-        },
-        {
           "text": "Emit the hint",
-          "level": 2
-        },
-        {
-          "text": "Choose where to emit",
-          "level": 2
-        },
-        {
-          "text": "What the user sees",
           "level": 2
         },
         {
@@ -25474,827 +25264,85 @@
           "level": 2
         },
         {
-          "text": "Requirements",
+          "text": "Check when the prompt appears",
           "level": 2
         },
         {
-          "text": "Get your plugin into the official marketplace",
+          "text": "Preview what the user sees",
           "level": 2
-        },
-        {
-          "text": "See also",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "plugin": 28,
-        "claude": 26,
-        "code": 25,
-        "hint": 25,
-        "prompt": 20,
-        "user": 15,
-        "marketplace": 15,
-        "cli": 13,
-        "official": 12,
-        "command": 11,
-        "session": 11,
-        "line": 10,
-        "install": 10,
-        "tag": 9,
-        "only": 9,
-        "set": 8,
-        "emit": 7,
-        "anthropic": 7,
-        "output": 7,
-        "show": 7,
-        "reach": 7,
-        "never": 7,
-        "before": 6,
-        "see": 6,
-        "run": 6,
-        "check": 6,
-        "one": 5,
-        "marker": 5,
-        "tool": 5,
-        "stderr": 5,
-        "work": 5,
-        "variable": 5,
-        "also": 5,
-        "such": 5,
-        "recommend": 4,
-        "protocol": 4,
-        "environment": 4,
-        "variabl": 4,
-        "where": 4,
-        "yes": 4,
-        "sdk": 3,
-        "inside": 3,
-        "requir": 3,
-        "doe": 3,
-        "every": 3,
-        "hook": 3,
-        "subprocess": 3,
-        "nam": 3,
-        "list": 3,
-        "gate": 3
-      },
-      "word_count": 1331
-    },
-    {
-      "filename": "claude-code__plugin-marketplaces.md",
-      "id": "claude-code/plugin-marketplaces",
-      "title": "Create and distribute a plugin marketplace",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugin-marketplaces",
-      "headings": [
-        {
-          "text": "Create and distribute a plugin marketplace",
-          "level": 1
-        },
-        {
-          "text": "Overview",
-          "level": 2
-        },
-        {
-          "text": "Walkthrough: create a local marketplace",
-          "level": 2
-        },
-        {
-          "text": "Create the marketplace file",
-          "level": 2
-        },
-        {
-          "text": "Marketplace schema",
-          "level": 2
-        },
-        {
-          "text": "Required fields",
-          "level": 3
-        },
-        {
-          "text": "Owner fields",
-          "level": 3
-        },
-        {
-          "text": "Optional fields",
-          "level": 3
-        },
-        {
-          "text": "Plugin entries",
-          "level": 2
-        },
-        {
-          "text": "Required fields",
-          "level": 3
-        },
-        {
-          "text": "Optional plugin fields",
-          "level": 3
-        },
-        {
-          "text": "Plugin sources",
-          "level": 2
-        },
-        {
-          "text": "Relative paths",
-          "level": 3
-        },
-        {
-          "text": "GitHub repositories",
-          "level": 3
-        },
-        {
-          "text": "Git repositories",
-          "level": 3
-        },
-        {
-          "text": "Git subdirectories",
-          "level": 3
-        },
-        {
-          "text": "npm packages",
-          "level": 3
-        },
-        {
-          "text": "Zip archives",
-          "level": 3
-        },
-        {
-          "text": "Authenticate archive downloads",
-          "level": 4
-        },
-        {
-          "text": "Add a headersHelper to a plugin entry",
-          "level": 5
-        },
-        {
-          "text": "Write the headersHelper command",
-          "level": 4
-        },
-        {
-          "text": "When Claude Code skips a headersHelper command or drops its output",
-          "level": 4
-        },
-        {
-          "text": "How users accept a headersHelper command",
-          "level": 4
-        },
-        {
-          "text": "Installs and updates that refuse the command instead of asking",
-          "level": 5
-        },
-        {
-          "text": "When a marketplace `url` source's command runs",
-          "level": 5
-        },
-        {
-          "text": "Command sources",
-          "level": 3
-        },
-        {
-          "text": "Copy mode and link mode",
-          "level": 4
-        },
-        {
-          "text": "How users accept the command",
-          "level": 4
-        },
-        {
-          "text": "When Claude Code re-runs the command",
-          "level": 4
-        },
-        {
-          "text": "Advanced plugin entries",
-          "level": 3
-        },
-        {
-          "text": "Strict mode",
-          "level": 3
-        },
-        {
-          "text": "Host and distribute marketplaces",
-          "level": 2
-        },
-        {
-          "text": "Host on GitHub (recommended)",
-          "level": 3
-        },
-        {
-          "text": "Host on other git services",
-          "level": 3
-        },
-        {
-          "text": "Private repositories",
-          "level": 3
-        },
-        {
-          "text": "Commands you run",
-          "level": 4
-        },
-        {
-          "text": "Background auto-updates",
-          "level": 4
-        },
-        {
-          "text": "Distribute through organization settings",
-          "level": 3
-        },
-        {
-          "text": "Sync a GitLab-hosted marketplace",
-          "level": 4
-        },
-        {
-          "text": "Keep executables out of the top-level bin directory",
-          "level": 4
-        },
-        {
-          "text": "Require marketplaces for your team",
-          "level": 3
-        },
-        {
-          "text": "Pre-populate plugins for containers",
-          "level": 3
-        },
-        {
-          "text": "Managed marketplace restrictions",
-          "level": 3
-        },
-        {
-          "text": "Common configurations",
-          "level": 4
-        },
-        {
-          "text": "How restrictions work",
-          "level": 4
-        },
-        {
-          "text": "Version resolution and release channels",
-          "level": 3
-        },
-        {
-          "text": "Set up release channels",
-          "level": 4
-        },
-        {
-          "text": "Example",
-          "level": 5
-        },
-        {
-          "text": "Assign channels to user groups",
-          "level": 5
-        },
-        {
-          "text": "Pin dependency versions",
-          "level": 4
-        },
-        {
-          "text": "Rename or remove a plugin",
-          "level": 3
-        },
-        {
-          "text": "Validation and testing",
-          "level": 2
-        },
-        {
-          "text": "Manage marketplaces from the CLI",
-          "level": 2
-        },
-        {
-          "text": "Plugin marketplace add",
-          "level": 3
-        },
-        {
-          "text": "Plugin marketplace list",
-          "level": 3
-        },
-        {
-          "text": "Plugin marketplace remove",
-          "level": 3
-        },
-        {
-          "text": "Plugin marketplace update",
-          "level": 3
-        },
-        {
-          "text": "Troubleshooting",
-          "level": 2
-        },
-        {
-          "text": "Marketplace not loading",
-          "level": 3
-        },
-        {
-          "text": "Marketplace validation errors",
-          "level": 3
-        },
-        {
-          "text": "Validate a plugin or a directory without a manifest",
-          "level": 4
-        },
-        {
-          "text": "Pick the directory to name",
-          "level": 5
-        },
-        {
-          "text": "Check a plugin whose skill is its root `SKILL.md`",
-          "level": 5
-        },
-        {
-          "text": "Check files behind symlinks",
-          "level": 5
-        },
-        {
-          "text": "Read the validation results",
-          "level": 5
-        },
-        {
-          "text": "Plugin installation failures",
-          "level": 3
-        },
-        {
-          "text": "Private repository authentication fails",
-          "level": 3
-        },
-        {
-          "text": "Marketplace updates fail in offline environments",
-          "level": 3
-        },
-        {
-          "text": "Git operations time out",
-          "level": 3
-        },
-        {
-          "text": "Plugins with relative paths fail in URL-based marketplaces",
-          "level": 3
-        },
-        {
-          "text": "Files not found after installation",
-          "level": 3
-        },
-        {
-          "text": "See also",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "plugin": 334,
-        "marketplace": 225,
-        "claude": 216,
-        "code": 195,
-        "directory": 105,
-        "command": 101,
-        "install": 93,
-        "entry": 92,
-        "user": 91,
-        "run": 90,
-        "path": 78,
-        "source": 75,
-        "add": 68,
-        "see": 59,
-        "field": 59,
-        "git": 58,
-        "name": 58,
-        "repository": 56,
-        "set": 56,
-        "check": 55,
-        "url": 50,
-        "file": 49,
-        "version": 49,
-        "str": 49,
-        "setting": 49,
-        "only": 45,
-        "such": 43,
-        "host": 42,
-        "sourc": 42,
-        "github": 39,
-        "doesn": 39,
-        "each": 38,
-        "one": 37,
-        "requir": 36,
-        "organization": 36,
-        "marketplac": 34,
-        "load": 34,
-        "fil": 33,
-        "same": 33,
-        "fail": 33,
-        "list": 32,
-        "update": 32,
-        "manag": 32,
-        "place": 30,
-        "download": 30,
-        "skill": 29,
-        "accept": 29,
-        "server": 28,
-        "also": 28,
-        "without": 27
-      },
-      "word_count": 14360
-    },
-    {
-      "filename": "claude-code__plugin-relevance.md",
-      "id": "claude-code/plugin-relevance",
-      "title": "Recommend plugins for your org",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugin-relevance",
-      "headings": [
-        {
-          "text": "Recommend plugins for your org",
-          "level": 1
-        },
-        {
-          "text": "How it works",
-          "level": 2
-        },
-        {
-          "text": "Add relevance to a plugin entry",
-          "level": 2
-        },
-        {
-          "text": "Field reference",
-          "level": 2
-        },
-        {
-          "text": "`relevance`",
-          "level": 3
-        },
-        {
-          "text": "`relevance.signals`",
-          "level": 3
-        },
-        {
-          "text": "Enable suggestions in managed settings",
-          "level": 2
-        },
-        {
-          "text": "What the user sees",
-          "level": 2
-        },
-        {
-          "text": "Validate your marketplace",
-          "level": 2
-        },
-        {
-          "text": "See also",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "plugin": 32,
-        "marketplace": 24,
-        "match": 24,
-        "claude": 22,
-        "session": 20,
-        "signal": 18,
-        "code": 13,
-        "tip": 12,
-        "path": 12,
-        "suggestion": 10,
-        "name": 10,
-        "discover": 9,
-        "user": 9,
-        "entry": 9,
-        "setting": 9,
-        "spinner": 9,
-        "command": 9,
-        "work": 8,
-        "one": 8,
-        "each": 8,
-        "pattern": 8,
-        "start": 8,
-        "add": 7,
-        "allowlist": 7,
-        "install": 7,
-        "directory": 7,
-        "read": 7,
-        "example": 7,
-        "suggest": 6,
-        "manag": 6,
-        "declar": 6,
-        "object": 6,
-        "against": 6,
-        "fil": 6,
-        "appear": 6,
-        "notification": 6,
-        "maximum": 6,
-        "character": 6,
-        "source": 6,
-        "file": 5,
-        "before": 5,
-        "tab": 5,
-        "array": 5,
-        "string": 5,
-        "case": 5,
-        "under": 5,
-        "only": 5,
-        "record": 5,
-        "block": 4,
-        "entri": 4
-      },
-      "word_count": 1611
-    },
-    {
-      "filename": "claude-code__plugins.md",
-      "id": "claude-code/plugins",
-      "title": "Create plugins",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugins",
-      "headings": [
-        {
-          "text": "Create plugins",
-          "level": 1
-        },
-        {
-          "text": "When to use plugins vs standalone configuration",
-          "level": 2
-        },
-        {
-          "text": "Quickstart",
-          "level": 2
-        },
-        {
-          "text": "Prerequisites",
-          "level": 3
-        },
-        {
-          "text": "Create your first plugin",
-          "level": 3
-        },
-        {
-          "text": "Develop a plugin in your skills directory",
-          "level": 2
-        },
-        {
-          "text": "Plugin structure overview",
-          "level": 2
-        },
-        {
-          "text": "Develop more complex plugins",
-          "level": 2
-        },
-        {
-          "text": "Add Skills to your plugin",
-          "level": 3
-        },
-        {
-          "text": "Add LSP servers to your plugin",
-          "level": 3
-        },
-        {
-          "text": "Add background monitors to your plugin",
-          "level": 3
-        },
-        {
-          "text": "Ship default settings with your plugin",
-          "level": 3
-        },
-        {
-          "text": "Organize complex plugins",
-          "level": 3
-        },
-        {
-          "text": "Test your plugins locally",
-          "level": 3
-        },
-        {
-          "text": "Debug plugin issues",
-          "level": 3
-        },
-        {
-          "text": "Share your plugins",
-          "level": 3
-        },
-        {
-          "text": "Submit your plugin to the community marketplace",
-          "level": 3
-        },
-        {
-          "text": "Convert existing configurations to plugins",
-          "level": 2
-        },
-        {
-          "text": "Migration steps",
-          "level": 3
-        },
-        {
-          "text": "What changes when migrating",
-          "level": 3
         },
         {
           "text": "Next steps",
           "level": 2
-        },
-        {
-          "text": "For plugin users",
-          "level": 3
-        },
-        {
-          "text": "For plugin developers",
-          "level": 3
         }
       ],
       "terms": {
-        "plugin": 173,
-        "claude": 50,
-        "skill": 49,
-        "code": 36,
-        "directory": 32,
-        "step": 28,
-        "load": 24,
-        "create": 22,
-        "hook": 22,
-        "install": 20,
-        "see": 20,
-        "root": 19,
-        "agent": 18,
-        "test": 18,
-        "add": 17,
-        "server": 15,
-        "each": 15,
-        "marketplace": 15,
-        "folder": 14,
-        "run": 14,
-        "configuration": 13,
-        "manifest": 13,
-        "file": 11,
-        "name": 11,
+        "plugin": 20,
+        "claude": 16,
+        "code": 15,
+        "prompt": 14,
         "one": 11,
-        "session": 11,
-        "custom": 10,
-        "lsp": 10,
-        "project": 9,
-        "flag": 9,
-        "title": 9,
-        "chang": 9,
-        "version": 8,
-        "tip": 8,
-        "start": 8,
-        "path": 8,
-        "user": 8,
-        "only": 8,
-        "setting": 8,
-        "check": 8,
-        "without": 8,
-        "mcp": 7,
-        "team": 7,
-        "contain": 7,
-        "new": 7,
-        "include": 7,
-        "monitor": 7,
-        "component": 7,
-        "fil": 7,
-        "complete": 6
+        "hint": 10,
+        "user": 9,
+        "marketplace": 9,
+        "tag": 9,
+        "session": 8,
+        "install": 7,
+        "official": 7,
+        "set": 7,
+        "run": 7,
+        "cli": 6,
+        "line": 6,
+        "only": 6,
+        "command": 6,
+        "emit": 5,
+        "appear": 5,
+        "check": 5,
+        "output": 4,
+        "show": 4,
+        "nam": 4,
+        "also": 4,
+        "terminal": 4,
+        "tool": 3,
+        "see": 3,
+        "isn": 3,
+        "publish": 3,
+        "each": 3,
+        "value": 3,
+        "local": 3,
+        "off": 3,
+        "answer": 3,
+        "documentation": 2,
+        "index": 2,
+        "before": 2,
+        "sdk": 2,
+        "runn": 2,
+        "stderr": 2,
+        "remov": 2,
+        "bash": 2,
+        "powershell": 2,
+        "appli": 2,
+        "note": 2,
+        "distribute": 2,
+        "person": 2,
+        "hook": 2,
+        "later": 2
       },
-      "word_count": 3498
+      "word_count": 882
     },
     {
-      "filename": "claude-code__plugins-reference.md",
-      "id": "claude-code/plugins-reference",
-      "title": "Plugins reference",
+      "filename": "claude-code__plugins__cli-reference.md",
+      "id": "claude-code/plugins/cli-reference",
+      "title": "Plugin commands reference",
       "category": "claude_code",
-      "url": "https://code.claude.com/docs/en/plugins-reference",
+      "url": "https://code.claude.com/docs/en/plugins/cli-reference",
       "headings": [
         {
-          "text": "Plugins reference",
+          "text": "Plugin commands reference",
           "level": 1
         },
         {
-          "text": "Plugin components reference",
-          "level": 2
-        },
-        {
-          "text": "Skills",
-          "level": 3
-        },
-        {
-          "text": "Agents",
-          "level": 3
-        },
-        {
-          "text": "Plugin agent frontmatter",
-          "level": 4
-        },
-        {
-          "text": "Hooks",
-          "level": 3
-        },
-        {
-          "text": "MCP servers",
-          "level": 3
-        },
-        {
-          "text": "LSP servers",
-          "level": 3
-        },
-        {
-          "text": "Monitors",
-          "level": 3
-        },
-        {
-          "text": "Themes",
-          "level": 3
-        },
-        {
-          "text": "Plugin installation scopes",
-          "level": 2
-        },
-        {
-          "text": "Skills-directory plugins",
-          "level": 2
-        },
-        {
-          "text": "Choose where the plugin loads from",
-          "level": 3
-        },
-        {
-          "text": "Edit, reload, and disable a skills-directory plugin",
-          "level": 3
-        },
-        {
-          "text": "Plugin manifest schema",
-          "level": 2
-        },
-        {
-          "text": "Complete schema",
-          "level": 3
-        },
-        {
-          "text": "Required fields",
-          "level": 3
-        },
-        {
-          "text": "Unrecognized fields",
-          "level": 3
-        },
-        {
-          "text": "Metadata fields",
-          "level": 3
-        },
-        {
-          "text": "Default enablement",
-          "level": 3
-        },
-        {
-          "text": "Component path fields",
-          "level": 3
-        },
-        {
-          "text": "Experimental components",
-          "level": 3
-        },
-        {
-          "text": "User configuration",
-          "level": 3
-        },
-        {
-          "text": "Limit a field to fixed options",
-          "level": 4
-        },
-        {
-          "text": "Channels",
-          "level": 3
-        },
-        {
-          "text": "Path behavior rules",
-          "level": 3
-        },
-        {
-          "text": "Environment variables",
-          "level": 3
-        },
-        {
-          "text": "Persistent data directory",
-          "level": 4
-        },
-        {
-          "text": "Plugin caching and file resolution",
-          "level": 2
-        },
-        {
-          "text": "Node.js package dependencies",
-          "level": 3
-        },
-        {
-          "text": "Path traversal limitations",
-          "level": 3
-        },
-        {
-          "text": "Share files within a marketplace with symlinks",
-          "level": 3
-        },
-        {
-          "text": "Plugin directory structure",
-          "level": 2
-        },
-        {
-          "text": "Standard plugin layout",
-          "level": 3
-        },
-        {
-          "text": "File locations reference",
-          "level": 3
-        },
-        {
-          "text": "CLI commands reference",
+          "text": "claude plugin commands",
           "level": 2
         },
         {
@@ -26306,11 +25354,11 @@
           "level": 3
         },
         {
-          "text": "plugin uninstall",
-          "level": 3
+          "text": "Accept a displayed install command",
+          "level": 4
         },
         {
-          "text": "plugin prune",
+          "text": "plugin uninstall",
           "level": 3
         },
         {
@@ -26330,11 +25378,15 @@
           "level": 3
         },
         {
+          "text": "JSON output",
+          "level": 4
+        },
+        {
           "text": "plugin details",
           "level": 3
         },
         {
-          "text": "plugin validate",
+          "text": "plugin prune",
           "level": 3
         },
         {
@@ -26350,39 +25402,677 @@
           "level": 3
         },
         {
-          "text": "Debugging and development tools",
+          "text": "plugin validate",
+          "level": 3
+        },
+        {
+          "text": "Validate a directory",
+          "level": 4
+        },
+        {
+          "text": "Output and exit codes",
+          "level": 4
+        },
+        {
+          "text": "claude plugin marketplace commands",
           "level": 2
         },
         {
-          "text": "Debugging commands",
+          "text": "plugin marketplace add",
           "level": 3
         },
         {
-          "text": "Common issues",
+          "text": "plugin marketplace list",
           "level": 3
         },
         {
-          "text": "Example error messages",
+          "text": "plugin marketplace remove",
           "level": 3
         },
         {
-          "text": "Hook troubleshooting",
+          "text": "plugin marketplace update",
           "level": 3
         },
         {
-          "text": "MCP server troubleshooting",
+          "text": "Reload summary",
           "level": 3
         },
         {
-          "text": "Directory structure mistakes",
+          "text": "Reloads that change MCP tools",
           "level": 3
         },
         {
-          "text": "Distribution and versioning reference",
+          "text": "Sessions without an interactive terminal",
+          "level": 3
+        },
+        {
+          "text": "Flags that load a plugin for one session",
           "level": 2
         },
         {
-          "text": "Version management",
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 169,
+        "claude": 72,
+        "command": 56,
+        "marketplace": 42,
+        "code": 38,
+        "scope": 37,
+        "install": 36,
+        "name": 35,
+        "json": 30,
+        "run": 29,
+        "print": 23,
+        "project": 20,
+        "git": 17,
+        "requir": 16,
+        "exit": 15,
+        "without": 15,
+        "list": 15,
+        "skill": 15,
+        "flag": 14,
+        "dir": 14,
+        "path": 14,
+        "one": 13,
+        "result": 13,
+        "session": 12,
+        "later": 12,
+        "http": 11,
+        "version": 11,
+        "declar": 11,
+        "fail": 11,
+        "update": 11,
+        "description": 10,
+        "display": 10,
+        "pas": 10,
+        "source": 10,
+        "enable": 10,
+        "user": 10,
+        "com": 9,
+        "load": 9,
+        "error": 9,
+        "prompt": 9,
+        "accept": 9,
+        "line": 9,
+        "stdout": 9,
+        "enabl": 9,
+        "disable": 9,
+        "eval": 9,
+        "repo": 9,
+        "reload": 8,
+        "output": 8,
+        "see": 8
+      },
+      "word_count": 7454
+    },
+    {
+      "filename": "claude-code__plugins__code-intelligence.md",
+      "id": "claude-code/plugins/code-intelligence",
+      "title": "Code intelligence plugins",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/code-intelligence",
+      "headings": [
+        {
+          "text": "Code intelligence plugins",
+          "level": 1
+        },
+        {
+          "text": "Install a code intelligence plugin",
+          "level": 2
+        },
+        {
+          "text": "See what Claude gains",
+          "level": 2
+        },
+        {
+          "text": "Read the diagnostics yourself",
+          "level": 3
+        },
+        {
+          "text": "Accept or dismiss the recommendation dialog",
+          "level": 2
+        },
+        {
+          "text": "When the recommendation dialog appears",
+          "level": 3
+        },
+        {
+          "text": "Respond to the recommendation dialog",
+          "level": 3
+        },
+        {
+          "text": "Turn recommendations back on",
+          "level": 3
+        },
+        {
+          "text": "Troubleshoot code intelligence",
+          "level": 2
+        },
+        {
+          "text": "Add a language without an official plugin",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 62,
+        "server": 32,
+        "language": 31,
+        "claude": 30,
+        "code": 27,
+        "install": 24,
+        "dialog": 17,
+        "file": 16,
+        "lsp": 14,
+        "recommendation": 14,
+        "start": 14,
+        "see": 13,
+        "diagnostic": 12,
+        "official": 12,
+        "binary": 12,
+        "error": 11,
+        "session": 11,
+        "appear": 11,
+        "intelligence": 10,
+        "edit": 10,
+        "step": 10,
+        "after": 9,
+        "marketplace": 9,
+        "table": 7,
+        "offer": 7,
+        "one": 6,
+        "find": 5,
+        "extension": 5,
+        "list": 5,
+        "troubleshoot": 5,
+        "never": 5,
+        "type": 4,
+        "run": 4,
+        "doesn": 4,
+        "get": 4,
+        "command": 4,
+        "handl": 4,
+        "first": 4,
+        "isn": 4,
+        "shell": 4,
+        "read": 4,
+        "report": 4,
+        "tool": 4,
+        "stop": 4,
+        "index": 3,
+        "symbol": 3,
+        "miss": 3,
+        "import": 3,
+        "own": 3,
+        "instead": 3
+      },
+      "word_count": 1484
+    },
+    {
+      "filename": "claude-code__plugins__components.md",
+      "id": "claude-code/plugins/components",
+      "title": "Add components to a plugin",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/components",
+      "headings": [
+        {
+          "text": "Add components to a plugin",
+          "level": 1
+        },
+        {
+          "text": "Explore the plugin directory",
+          "level": 2
+        },
+        {
+          "text": "Add each kind of component",
+          "level": 2
+        },
+        {
+          "text": "Skills",
+          "level": 3
+        },
+        {
+          "text": "Commands",
+          "level": 3
+        },
+        {
+          "text": "Define commands in the manifest",
+          "level": 4
+        },
+        {
+          "text": "Agents",
+          "level": 3
+        },
+        {
+          "text": "Organize agents in subfolders",
+          "level": 4
+        },
+        {
+          "text": "Frontmatter fields in plugin agents",
+          "level": 4
+        },
+        {
+          "text": "Hooks",
+          "level": 3
+        },
+        {
+          "text": "When plugin hooks fire",
+          "level": 4
+        },
+        {
+          "text": "Environment, quoting, and matching MCP tools",
+          "level": 4
+        },
+        {
+          "text": "MCP servers",
+          "level": 3
+        },
+        {
+          "text": "Reach users on claude.ai and Cowork",
+          "level": 4
+        },
+        {
+          "text": "Server names, tool names, and reloads",
+          "level": 4
+        },
+        {
+          "text": "Include a packaged MCPB server",
+          "level": 4
+        },
+        {
+          "text": "LSP servers",
+          "level": 3
+        },
+        {
+          "text": "Executables",
+          "level": 3
+        },
+        {
+          "text": "Default settings",
+          "level": 3
+        },
+        {
+          "text": "Themes and output styles",
+          "level": 3
+        },
+        {
+          "text": "Channels",
+          "level": 3
+        },
+        {
+          "text": "Monitors",
+          "level": 3
+        },
+        {
+          "text": "When the configuration dialog appears",
+          "level": 3
+        },
+        {
+          "text": "Install dependencies into the data directory",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 128,
+        "server": 62,
+        "claude": 59,
+        "file": 55,
+        "name": 47,
+        "hook": 44,
+        "one": 43,
+        "key": 40,
+        "skill": 39,
+        "path": 39,
+        "command": 39,
+        "run": 37,
+        "manifest": 36,
+        "user": 36,
+        "piece": 32,
+        "div": 32,
+        "kind": 31,
+        "text": 30,
+        "code": 29,
+        "component": 29,
+        "mcp": 29,
+        "see": 29,
+        "load": 29,
+        "each": 27,
+        "depth": 27,
+        "classname": 25,
+        "agent": 23,
+        "folder": 22,
+        "monitor": 22,
+        "same": 20,
+        "output": 19,
+        "directory": 19,
+        "session": 19,
+        "tool": 19,
+        "fil": 18,
+        "json": 17,
+        "lin": 17,
+        "field": 17,
+        "own": 17,
+        "add": 16,
+        "const": 16,
+        "href": 16,
+        "setting": 16,
+        "span": 16,
+        "start": 16,
+        "shell": 16,
+        "install": 16,
+        "nam": 16,
+        "linktext": 15,
+        "section": 15
+      },
+      "word_count": 6473
+    },
+    {
+      "filename": "claude-code__plugins__create.md",
+      "id": "claude-code/plugins/create",
+      "title": "Create a Claude Code plugin",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/create",
+      "headings": [
+        {
+          "text": "Create a Claude Code plugin",
+          "level": 1
+        },
+        {
+          "text": "Decide when to use a plugin",
+          "level": 2
+        },
+        {
+          "text": "Create your first plugin",
+          "level": 2
+        },
+        {
+          "text": "Plugin layout",
+          "level": 3
+        },
+        {
+          "text": "Develop without a marketplace",
+          "level": 2
+        },
+        {
+          "text": "From a directory or `.zip`",
+          "level": 4
+        },
+        {
+          "text": "From an environment variable",
+          "level": 4
+        },
+        {
+          "text": "Scaffold the plugin with `claude plugin init`",
+          "level": 4
+        },
+        {
+          "text": "Stop loading the plugin",
+          "level": 4
+        },
+        {
+          "text": "Test and debug",
+          "level": 2
+        },
+        {
+          "text": "A component path isn't found",
+          "level": 3
+        },
+        {
+          "text": "`--plugin-dir` at a marketplace root doesn't load the plugins under `plugins/`",
+          "level": 3
+        },
+        {
+          "text": "The plugin loads but its skills are missing",
+          "level": 3
+        },
+        {
+          "text": "The `userConfig` dialog never appears",
+          "level": 3
+        },
+        {
+          "text": "Check that the plugin changes Claude's behavior",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 146,
+        "load": 53,
+        "skill": 45,
+        "claude": 41,
+        "directory": 41,
+        "session": 29,
+        "one": 28,
+        "run": 28,
+        "step": 26,
+        "code": 25,
+        "see": 23,
+        "marketplace": 20,
+        "hook": 20,
+        "each": 19,
+        "create": 17,
+        "manifest": 17,
+        "folder": 16,
+        "under": 16,
+        "file": 14,
+        "agent": 14,
+        "install": 14,
+        "component": 14,
+        "without": 13,
+        "add": 13,
+        "only": 12,
+        "root": 12,
+        "name": 12,
+        "path": 12,
+        "test": 11,
+        "server": 11,
+        "start": 11,
+        "such": 11,
+        "exist": 10,
+        "command": 10,
+        "check": 10,
+        "archive": 10,
+        "mcp": 9,
+        "own": 9,
+        "pas": 9,
+        "title": 9,
+        "every": 9,
+        "doesn": 9,
+        "error": 9,
+        "flag": 9,
+        "setup": 8,
+        "project": 8,
+        "list": 8,
+        "scaffold": 8,
+        "shell": 8,
+        "nam": 7
+      },
+      "word_count": 3269
+    },
+    {
+      "filename": "claude-code__plugins__create-marketplace.md",
+      "id": "claude-code/plugins/create-marketplace",
+      "title": "Create a marketplace",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/create-marketplace",
+      "headings": [
+        {
+          "text": "Create a marketplace",
+          "level": 1
+        },
+        {
+          "text": "Create a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Add plugin entries",
+          "level": 2
+        },
+        {
+          "text": "Rules for plugin entries",
+          "level": 2
+        },
+        {
+          "text": "Write relative paths from the marketplace root",
+          "level": 3
+        },
+        {
+          "text": "Keep the entry name and the manifest name the same",
+          "level": 3
+        },
+        {
+          "text": "Choose a plugin source",
+          "level": 2
+        },
+        {
+          "text": "Validate and test",
+          "level": 2
+        },
+        {
+          "text": "Problems that validation reports",
+          "level": 3
+        },
+        {
+          "text": "Problems that surface when you add or install",
+          "level": 3
+        },
+        {
+          "text": "Test an edit to a plugin",
+          "level": 3
+        },
+        {
+          "text": "Remove the marketplace to start over",
+          "level": 3
+        },
+        {
+          "text": "Host your marketplace",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 80,
+        "marketplace": 54,
+        "directory": 25,
+        "install": 25,
+        "see": 16,
+        "step": 16,
+        "entry": 15,
+        "claude": 14,
+        "code": 13,
+        "name": 13,
+        "add": 12,
+        "path": 12,
+        "source": 11,
+        "file": 10,
+        "host": 10,
+        "create": 9,
+        "one": 9,
+        "command": 9,
+        "field": 9,
+        "repository": 8,
+        "list": 8,
+        "where": 8,
+        "own": 8,
+        "every": 8,
+        "run": 8,
+        "relative": 8,
+        "machine": 7,
+        "start": 7,
+        "each": 6,
+        "entri": 6,
+        "fetch": 5,
+        "git": 5,
+        "such": 5,
+        "keep": 5,
+        "people": 5,
+        "skill": 5,
+        "same": 5,
+        "contain": 5,
+        "title": 5,
+        "read": 5,
+        "inside": 5,
+        "session": 5,
+        "report": 5,
+        "nam": 5,
+        "problem": 5,
+        "before": 4,
+        "json": 4,
+        "register": 4,
+        "load": 4,
+        "user": 4
+      },
+      "word_count": 1944
+    },
+    {
+      "filename": "claude-code__plugins__dependencies.md",
+      "id": "claude-code/plugins/dependencies",
+      "title": "Plugin dependencies",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/dependencies",
+      "headings": [
+        {
+          "text": "Plugin dependencies",
+          "level": 1
+        },
+        {
+          "text": "Declare dependencies",
+          "level": 2
+        },
+        {
+          "text": "Declare a dependency with a version constraint",
+          "level": 3
+        },
+        {
+          "text": "Bundle plugins for a team",
+          "level": 3
+        },
+        {
+          "text": "Depend on a plugin from another marketplace",
+          "level": 3
+        },
+        {
+          "text": "Test a plugin and its dependency locally",
+          "level": 3
+        },
+        {
+          "text": "Create a release tag",
+          "level": 3
+        },
+        {
+          "text": "Constrain a dependency that has a non-git source",
+          "level": 3
+        },
+        {
+          "text": "How dependencies behave for your users",
+          "level": 2
+        },
+        {
+          "text": "How a constraint resolves against tags",
+          "level": 3
+        },
+        {
+          "text": "Confirm the resolved version",
+          "level": 3
+        },
+        {
+          "text": "Combine constraints from several plugins",
           "level": 3
         },
         {
@@ -26391,58 +26081,1814 @@
         }
       ],
       "terms": {
-        "plugin": 405,
-        "claude": 189,
-        "code": 166,
-        "command": 115,
-        "server": 97,
-        "directory": 90,
-        "install": 81,
-        "field": 81,
-        "run": 74,
-        "load": 71,
-        "marketplace": 67,
-        "path": 62,
-        "session": 62,
-        "skill": 58,
-        "default": 53,
-        "version": 49,
-        "see": 48,
-        "one": 47,
-        "file": 43,
-        "hook": 43,
-        "option": 43,
-        "mcp": 42,
-        "name": 42,
-        "component": 39,
-        "only": 39,
-        "agent": 38,
-        "user": 37,
-        "manifest": 36,
-        "same": 36,
-        "requir": 36,
-        "fil": 33,
-        "set": 33,
-        "start": 31,
-        "before": 30,
-        "accept": 30,
-        "source": 29,
-        "monitor": 28,
-        "tool": 28,
-        "error": 27,
-        "root": 26,
-        "str": 26,
-        "each": 26,
-        "description": 26,
-        "own": 26,
-        "sync": 26,
-        "lsp": 25,
-        "nam": 25,
-        "json": 25,
-        "script": 25,
-        "without": 24
+        "plugin": 91,
+        "dependency": 51,
+        "install": 48,
+        "marketplace": 44,
+        "version": 35,
+        "tag": 29,
+        "constraint": 22,
+        "code": 14,
+        "update": 14,
+        "claude": 13,
+        "one": 12,
+        "copy": 12,
+        "dependenci": 11,
+        "user": 11,
+        "such": 10,
+        "range": 10,
+        "entry": 10,
+        "auto": 10,
+        "depend": 9,
+        "see": 9,
+        "resolv": 9,
+        "constrain": 9,
+        "release": 9,
+        "git": 9,
+        "doesn": 9,
+        "check": 9,
+        "folder": 9,
+        "repository": 9,
+        "declar": 8,
+        "set": 8,
+        "run": 8,
+        "load": 8,
+        "local": 8,
+        "also": 8,
+        "declare": 7,
+        "add": 7,
+        "source": 7,
+        "satisfi": 7,
+        "each": 6,
+        "against": 6,
+        "other": 6,
+        "error": 6,
+        "need": 6,
+        "without": 6,
+        "name": 6,
+        "requir": 6,
+        "fetch": 5,
+        "releas": 5,
+        "own": 5,
+        "resolve": 5
       },
-      "word_count": 13998
+      "word_count": 2219
+    },
+    {
+      "filename": "claude-code__plugins__host-marketplace.md",
+      "id": "claude-code/plugins/host-marketplace",
+      "title": "Host and maintain a marketplace",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/host-marketplace",
+      "headings": [
+        {
+          "text": "Host and maintain a marketplace",
+          "level": 1
+        },
+        {
+          "text": "Host your marketplace",
+          "level": 2
+        },
+        {
+          "text": "Register the marketplace for everyone in a repository",
+          "level": 3
+        },
+        {
+          "text": "Avoid relative-path entries in a URL-hosted marketplace",
+          "level": 3
+        },
+        {
+          "text": "Edit plugins in place on a shared directory",
+          "level": 3
+        },
+        {
+          "text": "Keep plugin files out of Git LFS",
+          "level": 3
+        },
+        {
+          "text": "Share files within a marketplace with symlinks",
+          "level": 3
+        },
+        {
+          "text": "Distribute through organization settings",
+          "level": 2
+        },
+        {
+          "text": "Grant access to a private marketplace",
+          "level": 2
+        },
+        {
+          "text": "Serve users who have no git-host account",
+          "level": 3
+        },
+        {
+          "text": "What background auto-update does with credentials",
+          "level": 3
+        },
+        {
+          "text": "Roll out to a whole company",
+          "level": 2
+        },
+        {
+          "text": "Keep users up to date",
+          "level": 2
+        },
+        {
+          "text": "Turn on auto-update",
+          "level": 3
+        },
+        {
+          "text": "Release a new version",
+          "level": 3
+        },
+        {
+          "text": "Hold users on one version",
+          "level": 3
+        },
+        {
+          "text": "Change the command of a command source",
+          "level": 3
+        },
+        {
+          "text": "Run release channels",
+          "level": 2
+        },
+        {
+          "text": "Rename or remove a plugin",
+          "level": 2
+        },
+        {
+          "text": "Migrate users with a renames map",
+          "level": 3
+        },
+        {
+          "text": "Uninstall removed plugins from users' machines",
+          "level": 3
+        },
+        {
+          "text": "Authenticate archive downloads",
+          "level": 2
+        },
+        {
+          "text": "Add a headersHelper to a plugin entry",
+          "level": 3
+        },
+        {
+          "text": "Write the headersHelper command",
+          "level": 3
+        },
+        {
+          "text": "When Claude Code skips a headersHelper command or drops its output",
+          "level": 3
+        },
+        {
+          "text": "How users accept a headersHelper command",
+          "level": 3
+        },
+        {
+          "text": "Depend on and recommend other plugins",
+          "level": 2
+        },
+        {
+          "text": "Work around what a marketplace can't do",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "user": 108,
+        "plugin": 106,
+        "marketplace": 94,
+        "claude": 70,
+        "command": 67,
+        "code": 65,
+        "entry": 54,
+        "install": 42,
+        "run": 42,
+        "host": 35,
+        "git": 33,
+        "each": 32,
+        "set": 32,
+        "setting": 30,
+        "one": 28,
+        "add": 28,
+        "see": 25,
+        "update": 24,
+        "credential": 23,
+        "only": 22,
+        "version": 22,
+        "url": 21,
+        "source": 21,
+        "without": 20,
+        "directory": 19,
+        "download": 19,
+        "keep": 17,
+        "new": 17,
+        "who": 16,
+        "repository": 16,
+        "acces": 15,
+        "accept": 15,
+        "name": 15,
+        "private": 14,
+        "organization": 14,
+        "need": 14,
+        "manag": 14,
+        "release": 13,
+        "other": 13,
+        "github": 13,
+        "http": 12,
+        "file": 12,
+        "after": 12,
+        "session": 12,
+        "place": 12,
+        "instead": 12,
+        "archive": 12,
+        "read": 11,
+        "field": 11,
+        "same": 11
+      },
+      "word_count": 5196
+    },
+    {
+      "filename": "claude-code__plugins__install.md",
+      "id": "claude-code/plugins/install",
+      "title": "Install and manage plugins",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/install",
+      "headings": [
+        {
+          "text": "Install and manage plugins",
+          "level": 1
+        },
+        {
+          "text": "Install a plugin",
+          "level": 2
+        },
+        {
+          "text": "Choose an install scope",
+          "level": 3
+        },
+        {
+          "text": "Install from your shell",
+          "level": 3
+        },
+        {
+          "text": "Add a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Add a marketplace and install in one command",
+          "level": 3
+        },
+        {
+          "text": "Add a private marketplace",
+          "level": 3
+        },
+        {
+          "text": "Manage installed plugins",
+          "level": 2
+        },
+        {
+          "text": "Manage plugins synced from claude.ai",
+          "level": 3
+        },
+        {
+          "text": "Uninstall a plugin the project enables",
+          "level": 3
+        },
+        {
+          "text": "See what an installed plugin adds to your sessions",
+          "level": 3
+        },
+        {
+          "text": "Find plugins you no longer use",
+          "level": 3
+        },
+        {
+          "text": "Plugins with dependencies",
+          "level": 3
+        },
+        {
+          "text": "Manage plugins from your shell",
+          "level": 3
+        },
+        {
+          "text": "Keep plugins updated",
+          "level": 2
+        },
+        {
+          "text": "Turn auto-update on or off for a marketplace",
+          "level": 3
+        },
+        {
+          "text": "Update one plugin now",
+          "level": 3
+        },
+        {
+          "text": "Auto-update from a private marketplace",
+          "level": 3
+        },
+        {
+          "text": "Manage marketplaces",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 167,
+        "install": 84,
+        "claude": 79,
+        "marketplace": 63,
+        "code": 56,
+        "add": 44,
+        "session": 39,
+        "step": 35,
+        "tab": 35,
+        "run": 35,
+        "scope": 31,
+        "see": 28,
+        "one": 27,
+        "list": 23,
+        "marketplac": 22,
+        "update": 21,
+        "open": 21,
+        "command": 20,
+        "load": 18,
+        "shell": 18,
+        "name": 15,
+        "title": 15,
+        "start": 14,
+        "repository": 14,
+        "enabl": 14,
+        "manage": 13,
+        "project": 13,
+        "turn": 13,
+        "disable": 13,
+        "uninstall": 13,
+        "source": 13,
+        "other": 12,
+        "every": 12,
+        "also": 12,
+        "each": 12,
+        "local": 12,
+        "auto": 12,
+        "choose": 11,
+        "same": 11,
+        "select": 11,
+        "setting": 11,
+        "organization": 11,
+        "sync": 11,
+        "account": 10,
+        "terminal": 10,
+        "show": 10,
+        "enable": 10,
+        "example": 9,
+        "detail": 9,
+        "prompt": 9
+      },
+      "word_count": 4034
+    },
+    {
+      "filename": "claude-code__plugins__loading.md",
+      "id": "claude-code/plugins/loading",
+      "title": "Plugin loading reference",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/loading",
+      "headings": [
+        {
+          "text": "Plugin loading reference",
+          "level": 1
+        },
+        {
+          "text": "Check which stage a plugin reached",
+          "level": 2
+        },
+        {
+          "text": "Plugins and marketplaces that aren't on disk at session start",
+          "level": 3
+        },
+        {
+          "text": "Find where a plugin came from",
+          "level": 2
+        },
+        {
+          "text": "Entry name and manifest name",
+          "level": 3
+        },
+        {
+          "text": "Plugins shared through a repository",
+          "level": 3
+        },
+        {
+          "text": "Sync timing in terminal sessions",
+          "level": 4
+        },
+        {
+          "text": "Sign-in requirements for terminal sync",
+          "level": 4
+        },
+        {
+          "text": "Control which synced plugins load",
+          "level": 4
+        },
+        {
+          "text": "Find where a plugin is enabled",
+          "level": 2
+        },
+        {
+          "text": "Disabled in user settings but still loads",
+          "level": 3
+        },
+        {
+          "text": "Enabled in project settings but not installed",
+          "level": 3
+        },
+        {
+          "text": "Find plugins on disk",
+          "level": 2
+        },
+        {
+          "text": "In-place and copied plugins",
+          "level": 3
+        },
+        {
+          "text": "Paths that escape the plugin directory",
+          "level": 3
+        },
+        {
+          "text": "Cleanup of previous versions",
+          "level": 3
+        },
+        {
+          "text": "Node.js package dependencies",
+          "level": 3
+        },
+        {
+          "text": "When the dependency install runs",
+          "level": 4
+        },
+        {
+          "text": "Limits on the dependency install",
+          "level": 4
+        },
+        {
+          "text": "When the dependency install fails or is skipped",
+          "level": 4
+        },
+        {
+          "text": "Versions and updates",
+          "level": 2
+        },
+        {
+          "text": "How Claude Code computes the version",
+          "level": 3
+        },
+        {
+          "text": "When Claude Code refreshes a marketplace before an install",
+          "level": 3
+        },
+        {
+          "text": "When auto-update runs",
+          "level": 3
+        },
+        {
+          "text": "Which marketplaces and plugins auto-update",
+          "level": 4
+        },
+        {
+          "text": "When a command source re-runs",
+          "level": 3
+        },
+        {
+          "text": "Name conflicts",
+          "level": 2
+        },
+        {
+          "text": "Keep a session-only plugin from loading",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 188,
+        "claude": 89,
+        "code": 70,
+        "install": 63,
+        "marketplace": 57,
+        "load": 52,
+        "session": 45,
+        "directory": 45,
+        "version": 36,
+        "source": 33,
+        "setting": 32,
+        "path": 28,
+        "run": 26,
+        "set": 26,
+        "sync": 23,
+        "see": 22,
+        "update": 20,
+        "start": 20,
+        "entry": 20,
+        "one": 20,
+        "only": 20,
+        "every": 19,
+        "manifest": 18,
+        "doesn": 17,
+        "command": 17,
+        "copy": 16,
+        "name": 16,
+        "project": 16,
+        "file": 15,
+        "lockfile": 15,
+        "enabl": 14,
+        "under": 14,
+        "fetch": 13,
+        "nam": 13,
+        "each": 12,
+        "turn": 12,
+        "off": 12,
+        "updat": 12,
+        "same": 12,
+        "record": 12,
+        "repository": 12,
+        "keep": 12,
+        "auto": 12,
+        "instead": 11,
+        "marketplac": 11,
+        "user": 11,
+        "add": 11,
+        "after": 11,
+        "because": 11,
+        "skill": 11
+      },
+      "word_count": 4977
+    },
+    {
+      "filename": "claude-code__plugins__manifest-reference.md",
+      "id": "claude-code/plugins/manifest-reference",
+      "title": "Plugin manifest reference",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/manifest-reference",
+      "headings": [
+        {
+          "text": "Plugin manifest reference",
+          "level": 1
+        },
+        {
+          "text": "Manifest file",
+          "level": 2
+        },
+        {
+          "text": "Unrecognized fields",
+          "level": 3
+        },
+        {
+          "text": "Validate the manifest",
+          "level": 3
+        },
+        {
+          "text": "Fields",
+          "level": 2
+        },
+        {
+          "text": "`name`",
+          "level": 3
+        },
+        {
+          "text": "`displayName`",
+          "level": 3
+        },
+        {
+          "text": "`version`",
+          "level": 3
+        },
+        {
+          "text": "`metadata`",
+          "level": 3
+        },
+        {
+          "text": "`defaultEnabled`",
+          "level": 3
+        },
+        {
+          "text": "`dependencies`",
+          "level": 3
+        },
+        {
+          "text": "`settings`",
+          "level": 3
+        },
+        {
+          "text": "Component path forms",
+          "level": 2
+        },
+        {
+          "text": "Path-only fields",
+          "level": 3
+        },
+        {
+          "text": "`commands`",
+          "level": 3
+        },
+        {
+          "text": "`hooks`",
+          "level": 3
+        },
+        {
+          "text": "`mcpServers`",
+          "level": 3
+        },
+        {
+          "text": "`lspServers`",
+          "level": 3
+        },
+        {
+          "text": "`monitors`",
+          "level": 3
+        },
+        {
+          "text": "Path rules",
+          "level": 2
+        },
+        {
+          "text": "Containment and existence",
+          "level": 3
+        },
+        {
+          "text": "How each key combines with its default location",
+          "level": 3
+        },
+        {
+          "text": "User configuration",
+          "level": 2
+        },
+        {
+          "text": "Limit a field to fixed options",
+          "level": 3
+        },
+        {
+          "text": "Where values are stored",
+          "level": 3
+        },
+        {
+          "text": "Reference a saved value",
+          "level": 3
+        },
+        {
+          "text": "Fields that run through a shell",
+          "level": 3
+        },
+        {
+          "text": "Channels",
+          "level": 2
+        },
+        {
+          "text": "Environment variables",
+          "level": 2
+        },
+        {
+          "text": "Where each variable resolves",
+          "level": 3
+        },
+        {
+          "text": "Quoting and path separators",
+          "level": 3
+        },
+        {
+          "text": "Standard layout",
+          "level": 2
+        },
+        {
+          "text": "Marketplace entries and the manifest",
+          "level": 2
+        },
+        {
+          "text": "How entry fields combine with `plugin.json`",
+          "level": 3
+        },
+        {
+          "text": "Metadata precedence",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 104,
+        "path": 68,
+        "field": 56,
+        "server": 39,
+        "claude": 38,
+        "default": 37,
+        "load": 37,
+        "each": 36,
+        "code": 34,
+        "component": 33,
+        "manifest": 31,
+        "one": 31,
+        "entry": 30,
+        "key": 29,
+        "command": 28,
+        "array": 28,
+        "object": 24,
+        "file": 21,
+        "root": 21,
+        "fil": 20,
+        "name": 20,
+        "inline": 19,
+        "config": 19,
+        "value": 19,
+        "hook": 18,
+        "accept": 17,
+        "form": 17,
+        "directory": 17,
+        "str": 17,
+        "mcp": 17,
+        "user": 16,
+        "marketplace": 15,
+        "reference": 14,
+        "every": 14,
+        "declar": 14,
+        "option": 14,
+        "set": 14,
+        "run": 14,
+        "enabl": 14,
+        "start": 13,
+        "see": 13,
+        "monitor": 13,
+        "list": 12,
+        "shell": 12,
+        "such": 12,
+        "must": 12,
+        "replac": 12,
+        "valu": 11,
+        "doesn": 11,
+        "fail": 11
+      },
+      "word_count": 5268
+    },
+    {
+      "filename": "claude-code__plugins__marketplace-reference.md",
+      "id": "claude-code/plugins/marketplace-reference",
+      "title": "Marketplace reference",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/marketplace-reference",
+      "headings": [
+        {
+          "text": "Marketplace reference",
+          "level": 1
+        },
+        {
+          "text": "Marketplace file",
+          "level": 2
+        },
+        {
+          "text": "Reserved names",
+          "level": 3
+        },
+        {
+          "text": "Top-level fields",
+          "level": 2
+        },
+        {
+          "text": "Plugin entries",
+          "level": 2
+        },
+        {
+          "text": "Hooks in an entry",
+          "level": 4
+        },
+        {
+          "text": "Display fields",
+          "level": 4
+        },
+        {
+          "text": "Strict mode",
+          "level": 3
+        },
+        {
+          "text": "Plugin sources",
+          "level": 2
+        },
+        {
+          "text": "Relative path plugin source",
+          "level": 3
+        },
+        {
+          "text": "Bare names under pluginRoot",
+          "level": 4
+        },
+        {
+          "text": "github plugin source",
+          "level": 3
+        },
+        {
+          "text": "url plugin source",
+          "level": 3
+        },
+        {
+          "text": "git-subdir plugin source",
+          "level": 3
+        },
+        {
+          "text": "npm plugin source",
+          "level": 3
+        },
+        {
+          "text": "archive plugin source",
+          "level": 3
+        },
+        {
+          "text": "command plugin source",
+          "level": 3
+        },
+        {
+          "text": "What the command must do",
+          "level": 4
+        },
+        {
+          "text": "Output that fails the install or update",
+          "level": 4
+        },
+        {
+          "text": "Copy mode and link mode",
+          "level": 4
+        },
+        {
+          "text": "Marketplace sources",
+          "level": 2
+        },
+        {
+          "text": "Fields by type",
+          "level": 3
+        },
+        {
+          "text": "Source values valid only in policy lists",
+          "level": 3
+        },
+        {
+          "text": "Source objects in settings",
+          "level": 3
+        },
+        {
+          "text": "Validation messages",
+          "level": 2
+        },
+        {
+          "text": "Invalid input on a source",
+          "level": 3
+        },
+        {
+          "text": "Failures that validation doesn't catch",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 110,
+        "marketplace": 75,
+        "claude": 63,
+        "entry": 57,
+        "code": 55,
+        "source": 50,
+        "field": 46,
+        "directory": 42,
+        "path": 38,
+        "see": 31,
+        "one": 29,
+        "nam": 28,
+        "load": 28,
+        "name": 25,
+        "file": 23,
+        "repository": 23,
+        "user": 23,
+        "error": 23,
+        "type": 23,
+        "object": 22,
+        "install": 22,
+        "fetch": 19,
+        "print": 19,
+        "each": 18,
+        "same": 18,
+        "str": 18,
+        "set": 17,
+        "warn": 17,
+        "requir": 17,
+        "command": 17,
+        "relative": 16,
+        "such": 16,
+        "only": 16,
+        "sourc": 15,
+        "fail": 15,
+        "list": 14,
+        "own": 14,
+        "url": 14,
+        "level": 13,
+        "reserv": 13,
+        "under": 13,
+        "default": 13,
+        "git": 13,
+        "write": 12,
+        "host": 12,
+        "later": 12,
+        "contain": 11,
+        "run": 11,
+        "top": 11,
+        "any": 11
+      },
+      "word_count": 5576
+    },
+    {
+      "filename": "claude-code__plugins__measure.md",
+      "id": "claude-code/plugins/measure",
+      "title": "Measure plugin cost and usage",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/measure",
+      "headings": [
+        {
+          "text": "Measure plugin cost and usage",
+          "level": 1
+        },
+        {
+          "text": "Measure what a plugin costs",
+          "level": 2
+        },
+        {
+          "text": "Lower the always-on figure",
+          "level": 3
+        },
+        {
+          "text": "Cost shown to users before install",
+          "level": 3
+        },
+        {
+          "text": "Check whether a plugin is used",
+          "level": 2
+        },
+        {
+          "text": "Not used recently in `/plugin`",
+          "level": 3
+        },
+        {
+          "text": "Find skills that never run",
+          "level": 3
+        },
+        {
+          "text": "Unused plugins in `/doctor`",
+          "level": 3
+        },
+        {
+          "text": "Usage share in `/usage`",
+          "level": 3
+        },
+        {
+          "text": "Measure across a fleet",
+          "level": 2
+        },
+        {
+          "text": "Redacted plugin names in your backend",
+          "level": 3
+        },
+        {
+          "text": "Query the Analytics API",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 80,
+        "skill": 22,
+        "claude": 20,
+        "install": 18,
+        "cost": 17,
+        "see": 16,
+        "code": 15,
+        "user": 13,
+        "session": 12,
+        "event": 11,
+        "each": 11,
+        "usage": 10,
+        "measure": 9,
+        "command": 9,
+        "used": 9,
+        "component": 9,
+        "every": 8,
+        "nam": 8,
+        "run": 8,
+        "marketplace": 8,
+        "opentelemetry": 8,
+        "organization": 7,
+        "count": 7,
+        "acros": 7,
+        "own": 7,
+        "name": 7,
+        "per": 7,
+        "alway": 7,
+        "one": 7,
+        "api": 7,
+        "find": 6,
+        "whether": 6,
+        "question": 6,
+        "context": 6,
+        "show": 6,
+        "server": 6,
+        "line": 6,
+        "report": 6,
+        "still": 5,
+        "where": 5,
+        "enabl": 5,
+        "description": 5,
+        "agent": 5,
+        "get": 5,
+        "machine": 5,
+        "mcp": 5,
+        "appear": 5,
+        "only": 5,
+        "analytic": 5,
+        "token": 4
+      },
+      "word_count": 1685
+    },
+    {
+      "filename": "claude-code__plugins__org.md",
+      "id": "claude-code/plugins/org",
+      "title": "Manage Claude Code plugins for your organization",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/org",
+      "headings": [
+        {
+          "text": "Manage Claude Code plugins for your organization",
+          "level": 1
+        },
+        {
+          "text": "Pre-install and require plugins",
+          "level": 2
+        },
+        {
+          "text": "Choose a delivery mechanism",
+          "level": 3
+        },
+        {
+          "text": "Which managed source applies on a machine",
+          "level": 4
+        },
+        {
+          "text": "Require a marketplace and its plugins",
+          "level": 3
+        },
+        {
+          "text": "Require plugins per repository",
+          "level": 3
+        },
+        {
+          "text": "When each surface applies the plugin keys",
+          "level": 3
+        },
+        {
+          "text": "Confirm the rollout",
+          "level": 3
+        },
+        {
+          "text": "Seed containers and CI",
+          "level": 2
+        },
+        {
+          "text": "Restrict what users can install",
+          "level": 2
+        },
+        {
+          "text": "Control matrix",
+          "level": 3
+        },
+        {
+          "text": "Aliases for the marketplace keys",
+          "level": 4
+        },
+        {
+          "text": "Allowlist with `strictKnownMarketplaces`",
+          "level": 3
+        },
+        {
+          "text": "How entries match",
+          "level": 4
+        },
+        {
+          "text": "Keep skills-directory plugins loading",
+          "level": 4
+        },
+        {
+          "text": "Marketplaces hosted on claude.ai",
+          "level": 4
+        },
+        {
+          "text": "Lock every source out",
+          "level": 4
+        },
+        {
+          "text": "Blocklist with `blockedMarketplaces`",
+          "level": 3
+        },
+        {
+          "text": "Allow the official marketplace and your own",
+          "level": 3
+        },
+        {
+          "text": "Set update policy",
+          "level": 2
+        },
+        {
+          "text": "Turn auto-update on or off per marketplace",
+          "level": 3
+        },
+        {
+          "text": "Turn updates off for the whole fleet",
+          "level": 3
+        },
+        {
+          "text": "Assign release channels to user groups",
+          "level": 3
+        },
+        {
+          "text": "Recommend plugins",
+          "level": 2
+        },
+        {
+          "text": "Audit and review",
+          "level": 2
+        },
+        {
+          "text": "OpenTelemetry events",
+          "level": 3
+        },
+        {
+          "text": "Analytics API",
+          "level": 3
+        },
+        {
+          "text": "Plan for what managed settings can't enforce",
+          "level": 2
+        },
+        {
+          "text": "Troubleshoot policy",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 122,
+        "marketplace": 93,
+        "claude": 72,
+        "manag": 64,
+        "setting": 61,
+        "code": 48,
+        "source": 43,
+        "user": 42,
+        "entry": 42,
+        "set": 40,
+        "policy": 39,
+        "install": 37,
+        "doesn": 35,
+        "match": 31,
+        "one": 29,
+        "every": 28,
+        "key": 28,
+        "seed": 28,
+        "allowlist": 28,
+        "repository": 27,
+        "machine": 26,
+        "each": 25,
+        "run": 25,
+        "see": 24,
+        "register": 24,
+        "list": 24,
+        "load": 24,
+        "organization": 21,
+        "own": 21,
+        "block": 20,
+        "session": 19,
+        "entri": 19,
+        "allow": 18,
+        "file": 17,
+        "only": 17,
+        "nam": 16,
+        "marketplac": 16,
+        "group": 16,
+        "server": 15,
+        "path": 15,
+        "under": 15,
+        "appli": 15,
+        "both": 15,
+        "same": 15,
+        "per": 14,
+        "add": 14,
+        "update": 14,
+        "also": 14,
+        "host": 14,
+        "start": 13
+      },
+      "word_count": 5099
+    },
+    {
+      "filename": "claude-code__plugins__overview.md",
+      "id": "claude-code/plugins/overview",
+      "title": "Plugins overview",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/overview",
+      "headings": [
+        {
+          "text": "Plugins overview",
+          "level": 1
+        },
+        {
+          "text": "Understand what a plugin is",
+          "level": 2
+        },
+        {
+          "text": "Decide whether you need a plugin",
+          "level": 3
+        },
+        {
+          "text": "What an enabled plugin adds to your sessions",
+          "level": 3
+        },
+        {
+          "text": "Get plugins from a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Make an installed plugin available in your session",
+          "level": 3
+        },
+        {
+          "text": "Tell Anthropic's marketplaces from third-party ones",
+          "level": 2
+        },
+        {
+          "text": "Understand install scopes",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 110,
+        "claude": 45,
+        "install": 37,
+        "marketplace": 35,
+        "code": 28,
+        "one": 22,
+        "session": 19,
+        "skill": 18,
+        "mcp": 17,
+        "hook": 16,
+        "run": 16,
+        "load": 15,
+        "each": 15,
+        "component": 14,
+        "directory": 13,
+        "add": 13,
+        "server": 12,
+        "file": 11,
+        "see": 11,
+        "anthropic": 11,
+        "marketplac": 11,
+        "agent": 10,
+        "other": 10,
+        "list": 10,
+        "where": 9,
+        "own": 9,
+        "json": 9,
+        "enabl": 9,
+        "hold": 9,
+        "com": 8,
+        "official": 8,
+        "gtoeovg": 8,
+        "qabem": 8,
+        "imag": 8,
+        "svg": 8,
+        "dark": 8,
+        "read": 7,
+        "giv": 7,
+        "name": 7,
+        "every": 7,
+        "path": 7,
+        "scope": 7,
+        "before": 6,
+        "note": 6,
+        "terminal": 6,
+        "manage": 6,
+        "manifest": 6,
+        "subagent": 6,
+        "diagram": 6,
+        "nam": 6
+      },
+      "word_count": 1802
+    },
+    {
+      "filename": "claude-code__plugins__publish.md",
+      "id": "claude-code/plugins/publish",
+      "title": "Publish and distribute a plugin",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/publish",
+      "headings": [
+        {
+          "text": "Publish and distribute a plugin",
+          "level": 1
+        },
+        {
+          "text": "Choose how to distribute",
+          "level": 2
+        },
+        {
+          "text": "Prepare your plugin for release",
+          "level": 2
+        },
+        {
+          "text": "Share a plugin without a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Ship a plugin with your own tool",
+          "level": 3
+        },
+        {
+          "text": "Publish through your own marketplace",
+          "level": 2
+        },
+        {
+          "text": "Add the marketplace file to your repository",
+          "level": 3
+        },
+        {
+          "text": "Control who can install",
+          "level": 3
+        },
+        {
+          "text": "Tell users how to install",
+          "level": 3
+        },
+        {
+          "text": "Ship updates to users",
+          "level": 3
+        },
+        {
+          "text": "Submit to the community marketplace",
+          "level": 2
+        },
+        {
+          "text": "Ship updates, renames, and removals",
+          "level": 2
+        },
+        {
+          "text": "Release a new version",
+          "level": 3
+        },
+        {
+          "text": "Tag a release",
+          "level": 3
+        },
+        {
+          "text": "Rename or remove a plugin",
+          "level": 3
+        },
+        {
+          "text": "Declare dependencies",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 71,
+        "marketplace": 49,
+        "install": 27,
+        "user": 23,
+        "see": 18,
+        "claude": 16,
+        "repository": 16,
+        "step": 16,
+        "code": 13,
+        "run": 13,
+        "release": 12,
+        "who": 12,
+        "add": 12,
+        "publish": 11,
+        "list": 11,
+        "one": 11,
+        "version": 11,
+        "own": 10,
+        "name": 10,
+        "directory": 10,
+        "shell": 10,
+        "file": 9,
+        "community": 9,
+        "session": 9,
+        "updat": 8,
+        "people": 8,
+        "load": 8,
+        "form": 8,
+        "through": 7,
+        "start": 7,
+        "git": 7,
+        "update": 7,
+        "tag": 7,
+        "anthropic": 6,
+        "other": 6,
+        "cli": 6,
+        "need": 6,
+        "host": 6,
+        "submission": 6,
+        "auto": 6,
+        "new": 6,
+        "title": 6,
+        "every": 6,
+        "path": 6,
+        "before": 5,
+        "submit": 5,
+        "cover": 5,
+        "choose": 5,
+        "keep": 5,
+        "command": 5
+      },
+      "word_count": 1952
+    },
+    {
+      "filename": "claude-code__plugins__relevance.md",
+      "id": "claude-code/plugins/relevance",
+      "title": "Recommend plugins for your org",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/relevance",
+      "headings": [
+        {
+          "text": "Recommend plugins for your org",
+          "level": 1
+        },
+        {
+          "text": "Understand how plugin relevance works",
+          "level": 2
+        },
+        {
+          "text": "Add relevance to a plugin entry",
+          "level": 2
+        },
+        {
+          "text": "Field reference",
+          "level": 2
+        },
+        {
+          "text": "`relevance`",
+          "level": 3
+        },
+        {
+          "text": "`relevance.signals`",
+          "level": 3
+        },
+        {
+          "text": "Working directory matching",
+          "level": 4
+        },
+        {
+          "text": "Command name matching",
+          "level": 4
+        },
+        {
+          "text": "Manifest dependency matching",
+          "level": 4
+        },
+        {
+          "text": "Validate your marketplace",
+          "level": 2
+        },
+        {
+          "text": "Enable suggestions in managed settings",
+          "level": 2
+        },
+        {
+          "text": "Preview what the user sees",
+          "level": 2
+        },
+        {
+          "text": "See also",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 40,
+        "match": 31,
+        "marketplace": 27,
+        "claude": 24,
+        "session": 19,
+        "signal": 18,
+        "user": 15,
+        "each": 14,
+        "code": 13,
+        "work": 13,
+        "entry": 12,
+        "name": 12,
+        "command": 11,
+        "see": 11,
+        "field": 11,
+        "path": 11,
+        "directory": 10,
+        "pattern": 10,
+        "against": 10,
+        "read": 9,
+        "suggestion": 9,
+        "start": 9,
+        "object": 9,
+        "spinner": 9,
+        "tip": 9,
+        "allowlist": 8,
+        "appear": 8,
+        "notification": 8,
+        "discover": 7,
+        "add": 7,
+        "suggest": 7,
+        "install": 7,
+        "follow": 7,
+        "example": 7,
+        "source": 7,
+        "manag": 6,
+        "setting": 6,
+        "fil": 6,
+        "run": 6,
+        "character": 6,
+        "before": 5,
+        "relevance": 5,
+        "block": 5,
+        "entri": 5,
+        "one": 5,
+        "tab": 5,
+        "under": 5,
+        "only": 5,
+        "array": 5,
+        "string": 5
+      },
+      "word_count": 1759
+    },
+    {
+      "filename": "claude-code__plugins__security.md",
+      "id": "claude-code/plugins/security",
+      "title": "Plugin security and trust",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/security",
+      "headings": [
+        {
+          "text": "Plugin security and trust",
+          "level": 1
+        },
+        {
+          "text": "Understand what a plugin can do",
+          "level": 2
+        },
+        {
+          "text": "Official marketplace names",
+          "level": 3
+        },
+        {
+          "text": "Review a plugin before you install",
+          "level": 2
+        },
+        {
+          "text": "Remove a plugin you no longer trust",
+          "level": 3
+        },
+        {
+          "text": "Recognize when Claude Code refuses or warns",
+          "level": 2
+        },
+        {
+          "text": "Trust warning before you install",
+          "level": 3
+        },
+        {
+          "text": "Untrusted marketplace sources and failed integrity checks",
+          "level": 3
+        },
+        {
+          "text": "Enforce plugin controls for your organization",
+          "level": 2
+        },
+        {
+          "text": "Find plugins in telemetry",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 78,
+        "marketplace": 37,
+        "claude": 35,
+        "code": 30,
+        "install": 29,
+        "run": 15,
+        "before": 12,
+        "step": 12,
+        "each": 11,
+        "hook": 11,
+        "command": 11,
+        "official": 11,
+        "marketplac": 10,
+        "trust": 9,
+        "nam": 9,
+        "tool": 9,
+        "server": 9,
+        "directory": 9,
+        "tier": 9,
+        "review": 8,
+        "anthropic": 8,
+        "community": 8,
+        "event": 8,
+        "one": 7,
+        "every": 7,
+        "third": 7,
+        "party": 7,
+        "see": 7,
+        "organization": 7,
+        "shell": 7,
+        "mcp": 7,
+        "source": 7,
+        "remove": 6,
+        "name": 6,
+        "read": 6,
+        "fil": 6,
+        "list": 6,
+        "check": 6,
+        "pane": 6,
+        "warn": 6,
+        "load": 6,
+        "security": 5,
+        "own": 5,
+        "other": 5,
+        "such": 5,
+        "call": 5,
+        "enabl": 5,
+        "refus": 5,
+        "detail": 5,
+        "report": 5
+      },
+      "word_count": 1715
+    },
+    {
+      "filename": "claude-code__plugins__troubleshooting.md",
+      "id": "claude-code/plugins/troubleshooting",
+      "title": "Troubleshoot plugins",
+      "category": "claude_code",
+      "url": "https://code.claude.com/docs/en/plugins/troubleshooting",
+      "headings": [
+        {
+          "text": "Troubleshoot plugins",
+          "level": 1
+        },
+        {
+          "text": "Find where `/plugin` runs",
+          "level": 2
+        },
+        {
+          "text": "Add a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Install a plugin",
+          "level": 2
+        },
+        {
+          "text": "Plugin installed but not working",
+          "level": 2
+        },
+        {
+          "text": "Hooks fail to load",
+          "level": 4
+        },
+        {
+          "text": "`hook error` notices in the transcript",
+          "level": 4
+        },
+        {
+          "text": "Hook loads but never fires",
+          "level": 4
+        },
+        {
+          "text": "`Invalid MCP server config for \"<server>\": <error>`",
+          "level": 4
+        },
+        {
+          "text": "Server is configured but never connects",
+          "level": 4
+        },
+        {
+          "text": "Server works with `--plugin-dir` but fails after install",
+          "level": 4
+        },
+        {
+          "text": "Language server doesn't start",
+          "level": 4
+        },
+        {
+          "text": "Language server uses too much memory",
+          "level": 4
+        },
+        {
+          "text": "False positive diagnostics in a monorepo",
+          "level": 4
+        },
+        {
+          "text": "Build a plugin",
+          "level": 2
+        },
+        {
+          "text": "Host a marketplace",
+          "level": 2
+        },
+        {
+          "text": "Blocked by your organization",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "plugin": 243,
+        "marketplace": 149,
+        "install": 132,
+        "claude": 115,
+        "code": 99,
+        "add": 69,
+        "error": 60,
+        "run": 56,
+        "path": 55,
+        "directory": 53,
+        "message": 52,
+        "source": 49,
+        "load": 48,
+        "fail": 47,
+        "command": 46,
+        "session": 41,
+        "tab": 41,
+        "name": 40,
+        "skill": 37,
+        "entry": 34,
+        "see": 33,
+        "shell": 33,
+        "server": 33,
+        "start": 32,
+        "step": 32,
+        "list": 31,
+        "file": 30,
+        "fix": 28,
+        "hook": 28,
+        "host": 27,
+        "isn": 27,
+        "report": 27,
+        "doesn": 27,
+        "line": 26,
+        "print": 26,
+        "show": 25,
+        "such": 24,
+        "instead": 24,
+        "check": 24,
+        "repository": 23,
+        "nam": 21,
+        "under": 21,
+        "open": 21,
+        "only": 21,
+        "set": 21,
+        "root": 21,
+        "one": 20,
+        "manifest": 20,
+        "ran": 20,
+        "git": 20
+      },
+      "word_count": 10238
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -26708,8 +28154,8 @@
         "key": 21,
         "find": 21,
         "ask": 21,
-        "open": 20,
         "work": 20,
+        "open": 19,
         "target": 19,
         "span": 19,
         "copy": 18,
@@ -26722,7 +28168,7 @@
         "change": 17,
         "chang": 17
       },
-      "word_count": 7052
+      "word_count": 7045
     },
     {
       "filename": "claude-code__quickstart.md",
@@ -26894,10 +28340,6 @@
           "level": 2
         },
         {
-          "text": "Enable Trusted Devices for your organization",
-          "level": 3
-        },
-        {
           "text": "What members see",
           "level": 3
         },
@@ -26983,11 +28425,11 @@
         }
       ],
       "terms": {
-        "session": 219,
-        "claude": 211,
-        "code": 162,
+        "session": 220,
+        "claude": 208,
+        "code": 159,
         "remote": 125,
-        "control": 121,
+        "control": 120,
         "run": 67,
         "device": 52,
         "server": 47,
@@ -27004,37 +28446,37 @@
         "terminal": 30,
         "after": 30,
         "set": 30,
+        "account": 30,
         "message": 29,
-        "account": 29,
+        "organization": 29,
+        "turn": 27,
         "instead": 26,
         "prompt": 25,
-        "turn": 25,
-        "organization": 25,
         "own": 24,
         "local": 23,
+        "devic": 23,
+        "setting": 22,
         "flag": 22,
         "mobile": 21,
         "off": 21,
-        "setting": 21,
-        "devic": 21,
         "while": 21,
         "cloud": 21,
         "step": 21,
         "another": 20,
         "messag": 20,
+        "trust": 20,
         "title": 20,
         "requir": 19,
-        "open": 19,
         "record": 19,
         "work": 18,
         "default": 18,
         "see": 18,
         "connection": 18,
-        "trust": 18,
         "list": 18,
-        "name": 18
+        "name": 18,
+        "check": 18
       },
-      "word_count": 8158
+      "word_count": 8205
     },
     {
       "filename": "claude-code__routines.md",
@@ -27473,17 +28915,17 @@
         }
       ],
       "terms": {
-        "sandbox": 218,
-        "command": 160,
-        "claude": 130,
-        "code": 115,
+        "sandbox": 219,
+        "command": 161,
+        "claude": 129,
+        "code": 114,
         "setting": 75,
         "run": 72,
         "allow": 66,
         "filesystem": 51,
         "permission": 51,
+        "mode": 48,
         "path": 48,
-        "mode": 47,
         "file": 46,
         "only": 46,
         "isolation": 45,
@@ -27512,7 +28954,7 @@
         "instead": 29,
         "fil": 28,
         "linux": 28,
-        "auto": 27,
+        "auto": 28,
         "one": 27,
         "each": 26,
         "fail": 26,
@@ -27524,7 +28966,7 @@
         "default": 25,
         "work": 25
       },
-      "word_count": 9777
+      "word_count": 9779
     },
     {
       "filename": "claude-code__scheduled-tasks.md",
@@ -27873,8 +29315,8 @@
       "terms": {
         "plugin": 59,
         "review": 56,
-        "claude": 43,
-        "code": 25,
+        "claude": 41,
+        "code": 24,
         "turn": 21,
         "commit": 20,
         "check": 20,
@@ -27885,7 +29327,7 @@
         "per": 17,
         "edit": 17,
         "security": 16,
-        "install": 15,
+        "install": 14,
         "run": 14,
         "match": 14,
         "back": 12,
@@ -27903,10 +29345,12 @@
         "disable": 9,
         "guidance": 8,
         "issu": 7,
+        "find": 7,
         "doe": 7,
         "tool": 7,
         "python": 7,
         "agent": 7,
+        "through": 7,
         "diff": 7,
         "skip": 7,
         "user": 7,
@@ -27916,13 +29360,11 @@
         "rul": 7,
         "str": 7,
         "only": 7,
-        "find": 6,
-        "through": 6,
-        "load": 6,
+        "setting": 6,
         "scope": 6,
         "fil": 6
       },
-      "word_count": 2614
+      "word_count": 2617
     },
     {
       "filename": "claude-code__self-hosted-environments.md",
@@ -28880,9 +30322,9 @@
       ],
       "terms": {
         "setting": 171,
-        "claude": 124,
+        "claude": 123,
         "manag": 106,
-        "code": 99,
+        "code": 98,
         "fetch": 65,
         "server": 63,
         "user": 47,
@@ -28922,15 +30364,15 @@
         "apply": 17,
         "file": 16,
         "next": 16,
-        "later": 16,
         "sign": 16,
         "through": 15,
         "mdm": 15,
+        "later": 15,
         "admin": 14,
         "security": 14,
         "other": 14
       },
-      "word_count": 5327
+      "word_count": 5321
     },
     {
       "filename": "claude-code__sessions.md",
@@ -29006,18 +30448,18 @@
       ],
       "terms": {
         "session": 167,
-        "claude": 69,
-        "code": 68,
+        "claude": 71,
+        "code": 69,
         "name": 50,
         "mode": 36,
         "directory": 35,
+        "conversation": 34,
         "resume": 33,
-        "conversation": 33,
         "picker": 27,
         "resum": 25,
         "run": 24,
+        "one": 23,
         "start": 23,
-        "one": 22,
         "project": 21,
         "transcript": 20,
         "permission": 19,
@@ -29026,8 +30468,9 @@
         "current": 15,
         "new": 15,
         "prompt": 14,
+        "see": 14,
         "request": 13,
-        "see": 13,
+        "set": 13,
         "default": 13,
         "nam": 12,
         "stor": 12,
@@ -29038,25 +30481,24 @@
         "doesn": 12,
         "pas": 12,
         "summary": 12,
-        "set": 12,
         "title": 12,
+        "runn": 11,
         "command": 11,
         "interactive": 11,
         "under": 11,
         "same": 11,
-        "runn": 10,
         "open": 10,
         "path": 10,
         "agent": 10,
         "first": 10,
         "background": 10,
         "later": 10,
+        "again": 10,
+        "show": 10,
         "keep": 10,
-        "each": 9,
-        "also": 9,
-        "full": 9
+        "each": 9
       },
-      "word_count": 4308
+      "word_count": 4353
     },
     {
       "filename": "claude-code__settings.md",
@@ -29191,18 +30633,18 @@
         }
       ],
       "terms": {
-        "setting": 146,
-        "claude": 144,
-        "file": 135,
-        "code": 117,
+        "setting": 147,
+        "claude": 146,
+        "file": 136,
+        "code": 119,
         "manag": 91,
-        "key": 82,
+        "key": 83,
         "session": 68,
-        "project": 67,
+        "project": 68,
         "set": 56,
         "span": 50,
         "const": 43,
-        "local": 40,
+        "local": 41,
         "value": 39,
         "one": 39,
         "fil": 37,
@@ -29220,19 +30662,19 @@
         "div": 22,
         "classname": 22,
         "start": 22,
-        "see": 21,
+        "see": 22,
         "source": 21,
         "only": 20,
         "sett": 20,
+        "list": 19,
         "such": 19,
         "rul": 19,
         "level": 18,
         "same": 18,
         "path": 18,
         "model": 18,
-        "list": 18,
         "permission": 18,
-        "doesn": 17,
+        "doesn": 18,
         "app": 16,
         "left": 16,
         "any": 16,
@@ -29242,7 +30684,7 @@
         "don": 15,
         "scope": 14
       },
-      "word_count": 7181
+      "word_count": 7243
     },
     {
       "filename": "claude-code__settings-example.md",
@@ -29262,32 +30704,34 @@
       ],
       "terms": {
         "file": 28,
+        "setting": 23,
         "tab": 23,
-        "setting": 20,
         "key": 16,
-        "each": 13,
+        "each": 14,
         "one": 11,
         "comment": 11,
-        "claude": 8,
+        "claude": 9,
         "read": 8,
+        "manag": 8,
+        "code": 7,
+        "organization": 7,
         "same": 7,
-        "code": 6,
         "json": 6,
-        "organization": 6,
         "copy": 6,
+        "repository": 6,
         "command": 6,
         "title": 6,
-        "manag": 6,
         "example": 5,
         "team": 5,
         "want": 5,
         "save": 5,
-        "repository": 5,
         "every": 5,
+        "set": 5,
         "doesn": 5,
         "own": 5,
         "session": 5,
-        "set": 4,
+        "fil": 4,
+        "valu": 4,
         "copyable": 4,
         "doe": 4,
         "above": 4,
@@ -29299,9 +30743,7 @@
         "rul": 4,
         "server": 4,
         "deploy": 4,
-        "fil": 3,
         "developer": 3,
-        "valu": 3,
         "committ": 3,
         "only": 3,
         "like": 3,
@@ -29312,7 +30754,7 @@
         "shar": 3,
         "permission": 3
       },
-      "word_count": 1741
+      "word_count": 1742
     },
     {
       "filename": "claude-code__settings-reference.md",
@@ -30027,58 +31469,58 @@
         }
       ],
       "terms": {
-        "claude": 584,
-        "code": 470,
-        "setting": 373,
-        "file": 283,
-        "manag": 236,
+        "claude": 585,
+        "code": 471,
+        "setting": 383,
+        "file": 288,
+        "manag": 238,
         "sandbox": 225,
+        "session": 219,
         "default": 218,
-        "session": 216,
+        "set": 197,
         "json": 195,
         "command": 195,
-        "set": 193,
-        "any": 190,
+        "any": 189,
         "key": 185,
         "model": 177,
         "type": 163,
         "scope": 163,
-        "one": 140,
-        "turn": 138,
-        "only": 119,
+        "one": 142,
+        "turn": 142,
+        "only": 120,
         "null": 115,
         "mode": 115,
         "unset": 113,
-        "every": 112,
-        "run": 108,
+        "every": 111,
+        "run": 110,
         "theme": 107,
-        "off": 100,
-        "see": 99,
+        "off": 104,
+        "see": 101,
+        "such": 100,
         "each": 97,
-        "such": 97,
         "const": 96,
-        "show": 91,
-        "list": 90,
-        "read": 88,
-        "user": 88,
+        "show": 93,
+        "list": 92,
+        "user": 91,
+        "read": 89,
         "path": 85,
         "hook": 84,
         "permission": 84,
         "tool": 83,
-        "later": 81,
         "prompt": 79,
-        "requir": 78,
         "block": 75,
+        "later": 75,
         "terminal": 74,
         "name": 72,
+        "requir": 72,
         "plugin": 71,
-        "fil": 69,
+        "fil": 70,
         "boolean": 69,
         "row": 66,
         "add": 66,
         "rul": 66
       },
-      "word_count": 48918
+      "word_count": 49250
     },
     {
       "filename": "claude-code__setup.md",
@@ -30454,7 +31896,7 @@
         "budget": 8,
         "available": 7
       },
-      "word_count": 12846
+      "word_count": 12850
     },
     {
       "filename": "claude-code__slack.md",
@@ -30995,22 +32437,22 @@
       "terms": {
         "subagent": 512,
         "claude": 247,
-        "code": 148,
+        "code": 147,
         "agent": 126,
-        "tool": 125,
-        "run": 101,
+        "tool": 124,
+        "run": 102,
         "main": 98,
         "session": 95,
         "conversation": 89,
         "model": 74,
         "fork": 71,
-        "prompt": 65,
+        "prompt": 66,
         "only": 61,
-        "one": 49,
+        "one": 50,
         "same": 49,
         "hook": 49,
-        "background": 48,
         "set": 48,
+        "background": 47,
         "mode": 47,
         "spawn": 46,
         "file": 45,
@@ -31020,7 +32462,7 @@
         "directory": 41,
         "fil": 40,
         "name": 40,
-        "before": 39,
+        "before": 38,
         "context": 38,
         "command": 38,
         "project": 37,
@@ -31029,11 +32471,11 @@
         "frontmatter": 36,
         "server": 36,
         "every": 35,
+        "plugin": 35,
         "skill": 34,
         "own": 33,
-        "plugin": 33,
+        "instead": 33,
         "see": 32,
-        "instead": 32,
         "runn": 32,
         "keep": 31,
         "list": 31,
@@ -31042,9 +32484,9 @@
         "doesn": 30,
         "system": 29,
         "also": 29,
-        "permission": 28
+        "each": 28
       },
-      "word_count": 14863
+      "word_count": 14880
     },
     {
       "filename": "claude-code__terminal-config.md",
@@ -32596,15 +34038,14 @@
         "try": 6,
         "link": 6,
         "command": 6,
-        "reference": 6,
         "header": 5,
         "pill": 5,
         "lede": 5,
         "loop": 5,
         "full": 5,
+        "reference": 5,
         "http": 4,
         "com": 4,
-        "file": 4,
         "free": 4,
         "call": 4,
         "max": 4,
@@ -32612,6 +34053,7 @@
         "powerup": 4,
         "hook": 4,
         "win": 4,
+        "file": 3,
         "week": 3,
         "april": 3,
         "interactive": 3,
@@ -33706,9 +35148,9 @@
         "auto": 12,
         "self": 10,
         "host": 10,
+        "plugin": 9,
         "new": 8,
         "setting": 8,
-        "plugin": 8,
         "message": 7,
         "run": 7,
         "other": 6,
@@ -33721,6 +35163,7 @@
         "one": 5,
         "runner": 5,
         "turn": 5,
+        "install": 5,
         "review": 5,
         "permission": 4,
         "title": 4,
@@ -33739,7 +35182,6 @@
         "control": 4,
         "win": 4,
         "sandbox": 4,
-        "install": 4,
         "subagent": 4
       },
       "word_count": 910
@@ -33770,8 +35212,8 @@
         "href": 15,
         "tool": 11,
         "fork": 10,
+        "plugin": 10,
         "request": 9,
-        "plugin": 9,
         "auto": 8,
         "desktop": 7,
         "reset": 7,
@@ -33779,13 +35221,15 @@
         "mode": 6,
         "turn": 6,
         "gitlab": 6,
-        "marketplac": 5,
         "continue": 5,
         "card": 5,
         "try": 5,
         "branch": 5,
+        "marketplace": 5,
+        "reference": 5,
         "com": 4,
         "default": 4,
+        "marketplac": 4,
         "title": 4,
         "now": 4,
         "strong": 4,
@@ -33799,14 +35243,12 @@
         "name": 4,
         "without": 4,
         "command": 4,
-        "reference": 4,
-        "marketplace": 4,
+        "install": 4,
         "after": 3,
         "usage": 3,
         "header": 3,
         "pill": 3,
-        "lede": 3,
-        "hit": 3
+        "lede": 3
       },
       "word_count": 776
     },
@@ -34023,7 +35465,7 @@
       "terms": {
         "code": 49,
         "div": 34,
-        "plugin": 25,
+        "plugin": 24,
         "claude": 21,
         "classname": 20,
         "digest": 18,
@@ -34034,7 +35476,7 @@
         "href": 12,
         "desktop": 7,
         "run": 7,
-        "test": 6,
+        "test": 5,
         "pop": 5,
         "result": 5,
         "prompt": 5,
@@ -34066,11 +35508,11 @@
         "full": 3,
         "terminal": 3,
         "data": 3,
+        "session": 3,
         "reference": 3,
         "level": 3,
         "agent": 3,
-        "webfetch": 3,
-        "deadline": 3
+        "webfetch": 3
       },
       "word_count": 668
     },
@@ -34440,26 +35882,26 @@
       ],
       "terms": {
         "worktree": 189,
-        "claude": 127,
-        "code": 94,
+        "claude": 128,
+        "code": 95,
         "session": 76,
         "directory": 57,
-        "git": 48,
-        "repository": 38,
+        "git": 50,
+        "repository": 40,
         "checkout": 36,
         "branch": 35,
+        "run": 31,
         "creat": 31,
-        "run": 30,
         "fil": 30,
         "worktre": 29,
         "main": 29,
         "work": 27,
-        "hook": 25,
+        "hook": 26,
         "one": 25,
-        "command": 23,
+        "command": 24,
         "check": 23,
         "before": 22,
-        "subagent": 20,
+        "subagent": 21,
         "path": 20,
         "refus": 19,
         "inside": 18,
@@ -34485,12 +35927,12 @@
         "remove": 12,
         "sweep": 12,
         "say": 12,
+        "instead": 12,
         "match": 12,
         "fetch": 11,
-        "create": 11,
-        "new": 11
+        "create": 11
       },
-      "word_count": 5399
+      "word_count": 5448
     },
     {
       "filename": "claude-code__zero-data-retention.md",
@@ -101428,7 +102870,7 @@
         }
       ],
       "terms": {
-        "claude": 55,
+        "claude": 56,
         "fable": 41,
         "long": 17,
         "task": 17,
@@ -101446,7 +102888,6 @@
         "only": 7,
         "think": 7,
         "reason": 7,
-        "request": 7,
         "higher": 7,
         "follow": 6,
         "see": 6,
@@ -101456,12 +102897,14 @@
         "most": 6,
         "often": 6,
         "output": 6,
+        "request": 6,
         "system": 6,
         "ask": 6,
         "agent": 6,
         "progres": 6,
         "mytho": 5,
         "perform": 5,
+        "opu": 5,
         "behavior": 5,
         "call": 5,
         "skill": 5,
@@ -101474,12 +102917,11 @@
         "complex": 4,
         "capability": 4,
         "also": 4,
-        "opu": 4,
         "improvement": 4,
         "extend": 4,
         "cybersecurity": 4
       },
-      "word_count": 2748
+      "word_count": 2738
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-fable-5-1.md",
@@ -107883,58 +109325,58 @@
         }
       ],
       "terms": {
-        "activity": 23,
-        "compliance": 23,
         "api": 23,
-        "activiti": 18,
+        "compliance": 22,
+        "activity": 21,
+        "activiti": 15,
         "page": 15,
         "claude": 14,
-        "key": 13,
+        "key": 12,
         "return": 10,
         "cursor": 10,
         "organization": 9,
         "first": 9,
-        "field": 9,
-        "title": 8,
         "see": 8,
         "type": 8,
         "chat": 8,
-        "endpoint": 8,
         "session": 8,
+        "field": 8,
         "card": 8,
         "feed": 7,
         "platform": 7,
-        "project": 7,
         "parameter": 7,
-        "pas": 7,
+        "endpoint": 7,
         "user": 7,
         "token": 7,
         "through": 7,
         "note": 6,
         "each": 6,
-        "str": 6,
+        "project": 6,
+        "pas": 6,
         "example": 6,
+        "title": 5,
         "query": 5,
         "http": 5,
         "com": 5,
         "doc": 5,
         "manage": 5,
         "set": 5,
-        "acces": 5,
         "admin": 5,
-        "file": 5,
         "reference": 5,
         "list": 5,
         "messag": 5,
         "local": 5,
         "without": 5,
         "request": 5,
+        "str": 5,
         "anthropic": 5,
         "load": 5,
-        "retrieve": 4,
-        "scope": 4
+        "acces": 4,
+        "call": 4,
+        "order": 4,
+        "occurr": 4
       },
-      "word_count": 1663
+      "word_count": 1562
     },
     {
       "filename": "docs__en__manage-claude__compliance-api.md",
@@ -108354,15 +109796,15 @@
         "delet": 24,
         "scope": 23,
         "doe": 22,
-        "project": 22,
         "acces": 22,
         "see": 21,
         "body": 21,
         "local": 21,
-        "activity": 20,
+        "project": 21,
         "value": 19,
         "messag": 19,
         "retry": 19,
+        "activity": 19,
         "one": 19,
         "admin": 18,
         "cursor": 17,
@@ -108386,7 +109828,7 @@
         "budget": 13,
         "each": 12
       },
-      "word_count": 5484
+      "word_count": 5467
     },
     {
       "filename": "docs__en__manage-claude__compliance-faq.md",
@@ -111676,10 +113118,6 @@
           "level": 3
         },
         {
-          "text": "Package manager hosts",
-          "level": 4
-        },
-        {
           "text": "Environment lifecycle",
           "level": 2
         },
@@ -111697,29 +113135,24 @@
         }
       ],
       "terms": {
-        "environment": 26,
-        "sandbox": 18,
-        "agent": 14,
+        "environment": 25,
+        "sandbox": 15,
         "session": 14,
-        "host": 13,
+        "agent": 12,
         "codegroup": 10,
         "cli": 10,
-        "network": 10,
-        "package": 8,
-        "acces": 8,
-        "list": 8,
+        "network": 9,
         "cloud": 7,
-        "set": 7,
+        "acces": 7,
         "manag": 6,
         "multifileexample": 6,
         "file": 6,
         "packag": 6,
-        "manager": 6,
-        "tool": 6,
-        "allow": 6,
         "run": 5,
         "reference": 5,
         "install": 5,
+        "package": 5,
+        "list": 5,
         "title": 4,
         "http": 4,
         "platform": 4,
@@ -111730,9 +113163,12 @@
         "each": 4,
         "start": 4,
         "own": 4,
-        "see": 4,
         "language": 4,
+        "manager": 4,
+        "set": 4,
         "outbound": 4,
+        "tool": 4,
+        "allow": 4,
         "card": 4,
         "url": 3,
         "configuration": 3,
@@ -111740,6 +113176,8 @@
         "share": 3,
         "same": 3,
         "get": 3,
+        "see": 3,
+        "host": 3,
         "defaultlanguage": 3,
         "label": 3,
         "filename": 3,
@@ -111748,7 +113186,7 @@
         "field": 3,
         "pre": 3
       },
-      "word_count": 2299
+      "word_count": 2068
     },
     {
       "filename": "docs__en__managed-agents__events-and-streaming.md",
@@ -116933,24 +118371,24 @@
         }
       ],
       "terms": {
-        "claude": 456,
-        "api": 175,
-        "beta": 136,
+        "claude": 455,
+        "api": 173,
+        "beta": 135,
         "model": 128,
-        "now": 114,
         "tool": 114,
+        "now": 113,
         "opu": 107,
-        "see": 93,
+        "see": 91,
         "header": 86,
         "request": 78,
         "agent": 70,
         "support": 68,
         "token": 65,
         "sonnet": 60,
-        "session": 58,
         "launch": 57,
-        "return": 51,
+        "session": 55,
         "available": 50,
+        "return": 50,
         "think": 47,
         "manag": 42,
         "sdk": 38,
@@ -116969,22 +118407,22 @@
         "console": 31,
         "context": 31,
         "block": 31,
-        "acces": 30,
         "event": 30,
-        "key": 29,
         "same": 29,
+        "acces": 29,
         "august": 29,
         "limit": 29,
+        "key": 28,
         "platform": 27,
         "chang": 26,
-        "endpoint": 26,
         "parameter": 26,
+        "endpoint": 25,
         "skill": 25,
         "mytho": 25,
         "usage": 25,
         "mode": 24
       },
-      "word_count": 12332
+      "word_count": 12233
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
