@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T15:14:23.816658Z",
+  "generated_at": "2026-09-25T18:15:46.649182Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14890,10 +14890,6 @@
           "level": 4
         },
         {
-          "text": "Plugins",
-          "level": 4
-        },
-        {
           "text": "Artefacts",
           "level": 4
         },
@@ -14907,6 +14903,38 @@
         },
         {
           "text": "D\u00e9pannage",
+          "level": 4
+        },
+        {
+          "text": "Plugins",
+          "level": 3
+        },
+        {
+          "text": "Plugins",
+          "level": 4
+        },
+        {
+          "text": "Utiliser les plugins",
+          "level": 4
+        },
+        {
+          "text": "Cr\u00e9er des plugins",
+          "level": 4
+        },
+        {
+          "text": "Ex\u00e9cuter une marketplace",
+          "level": 4
+        },
+        {
+          "text": "G\u00e9rer les plugins de votre organisation",
+          "level": 4
+        },
+        {
+          "text": "D\u00e9pannage",
+          "level": 4
+        },
+        {
+          "text": "R\u00e9f\u00e9rence",
           "level": 4
         },
         {
@@ -14935,10 +14963,6 @@
         },
         {
           "text": "Utilisation et co\u00fbts",
-          "level": 4
-        },
-        {
-          "text": "Distribution de plugins",
           "level": 4
         },
         {
@@ -15047,58 +15071,58 @@
         }
       ],
       "terms": {
-        "les": 282,
-        "claude": 269,
-        "code": 201,
-        "des": 169,
-        "avec": 106,
-        "pour": 101,
-        "agent": 84,
-        "dan": 78,
-        "votre": 77,
-        "session": 71,
-        "une": 70,
-        "sur": 53,
-        "que": 43,
-        "sdk": 39,
-        "plugin": 36,
+        "les": 301,
+        "claude": 281,
+        "code": 212,
+        "des": 174,
+        "avec": 109,
+        "pour": 102,
+        "votre": 84,
+        "agent": 82,
+        "une": 82,
+        "dan": 81,
+        "session": 73,
+        "plugin": 68,
+        "sur": 55,
+        "que": 47,
+        "sdk": 40,
         "outil": 35,
+        "par": 33,
+        "rence": 32,
         "cloud": 31,
         "auto": 30,
-        "par": 30,
-        "configuration": 28,
-        "environnement": 28,
+        "configuration": 29,
+        "environnement": 29,
+        "tre": 28,
         "passerelle": 28,
-        "rence": 26,
-        "tre": 25,
+        "mcp": 25,
         "mode": 25,
         "semaine": 25,
         "hook": 24,
-        "mcp": 24,
-        "utilisation": 23,
-        "comment": 22,
+        "comment": 24,
+        "utilisation": 24,
+        "param": 22,
+        "qui": 21,
         "mod": 21,
         "application": 20,
-        "qui": 19,
+        "vou": 20,
+        "via": 20,
         "configurez": 19,
-        "via": 19,
         "berg": 19,
-        "param": 19,
+        "serveur": 19,
+        "fichier": 18,
+        "marketplace": 18,
+        "couvrez": 17,
         "che": 17,
         "depui": 17,
-        "serveur": 17,
-        "fichier": 16,
+        "partir": 17,
+        "organisation": 17,
+        "contr": 17,
         "int": 16,
-        "vou": 16,
-        "contr": 16,
-        "desktop": 15,
-        "vos": 15,
-        "couvrez": 15,
-        "cuter": 15,
-        "cli": 15,
-        "skill": 14
+        "cuter": 16,
+        "desktop": 15
       },
-      "word_count": 6438
+      "word_count": 6880
     },
     {
       "filename": "claude-code__docs___llms__id.md",
@@ -15164,10 +15188,6 @@
           "level": 4
         },
         {
-          "text": "Plugin",
-          "level": 4
-        },
-        {
           "text": "Artefak",
           "level": 4
         },
@@ -15184,6 +15204,38 @@
           "level": 4
         },
         {
+          "text": "Plugin",
+          "level": 3
+        },
+        {
+          "text": "Plugin",
+          "level": 4
+        },
+        {
+          "text": "Gunakan plugin",
+          "level": 4
+        },
+        {
+          "text": "Buat plugin",
+          "level": 4
+        },
+        {
+          "text": "Jalankan marketplace",
+          "level": 4
+        },
+        {
+          "text": "Kelola plugin untuk organisasi Anda",
+          "level": 4
+        },
+        {
+          "text": "Pemecahan Masalah",
+          "level": 4
+        },
+        {
+          "text": "Referensi",
+          "level": 4
+        },
+        {
           "text": "Administrasi",
           "level": 3
         },
@@ -15192,7 +15244,7 @@
           "level": 4
         },
         {
-          "text": "Penyebaran",
+          "text": "Penerapan",
           "level": 4
         },
         {
@@ -15209,10 +15261,6 @@
         },
         {
           "text": "Penggunaan dan biaya",
-          "level": 4
-        },
-        {
-          "text": "Distribusi Plugin",
           "level": 4
         },
         {
@@ -15296,7 +15344,7 @@
           "level": 4
         },
         {
-          "text": "Penerapan",
+          "text": "Penyebaran",
           "level": 4
         },
         {
@@ -15321,58 +15369,58 @@
         }
       ],
       "terms": {
-        "claude": 269,
-        "dan": 243,
-        "code": 182,
-        "yang": 123,
-        "dengan": 115,
-        "untuk": 105,
-        "anda": 102,
-        "sesi": 66,
-        "agent": 44,
-        "dari": 40,
-        "sdk": 39,
-        "atau": 38,
-        "plugin": 36,
-        "dalam": 35,
+        "claude": 281,
+        "dan": 261,
+        "code": 192,
+        "yang": 133,
+        "dengan": 119,
+        "anda": 114,
+        "untuk": 110,
+        "plugin": 69,
+        "sesi": 68,
+        "dari": 45,
+        "agent": 43,
+        "atau": 43,
+        "sdk": 40,
+        "dalam": 37,
         "cloud": 32,
         "konfigurasi": 31,
-        "agen": 31,
+        "referensi": 31,
         "mode": 31,
         "gateway": 31,
-        "lingkungan": 28,
+        "agen": 30,
+        "lingkungan": 29,
         "aplikasi": 26,
-        "sendiri": 25,
-        "referensi": 25,
+        "sendiri": 26,
+        "mcp": 25,
         "minggu": 25,
         "hook": 24,
-        "mcp": 24,
+        "jalankan": 24,
+        "pengaturan": 24,
         "desktop": 23,
-        "jalankan": 23,
         "alat": 22,
+        "apa": 22,
         "host": 22,
-        "pengaturan": 21,
+        "server": 21,
+        "dapat": 20,
         "skill": 19,
-        "server": 19,
-        "kode": 18,
-        "apa": 18,
-        "secara": 18,
-        "dapat": 18,
-        "penggunaan": 18,
-        "gunakan": 17,
-        "cli": 17,
-        "melalui": 17,
+        "kode": 19,
+        "secara": 19,
+        "gunakan": 19,
+        "penggunaan": 19,
+        "melalui": 19,
+        "marketplace": 19,
+        "organisasi": 18,
+        "file": 17,
         "otomati": 16,
-        "file": 15,
+        "setiap": 16,
+        "cli": 16,
         "model": 15,
         "tuga": 15,
         "platform": 15,
-        "tool": 14,
-        "prompt": 14,
-        "pelajari": 14,
-        "izin": 14
+        "mana": 15
       },
-      "word_count": 5304
+      "word_count": 5653
     },
     {
       "filename": "claude-code__docs___llms__it.md",

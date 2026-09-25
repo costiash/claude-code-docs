@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T15:14:19.743766Z",
+  "generated_at": "2026-09-25T18:15:42.566636Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -961,7 +961,7 @@
       "md_url": "https://code.claude.com/docs/_llms/fr.md",
       "title": "French (209 pages)",
       "category": "claude_code",
-      "sha256": "cd14a2aaba3ea1fcfda5d8d0fc441aee013aa720d66382b4213897808f0bbe78",
+      "sha256": "096e90e215f1d365d849fe91eb15c7c93301a520cb3c4bd7705389f7677350f1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -972,7 +972,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (209 pages)",
       "category": "claude_code",
-      "sha256": "36d1ea1ef4028a332f466a50cd597b6ff9008b11ab97b377f41ceb9c91ff6ba0",
+      "sha256": "0720af0e82c677173ecd3edcbf9ba1a5c554f04771e6758e5f4f26e92fb3d746",
       "lastmod": null,
       "fetch_status": "ok"
     },
