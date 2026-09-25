@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T03:14:26.445006Z",
+  "generated_at": "2026-09-25T06:16:09.892278Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "007c141fe2f1b4d7ef7c0f122173398991ade3c5d980200378b1e1a0d25de282",
-      "lastmod": "2026-09-19T00:05:55.656Z",
+      "sha256": "eb1a339af8b170acad411c4a1056c3696b21ac824f96e639ec9fb117d8051dbe",
+      "lastmod": "2026-09-25T03:24:24.649Z",
       "fetch_status": "ok"
     },
     {
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "4ab7b2a4a5978c2ee53e8834fe69015fc62d15ffeef94f00e6d8bd64ea7d1f71",
-      "lastmod": "2026-09-19T00:05:55.646Z",
+      "sha256": "22adc36166583f677eed16c08cae06f17e55f3c5a04ab5089724c79ecec74e19",
+      "lastmod": "2026-09-25T03:24:24.651Z",
       "fetch_status": "ok"
     },
     {
@@ -698,8 +698,8 @@
       "title": "Claude Tag",
       "category": "claude_code",
       "sha256": "71a0a4e6c77545d48c76a50df303a62f20d933d79939fd42e4af178f3ff241fd",
-      "lastmod": "2026-08-10T21:10:44.608Z",
-      "fetch_status": "ok"
+      "lastmod": null,
+      "fetch_status": "stale"
     },
     {
       "id": "claude-code/cli-reference",
@@ -1511,8 +1511,8 @@
       "md_url": "https://code.claude.com/docs/en/platforms.md",
       "title": "Platforms and integrations",
       "category": "claude_code",
-      "sha256": "e5784da100963ffbccfaa60e9d5f4abf0fe38961db177ffdcbbfa2a3c7a4450f",
-      "lastmod": "2026-09-17T17:01:54.507Z",
+      "sha256": "e37f6bce6e8c3d01dce14340cf39a7497562f805ef4334483b585bf2c246cfe0",
+      "lastmod": "2026-09-25T03:23:16.106Z",
       "fetch_status": "ok"
     },
     {
@@ -2457,8 +2457,8 @@
       "md_url": "https://code.claude.com/docs/en/zero-data-retention.md",
       "title": "Zero data retention",
       "category": "claude_code",
-      "sha256": "a05ce9c2d3cbb01e3364614f919f001b325d666ac6ac70ba8a4f24f727b8c819",
-      "lastmod": "2026-09-15T22:32:07.630Z",
+      "sha256": "24c79ef0276402111aaa2b5944ce3b2e6632812149aeb53659e57410d58aeb5c",
+      "lastmod": "2026-09-25T03:23:15.951Z",
       "fetch_status": "ok"
     },
     {

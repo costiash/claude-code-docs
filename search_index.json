@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T03:14:30.528256Z",
+  "generated_at": "2026-09-25T06:16:13.929640Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -10026,6 +10026,10 @@
           "level": 3
         },
         {
+          "text": "`load_test_mode`",
+          "level": 3
+        },
+        {
           "text": "Complete example",
           "level": 2
         },
@@ -10039,58 +10043,58 @@
         }
       ],
       "terms": {
-        "gateway": 236,
+        "gateway": 246,
         "claude": 98,
         "upstream": 97,
-        "set": 91,
-        "key": 75,
-        "request": 71,
+        "set": 92,
+        "key": 76,
+        "request": 76,
         "policy": 71,
-        "developer": 63,
+        "developer": 67,
         "proxy": 61,
-        "every": 57,
+        "every": 59,
+        "token": 59,
         "code": 56,
-        "token": 56,
+        "block": 56,
         "one": 55,
-        "block": 53,
         "only": 53,
         "idp": 52,
+        "model": 51,
         "client": 51,
         "list": 50,
-        "model": 48,
-        "default": 46,
+        "default": 49,
+        "each": 46,
         "fail": 42,
-        "each": 42,
         "per": 41,
-        "requir": 38,
-        "group": 38,
+        "requir": 40,
+        "group": 39,
         "match": 38,
-        "later": 37,
+        "later": 38,
+        "boot": 36,
         "desktop": 36,
-        "boot": 35,
+        "own": 35,
         "such": 35,
         "user": 35,
-        "own": 34,
         "setting": 34,
         "endpoint": 34,
+        "sign": 33,
         "server": 33,
-        "sign": 32,
         "value": 32,
         "platform": 31,
+        "keep": 31,
+        "before": 30,
         "nam": 30,
-        "keep": 30,
         "manag": 29,
-        "before": 28,
+        "provider": 29,
         "see": 28,
-        "through": 27,
+        "through": 28,
+        "send": 28,
+        "doesn": 27,
         "export": 27,
         "first": 26,
-        "addres": 26,
-        "doesn": 26,
-        "send": 26,
-        "run": 25
+        "addres": 26
       },
-      "word_count": 13616
+      "word_count": 14061
     },
     {
       "filename": "claude-code__claude-apps-gateway-deploy.md",
@@ -10195,8 +10199,8 @@
       "terms": {
         "gateway": 148,
         "developer": 64,
+        "idp": 51,
         "request": 51,
-        "idp": 50,
         "sign": 48,
         "set": 44,
         "code": 39,
@@ -10219,8 +10223,8 @@
         "also": 21,
         "each": 21,
         "refresh": 21,
+        "session": 21,
         "per": 20,
-        "session": 20,
         "check": 19,
         "secret": 19,
         "second": 19,
@@ -10244,7 +10248,7 @@
         "such": 15,
         "nam": 15
       },
-      "word_count": 7922
+      "word_count": 7935
     },
     {
       "filename": "claude-code__claude-apps-gateway-on-aws.md",
