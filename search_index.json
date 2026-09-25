@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T00:20:57.975846Z",
+  "generated_at": "2026-09-25T03:14:30.528256Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -1632,7 +1632,7 @@
       ],
       "terms": {
         "fix": 3556,
-        "session": 1590,
+        "session": 1591,
         "now": 1312,
         "claude": 1050,
         "add": 740,
@@ -1643,7 +1643,7 @@
         "prompt": 581,
         "command": 573,
         "mode": 556,
-        "agent": 550,
+        "agent": 551,
         "show": 529,
         "background": 487,
         "code": 481,
@@ -1652,7 +1652,7 @@
         "error": 452,
         "model": 414,
         "plugin": 398,
-        "chang": 396,
+        "chang": 397,
         "server": 386,
         "mcp": 374,
         "terminal": 341,
@@ -1677,12 +1677,12 @@
         "only": 234,
         "start": 227,
         "text": 225,
-        "work": 220,
+        "work": 221,
         "subagent": 217,
         "conversation": 214,
         "request": 213
       },
-      "word_count": 123150
+      "word_count": 123165
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -9160,7 +9160,7 @@
       ],
       "terms": {
         "fix": 3557,
-        "session": 1590,
+        "session": 1591,
         "now": 1312,
         "claude": 1053,
         "add": 740,
@@ -9172,7 +9172,7 @@
         "command": 573,
         "update": 559,
         "mode": 556,
-        "agent": 551,
+        "agent": 552,
         "show": 529,
         "background": 487,
         "code": 484,
@@ -9181,7 +9181,7 @@
         "error": 452,
         "model": 414,
         "plugin": 398,
-        "chang": 396,
+        "chang": 397,
         "server": 385,
         "mcp": 374,
         "terminal": 341,
@@ -9208,9 +9208,9 @@
         "only": 234,
         "start": 227,
         "text": 225,
-        "work": 220
+        "work": 221
       },
-      "word_count": 124820
+      "word_count": 124835
     },
     {
       "filename": "claude-code__channels.md",
@@ -15269,20 +15269,20 @@
         }
       ],
       "terms": {
-        "les": 283,
-        "claude": 268,
-        "code": 200,
+        "les": 282,
+        "claude": 269,
+        "code": 201,
         "des": 169,
-        "avec": 107,
-        "pour": 102,
+        "avec": 106,
+        "pour": 101,
         "agent": 84,
-        "dan": 79,
+        "dan": 78,
         "votre": 77,
         "session": 71,
         "une": 70,
         "sur": 53,
-        "que": 44,
-        "sdk": 40,
+        "que": 43,
+        "sdk": 39,
         "plugin": 36,
         "outil": 35,
         "cloud": 31,
@@ -15307,20 +15307,20 @@
         "berg": 19,
         "param": 19,
         "che": 17,
-        "vou": 17,
         "depui": 17,
         "serveur": 17,
         "fichier": 16,
         "int": 16,
+        "vou": 16,
         "contr": 16,
         "desktop": 15,
         "vos": 15,
         "couvrez": 15,
         "cuter": 15,
-        "skill": 14,
-        "command": 14
+        "cli": 15,
+        "skill": 14
       },
-      "word_count": 6440
+      "word_count": 6438
     },
     {
       "filename": "claude-code__docs___llms__id.md",
@@ -15518,7 +15518,7 @@
           "level": 4
         },
         {
-          "text": "Penyebaran",
+          "text": "Penerapan",
           "level": 4
         },
         {
@@ -15543,18 +15543,18 @@
         }
       ],
       "terms": {
-        "claude": 268,
-        "dan": 245,
-        "code": 181,
-        "yang": 124,
-        "dengan": 116,
-        "untuk": 106,
-        "anda": 103,
+        "claude": 269,
+        "dan": 243,
+        "code": 182,
+        "yang": 123,
+        "dengan": 115,
+        "untuk": 105,
+        "anda": 102,
         "sesi": 66,
         "agent": 44,
-        "sdk": 40,
         "dari": 40,
-        "atau": 37,
+        "sdk": 39,
+        "atau": 38,
         "plugin": 36,
         "dalam": 35,
         "cloud": 32,
@@ -15582,19 +15582,19 @@
         "dapat": 18,
         "penggunaan": 18,
         "gunakan": 17,
+        "cli": 17,
         "melalui": 17,
         "otomati": 16,
         "file": 15,
         "model": 15,
         "tuga": 15,
         "platform": 15,
-        "cli": 15,
         "tool": 14,
-        "setiap": 14,
         "prompt": 14,
-        "pelajari": 14
+        "pelajari": 14,
+        "izin": 14
       },
-      "word_count": 5306
+      "word_count": 5304
     },
     {
       "filename": "claude-code__docs___llms__it.md",
@@ -16091,14 +16091,14 @@
         }
       ],
       "terms": {
-        "claude": 267,
-        "code": 179,
-        "sdk": 40,
+        "claude": 268,
+        "code": 180,
+        "sdk": 39,
         "agent": 38,
         "mcp": 24,
         "week": 20,
+        "cli": 17,
         "desktop": 15,
-        "cli": 15,
         "cloud": 15,
         "gateway": 13,
         "platform": 12,
@@ -16113,15 +16113,15 @@
         "anthropic": 8,
         "microsoft": 8,
         "foundry": 8,
-        "typescript": 8,
         "skill": 7,
+        "typescript": 7,
         "opu": 7,
         "json": 6,
         "git": 6,
-        "python": 6,
         "llm": 6,
         "subagent": 5,
         "security": 5,
+        "python": 5,
         "agentic": 4,
         "ide": 4,
         "plugin": 4,
@@ -16142,7 +16142,7 @@
         "diff": 3,
         "gitlab": 3
       },
-      "word_count": 2019
+      "word_count": 2020
     },
     {
       "filename": "claude-code__docs___llms__ko.md",
@@ -16365,13 +16365,13 @@
         }
       ],
       "terms": {
-        "claude": 269,
-        "code": 180,
+        "claude": 270,
+        "code": 181,
         "agent": 40,
-        "sdk": 40,
+        "sdk": 39,
         "mcp": 24,
+        "cli": 17,
         "desktop": 16,
-        "cli": 15,
         "cloud": 15,
         "hook": 13,
         "skill": 12,
@@ -16384,15 +16384,15 @@
         "bedrock": 9,
         "microsoft": 8,
         "foundry": 8,
-        "typescript": 8,
         "anthropic": 7,
+        "typescript": 7,
         "opu": 7,
         "json": 6,
         "git": 6,
-        "python": 6,
         "gateway": 6,
         "llm": 6,
         "subagent": 5,
+        "python": 5,
         "ide": 4,
         "chrome": 4,
         "slack": 4,
@@ -16416,7 +16416,7 @@
         "kubernet": 3,
         "opentelemetry": 3
       },
-      "word_count": 4569
+      "word_count": 4570
     },
     {
       "filename": "claude-code__docs___llms__pt-br.md",
@@ -16466,7 +16466,7 @@
           "level": 5
         },
         {
-          "text": "Construir com Claude Code",
+          "text": "Criar com Claude Code",
           "level": 3
         },
         {
@@ -16639,18 +16639,18 @@
         }
       ],
       "terms": {
-        "claude": 269,
-        "code": 180,
-        "para": 133,
-        "com": 116,
+        "claude": 270,
+        "code": 181,
+        "para": 132,
+        "com": 115,
         "ses": 69,
-        "que": 67,
+        "que": 66,
         "agent": 63,
         "uma": 50,
         "seu": 48,
         "sua": 47,
         "configura": 43,
-        "sdk": 40,
+        "sdk": 39,
         "plugin": 36,
         "ncia": 36,
         "ferramenta": 35,
@@ -16674,23 +16674,23 @@
         "hospedado": 18,
         "arquivo": 17,
         "tarefa": 17,
+        "cli": 17,
         "nuvem": 17,
         "execute": 17,
-        "cada": 16,
         "trabalho": 16,
         "atrav": 16,
         "servidor": 16,
         "permis": 16,
         "comando": 15,
-        "cli": 15,
+        "cada": 15,
         "cloud": 15,
         "ambient": 15,
+        "quando": 14,
         "prompt": 14,
         "modelo": 14,
-        "executar": 14,
-        "vei": 14
+        "executar": 14
       },
-      "word_count": 6199
+      "word_count": 6202
     },
     {
       "filename": "claude-code__docs___llms__ru.md",
@@ -16913,16 +16913,16 @@
         }
       ],
       "terms": {
-        "claude": 267,
-        "code": 180,
+        "claude": 268,
+        "code": 181,
         "agent": 44,
-        "sdk": 40,
+        "sdk": 39,
         "mcp": 24,
         "hook": 23,
         "desktop": 17,
+        "cli": 17,
         "skill": 16,
         "plugin": 16,
-        "cli": 15,
         "cloud": 15,
         "auto": 12,
         "platform": 12,
@@ -16937,14 +16937,14 @@
         "bedrock": 9,
         "microsoft": 8,
         "foundry": 8,
-        "typescript": 8,
         "anthropic": 7,
+        "typescript": 7,
         "opu": 7,
         "json": 6,
         "git": 6,
-        "python": 6,
         "llm": 6,
         "security": 5,
+        "python": 5,
         "runner": 5,
         "ide": 4,
         "setting": 4,
@@ -16964,7 +16964,7 @@
         "sandbox": 4,
         "bash": 4
       },
-      "word_count": 5375
+      "word_count": 5372
     },
     {
       "filename": "claude-code__docs___llms__zh-hant.md",
@@ -17074,7 +17074,7 @@
           "level": 5
         },
         {
-          "text": "\u4f7f\u7528\u91cf\u548c\u6210\u672c",
+          "text": "\u4f7f\u7528\u91cf\u8207\u6210\u672c",
           "level": 4
         },
         {
@@ -17187,16 +17187,16 @@
         }
       ],
       "terms": {
-        "claude": 270,
-        "code": 181,
+        "claude": 271,
+        "code": 182,
         "agent": 42,
-        "sdk": 40,
+        "sdk": 39,
         "mcp": 24,
         "hook": 23,
         "plugin": 21,
+        "cli": 17,
         "desktop": 16,
         "skill": 15,
-        "cli": 15,
         "cloud": 15,
         "platform": 12,
         "google": 11,
@@ -17207,16 +17207,16 @@
         "bedrock": 9,
         "microsoft": 8,
         "foundry": 8,
-        "typescript": 8,
         "anthropic": 7,
         "subagent": 7,
         "json": 7,
+        "typescript": 7,
         "opu": 7,
         "git": 6,
         "server": 6,
-        "python": 6,
         "llm": 6,
         "session": 5,
+        "python": 5,
         "ide": 4,
         "setting": 4,
         "chrome": 4,

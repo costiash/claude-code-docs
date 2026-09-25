@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T00:20:54.921748Z",
+  "generated_at": "2026-09-25T03:14:26.445006Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "0452526ab7c9b6c2c01340153d1af0b33034e85e7cdddff8004d9b4c021417b5",
+      "sha256": "f7687fb54480ecc71c8f9da577ede105b4c8cea3373f8eaadc348dff0f8b2f62",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "7adc1b42cf13a66395b77278b58904a73b1892d022ac9725e478028fd95d6243",
-      "lastmod": "2026-09-24T18:46:52.798Z",
+      "sha256": "ac175029aac4f3d694f9874277e1df909e6a0f133e326623025806ee7aa011c8",
+      "lastmod": "2026-09-25T02:29:53.476Z",
       "fetch_status": "ok"
     },
     {
@@ -972,7 +972,7 @@
       "md_url": "https://code.claude.com/docs/_llms/fr.md",
       "title": "French (197 pages)",
       "category": "claude_code",
-      "sha256": "d7a62d95cc6cdabe179820d5126d3a918716e998a79c842411edd2712805c972",
+      "sha256": "cd14a2aaba3ea1fcfda5d8d0fc441aee013aa720d66382b4213897808f0bbe78",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (197 pages)",
       "category": "claude_code",
-      "sha256": "a32dd11fe7deb586a741c70fa585f836d56caed3a4dfe41824ba549c86e592fe",
+      "sha256": "36d1ea1ef4028a332f466a50cd597b6ff9008b11ab97b377f41ceb9c91ff6ba0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (196 pages)",
       "category": "claude_code",
-      "sha256": "16008b8d5a26e5edd64d72ed6ad95c48ae0544a0d07aa47cafc562628c0ba08d",
+      "sha256": "8800294c29b905827e4ea70b28b7420eeee707554a26e39cd0e4b92405424149",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (197 pages)",
       "category": "claude_code",
-      "sha256": "dade116b1548a547033f8d9c698025007b3011aa91a44db3c5e0887cb8f03a91",
+      "sha256": "a50d340cfb3d71e07fde17fe4c92269e1093e9ae69f49aca72062c3d4eac86a5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1027,7 +1027,7 @@
       "md_url": "https://code.claude.com/docs/_llms/pt-br.md",
       "title": "Brazilian Portuguese (197 pages)",
       "category": "claude_code",
-      "sha256": "bfac765f4c807c5b28527b4232fbfad0c3dd0ac96044ab8f1dcb63ab81ada9a7",
+      "sha256": "7d43e4fc2646378faabf2341a7043a1cd20815adc1907efa6a14234fd26e2cf9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1038,7 +1038,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ru.md",
       "title": "Russian (197 pages)",
       "category": "claude_code",
-      "sha256": "37a429137e40665547319f13303b69989a747299855b2672b1a06ab7e1b8198c",
+      "sha256": "c35f9384559d8eab4e1f68721311d7f48618bea3a4d0dde377d028b3fd5e9760",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1049,7 +1049,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-hant.md",
       "title": "Traditional Chinese (197 pages)",
       "category": "claude_code",
-      "sha256": "bc304a97d00066b26c55bae9bde732d73495dc899fe0f95c8ced8b3105d25317",
+      "sha256": "673032fdb5dd5226d79a26bc85e41a24273021de5144bf5183a0fdbe0bc9c675",
       "lastmod": null,
       "fetch_status": "ok"
     },
