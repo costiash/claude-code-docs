@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-26T06:16:17.010632Z",
+  "generated_at": "2026-09-26T18:13:50.253345Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -818,8 +818,8 @@
       "md_url": "https://code.claude.com/docs/en/cross-session-messaging.md",
       "title": "Message your other Claude Code sessions",
       "category": "claude_code",
-      "sha256": "61beb9bc9013e9939a745a599f18d1eaa72b407afd51dc5f120a65c03abbc5f5",
-      "lastmod": "2026-09-15T22:32:07.924Z",
+      "sha256": "a8ccea79027e86d6406e96239afffff80fd999b1c118b13300eba7019c9e9957",
+      "lastmod": "2026-09-26T16:50:28.541Z",
       "fetch_status": "ok"
     },
     {
