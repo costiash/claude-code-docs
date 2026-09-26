@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-26T03:14:13.919907Z",
+  "generated_at": "2026-09-26T06:16:17.010632Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -433,8 +433,8 @@
       "md_url": "https://code.claude.com/docs/en/agents.md",
       "title": "Run agents in parallel",
       "category": "claude_code",
-      "sha256": "94f45e4fc3bd915a707ad541891da8a0f5d843a3b983d9e9ef8209c78ee85c24",
-      "lastmod": "2026-09-24T23:21:41.877Z",
+      "sha256": "1c1e201c5ce331c363c2d077c64339e9197bb1bfb1a99d97e74df8f80d822403",
+      "lastmod": "2026-09-26T03:05:24.538Z",
       "fetch_status": "ok"
     },
     {
@@ -642,8 +642,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code in the cloud",
       "category": "claude_code",
-      "sha256": "78536e44351a6f021d9af6ec1599d9dbbc14866960d0daadde15358bcedb7c23",
-      "lastmod": "2026-09-26T00:27:38.745Z",
+      "sha256": "c0515ced5ea4433f46ee2a3d0567d80429a5e273ebaeddc83bd62b22867c738d",
+      "lastmod": "2026-09-26T05:24:22.122Z",
       "fetch_status": "ok"
     },
     {
@@ -675,8 +675,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-projects.md",
       "title": "Let Claude coordinate ongoing work with Projects",
       "category": "claude_code",
-      "sha256": "b5c97a67660c5b88d0af7f2959de1e373de12a714892da518d0b08ca3263e2b4",
-      "lastmod": "2026-09-24T22:54:56.028Z",
+      "sha256": "7eae4987e9956ffa589b66240be5b2c90024a7d2260ca7df53b5f56a03523945",
+      "lastmod": "2026-09-26T03:05:24.539Z",
       "fetch_status": "ok"
     },
     {
@@ -829,8 +829,8 @@
       "md_url": "https://code.claude.com/docs/en/data-usage.md",
       "title": "Data usage",
       "category": "claude_code",
-      "sha256": "bbb6d6542a27a43cb86da21fd32c919ac27192187397b6331a4304f4d8984bb9",
-      "lastmod": "2026-09-15T22:32:07.925Z",
+      "sha256": "001756f1c906aa5cdcde73c59d53b42098f757082bb9dcb0b6f775d779bb8dc8",
+      "lastmod": "2026-09-26T05:24:22.118Z",
       "fetch_status": "ok"
     },
     {
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "ac556c3c310830f3908f9ef2b99bdaba7256e5f7fb17d99a22de72e7af712048",
-      "lastmod": "2026-09-26T01:36:56.738Z",
+      "sha256": "40cd32d0d674a03f15f1462fb897b905264f425f97ba1631837ade095f01ccd0",
+      "lastmod": "2026-09-26T05:19:31.834Z",
       "fetch_status": "ok"
     },
     {
@@ -1424,7 +1424,7 @@
       "title": "Claude Code on mobile",
       "category": "claude_code",
       "sha256": "bc8ea2e56a80178e6d8d38219aa3ccdaa36a30d63c86e66942e0e03c6aaed515",
-      "lastmod": "2026-09-17T20:23:31.666Z",
+      "lastmod": "2026-09-26T03:05:24.537Z",
       "fetch_status": "ok"
     },
     {
@@ -1490,7 +1490,7 @@
       "title": "Choose a permission mode",
       "category": "claude_code",
       "sha256": "abc2321992feedcd9f3ff6b7bc7f043ad2ca0eed3bd79e15b34ceac945354a4c",
-      "lastmod": "2026-09-26T02:54:38.577Z",
+      "lastmod": "2026-09-26T03:05:24.540Z",
       "fetch_status": "ok"
     },
     {
@@ -1786,8 +1786,8 @@
       "md_url": "https://code.claude.com/docs/en/remote-control.md",
       "title": "Continue local sessions from any device with Remote Control",
       "category": "claude_code",
-      "sha256": "0a5d8b9fc856809db6cb0b1463272cd71c6f6c1ab8b786851f108985b7bed279",
-      "lastmod": "2026-09-25T23:19:24.257Z",
+      "sha256": "e894f42110339f438a713472c32c131f997a444f2d6f5f7500bead3061b97c71",
+      "lastmod": "2026-09-26T03:22:29.852Z",
       "fetch_status": "ok"
     },
     {
@@ -1841,8 +1841,8 @@
       "md_url": "https://code.claude.com/docs/en/security.md",
       "title": "Security",
       "category": "claude_code",
-      "sha256": "209449b6fccbcde395ff4a962b0ff86fb5eaf6dc40aa09e93634c5838df56b61",
-      "lastmod": "2026-09-15T22:32:07.832Z",
+      "sha256": "a2a6827d9b44c07eab4eef697cf19836831fd6a0b6adb2ef3c108251c7770a86",
+      "lastmod": "2026-09-26T05:24:22.117Z",
       "fetch_status": "ok"
     },
     {
