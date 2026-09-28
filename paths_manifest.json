@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-28T18:18:29.669419Z",
+  "generated_at": "2026-09-28T21:13:43.225651Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -466,8 +466,8 @@
       "md_url": "https://code.claude.com/docs/en/artifacts.md",
       "title": "Share session output as artifacts",
       "category": "claude_code",
-      "sha256": "eefc1044e42a8d18c90f127e67936beee3dea151671d62561ffe278220dc0485",
-      "lastmod": "2026-09-23T01:49:34.814Z",
+      "sha256": "4c63e5d9f8c65908c84b4560a4e887106a25d292b1c3209556f59b456fb193ba",
+      "lastmod": "2026-09-28T18:43:47.158Z",
       "fetch_status": "ok"
     },
     {
@@ -488,8 +488,8 @@
       "md_url": "https://code.claude.com/docs/en/auto-mode-config.md",
       "title": "Configure auto mode",
       "category": "claude_code",
-      "sha256": "324cc4ce0af82f89e780be8b3d89bd5cacc5c4aaa822fddd39cb5cfb068e0eca",
-      "lastmod": "2026-09-26T02:53:20.606Z",
+      "sha256": "2fc5964fc7e9f1359308ece6f698a9cd31c1dd1d74d27ae94fb2cdb8a51c2435",
+      "lastmod": "2026-09-28T19:33:24.256Z",
       "fetch_status": "ok"
     },
     {
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "dc55f421cfb20bcfa66040a902870425ab9bb9d5daf0c2a9bbe2af7678ef626d",
-      "lastmod": "2026-09-25T22:00:25.553Z",
+      "sha256": "d4c6aac849a9304916bbc6d129a4d0e9b3bd5c189b058900e59399bb6c9f87e2",
+      "lastmod": "2026-09-28T18:16:09.099Z",
       "fetch_status": "ok"
     },
     {
@@ -741,8 +741,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "f0b71855bab62002c1bf410afc7d0e41b825ba8b3b6b8fa13da6fa142f6b8098",
-      "lastmod": "2026-09-28T00:06:14.760Z",
+      "sha256": "14f365572af637ab7b091ea687acc8182aa604d902a368784ccf59ad10829e67",
+      "lastmod": "2026-09-28T18:43:47.162Z",
       "fetch_status": "ok"
     },
     {
@@ -1379,8 +1379,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "dcd898d3572c6302ea6e4e6ed3de413e6a8efa58a5442be0dc3ba2a7a64e7c7b",
-      "lastmod": "2026-09-25T23:45:06.188Z",
+      "sha256": "b919137f19f035ba2405171bca618f8247b076cc70dbd287dc3b3d340e04ffd5",
+      "lastmod": "2026-09-28T18:43:47.156Z",
       "fetch_status": "ok"
     },
     {
@@ -8153,9 +8153,20 @@
       "filename": "docs__en__manage-claude__access-transparency.md",
       "url": "https://platform.claude.com/docs/en/manage-claude/access-transparency",
       "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency.md",
-      "title": "Access Transparency",
+      "title": "Overview",
       "category": "core_documentation",
-      "sha256": "b7e7a828694a5259a153c8d92650135ce4e94e1863d07ab763a2d27655b8b238",
+      "sha256": "b00db8869d8c0301b2a059c395cae6b0ca22d941c5e3b5a78316f61bf3cfde61",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/access-transparency-log",
+      "filename": "docs__en__manage-claude__access-transparency-log.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/access-transparency-log",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency-log.md",
+      "title": "Transparency log (beta)",
+      "category": "core_documentation",
+      "sha256": "3b897f307ea92beb3a500ee71fefc87e3026d66fcfd574a38f2b29ebe55fca30",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8287,7 +8298,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed.md",
       "title": "Activity Feed",
       "category": "core_documentation",
-      "sha256": "fd751d12d84cca61efec25250c9e507ca827e28f3b953ea10d5db2cbd02335b8",
+      "sha256": "241474e01d61b916c2ddfad6e8809b5488f71f27f6613fe4d318f9505a0c8488",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8342,7 +8353,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-faq.md",
       "title": "FAQ",
       "category": "core_documentation",
-      "sha256": "a4edd8b9215c6b85c51e036f459d92fb46c9a73f26cb394ab89df7d7d40731da",
+      "sha256": "afbf0ae2f441b7f49078f08e69fddb39da03a10f2947b9acc163dedb9d1bb2b8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8375,7 +8386,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-sessions.md",
       "title": "Session transcripts",
       "category": "core_documentation",
-      "sha256": "d89807cc6c694be830e248a22da4dbf912dc0e2a0b731f05a0058a9aad419cd4",
+      "sha256": "0b1f57c16d3d836ab31837c8c133fd94217dd7897be8824de5a2685cf8f10b87",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9370,13 +9381,24 @@
       "fetch_status": "ok"
     },
     {
+      "id": "docs/en/release-notes/system-prompts/claude-sonnet-5",
+      "filename": "docs__en__release-notes__system-prompts__claude-sonnet-5.md",
+      "url": "https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-5",
+      "md_url": "https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-5.md",
+      "title": "Claude Sonnet 5",
+      "category": "release_notes",
+      "sha256": "1e0e6aab05c4c1f014f27c3125d10850011500729cd5ba3dc932d5b5f9a2ce3e",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
       "id": "docs/en/release-notes/system-prompts/overview",
       "filename": "docs__en__release-notes__system-prompts__overview.md",
       "url": "https://platform.claude.com/docs/en/release-notes/system-prompts/overview",
       "md_url": "https://platform.claude.com/docs/en/release-notes/system-prompts/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "7598ab921a8176dee60529dcb44a7a9b78aebf73bb7c05672e9f49d7a9df387b",
+      "sha256": "5b46028d88b6247b1b83600a880c66ef925c31f4acf0fa95ee5f572f93364dbf",
       "lastmod": null,
       "fetch_status": "ok"
     },
