@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T03:14:42.421831Z",
+  "generated_at": "2026-09-29T06:17:04.072967Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -937,7 +937,7 @@
       "filename": "claude-code__docs___llms__de.md",
       "url": "https://code.claude.com/docs/_llms/de",
       "md_url": "https://code.claude.com/docs/_llms/de.md",
-      "title": "German (207 pages)",
+      "title": "German (210 pages)",
       "category": "claude_code",
       "sha256": "186638e20dd9242954bc3810d878e4b6f2f8951e6055a37d64d74589c06b887e",
       "lastmod": null,
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (209 pages)",
       "category": "claude_code",
-      "sha256": "52660a959800e422338fdf4d72f16e8696cec1b3c7ea37ea390f829c9ad54516",
+      "sha256": "0c5d3a7246045e3cfcc39a3460475ac92e1f96273dce255a21502ecc9f941b43",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -961,7 +961,7 @@
       "md_url": "https://code.claude.com/docs/_llms/fr.md",
       "title": "French (209 pages)",
       "category": "claude_code",
-      "sha256": "096e90e215f1d365d849fe91eb15c7c93301a520cb3c4bd7705389f7677350f1",
+      "sha256": "195e94ababecc230ffe1a4f483ca13b792c82500bee1d9e63d99342384fc6de4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (209 pages)",
       "category": "claude_code",
-      "sha256": "348fb679345681d166de9fa20aa647be15cc13569eaf475a0f0da2dea3bcea75",
+      "sha256": "85207bbf7437118595c0255af793b99cbe547eccbd1eb631de94201581cd1c03",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1003,7 +1003,7 @@
       "filename": "claude-code__docs___llms__ko.md",
       "url": "https://code.claude.com/docs/_llms/ko",
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
-      "title": "Korean (209 pages)",
+      "title": "Korean (210 pages)",
       "category": "claude_code",
       "sha256": "b18c8d92d3bb13a0cb307be5f95df195e9a2155055b840f00120f9c1bec124f0",
       "lastmod": null,
@@ -1038,7 +1038,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-cn.md",
       "title": "Simplified Chinese (210 pages)",
       "category": "claude_code",
-      "sha256": "37888859d92f5b79d7710d1018bb9beaf9379d36f60abcd15a8b54ee282fcdc9",
+      "sha256": "0ab61b4280cae985674e6c5a651409d62dbf9acdd0e162dd358f004191b8d3d5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1047,9 +1047,9 @@
       "filename": "claude-code__docs___llms__zh-tw.md",
       "url": "https://code.claude.com/docs/_llms/zh-tw",
       "md_url": "https://code.claude.com/docs/_llms/zh-tw.md",
-      "title": "Traditional Chinese (209 pages)",
+      "title": "Traditional Chinese (210 pages)",
       "category": "claude_code",
-      "sha256": "7277c462088265c6216e65ee2b0b85cad964fd93f17aacef6cf525205538e872",
+      "sha256": "199e645ca185c5f7748b3fbc953789053384a864bf6250522601de3c3b3c85fa",
       "lastmod": null,
       "fetch_status": "ok"
     },

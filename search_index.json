@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T03:14:46.421830Z",
+  "generated_at": "2026-09-29T06:17:07.073654Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14325,7 +14325,7 @@
     {
       "filename": "claude-code__docs___llms__de.md",
       "id": "claude-code/docs/_llms/de",
-      "title": "German (207 pages)",
+      "title": "German (210 pages)",
       "category": "claude_code",
       "url": "https://code.claude.com/docs/_llms/de",
       "headings": [
@@ -14865,13 +14865,13 @@
         }
       ],
       "terms": {
-        "claude": 282,
-        "code": 190,
+        "claude": 283,
+        "code": 191,
         "con": 118,
         "para": 106,
         "plugin": 68,
         "que": 67,
-        "una": 65,
+        "una": 66,
         "agent": 54,
         "del": 54,
         "los": 46,
@@ -14903,20 +14903,20 @@
         "nube": 17,
         "problema": 17,
         "organizaci": 17,
-        "marketplace": 17,
         "agente": 17,
         "comando": 16,
         "trabajo": 16,
         "cli": 16,
         "trav": 16,
+        "marketplace": 16,
         "autohospedado": 16,
         "desktop": 15,
         "cloud": 15,
         "subagent": 14,
-        "modelo": 14,
-        "configurar": 14
+        "aplicaci": 14,
+        "modelo": 14
       },
-      "word_count": 6892
+      "word_count": 6905
     },
     {
       "filename": "claude-code__docs___llms__fr.md",
@@ -15164,18 +15164,18 @@
       ],
       "terms": {
         "les": 301,
-        "claude": 281,
-        "code": 212,
+        "claude": 282,
+        "code": 213,
         "des": 174,
         "avec": 109,
         "pour": 102,
-        "votre": 84,
+        "votre": 85,
         "agent": 82,
         "une": 82,
         "dan": 81,
         "session": 73,
         "plugin": 68,
-        "sur": 55,
+        "sur": 56,
         "que": 47,
         "sdk": 40,
         "outil": 35,
@@ -15195,26 +15195,26 @@
         "utilisation": 24,
         "param": 22,
         "qui": 21,
+        "application": 21,
         "mod": 21,
-        "application": 20,
         "vou": 20,
         "via": 20,
         "configurez": 19,
         "berg": 19,
         "serveur": 19,
         "fichier": 18,
-        "marketplace": 18,
         "couvrez": 17,
         "che": 17,
         "depui": 17,
         "partir": 17,
         "organisation": 17,
+        "marketplace": 17,
         "contr": 17,
         "int": 16,
         "cuter": 16,
         "desktop": 15
       },
-      "word_count": 6880
+      "word_count": 6889
     },
     {
       "filename": "claude-code__docs___llms__id.md",
@@ -15788,14 +15788,14 @@
         "hook": 24,
         "dell": 24,
         "desktop": 23,
-        "della": 23,
+        "della": 22,
         "nel": 21,
         "server": 21,
         "delle": 20,
         "skill": 19,
         "utilizzo": 19,
-        "marketplace": 19,
         "eseguire": 18,
+        "marketplace": 18,
         "impostazioni": 18,
         "host": 18,
         "file": 17,
@@ -15810,7 +15810,7 @@
         "configura": 16,
         "configurare": 16
       },
-      "word_count": 6583
+      "word_count": 6582
     },
     {
       "filename": "claude-code__docs___llms__jp.md",
@@ -16113,7 +16113,7 @@
     {
       "filename": "claude-code__docs___llms__ko.md",
       "id": "claude-code/docs/_llms/ko",
-      "title": "Korean (209 pages)",
+      "title": "Korean (210 pages)",
       "category": "claude_code",
       "url": "https://code.claude.com/docs/_llms/ko",
       "headings": [
@@ -17249,8 +17249,8 @@
         }
       ],
       "terms": {
-        "claude": 282,
-        "code": 190,
+        "claude": 283,
+        "code": 191,
         "agent": 45,
         "sdk": 40,
         "mcp": 25,
@@ -17300,12 +17300,12 @@
         "jetbrain": 3,
         "tag": 3
       },
-      "word_count": 2443
+      "word_count": 2447
     },
     {
       "filename": "claude-code__docs___llms__zh-tw.md",
       "id": "claude-code/docs/_llms/zh-tw",
-      "title": "Traditional Chinese (209 pages)",
+      "title": "Traditional Chinese (210 pages)",
       "category": "claude_code",
       "url": "https://code.claude.com/docs/_llms/zh-tw",
       "headings": [
@@ -17438,7 +17438,7 @@
           "level": 5
         },
         {
-          "text": "\u4f7f\u7528\u91cf\u8207\u6210\u672c",
+          "text": "\u4f7f\u7528\u91cf\u548c\u6210\u672c",
           "level": 4
         },
         {
@@ -17547,8 +17547,8 @@
         }
       ],
       "terms": {
-        "claude": 284,
-        "code": 193,
+        "claude": 285,
+        "code": 194,
         "agent": 41,
         "sdk": 40,
         "plugin": 36,
@@ -17558,16 +17558,16 @@
         "cli": 16,
         "skill": 15,
         "cloud": 15,
+        "marketplace": 13,
         "platform": 12,
         "google": 11,
         "anthropic": 10,
         "api": 10,
         "amazon": 10,
-        "marketplace": 10,
         "aws": 10,
+        "json": 9,
         "github": 9,
         "bedrock": 9,
-        "json": 8,
         "microsoft": 8,
         "foundry": 8,
         "subagent": 7,
@@ -17598,7 +17598,7 @@
         "prompt": 3,
         "cach": 3
       },
-      "word_count": 2542
+      "word_count": 2553
     },
     {
       "filename": "claude-code__env-vars.md",
