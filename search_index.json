@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T15:15:17.193246Z",
+  "generated_at": "2026-09-29T18:15:52.905355Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -10783,7 +10783,7 @@
       "terms": {
         "session": 189,
         "claude": 111,
-        "cloud": 89,
+        "cloud": 88,
         "code": 51,
         "environment": 43,
         "github": 41,
@@ -10830,7 +10830,7 @@
         "without": 11,
         "api": 11,
         "before": 10,
-        "teleport": 10
+        "self": 10
       },
       "word_count": 5200
     },
@@ -13746,6 +13746,10 @@
           "level": 2
         },
         {
+          "text": "Choose which Xcode the simulator pane uses",
+          "level": 3
+        },
+        {
           "text": "Run your app in the simulator",
           "level": 2
         },
@@ -13790,67 +13794,63 @@
           "level": 3
         },
         {
-          "text": "The simulator pane fails with Xcode 27",
-          "level": 3
-        },
-        {
           "text": "See also",
           "level": 2
         }
       ],
       "terms": {
-        "simulator": 77,
-        "claude": 53,
-        "pane": 51,
-        "device": 46,
-        "app": 43,
+        "simulator": 72,
+        "claude": 55,
+        "pane": 47,
+        "device": 45,
+        "app": 41,
         "session": 21,
-        "xcode": 21,
-        "run": 18,
+        "xcode": 20,
+        "run": 19,
         "ios": 17,
+        "desktop": 16,
         "open": 15,
-        "desktop": 14,
-        "install": 12,
+        "install": 13,
         "screen": 12,
-        "work": 11,
+        "code": 10,
         "check": 10,
+        "work": 10,
         "step": 10,
         "off": 10,
-        "code": 9,
-        "see": 9,
+        "one": 9,
         "build": 8,
         "show": 8,
         "tap": 8,
-        "devic": 8,
+        "use": 8,
+        "see": 8,
         "test": 7,
         "launch": 7,
-        "doesn": 7,
-        "only": 7,
         "boot": 7,
-        "attach": 7,
         "cmd": 7,
         "apple": 6,
         "while": 6,
         "same": 6,
         "tool": 6,
-        "mac": 6,
-        "one": 6,
-        "ask": 6,
+        "only": 6,
+        "devic": 6,
         "example": 6,
+        "ask": 6,
         "acces": 6,
+        "attach": 6,
         "down": 6,
         "each": 5,
         "organization": 5,
         "conversation": 5,
         "through": 5,
-        "yourself": 5,
+        "doesn": 5,
         "computer": 5,
         "control": 5,
-        "use": 5,
+        "mac": 5,
         "project": 5,
-        "click": 5
+        "click": 5,
+        "turn": 5
       },
-      "word_count": 1943
+      "word_count": 1920
     },
     {
       "filename": "claude-code__desktop-linux.md",
@@ -13900,10 +13900,6 @@
           "level": 3
         },
         {
-          "text": "Running as root without --no-sandbox is not supported",
-          "level": 3
-        },
-        {
           "text": "Cowork isn't available",
           "level": 3
         },
@@ -13927,17 +13923,18 @@
         "linux": 11,
         "add": 11,
         "file": 9,
+        "support": 9,
         "distribution": 9,
         "command": 9,
         "doesn": 9,
         "anthropic": 9,
         "debian": 8,
-        "support": 8,
         "key": 8,
         "ubuntu": 6,
         "requirement": 6,
         "later": 6,
         "virtualization": 6,
+        "without": 6,
         "report": 6,
         "requir": 6,
         "packag": 6,
@@ -13952,7 +13949,6 @@
         "work": 5,
         "tab": 5,
         "qemu": 5,
-        "without": 5,
         "system": 5,
         "launch": 5,
         "directory": 5,
@@ -13964,7 +13960,7 @@
         "window": 4,
         "cli": 4
       },
-      "word_count": 1561
+      "word_count": 1563
     },
     {
       "filename": "claude-code__desktop-quickstart.md",
@@ -18046,14 +18042,6 @@
           "level": 2
         },
         {
-          "text": "Conflict between --bg and --print",
-          "level": 3
-        },
-        {
-          "text": "The --json-schema value is not a valid JSON Schema",
-          "level": 3
-        },
-        {
           "text": "Settings file exceeds the 2MiB limit",
           "level": 3
         },
@@ -18313,7 +18301,7 @@
         "anthropic": 87,
         "login": 86,
         "model": 77,
-        "json": 76,
+        "json": 77,
         "session": 74,
         "mcp": 71,
         "api": 67,
@@ -18327,7 +18315,7 @@
         "server": 44,
         "command": 42,
         "token": 40,
-        "agent": 38,
+        "agent": 39,
         "file": 36,
         "statu": 35,
         "could": 35,
@@ -18358,7 +18346,7 @@
         "compact": 22,
         "stream": 21
       },
-      "word_count": 62535
+      "word_count": 62539
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -20883,58 +20871,58 @@
         }
       ],
       "terms": {
-        "hook": 715,
-        "claude": 498,
-        "code": 384,
+        "hook": 728,
+        "claude": 501,
+        "code": 387,
         "field": 266,
         "tool": 265,
         "run": 240,
         "event": 185,
-        "session": 178,
+        "session": 180,
         "command": 144,
+        "input": 139,
         "block": 139,
-        "input": 138,
         "json": 131,
-        "only": 124,
+        "only": 125,
+        "exit": 122,
         "file": 118,
-        "exit": 118,
         "match": 118,
         "call": 112,
         "output": 110,
         "model": 109,
         "prompt": 108,
-        "return": 104,
-        "before": 97,
-        "path": 97,
+        "return": 106,
+        "path": 99,
+        "before": 98,
         "decision": 84,
         "same": 81,
         "matcher": 79,
         "subagent": 78,
-        "control": 77,
-        "agent": 77,
+        "control": 78,
+        "agent": 78,
+        "see": 77,
         "message": 76,
         "text": 76,
-        "see": 75,
         "user": 75,
-        "example": 74,
+        "example": 75,
         "set": 73,
+        "doesn": 71,
         "str": 71,
         "chang": 70,
         "name": 70,
-        "doesn": 70,
         "request": 68,
         "after": 68,
         "add": 68,
         "such": 68,
-        "read": 67,
+        "read": 68,
+        "directory": 67,
         "fir": 66,
         "description": 66,
         "context": 65,
-        "directory": 65,
         "each": 63,
         "any": 62
       },
-      "word_count": 33903
+      "word_count": 34070
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -25504,10 +25492,6 @@
           "level": 3
         },
         {
-          "text": "\"--json output path must end in .json\"",
-          "level": 3
-        },
-        {
           "text": "A grader shows passed: false under a run that scored 1.0",
           "level": 3
         },
@@ -25576,7 +25560,7 @@
         "field": 20,
         "mcp": 20
       },
-      "word_count": 9006
+      "word_count": 9008
     },
     {
       "filename": "claude-code__plugins__anthropic-marketplaces.md",
@@ -34397,14 +34381,13 @@
         "classname": 47,
         "digest": 47,
         "feature": 43,
-        "code": 40,
+        "code": 38,
         "span": 30,
         "auto": 19,
         "claude": 18,
         "fix": 10,
         "doc": 9,
         "mode": 8,
-        "permission": 7,
         "computer": 7,
         "tool": 7,
         "href": 7,
@@ -34412,6 +34395,7 @@
         "pill": 7,
         "imag": 7,
         "link": 7,
+        "permission": 6,
         "header": 6,
         "lede": 6,
         "frame": 6,
@@ -34459,7 +34443,7 @@
         }
       ],
       "terms": {
-        "code": 68,
+        "code": 66,
         "div": 44,
         "classname": 42,
         "digest": 39,
@@ -34591,7 +34575,7 @@
         }
       ],
       "terms": {
-        "code": 99,
+        "code": 97,
         "div": 52,
         "classname": 42,
         "digest": 39,
@@ -34602,9 +34586,9 @@
         "new": 11,
         "href": 10,
         "now": 10,
-        "auto": 9,
         "push": 8,
         "usage": 8,
+        "auto": 8,
         "command": 8,
         "notification": 7,
         "effort": 6,
@@ -34625,7 +34609,6 @@
         "try": 5,
         "link": 5,
         "run": 5,
-        "mode": 5,
         "http": 4,
         "com": 4,
         "show": 4,
@@ -34640,7 +34623,8 @@
         "png": 4,
         "terminal": 4,
         "session": 4,
-        "remote": 4
+        "remote": 4,
+        "control": 4
       },
       "word_count": 893
     },
@@ -34657,7 +34641,7 @@
         }
       ],
       "terms": {
-        "code": 64,
+        "code": 62,
         "div": 46,
         "classname": 35,
         "digest": 32,
@@ -34723,7 +34707,7 @@
         }
       ],
       "terms": {
-        "code": 63,
+        "code": 57,
         "div": 46,
         "classname": 34,
         "digest": 34,
@@ -34770,9 +34754,9 @@
         "setup": 3,
         "mcp": 3,
         "server": 3,
-        "plugin": 3,
         "ultrareview": 3,
-        "gateway": 3
+        "gateway": 3,
+        "anthropic": 3
       },
       "word_count": 716
     },
@@ -34789,7 +34773,7 @@
         }
       ],
       "terms": {
-        "code": 48,
+        "code": 44,
         "div": 38,
         "classname": 16,
         "digest": 16,
@@ -34855,33 +34839,32 @@
         }
       ],
       "terms": {
-        "code": 76,
+        "code": 58,
         "div": 40,
         "classname": 28,
         "digest": 25,
-        "claude": 21,
         "feature": 21,
+        "claude": 20,
         "span": 16,
         "fast": 15,
         "opu": 13,
-        "mode": 12,
-        "agent": 10,
+        "mode": 11,
+        "agent": 9,
         "new": 9,
         "session": 8,
         "goal": 8,
         "now": 8,
-        "plugin": 7,
         "view": 6,
         "frame": 6,
         "itvjicpxe": 6,
         "imag": 6,
         "what": 6,
         "hook": 6,
+        "plugin": 6,
         "doc": 5,
         "keep": 5,
         "work": 5,
         "full": 5,
-        "path": 5,
         "turn": 5,
         "http": 4,
         "com": 4,
@@ -34890,10 +34873,9 @@
         "href": 4,
         "title": 4,
         "without": 4,
+        "path": 4,
         "set": 4,
-        "model": 4,
         "win": 4,
-        "dir": 4,
         "until": 3,
         "hold": 3,
         "run": 3,
@@ -34904,7 +34886,9 @@
         "runn": 3,
         "row": 3,
         "list": 3,
-        "src": 3
+        "src": 3,
+        "mintcdn": 3,
+        "fit": 3
       },
       "word_count": 703
     },
@@ -34921,11 +34905,11 @@
         }
       ],
       "terms": {
-        "code": 58,
+        "code": 54,
         "div": 34,
         "classname": 12,
         "digest": 12,
-        "claude": 10,
+        "claude": 9,
         "feature": 9,
         "auto": 8,
         "mode": 8,
@@ -34942,8 +34926,6 @@
         "new": 4,
         "href": 4,
         "win": 4,
-        "agent": 4,
-        "json": 4,
         "available": 3,
         "pro": 3,
         "skill": 3,
@@ -34953,7 +34935,9 @@
         "background": 3,
         "show": 3,
         "cost": 3,
+        "agent": 3,
         "list": 3,
+        "json": 3,
         "enabl": 3,
         "documentation": 2,
         "index": 2,
@@ -34987,22 +34971,22 @@
         }
       ],
       "terms": {
-        "code": 52,
+        "code": 48,
         "div": 46,
         "classname": 36,
         "digest": 33,
         "feature": 29,
-        "claude": 20,
         "span": 20,
+        "claude": 19,
         "opu": 13,
         "workflow": 11,
         "plugin": 10,
         "mode": 10,
         "new": 10,
         "security": 9,
-        "model": 9,
         "guidance": 8,
         "fast": 8,
+        "model": 8,
         "now": 8,
         "doc": 6,
         "run": 6,
@@ -35647,7 +35631,7 @@
         }
       ],
       "terms": {
-        "code": 76,
+        "code": 74,
         "div": 40,
         "classname": 28,
         "digest": 27,
@@ -35686,7 +35670,6 @@
         "start": 4,
         "task": 4,
         "agent": 4,
-        "worktree": 4,
         "win": 4,
         "name": 4,
         "without": 4,
@@ -35696,7 +35679,8 @@
         "usage": 3,
         "header": 3,
         "pill": 3,
-        "lede": 3
+        "lede": 3,
+        "hit": 3
       },
       "word_count": 776
     },
@@ -36329,22 +36313,22 @@
         }
       ],
       "terms": {
-        "worktree": 189,
-        "claude": 129,
+        "worktree": 190,
+        "claude": 130,
         "code": 96,
         "session": 77,
         "directory": 58,
-        "git": 50,
+        "git": 51,
         "repository": 40,
         "checkout": 36,
         "branch": 35,
+        "creat": 33,
         "run": 32,
-        "creat": 31,
+        "worktre": 30,
         "fil": 30,
-        "worktre": 29,
         "main": 29,
+        "hook": 27,
         "work": 27,
-        "hook": 26,
         "one": 25,
         "command": 25,
         "check": 23,
@@ -36369,18 +36353,18 @@
         "enter": 14,
         "other": 13,
         "under": 13,
+        "instead": 13,
         "don": 12,
         "nam": 12,
         "interactive": 12,
         "remove": 12,
         "sweep": 12,
         "say": 12,
-        "instead": 12,
         "match": 12,
         "fetch": 11,
         "create": 11
       },
-      "word_count": 5477
+      "word_count": 5496
     },
     {
       "filename": "claude-code__zero-data-retention.md",
