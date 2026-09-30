@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T06:17:22.777792Z",
+  "generated_at": "2026-09-30T09:14:16.124789Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -8690,6 +8690,10 @@
           "level": 2
         },
         {
+          "text": "Log in with multiple accounts",
+          "level": 3
+        },
+        {
           "text": "Set up team authentication",
           "level": 2
         },
@@ -8749,8 +8753,8 @@
         "step": 27,
         "cloud": 26,
         "session": 26,
+        "account": 24,
         "team": 23,
-        "account": 23,
         "setting": 21,
         "gateway": 19,
         "file": 16,
@@ -8764,11 +8768,11 @@
         "federation": 14,
         "title": 13,
         "authentication": 12,
+        "log": 12,
         "variable": 12,
         "only": 12,
         "see": 12,
         "stor": 12,
-        "log": 11,
         "browser": 11,
         "configuration": 11,
         "directory": 11,
@@ -8786,7 +8790,7 @@
         "developer": 9,
         "one": 9
       },
-      "word_count": 3648
+      "word_count": 3654
     },
     {
       "filename": "claude-code__auto-mode-config.md",
@@ -11238,6 +11242,10 @@
           "level": 3
         },
         {
+          "text": "Add files and folders",
+          "level": 3
+        },
+        {
           "text": "What threads pick up from your repositories",
           "level": 3
         },
@@ -11299,58 +11307,58 @@
         }
       ],
       "terms": {
-        "thread": 296,
-        "project": 276,
-        "claude": 175,
-        "work": 97,
-        "cloud": 95,
-        "start": 76,
-        "one": 75,
-        "session": 66,
-        "repository": 63,
-        "conversation": 57,
+        "thread": 304,
+        "project": 289,
+        "claude": 176,
+        "work": 99,
+        "cloud": 96,
+        "one": 79,
+        "start": 77,
+        "session": 70,
+        "repository": 67,
+        "conversation": 59,
         "github": 57,
-        "run": 50,
-        "code": 44,
-        "each": 44,
+        "run": 52,
+        "add": 51,
+        "each": 47,
+        "code": 45,
+        "new": 45,
+        "task": 44,
         "need": 43,
-        "new": 43,
-        "add": 43,
         "open": 43,
         "environment": 43,
-        "repositori": 41,
-        "task": 40,
-        "ask": 38,
+        "repositori": 42,
+        "ask": 39,
         "step": 37,
         "app": 36,
+        "fil": 36,
         "setting": 36,
         "request": 35,
         "every": 34,
+        "own": 33,
+        "folder": 33,
         "message": 33,
         "pull": 32,
-        "reach": 29,
-        "computer": 29,
-        "own": 29,
+        "reach": 31,
+        "computer": 30,
+        "turn": 28,
         "instruction": 27,
-        "fil": 27,
-        "turn": 27,
         "send": 26,
+        "limit": 26,
         "only": 25,
         "once": 24,
-        "limit": 24,
         "memory": 23,
         "plan": 23,
         "runn": 23,
-        "folder": 23,
         "list": 22,
+        "instead": 22,
         "see": 22,
+        "don": 21,
         "wait": 21,
         "acces": 21,
-        "connect": 21,
-        "don": 20,
-        "machine": 20
+        "connect": 21
       },
-      "word_count": 9197
+      "word_count": 9569
     },
     {
       "filename": "claude-code__claude-security.md",
@@ -15348,7 +15356,7 @@
           "level": 4
         },
         {
-          "text": "Penyebaran",
+          "text": "Penerapan",
           "level": 4
         },
         {
@@ -15448,7 +15456,7 @@
           "level": 4
         },
         {
-          "text": "Penerapan",
+          "text": "Penyebaran",
           "level": 4
         },
         {
@@ -15524,7 +15532,7 @@
         "platform": 15,
         "mana": 15
       },
-      "word_count": 5661
+      "word_count": 5662
     },
     {
       "filename": "claude-code__docs___llms__it.md",
@@ -15784,7 +15792,7 @@
         "sdk": 40,
         "tuo": 38,
         "sessioni": 37,
-        "come": 35,
+        "come": 36,
         "sessione": 35,
         "gli": 33,
         "cloud": 32,
@@ -15822,7 +15830,7 @@
         "configura": 16,
         "configurare": 16
       },
-      "word_count": 6581
+      "word_count": 6583
     },
     {
       "filename": "claude-code__docs___llms__jp.md",
@@ -17014,7 +17022,7 @@
         "sandbox": 4,
         "bash": 4
       },
-      "word_count": 5738
+      "word_count": 5740
     },
     {
       "filename": "claude-code__docs___llms__zh-cn.md",
@@ -17267,9 +17275,9 @@
         "sdk": 40,
         "mcp": 25,
         "hook": 23,
+        "plugin": 18,
         "desktop": 17,
         "skill": 17,
-        "plugin": 17,
         "cli": 16,
         "cloud": 14,
         "marketplace": 13,
@@ -17312,7 +17320,7 @@
         "jetbrain": 3,
         "tag": 3
       },
-      "word_count": 2447
+      "word_count": 2448
     },
     {
       "filename": "claude-code__docs___llms__zh-tw.md",
@@ -17450,7 +17458,7 @@
           "level": 5
         },
         {
-          "text": "\u4f7f\u7528\u91cf\u8207\u6210\u672c",
+          "text": "\u4f7f\u7528\u91cf\u548c\u6210\u672c",
           "level": 4
         },
         {
@@ -18315,21 +18323,21 @@
         }
       ],
       "terms": {
-        "claude": 400,
-        "error": 138,
-        "code": 107,
+        "claude": 402,
+        "error": 139,
+        "code": 109,
         "login": 89,
         "anthropic": 88,
+        "model": 82,
         "json": 81,
         "session": 80,
-        "model": 77,
         "mcp": 71,
         "api": 68,
         "authentication": 68,
         "plugin": 68,
-        "request": 63,
+        "request": 64,
         "name": 58,
-        "setting": 54,
+        "setting": 56,
         "path": 53,
         "fail": 49,
         "server": 44,
@@ -18347,9 +18355,9 @@
         "update": 30,
         "marketplace": 30,
         "response": 30,
+        "read": 29,
         "permission": 29,
         "resume": 29,
-        "read": 27,
         "add": 27,
         "network": 26,
         "oauth": 26,
@@ -18360,13 +18368,13 @@
         "control": 24,
         "output": 24,
         "cannot": 24,
+        "check": 23,
         "usage": 23,
         "install": 23,
-        "check": 22,
         "disable": 22,
         "compact": 22
       },
-      "word_count": 63853
+      "word_count": 63988
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -23582,6 +23590,10 @@
           "level": 3
         },
         {
+          "text": "Audit your instruction files",
+          "level": 4
+        },
+        {
           "text": "Import additional files",
           "level": 3
         },
@@ -23713,56 +23725,56 @@
       "terms": {
         "claude": 210,
         "agent": 72,
-        "fil": 42,
+        "fil": 43,
         "instruction": 34,
         "project": 33,
         "memory": 33,
-        "rul": 26,
         "path": 26,
+        "rul": 25,
         "local": 24,
         "code": 18,
-        "context": 17,
-        "load": 16,
         "import": 15,
+        "file": 14,
+        "context": 14,
+        "load": 14,
         "setting": 14,
-        "file": 13,
-        "session": 10,
         "auto": 9,
+        "session": 9,
         "instead": 9,
         "write": 8,
-        "set": 8,
+        "only": 8,
+        "run": 8,
         "json": 8,
-        "specific": 7,
         "add": 7,
-        "only": 7,
-        "run": 7,
+        "set": 7,
         "each": 6,
         "own": 6,
         "preferenc": 6,
         "scope": 6,
-        "every": 6,
+        "specific": 6,
         "user": 6,
         "subagent": 6,
         "see": 6,
         "skill": 6,
         "test": 6,
-        "work": 6,
         "foo": 6,
         "config": 6,
         "before": 5,
-        "window": 5,
-        "read": 5,
-        "alongside": 5,
         "follow": 5,
+        "every": 5,
         "standard": 5,
         "workflow": 5,
         "personal": 5,
+        "codebase": 5,
         "command": 5,
         "manag": 5,
+        "audit": 5,
         "dir": 5,
-        "give": 4
+        "give": 4,
+        "let": 4,
+        "read": 4
       },
-      "word_count": 7000
+      "word_count": 6963
     },
     {
       "filename": "claude-code__microsoft-foundry.md",
@@ -24165,11 +24177,11 @@
         }
       ],
       "terms": {
-        "model": 512,
-        "claude": 251,
-        "code": 197,
+        "model": 513,
+        "claude": 252,
+        "code": 198,
         "default": 163,
-        "session": 156,
+        "session": 157,
         "set": 134,
         "opu": 119,
         "setting": 90,
@@ -24177,14 +24189,14 @@
         "sonnet": 78,
         "version": 74,
         "run": 71,
-        "fable": 69,
+        "fable": 70,
         "organization": 68,
         "manag": 67,
-        "request": 65,
+        "request": 66,
         "provider": 64,
         "effort": 61,
         "window": 59,
-        "picker": 54,
+        "picker": 53,
         "fallback": 51,
         "such": 50,
         "anthropic": 48,
@@ -24192,12 +24204,12 @@
         "list": 48,
         "resolv": 47,
         "context": 45,
+        "agent": 45,
         "see": 45,
         "variable": 45,
         "only": 45,
-        "agent": 44,
+        "before": 44,
         "appli": 44,
-        "before": 43,
         "switch": 41,
         "user": 41,
         "instead": 40,
@@ -24216,7 +24228,7 @@
         "plan": 36,
         "entry": 35
       },
-      "word_count": 15361
+      "word_count": 15409
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -25940,7 +25952,7 @@
         "scope": 42,
         "name": 35,
         "json": 32,
-        "run": 29,
+        "run": 30,
         "print": 23,
         "project": 22,
         "requir": 19,
@@ -25957,8 +25969,8 @@
         "flag": 14,
         "path": 14,
         "session": 13,
+        "version": 13,
         "directory": 13,
-        "version": 12,
         "fail": 12,
         "declar": 11,
         "pas": 11,
@@ -25974,15 +25986,15 @@
         "repo": 10,
         "com": 9,
         "load": 9,
+        "see": 9,
         "error": 9,
         "same": 9,
         "setting": 9,
         "prompt": 9,
         "accept": 9,
-        "stdout": 9,
-        "local": 9
+        "stdout": 9
       },
-      "word_count": 7908
+      "word_count": 7923
     },
     {
       "filename": "claude-code__plugins__code-intelligence.md",
@@ -26199,14 +26211,14 @@
         }
       ],
       "terms": {
-        "plugin": 129,
+        "plugin": 130,
         "server": 62,
         "claude": 59,
         "file": 56,
         "name": 47,
-        "hook": 44,
+        "hook": 46,
         "one": 44,
-        "skill": 40,
+        "skill": 42,
         "key": 40,
         "path": 39,
         "command": 39,
@@ -26220,8 +26232,8 @@
         "component": 30,
         "mcp": 30,
         "text": 30,
+        "see": 30,
         "load": 30,
-        "see": 29,
         "each": 27,
         "depth": 27,
         "classname": 25,
@@ -26232,13 +26244,13 @@
         "same": 20,
         "output": 19,
         "session": 19,
+        "fil": 19,
         "tool": 19,
-        "fil": 18,
+        "add": 17,
         "json": 17,
         "lin": 17,
         "field": 17,
         "own": 17,
-        "add": 16,
         "const": 16,
         "href": 16,
         "setting": 16,
@@ -26250,7 +26262,7 @@
         "linktext": 15,
         "section": 15
       },
-      "word_count": 6505
+      "word_count": 6546
     },
     {
       "filename": "claude-code__plugins__create.md",
@@ -29191,6 +29203,7 @@
         "built": 14,
         "command": 14,
         "inside": 13,
+        "file": 11,
         "environment": 11,
         "dev": 11,
         "docker": 11,
@@ -29203,32 +29216,31 @@
         "boundary": 10,
         "path": 10,
         "configuration": 10,
-        "file": 9,
         "organization": 9,
         "hook": 9,
         "own": 9,
+        "setting": 9,
         "work": 8,
         "machine": 8,
         "see": 8,
-        "without": 8,
         "wsl": 8,
         "cloud": 8,
         "doe": 8,
         "any": 8,
+        "start": 8,
         "repository": 8,
-        "setting": 8,
         "manag": 8,
         "virtual": 7,
+        "without": 7,
         "requir": 7,
         "linux": 7,
         "full": 7,
         "still": 7,
-        "start": 7,
+        "also": 7,
         "cover": 7,
-        "choose": 6,
-        "write": 6
+        "choose": 6
       },
-      "word_count": 2444
+      "word_count": 2472
     },
     {
       "filename": "claude-code__sandboxing.md",
@@ -32358,15 +32370,15 @@
       ],
       "terms": {
         "skill": 197,
-        "claude": 132,
+        "claude": 133,
         "name": 49,
         "code": 37,
         "command": 32,
         "run": 25,
         "description": 25,
         "tool": 21,
+        "plugin": 21,
         "context": 20,
-        "plugin": 20,
         "bundl": 18,
         "anthropic": 18,
         "file": 17,
@@ -32392,6 +32404,7 @@
         "later": 11,
         "review": 11,
         "user": 11,
+        "eval": 10,
         "yaml": 10,
         "false": 10,
         "theme": 10,
@@ -32401,14 +32414,13 @@
         "frontmatter": 9,
         "script": 9,
         "commit": 9,
-        "eval": 9,
         "json": 9,
+        "skilloverrid": 9,
         "argument": 9,
         "before": 8,
-        "step": 8,
-        "fix": 8
+        "step": 8
       },
-      "word_count": 13546
+      "word_count": 13600
     },
     {
       "filename": "claude-code__slack.md",
