@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T03:16:10.432823Z",
+  "generated_at": "2026-09-30T06:17:19.984869Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -422,8 +422,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-view.md",
       "title": "Manage multiple agents with agent view",
       "category": "claude_code",
-      "sha256": "de222e1034527e9f62d7bbd8488cc0a37b02d2f9a4878f8d3b933730ac5d97de",
-      "lastmod": "2026-09-29T00:11:35.316Z",
+      "sha256": "783be4d4d800479f2d373a67a6e8a6fcd5be03fc6c6bbf06aba19988dbaba1eb",
+      "lastmod": "2026-09-30T03:22:14.749Z",
       "fetch_status": "ok"
     },
     {
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "63d385bd7b02d45c1c398a7ed81c8661eb1dfe11f6b38cf7f0f3ff82e71582d5",
-      "lastmod": "2026-09-30T03:00:49.286Z",
+      "sha256": "f0ee85678411902b11f4d46271897135c2788e90202b1a69338a3f3cceacf231",
+      "lastmod": "2026-09-30T04:30:43.791Z",
       "fetch_status": "ok"
     },
     {
@@ -642,8 +642,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-code-on-the-web.md",
       "title": "Use Claude Code in the cloud",
       "category": "claude_code",
-      "sha256": "3f8bb51af100d3ab7a7ef7a851331a08711f58953f2b7e0738d85e23d0cb43e5",
-      "lastmod": "2026-09-29T17:27:53.288Z",
+      "sha256": "b3da904bc03133f90ab011227b20d9a2b8ced1a632cf4850b0332da7be995aa3",
+      "lastmod": "2026-09-30T04:32:44.955Z",
       "fetch_status": "ok"
     },
     {
@@ -653,8 +653,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-directory.md",
       "title": "Explore the .claude directory",
       "category": "claude_code",
-      "sha256": "b08c526b02a44fd1d6ad284f08a9da422fecae8c5167185f33b45e08e2a6ef98",
-      "lastmod": "2026-09-25T23:24:49.254Z",
+      "sha256": "68cc92fa7d6f0ad0feb59470efb20eb694b3f6b664823898ab1fa1acba288d67",
+      "lastmod": "2026-09-30T03:24:19.206Z",
       "fetch_status": "ok"
     },
     {
@@ -686,8 +686,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-security.md",
       "title": "Scan your codebase for vulnerabilities",
       "category": "claude_code",
-      "sha256": "7449fdb74028939535074a5b3620571bdc3f3830f16f6d32ff2c18158eafd446",
-      "lastmod": "2026-09-24T23:46:00.731Z",
+      "sha256": "d9b0d563cda6970ed47c1031b3e790d60408b7b543954ade8767abf691dee9b9",
+      "lastmod": "2026-09-30T03:24:51.177Z",
       "fetch_status": "ok"
     },
     {
@@ -708,8 +708,8 @@
       "md_url": "https://code.claude.com/docs/en/cli-reference.md",
       "title": "CLI reference",
       "category": "claude_code",
-      "sha256": "c1fa7a7abfc03ca295884dd5f035a27a6583949091edca0f65df306922ba1408",
-      "lastmod": "2026-09-28T23:26:00.927Z",
+      "sha256": "f46fbeb0d1b3acc637d74ba7b629fb71506d341d7f9d0965c269da17851d90f2",
+      "lastmod": "2026-09-30T04:31:27.745Z",
       "fetch_status": "ok"
     },
     {
@@ -741,8 +741,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "919e3b6b006acbb1dbf84337f4d9de5f4f8724a172d0bc9c80fd5cc99d8b852d",
-      "lastmod": "2026-09-30T03:04:28.971Z",
+      "sha256": "052c57c8a997e76fc1d842c35a5602e0eb387c106ed45587be83d36ea80072ab",
+      "lastmod": "2026-09-30T04:31:54.245Z",
       "fetch_status": "ok"
     },
     {
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (209 pages)",
       "category": "claude_code",
-      "sha256": "b663b52887e5d252eb53f4c181d908fe64644575460be790a0b4e34429b80f21",
+      "sha256": "0d989a88963d189fc7ab607cb962ee27604ecf84a705c5f98e92e1220cbdd225",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -972,7 +972,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (209 pages)",
       "category": "claude_code",
-      "sha256": "86667079e685fdf01b20c7feecf4e9d79ab2cf1365af838a6ea75fdcb3dcca57",
+      "sha256": "af8660ffa5a64caab21270352db4073c3b9092b7a91a4193f1bd521d58894dc2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/pt-br.md",
       "title": "Brazilian Portuguese (208 pages)",
       "category": "claude_code",
-      "sha256": "afc410b022c5fb086b98ddde2eef381b5a4ed68e1bc232abb68e33ad0d2b0344",
+      "sha256": "6c05b9589dbbb5c7e76be09cff36db85df3cac944af56dc4e448d14a47bc3f2e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1060,8 +1060,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "d797d591f6ef96396725eb138cdfb1b2d21e1109216e65ed7abf104978e0f909",
-      "lastmod": "2026-09-30T03:00:49.295Z",
+      "sha256": "f49dad1f82b0207d81e5a011ad119db820ac35f05b88ffb7828e5d668ae47b1a",
+      "lastmod": "2026-09-30T05:11:57.887Z",
       "fetch_status": "ok"
     },
     {
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "22e0a83dc04f8193a6e0a9fc5ac15e4c3536fde49a2d5ea28b29a6228313ab6a",
-      "lastmod": "2026-09-29T21:30:33.043Z",
+      "sha256": "92bcc33dba84a264304b1ae184aea13dfcaa6d096109c13b3c85d6c75dcd126a",
+      "lastmod": "2026-09-30T04:32:45.230Z",
       "fetch_status": "ok"
     },
     {
@@ -1115,8 +1115,8 @@
       "md_url": "https://code.claude.com/docs/en/fullscreen.md",
       "title": "Fullscreen rendering",
       "category": "claude_code",
-      "sha256": "5954ad6f485d37052541949a85a9361a88edec05a124ba620965897ef36596f6",
-      "lastmod": "2026-09-25T21:48:33.137Z",
+      "sha256": "067a5389cb0a29c6a375a26e5624415fa97c7d47eef889d15e7392cb5f533ad4",
+      "lastmod": "2026-09-30T04:31:27.738Z",
       "fetch_status": "ok"
     },
     {
@@ -1225,8 +1225,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "368137fa66b4600800103a197bbec79d5a845e0b991378a210396792473a718b",
-      "lastmod": "2026-09-30T00:13:34.123Z",
+      "sha256": "5129d58370ed4d7910c6e86537e0592b2902ea5bf0a8682721c5484f5d46f566",
+      "lastmod": "2026-09-30T04:59:59.552Z",
       "fetch_status": "ok"
     },
     {
@@ -1280,8 +1280,8 @@
       "md_url": "https://code.claude.com/docs/en/keybindings.md",
       "title": "Customize keyboard shortcuts",
       "category": "claude_code",
-      "sha256": "1190c37411503456160935bdec485932ae7cd8ff7561acf1146244f9efe885d2",
-      "lastmod": "2026-09-29T20:03:41.861Z",
+      "sha256": "017922cbd7f1c2dbe4b8878a329ec8771cc2f03546d2cf8c8a7bb7a4513e31f7",
+      "lastmod": "2026-09-30T03:25:37.818Z",
       "fetch_status": "ok"
     },
     {
@@ -1379,8 +1379,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "fd7f9908f8151c27be527b99980c847b01ea8b8b23c215af44cbbbf0ce79d71d",
-      "lastmod": "2026-09-29T14:37:08.200Z",
+      "sha256": "743ddae4ed693e5386f9651e9bde7689d9f35cb00d9a51e74e4cca298cc4d79f",
+      "lastmod": "2026-09-30T04:31:27.746Z",
       "fetch_status": "ok"
     },
     {
@@ -1434,8 +1434,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "42f103782e6355db6b69699d3a24f7dd6fdd8ef2460692ea37b39b8931ebc708",
-      "lastmod": "2026-09-30T03:05:30.197Z",
+      "sha256": "e273689d28910a7a56591a1a66b5a676d959e7c664ded2d856f999aad69a365c",
+      "lastmod": "2026-09-30T04:32:17.828Z",
       "fetch_status": "ok"
     },
     {
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "5d19e6fe5ed47d6b6ba88db57150eca07ba0af09f234b8a9475d96ea33578577",
-      "lastmod": "2026-09-29T21:13:08.556Z",
+      "sha256": "3e76f919b2a332a1dc5fcdb63e1039289b20ad5edb2fe210129f52e9aaaab796",
+      "lastmod": "2026-09-30T04:31:27.747Z",
       "fetch_status": "ok"
     },
     {
@@ -1522,8 +1522,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-evals.md",
       "title": "Test plugins with evals",
       "category": "claude_code",
-      "sha256": "73b169c4922feae0a4bd01af828f99f91e2d8d54331c9ece89b22f02b5122ec4",
-      "lastmod": "2026-09-29T16:35:08.736Z",
+      "sha256": "475a770e0974fa280ad05483a3c3c4d76b3c2e15f0e11e8ea80593b85744e798",
+      "lastmod": "2026-09-30T05:13:16.515Z",
       "fetch_status": "ok"
     },
     {
@@ -1555,8 +1555,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/cli-reference.md",
       "title": "Plugin commands reference",
       "category": "claude_code",
-      "sha256": "f2e42471f2fd6a8b63aca5a1052826f4a7552ec8df86aff6cae46759b7a46831",
-      "lastmod": "2026-09-27T16:27:44.664Z",
+      "sha256": "2543962c89b5ff2e8140cdeebfba51b88798303e5c1766f5ba3b7c67f1d62d82",
+      "lastmod": "2026-09-30T05:13:16.519Z",
       "fetch_status": "ok"
     },
     {
@@ -1599,8 +1599,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/create-marketplace.md",
       "title": "Create a marketplace",
       "category": "claude_code",
-      "sha256": "3b079222bc97cf17a9231e163cb9df2d47acf79cc80f0c0b155de33c087dbca5",
-      "lastmod": "2026-09-25T18:09:17.574Z",
+      "sha256": "b624040340b1aa58cba1f31f70ba356d9ded06842128b533614c1ea2b33c44cd",
+      "lastmod": "2026-09-30T03:24:19.191Z",
       "fetch_status": "ok"
     },
     {
@@ -1621,8 +1621,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/host-marketplace.md",
       "title": "Host and maintain a marketplace",
       "category": "claude_code",
-      "sha256": "56123e008d0de5a876806dda15426e4990a4036e503f7c11209e1bbfa5379a53",
-      "lastmod": "2026-09-25T18:09:17.582Z",
+      "sha256": "c368ee810d18fffb258d843c9d6e9a9f769d425242da325f20f43c78ad87da2a",
+      "lastmod": "2026-09-30T05:11:57.860Z",
       "fetch_status": "ok"
     },
     {
@@ -1643,8 +1643,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/loading.md",
       "title": "Plugin loading reference",
       "category": "claude_code",
-      "sha256": "a7a7ae4c26c0969a19fbff133786f9949bb3258236de75b06f879c715b73f05d",
-      "lastmod": "2026-09-30T00:14:01.257Z",
+      "sha256": "982b32ee0059ed80fb9fe43c48e00d992c59ac15e96268c21bd616165a9589ca",
+      "lastmod": "2026-09-30T03:24:19.191Z",
       "fetch_status": "ok"
     },
     {
@@ -1665,8 +1665,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/marketplace-reference.md",
       "title": "Marketplace reference",
       "category": "claude_code",
-      "sha256": "9bce0af0615e2e15e2337b5bf641ca6cb61020cb7a6b521f39d2055ca1335b5c",
-      "lastmod": "2026-09-27T16:27:44.685Z",
+      "sha256": "4c66a808e85666ee2aa9f667d658d8907fb906c679dd4be5862c9dd50fce1b6e",
+      "lastmod": "2026-09-30T05:11:57.861Z",
       "fetch_status": "ok"
     },
     {
@@ -1742,8 +1742,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/troubleshooting.md",
       "title": "Troubleshoot plugins",
       "category": "claude_code",
-      "sha256": "04c8d709b01f6e6c07ece6217438570e9ad9e9a854816ffb7eb045ac138a8ee9",
-      "lastmod": "2026-09-27T16:27:44.649Z",
+      "sha256": "4a7342531a85bdbcc7199f6201e254859029457a945c396f07d77395dbf6778e",
+      "lastmod": "2026-09-30T05:11:57.860Z",
       "fetch_status": "ok"
     },
     {
@@ -1753,8 +1753,8 @@
       "md_url": "https://code.claude.com/docs/en/prompt-caching.md",
       "title": "How Claude Code uses prompt caching",
       "category": "claude_code",
-      "sha256": "ff5bfa1aaf6b04cde2517893def3816b392a2c41b41447c53a1d161cc55ab382",
-      "lastmod": "2026-09-28T23:26:00.923Z",
+      "sha256": "0e87312bf986dd2b70b72f0900f72921df44f1306217e8006607c33c3d74e1d6",
+      "lastmod": "2026-09-30T04:32:17.823Z",
       "fetch_status": "ok"
     },
     {
@@ -1797,8 +1797,8 @@
       "md_url": "https://code.claude.com/docs/en/routines.md",
       "title": "Automate work with routines",
       "category": "claude_code",
-      "sha256": "11c9d6bffa2e06e0710b115b7f8dbf69f317a7f1143353331ed470bcc9781e9a",
-      "lastmod": "2026-09-26T01:06:52.601Z",
+      "sha256": "8f4d014d09951dfb89554925450e9abde205803c4e80587f857c81ee60dd443f",
+      "lastmod": "2026-09-30T03:21:44.292Z",
       "fetch_status": "ok"
     },
     {
@@ -1940,8 +1940,8 @@
       "md_url": "https://code.claude.com/docs/en/server-managed-settings.md",
       "title": "Configure server-managed settings",
       "category": "claude_code",
-      "sha256": "652a14d77c75cad4cff5480549e053b0b1a3fd00a48b6b8f46c1fa47e0c9d2ca",
-      "lastmod": "2026-09-25T23:09:19.450Z",
+      "sha256": "79a36ea2fac58cde4c849fe16c93ef04227945b203a3994a96744b2806a3e315",
+      "lastmod": "2026-09-30T04:30:43.785Z",
       "fetch_status": "ok"
     },
     {
@@ -1984,8 +1984,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "18498a9bf484f4955d9d3d26e2467a22d64bf1caf6a5f2712eb510d1a8750c6e",
-      "lastmod": "2026-09-30T01:53:03.725Z",
+      "sha256": "9213a105718bf43ff776e55de81321575d13a1fb8f53dc80c55bbd1656d606bc",
+      "lastmod": "2026-09-30T05:12:42.675Z",
       "fetch_status": "ok"
     },
     {
@@ -2006,8 +2006,8 @@
       "md_url": "https://code.claude.com/docs/en/skills.md",
       "title": "Extend Claude with skills",
       "category": "claude_code",
-      "sha256": "ffe690866cdac3e163ebefbd270161e62796dc35399f3335e4067b43d2b23910",
-      "lastmod": "2026-09-28T23:53:23.177Z",
+      "sha256": "4356e382ed4ba111ad989dec366426b8b893d162eef6ef05e332ea648ee59100",
+      "lastmod": "2026-09-30T03:32:44.777Z",
       "fetch_status": "ok"
     },
     {
@@ -2039,8 +2039,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "e5c8b23fa228ff20c4ab393734cd15578c7d1c19d85529fded042b90d14ef703",
-      "lastmod": "2026-09-29T20:23:50.603Z",
+      "sha256": "f7a49266d42328f2a24ab778e2c28689d527b57da737e52b8928f6e275ca01e3",
+      "lastmod": "2026-09-30T04:31:27.744Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/tools-reference.md",
       "title": "Tools reference",
       "category": "claude_code",
-      "sha256": "cc0eda9856f0f966182acb7a9b63000197fe15672dd14cea6c69e52c573e93d3",
-      "lastmod": "2026-09-29T18:53:23.263Z",
+      "sha256": "16c0233f99b9ec01dec1c46e7e9a0757c04828e449810acac281390f8ee2f1e1",
+      "lastmod": "2026-09-30T04:31:27.757Z",
       "fetch_status": "ok"
     },
     {
