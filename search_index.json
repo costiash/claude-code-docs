@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T09:14:16.124789Z",
+  "generated_at": "2026-09-30T12:17:19.642995Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15356,7 +15356,7 @@
           "level": 4
         },
         {
-          "text": "Penerapan",
+          "text": "Penyebaran",
           "level": 4
         },
         {
@@ -15952,7 +15952,7 @@
           "level": 4
         },
         {
-          "text": "\u30c7\u30d7\u30ed\u30a4\u30e1\u30f3\u30c8",
+          "text": "\u30c7\u30d7\u30ed\u30a4",
           "level": 4
         },
         {
@@ -16687,7 +16687,7 @@
         "configura": 46,
         "ncia": 42,
         "sdk": 40,
-        "como": 37,
+        "como": 38,
         "ferramenta": 35,
         "refer": 32,
         "modo": 31,
@@ -16715,16 +16715,16 @@
         "atrav": 17,
         "organiza": 17,
         "comando": 16,
+        "executar": 16,
         "cli": 16,
         "voc": 16,
         "permis": 16,
         "trabalho": 15,
-        "executar": 15,
         "vei": 15,
         "problema": 15,
         "ambient": 15
       },
-      "word_count": 6618
+      "word_count": 6619
     },
     {
       "filename": "claude-code__docs___llms__ru.md",
@@ -17518,7 +17518,7 @@
           "level": 4
         },
         {
-          "text": "\u5efa\u7acb\u4ee3\u7406\u7a0b\u5f0f",
+          "text": "\u5efa\u7acb\u4ee3\u7406",
           "level": 4
         },
         {
