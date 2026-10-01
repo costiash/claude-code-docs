@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-01T06:20:34.570844Z",
+  "generated_at": "2026-10-01T09:16:14.627128Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15896,7 +15896,7 @@
           "level": 5
         },
         {
-          "text": "Claude Code \u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248",
+          "text": "Claude Code\uff08\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248\uff09",
           "level": 5
         },
         {
@@ -16152,7 +16152,7 @@
         "diff": 3,
         "gitlab": 3
       },
-      "word_count": 2119
+      "word_count": 2118
     },
     {
       "filename": "claude-code__docs___llms__ko.md",
@@ -16500,7 +16500,7 @@
           "level": 5
         },
         {
-          "text": "Construir com Claude Code",
+          "text": "Criar com Claude Code",
           "level": 3
         },
         {
@@ -17482,7 +17482,7 @@
           "level": 5
         },
         {
-          "text": "\u4f7f\u7528\u91cf\u8207\u6210\u672c",
+          "text": "\u4f7f\u7528\u91cf\u548c\u6210\u672c",
           "level": 4
         },
         {
@@ -17542,7 +17542,7 @@
           "level": 4
         },
         {
-          "text": "\u5efa\u7acb\u4ee3\u7406\u7a0b\u5f0f",
+          "text": "\u5efa\u7acb\u4ee3\u7406",
           "level": 4
         },
         {

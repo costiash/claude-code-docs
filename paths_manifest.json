@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-01T06:20:32.206837Z",
+  "generated_at": "2026-10-01T09:16:10.477387Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (209 pages)",
       "category": "claude_code",
-      "sha256": "fcd2e31560c50eff8ffc43288eab061967a2c6d837cda8fd6b56a98e3bb395c3",
+      "sha256": "4f466417222063094d74fcd24f697856596d18b9199c7a9abc8e9ee9583e903e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/pt-br.md",
       "title": "Brazilian Portuguese (208 pages)",
       "category": "claude_code",
-      "sha256": "fac8eb00cd607951f1323efc91b256956b6c710a3e0430bfc32714e87f1ea0dd",
+      "sha256": "fdc2986e5b797110cd7a65ff9d5a59dc36eab1a3de3bfce3d6da79a9871d36fc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1049,7 +1049,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-tw.md",
       "title": "Traditional Chinese (210 pages)",
       "category": "claude_code",
-      "sha256": "dd924b59389152a60ce1b951b4aecef19d6671b2cb024fdc9341b2234feb3267",
+      "sha256": "226687171df9f65fdd05c281646d5a8ac9272f92d9fada2d657e6c6aab4d167c",
       "lastmod": null,
       "fetch_status": "ok"
     },
