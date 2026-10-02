@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T15:16:29.535286Z",
+  "generated_at": "2026-10-02T18:17:50.787637Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14434,7 +14434,7 @@
           "level": 4
         },
         {
-          "text": "Grundkonzepte",
+          "text": "Grundlegende Konzepte",
           "level": 4
         },
         {
@@ -14462,7 +14462,7 @@
           "level": 3
         },
         {
-          "text": "Agenten und parallele Arbeit",
+          "text": "Agenten und paralleles Arbeiten",
           "level": 4
         },
         {
@@ -14482,7 +14482,7 @@
           "level": 4
         },
         {
-          "text": "Leitf\u00e4den",
+          "text": "Anleitungen",
           "level": 4
         },
         {
@@ -14534,7 +14534,7 @@
           "level": 4
         },
         {
-          "text": "Administration",
+          "text": "Verwaltung",
           "level": 3
         },
         {
@@ -14586,7 +14586,7 @@
           "level": 4
         },
         {
-          "text": "Selbst gehostete Umgebungen",
+          "text": "Selbstgehostete Umgebungen",
           "level": 5
         },
         {
@@ -14622,7 +14622,7 @@
           "level": 4
         },
         {
-          "text": "Grundkonzepte",
+          "text": "Grundlegende Konzepte",
           "level": 4
         },
         {
@@ -14695,7 +14695,7 @@
         "referenz": 31,
         "gateway": 31,
         "eine": 30,
-        "den": 30,
+        "den": 29,
         "mod": 29,
         "dem": 28,
         "app": 27,
@@ -14718,7 +14718,7 @@
         "vollst": 17,
         "einstellungen": 17
       },
-      "word_count": 6154
+      "word_count": 6155
     },
     {
       "filename": "claude-code__docs___llms__es.md",
@@ -14748,7 +14748,7 @@
           "level": 4
         },
         {
-          "text": "Usar Claude Code",
+          "text": "Usa Claude Code",
           "level": 4
         },
         {
@@ -14828,11 +14828,11 @@
           "level": 5
         },
         {
-          "text": "Administra un marketplace",
+          "text": "Gestiona un marketplace",
           "level": 4
         },
         {
-          "text": "Administra plugins para tu organizaci\u00f3n",
+          "text": "Administra los plugins de tu organizaci\u00f3n",
           "level": 4
         },
         {
@@ -14860,7 +14860,7 @@
           "level": 4
         },
         {
-          "text": "Gateway de aplicaciones de Claude",
+          "text": "Gateway de apps de Claude",
           "level": 5
         },
         {
@@ -14940,7 +14940,7 @@
           "level": 4
         },
         {
-          "text": "Ampliar con herramientas",
+          "text": "Ampl\u00eda con herramientas",
           "level": 4
         },
         {
@@ -14980,11 +14980,11 @@
         "claude": 296,
         "code": 203,
         "con": 126,
-        "para": 111,
+        "para": 110,
         "que": 72,
         "plugin": 70,
         "una": 67,
-        "los": 57,
+        "los": 58,
         "agent": 55,
         "del": 55,
         "configuraci": 46,
@@ -15028,7 +15028,7 @@
         "agente": 15,
         "autohospedado": 15
       },
-      "word_count": 7321
+      "word_count": 7322
     },
     {
       "filename": "claude-code__docs___llms__fr.md",
@@ -15130,7 +15130,7 @@
           "level": 4
         },
         {
-          "text": "Cr\u00e9er",
+          "text": "D\u00e9velopper",
           "level": 5
         },
         {
@@ -15448,7 +15448,7 @@
           "level": 5
         },
         {
-          "text": "Kelola marketplace",
+          "text": "Menjalankan marketplace",
           "level": 4
         },
         {
@@ -15516,7 +15516,7 @@
           "level": 4
         },
         {
-          "text": "Lingkungan yang di-host sendiri",
+          "text": "Lingkungan self-hosted",
           "level": 5
         },
         {
@@ -15600,7 +15600,7 @@
         "claude": 295,
         "dan": 281,
         "code": 206,
-        "yang": 141,
+        "yang": 140,
         "dengan": 127,
         "anda": 118,
         "untuk": 116,
@@ -15618,8 +15618,8 @@
         "konfigurasi": 30,
         "mod": 30,
         "lingkungan": 29,
-        "sendiri": 29,
         "aplikasi": 28,
+        "sendiri": 28,
         "agen": 27,
         "hook": 26,
         "mcp": 25,
@@ -15648,7 +15648,7 @@
         "prompt": 16,
         "model": 16
       },
-      "word_count": 5995
+      "word_count": 5993
     },
     {
       "filename": "claude-code__docs___llms__it.md",
@@ -15742,7 +15742,7 @@
           "level": 4
         },
         {
-          "text": "Crea plugin",
+          "text": "Creare plugin",
           "level": 4
         },
         {
@@ -15870,7 +15870,7 @@
           "level": 4
         },
         {
-          "text": "Estendi con gli strumenti",
+          "text": "Estendi con strumenti",
           "level": 4
         },
         {
@@ -15921,7 +15921,7 @@
         "tuo": 39,
         "sessioni": 39,
         "come": 38,
-        "gli": 37,
+        "gli": 36,
         "sessione": 36,
         "cloud": 32,
         "modalit": 32,
@@ -15958,7 +15958,7 @@
         "codice": 16,
         "prompt": 16
       },
-      "word_count": 7010
+      "word_count": 7009
     },
     {
       "filename": "claude-code__docs___llms__jp.md",
@@ -15992,7 +15992,7 @@
           "level": 4
         },
         {
-          "text": "\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3068\u9023\u643a",
+          "text": "\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3068\u7d71\u5408",
           "level": 4
         },
         {
@@ -16048,7 +16048,7 @@
           "level": 4
         },
         {
-          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u4f7f\u7528",
+          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u4f7f\u7528\u3059\u308b",
           "level": 4
         },
         {
@@ -16060,7 +16060,7 @@
           "level": 4
         },
         {
-          "text": "\u30d3\u30eb\u30c9",
+          "text": "\u69cb\u7bc9",
           "level": 5
         },
         {
@@ -16132,7 +16132,7 @@
           "level": 4
         },
         {
-          "text": "\u74b0\u5883",
+          "text": "environments",
           "level": 4
         },
         {
@@ -16184,11 +16184,11 @@
           "level": 4
         },
         {
-          "text": "\u52d5\u4f5c\u3092\u30ab\u30b9\u30bf\u30de\u30a4\u30ba",
+          "text": "\u52d5\u4f5c\u306e\u30ab\u30b9\u30bf\u30de\u30a4\u30ba",
           "level": 4
         },
         {
-          "text": "\u5236\u5fa1\u3068\u30aa\u30d6\u30b6\u30fc\u30d0\u30d3\u30ea\u30c6\u30a3",
+          "text": "\u5236\u5fa1\u3068\u53ef\u89b3\u6e2c\u6027",
           "level": 4
         },
         {
@@ -16200,7 +16200,7 @@
           "level": 4
         },
         {
-          "text": "\u65b0\u6a5f\u80fd",
+          "text": "\u65b0\u7740\u60c5\u5831",
           "level": 3
         },
         {
@@ -16310,7 +16310,7 @@
           "level": 5
         },
         {
-          "text": "Claude Code \ub370\uc2a4\ud06c\ud1b1",
+          "text": "\ub370\uc2a4\ud06c\ud1b1\uc6a9 Claude Code",
           "level": 5
         },
         {
@@ -16322,7 +16322,7 @@
           "level": 3
         },
         {
-          "text": "\uc5d0\uc774\uc804\ud2b8 \ubc0f \ubcd1\ub82c \uc791\uc5c5",
+          "text": "\uc5d0\uc774\uc804\ud2b8\uc640 \ubcd1\ub82c \uc791\uc5c5",
           "level": 4
         },
         {
@@ -16390,7 +16390,7 @@
           "level": 4
         },
         {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
+          "text": "\ucc38\uc870",
           "level": 4
         },
         {
@@ -16458,7 +16458,7 @@
           "level": 4
         },
         {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
+          "text": "\ucc38\uc870",
           "level": 3
         },
         {
@@ -16498,7 +16498,7 @@
           "level": 4
         },
         {
-          "text": "\uc81c\uc5b4 \ubc0f \uad00\uce21 \uac00\ub2a5\uc131",
+          "text": "\uc81c\uc5b4 \ubc0f \uad00\ucc30 \uac00\ub2a5\uc131",
           "level": 4
         },
         {
@@ -16514,7 +16514,7 @@
           "level": 3
         },
         {
-          "text": "\uc0c8\ub85c\uc6b4 \uae30\ub2a5",
+          "text": "\uc0c8\ub85c\uc6b4 \uc18c\uc2dd",
           "level": 4
         },
         {
@@ -16578,7 +16578,7 @@
         "kubernet": 3,
         "opentelemetry": 3
       },
-      "word_count": 5142
+      "word_count": 5141
     },
     {
       "filename": "claude-code__docs___llms__pt-br.md",
@@ -16680,7 +16680,7 @@
           "level": 4
         },
         {
-          "text": "Desenvolver",
+          "text": "Build",
           "level": 5
         },
         {
@@ -16692,7 +16692,7 @@
           "level": 4
         },
         {
-          "text": "Gerenciar plugins da sua organiza\u00e7\u00e3o",
+          "text": "Gerencie plugins para sua organiza\u00e7\u00e3o",
           "level": 4
         },
         {
@@ -16839,7 +16839,7 @@
       "terms": {
         "claude": 296,
         "code": 203,
-        "para": 142,
+        "para": 143,
         "com": 125,
         "que": 79,
         "ses": 74,
@@ -16930,7 +16930,7 @@
           "level": 5
         },
         {
-          "text": "Claude Code \u043d\u0430 \u0434\u0435\u0441\u043a\u0442\u043e\u043f\u0435",
+          "text": "Claude Code \u043d\u0430 \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440\u0435",
           "level": 5
         },
         {
@@ -16938,7 +16938,7 @@
           "level": 5
         },
         {
-          "text": "\u0421\u043e\u0437\u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u0441 Claude Code",
+          "text": "\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441 Claude Code",
           "level": 3
         },
         {
@@ -17102,7 +17102,7 @@
           "level": 4
         },
         {
-          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043a\u043e\u043d\u0446\u0435\u043f\u0446\u0438\u0438",
+          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043d\u044f\u0442\u0438\u044f",
           "level": 4
         },
         {
@@ -17126,7 +17126,7 @@
           "level": 4
         },
         {
-          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a\u0438 SDK",
+          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a\u0438 \u043f\u043e SDK",
           "level": 4
         },
         {
@@ -17198,7 +17198,7 @@
         "session": 4,
         "prompt": 3
       },
-      "word_count": 6070
+      "word_count": 6071
     },
     {
       "filename": "claude-code__docs___llms__zh-cn.md",
@@ -17216,7 +17216,7 @@
           "level": 2
         },
         {
-          "text": "\u5feb\u901f\u5165\u95e8",
+          "text": "\u5165\u95e8",
           "level": 3
         },
         {
@@ -17368,7 +17368,7 @@
           "level": 4
         },
         {
-          "text": "\u6743\u9650\u548c\u6c99\u7bb1\u9694\u79bb",
+          "text": "\u6743\u9650\u4e0e\u6c99\u7bb1\u9694\u79bb",
           "level": 4
         },
         {
@@ -17420,7 +17420,7 @@
           "level": 4
         },
         {
-          "text": "\u4f7f\u7528\u5de5\u5177\u8fdb\u884c\u6269\u5c55",
+          "text": "\u4f7f\u7528\u5de5\u5177\u6269\u5c55",
           "level": 4
         },
         {
@@ -17440,7 +17440,7 @@
           "level": 4
         },
         {
-          "text": "\u6700\u65b0\u52a8\u6001",
+          "text": "\u65b0\u529f\u80fd",
           "level": 3
         },
         {
@@ -17562,7 +17562,7 @@
           "level": 3
         },
         {
-          "text": "Agent \u8207\u5e73\u884c\u4f5c\u696d",
+          "text": "Agent \u8207\u5e73\u884c\u5de5\u4f5c",
           "level": 4
         },
         {
@@ -17658,7 +17658,7 @@
           "level": 5
         },
         {
-          "text": "\u7528\u91cf\u8207\u8cbb\u7528",
+          "text": "\u4f7f\u7528\u91cf\u8207\u8cbb\u7528",
           "level": 4
         },
         {
@@ -17702,7 +17702,7 @@
           "level": 3
         },
         {
-          "text": "\u53c3\u8003",
+          "text": "\u53c3\u8003\u8cc7\u6599",
           "level": 4
         },
         {
@@ -17746,7 +17746,7 @@
           "level": 4
         },
         {
-          "text": "SDK \u53c3\u8003",
+          "text": "SDK \u53c3\u8003\u8cc7\u6599",
           "level": 4
         },
         {
