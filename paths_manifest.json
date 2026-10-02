@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T18:17:47.566474Z",
+  "generated_at": "2026-10-02T21:15:53.459164Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "797d9c8136c1141c323a6a82bcd90a33bb2f183bc379ac8f4264076121f880e7",
+      "sha256": "c2073a2eb811b9322317fe8496bfa38634984a3de1147cc8ef3439f91e0be9a1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "2df9a656faa807da25cbdacca82f2fd06cb4f96f6613c1079037d9bfcaceeb61",
-      "lastmod": "2026-10-01T18:56:47.728Z",
+      "sha256": "48577d55cccc633740056ba758eb946451f6c683f1ce5036dbdce6d1f5974501",
+      "lastmod": "2026-10-02T20:36:12.038Z",
       "fetch_status": "ok"
     },
     {
@@ -939,7 +939,7 @@
       "md_url": "https://code.claude.com/docs/_llms/de.md",
       "title": "German (220 pages)",
       "category": "claude_code",
-      "sha256": "8813a215e34346a25a2c7a750d982b16c08d55660a9a1af8983d89839b082b68",
+      "sha256": "1d1c01a937aab895059d2fc9ce7a51327c27dabbdb059149cb4a36580236f1d3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (220 pages)",
       "category": "claude_code",
-      "sha256": "19129b9e8675010774973a2b3feed885caede7ca21d4157db3346f153cb11b37",
+      "sha256": "2705e4e5b89dab87dde63771ded9c8670e2b228ca07ce9540e0584f607baf7e5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (220 pages)",
       "category": "claude_code",
-      "sha256": "a59cce07e377d51e2dc7660b4d406620a3bd938c78a89652f170263c69c13f1c",
+      "sha256": "0ff08f0e67bc5f76078afd083817efaa522b05d531390ac8c53391101b79a836",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (220 pages)",
       "category": "claude_code",
-      "sha256": "103ba8b2c9b8c1051332b096cb04e901abe0018e4aeff3a88128a38ca52a3547",
+      "sha256": "7949207a704c7d7deed90cbc334488b09543e14f8acd08cb917c3d01b8e6ab44",
       "lastmod": null,
       "fetch_status": "ok"
     },
