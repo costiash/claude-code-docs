@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T09:15:14.384121Z",
+  "generated_at": "2026-10-02T12:18:07.810282Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -939,7 +939,7 @@
       "md_url": "https://code.claude.com/docs/_llms/de.md",
       "title": "German (220 pages)",
       "category": "claude_code",
-      "sha256": "6fc0c23cb87fe3636da3e3791ff8f1e360a1b140daafcbfe55c1650ba4d21770",
+      "sha256": "e30835e000726d1fea6b98d6a6d18feea93db6d5d6efad8227ab675316b98f31",
       "lastmod": null,
       "fetch_status": "ok"
     },

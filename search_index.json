@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T09:15:17.548871Z",
+  "generated_at": "2026-10-02T12:18:11.103534Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14494,7 +14494,7 @@
           "level": 5
         },
         {
-          "text": "Marketplace betreiben",
+          "text": "Einen Marketplace betreiben",
           "level": 4
         },
         {
@@ -14526,7 +14526,7 @@
           "level": 4
         },
         {
-          "text": "Claude-Apps-Gateway",
+          "text": "Gateway f\u00fcr Claude-Apps",
           "level": 5
         },
         {
@@ -14598,7 +14598,7 @@
           "level": 4
         },
         {
-          "text": "Kernkonzepte",
+          "text": "Grundkonzepte",
           "level": 4
         },
         {
@@ -14614,7 +14614,7 @@
           "level": 4
         },
         {
-          "text": "Steuerung und Beobachtbarkeit",
+          "text": "Kontrolle und Beobachtbarkeit",
           "level": 4
         },
         {
@@ -14644,16 +14644,16 @@
       ],
       "terms": {
         "sie": 390,
-        "claude": 289,
-        "und": 287,
-        "code": 217,
+        "claude": 290,
+        "und": 288,
+        "code": 218,
         "mit": 126,
         "die": 115,
         "plugin": 70,
         "ein": 66,
         "auf": 64,
         "von": 56,
-        "der": 53,
+        "der": 54,
         "agent": 51,
         "oder": 49,
         "das": 48,
@@ -14664,20 +14664,20 @@
         "einem": 36,
         "tool": 34,
         "hren": 34,
+        "einen": 32,
         "ber": 32,
         "wie": 31,
-        "einen": 31,
         "cloud": 31,
+        "referenz": 31,
         "gateway": 31,
         "eine": 30,
         "den": 29,
-        "referenz": 29,
+        "mod": 29,
         "dem": 28,
         "app": 27,
         "sitzung": 27,
+        "hook": 26,
         "konfigurieren": 26,
-        "mod": 26,
-        "hook": 25,
         "mcp": 25,
         "woche": 25,
         "desktop": 23,
@@ -14691,10 +14691,10 @@
         "modu": 18,
         "einer": 17,
         "ihr": 17,
-        "marketplace": 17,
-        "erfahren": 16
+        "vollst": 17,
+        "einstellungen": 17
       },
-      "word_count": 6131
+      "word_count": 6155
     },
     {
       "filename": "claude-code__docs___llms__es.md",
