@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-03T06:20:40.658085Z",
+  "generated_at": "2026-10-03T18:46:53.183301Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -411,8 +411,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-teams.md",
       "title": "Orchestrate teams of Claude Code sessions",
       "category": "claude_code",
-      "sha256": "d18a41b9ddc4ecdf3668165265321fedfe9c9bbe96ea071d8fc0e6ef2dafb19b",
-      "lastmod": "2026-10-03T01:12:43.253Z",
+      "sha256": "a2ed185b716d2550240752d988bfd1875cb2cad3f803be3a795f14054f3c0549",
+      "lastmod": "2026-10-03T16:27:00.095Z",
       "fetch_status": "ok"
     },
     {

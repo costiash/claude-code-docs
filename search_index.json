@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-03T06:20:43.358214Z",
+  "generated_at": "2026-10-03T18:46:56.411000Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7715,15 +7715,15 @@
         }
       ],
       "terms": {
-        "teammate": 110,
-        "teammat": 85,
-        "claude": 84,
+        "teammate": 112,
+        "claude": 86,
         "team": 84,
+        "teammat": 84,
         "agent": 81,
-        "task": 71,
+        "task": 72,
         "session": 64,
-        "lead": 58,
-        "code": 51,
+        "lead": 57,
+        "code": 53,
         "subagent": 51,
         "work": 49,
         "spawn": 40,
@@ -7732,11 +7732,12 @@
         "message": 26,
         "other": 24,
         "own": 22,
+        "proces": 21,
         "prompt": 20,
+        "set": 19,
         "one": 19,
-        "proces": 19,
-        "set": 18,
-        "list": 18,
+        "list": 19,
+        "definition": 18,
         "see": 17,
         "split": 17,
         "file": 16,
@@ -7745,12 +7746,11 @@
         "start": 16,
         "after": 16,
         "model": 16,
-        "definition": 16,
         "permission": 16,
         "run": 15,
+        "nam": 15,
         "name": 15,
         "pane": 15,
-        "nam": 14,
         "coordination": 13,
         "context": 13,
         "directly": 13,
@@ -7762,11 +7762,11 @@
         "any": 12,
         "same": 12,
         "back": 12,
+        "tool": 12,
         "ask": 12,
-        "instead": 12,
-        "request": 12
+        "instead": 12
       },
-      "word_count": 5650
+      "word_count": 5688
     },
     {
       "filename": "claude-code__agent-view.md",
