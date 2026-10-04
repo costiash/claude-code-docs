@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T16:16:59.993972Z",
+  "generated_at": "2026-10-04T18:45:36.792905Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -379,7 +379,7 @@
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
       "sha256": "ace8fbe297f55481fd970510727059e9946e8742ae86e33f4737ce59f3ec9c50",
-      "lastmod": "2026-10-04T06:10:41.540Z",
+      "lastmod": "2026-10-04T16:16:37.151Z",
       "fetch_status": "ok"
     },
     {
@@ -653,8 +653,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-directory.md",
       "title": "Explore the .claude directory",
       "category": "claude_code",
-      "sha256": "327bcc9e6f6ea0ca6a23dfa2f83249848a3be91eb3cbdc9eb8499963f1a62f94",
-      "lastmod": "2026-10-04T04:47:16.657Z",
+      "sha256": "eca8f5bf53fbaf92aa8dde1e70609ecec434cc8cf45db17edad4385846530973",
+      "lastmod": "2026-10-04T16:16:35.293Z",
       "fetch_status": "ok"
     },
     {
