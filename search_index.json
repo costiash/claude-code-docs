@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T18:45:40.005347Z",
+  "generated_at": "2026-10-04T21:31:52.759451Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -11134,7 +11134,7 @@
         "auto": 25,
         "background": 25
       },
-      "word_count": 10239
+      "word_count": 10238
     },
     {
       "filename": "claude-code__claude-platform-on-aws.md",

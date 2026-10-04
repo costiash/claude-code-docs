@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T18:45:36.792905Z",
+  "generated_at": "2026-10-04T21:31:48.478656Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -653,8 +653,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-directory.md",
       "title": "Explore the .claude directory",
       "category": "claude_code",
-      "sha256": "eca8f5bf53fbaf92aa8dde1e70609ecec434cc8cf45db17edad4385846530973",
-      "lastmod": "2026-10-04T16:16:35.293Z",
+      "sha256": "ada65719991b700cd65351402efaa7575fd2b00205aae5915afbe41410ccd178",
+      "lastmod": "2026-10-04T20:12:31.605Z",
       "fetch_status": "ok"
     },
     {
