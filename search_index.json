@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T21:31:52.759451Z",
+  "generated_at": "2026-10-05T00:24:47.632747Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -21795,21 +21795,21 @@
       "terms": {
         "claude": 210,
         "code": 157,
-        "prompt": 95,
+        "prompt": 96,
         "command": 85,
         "session": 66,
         "turn": 61,
         "mode": 56,
-        "pres": 49,
+        "pres": 50,
         "one": 49,
         "line": 48,
+        "open": 45,
         "run": 45,
         "input": 44,
-        "open": 44,
         "text": 43,
         "word": 43,
+        "background": 42,
         "start": 42,
-        "background": 41,
         "terminal": 36,
         "list": 36,
         "task": 35,
@@ -21821,10 +21821,10 @@
         "such": 31,
         "character": 30,
         "end": 30,
+        "while": 28,
         "only": 28,
         "wait": 28,
         "conversation": 27,
-        "while": 27,
         "see": 26,
         "cursor": 26,
         "panel": 26,
@@ -21844,7 +21844,7 @@
         "shortcut": 22,
         "runn": 22
       },
-      "word_count": 10459
+      "word_count": 10471
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -22181,7 +22181,7 @@
         "claude": 33,
         "bind": 33,
         "code": 30,
-        "open": 27,
+        "open": 28,
         "description": 27,
         "available": 25,
         "select": 25,
@@ -22194,8 +22194,8 @@
         "mode": 22,
         "such": 20,
         "escape": 19,
+        "shortcut": 18,
         "dialog": 18,
-        "shortcut": 17,
         "selection": 17,
         "diff": 16,
         "panel": 16,
@@ -22213,7 +22213,7 @@
         "field": 13,
         "unbound": 13,
         "session": 13,
-        "while": 12,
+        "while": 13,
         "option": 12,
         "viewport": 12,
         "active": 12,
@@ -22221,10 +22221,10 @@
         "only": 11,
         "keyboard": 10,
         "footer": 10,
-        "vim": 10,
-        "input": 9
+        "prompt": 10,
+        "vim": 10
       },
-      "word_count": 5091
+      "word_count": 5112
     },
     {
       "filename": "claude-code__large-codebases.md",

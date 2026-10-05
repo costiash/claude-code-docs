@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T21:31:48.478656Z",
+  "generated_at": "2026-10-05T00:24:43.403933Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1258,8 +1258,8 @@
       "md_url": "https://code.claude.com/docs/en/interactive-mode.md",
       "title": "Interactive mode",
       "category": "claude_code",
-      "sha256": "f6aa6815403332525b727f08fbc466c089ca031137b11c77293813ad5db19f9e",
-      "lastmod": "2026-10-04T04:45:40.180Z",
+      "sha256": "b9755bd87299d0d9e7d4216cfcfb484700ec0c6e70d9df8a1b69635f1748f81b",
+      "lastmod": "2026-10-04T22:03:56.530Z",
       "fetch_status": "ok"
     },
     {
@@ -1280,8 +1280,8 @@
       "md_url": "https://code.claude.com/docs/en/keybindings.md",
       "title": "Customize keyboard shortcuts",
       "category": "claude_code",
-      "sha256": "df193c4e07dc91d43be2221e52edfb17663d0da8983b7bf23d6fea925850465a",
-      "lastmod": "2026-10-04T04:01:00.358Z",
+      "sha256": "ea0fa18b42e013af104d8676d92bee6a1500299c75b96ab095f5cc3ec3b26c31",
+      "lastmod": "2026-10-04T22:03:56.526Z",
       "fetch_status": "ok"
     },
     {
