@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-05T03:21:38.234118Z",
+  "generated_at": "2026-10-05T15:16:58.079596Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "0f23fc6d6a01afc593ebc33a6b665b5607f9ad093f0478b03529ce37b95394a1",
-      "lastmod": "2026-10-04T15:57:49.683Z",
+      "sha256": "a516356b9c452b0f893cb12b68365d25567b2444b0c1cdc39978f86d220e196a",
+      "lastmod": "2026-10-05T13:55:18.493Z",
       "fetch_status": "ok"
     },
     {
