@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T21:15:56.023742Z",
+  "generated_at": "2026-10-07T00:23:36.400769Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14782,7 +14782,7 @@
         "einer": 17,
         "erfahren": 17
       },
-      "word_count": 6191
+      "word_count": 6190
     },
     {
       "filename": "claude-code__docs___llms__es.md",
@@ -15088,11 +15088,11 @@
         "marketplace": 16,
         "desktop": 15,
         "modelo": 15,
-        "completa": 15,
         "agente": 15,
-        "autohospedado": 15
+        "autohospedado": 15,
+        "subagent": 14
       },
-      "word_count": 7359
+      "word_count": 7356
     },
     {
       "filename": "claude-code__docs___llms__fr.md",
@@ -16022,7 +16022,7 @@
         "organizzazione": 17,
         "codice": 16
       },
-      "word_count": 7045
+      "word_count": 7044
     },
     {
       "filename": "claude-code__docs___llms__jp.md",
@@ -16600,8 +16600,8 @@
         "desktop": 16,
         "cli": 16,
         "cloud": 15,
-        "hook": 13,
         "api": 13,
+        "hook": 12,
         "platform": 12,
         "google": 11,
         "skill": 10,
@@ -16642,7 +16642,7 @@
         "kubernet": 3,
         "opentelemetry": 3
       },
-      "word_count": 5169
+      "word_count": 5168
     },
     {
       "filename": "claude-code__docs___llms__pt-br.md",
@@ -16952,7 +16952,7 @@
         "permis": 16,
         "marketplace": 16
       },
-      "word_count": 7089
+      "word_count": 7087
     },
     {
       "filename": "claude-code__docs___llms__ru.md",
@@ -17262,7 +17262,7 @@
         "session": 4,
         "prompt": 3
       },
-      "word_count": 6094
+      "word_count": 6093
     },
     {
       "filename": "claude-code__docs___llms__zh-cn.md",
@@ -41274,7 +41274,7 @@
         "see": 3,
         "claude": 2
       },
-      "word_count": 902
+      "word_count": 1018
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__console.md",
@@ -42274,7 +42274,7 @@
         "set": 11,
         "read": 10
       },
-      "word_count": 9983
+      "word_count": 10050
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__bash-tool.md",
@@ -44268,7 +44268,7 @@
         "need": 3,
         "follow": 3
       },
-      "word_count": 4932
+      "word_count": 4928
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__strict-tool-use.md",
@@ -44754,7 +44754,7 @@
         "conversation": 7,
         "example": 7
       },
-      "word_count": 6782
+      "word_count": 6865
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__tool-search-tool.md",
@@ -45187,9 +45187,9 @@
         }
       ],
       "terms": {
-        "fetch": 74,
-        "tool": 68,
-        "web": 48,
+        "fetch": 73,
+        "tool": 69,
+        "web": 47,
         "claude": 38,
         "content": 32,
         "url": 31,
@@ -45200,10 +45200,10 @@
         "see": 15,
         "only": 14,
         "token": 13,
-        "search": 13,
         "code": 12,
         "response": 12,
         "appear": 12,
+        "search": 12,
         "data": 11,
         "document": 11,
         "user": 11,
@@ -45222,11 +45222,11 @@
         "server": 8,
         "client": 8,
         "text": 8,
-        "domain": 8,
         "page": 8,
         "support": 7,
         "such": 7,
         "prompt": 7,
+        "domain": 7,
         "citation": 7,
         "execution": 7,
         "http": 6,
@@ -45238,7 +45238,7 @@
         "conversation": 6,
         "credential": 6
       },
-      "word_count": 3892
+      "word_count": 3889
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__web-search-tool.md",
@@ -45325,9 +45325,9 @@
         }
       ],
       "terms": {
-        "search": 81,
-        "tool": 54,
-        "web": 50,
+        "search": 80,
+        "tool": 55,
+        "web": 49,
         "claude": 36,
         "api": 25,
         "result": 22,
@@ -45341,10 +45341,10 @@
         "see": 13,
         "note": 12,
         "agent": 11,
-        "domain": 11,
         "response": 11,
         "server": 11,
         "call": 11,
+        "domain": 10,
         "run": 9,
         "execution": 9,
         "return": 9,
@@ -45359,7 +45359,6 @@
         "only": 6,
         "support": 6,
         "conversation": 6,
-        "fetch": 6,
         "limit": 6,
         "block": 6,
         "back": 6,
@@ -45373,10 +45372,11 @@
         "directly": 5,
         "each": 5,
         "field": 5,
+        "fetch": 5,
         "parameter": 5,
         "source": 5
       },
-      "word_count": 3132
+      "word_count": 3129
     },
     {
       "filename": "docs__en__api__beta.md",
@@ -132388,6 +132388,120 @@
         "follow": 3
       },
       "word_count": 1853
+    },
+    {
+      "filename": "docs__en__managed-agents__tools-web-restrictions.md",
+      "id": "docs/en/managed-agents/tools-web-restrictions",
+      "title": "Web tool restrictions",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions",
+      "headings": [
+        {
+          "text": "Set domain lists on an agent",
+          "level": 2
+        },
+        {
+          "text": "Settings",
+          "level": 2
+        },
+        {
+          "text": "When a domain is not permitted",
+          "level": 2
+        },
+        {
+          "text": "Domain list rules",
+          "level": 2
+        },
+        {
+          "text": "What a listed domain matches",
+          "level": 3
+        },
+        {
+          "text": "Domain format",
+          "level": 3
+        },
+        {
+          "text": "Path suffixes on web search domains",
+          "level": 3
+        },
+        {
+          "text": "Validation errors",
+          "level": 2
+        },
+        {
+          "text": "When an accepted setting is no longer valid",
+          "level": 3
+        },
+        {
+          "text": "Multiagent and outcome-driven sessions",
+          "level": 2
+        },
+        {
+          "text": "Change the lists mid-session",
+          "level": 2
+        },
+        {
+          "text": "Differences from the Messages API tools",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "domain": 38,
+        "list": 36,
+        "agent": 35,
+        "tool": 29,
+        "session": 16,
+        "setting": 15,
+        "web": 12,
+        "set": 12,
+        "host": 12,
+        "manag": 10,
+        "reach": 10,
+        "search": 9,
+        "card": 9,
+        "claude": 8,
+        "each": 8,
+        "own": 8,
+        "api": 7,
+        "coordinator": 7,
+        "roster": 7,
+        "title": 6,
+        "fetch": 6,
+        "http": 6,
+        "platform": 6,
+        "com": 6,
+        "doc": 6,
+        "one": 6,
+        "doe": 6,
+        "error": 6,
+        "cover": 6,
+        "path": 6,
+        "control": 5,
+        "entri": 5,
+        "only": 5,
+        "environment": 5,
+        "apply": 5,
+        "messag": 5,
+        "configuration": 5,
+        "accept": 5,
+        "sett": 5,
+        "see": 5,
+        "rul": 5,
+        "same": 5,
+        "entry": 5,
+        "call": 5,
+        "reject": 5,
+        "name": 5,
+        "multiagent": 5,
+        "url": 4,
+        "content": 4,
+        "result": 4
+      },
+      "word_count": 2242
     },
     {
       "filename": "docs__en__managed-agents__vaults.md",

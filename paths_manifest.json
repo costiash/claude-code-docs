@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T21:15:53.719348Z",
+  "generated_at": "2026-10-07T00:23:32.162281Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -939,7 +939,7 @@
       "md_url": "https://code.claude.com/docs/_llms/de.md",
       "title": "German (221 pages)",
       "category": "claude_code",
-      "sha256": "118df33ec0f9e4070204c20418e9cebf8bd6be3af7a6e7e47931b6db777dabd9",
+      "sha256": "a991ffe6bba24d802989bd0035db5bef0d63ce367003c5fc741e73a771041d46",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (221 pages)",
       "category": "claude_code",
-      "sha256": "582a91fe09289605235ad63b92eebc0cf97ff3a52cb1b9b17a7a1f762a1c89e1",
+      "sha256": "c121c86c34085d35f1a50f216621848b365e5b5e59fe3ef2565fb62ef77a9733",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (221 pages)",
       "category": "claude_code",
-      "sha256": "73c814a4a20bcbafa8f430e71ea4c5e042f7a70a18341caf448d18894c2936b6",
+      "sha256": "357629b9a520af2d22d0aef72fc68e7da8d12e6a83ff2f490b40c9d3d042f24c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (221 pages)",
       "category": "claude_code",
-      "sha256": "9d7eae130004d677be185212ab16ca0a2a13bfce22318c604f6611972ccb18cf",
+      "sha256": "67c3bc3dd740963eba1bfdbac54d694fd50049c4e8ad7f56ab97872d1f702b35",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/pt-br.md",
       "title": "Brazilian Portuguese (221 pages)",
       "category": "claude_code",
-      "sha256": "69dbae0ef51c0cf5157b3e42901bf5582bc8746fca8d2dd2853d04e24e93fec2",
+      "sha256": "8b5faa8f60c3f71eada441f34ee0891723924b2b64b4d60f3d1e64e269114df8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1027,7 +1027,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ru.md",
       "title": "Russian (221 pages)",
       "category": "claude_code",
-      "sha256": "6b52402004b46ded186cfc4d0df2f498df69d11e5f408c6a0547a5dbb6dcc322",
+      "sha256": "f239a9bc338095dbfe29509c6d6b66e98035d0dc13a015afad60896e64abce67",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1049,7 +1049,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-tw.md",
       "title": "Traditional Chinese (221 pages)",
       "category": "claude_code",
-      "sha256": "9b0b0d861a136e701f412476022fba99e916eb61211f42ec4f0de85009abaca5",
+      "sha256": "c0ff0952d146d920bd3ff2104cb8d9bf4fd50071422d9ee92796318a1fa10fa8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2809,7 +2809,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts.md",
       "title": "Architecture and components",
       "category": "agents_and_tools",
-      "sha256": "b1801270990474fd6e4363698b27000c5312945e33443508309c3fa9103549b2",
+      "sha256": "a4784f030cc9302d08f06c3e22f4a75325965a9af6fa564bf0a21c2726cfdc6d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2919,7 +2919,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool.md",
       "title": "Advisor tool",
       "category": "agents_and_tools",
-      "sha256": "bc15d410ba53cba4bc1a23f9de0b8d2c180a4a7d7c319087b872208929c4f80c",
+      "sha256": "71cab8507f3e61c845c289ef2a7678efb4cf68d905488e64e5f2a28c8d9c7ee0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2985,7 +2985,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md",
       "title": "Define tools",
       "category": "agents_and_tools",
-      "sha256": "6a99cce85b0cdae1006f271ea0eb066e758047676a6b8514e0116b5caa4fccff",
+      "sha256": "6bc2d6096b2129545389255a3551fae839e628890a6c05753d1a8af827d9834b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -3084,7 +3084,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md",
       "title": "Server tools",
       "category": "agents_and_tools",
-      "sha256": "f68cd3aee827c65194a46fdd186c164577d078eea00fdc76018dc071b7cf9c1b",
+      "sha256": "afe9b25f34c7429253d2f61a09a86c4554296e969a9785b288e1f29e686cea66",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -3139,7 +3139,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner.md",
       "title": "Tool Runner (SDK)",
       "category": "agents_and_tools",
-      "sha256": "33a3e0b5fa743efde2a7124bfe3349f50d934de50aae847b37b4720202f31bc0",
+      "sha256": "ab8b4f3fca2a4c24c4d9c6b360597a3bf71ac26dc409378945d823ac653fa6da",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -3183,7 +3183,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool.md",
       "title": "Web fetch tool",
       "category": "agents_and_tools",
-      "sha256": "12a1845fba2280100e54b8d4e8ed7c66a8f53ef553c066708da6479d023a1b7f",
+      "sha256": "ef479dc5e2a0e25fee39d8004e26b6e8b243df5b6677fa3ccb3c4b58e784f228",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -3194,7 +3194,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool.md",
       "title": "Web search tool",
       "category": "agents_and_tools",
-      "sha256": "84e820d62be02d1b7849db243edce6d72825ebc4d4466739ed129478f30b22d8",
+      "sha256": "cad0c7c7e23ba6e611857d454ed42e9a88d800868033cce6c294b814fc6c2509",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10224,6 +10224,17 @@
       "title": "Tools",
       "category": "core_documentation",
       "sha256": "4f9c8be97d55c0007135e74558ab9c07c766b6d07e2ad5b60de6e71ff5efddc6",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/managed-agents/tools-web-restrictions",
+      "filename": "docs__en__managed-agents__tools-web-restrictions.md",
+      "url": "https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions",
+      "md_url": "https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions.md",
+      "title": "Web tool restrictions",
+      "category": "core_documentation",
+      "sha256": "bcd6ba17c8423351257edda8f01f49817554dd601f2df092491b5acc3a687765",
       "lastmod": null,
       "fetch_status": "ok"
     },
