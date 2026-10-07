@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T09:17:03.276154Z",
+  "generated_at": "2026-10-07T12:18:52.503872Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15071,10 +15071,10 @@
         "puerta": 21,
         "archivo": 20,
         "comando": 20,
+        "autom": 20,
         "ejecutar": 20,
         "uso": 20,
         "skill": 19,
-        "autom": 19,
         "cada": 19,
         "problema": 19,
         "servidor": 19,
@@ -15092,7 +15092,7 @@
         "autohospedado": 15,
         "subagent": 14
       },
-      "word_count": 7356
+      "word_count": 7357
     },
     {
       "filename": "claude-code__docs___llms__fr.md",

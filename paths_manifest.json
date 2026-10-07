@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T09:17:00.531947Z",
+  "generated_at": "2026-10-07T12:18:48.130226Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (221 pages)",
       "category": "claude_code",
-      "sha256": "c121c86c34085d35f1a50f216621848b365e5b5e59fe3ef2565fb62ef77a9733",
+      "sha256": "516780bb57c8bc743786403c0c4a3d42365a4a215cee7140975d5b8042df4fd2",
       "lastmod": null,
       "fetch_status": "ok"
     },
