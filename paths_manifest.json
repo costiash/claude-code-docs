@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T00:23:32.162281Z",
+  "generated_at": "2026-10-07T03:20:19.069507Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -576,8 +576,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway.md",
       "title": "Claude apps gateway for Amazon Bedrock, Claude Platform on AWS, Google Cloud, and Microsoft Foundry",
       "category": "claude_code",
-      "sha256": "613fd2a769a23b96d1aa8e0daece5bdf8ed591263fa58a37b043130936b4eff3",
-      "lastmod": "2026-10-04T06:19:05.898Z",
+      "sha256": "10234d58f2fa894b339b7d4a747cf96b990cc4d965985410a908848d86f85cfe",
+      "lastmod": "2026-10-07T00:29:41.849Z",
       "fetch_status": "ok"
     },
     {
@@ -587,8 +587,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "8e8cd8b149da145b85a03607bf3e677545af0686c63e3d1cebbb8dae1986e6fe",
-      "lastmod": "2026-10-04T15:48:19.557Z",
+      "sha256": "b4c90f883e0b0ea3d2de1b53ded7bf4f197e436b1c8f338be6793d377df1ff53",
+      "lastmod": "2026-10-07T00:29:41.860Z",
       "fetch_status": "ok"
     },
     {
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "823162001fb4943c9355ddf138a5468692a62707167ff66d763963b7fec67de8",
-      "lastmod": "2026-10-04T05:10:44.805Z",
+      "sha256": "91d7e69d5b2e3201db531e89cfad0b0b5383ae5a4545a4a239b4ccd81585213b",
+      "lastmod": "2026-10-07T00:29:41.852Z",
       "fetch_status": "ok"
     },
     {
@@ -609,8 +609,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md",
       "title": "Deploy Claude apps gateway on AWS",
       "category": "claude_code",
-      "sha256": "530426cc1ab4ea7e9df9448cb243ce9021e60706e292cf4f3dccfada9dde0e88",
-      "lastmod": "2026-09-30T20:43:58.510Z",
+      "sha256": "9063dde472f1a4ee1efb06928b5189d938de00e17eaf9361c3e6dd4fceead5a3",
+      "lastmod": "2026-10-07T00:29:41.847Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/sessions.md",
       "title": "Manage sessions",
       "category": "claude_code",
-      "sha256": "550ca022a3511cc432c93ec518d967d5493ad763a76edcaf180151f89e5b173b",
-      "lastmod": "2026-10-06T20:02:39.576Z",
+      "sha256": "73ee8dbe27ad399e763ad8c32e5a1657a2c12e0cbbf9a64d45db26be0e738f26",
+      "lastmod": "2026-10-07T01:02:29.363Z",
       "fetch_status": "ok"
     },
     {
