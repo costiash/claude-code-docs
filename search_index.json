@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T21:15:13.199362Z",
+  "generated_at": "2026-10-08T00:22:36.475485Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -4782,7 +4782,7 @@
         "run": 25,
         "read": 25
       },
-      "word_count": 20402
+      "word_count": 20420
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -8037,45 +8037,45 @@
         }
       ],
       "terms": {
-        "session": 690,
-        "background": 194,
+        "session": 689,
+        "background": 193,
         "claude": 185,
         "agent": 174,
         "view": 149,
-        "code": 139,
+        "code": 138,
         "row": 127,
         "start": 125,
         "open": 115,
-        "show": 111,
+        "show": 112,
         "dispatch": 104,
         "worktree": 96,
         "directory": 93,
-        "instead": 90,
+        "prompt": 91,
+        "instead": 89,
         "run": 89,
-        "prompt": 89,
         "before": 84,
         "proces": 84,
-        "input": 83,
         "work": 83,
-        "runn": 79,
+        "input": 82,
+        "runn": 77,
         "attach": 76,
         "one": 66,
+        "such": 66,
         "list": 66,
-        "conversation": 65,
-        "such": 65,
-        "keep": 64,
+        "keep": 65,
+        "conversation": 64,
         "pres": 64,
         "command": 63,
-        "while": 60,
         "same": 59,
         "restart": 59,
         "terminal": 58,
         "request": 58,
-        "after": 57,
-        "wait": 57,
+        "after": 58,
+        "wait": 58,
+        "while": 57,
         "supervisor": 57,
         "name": 53,
-        "subagent": 51,
+        "subagent": 50,
         "copy": 50,
         "again": 49,
         "shell": 47,
@@ -8084,11 +8084,11 @@
         "own": 44,
         "first": 44,
         "delet": 44,
+        "without": 43,
         "mode": 43,
-        "fail": 43,
-        "new": 42
+        "fail": 43
       },
-      "word_count": 20343
+      "word_count": 20341
     },
     {
       "filename": "claude-code__agents.md",
@@ -11938,17 +11938,17 @@
         "cloud": 80,
         "org": 76,
         "run": 67,
-        "network": 59,
+        "network": 60,
         "host": 59,
         "script": 56,
         "setup": 47,
         "install": 47,
         "start": 46,
         "code": 45,
-        "secret": 44,
+        "secret": 45,
         "default": 40,
         "www": 40,
-        "add": 37,
+        "add": 38,
         "proxy": 37,
         "one": 35,
         "accordion": 34,
@@ -11982,7 +11982,7 @@
         "tool": 19,
         "work": 18
       },
-      "word_count": 7598
+      "word_count": 7601
     },
     {
       "filename": "claude-code__code-review.md",
@@ -13904,7 +13904,7 @@
         "cloud": 9,
         "add": 9
       },
-      "word_count": 13097
+      "word_count": 13216
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -17971,8 +17971,8 @@
         "variable": 93,
         "command": 86,
         "turn": 84,
-        "server": 78,
         "agent": 77,
+        "server": 77,
         "such": 76,
         "request": 73,
         "off": 73,
@@ -18008,7 +18008,7 @@
         "google": 40,
         "environment": 38
       },
-      "word_count": 21066
+      "word_count": 21063
     },
     {
       "filename": "claude-code__errors.md",
@@ -23869,17 +23869,17 @@
         }
       ],
       "terms": {
-        "mcp": 204,
-        "claude": 151,
+        "mcp": 199,
+        "claude": 149,
         "server": 94,
         "json": 52,
         "code": 47,
         "tool": 43,
-        "name": 28,
         "add": 27,
-        "list": 25,
+        "name": 27,
         "token": 25,
         "url": 25,
+        "list": 24,
         "anthropic": 23,
         "plugin": 23,
         "command": 21,
@@ -23910,17 +23910,17 @@
         "setting": 10,
         "scop": 10,
         "block": 10,
-        "get": 10,
-        "auto": 10,
         "output": 10,
         "stdio": 9,
         "support": 9,
-        "protocol": 8,
+        "get": 9,
         "read": 8,
         "directory": 8,
-        "default": 8
+        "default": 8,
+        "search": 8,
+        "auto": 8
       },
-      "word_count": 16454
+      "word_count": 16377
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -24413,13 +24413,13 @@
         }
       ],
       "terms": {
-        "session": 41,
+        "session": 40,
         "claude": 39,
         "code": 33,
         "app": 25,
         "cloud": 22,
-        "remote": 15,
-        "control": 15,
+        "remote": 14,
+        "control": 14,
         "dispatch": 14,
         "task": 13,
         "phone": 12,
@@ -24446,6 +24446,7 @@
         "terminal": 4,
         "notification": 4,
         "file": 3,
+        "available": 3,
         "android": 3,
         "where": 3,
         "reach": 3,
@@ -24461,10 +24462,9 @@
         "one": 3,
         "finish": 3,
         "continue": 3,
-        "select": 3,
         "also": 3
       },
-      "word_count": 1205
+      "word_count": 1197
     },
     {
       "filename": "claude-code__model-config.md",
@@ -25565,18 +25565,18 @@
         }
       ],
       "terms": {
-        "mode": 258,
-        "claude": 205,
-        "session": 166,
+        "mode": 259,
+        "claude": 204,
+        "session": 168,
         "code": 163,
-        "permission": 124,
-        "auto": 114,
+        "permission": 125,
+        "auto": 116,
         "start": 89,
         "prompt": 85,
         "classifier": 83,
         "command": 78,
         "path": 68,
-        "run": 65,
+        "run": 64,
         "set": 62,
         "read": 60,
         "action": 59,
@@ -25616,7 +25616,7 @@
         "directory": 27,
         "manual": 26
       },
-      "word_count": 12233
+      "word_count": 12248
     },
     {
       "filename": "claude-code__permissions.md",
@@ -26528,7 +26528,7 @@
         "error": 9,
         "same": 9
       },
-      "word_count": 8847
+      "word_count": 8881
     },
     {
       "filename": "claude-code__plugins__code-intelligence.md",
@@ -28272,7 +28272,7 @@
         "doesn": 10,
         "fil": 10
       },
-      "word_count": 4849
+      "word_count": 4852
     },
     {
       "filename": "claude-code__plugins__mods__api.md",
@@ -28332,41 +28332,41 @@
       ],
       "terms": {
         "mod": 29,
-        "claude": 25,
+        "claude": 28,
         "call": 24,
         "hook": 23,
         "command": 20,
         "session": 18,
-        "name": 16,
+        "name": 17,
+        "tool": 16,
         "start": 15,
         "run": 14,
         "message": 14,
         "api": 13,
-        "tool": 12,
         "read": 12,
         "model": 11,
         "work": 11,
         "such": 11,
         "prompt": 11,
+        "turn": 11,
         "one": 11,
+        "add": 10,
         "event": 10,
-        "turn": 10,
+        "register": 10,
         "return": 10,
-        "add": 9,
-        "register": 9,
         "user": 8,
         "after": 8,
         "text": 8,
         "resolv": 8,
+        "code": 7,
         "timer": 7,
         "method": 7,
         "once": 7,
+        "see": 7,
         "own": 7,
         "send": 7,
-        "code": 6,
         "reach": 6,
         "first": 6,
-        "see": 6,
         "show": 6,
         "doesn": 6,
         "runn": 6,
@@ -28382,7 +28382,7 @@
         "between": 4,
         "process": 4
       },
-      "word_count": 2437
+      "word_count": 2494
     },
     {
       "filename": "claude-code__plugins__mods__create.md",
@@ -28440,13 +28440,13 @@
         "mod": 110,
         "claude": 79,
         "code": 56,
+        "hook": 33,
         "session": 32,
         "call": 31,
-        "hook": 31,
         "load": 31,
         "step": 29,
         "run": 28,
-        "each": 23,
+        "each": 24,
         "plugin": 21,
         "event": 21,
         "directory": 21,
@@ -28455,15 +28455,15 @@
         "file": 17,
         "count": 15,
         "read": 15,
-        "list": 15,
         "write": 14,
         "reload": 14,
         "fil": 14,
+        "check": 14,
         "first": 13,
-        "check": 13,
         "nam": 13,
         "prompt": 13,
         "title": 13,
+        "list": 13,
         "test": 13,
         "command": 12,
         "module": 12,
@@ -28477,18 +28477,18 @@
         "version": 10,
         "path": 10,
         "start": 10,
+        "such": 10,
         "writ": 9,
         "own": 9,
         "install": 9,
-        "such": 9,
         "line": 9,
+        "see": 8,
         "tab": 8,
         "name": 8,
         "every": 8,
-        "api": 8,
-        "see": 7
+        "api": 8
       },
-      "word_count": 3652
+      "word_count": 3681
     },
     {
       "filename": "claude-code__plugins__mods__events.md",
@@ -28887,8 +28887,8 @@
         "hook": 54,
         "claude": 52,
         "one": 47,
-        "each": 42,
-        "call": 35,
+        "each": 43,
+        "call": 36,
         "value": 35,
         "open": 32,
         "button": 31,
@@ -28930,7 +28930,7 @@
         "prop": 14,
         "title": 14
       },
-      "word_count": 7122
+      "word_count": 7149
     },
     {
       "filename": "claude-code__plugins__mods__overview.md",
@@ -29249,11 +29249,11 @@
         }
       ],
       "terms": {
-        "test": 72,
+        "test": 74,
         "mod": 68,
-        "stub": 37,
+        "stub": 38,
         "call": 34,
-        "hook": 31,
+        "hook": 33,
         "return": 23,
         "answer": 19,
         "run": 19,
@@ -29265,14 +29265,14 @@
         "one": 13,
         "code": 12,
         "file": 12,
+        "fail": 12,
         "load": 11,
+        "pass": 11,
         "start": 11,
         "second": 11,
         "event": 10,
-        "pass": 10,
+        "such": 10,
         "without": 9,
-        "such": 9,
-        "fail": 9,
         "fire": 8,
         "kit": 8,
         "tool": 8,
@@ -29300,7 +29300,7 @@
         "mov": 6,
         "write": 5
       },
-      "word_count": 3954
+      "word_count": 4002
     },
     {
       "filename": "claude-code__plugins__mods__troubleshoot.md",
@@ -33975,18 +33975,18 @@
         }
       ],
       "terms": {
-        "claude": 621,
-        "code": 496,
+        "claude": 622,
+        "code": 497,
         "setting": 425,
         "file": 301,
         "manag": 253,
         "sandbox": 246,
-        "default": 227,
+        "default": 226,
         "session": 222,
         "model": 214,
         "json": 213,
         "command": 206,
-        "set": 203,
+        "set": 204,
         "key": 199,
         "any": 198,
         "type": 166,
@@ -33998,8 +33998,8 @@
         "run": 117,
         "theme": 116,
         "mode": 115,
+        "such": 115,
         "unset": 115,
-        "such": 114,
         "every": 110,
         "off": 109,
         "see": 109,
@@ -34008,7 +34008,7 @@
         "list": 100,
         "block": 97,
         "const": 96,
-        "path": 92,
+        "path": 93,
         "show": 91,
         "read": 89,
         "tool": 89,
@@ -34017,16 +34017,16 @@
         "fil": 82,
         "plugin": 80,
         "terminal": 80,
+        "project": 79,
         "prompt": 79,
-        "project": 77,
         "later": 77,
         "entry": 75,
         "requir": 74,
         "name": 72,
         "start": 71,
-        "keep": 70
+        "keep": 69
       },
-      "word_count": 53373
+      "word_count": 53536
     },
     {
       "filename": "claude-code__setup.md",
@@ -34686,6 +34686,10 @@
           "level": 2
         },
         {
+          "text": "Task fields",
+          "level": 3
+        },
+        {
           "text": "Tips",
           "level": 2
         },
@@ -34695,39 +34699,41 @@
         }
       ],
       "terms": {
-        "claude": 72,
-        "script": 66,
-        "code": 63,
-        "line": 62,
+        "claude": 76,
+        "script": 67,
+        "code": 66,
+        "line": 63,
         "statu": 60,
-        "session": 55,
+        "session": 56,
         "field": 45,
         "git": 36,
         "window": 35,
         "cache": 35,
+        "run": 34,
         "context": 32,
-        "run": 32,
-        "token": 28,
+        "token": 29,
         "api": 24,
         "limit": 22,
-        "absent": 22,
         "request": 22,
+        "name": 21,
+        "directory": 21,
         "set": 21,
         "command": 21,
         "only": 21,
-        "name": 20,
-        "current": 20,
+        "current": 21,
+        "absent": 21,
+        "first": 20,
         "appear": 19,
-        "first": 19,
         "setting": 19,
         "response": 19,
         "display": 18,
-        "model": 18,
-        "directory": 18,
+        "row": 18,
+        "show": 18,
         "output": 18,
         "codegroup": 18,
         "json": 17,
-        "show": 17,
+        "model": 17,
+        "requir": 17,
         "before": 16,
         "data": 16,
         "path": 16,
@@ -34738,15 +34744,13 @@
         "statusline": 15,
         "see": 15,
         "input": 15,
+        "one": 15,
+        "later": 15,
         "usage": 14,
         "cost": 14,
-        "row": 14,
-        "add": 14,
-        "example": 14,
-        "frame": 14,
-        "hdambwgbrzvk": 14
+        "work": 14
       },
-      "word_count": 8057
+      "word_count": 8329
     },
     {
       "filename": "claude-code__sub-agents.md",
@@ -36442,7 +36446,7 @@
         "machine": 8,
         "mobile": 8
       },
-      "word_count": 3349
+      "word_count": 3348
     },
     {
       "filename": "claude-code__whats-new.md",
@@ -39497,7 +39501,7 @@
         }
       ],
       "terms": {
-        "claude": 164,
+        "claude": 165,
         "mtok": 159,
         "token": 126,
         "pric": 87,
@@ -39512,7 +39516,7 @@
         "cache": 31,
         "cloud": 28,
         "api": 28,
-        "sonnet": 26,
+        "sonnet": 27,
         "request": 26,
         "platform": 25,
         "bill": 24,
@@ -39520,8 +39524,8 @@
         "see": 22,
         "cost": 22,
         "aws": 21,
+        "sup": 20,
         "discount": 20,
-        "sup": 18,
         "google": 18,
         "haiku": 18,
         "output": 17,
@@ -39548,7 +39552,7 @@
         "rat": 13,
         "mode": 13
       },
-      "word_count": 5282
+      "word_count": 5286
     },
     {
       "filename": "docs__en__about-claude__use-case-guides__commerce-agents.md",
@@ -118819,7 +118823,7 @@
         "request": 98,
         "token": 91,
         "breakpoint": 89,
-        "claude": 86,
+        "claude": 87,
         "tool": 54,
         "content": 50,
         "system": 46,
@@ -118851,10 +118855,10 @@
         "same": 22,
         "each": 22,
         "follow": 21,
+        "sonnet": 21,
         "different": 21,
         "explicit": 20,
         "response": 20,
-        "sonnet": 20,
         "context": 19,
         "level": 18,
         "codegroup": 18,
@@ -118862,7 +118866,7 @@
         "haiku": 18,
         "any": 18
       },
-      "word_count": 16911
+      "word_count": 16915
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md",
@@ -132886,7 +132890,7 @@
         }
       ],
       "terms": {
-        "claude": 71,
+        "claude": 72,
         "model": 27,
         "card": 24,
         "fable": 22,
@@ -132923,6 +132927,7 @@
         "latency": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "long": 4,
         "agentic": 4,
         "max": 4,
@@ -132930,14 +132935,13 @@
         "anthropic": 4,
         "verification": 4,
         "default": 4,
-        "sonnet": 4,
         "about": 4,
         "batch": 4,
         "value": 4,
         "cardgroup": 4,
         "overview": 3
       },
-      "word_count": 1107
+      "word_count": 1111
     },
     {
       "filename": "docs__en__models__fable-5-1__whats-new-fable-5-1.md",
@@ -133350,7 +133354,7 @@
         }
       ],
       "terms": {
-        "claude": 70,
+        "claude": 71,
         "fable": 34,
         "model": 27,
         "card": 22,
@@ -133378,6 +133382,7 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "system": 5,
         "overview": 4,
         "current": 4,
@@ -133385,7 +133390,6 @@
         "default": 4,
         "alway": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "batch": 4,
         "value": 4,
@@ -133401,7 +133405,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 912
+      "word_count": 916
     },
     {
       "filename": "docs__en__models__haiku-4-5__migration-guide.md",
@@ -133522,7 +133526,7 @@
         }
       ],
       "terms": {
-        "claude": 63,
+        "claude": 64,
         "model": 32,
         "haiku": 27,
         "card": 24,
@@ -133551,6 +133555,7 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "about": 5,
         "prompt": 5,
         "system": 5,
@@ -133558,7 +133563,6 @@
         "max": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "batch": 4,
         "support": 4,
         "value": 4,
@@ -133573,7 +133577,7 @@
         "see": 3,
         "word": 3
       },
-      "word_count": 938
+      "word_count": 942
     },
     {
       "filename": "docs__en__models__mythos-5-1__overview.md",
@@ -133612,7 +133616,7 @@
         }
       ],
       "terms": {
-        "claude": 44,
+        "claude": 45,
         "model": 22,
         "mytho": 12,
         "output": 12,
@@ -133639,6 +133643,7 @@
         "latency": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "icon": 5,
         "href": 5,
         "program": 4,
@@ -133646,7 +133651,6 @@
         "max": 4,
         "default": 4,
         "alway": 4,
-        "sonnet": 4,
         "about": 4,
         "batch": 4,
         "value": 4,
@@ -133663,7 +133667,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 835
+      "word_count": 839
     },
     {
       "filename": "docs__en__models__mythos-5__overview.md",
@@ -133706,7 +133710,7 @@
         }
       ],
       "terms": {
-        "claude": 47,
+        "claude": 48,
         "model": 25,
         "mytho": 18,
         "card": 14,
@@ -133733,13 +133737,13 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "program": 4,
         "context": 4,
         "max": 4,
         "default": 4,
         "alway": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "batch": 4,
         "value": 4,
@@ -133757,7 +133761,7 @@
         "word": 3,
         "full": 3
       },
-      "word_count": 821
+      "word_count": 825
     },
     {
       "filename": "docs__en__models__opus-4-5__overview.md",
@@ -133800,7 +133804,7 @@
         }
       ],
       "terms": {
-        "claude": 58,
+        "claude": 59,
         "opu": 33,
         "model": 25,
         "card": 18,
@@ -133826,6 +133830,7 @@
         "knowledge": 5,
         "cutoff": 5,
         "adaptive": 5,
+        "sonnet": 5,
         "prompt": 5,
         "system": 5,
         "overview": 4,
@@ -133834,7 +133839,6 @@
         "max": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "batch": 4,
         "value": 4,
@@ -133851,7 +133855,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 835
+      "word_count": 839
     },
     {
       "filename": "docs__en__models__opus-4-6__overview.md",
@@ -133894,7 +133898,7 @@
         }
       ],
       "terms": {
-        "claude": 57,
+        "claude": 58,
         "opu": 33,
         "model": 25,
         "card": 18,
@@ -133921,6 +133925,7 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "batch": 5,
         "prompt": 5,
         "system": 5,
@@ -133929,7 +133934,6 @@
         "current": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "value": 4,
         "amazon": 4,
@@ -133945,7 +133949,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 842
+      "word_count": 846
     },
     {
       "filename": "docs__en__models__opus-4-7__overview.md",
@@ -133988,7 +133992,7 @@
         }
       ],
       "terms": {
-        "claude": 53,
+        "claude": 54,
         "opu": 31,
         "model": 24,
         "card": 16,
@@ -134014,6 +134018,7 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "batch": 5,
         "prompt": 5,
         "system": 5,
@@ -134021,7 +134026,6 @@
         "current": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "value": 4,
         "cardgroup": 4,
@@ -134039,7 +134043,7 @@
         "cache": 3,
         "text": 3
       },
-      "word_count": 814
+      "word_count": 818
     },
     {
       "filename": "docs__en__models__opus-4-8__overview.md",
@@ -134082,7 +134086,7 @@
         }
       ],
       "terms": {
-        "claude": 57,
+        "claude": 58,
         "opu": 33,
         "model": 25,
         "card": 18,
@@ -134109,13 +134113,13 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "batch": 5,
         "system": 5,
         "overview": 4,
         "current": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "value": 4,
         "cardgroup": 4,
@@ -134133,7 +134137,7 @@
         "text": 3,
         "reference": 2
       },
-      "word_count": 824
+      "word_count": 828
     },
     {
       "filename": "docs__en__models__opus-5-5__migration-guide.md",
@@ -134390,7 +134394,7 @@
         }
       ],
       "terms": {
-        "claude": 58,
+        "claude": 59,
         "opu": 23,
         "model": 22,
         "card": 20,
@@ -134424,11 +134428,11 @@
         "default": 5,
         "value": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "system": 5,
         "work": 4,
         "tool": 4,
         "alway": 4,
-        "sonnet": 4,
         "about": 4,
         "cardgroup": 4,
         "overview": 3,
@@ -134441,7 +134445,7 @@
         "google": 3,
         "cloud": 3
       },
-      "word_count": 1059
+      "word_count": 1063
     },
     {
       "filename": "docs__en__models__opus-5-5__whats-new-opus-5-5.md",
@@ -134614,7 +134618,7 @@
         }
       ],
       "terms": {
-        "claude": 58,
+        "claude": 59,
         "opu": 34,
         "model": 26,
         "card": 18,
@@ -134642,12 +134646,12 @@
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
+        "sonnet": 5,
         "system": 5,
         "overview": 4,
         "current": 4,
         "default": 4,
         "jun": 4,
-        "sonnet": 4,
         "about": 4,
         "value": 4,
         "cardgroup": 4,
@@ -134665,7 +134669,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 871
+      "word_count": 875
     },
     {
       "filename": "docs__en__models__overview.md",
@@ -134696,7 +134700,7 @@
         }
       ],
       "terms": {
-        "claude": 87,
+        "claude": 88,
         "model": 66,
         "opu": 22,
         "api": 20,
@@ -134707,12 +134711,12 @@
         "http": 10,
         "com": 10,
         "pric": 10,
+        "sonnet": 10,
         "think": 10,
         "doc": 9,
         "icon": 9,
         "href": 9,
         "tool": 9,
-        "sonnet": 9,
         "prompt": 9,
         "anthropic": 8,
         "effort": 8,
@@ -134747,7 +134751,7 @@
         "report": 5,
         "available": 4
       },
-      "word_count": 1631
+      "word_count": 1635
     },
     {
       "filename": "docs__en__models__sonnet-4-5__overview.md",
@@ -134790,8 +134794,8 @@
         }
       ],
       "terms": {
-        "claude": 58,
-        "sonnet": 29,
+        "claude": 59,
+        "sonnet": 30,
         "model": 26,
         "card": 18,
         "platform": 13,
@@ -134841,7 +134845,7 @@
         "list": 3,
         "earlier": 3
       },
-      "word_count": 849
+      "word_count": 853
     },
     {
       "filename": "docs__en__models__sonnet-4-6__overview.md",
@@ -134884,8 +134888,8 @@
         }
       ],
       "terms": {
-        "claude": 57,
-        "sonnet": 28,
+        "claude": 58,
+        "sonnet": 29,
         "model": 25,
         "card": 18,
         "platform": 13,
@@ -134935,7 +134939,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 842
+      "word_count": 846
     },
     {
       "filename": "docs__en__models__sonnet-5-5__migration-guide.md",
@@ -135148,9 +135152,9 @@
         }
       ],
       "terms": {
-        "claude": 57,
+        "claude": 58,
         "model": 23,
-        "sonnet": 20,
+        "sonnet": 21,
         "think": 19,
         "card": 18,
         "output": 15,
@@ -135199,7 +135203,7 @@
         "block": 3,
         "google": 3
       },
-      "word_count": 1068
+      "word_count": 1072
     },
     {
       "filename": "docs__en__models__sonnet-5-5__whats-new-sonnet-5-5.md",
@@ -135376,8 +135380,8 @@
         }
       ],
       "terms": {
-        "claude": 67,
-        "sonnet": 31,
+        "claude": 68,
+        "sonnet": 32,
         "model": 26,
         "card": 24,
         "platform": 16,
@@ -135427,7 +135431,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 927
+      "word_count": 931
     },
     {
       "filename": "docs__en__release-notes__overview.md",
