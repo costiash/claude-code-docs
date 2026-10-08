@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T03:19:06.240055Z",
+  "generated_at": "2026-10-08T06:18:39.543014Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.294",
+          "level": 2
         },
         {
           "text": "2.1.293",
@@ -1675,17 +1679,17 @@
         }
       ],
       "terms": {
-        "fix": 4198,
+        "fix": 4199,
         "session": 1876,
         "now": 1558,
-        "claude": 1379,
+        "claude": 1380,
         "add": 854,
         "after": 803,
         "instead": 755,
-        "improv": 752,
+        "improv": 753,
         "tool": 750,
         "prompt": 690,
-        "command": 650,
+        "command": 651,
         "mode": 649,
         "agent": 642,
         "show": 629,
@@ -1705,8 +1709,8 @@
         "terminal": 377,
         "setting": 362,
         "permission": 360,
+        "hook": 350,
         "read": 350,
-        "hook": 348,
         "window": 341,
         "auto": 334,
         "turn": 329,
@@ -1726,7 +1730,7 @@
         "bash": 265,
         "subagent": 254
       },
-      "word_count": 147490
+      "word_count": 147542
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -3602,15 +3606,15 @@
       ],
       "terms": {
         "claude": 95,
-        "prompt": 73,
+        "prompt": 74,
         "code": 51,
-        "instruction": 39,
+        "instruction": 40,
         "system": 35,
         "sdk": 30,
         "session": 30,
         "agent": 29,
         "output": 28,
-        "set": 27,
+        "set": 28,
         "preset": 25,
         "project": 22,
         "custom": 21,
@@ -3625,14 +3629,14 @@
         "typescript": 14,
         "text": 14,
         "tool": 13,
-        "default": 13,
         "only": 13,
         "load": 13,
         "message": 13,
+        "cod": 12,
         "conversation": 12,
+        "default": 12,
         "example": 12,
         "codegroup": 12,
-        "cod": 11,
         "same": 11,
         "context": 11,
         "each": 11,
@@ -3652,7 +3656,7 @@
         "work": 9,
         "different": 9
       },
-      "word_count": 4659
+      "word_count": 4664
     },
     {
       "filename": "claude-code__agent-sdk__observability.md",
@@ -9323,21 +9327,21 @@
         }
       ],
       "terms": {
-        "fix": 4199,
+        "fix": 4200,
         "session": 1876,
         "now": 1558,
-        "claude": 1382,
+        "claude": 1383,
         "add": 854,
         "after": 803,
         "instead": 755,
-        "improv": 752,
+        "improv": 753,
         "tool": 750,
         "prompt": 690,
-        "command": 650,
+        "command": 651,
         "mode": 649,
         "agent": 643,
         "show": 629,
-        "update": 587,
+        "update": 589,
         "code": 586,
         "being": 570,
         "fail": 561,
@@ -9354,17 +9358,17 @@
         "terminal": 377,
         "setting": 362,
         "permission": 360,
+        "hook": 350,
         "read": 350,
-        "hook": 348,
         "window": 341,
         "auto": 334,
         "turn": 329,
         "runn": 319,
         "remote": 317,
         "message": 315,
-        "description": 311,
+        "description": 312,
+        "label": 305,
         "while": 305,
-        "label": 304,
         "start": 301,
         "open": 294,
         "longer": 294,
@@ -9374,7 +9378,7 @@
         "one": 273,
         "request": 272
       },
-      "word_count": 149204
+      "word_count": 149260
     },
     {
       "filename": "claude-code__channels.md",
@@ -17993,12 +17997,12 @@
         }
       ],
       "terms": {
-        "claude": 442,
+        "claude": 443,
         "set": 386,
-        "code": 355,
-        "default": 168,
+        "code": 356,
+        "default": 169,
         "session": 161,
-        "model": 150,
+        "model": 152,
         "requir": 114,
         "later": 112,
         "tool": 107,
@@ -18032,6 +18036,7 @@
         "also": 46,
         "bash": 46,
         "ignor": 44,
+        "prompt": 44,
         "wait": 44,
         "still": 43,
         "cloud": 43,
@@ -18040,11 +18045,10 @@
         "path": 41,
         "variabl": 40,
         "timeout": 40,
-        "prompt": 40,
         "google": 40,
         "environment": 38
       },
-      "word_count": 21152
+      "word_count": 21195
     },
     {
       "filename": "claude-code__errors.md",
@@ -20152,8 +20156,8 @@
         "context": 21,
         "file": 20,
         "read": 20,
+        "instruction": 19,
         "server": 19,
-        "instruction": 18,
         "fil": 18,
         "conversation": 18,
         "subagent": 17,
@@ -20170,10 +20174,10 @@
         "permission": 13,
         "cloud": 13,
         "see": 12,
+        "add": 12,
         "load": 12,
         "auto": 12,
         "directory": 12,
-        "add": 11,
         "only": 11,
         "output": 11,
         "one": 10,
@@ -20190,7 +20194,7 @@
         "desktop": 8,
         "such": 8
       },
-      "word_count": 3739
+      "word_count": 3745
     },
     {
       "filename": "claude-code__goal.md",
@@ -25371,27 +25375,29 @@
       "terms": {
         "claude": 69,
         "style": 63,
-        "output": 37,
+        "output": 38,
         "code": 33,
-        "styl": 23,
+        "styl": 24,
         "instruction": 22,
         "default": 14,
+        "prompt": 14,
         "file": 13,
         "built": 13,
+        "set": 13,
+        "work": 13,
         "one": 13,
-        "set": 12,
-        "work": 12,
         "command": 11,
         "session": 10,
-        "prompt": 10,
         "run": 10,
         "step": 10,
+        "field": 10,
         "such": 9,
         "write": 9,
         "every": 9,
         "add": 9,
         "start": 9,
         "task": 9,
+        "system": 9,
         "menu": 9,
         "change": 8,
         "custom": 8,
@@ -25399,28 +25405,26 @@
         "ask": 8,
         "engineer": 8,
         "switch": 8,
+        "doesn": 8,
         "about": 8,
         "want": 8,
+        "select": 8,
         "setting": 8,
-        "field": 8,
         "response": 7,
         "own": 7,
         "each": 7,
         "other": 7,
         "software": 7,
         "pick": 7,
-        "doesn": 7,
         "project": 7,
         "keep": 7,
         "chang": 7,
-        "select": 7,
         "name": 7,
         "explanatory": 6,
         "respons": 6,
-        "explanation": 6,
-        "also": 6
+        "explanation": 6
       },
-      "word_count": 2417
+      "word_count": 2470
     },
     {
       "filename": "claude-code__overview.md",
@@ -30728,7 +30732,7 @@
         "get": 4,
         "type": 4
       },
-      "word_count": 1855
+      "word_count": 1740
     },
     {
       "filename": "claude-code__remote-control.md",
@@ -34280,7 +34284,7 @@
         "installer": 10,
         "dnf": 10
       },
-      "word_count": 4356
+      "word_count": 4241
     },
     {
       "filename": "claude-code__skills.md",

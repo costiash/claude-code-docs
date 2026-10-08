@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T03:19:01.848468Z",
+  "generated_at": "2026-10-08T06:18:35.186988Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "601c5cbb1f52dae6c46b665d90c566f31e4cb8aa8d0521854f36776f25dc65b5",
+      "sha256": "b60a2efb867f7de45d3dc026bdeb29b0c03a70128bc3d290889bec96451522b9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -180,8 +180,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md",
       "title": "Modifying system prompts",
       "category": "agent_sdk",
-      "sha256": "d0d2e72c78c6e7c6bc058498155c9bd74228e871a9ce052f504d886e26fc18c2",
-      "lastmod": "2026-09-28T23:26:00.925Z",
+      "sha256": "30f2d4379d664d99a4889c38c1485aa8884898a341019a98cc59f73cff25755c",
+      "lastmod": "2026-10-08T03:42:36.487Z",
       "fetch_status": "ok"
     },
     {
@@ -521,8 +521,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "8453a6d0384cb9a276c4884b3500f5fce6f6e510e490ce3806c1561dcba76e18",
-      "lastmod": "2026-10-07T18:26:43.665Z",
+      "sha256": "86d1fafd1e77f504d8ceba029989397db30001c3f8cb42e79292e4af22ef94a6",
+      "lastmod": "2026-10-08T05:15:12.731Z",
       "fetch_status": "ok"
     },
     {
@@ -1038,7 +1038,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-cn.md",
       "title": "Simplified Chinese (221 pages)",
       "category": "claude_code",
-      "sha256": "157e95333fee19b603163cf60734ea5f26f9e9c45341325885b086860761292e",
+      "sha256": "6d45673323c23cf28904e4476b69e89ac5b5ab50a1e3d0db6e7f8afaefce471b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1060,8 +1060,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "ea23ecd94c202ab946db5a8b216a7dc6189ed951467139d20b9147cdc2c05c54",
-      "lastmod": "2026-10-08T02:07:46.474Z",
+      "sha256": "b1a2650f714c2adbe1bba56947ddb33da396d5e43882d7017b01f21a9e891048",
+      "lastmod": "2026-10-08T03:42:36.509Z",
       "fetch_status": "ok"
     },
     {
@@ -1181,8 +1181,8 @@
       "md_url": "https://code.claude.com/docs/en/glossary.md",
       "title": "Glossary",
       "category": "claude_code",
-      "sha256": "afaddf09c556a05a2f1e3dab139970d7bdfcb73bb7c6ce37a204733d181b1c69",
-      "lastmod": "2026-10-07T17:58:50.193Z",
+      "sha256": "154e4450eb55f883440c14e059c72d375d8bfaa62501ea7bea524f7dcaa7ac27",
+      "lastmod": "2026-10-08T03:42:36.487Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1478,8 @@
       "md_url": "https://code.claude.com/docs/en/output-styles.md",
       "title": "Output styles",
       "category": "claude_code",
-      "sha256": "e5e2ab65d01fb7ce26d04b3ecc1758304d4b305b4097655bb65e6e77505b4a94",
-      "lastmod": "2026-09-24T23:46:00.598Z",
+      "sha256": "caa152d1d974171c4622c6c4f6c6c45d2f553f491c18f867153375b7ffab8623",
+      "lastmod": "2026-10-08T03:42:36.486Z",
       "fetch_status": "ok"
     },
     {
@@ -1896,8 +1896,8 @@
       "md_url": "https://code.claude.com/docs/en/quickstart.md",
       "title": "Quickstart",
       "category": "claude_code",
-      "sha256": "d1b545c12dfee9234a9e44e65d0ad9db67bf00ee91139f6847164f2b773e657c",
-      "lastmod": "2026-10-08T02:40:14.990Z",
+      "sha256": "41e9970c2a237b86765c3a95e326c6c78000f878cc782d3f2dacae48151067fa",
+      "lastmod": "2026-10-08T03:42:07.641Z",
       "fetch_status": "ok"
     },
     {
@@ -2116,8 +2116,8 @@
       "md_url": "https://code.claude.com/docs/en/setup.md",
       "title": "Advanced setup",
       "category": "claude_code",
-      "sha256": "4e8a2caa387665133c63bfb84915cd6c67f37c38e89991bc1f081b852712000b",
-      "lastmod": "2026-10-08T02:40:14.987Z",
+      "sha256": "1fff9dbd1ff1842e94da18102815bc2eabfedf6a9dd59d2781843b91dc838703",
+      "lastmod": "2026-10-08T03:42:07.639Z",
       "fetch_status": "ok"
     },
     {
