@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T12:17:34.162467Z",
+  "generated_at": "2026-10-08T18:17:37.224733Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -28058,19 +28058,19 @@
       ],
       "terms": {
         "plugin": 115,
-        "marketplace": 80,
-        "claude": 65,
-        "code": 58,
+        "marketplace": 85,
+        "claude": 67,
+        "code": 60,
         "entry": 57,
-        "source": 51,
+        "source": 52,
         "field": 47,
         "directory": 43,
         "path": 41,
         "see": 34,
-        "nam": 32,
+        "nam": 34,
         "one": 31,
+        "name": 30,
         "load": 30,
-        "name": 29,
         "install": 29,
         "error": 27,
         "repository": 25,
@@ -28081,34 +28081,34 @@
         "fetch": 21,
         "print": 21,
         "fail": 20,
+        "such": 19,
         "each": 18,
         "relative": 18,
         "same": 18,
         "warn": 18,
-        "such": 18,
+        "requir": 18,
+        "own": 18,
         "str": 18,
         "set": 17,
-        "requir": 17,
-        "own": 17,
         "command": 17,
         "link": 17,
+        "under": 16,
         "only": 16,
         "url": 16,
         "git": 16,
         "host": 15,
         "sourc": 15,
-        "under": 15,
         "list": 15,
         "default": 15,
         "reserv": 14,
+        "download": 14,
+        "github": 14,
         "level": 13,
         "any": 13,
-        "github": 13,
-        "write": 12,
-        "also": 12,
-        "later": 12
+        "later": 13,
+        "write": 12
       },
-      "word_count": 6104
+      "word_count": 6178
     },
     {
       "filename": "claude-code__plugins__measure.md",
@@ -35622,7 +35622,7 @@
         "pattern": 18,
         "also": 18
       },
-      "word_count": 11263
+      "word_count": 11294
     },
     {
       "filename": "claude-code__troubleshoot-install.md",

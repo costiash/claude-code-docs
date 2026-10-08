@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T12:17:29.758578Z",
+  "generated_at": "2026-10-08T18:17:32.792612Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1676,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/marketplace-reference.md",
       "title": "Marketplace reference",
       "category": "claude_code",
-      "sha256": "9fd24e93240c2b21f48b4bc9a3f76e79cee58004eb49bf9c9f7a28b6404ec041",
-      "lastmod": "2026-10-08T02:16:04.388Z",
+      "sha256": "32fa7bebd1cbdbea5e2622f9adacf396c20b50c3912e8ac9f7b753967378f183",
+      "lastmod": "2026-10-08T18:03:42.867Z",
       "fetch_status": "ok"
     },
     {
@@ -2193,8 +2193,8 @@
       "md_url": "https://code.claude.com/docs/en/tools-reference.md",
       "title": "Tools reference",
       "category": "claude_code",
-      "sha256": "ead1879f1f0631d4aa762fde5b2426e6f35ac3ae7d0fd809ce7d874bfc69fe03",
-      "lastmod": "2026-10-08T02:07:46.467Z",
+      "sha256": "56c03280c66af5649abc7fcee61c2afc60761c6df29ad297a724ad2a4c6332c8",
+      "lastmod": "2026-10-08T17:56:21.172Z",
       "fetch_status": "ok"
     },
     {
@@ -2798,7 +2798,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md",
       "title": "MCP connector",
       "category": "agents_and_tools",
-      "sha256": "67bb816bb4aaaf29eda79e300b239ce43be0ee90abadfe96f31af21157628e80",
+      "sha256": "4a7433f49136cf420b0e2da65a7e14574a98ed9b8406fa45bf2b67e5faf42e25",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8650,7 +8650,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock.md",
       "title": "Amazon Bedrock (Opus 4.7 and later)",
       "category": "core_documentation",
-      "sha256": "bf1271b42eec659cbf2f1ccd2a83f361605fb4921844391ac8fd6d7c55aa44ef",
+      "sha256": "cca39da37a16d427497e8e423d85a594ead08d8624f14e98d8c34cb13acd99fa",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8661,7 +8661,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry.md",
       "title": "Microsoft Foundry",
       "category": "core_documentation",
-      "sha256": "476d7cc9150075fd59f382eac61cabefc3ee196989c6c7a113c750a679c8b876",
+      "sha256": "97c454d3ef99add2931e5de557cc904a8fe0e15ac03c1443ef9676c3dc169f11",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8672,7 +8672,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy.md",
       "title": "Amazon Bedrock (Opus 4.6 and earlier)",
       "category": "core_documentation",
-      "sha256": "f4efa5db1c278ee99794334f8452ebf8444f430614554ce3b05cfe06644cdfa6",
+      "sha256": "90d70a6d99cc29178fabfb613b59767b59dc6dda27d27b2548b88ed553403d2d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8683,7 +8683,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai.md",
       "title": "Google Cloud",
       "category": "core_documentation",
-      "sha256": "3e7389092c5281f280f20b3d131ad763f85b29e27a05b84fe6b917417fe72054",
+      "sha256": "86a518f866262d3088de456b07226a2d15a30113443c17e3fce343e32ce56e9f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8694,7 +8694,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "eea15aa8bf31ed677490c1312cef08d9781f52d0da376eb276fcc022667af4a9",
+      "sha256": "4020db944fd57bc692be541533d81c3ccd5b04fa025f343491b2dc8e86ca9795",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9244,7 +9244,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "6c17ba63d313010e31bfc8e0d70ed36c598f4f65812061f338467a5b8912340d",
+      "sha256": "332c232f8e1573b76862245f6f3875813f1c7d0d9cad471675c51327bd2b51e9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9354,7 +9354,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md",
       "title": "Java",
       "category": "core_documentation",
-      "sha256": "e8c9f083c24b32ebe57ab89415d06d497727ca2cbd6050d22220701dcf60c4b2",
+      "sha256": "49a1a61051509cdf4fd2983c4664cf22d05b15f95462975cda61ff37e94c4947",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9420,7 +9420,7 @@
       "md_url": "https://platform.claude.com/docs/en/get-started.md",
       "title": "Quickstart",
       "category": "get_started",
-      "sha256": "563790a3713f61386844c78d17c293e0222ab3acdace941f8177fecb2fe182a4",
+      "sha256": "110596dd7ef010205d3dd0592f9f26b72b22a886acb1b1c5d985e8ca231fed4c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10102,7 +10102,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "a22a8905a1f88b7da76287e20d1a353395c8325aa91a06f562f681141d4e2938",
+      "sha256": "e9c45accc37bcf37d1b7a89707f900ccf7eb591776a9598430a656ca01c3c6eb",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10135,7 +10135,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
       "title": "Overview and quickstart",
       "category": "core_documentation",
-      "sha256": "b0fbdd429d8a446f23db4724ebf3e5834f90686b8185adf9dfc8cae294287a5e",
+      "sha256": "9f6afa64957700b1f046b923d55690abcbbcef675b9b6d37bcd9623004f9f2cf",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10201,7 +10201,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers.md",
       "title": "Deploy workers",
       "category": "core_documentation",
-      "sha256": "1e765951a178ef2090087572d70808fae9c4adc9427e243ccdf1ce1a28b1d940",
+      "sha256": "fe6e09e7d70570d532e912e61a718da99de1803891c1068df7be3654602115cc",
       "lastmod": null,
       "fetch_status": "ok"
     },
