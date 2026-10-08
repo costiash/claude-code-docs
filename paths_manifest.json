@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T09:18:51.922607Z",
+  "generated_at": "2026-10-08T12:17:29.758578Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-deploy.md",
       "title": "Claude apps gateway deployment and operations",
       "category": "claude_code",
-      "sha256": "a62f7ee0cae6fc2e5b499967f34f43adb3132f28249d4b7d1acd7bd55c7354c7",
-      "lastmod": "2026-10-08T09:05:45.453Z",
+      "sha256": "93d9ce4f23e5e7a20b9c0bf253d5f891e341d77d7d185ece7e3bca0cee5a2b37",
+      "lastmod": "2026-10-08T09:32:53.495Z",
       "fetch_status": "ok"
     },
     {

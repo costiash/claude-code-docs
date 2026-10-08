@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T09:18:56.267852Z",
+  "generated_at": "2026-10-08T12:17:34.162467Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -10463,8 +10463,8 @@
         "code": 44,
         "limit": 38,
         "run": 37,
+        "addres": 36,
         "only": 36,
-        "addres": 35,
         "one": 33,
         "token": 33,
         "block": 30,
@@ -10480,18 +10480,19 @@
         "default": 25,
         "check": 23,
         "also": 23,
+        "network": 22,
         "setting": 22,
         "each": 22,
         "refresh": 22,
-        "network": 21,
         "before": 20,
         "secret": 20,
+        "user": 20,
         "own": 20,
         "second": 20,
         "per": 20,
         "fail": 20,
         "host": 20,
-        "user": 19,
+        "private": 19,
         "client": 19,
         "such": 19,
         "still": 19,
@@ -10500,11 +10501,10 @@
         "boot": 18,
         "group": 18,
         "work": 18,
-        "private": 18,
         "nam": 18,
         "doesn": 18
       },
-      "word_count": 8869
+      "word_count": 8885
     },
     {
       "filename": "claude-code__claude-apps-gateway-on-aws.md",
