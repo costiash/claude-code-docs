@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T03:20:17.699350Z",
+  "generated_at": "2026-10-09T06:19:26.253497Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7588,7 +7588,7 @@
         "rule": 6,
         "run": 6
       },
-      "word_count": 4363
+      "word_count": 4406
     },
     {
       "filename": "claude-code__agent-teams.md",
@@ -14742,7 +14742,7 @@
           "level": 4
         },
         {
-          "text": "Schnittstelle",
+          "text": "Oberfl\u00e4che",
           "level": 4
         },
         {
@@ -14770,7 +14770,7 @@
           "level": 4
         },
         {
-          "text": "Kernkonzepte",
+          "text": "Grundlegende Konzepte",
           "level": 4
         },
         {
@@ -14866,7 +14866,7 @@
         "cli": 17,
         "einer": 17
       },
-      "word_count": 6212
+      "word_count": 6213
     },
     {
       "filename": "claude-code__docs___llms__es.md",
@@ -14896,7 +14896,7 @@
           "level": 4
         },
         {
-          "text": "Usar Claude Code",
+          "text": "Usa Claude Code",
           "level": 4
         },
         {
@@ -14908,7 +14908,7 @@
           "level": 5
         },
         {
-          "text": "Claude Code en el escritorio",
+          "text": "Claude Code en escritorio",
           "level": 5
         },
         {
@@ -14976,11 +14976,11 @@
           "level": 5
         },
         {
-          "text": "Administra un marketplace",
+          "text": "Ejecuta un marketplace",
           "level": 4
         },
         {
-          "text": "Administra plugins para tu organizaci\u00f3n",
+          "text": "Administra los plugins de tu organizaci\u00f3n",
           "level": 4
         },
         {
@@ -15088,7 +15088,7 @@
           "level": 4
         },
         {
-          "text": "Extiende con herramientas",
+          "text": "Ampl\u00eda con herramientas",
           "level": 4
         },
         {
@@ -15128,11 +15128,11 @@
         "claude": 298,
         "code": 205,
         "con": 128,
-        "para": 114,
+        "para": 113,
         "que": 74,
         "plugin": 70,
         "una": 68,
-        "los": 65,
+        "los": 66,
         "agent": 55,
         "del": 55,
         "configuraci": 47,
@@ -15226,7 +15226,7 @@
           "level": 5
         },
         {
-          "text": "D\u00e9velopper avec Claude Code",
+          "text": "Cr\u00e9er avec Claude Code",
           "level": 3
         },
         {
@@ -15516,7 +15516,7 @@
           "level": 4
         },
         {
-          "text": "Gunakan Claude Code",
+          "text": "Menggunakan Claude Code",
           "level": 4
         },
         {
@@ -15596,7 +15596,7 @@
           "level": 5
         },
         {
-          "text": "Kelola marketplace",
+          "text": "Menjalankan marketplace",
           "level": 4
         },
         {
@@ -15780,8 +15780,8 @@
         "jalankan": 23,
         "host": 23,
         "kode": 21,
-        "gunakan": 21,
         "server": 21,
+        "gunakan": 20,
         "organisasi": 20,
         "marketplace": 20,
         "skill": 19,
@@ -15898,7 +15898,7 @@
           "level": 4
         },
         {
-          "text": "Sviluppo",
+          "text": "Sviluppa",
           "level": 5
         },
         {
@@ -16140,11 +16140,11 @@
           "level": 4
         },
         {
-          "text": "\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3068\u9023\u643a",
+          "text": "\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3068\u30a4\u30f3\u30c6\u30b0\u30ec\u30fc\u30b7\u30e7\u30f3",
           "level": 4
         },
         {
-          "text": "\u30af\u30e9\u30a6\u30c9\u4e0a\u306e Claude Code",
+          "text": "\u30af\u30e9\u30a6\u30c9\u3067\u306e Claude Code",
           "level": 5
         },
         {
@@ -16336,7 +16336,7 @@
           "level": 4
         },
         {
-          "text": "\u5236\u5fa1\u3068\u30aa\u30d6\u30b6\u30fc\u30d0\u30d3\u30ea\u30c6\u30a3",
+          "text": "\u5236\u5fa1\u3068\u53ef\u89b3\u6e2c\u6027",
           "level": 4
         },
         {
@@ -16348,7 +16348,7 @@
           "level": 4
         },
         {
-          "text": "\u6700\u65b0\u60c5\u5831",
+          "text": "\u65b0\u6a5f\u80fd",
           "level": 3
         },
         {
@@ -16462,7 +16462,7 @@
           "level": 5
         },
         {
-          "text": "\ucf54\ub4dc \ub9ac\ubdf0 \ubc0f CI/CD",
+          "text": "\ucf54\ub4dc \ub9ac\ubdf0 & CI/CD",
           "level": 5
         },
         {
@@ -16470,7 +16470,7 @@
           "level": 3
         },
         {
-          "text": "\uc5d0\uc774\uc804\ud2b8\uc640 \ubcd1\ub82c \uc791\uc5c5",
+          "text": "\uc5d0\uc774\uc804\ud2b8 \ubc0f \ubcd1\ub82c \uc791\uc5c5",
           "level": 4
         },
         {
@@ -16518,7 +16518,7 @@
           "level": 4
         },
         {
-          "text": "\uad6c\ucd95\ud558\uae30",
+          "text": "\uad6c\ucd95",
           "level": 5
         },
         {
@@ -16530,7 +16530,7 @@
           "level": 4
         },
         {
-          "text": "\uc870\uc9c1 \ud50c\ub7ec\uadf8\uc778 \uad00\ub9ac",
+          "text": "\uc870\uc9c1\uc758 \ud50c\ub7ec\uadf8\uc778 \uad00\ub9ac",
           "level": 4
         },
         {
@@ -16606,11 +16606,11 @@
           "level": 4
         },
         {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
+          "text": "\ucc38\uc870",
           "level": 3
         },
         {
-          "text": "\ucc38\uc870",
+          "text": "\ub808\ud37c\ub7f0\uc2a4",
           "level": 4
         },
         {
@@ -16626,7 +16626,7 @@
           "level": 4
         },
         {
-          "text": "\uc5d0\uc774\uc804\ud2b8 \uad6c\ucd95\ud558\uae30",
+          "text": "\uc5d0\uc774\uc804\ud2b8 \uad6c\ucd95",
           "level": 4
         },
         {
@@ -16658,7 +16658,7 @@
           "level": 4
         },
         {
-          "text": "\uc0c8\ub85c\uc6b4 \uae30\ub2a5",
+          "text": "\uc0c8\ub85c\uc6b4 \uc18c\uc2dd",
           "level": 3
         },
         {
@@ -16726,7 +16726,7 @@
         "kubernet": 3,
         "opentelemetry": 3
       },
-      "word_count": 5178
+      "word_count": 5179
     },
     {
       "filename": "claude-code__docs___llms__pt-br.md",
@@ -16752,7 +16752,7 @@
           "level": 4
         },
         {
-          "text": "Conceitos fundamentais",
+          "text": "Conceitos principais",
           "level": 4
         },
         {
@@ -16776,7 +16776,7 @@
           "level": 5
         },
         {
-          "text": "Desenvolva com o Claude Code",
+          "text": "Desenvolva com Claude Code",
           "level": 3
         },
         {
@@ -16836,11 +16836,11 @@
           "level": 5
         },
         {
-          "text": "Executar um marketplace",
+          "text": "Execute um marketplace",
           "level": 4
         },
         {
-          "text": "Gerencie plugins da sua organiza\u00e7\u00e3o",
+          "text": "Gerenciar plugins da sua organiza\u00e7\u00e3o",
           "level": 4
         },
         {
@@ -16868,7 +16868,7 @@
           "level": 4
         },
         {
-          "text": "Gateway de aplicativos do Claude",
+          "text": "Gateway de aplicativos Claude",
           "level": 5
         },
         {
@@ -17023,20 +17023,20 @@
         "skill": 19,
         "uso": 19,
         "servidor": 19,
-        "executar": 18,
         "problema": 18,
+        "execute": 18,
         "hospedado": 18,
         "cli": 17,
         "tarefa": 17,
+        "executar": 17,
         "nuvem": 17,
-        "execute": 17,
         "voc": 17,
         "atrav": 17,
         "prompt": 16,
         "permis": 16,
         "marketplace": 16
       },
-      "word_count": 7107
+      "word_count": 7105
     },
     {
       "filename": "claude-code__docs___llms__ru.md",
@@ -17062,7 +17062,7 @@
           "level": 4
         },
         {
-          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043d\u044f\u0442\u0438\u044f",
+          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043a\u043e\u043d\u0446\u0435\u043f\u0446\u0438\u0438",
           "level": 4
         },
         {
@@ -17146,11 +17146,11 @@
           "level": 5
         },
         {
-          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u043f\u043b\u0435\u0439\u0441\u043e\u043c",
+          "text": "\u0412\u0435\u0434\u0435\u043d\u0438\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u043f\u043b\u0435\u0439\u0441\u0430",
           "level": 4
         },
         {
-          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u043b\u0430\u0433\u0438\u043d\u0430\u043c\u0438 \u0434\u043b\u044f \u0432\u0430\u0448\u0435\u0439 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438",
+          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u043b\u0430\u0433\u0438\u043d\u0430\u043c\u0438 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438",
           "level": 4
         },
         {
@@ -17266,7 +17266,7 @@
           "level": 4
         },
         {
-          "text": "\u041a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u0438 \u043d\u0430\u0431\u043b\u044e\u0434\u0430\u0435\u043c\u043e\u0441\u0442\u044c",
+          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0438 \u043d\u0430\u0431\u043b\u044e\u0434\u0430\u0435\u043c\u043e\u0441\u0442\u044c",
           "level": 4
         },
         {
@@ -17346,7 +17346,7 @@
         "session": 4,
         "prompt": 3
       },
-      "word_count": 6109
+      "word_count": 6107
     },
     {
       "filename": "claude-code__docs___llms__zh-cn.md",
@@ -17368,7 +17368,7 @@
           "level": 3
         },
         {
-          "text": "\u5feb\u901f\u5165\u95e8",
+          "text": "\u5165\u95e8",
           "level": 4
         },
         {
@@ -17516,7 +17516,7 @@
           "level": 4
         },
         {
-          "text": "\u6743\u9650\u4e0e\u6c99\u7bb1\u9694\u79bb",
+          "text": "\u6743\u9650\u548c\u6c99\u7bb1\u9694\u79bb",
           "level": 4
         },
         {
@@ -17674,7 +17674,7 @@
           "level": 2
         },
         {
-          "text": "\u958b\u59cb\u4f7f\u7528",
+          "text": "\u5feb\u901f\u5165\u9580",
           "level": 3
         },
         {
@@ -17710,7 +17710,7 @@
           "level": 3
         },
         {
-          "text": "Agent \u8207\u5e73\u884c\u5de5\u4f5c",
+          "text": "Agent \u8207\u5e73\u884c\u4f5c\u696d",
           "level": 4
         },
         {
@@ -17766,7 +17766,7 @@
           "level": 5
         },
         {
-          "text": "\u7d93\u71df\u5e02\u96c6",
+          "text": "\u71df\u904b\u5e02\u96c6",
           "level": 4
         },
         {
@@ -17814,7 +17814,7 @@
           "level": 4
         },
         {
-          "text": "\u63a1\u7528",
+          "text": "\u5c0e\u5165",
           "level": 4
         },
         {
@@ -17846,7 +17846,7 @@
           "level": 4
         },
         {
-          "text": "\u53c3\u8003\u8cc7\u6599",
+          "text": "\u53c3\u8003",
           "level": 3
         },
         {
@@ -17866,7 +17866,7 @@
           "level": 4
         },
         {
-          "text": "\u6253\u9020 agent",
+          "text": "\u5efa\u7acb agent",
           "level": 4
         },
         {
@@ -17878,7 +17878,7 @@
           "level": 4
         },
         {
-          "text": "\u4f7f\u7528\u5de5\u5177\u64f4\u5145\u529f\u80fd",
+          "text": "\u4f7f\u7528\u5de5\u5177\u64f4\u5145",
           "level": 4
         },
         {
@@ -17902,7 +17902,7 @@
           "level": 3
         },
         {
-          "text": "\u6700\u65b0\u6d88\u606f",
+          "text": "\u65b0\u529f\u80fd",
           "level": 4
         },
         {

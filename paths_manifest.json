@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T03:20:13.307077Z",
+  "generated_at": "2026-10-09T06:19:23.923028Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -236,7 +236,7 @@
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
       "sha256": "8e3a3d0f84c57120658d366eb5dc781395383bec45b63bcd2f71f9b3ef2b38bb",
-      "lastmod": "2026-10-09T00:55:54.394Z",
+      "lastmod": "2026-10-09T03:28:23.454Z",
       "fetch_status": "ok"
     },
     {
@@ -379,7 +379,7 @@
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
       "sha256": "5d3b266e50b4a6f9d5810651fd11651347a92ed21835cccb001e8a86f7316138",
-      "lastmod": "2026-10-09T00:55:54.398Z",
+      "lastmod": "2026-10-09T03:28:23.478Z",
       "fetch_status": "ok"
     },
     {
@@ -400,8 +400,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/user-input.md",
       "title": "Handle approvals and user input",
       "category": "agent_sdk",
-      "sha256": "bdff732e3af50c0c28252d84dd0a82c2496092ff55032a4271a5ecf9e4740341",
-      "lastmod": "2026-09-28T00:43:54.765Z",
+      "sha256": "ff01dec6260ddebd97cdaaa1e05349884a7a5363b01bba70bb0cb1b91db5f6b2",
+      "lastmod": "2026-10-09T03:28:51.056Z",
       "fetch_status": "ok"
     },
     {
@@ -939,7 +939,7 @@
       "md_url": "https://code.claude.com/docs/_llms/de.md",
       "title": "German (221 pages)",
       "category": "claude_code",
-      "sha256": "f435eb704ec8af2630e038255cbee0cb540061377a232cd3a6dd250f07118cff",
+      "sha256": "b5c723088f5f24055bdfd03110ed7d5d9b47915160c067abc13cb548c9282dd8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -950,7 +950,7 @@
       "md_url": "https://code.claude.com/docs/_llms/es.md",
       "title": "Spanish (221 pages)",
       "category": "claude_code",
-      "sha256": "3bf7d8f1fe2da26d3c77bf6820abdf133fe4befe9bd466496ab2504a10d74810",
+      "sha256": "fff88c9978aeb1088921eb959a73bafe6a2037d3e13e080f8341d92b9133813c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -961,7 +961,7 @@
       "md_url": "https://code.claude.com/docs/_llms/fr.md",
       "title": "French (221 pages)",
       "category": "claude_code",
-      "sha256": "6afb881ae897bf7d3ebd848f591473a22ef4c48dfd7d27c49c81e1a2436dc75a",
+      "sha256": "bfe2cc9e1bfe478e5070aa1848fdebe242244f1ebef6caaa33a83ab9c75991ed",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -972,7 +972,7 @@
       "md_url": "https://code.claude.com/docs/_llms/id.md",
       "title": "Indonesian (221 pages)",
       "category": "claude_code",
-      "sha256": "cca8eb5c59daae5352c7b1fbf6e9cc58bcba86668a63a492b967fc44489a253c",
+      "sha256": "d4a465ffc86bee691c34ab4ef08afc281012a71b52a2977120c4721016f7d41b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -983,7 +983,7 @@
       "md_url": "https://code.claude.com/docs/_llms/it.md",
       "title": "Italian (221 pages)",
       "category": "claude_code",
-      "sha256": "121400e0b5343b91f798c7d0f829b96009b91ffa157a952bc5754244d9730946",
+      "sha256": "00882f88454ce14dd2051e2981c7c54e71edac1622e7a3895996acac3f62119e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -994,7 +994,7 @@
       "md_url": "https://code.claude.com/docs/_llms/jp.md",
       "title": "Japanese (221 pages)",
       "category": "claude_code",
-      "sha256": "5fef7623a7313d3043fccf2daad5e897347c852d693efbac714217c81e1c6817",
+      "sha256": "38bb07c0001458accd679973b5e2d3a201391884795b682ae8f6f8f44f617ccc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1005,7 +1005,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ko.md",
       "title": "Korean (221 pages)",
       "category": "claude_code",
-      "sha256": "6e0c745c0ff3eb9b5ce928fe587182986316d8b82850501636021434853f2ab3",
+      "sha256": "ec94721f177e0d0f410cf76e67023cc4abc1299305e2272691bb72c2b79857cf",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1016,7 +1016,7 @@
       "md_url": "https://code.claude.com/docs/_llms/pt-br.md",
       "title": "Brazilian Portuguese (221 pages)",
       "category": "claude_code",
-      "sha256": "e71643f9fcac1b2a9a07f8773b2e2a7517d42c530cd0ff03f7581bc90e959482",
+      "sha256": "42b8f524f73df2d9ec298549243a98c9a2e58005a1daa948f94356d0b9ca2ffc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1027,7 +1027,7 @@
       "md_url": "https://code.claude.com/docs/_llms/ru.md",
       "title": "Russian (221 pages)",
       "category": "claude_code",
-      "sha256": "f9f6f07621b5b83283b04bd5e1cc505e8912ed23ce5a27bdd95f0335df2fb44d",
+      "sha256": "8de8ea7f51990156669cbda3ae01868a5e77cca07e64f3ea462b81e7b041c019",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1038,7 +1038,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-cn.md",
       "title": "Simplified Chinese (221 pages)",
       "category": "claude_code",
-      "sha256": "2a3f86376f0c4ce4a359dadb937991184e3a114fb2f5f8dda4f1cdabb3dc91b4",
+      "sha256": "a5203e88821d4b0f09c1b5e1ad755140bd455ae2c3ef47d9109ce3927c6d2ea4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -1049,7 +1049,7 @@
       "md_url": "https://code.claude.com/docs/_llms/zh-tw.md",
       "title": "Traditional Chinese (221 pages)",
       "category": "claude_code",
-      "sha256": "a34f25489344f045aa983928d537662d9c1d76b68551b121c5440eea27267dca",
+      "sha256": "c44b289c0061fd3fa3bae7aca20dfad8b8d16121e276ae9467a9f68f462c0235",
       "lastmod": null,
       "fetch_status": "ok"
     },
