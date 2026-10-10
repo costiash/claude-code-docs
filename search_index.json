@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T18:16:45.640278Z",
+  "generated_at": "2026-10-10T21:15:14.010632Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -7325,11 +7325,11 @@
         }
       ],
       "terms": {
-        "claude": 393,
-        "code": 343,
+        "claude": 394,
+        "code": 344,
         "session": 261,
-        "tool": 254,
-        "later": 189,
+        "tool": 255,
+        "later": 190,
         "field": 173,
         "message": 167,
         "agent": 159,
@@ -7361,7 +7361,7 @@
         "command": 68,
         "each": 67,
         "report": 64,
-        "before": 62,
+        "before": 63,
         "carri": 59,
         "messag": 58,
         "file": 57,
@@ -7376,7 +7376,7 @@
         "option": 51,
         "block": 51
       },
-      "word_count": 37394
+      "word_count": 37419
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -8098,14 +8098,14 @@
         "prompt": 91,
         "instead": 90,
         "proces": 87,
+        "work": 86,
         "before": 85,
-        "work": 85,
         "input": 82,
         "attach": 79,
         "runn": 78,
+        "conversation": 70,
         "such": 69,
         "one": 68,
-        "conversation": 68,
         "keep": 66,
         "pres": 66,
         "list": 66,
@@ -8130,9 +8130,9 @@
         "exit": 44,
         "delet": 44,
         "new": 43,
-        "mode": 43
+        "reply": 43
       },
-      "word_count": 20714
+      "word_count": 20728
     },
     {
       "filename": "claude-code__agents.md",
@@ -8534,16 +8534,16 @@
         "code": 64,
         "claude": 61,
         "user": 36,
-        "metric": 28,
+        "metric": 29,
         "lin": 28,
         "github": 23,
-        "analytic": 20,
-        "usage": 19,
+        "analytic": 21,
+        "usage": 20,
         "contribution": 17,
         "prs": 17,
         "data": 15,
+        "dashboard": 14,
         "team": 13,
-        "dashboard": 13,
         "api": 13,
         "per": 13,
         "adoption": 11,
@@ -8554,17 +8554,18 @@
         "pull": 10,
         "track": 9,
         "organization": 9,
+        "show": 9,
         "request": 9,
         "includ": 8,
         "enterprise": 8,
         "spend": 8,
         "note": 8,
-        "show": 8,
         "total": 8,
         "merg": 8,
         "export": 7,
         "active": 7,
         "count": 7,
+        "only": 7,
         "app": 7,
         "chart": 7,
         "available": 6,
@@ -8575,14 +8576,13 @@
         "owner": 6,
         "suggestion": 6,
         "cost": 6,
-        "only": 6,
         "day": 6,
         "display": 6,
         "time": 6,
         "attribution": 6,
-        "help": 5
+        "com": 5
       },
-      "word_count": 1634
+      "word_count": 1645
     },
     {
       "filename": "claude-code__artifacts.md",
@@ -13930,6 +13930,10 @@
           "level": 3
         },
         {
+          "text": "Choose where SSH session worktrees go",
+          "level": 4
+        },
+        {
           "text": "Open an SSH session from a link",
           "level": 4
         },
@@ -14051,10 +14055,10 @@
         }
       ],
       "terms": {
-        "claude": 117,
+        "claude": 119,
         "session": 40,
         "browser": 34,
-        "json": 28,
+        "json": 29,
         "code": 27,
         "desktop": 25,
         "mode": 24,
@@ -14062,10 +14066,10 @@
         "pane": 22,
         "prompt": 22,
         "file": 20,
+        "setting": 20,
         "auto": 20,
         "app": 19,
         "open": 19,
-        "setting": 19,
         "diff": 17,
         "click": 17,
         "cmd": 17,
@@ -14091,6 +14095,7 @@
         "pres": 11,
         "dev": 11,
         "start": 10,
+        "project": 10,
         "sit": 10,
         "ask": 10,
         "command": 10,
@@ -14099,10 +14104,9 @@
         "config": 10,
         "available": 9,
         "work": 9,
-        "card": 9,
-        "after": 9
+        "card": 9
       },
-      "word_count": 13852
+      "word_count": 14070
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -14695,3416 +14699,6 @@
         "acros": 5
       },
       "word_count": 2192
-    },
-    {
-      "filename": "claude-code__docs___llms__de.md",
-      "id": "claude-code/docs/_llms/de",
-      "title": "German (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/de",
-      "headings": [
-        {
-          "text": "Claude Code Docs: German",
-          "level": 1
-        },
-        {
-          "text": "German",
-          "level": 2
-        },
-        {
-          "text": "Erste Schritte",
-          "level": 3
-        },
-        {
-          "text": "Erste Schritte",
-          "level": 4
-        },
-        {
-          "text": "Grundlegende Konzepte",
-          "level": 4
-        },
-        {
-          "text": "Claude Code verwenden",
-          "level": 4
-        },
-        {
-          "text": "Plattformen und Integrationen",
-          "level": 4
-        },
-        {
-          "text": "Claude Code in der Cloud",
-          "level": 5
-        },
-        {
-          "text": "Claude Code auf dem Desktop",
-          "level": 5
-        },
-        {
-          "text": "Code-Review & CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Mit Claude Code entwickeln",
-          "level": 3
-        },
-        {
-          "text": "Agenten und parallele Arbeit",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artefakte",
-          "level": 4
-        },
-        {
-          "text": "Automatisierung",
-          "level": 4
-        },
-        {
-          "text": "Leitf\u00e4den",
-          "level": 4
-        },
-        {
-          "text": "Fehlerbehebung",
-          "level": 4
-        },
-        {
-          "text": "Plugins",
-          "level": 3
-        },
-        {
-          "text": "Plugins",
-          "level": 4
-        },
-        {
-          "text": "Plugins verwenden",
-          "level": 4
-        },
-        {
-          "text": "Plugins erstellen",
-          "level": 4
-        },
-        {
-          "text": "Mods",
-          "level": 4
-        },
-        {
-          "text": "Entwickeln",
-          "level": 5
-        },
-        {
-          "text": "Testen und Fehlerbehebung",
-          "level": 5
-        },
-        {
-          "text": "Einen Marketplace betreiben",
-          "level": 4
-        },
-        {
-          "text": "Plugins f\u00fcr Ihre Organisation verwalten",
-          "level": 4
-        },
-        {
-          "text": "Fehlerbehebung",
-          "level": 4
-        },
-        {
-          "text": "Referenz",
-          "level": 4
-        },
-        {
-          "text": "Verwaltung",
-          "level": 3
-        },
-        {
-          "text": "Einrichtung und Zugriff",
-          "level": 4
-        },
-        {
-          "text": "Bereitstellung",
-          "level": 4
-        },
-        {
-          "text": "Gateways",
-          "level": 4
-        },
-        {
-          "text": "Gateway f\u00fcr Claude-Apps",
-          "level": 5
-        },
-        {
-          "text": "Andere Gateways",
-          "level": 5
-        },
-        {
-          "text": "Nutzung und Kosten",
-          "level": 4
-        },
-        {
-          "text": "Sicherheit und Daten",
-          "level": 4
-        },
-        {
-          "text": "Einf\u00fchrung",
-          "level": 4
-        },
-        {
-          "text": "Konfiguration",
-          "level": 3
-        },
-        {
-          "text": "Einstellungen",
-          "level": 4
-        },
-        {
-          "text": "Berechtigungen und Sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Umgebungen",
-          "level": 4
-        },
-        {
-          "text": "Selbst gehostete Umgebungen",
-          "level": 5
-        },
-        {
-          "text": "Modell und Antworten",
-          "level": 4
-        },
-        {
-          "text": "Oberfl\u00e4che",
-          "level": 4
-        },
-        {
-          "text": "Referenz",
-          "level": 3
-        },
-        {
-          "text": "Referenz",
-          "level": 4
-        },
-        {
-          "text": "Glossar",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "Agenten erstellen",
-          "level": 4
-        },
-        {
-          "text": "Grundlegende Konzepte",
-          "level": 4
-        },
-        {
-          "text": "Eingabe und Ausgabe",
-          "level": 4
-        },
-        {
-          "text": "Mit Tools erweitern",
-          "level": 4
-        },
-        {
-          "text": "Verhalten anpassen",
-          "level": 4
-        },
-        {
-          "text": "Kontrolle und Beobachtbarkeit",
-          "level": 4
-        },
-        {
-          "text": "Bereitstellung",
-          "level": 4
-        },
-        {
-          "text": "SDK-Referenzen",
-          "level": 4
-        },
-        {
-          "text": "Neuigkeiten",
-          "level": 3
-        },
-        {
-          "text": "Neuigkeiten",
-          "level": 4
-        },
-        {
-          "text": "Ressourcen",
-          "level": 3
-        },
-        {
-          "text": "Ressourcen",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "sie": 394,
-        "claude": 292,
-        "und": 290,
-        "code": 221,
-        "mit": 129,
-        "die": 119,
-        "plugin": 70,
-        "ein": 64,
-        "auf": 63,
-        "von": 56,
-        "der": 53,
-        "agent": 50,
-        "oder": 49,
-        "das": 48,
-        "aus": 47,
-        "ihre": 44,
-        "sdk": 40,
-        "sitzungen": 36,
-        "hren": 36,
-        "einem": 36,
-        "tool": 35,
-        "einen": 32,
-        "ber": 32,
-        "wie": 31,
-        "cloud": 31,
-        "den": 31,
-        "referenz": 31,
-        "gateway": 31,
-        "eine": 30,
-        "dem": 29,
-        "mod": 29,
-        "app": 27,
-        "sitzung": 27,
-        "hook": 26,
-        "konfigurieren": 26,
-        "mcp": 25,
-        "woche": 25,
-        "desktop": 23,
-        "verwenden": 22,
-        "berpr": 22,
-        "erstellen": 21,
-        "ihrem": 20,
-        "agenten": 20,
-        "skill": 19,
-        "ausf": 19,
-        "ihr": 18,
-        "einstellungen": 18,
-        "modu": 18,
-        "cli": 17,
-        "einer": 17
-      },
-      "word_count": 6214
-    },
-    {
-      "filename": "claude-code__docs___llms__es.md",
-      "id": "claude-code/docs/_llms/es",
-      "title": "Spanish (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/es",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Spanish",
-          "level": 1
-        },
-        {
-          "text": "Spanish",
-          "level": 2
-        },
-        {
-          "text": "Primeros pasos",
-          "level": 3
-        },
-        {
-          "text": "Primeros pasos",
-          "level": 4
-        },
-        {
-          "text": "Conceptos b\u00e1sicos",
-          "level": 4
-        },
-        {
-          "text": "Usar Claude Code",
-          "level": 4
-        },
-        {
-          "text": "Plataformas e integraciones",
-          "level": 4
-        },
-        {
-          "text": "Claude Code en la nube",
-          "level": 5
-        },
-        {
-          "text": "Claude Code en el escritorio",
-          "level": 5
-        },
-        {
-          "text": "Revisi\u00f3n de c\u00f3digo y CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Crea con Claude Code",
-          "level": 3
-        },
-        {
-          "text": "Agentes y trabajo en paralelo",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artefactos",
-          "level": 4
-        },
-        {
-          "text": "Automatizaci\u00f3n",
-          "level": 4
-        },
-        {
-          "text": "Gu\u00edas",
-          "level": 4
-        },
-        {
-          "text": "Soluci\u00f3n de problemas",
-          "level": 4
-        },
-        {
-          "text": "Plugins",
-          "level": 3
-        },
-        {
-          "text": "Plugins",
-          "level": 4
-        },
-        {
-          "text": "Usa plugins",
-          "level": 4
-        },
-        {
-          "text": "Crear plugins",
-          "level": 4
-        },
-        {
-          "text": "Mods",
-          "level": 4
-        },
-        {
-          "text": "Crear",
-          "level": 5
-        },
-        {
-          "text": "Prueba y soluciona problemas",
-          "level": 5
-        },
-        {
-          "text": "Administra un marketplace",
-          "level": 4
-        },
-        {
-          "text": "Administra los plugins de tu organizaci\u00f3n",
-          "level": 4
-        },
-        {
-          "text": "Soluci\u00f3n de problemas",
-          "level": 4
-        },
-        {
-          "text": "Referencia",
-          "level": 4
-        },
-        {
-          "text": "Administraci\u00f3n",
-          "level": 3
-        },
-        {
-          "text": "Configuraci\u00f3n y acceso",
-          "level": 4
-        },
-        {
-          "text": "Despliegue",
-          "level": 4
-        },
-        {
-          "text": "Gateways",
-          "level": 4
-        },
-        {
-          "text": "Gateway de aplicaciones de Claude",
-          "level": 5
-        },
-        {
-          "text": "Otros gateways",
-          "level": 5
-        },
-        {
-          "text": "Uso y costos",
-          "level": 4
-        },
-        {
-          "text": "Seguridad y datos",
-          "level": 4
-        },
-        {
-          "text": "Adopci\u00f3n",
-          "level": 4
-        },
-        {
-          "text": "Configuraci\u00f3n",
-          "level": 3
-        },
-        {
-          "text": "Configuraci\u00f3n",
-          "level": 4
-        },
-        {
-          "text": "Permisos y sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Entornos",
-          "level": 4
-        },
-        {
-          "text": "Entornos autoalojados",
-          "level": 5
-        },
-        {
-          "text": "Modelo y respuestas",
-          "level": 4
-        },
-        {
-          "text": "Interfaz",
-          "level": 4
-        },
-        {
-          "text": "Referencia",
-          "level": 3
-        },
-        {
-          "text": "Referencia",
-          "level": 4
-        },
-        {
-          "text": "Glosario",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "Crear agentes",
-          "level": 4
-        },
-        {
-          "text": "Conceptos b\u00e1sicos",
-          "level": 4
-        },
-        {
-          "text": "Entrada y salida",
-          "level": 4
-        },
-        {
-          "text": "Ampl\u00eda con herramientas",
-          "level": 4
-        },
-        {
-          "text": "Personalizar comportamiento",
-          "level": 4
-        },
-        {
-          "text": "Control y observabilidad",
-          "level": 4
-        },
-        {
-          "text": "Despliegue",
-          "level": 4
-        },
-        {
-          "text": "Referencias del SDK",
-          "level": 4
-        },
-        {
-          "text": "Novedades",
-          "level": 3
-        },
-        {
-          "text": "Novedades",
-          "level": 4
-        },
-        {
-          "text": "Recursos",
-          "level": 3
-        },
-        {
-          "text": "Recursos",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 298,
-        "code": 205,
-        "con": 128,
-        "para": 113,
-        "que": 74,
-        "plugin": 70,
-        "una": 68,
-        "los": 66,
-        "agent": 55,
-        "del": 55,
-        "configuraci": 47,
-        "sesion": 42,
-        "sdk": 40,
-        "sesi": 39,
-        "las": 39,
-        "herramienta": 38,
-        "desde": 38,
-        "referencia": 34,
-        "modo": 31,
-        "entorno": 29,
-        "mod": 29,
-        "hook": 26,
-        "digo": 26,
-        "mcp": 25,
-        "semana": 25,
-        "por": 24,
-        "enlace": 22,
-        "puerta": 21,
-        "archivo": 20,
-        "comando": 20,
-        "autom": 20,
-        "ejecutar": 20,
-        "uso": 20,
-        "skill": 19,
-        "cada": 19,
-        "problema": 19,
-        "servidor": 19,
-        "organizaci": 19,
-        "cli": 17,
-        "tarea": 17,
-        "nube": 17,
-        "trabajo": 16,
-        "sus": 16,
-        "trav": 16,
-        "marketplace": 16,
-        "desktop": 15,
-        "modelo": 15,
-        "agente": 15,
-        "autohospedado": 15,
-        "subagent": 14
-      },
-      "word_count": 7378
-    },
-    {
-      "filename": "claude-code__docs___llms__fr.md",
-      "id": "claude-code/docs/_llms/fr",
-      "title": "French (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/fr",
-      "headings": [
-        {
-          "text": "Claude Code Docs: French",
-          "level": 1
-        },
-        {
-          "text": "French",
-          "level": 2
-        },
-        {
-          "text": "Premiers pas",
-          "level": 3
-        },
-        {
-          "text": "Premiers pas",
-          "level": 4
-        },
-        {
-          "text": "Concepts fondamentaux",
-          "level": 4
-        },
-        {
-          "text": "Utiliser Claude Code",
-          "level": 4
-        },
-        {
-          "text": "Plateformes et int\u00e9grations",
-          "level": 4
-        },
-        {
-          "text": "Claude Code dans le cloud",
-          "level": 5
-        },
-        {
-          "text": "Claude Code sur ordinateur",
-          "level": 5
-        },
-        {
-          "text": "Revue de code et CI/CD",
-          "level": 5
-        },
-        {
-          "text": "D\u00e9velopper avec Claude Code",
-          "level": 3
-        },
-        {
-          "text": "Agents et travail en parall\u00e8le",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artefacts",
-          "level": 4
-        },
-        {
-          "text": "Automatisation",
-          "level": 4
-        },
-        {
-          "text": "Guides",
-          "level": 4
-        },
-        {
-          "text": "D\u00e9pannage",
-          "level": 4
-        },
-        {
-          "text": "Plugins",
-          "level": 3
-        },
-        {
-          "text": "Plugins",
-          "level": 4
-        },
-        {
-          "text": "Utiliser des plugins",
-          "level": 4
-        },
-        {
-          "text": "Cr\u00e9er des plugins",
-          "level": 4
-        },
-        {
-          "text": "Mods",
-          "level": 4
-        },
-        {
-          "text": "D\u00e9velopper",
-          "level": 5
-        },
-        {
-          "text": "Tester et d\u00e9panner",
-          "level": 5
-        },
-        {
-          "text": "G\u00e9rer une marketplace",
-          "level": 4
-        },
-        {
-          "text": "G\u00e9rer les plugins de votre organisation",
-          "level": 4
-        },
-        {
-          "text": "D\u00e9pannage",
-          "level": 4
-        },
-        {
-          "text": "R\u00e9f\u00e9rence",
-          "level": 4
-        },
-        {
-          "text": "Administration",
-          "level": 3
-        },
-        {
-          "text": "Configuration et acc\u00e8s",
-          "level": 4
-        },
-        {
-          "text": "D\u00e9ploiement",
-          "level": 4
-        },
-        {
-          "text": "Passerelles",
-          "level": 4
-        },
-        {
-          "text": "Passerelle des applications Claude",
-          "level": 5
-        },
-        {
-          "text": "Autres passerelles",
-          "level": 5
-        },
-        {
-          "text": "Utilisation et co\u00fbts",
-          "level": 4
-        },
-        {
-          "text": "S\u00e9curit\u00e9 et donn\u00e9es",
-          "level": 4
-        },
-        {
-          "text": "Adoption",
-          "level": 4
-        },
-        {
-          "text": "Configuration",
-          "level": 3
-        },
-        {
-          "text": "Param\u00e8tres",
-          "level": 4
-        },
-        {
-          "text": "Permissions et sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Environnements",
-          "level": 4
-        },
-        {
-          "text": "Environnements auto-h\u00e9berg\u00e9s",
-          "level": 5
-        },
-        {
-          "text": "Mod\u00e8le et r\u00e9ponses",
-          "level": 4
-        },
-        {
-          "text": "Interface",
-          "level": 4
-        },
-        {
-          "text": "R\u00e9f\u00e9rence",
-          "level": 3
-        },
-        {
-          "text": "R\u00e9f\u00e9rence",
-          "level": 4
-        },
-        {
-          "text": "Glossaire",
-          "level": 4
-        },
-        {
-          "text": "SDK Agent",
-          "level": 3
-        },
-        {
-          "text": "SDK Agent",
-          "level": 4
-        },
-        {
-          "text": "Cr\u00e9er des agents",
-          "level": 4
-        },
-        {
-          "text": "Concepts fondamentaux",
-          "level": 4
-        },
-        {
-          "text": "Entr\u00e9e et sortie",
-          "level": 4
-        },
-        {
-          "text": "\u00c9tendre avec des outils",
-          "level": 4
-        },
-        {
-          "text": "Personnaliser le comportement",
-          "level": 4
-        },
-        {
-          "text": "Contr\u00f4le et observabilit\u00e9",
-          "level": 4
-        },
-        {
-          "text": "D\u00e9ploiement",
-          "level": 4
-        },
-        {
-          "text": "R\u00e9f\u00e9rences du SDK",
-          "level": 4
-        },
-        {
-          "text": "Nouveaut\u00e9s",
-          "level": 3
-        },
-        {
-          "text": "Nouveaut\u00e9s",
-          "level": 4
-        },
-        {
-          "text": "Ressources",
-          "level": 3
-        },
-        {
-          "text": "Ressources",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "les": 325,
-        "claude": 297,
-        "code": 231,
-        "des": 201,
-        "avec": 115,
-        "pour": 108,
-        "votre": 89,
-        "une": 85,
-        "dan": 84,
-        "agent": 81,
-        "session": 76,
-        "plugin": 70,
-        "sur": 58,
-        "mod": 51,
-        "que": 47,
-        "sdk": 40,
-        "outil": 38,
-        "par": 35,
-        "rence": 34,
-        "tre": 32,
-        "cloud": 31,
-        "auto": 30,
-        "configuration": 29,
-        "environnement": 29,
-        "passerelle": 28,
-        "mode": 27,
-        "hook": 26,
-        "mcp": 25,
-        "comment": 25,
-        "param": 25,
-        "semaine": 25,
-        "utilisation": 24,
-        "qui": 23,
-        "vou": 22,
-        "application": 21,
-        "partir": 21,
-        "aux": 20,
-        "via": 20,
-        "fichier": 19,
-        "couvrez": 19,
-        "configurez": 19,
-        "berg": 19,
-        "serveur": 19,
-        "organisation": 19,
-        "command": 18,
-        "che": 18,
-        "contr": 18,
-        "int": 17,
-        "cuter": 17,
-        "depui": 17
-      },
-      "word_count": 7370
-    },
-    {
-      "filename": "claude-code__docs___llms__id.md",
-      "id": "claude-code/docs/_llms/id",
-      "title": "Indonesian (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/id",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Indonesian",
-          "level": 1
-        },
-        {
-          "text": "Indonesian",
-          "level": 2
-        },
-        {
-          "text": "Memulai",
-          "level": 3
-        },
-        {
-          "text": "Memulai",
-          "level": 4
-        },
-        {
-          "text": "Konsep inti",
-          "level": 4
-        },
-        {
-          "text": "Gunakan Claude Code",
-          "level": 4
-        },
-        {
-          "text": "Platform dan integrasi",
-          "level": 4
-        },
-        {
-          "text": "Claude Code di cloud",
-          "level": 5
-        },
-        {
-          "text": "Claude Code di desktop",
-          "level": 5
-        },
-        {
-          "text": "Code review & CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Membangun dengan Claude Code",
-          "level": 3
-        },
-        {
-          "text": "Agent dan pekerjaan paralel",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artifact",
-          "level": 4
-        },
-        {
-          "text": "Otomatisasi",
-          "level": 4
-        },
-        {
-          "text": "Panduan",
-          "level": 4
-        },
-        {
-          "text": "Pemecahan masalah",
-          "level": 4
-        },
-        {
-          "text": "Plugin",
-          "level": 3
-        },
-        {
-          "text": "Plugin",
-          "level": 4
-        },
-        {
-          "text": "Menggunakan plugin",
-          "level": 4
-        },
-        {
-          "text": "Buat plugin",
-          "level": 4
-        },
-        {
-          "text": "Mod",
-          "level": 4
-        },
-        {
-          "text": "Build",
-          "level": 5
-        },
-        {
-          "text": "Uji dan pecahkan masalah",
-          "level": 5
-        },
-        {
-          "text": "Menjalankan marketplace",
-          "level": 4
-        },
-        {
-          "text": "Kelola plugin untuk organisasi Anda",
-          "level": 4
-        },
-        {
-          "text": "Pemecahan masalah",
-          "level": 4
-        },
-        {
-          "text": "Referensi",
-          "level": 4
-        },
-        {
-          "text": "Administrasi",
-          "level": 3
-        },
-        {
-          "text": "Penyiapan dan akses",
-          "level": 4
-        },
-        {
-          "text": "Deployment",
-          "level": 4
-        },
-        {
-          "text": "Gateway",
-          "level": 4
-        },
-        {
-          "text": "Gateway aplikasi Claude",
-          "level": 5
-        },
-        {
-          "text": "Gateway lainnya",
-          "level": 5
-        },
-        {
-          "text": "Penggunaan dan biaya",
-          "level": 4
-        },
-        {
-          "text": "Keamanan dan data",
-          "level": 4
-        },
-        {
-          "text": "Adopsi",
-          "level": 4
-        },
-        {
-          "text": "Konfigurasi",
-          "level": 3
-        },
-        {
-          "text": "Pengaturan",
-          "level": 4
-        },
-        {
-          "text": "Izin dan sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Lingkungan",
-          "level": 4
-        },
-        {
-          "text": "Lingkungan self-hosted",
-          "level": 5
-        },
-        {
-          "text": "Model dan respons",
-          "level": 4
-        },
-        {
-          "text": "Antarmuka",
-          "level": 4
-        },
-        {
-          "text": "Referensi",
-          "level": 3
-        },
-        {
-          "text": "Referensi",
-          "level": 4
-        },
-        {
-          "text": "Glosarium",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "Membangun agent",
-          "level": 4
-        },
-        {
-          "text": "Konsep inti",
-          "level": 4
-        },
-        {
-          "text": "Input dan output",
-          "level": 4
-        },
-        {
-          "text": "Perluas dengan tool",
-          "level": 4
-        },
-        {
-          "text": "Sesuaikan perilaku",
-          "level": 4
-        },
-        {
-          "text": "Kontrol dan observabilitas",
-          "level": 4
-        },
-        {
-          "text": "Deployment",
-          "level": 4
-        },
-        {
-          "text": "Referensi SDK",
-          "level": 4
-        },
-        {
-          "text": "Yang Baru",
-          "level": 3
-        },
-        {
-          "text": "Yang Baru",
-          "level": 4
-        },
-        {
-          "text": "Sumber Daya",
-          "level": 3
-        },
-        {
-          "text": "Sumber Daya",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 297,
-        "dan": 283,
-        "code": 208,
-        "yang": 142,
-        "dengan": 127,
-        "anda": 120,
-        "untuk": 118,
-        "plugin": 71,
-        "sesi": 71,
-        "dari": 51,
-        "atau": 48,
-        "agent": 45,
-        "sdk": 40,
-        "dalam": 37,
-        "referensi": 33,
-        "mode": 33,
-        "cloud": 31,
-        "konfigurasi": 31,
-        "gateway": 31,
-        "mod": 30,
-        "lingkungan": 29,
-        "aplikasi": 28,
-        "sendiri": 28,
-        "agen": 27,
-        "hook": 26,
-        "pengaturan": 26,
-        "mcp": 25,
-        "minggu": 25,
-        "dapat": 24,
-        "desktop": 23,
-        "alat": 23,
-        "apa": 23,
-        "jalankan": 23,
-        "host": 23,
-        "kode": 21,
-        "server": 21,
-        "gunakan": 20,
-        "organisasi": 20,
-        "marketplace": 20,
-        "skill": 19,
-        "file": 19,
-        "secara": 19,
-        "penggunaan": 19,
-        "melalui": 19,
-        "perintah": 18,
-        "cli": 17,
-        "otomati": 17,
-        "tool": 16,
-        "cara": 16,
-        "setiap": 16
-      },
-      "word_count": 6034
-    },
-    {
-      "filename": "claude-code__docs___llms__it.md",
-      "id": "claude-code/docs/_llms/it",
-      "title": "Italian (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/it",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Italian",
-          "level": 1
-        },
-        {
-          "text": "Italian",
-          "level": 2
-        },
-        {
-          "text": "Per iniziare",
-          "level": 3
-        },
-        {
-          "text": "Per iniziare",
-          "level": 4
-        },
-        {
-          "text": "Concetti fondamentali",
-          "level": 4
-        },
-        {
-          "text": "Usa Claude Code",
-          "level": 4
-        },
-        {
-          "text": "Piattaforme e integrazioni",
-          "level": 4
-        },
-        {
-          "text": "Claude Code nel cloud",
-          "level": 5
-        },
-        {
-          "text": "Claude Code su desktop",
-          "level": 5
-        },
-        {
-          "text": "Code review e CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Sviluppa con Claude Code",
-          "level": 3
-        },
-        {
-          "text": "Agenti e lavoro in parallelo",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skill",
-          "level": 4
-        },
-        {
-          "text": "Artefatti",
-          "level": 4
-        },
-        {
-          "text": "Automazione",
-          "level": 4
-        },
-        {
-          "text": "Guide",
-          "level": 4
-        },
-        {
-          "text": "Risoluzione dei problemi",
-          "level": 4
-        },
-        {
-          "text": "Plugin",
-          "level": 3
-        },
-        {
-          "text": "Plugin",
-          "level": 4
-        },
-        {
-          "text": "Usa i plugin",
-          "level": 4
-        },
-        {
-          "text": "Crea plugin",
-          "level": 4
-        },
-        {
-          "text": "Mod",
-          "level": 4
-        },
-        {
-          "text": "Sviluppa",
-          "level": 5
-        },
-        {
-          "text": "Test e risoluzione dei problemi",
-          "level": 5
-        },
-        {
-          "text": "Gestisci un marketplace",
-          "level": 4
-        },
-        {
-          "text": "Gestisci i plugin per la tua organizzazione",
-          "level": 4
-        },
-        {
-          "text": "Risoluzione dei problemi",
-          "level": 4
-        },
-        {
-          "text": "Riferimento",
-          "level": 4
-        },
-        {
-          "text": "Amministrazione",
-          "level": 3
-        },
-        {
-          "text": "Configurazione e accesso",
-          "level": 4
-        },
-        {
-          "text": "Deploy",
-          "level": 4
-        },
-        {
-          "text": "Gateway",
-          "level": 4
-        },
-        {
-          "text": "Gateway per le app di Claude",
-          "level": 5
-        },
-        {
-          "text": "Altri gateway",
-          "level": 5
-        },
-        {
-          "text": "Utilizzo e costi",
-          "level": 4
-        },
-        {
-          "text": "Sicurezza e dati",
-          "level": 4
-        },
-        {
-          "text": "Adozione",
-          "level": 4
-        },
-        {
-          "text": "Configurazione",
-          "level": 3
-        },
-        {
-          "text": "Impostazioni",
-          "level": 4
-        },
-        {
-          "text": "Permessi e sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Ambienti",
-          "level": 4
-        },
-        {
-          "text": "Ambienti self-hosted",
-          "level": 5
-        },
-        {
-          "text": "Modello e risposte",
-          "level": 4
-        },
-        {
-          "text": "Interfaccia",
-          "level": 4
-        },
-        {
-          "text": "Riferimento",
-          "level": 3
-        },
-        {
-          "text": "Riferimento",
-          "level": 4
-        },
-        {
-          "text": "Glossario",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "Crea agenti",
-          "level": 4
-        },
-        {
-          "text": "Concetti fondamentali",
-          "level": 4
-        },
-        {
-          "text": "Input e output",
-          "level": 4
-        },
-        {
-          "text": "Estendi con gli strumenti",
-          "level": 4
-        },
-        {
-          "text": "Personalizza il comportamento",
-          "level": 4
-        },
-        {
-          "text": "Controllo e osservabilit\u00e0",
-          "level": 4
-        },
-        {
-          "text": "Deploy",
-          "level": 4
-        },
-        {
-          "text": "Riferimenti SDK",
-          "level": 4
-        },
-        {
-          "text": "Novit\u00e0",
-          "level": 3
-        },
-        {
-          "text": "Novit\u00e0",
-          "level": 4
-        },
-        {
-          "text": "Risorse",
-          "level": 3
-        },
-        {
-          "text": "Risorse",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 297,
-        "code": 208,
-        "per": 136,
-        "con": 123,
-        "plugin": 70,
-        "che": 61,
-        "una": 48,
-        "dei": 48,
-        "del": 47,
-        "agent": 43,
-        "tuo": 41,
-        "sdk": 40,
-        "sessioni": 39,
-        "come": 38,
-        "gli": 37,
-        "sessione": 36,
-        "cloud": 32,
-        "modalit": 32,
-        "riferimento": 32,
-        "gateway": 31,
-        "strumenti": 30,
-        "mod": 29,
-        "app": 27,
-        "tua": 27,
-        "configurazione": 27,
-        "hook": 26,
-        "dell": 26,
-        "mcp": 25,
-        "settimana": 25,
-        "desktop": 23,
-        "nel": 22,
-        "della": 22,
-        "server": 21,
-        "impostazioni": 21,
-        "delle": 20,
-        "marketplace": 20,
-        "skill": 19,
-        "file": 19,
-        "scopri": 19,
-        "eseguire": 19,
-        "utilizzo": 19,
-        "host": 19,
-        "lavoro": 18,
-        "problemi": 18,
-        "configurare": 18,
-        "codice": 17,
-        "cli": 17,
-        "ogni": 17,
-        "esegui": 17,
-        "agenti": 17
-      },
-      "word_count": 7066
-    },
-    {
-      "filename": "claude-code__docs___llms__jp.md",
-      "id": "claude-code/docs/_llms/jp",
-      "title": "Japanese (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/jp",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Japanese",
-          "level": 1
-        },
-        {
-          "text": "Japanese",
-          "level": 2
-        },
-        {
-          "text": "\u306f\u3058\u3081\u306b",
-          "level": 3
-        },
-        {
-          "text": "\u306f\u3058\u3081\u306b",
-          "level": 4
-        },
-        {
-          "text": "\u57fa\u672c\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "Claude Code \u3092\u4f7f\u3046",
-          "level": 4
-        },
-        {
-          "text": "\u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0\u3068\u9023\u643a",
-          "level": 4
-        },
-        {
-          "text": "\u30af\u30e9\u30a6\u30c9\u4e0a\u306e Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u30c7\u30b9\u30af\u30c8\u30c3\u30d7\u7248 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u30b3\u30fc\u30c9\u30ec\u30d3\u30e5\u30fc\u3068 CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Claude Code \u3067\u69cb\u7bc9\u3059\u308b",
-          "level": 3
-        },
-        {
-          "text": "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3068\u4e26\u5217\u4f5c\u696d",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "\u30b9\u30ad\u30eb",
-          "level": 4
-        },
-        {
-          "text": "\u30a2\u30fc\u30c6\u30a3\u30d5\u30a1\u30af\u30c8",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u52d5\u5316",
-          "level": 4
-        },
-        {
-          "text": "\u30ac\u30a4\u30c9",
-          "level": 4
-        },
-        {
-          "text": "\u30c8\u30e9\u30d6\u30eb\u30b7\u30e5\u30fc\u30c6\u30a3\u30f3\u30b0",
-          "level": 4
-        },
-        {
-          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3",
-          "level": 3
-        },
-        {
-          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3",
-          "level": 4
-        },
-        {
-          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u4f7f\u7528\u3059\u308b",
-          "level": 4
-        },
-        {
-          "text": "\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u4f5c\u6210",
-          "level": 4
-        },
-        {
-          "text": "mod",
-          "level": 4
-        },
-        {
-          "text": "\u69cb\u7bc9",
-          "level": 5
-        },
-        {
-          "text": "\u30c6\u30b9\u30c8\u3068\u30c8\u30e9\u30d6\u30eb\u30b7\u30e5\u30fc\u30c6\u30a3\u30f3\u30b0",
-          "level": 5
-        },
-        {
-          "text": "\u30de\u30fc\u30b1\u30c3\u30c8\u30d7\u30ec\u30a4\u30b9\u3092\u904b\u55b6\u3059\u308b",
-          "level": 4
-        },
-        {
-          "text": "\u7d44\u7e54\u306e\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u7ba1\u7406",
-          "level": 4
-        },
-        {
-          "text": "\u30c8\u30e9\u30d6\u30eb\u30b7\u30e5\u30fc\u30c6\u30a3\u30f3\u30b0",
-          "level": 4
-        },
-        {
-          "text": "\u30ea\u30d5\u30a1\u30ec\u30f3\u30b9",
-          "level": 4
-        },
-        {
-          "text": "\u7ba1\u7406",
-          "level": 3
-        },
-        {
-          "text": "\u30bb\u30c3\u30c8\u30a2\u30c3\u30d7\u3068\u30a2\u30af\u30bb\u30b9",
-          "level": 4
-        },
-        {
-          "text": "\u30c7\u30d7\u30ed\u30a4",
-          "level": 4
-        },
-        {
-          "text": "\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4",
-          "level": 4
-        },
-        {
-          "text": "Claude \u30a2\u30d7\u30ea\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4",
-          "level": 5
-        },
-        {
-          "text": "\u305d\u306e\u4ed6\u306e\u30b2\u30fc\u30c8\u30a6\u30a7\u30a4",
-          "level": 5
-        },
-        {
-          "text": "\u4f7f\u7528\u91cf\u3068\u30b3\u30b9\u30c8",
-          "level": 4
-        },
-        {
-          "text": "\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u3068\u30c7\u30fc\u30bf",
-          "level": 4
-        },
-        {
-          "text": "\u5c0e\u5165",
-          "level": 4
-        },
-        {
-          "text": "\u8a2d\u5b9a",
-          "level": 3
-        },
-        {
-          "text": "\u8a2d\u5b9a",
-          "level": 4
-        },
-        {
-          "text": "\u6a29\u9650\u3068\u30b5\u30f3\u30c9\u30dc\u30c3\u30af\u30b9\u5316",
-          "level": 4
-        },
-        {
-          "text": "\u74b0\u5883",
-          "level": 4
-        },
-        {
-          "text": "\u30bb\u30eb\u30d5\u30db\u30b9\u30c8\u74b0\u5883",
-          "level": 5
-        },
-        {
-          "text": "\u30e2\u30c7\u30eb\u3068\u5fdc\u7b54",
-          "level": 4
-        },
-        {
-          "text": "\u30a4\u30f3\u30bf\u30fc\u30d5\u30a7\u30fc\u30b9",
-          "level": 4
-        },
-        {
-          "text": "\u30ea\u30d5\u30a1\u30ec\u30f3\u30b9",
-          "level": 3
-        },
-        {
-          "text": "\u30ea\u30d5\u30a1\u30ec\u30f3\u30b9",
-          "level": 4
-        },
-        {
-          "text": "\u7528\u8a9e\u96c6",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3092\u69cb\u7bc9",
-          "level": 4
-        },
-        {
-          "text": "\u57fa\u672c\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "\u5165\u529b\u3068\u51fa\u529b",
-          "level": 4
-        },
-        {
-          "text": "\u30c4\u30fc\u30eb\u3067\u62e1\u5f35",
-          "level": 4
-        },
-        {
-          "text": "\u52d5\u4f5c\u306e\u30ab\u30b9\u30bf\u30de\u30a4\u30ba",
-          "level": 4
-        },
-        {
-          "text": "\u5236\u5fa1\u3068\u30aa\u30d6\u30b6\u30fc\u30d0\u30d3\u30ea\u30c6\u30a3",
-          "level": 4
-        },
-        {
-          "text": "\u30c7\u30d7\u30ed\u30a4",
-          "level": 4
-        },
-        {
-          "text": "SDK \u30ea\u30d5\u30a1\u30ec\u30f3\u30b9",
-          "level": 4
-        },
-        {
-          "text": "\u65b0\u6a5f\u80fd",
-          "level": 3
-        },
-        {
-          "text": "\u65b0\u6a5f\u80fd",
-          "level": 4
-        },
-        {
-          "text": "\u30ea\u30bd\u30fc\u30b9",
-          "level": 3
-        },
-        {
-          "text": "\u30ea\u30bd\u30fc\u30b9",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 298,
-        "code": 205,
-        "sdk": 40,
-        "agent": 38,
-        "mod": 32,
-        "mcp": 25,
-        "week": 21,
-        "cli": 17,
-        "desktop": 16,
-        "cloud": 14,
-        "api": 13,
-        "platform": 12,
-        "gateway": 12,
-        "google": 11,
-        "anthropic": 10,
-        "app": 10,
-        "amazon": 10,
-        "aws": 10,
-        "hook": 9,
-        "json": 9,
-        "github": 9,
-        "bedrock": 9,
-        "plugin": 8,
-        "microsoft": 8,
-        "foundry": 8,
-        "typescript": 7,
-        "opu": 7,
-        "skill": 6,
-        "git": 6,
-        "llm": 6,
-        "security": 5,
-        "python": 5,
-        "agentic": 4,
-        "ide": 4,
-        "subagent": 4,
-        "auto": 4,
-        "chrome": 4,
-        "slack": 4,
-        "ios": 4,
-        "action": 4,
-        "url": 4,
-        "eval": 4,
-        "iam": 4,
-        "setting": 3,
-        "jetbrain": 3,
-        "web": 3,
-        "tag": 3,
-        "review": 3,
-        "diff": 3,
-        "enterprise": 3
-      },
-      "word_count": 2240
-    },
-    {
-      "filename": "claude-code__docs___llms__ko.md",
-      "id": "claude-code/docs/_llms/ko",
-      "title": "Korean (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/ko",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Korean",
-          "level": 1
-        },
-        {
-          "text": "Korean",
-          "level": 2
-        },
-        {
-          "text": "\uc2dc\uc791\ud558\uae30",
-          "level": 3
-        },
-        {
-          "text": "\uc2dc\uc791\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\ud575\uc2ec \uac1c\ub150",
-          "level": 4
-        },
-        {
-          "text": "Claude Code \uc0ac\uc6a9\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\ud50c\ub7ab\ud3fc \ubc0f \ud1b5\ud569",
-          "level": 4
-        },
-        {
-          "text": "\ud074\ub77c\uc6b0\ub4dc\uc758 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\ub370\uc2a4\ud06c\ud1b1\uc6a9 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\ucf54\ub4dc \ub9ac\ubdf0 & CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Claude Code\ub85c \ub9cc\ub4e4\uae30",
-          "level": 3
-        },
-        {
-          "text": "\uc5d0\uc774\uc804\ud2b8\uc640 \ubcd1\ub82c \uc791\uc5c5",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "\uc2a4\ud0ac",
-          "level": 4
-        },
-        {
-          "text": "\uc544\ud2f0\ud329\ud2b8",
-          "level": 4
-        },
-        {
-          "text": "\uc790\ub3d9\ud654",
-          "level": 4
-        },
-        {
-          "text": "\uac00\uc774\ub4dc",
-          "level": 4
-        },
-        {
-          "text": "\ubb38\uc81c \ud574\uacb0",
-          "level": 4
-        },
-        {
-          "text": "\ud50c\ub7ec\uadf8\uc778",
-          "level": 3
-        },
-        {
-          "text": "\ud50c\ub7ec\uadf8\uc778",
-          "level": 4
-        },
-        {
-          "text": "\ud50c\ub7ec\uadf8\uc778 \uc0ac\uc6a9\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\ud50c\ub7ec\uadf8\uc778 \ub9cc\ub4e4\uae30",
-          "level": 4
-        },
-        {
-          "text": "mod",
-          "level": 4
-        },
-        {
-          "text": "\uad6c\ucd95",
-          "level": 5
-        },
-        {
-          "text": "\ud14c\uc2a4\ud2b8 \ubc0f \ubb38\uc81c \ud574\uacb0",
-          "level": 5
-        },
-        {
-          "text": "\ub9c8\ucf13\ud50c\ub808\uc774\uc2a4 \uc6b4\uc601\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\uc870\uc9c1\uc758 \ud50c\ub7ec\uadf8\uc778 \uad00\ub9ac",
-          "level": 4
-        },
-        {
-          "text": "\ubb38\uc81c \ud574\uacb0",
-          "level": 4
-        },
-        {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
-          "level": 4
-        },
-        {
-          "text": "\uad00\ub9ac",
-          "level": 3
-        },
-        {
-          "text": "\uc124\uc815 \ubc0f \uc561\uc138\uc2a4",
-          "level": 4
-        },
-        {
-          "text": "\ubc30\ud3ec",
-          "level": 4
-        },
-        {
-          "text": "\uac8c\uc774\ud2b8\uc6e8\uc774",
-          "level": 4
-        },
-        {
-          "text": "Claude \uc571 \uac8c\uc774\ud2b8\uc6e8\uc774",
-          "level": 5
-        },
-        {
-          "text": "\uae30\ud0c0 \uac8c\uc774\ud2b8\uc6e8\uc774",
-          "level": 5
-        },
-        {
-          "text": "\uc0ac\uc6a9\ub7c9 \ubc0f \ube44\uc6a9",
-          "level": 4
-        },
-        {
-          "text": "\ubcf4\uc548 \ubc0f \ub370\uc774\ud130",
-          "level": 4
-        },
-        {
-          "text": "\ub3c4\uc785",
-          "level": 4
-        },
-        {
-          "text": "\uad6c\uc131",
-          "level": 3
-        },
-        {
-          "text": "\uc124\uc815",
-          "level": 4
-        },
-        {
-          "text": "\uad8c\ud55c \ubc0f \uc0cc\ub4dc\ubc15\uc2f1",
-          "level": 4
-        },
-        {
-          "text": "\ud658\uacbd",
-          "level": 4
-        },
-        {
-          "text": "\uc140\ud504 \ud638\uc2a4\ud305 \ud658\uacbd",
-          "level": 5
-        },
-        {
-          "text": "\ubaa8\ub378 \ubc0f \uc751\ub2f5",
-          "level": 4
-        },
-        {
-          "text": "\uc778\ud130\ud398\uc774\uc2a4",
-          "level": 4
-        },
-        {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
-          "level": 3
-        },
-        {
-          "text": "\ub808\ud37c\ub7f0\uc2a4",
-          "level": 4
-        },
-        {
-          "text": "\uc6a9\uc5b4\uc9d1",
-          "level": 4
-        },
-        {
-          "text": "\uc5d0\uc774\uc804\ud2b8 SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "\uc5d0\uc774\uc804\ud2b8 \uad6c\ucd95\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\ud575\uc2ec \uac1c\ub150",
-          "level": 4
-        },
-        {
-          "text": "\uc785\ub825 \ubc0f \ucd9c\ub825",
-          "level": 4
-        },
-        {
-          "text": "\ub3c4\uad6c\ub85c \ud655\uc7a5\ud558\uae30",
-          "level": 4
-        },
-        {
-          "text": "\ub3d9\uc791 \uc0ac\uc6a9\uc790 \uc9c0\uc815",
-          "level": 4
-        },
-        {
-          "text": "\uc81c\uc5b4 \ubc0f \uad00\ucc30 \uac00\ub2a5\uc131",
-          "level": 4
-        },
-        {
-          "text": "\ubc30\ud3ec",
-          "level": 4
-        },
-        {
-          "text": "SDK \ub808\ud37c\ub7f0\uc2a4",
-          "level": 4
-        },
-        {
-          "text": "\uc0c8\ub85c\uc6b4 \uc18c\uc2dd",
-          "level": 3
-        },
-        {
-          "text": "\uc0c8\ub85c\uc6b4 \uae30\ub2a5",
-          "level": 4
-        },
-        {
-          "text": "\ub9ac\uc18c\uc2a4",
-          "level": 3
-        },
-        {
-          "text": "\ub9ac\uc18c\uc2a4",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 298,
-        "code": 204,
-        "sdk": 40,
-        "agent": 37,
-        "mod": 32,
-        "mcp": 25,
-        "cli": 17,
-        "desktop": 16,
-        "cloud": 14,
-        "api": 13,
-        "hook": 12,
-        "platform": 12,
-        "google": 11,
-        "skill": 10,
-        "amazon": 10,
-        "aws": 10,
-        "anthropic": 9,
-        "json": 9,
-        "github": 9,
-        "bedrock": 9,
-        "microsoft": 8,
-        "foundry": 8,
-        "typescript": 7,
-        "plugin": 7,
-        "opu": 7,
-        "git": 6,
-        "gateway": 6,
-        "llm": 6,
-        "subagent": 5,
-        "diff": 5,
-        "python": 5,
-        "ide": 4,
-        "chrome": 4,
-        "slack": 4,
-        "ios": 4,
-        "security": 4,
-        "action": 4,
-        "url": 4,
-        "eval": 4,
-        "iam": 4,
-        "setting": 3,
-        "jetbrain": 3,
-        "tag": 3,
-        "review": 3,
-        "enterprise": 3,
-        "gitlab": 3,
-        "worktree": 3,
-        "marketplace": 3,
-        "kubernet": 3,
-        "opentelemetry": 3
-      },
-      "word_count": 5178
-    },
-    {
-      "filename": "claude-code__docs___llms__pt-br.md",
-      "id": "claude-code/docs/_llms/pt-br",
-      "title": "Brazilian Portuguese (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/pt-br",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Brazilian Portuguese",
-          "level": 1
-        },
-        {
-          "text": "Brazilian Portuguese",
-          "level": 2
-        },
-        {
-          "text": "Primeiros passos",
-          "level": 3
-        },
-        {
-          "text": "Primeiros passos",
-          "level": 4
-        },
-        {
-          "text": "Conceitos principais",
-          "level": 4
-        },
-        {
-          "text": "Use o Claude Code",
-          "level": 4
-        },
-        {
-          "text": "Plataformas e integra\u00e7\u00f5es",
-          "level": 4
-        },
-        {
-          "text": "Claude Code na nuvem",
-          "level": 5
-        },
-        {
-          "text": "Claude Code no desktop",
-          "level": 5
-        },
-        {
-          "text": "Revis\u00e3o de c\u00f3digo e CI/CD",
-          "level": 5
-        },
-        {
-          "text": "Desenvolva com o Claude Code",
-          "level": 3
-        },
-        {
-          "text": "Agentes e trabalho paralelo",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artefatos",
-          "level": 4
-        },
-        {
-          "text": "Automa\u00e7\u00e3o",
-          "level": 4
-        },
-        {
-          "text": "Guias",
-          "level": 4
-        },
-        {
-          "text": "Solu\u00e7\u00e3o de problemas",
-          "level": 4
-        },
-        {
-          "text": "Plugins",
-          "level": 3
-        },
-        {
-          "text": "Plugins",
-          "level": 4
-        },
-        {
-          "text": "Usar plugins",
-          "level": 4
-        },
-        {
-          "text": "Criar plugins",
-          "level": 4
-        },
-        {
-          "text": "Mods",
-          "level": 4
-        },
-        {
-          "text": "Desenvolver",
-          "level": 5
-        },
-        {
-          "text": "Testar e solucionar problemas",
-          "level": 5
-        },
-        {
-          "text": "Execute um marketplace",
-          "level": 4
-        },
-        {
-          "text": "Gerencie plugins para sua organiza\u00e7\u00e3o",
-          "level": 4
-        },
-        {
-          "text": "Solu\u00e7\u00e3o de problemas",
-          "level": 4
-        },
-        {
-          "text": "Refer\u00eancia",
-          "level": 4
-        },
-        {
-          "text": "Administra\u00e7\u00e3o",
-          "level": 3
-        },
-        {
-          "text": "Configura\u00e7\u00e3o e acesso",
-          "level": 4
-        },
-        {
-          "text": "Implanta\u00e7\u00e3o",
-          "level": 4
-        },
-        {
-          "text": "Gateways",
-          "level": 4
-        },
-        {
-          "text": "Gateway de aplicativos Claude",
-          "level": 5
-        },
-        {
-          "text": "Outros gateways",
-          "level": 5
-        },
-        {
-          "text": "Uso e custos",
-          "level": 4
-        },
-        {
-          "text": "Seguran\u00e7a e dados",
-          "level": 4
-        },
-        {
-          "text": "Ado\u00e7\u00e3o",
-          "level": 4
-        },
-        {
-          "text": "Configura\u00e7\u00e3o",
-          "level": 3
-        },
-        {
-          "text": "Configura\u00e7\u00f5es",
-          "level": 4
-        },
-        {
-          "text": "Permiss\u00f5es e sandboxing",
-          "level": 4
-        },
-        {
-          "text": "Ambientes",
-          "level": 4
-        },
-        {
-          "text": "Ambientes auto-hospedados",
-          "level": 5
-        },
-        {
-          "text": "Modelo e respostas",
-          "level": 4
-        },
-        {
-          "text": "Interface",
-          "level": 4
-        },
-        {
-          "text": "Refer\u00eancia",
-          "level": 3
-        },
-        {
-          "text": "Refer\u00eancia",
-          "level": 4
-        },
-        {
-          "text": "Gloss\u00e1rio",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "Criar agentes",
-          "level": 4
-        },
-        {
-          "text": "Conceitos principais",
-          "level": 4
-        },
-        {
-          "text": "Entrada e sa\u00edda",
-          "level": 4
-        },
-        {
-          "text": "Estender com ferramentas",
-          "level": 4
-        },
-        {
-          "text": "Personalizar comportamento",
-          "level": 4
-        },
-        {
-          "text": "Controle e observabilidade",
-          "level": 4
-        },
-        {
-          "text": "Implanta\u00e7\u00e3o",
-          "level": 4
-        },
-        {
-          "text": "Refer\u00eancias do SDK",
-          "level": 4
-        },
-        {
-          "text": "Novidades",
-          "level": 3
-        },
-        {
-          "text": "Novidades",
-          "level": 4
-        },
-        {
-          "text": "Recursos",
-          "level": 3
-        },
-        {
-          "text": "Recursos",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 298,
-        "code": 205,
-        "para": 146,
-        "com": 125,
-        "que": 79,
-        "ses": 74,
-        "plugin": 70,
-        "agent": 60,
-        "uma": 59,
-        "seu": 57,
-        "sua": 55,
-        "configura": 50,
-        "ncia": 45,
-        "sdk": 40,
-        "como": 39,
-        "ferramenta": 38,
-        "refer": 34,
-        "modo": 33,
-        "gateway": 31,
-        "rio": 30,
-        "mod": 29,
-        "digo": 28,
-        "aplicativo": 27,
-        "hook": 26,
-        "partir": 26,
-        "mcp": 25,
-        "semana": 25,
-        "por": 24,
-        "desktop": 23,
-        "auto": 23,
-        "configure": 21,
-        "arquivo": 20,
-        "comando": 20,
-        "cada": 20,
-        "organiza": 20,
-        "skill": 19,
-        "uso": 19,
-        "servidor": 19,
-        "problema": 18,
-        "execute": 18,
-        "hospedado": 18,
-        "cli": 17,
-        "tarefa": 17,
-        "executar": 17,
-        "nuvem": 17,
-        "voc": 17,
-        "atrav": 17,
-        "prompt": 16,
-        "permis": 16,
-        "marketplace": 16
-      },
-      "word_count": 7106
-    },
-    {
-      "filename": "claude-code__docs___llms__ru.md",
-      "id": "claude-code/docs/_llms/ru",
-      "title": "Russian (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/ru",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Russian",
-          "level": 1
-        },
-        {
-          "text": "Russian",
-          "level": 2
-        },
-        {
-          "text": "\u041d\u0430\u0447\u0430\u043b\u043e \u0440\u0430\u0431\u043e\u0442\u044b",
-          "level": 3
-        },
-        {
-          "text": "\u041d\u0430\u0447\u0430\u043b\u043e \u0440\u0430\u0431\u043e\u0442\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043f\u043e\u043d\u044f\u0442\u0438\u044f",
-          "level": 4
-        },
-        {
-          "text": "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 Claude Code",
-          "level": 4
-        },
-        {
-          "text": "\u041f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u044b \u0438 \u0438\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u0438",
-          "level": 4
-        },
-        {
-          "text": "Claude Code \u0432 \u043e\u0431\u043b\u0430\u043a\u0435",
-          "level": 5
-        },
-        {
-          "text": "Claude Code \u0434\u043b\u044f \u0434\u0435\u0441\u043a\u0442\u043e\u043f\u0430",
-          "level": 5
-        },
-        {
-          "text": "\u041a\u043e\u0434-\u0440\u0435\u0432\u044c\u044e \u0438 CI/CD",
-          "level": 5
-        },
-        {
-          "text": "\u0420\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430 \u0441 Claude Code",
-          "level": 3
-        },
-        {
-          "text": "\u0410\u0433\u0435\u043d\u0442\u044b \u0438 \u043f\u0430\u0440\u0430\u043b\u043b\u0435\u043b\u044c\u043d\u0430\u044f \u0440\u0430\u0431\u043e\u0442\u0430",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043a\u0438\u043b\u043b\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0410\u0440\u0442\u0435\u0444\u0430\u043a\u0442\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0437\u0430\u0446\u0438\u044f",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0443\u043a\u043e\u0432\u043e\u0434\u0441\u0442\u0432\u0430",
-          "level": 4
-        },
-        {
-          "text": "\u0423\u0441\u0442\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u043d\u0435\u043f\u043e\u043b\u0430\u0434\u043e\u043a",
-          "level": 4
-        },
-        {
-          "text": "\u041f\u043b\u0430\u0433\u0438\u043d\u044b",
-          "level": 3
-        },
-        {
-          "text": "\u041f\u043b\u0430\u0433\u0438\u043d\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u043f\u043b\u0430\u0433\u0438\u043d\u043e\u0432",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u043f\u043b\u0430\u0433\u0438\u043d\u043e\u0432",
-          "level": 4
-        },
-        {
-          "text": "\u041c\u043e\u0434\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435",
-          "level": 5
-        },
-        {
-          "text": "\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0438 \u0443\u0441\u0442\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u043d\u0435\u043f\u043e\u043b\u0430\u0434\u043e\u043a",
-          "level": 5
-        },
-        {
-          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043c\u0430\u0440\u043a\u0435\u0442\u043f\u043b\u0435\u0439\u0441\u043e\u043c",
-          "level": 4
-        },
-        {
-          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u043f\u043b\u0430\u0433\u0438\u043d\u0430\u043c\u0438 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438",
-          "level": 4
-        },
-        {
-          "text": "\u0423\u0441\u0442\u0440\u0430\u043d\u0435\u043d\u0438\u0435 \u043d\u0435\u043f\u043e\u043b\u0430\u0434\u043e\u043a",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a",
-          "level": 4
-        },
-        {
-          "text": "\u0410\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435",
-          "level": 3
-        },
-        {
-          "text": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0438 \u0434\u043e\u0441\u0442\u0443\u043f",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0430\u0437\u0432\u0451\u0440\u0442\u044b\u0432\u0430\u043d\u0438\u0435",
-          "level": 4
-        },
-        {
-          "text": "\u0428\u043b\u044e\u0437\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0428\u043b\u044e\u0437 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0439 Claude",
-          "level": 5
-        },
-        {
-          "text": "\u0414\u0440\u0443\u0433\u0438\u0435 \u0448\u043b\u044e\u0437\u044b",
-          "level": 5
-        },
-        {
-          "text": "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0435 \u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0411\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u044c \u0438 \u0434\u0430\u043d\u043d\u044b\u0435",
-          "level": 4
-        },
-        {
-          "text": "\u0412\u043d\u0435\u0434\u0440\u0435\u043d\u0438\u0435",
-          "level": 4
-        },
-        {
-          "text": "\u041a\u043e\u043d\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044f",
-          "level": 3
-        },
-        {
-          "text": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u044f \u0438 \u0438\u0437\u043e\u043b\u044f\u0446\u0438\u044f \u0432 \u043f\u0435\u0441\u043e\u0447\u043d\u0438\u0446\u0435",
-          "level": 4
-        },
-        {
-          "text": "\u041e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u0430\u043c\u043e\u0441\u0442\u043e\u044f\u0442\u0435\u043b\u044c\u043d\u043e \u0440\u0430\u0437\u043c\u0435\u0449\u0430\u0435\u043c\u044b\u0435 \u0441\u0440\u0435\u0434\u044b",
-          "level": 5
-        },
-        {
-          "text": "\u041c\u043e\u0434\u0435\u043b\u044c \u0438 \u043e\u0442\u0432\u0435\u0442\u044b",
-          "level": 4
-        },
-        {
-          "text": "\u0418\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a",
-          "level": 3
-        },
-        {
-          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a",
-          "level": 4
-        },
-        {
-          "text": "\u0413\u043b\u043e\u0441\u0441\u0430\u0440\u0438\u0439",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043e\u0437\u0434\u0430\u043d\u0438\u0435 \u0430\u0433\u0435\u043d\u0442\u043e\u0432",
-          "level": 4
-        },
-        {
-          "text": "\u041e\u0441\u043d\u043e\u0432\u043d\u044b\u0435 \u043a\u043e\u043d\u0446\u0435\u043f\u0446\u0438\u0438",
-          "level": 4
-        },
-        {
-          "text": "\u0412\u0432\u043e\u0434 \u0438 \u0432\u044b\u0432\u043e\u0434",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432",
-          "level": 4
-        },
-        {
-          "text": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u043f\u043e\u0432\u0435\u0434\u0435\u043d\u0438\u044f",
-          "level": 4
-        },
-        {
-          "text": "\u0423\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0438 \u043d\u0430\u0431\u043b\u044e\u0434\u0430\u0435\u043c\u043e\u0441\u0442\u044c",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0430\u0437\u0432\u0451\u0440\u0442\u044b\u0432\u0430\u043d\u0438\u0435",
-          "level": 4
-        },
-        {
-          "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0438\u043a \u043f\u043e SDK",
-          "level": 4
-        },
-        {
-          "text": "\u0427\u0442\u043e \u043d\u043e\u0432\u043e\u0433\u043e",
-          "level": 3
-        },
-        {
-          "text": "\u0427\u0442\u043e \u043d\u043e\u0432\u043e\u0433\u043e",
-          "level": 4
-        },
-        {
-          "text": "\u0420\u0435\u0441\u0443\u0440\u0441\u044b",
-          "level": 3
-        },
-        {
-          "text": "\u0420\u0435\u0441\u0443\u0440\u0441\u044b",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 296,
-        "code": 206,
-        "agent": 42,
-        "sdk": 40,
-        "mcp": 25,
-        "plugin": 25,
-        "hook": 24,
-        "desktop": 17,
-        "cli": 17,
-        "cloud": 14,
-        "skill": 13,
-        "api": 13,
-        "auto": 12,
-        "platform": 12,
-        "gateway": 12,
-        "app": 11,
-        "google": 11,
-        "marketplace": 11,
-        "subagent": 10,
-        "amazon": 10,
-        "aws": 10,
-        "anthropic": 9,
-        "json": 9,
-        "github": 9,
-        "bedrock": 9,
-        "microsoft": 8,
-        "foundry": 8,
-        "typescript": 7,
-        "opu": 7,
-        "git": 6,
-        "llm": 6,
-        "security": 5,
-        "python": 5,
-        "mode": 5,
-        "runner": 5,
-        "ide": 4,
-        "setting": 4,
-        "workflow": 4,
-        "chrome": 4,
-        "slack": 4,
-        "ios": 4,
-        "action": 4,
-        "server": 4,
-        "worktre": 4,
-        "url": 4,
-        "eval": 4,
-        "iam": 4,
-        "session": 4,
-        "prompt": 3,
-        "jetbrain": 3
-      },
-      "word_count": 6110
-    },
-    {
-      "filename": "claude-code__docs___llms__zh-cn.md",
-      "id": "claude-code/docs/_llms/zh-cn",
-      "title": "Simplified Chinese (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/zh-cn",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Simplified Chinese",
-          "level": 1
-        },
-        {
-          "text": "Simplified Chinese",
-          "level": 2
-        },
-        {
-          "text": "\u5165\u95e8",
-          "level": 3
-        },
-        {
-          "text": "\u5feb\u901f\u5165\u95e8",
-          "level": 4
-        },
-        {
-          "text": "\u6838\u5fc3\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528 Claude Code",
-          "level": 4
-        },
-        {
-          "text": "\u5e73\u53f0\u4e0e\u96c6\u6210",
-          "level": 4
-        },
-        {
-          "text": "\u4e91\u7aef Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u684c\u9762\u7248 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u4ee3\u7801\u5ba1\u67e5\u4e0e CI/CD",
-          "level": 5
-        },
-        {
-          "text": "\u4f7f\u7528 Claude Code \u6784\u5efa",
-          "level": 3
-        },
-        {
-          "text": "Agent \u4e0e\u5e76\u884c\u5de5\u4f5c",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artifact",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u52a8\u5316",
-          "level": 4
-        },
-        {
-          "text": "\u6307\u5357",
-          "level": 4
-        },
-        {
-          "text": "\u6545\u969c\u6392\u9664",
-          "level": 4
-        },
-        {
-          "text": "\u63d2\u4ef6",
-          "level": 3
-        },
-        {
-          "text": "\u63d2\u4ef6",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528\u63d2\u4ef6",
-          "level": 4
-        },
-        {
-          "text": "\u521b\u5efa\u63d2\u4ef6",
-          "level": 4
-        },
-        {
-          "text": "mod",
-          "level": 4
-        },
-        {
-          "text": "\u6784\u5efa",
-          "level": 5
-        },
-        {
-          "text": "\u6d4b\u8bd5\u4e0e\u6545\u969c\u6392\u9664",
-          "level": 5
-        },
-        {
-          "text": "\u8fd0\u8425\u5e02\u573a",
-          "level": 4
-        },
-        {
-          "text": "\u7ba1\u7406\u7ec4\u7ec7\u7684\u63d2\u4ef6",
-          "level": 4
-        },
-        {
-          "text": "\u6545\u969c\u6392\u9664",
-          "level": 4
-        },
-        {
-          "text": "\u53c2\u8003",
-          "level": 4
-        },
-        {
-          "text": "\u7ba1\u7406",
-          "level": 3
-        },
-        {
-          "text": "\u8bbe\u7f6e\u4e0e\u8bbf\u95ee",
-          "level": 4
-        },
-        {
-          "text": "\u90e8\u7f72",
-          "level": 4
-        },
-        {
-          "text": "\u7f51\u5173",
-          "level": 4
-        },
-        {
-          "text": "Claude \u5e94\u7528\u7f51\u5173",
-          "level": 5
-        },
-        {
-          "text": "\u5176\u4ed6\u7f51\u5173",
-          "level": 5
-        },
-        {
-          "text": "\u4f7f\u7528\u91cf\u4e0e\u8d39\u7528",
-          "level": 4
-        },
-        {
-          "text": "\u5b89\u5168\u4e0e\u6570\u636e",
-          "level": 4
-        },
-        {
-          "text": "\u91c7\u7528",
-          "level": 4
-        },
-        {
-          "text": "\u914d\u7f6e",
-          "level": 3
-        },
-        {
-          "text": "\u8bbe\u7f6e",
-          "level": 4
-        },
-        {
-          "text": "\u6743\u9650\u4e0e\u6c99\u7bb1\u9694\u79bb",
-          "level": 4
-        },
-        {
-          "text": "\u73af\u5883",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u6258\u7ba1\u73af\u5883",
-          "level": 5
-        },
-        {
-          "text": "\u6a21\u578b\u4e0e\u56de\u590d",
-          "level": 4
-        },
-        {
-          "text": "\u754c\u9762",
-          "level": 4
-        },
-        {
-          "text": "\u53c2\u8003",
-          "level": 3
-        },
-        {
-          "text": "\u53c2\u8003",
-          "level": 4
-        },
-        {
-          "text": "\u672f\u8bed\u8868",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "\u6784\u5efa Agent",
-          "level": 4
-        },
-        {
-          "text": "\u6838\u5fc3\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "\u8f93\u5165\u4e0e\u8f93\u51fa",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528\u5de5\u5177\u6269\u5c55",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u5b9a\u4e49\u884c\u4e3a",
-          "level": 4
-        },
-        {
-          "text": "\u63a7\u5236\u4e0e\u53ef\u89c2\u6d4b\u6027",
-          "level": 4
-        },
-        {
-          "text": "\u90e8\u7f72",
-          "level": 4
-        },
-        {
-          "text": "SDK \u53c2\u8003",
-          "level": 4
-        },
-        {
-          "text": "\u6700\u65b0\u52a8\u6001",
-          "level": 3
-        },
-        {
-          "text": "\u6700\u65b0\u52a8\u6001",
-          "level": 4
-        },
-        {
-          "text": "\u8d44\u6e90",
-          "level": 3
-        },
-        {
-          "text": "\u8d44\u6e90",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 297,
-        "code": 204,
-        "agent": 47,
-        "sdk": 40,
-        "mod": 31,
-        "hook": 26,
-        "mcp": 25,
-        "skill": 18,
-        "desktop": 17,
-        "cli": 17,
-        "plugin": 16,
-        "cloud": 14,
-        "api": 13,
-        "platform": 12,
-        "marketplace": 12,
-        "google": 11,
-        "amazon": 10,
-        "aws": 10,
-        "anthropic": 9,
-        "json": 9,
-        "github": 9,
-        "bedrock": 9,
-        "microsoft": 8,
-        "foundry": 8,
-        "subagent": 7,
-        "typescript": 7,
-        "opu": 7,
-        "git": 6,
-        "llm": 6,
-        "app": 5,
-        "shell": 5,
-        "python": 5,
-        "gateway": 5,
-        "ide": 4,
-        "setting": 4,
-        "chrome": 4,
-        "slack": 4,
-        "ios": 4,
-        "security": 4,
-        "action": 4,
-        "server": 4,
-        "worktre": 4,
-        "artifact": 4,
-        "url": 4,
-        "eval": 4,
-        "iam": 4,
-        "prompt": 3,
-        "cach": 3,
-        "jetbrain": 3,
-        "tag": 3
-      },
-      "word_count": 2575
-    },
-    {
-      "filename": "claude-code__docs___llms__zh-tw.md",
-      "id": "claude-code/docs/_llms/zh-tw",
-      "title": "Traditional Chinese (221 pages)",
-      "category": "claude_code",
-      "url": "https://code.claude.com/docs/_llms/zh-tw",
-      "headings": [
-        {
-          "text": "Claude Code Docs: Traditional Chinese",
-          "level": 1
-        },
-        {
-          "text": "Traditional Chinese",
-          "level": 2
-        },
-        {
-          "text": "\u958b\u59cb\u4f7f\u7528",
-          "level": 3
-        },
-        {
-          "text": "\u5feb\u901f\u5165\u9580",
-          "level": 4
-        },
-        {
-          "text": "\u6838\u5fc3\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528 Claude Code",
-          "level": 4
-        },
-        {
-          "text": "\u5e73\u53f0\u8207\u6574\u5408",
-          "level": 4
-        },
-        {
-          "text": "\u96f2\u7aef\u4e0a\u7684 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u684c\u9762\u7248 Claude Code",
-          "level": 5
-        },
-        {
-          "text": "\u7a0b\u5f0f\u78bc\u5be9\u67e5\u8207 CI/CD",
-          "level": 5
-        },
-        {
-          "text": "\u4f7f\u7528 Claude Code \u9032\u884c\u958b\u767c",
-          "level": 3
-        },
-        {
-          "text": "Agent \u8207\u5e73\u884c\u4f5c\u696d",
-          "level": 4
-        },
-        {
-          "text": "MCP",
-          "level": 4
-        },
-        {
-          "text": "Skills",
-          "level": 4
-        },
-        {
-          "text": "Artifacts",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u52d5\u5316",
-          "level": 4
-        },
-        {
-          "text": "\u6307\u5357",
-          "level": 4
-        },
-        {
-          "text": "\u7591\u96e3\u6392\u89e3",
-          "level": 4
-        },
-        {
-          "text": "\u5916\u639b",
-          "level": 3
-        },
-        {
-          "text": "\u5916\u639b",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528\u5916\u639b",
-          "level": 4
-        },
-        {
-          "text": "\u5efa\u7acb\u5916\u639b",
-          "level": 4
-        },
-        {
-          "text": "mod",
-          "level": 4
-        },
-        {
-          "text": "\u5efa\u7f6e",
-          "level": 5
-        },
-        {
-          "text": "\u6e2c\u8a66\u8207\u7591\u96e3\u6392\u89e3",
-          "level": 5
-        },
-        {
-          "text": "\u7d93\u71df\u5e02\u96c6",
-          "level": 4
-        },
-        {
-          "text": "\u7ba1\u7406\u7d44\u7e54\u7684\u5916\u639b",
-          "level": 4
-        },
-        {
-          "text": "\u7591\u96e3\u6392\u89e3",
-          "level": 4
-        },
-        {
-          "text": "\u53c3\u8003\u8cc7\u6599",
-          "level": 4
-        },
-        {
-          "text": "\u7ba1\u7406",
-          "level": 3
-        },
-        {
-          "text": "\u8a2d\u5b9a\u8207\u5b58\u53d6",
-          "level": 4
-        },
-        {
-          "text": "\u90e8\u7f72",
-          "level": 4
-        },
-        {
-          "text": "\u9598\u9053",
-          "level": 4
-        },
-        {
-          "text": "Claude \u61c9\u7528\u7a0b\u5f0f\u9598\u9053",
-          "level": 5
-        },
-        {
-          "text": "\u5176\u4ed6\u9598\u9053",
-          "level": 5
-        },
-        {
-          "text": "\u4f7f\u7528\u91cf\u8207\u8cbb\u7528",
-          "level": 4
-        },
-        {
-          "text": "\u5b89\u5168\u6027\u8207\u8cc7\u6599",
-          "level": 4
-        },
-        {
-          "text": "\u5c0e\u5165\u8207\u63a1\u7528",
-          "level": 4
-        },
-        {
-          "text": "\u8a2d\u5b9a",
-          "level": 3
-        },
-        {
-          "text": "\u8a2d\u5b9a",
-          "level": 4
-        },
-        {
-          "text": "\u6b0a\u9650\u8207\u6c99\u7bb1\u6a5f\u5236",
-          "level": 4
-        },
-        {
-          "text": "\u74b0\u5883",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u884c\u8a17\u7ba1\u74b0\u5883",
-          "level": 5
-        },
-        {
-          "text": "\u6a21\u578b\u8207\u56de\u61c9",
-          "level": 4
-        },
-        {
-          "text": "\u4ecb\u9762",
-          "level": 4
-        },
-        {
-          "text": "\u53c3\u8003",
-          "level": 3
-        },
-        {
-          "text": "\u53c3\u8003\u8cc7\u6599",
-          "level": 4
-        },
-        {
-          "text": "\u8853\u8a9e\u8868",
-          "level": 4
-        },
-        {
-          "text": "Agent SDK",
-          "level": 3
-        },
-        {
-          "text": "Agent SDK",
-          "level": 4
-        },
-        {
-          "text": "\u5efa\u7acb agent",
-          "level": 4
-        },
-        {
-          "text": "\u6838\u5fc3\u6982\u5ff5",
-          "level": 4
-        },
-        {
-          "text": "\u8f38\u5165\u8207\u8f38\u51fa",
-          "level": 4
-        },
-        {
-          "text": "\u4f7f\u7528\u5de5\u5177\u64f4\u5145",
-          "level": 4
-        },
-        {
-          "text": "\u81ea\u8a02\u884c\u70ba",
-          "level": 4
-        },
-        {
-          "text": "\u63a7\u5236\u8207\u53ef\u89c0\u6e2c\u6027",
-          "level": 4
-        },
-        {
-          "text": "\u90e8\u7f72",
-          "level": 4
-        },
-        {
-          "text": "SDK \u53c3\u8003\u8cc7\u6599",
-          "level": 4
-        },
-        {
-          "text": "\u6700\u65b0\u6d88\u606f",
-          "level": 3
-        },
-        {
-          "text": "\u6700\u65b0\u6d88\u606f",
-          "level": 4
-        },
-        {
-          "text": "\u8cc7\u6e90",
-          "level": 3
-        },
-        {
-          "text": "\u8cc7\u6e90",
-          "level": 4
-        }
-      ],
-      "terms": {
-        "claude": 299,
-        "code": 207,
-        "agent": 43,
-        "sdk": 40,
-        "plugin": 36,
-        "mod": 31,
-        "hook": 26,
-        "mcp": 25,
-        "cli": 17,
-        "desktop": 16,
-        "skill": 16,
-        "cloud": 14,
-        "api": 13,
-        "platform": 12,
-        "marketplace": 12,
-        "google": 11,
-        "amazon": 10,
-        "aws": 10,
-        "anthropic": 9,
-        "json": 9,
-        "github": 9,
-        "bedrock": 9,
-        "microsoft": 8,
-        "foundry": 8,
-        "subagent": 7,
-        "typescript": 7,
-        "opu": 7,
-        "git": 6,
-        "llm": 6,
-        "session": 5,
-        "server": 5,
-        "shell": 5,
-        "python": 5,
-        "ide": 4,
-        "setting": 4,
-        "chrome": 4,
-        "slack": 4,
-        "ios": 4,
-        "window": 4,
-        "security": 4,
-        "action": 4,
-        "worktre": 4,
-        "url": 4,
-        "eval": 4,
-        "iam": 4,
-        "app": 3,
-        "command": 3,
-        "prompt": 3,
-        "cach": 3,
-        "jetbrain": 3
-      },
-      "word_count": 2681
     },
     {
       "filename": "claude-code__env-vars.md",
@@ -19777,18 +16371,18 @@
         }
       ],
       "terms": {
-        "ghe": 66,
-        "github": 60,
-        "claude": 46,
+        "ghe": 67,
+        "github": 61,
+        "claude": 47,
         "instance": 37,
+        "code": 31,
         "session": 31,
-        "code": 29,
+        "organization": 27,
         "app": 27,
         "setting": 27,
         "connect": 26,
-        "organization": 26,
+        "host": 26,
         "repository": 26,
-        "host": 25,
         "add": 25,
         "enterprise": 23,
         "marketplace": 21,
@@ -19796,14 +16390,15 @@
         "git": 19,
         "plugin": 17,
         "cloud": 16,
+        "review": 16,
         "owner": 16,
-        "review": 15,
         "support": 15,
         "user": 15,
+        "com": 14,
         "credential": 14,
-        "com": 13,
         "connection": 13,
         "read": 13,
+        "repositori": 12,
         "step": 12,
         "anthropic": 12,
         "manag": 11,
@@ -19811,7 +16406,7 @@
         "setup": 11,
         "url": 11,
         "machine": 11,
-        "repositori": 10,
+        "work": 10,
         "account": 10,
         "server": 9,
         "instead": 9,
@@ -19819,16 +16414,15 @@
         "configuration": 9,
         "requirement": 9,
         "own": 9,
-        "work": 9,
         "permission": 9,
         "each": 9,
         "same": 8,
-        "webhook": 8,
         "click": 8,
         "hostname": 8,
-        "acces": 8
+        "acces": 8,
+        "clone": 8
       },
-      "word_count": 2713
+      "word_count": 2722
     },
     {
       "filename": "claude-code__gitlab-ci-cd.md",
@@ -25046,6 +21640,10 @@
           "level": 3
         },
         {
+          "text": "Attribute telemetry to Desktop SSH sessions",
+          "level": 3
+        },
+        {
           "text": "Example configurations",
           "level": 3
         },
@@ -25315,58 +21913,58 @@
         }
       ],
       "terms": {
-        "event": 302,
-        "claude": 270,
-        "code": 231,
-        "attribut": 171,
+        "event": 304,
+        "claude": 274,
+        "code": 235,
+        "attribut": 172,
+        "session": 168,
         "tool": 165,
-        "session": 160,
-        "set": 114,
+        "set": 119,
         "request": 109,
-        "setting": 92,
+        "setting": 94,
         "plugin": 88,
-        "name": 79,
-        "only": 78,
-        "such": 78,
-        "metric": 75,
-        "manag": 75,
+        "name": 83,
+        "only": 79,
+        "such": 79,
+        "metric": 76,
+        "manag": 76,
         "per": 74,
         "span": 73,
         "later": 70,
+        "value": 69,
         "requir": 66,
         "hook": 65,
-        "value": 64,
         "user": 63,
         "prompt": 58,
         "api": 58,
+        "nam": 57,
         "under": 56,
         "includ": 56,
         "server": 56,
         "default": 56,
-        "nam": 54,
+        "each": 54,
+        "one": 52,
+        "attribute": 52,
         "mcp": 51,
-        "one": 51,
         "counter": 51,
-        "each": 50,
         "content": 50,
-        "attribute": 50,
+        "export": 49,
+        "run": 49,
         "agent": 49,
-        "export": 48,
-        "run": 48,
         "standard": 47,
         "trac": 46,
         "response": 45,
+        "file": 43,
+        "environment": 43,
         "correlation": 43,
-        "error": 41,
-        "log": 40,
-        "environment": 40,
-        "read": 40,
+        "start": 42,
+        "error": 42,
+        "read": 42,
+        "log": 41,
         "logg": 40,
-        "file": 39,
-        "start": 39,
         "describ": 39
       },
-      "word_count": 19104
+      "word_count": 19413
     },
     {
       "filename": "claude-code__network-config.md",
@@ -27547,46 +24145,45 @@
         }
       ],
       "terms": {
-        "plugin": 112,
-        "user": 112,
+        "user": 111,
+        "plugin": 110,
         "marketplace": 97,
         "claude": 72,
         "code": 69,
-        "command": 67,
+        "command": 68,
         "entry": 56,
-        "install": 49,
-        "run": 43,
-        "host": 39,
-        "git": 34,
-        "set": 33,
+        "install": 46,
+        "run": 42,
+        "host": 38,
+        "git": 33,
+        "set": 32,
         "each": 31,
         "setting": 30,
         "one": 29,
         "add": 29,
         "source": 26,
-        "update": 26,
+        "update": 25,
         "download": 24,
         "see": 24,
-        "without": 23,
-        "url": 23,
         "only": 23,
         "version": 23,
         "credential": 23,
+        "without": 22,
+        "url": 22,
+        "keep": 18,
         "directory": 18,
-        "keep": 17,
-        "github": 17,
+        "who": 17,
         "repository": 17,
         "accept": 17,
         "new": 17,
         "file": 16,
-        "who": 16,
         "organization": 16,
         "session": 16,
         "acces": 15,
         "name": 15,
+        "github": 14,
         "need": 14,
         "fail": 14,
-        "ssh": 14,
         "manag": 14,
         "http": 13,
         "private": 13,
@@ -27594,11 +24191,12 @@
         "other": 13,
         "after": 13,
         "archive": 13,
-        "instead": 13,
         "fil": 12,
-        "header": 12
+        "header": 12,
+        "place": 12,
+        "instead": 12
       },
-      "word_count": 5591
+      "word_count": 5545
     },
     {
       "filename": "claude-code__plugins__install.md",
@@ -27875,14 +24473,14 @@
         }
       ],
       "terms": {
-        "plugin": 199,
-        "claude": 96,
-        "code": 78,
+        "plugin": 202,
+        "claude": 97,
+        "code": 79,
         "install": 72,
+        "load": 58,
         "marketplace": 57,
-        "load": 56,
         "session": 53,
-        "directory": 42,
+        "directory": 41,
         "version": 38,
         "setting": 34,
         "source": 33,
@@ -27896,24 +24494,24 @@
         "start": 24,
         "sync": 24,
         "update": 21,
-        "only": 21,
         "entry": 20,
+        "doesn": 20,
         "every": 20,
-        "doesn": 19,
+        "only": 20,
         "manifest": 19,
         "enabl": 18,
         "hook": 18,
         "lockfile": 18,
-        "project": 16,
         "file": 15,
+        "project": 15,
         "command": 15,
         "npm": 15,
         "fetch": 14,
+        "where": 14,
         "turn": 14,
         "under": 14,
         "same": 14,
         "nam": 14,
-        "where": 13,
         "off": 13,
         "instead": 13,
         "record": 13,
@@ -27926,7 +24524,7 @@
         "after": 12,
         "download": 12
       },
-      "word_count": 5540
+      "word_count": 5568
     },
     {
       "filename": "claude-code__plugins__manifest-reference.md",
@@ -29454,28 +26052,28 @@
       ],
       "terms": {
         "mod": 68,
-        "hook": 64,
+        "hook": 62,
         "claude": 47,
         "event": 43,
-        "call": 37,
         "one": 35,
         "code": 34,
+        "call": 34,
         "each": 24,
+        "run": 23,
         "tool": 22,
         "setting": 21,
-        "run": 21,
         "method": 19,
         "terminal": 19,
         "api": 18,
-        "session": 17,
         "draw": 16,
-        "such": 16,
         "return": 16,
         "load": 16,
-        "prompt": 16,
+        "session": 16,
+        "such": 15,
         "user": 15,
         "text": 15,
         "about": 15,
+        "prompt": 15,
         "nam": 14,
         "file": 13,
         "fir": 13,
@@ -29486,17 +26084,17 @@
         "list": 12,
         "command": 12,
         "plugin": 11,
-        "own": 11,
+        "after": 11,
         "pane": 11,
         "manag": 11,
         "render": 10,
         "element": 10,
         "name": 10,
         "every": 10,
-        "after": 10,
-        "once": 10,
+        "own": 10,
         "site": 9,
         "later": 9,
+        "once": 9,
         "second": 9,
         "message": 9,
         "row": 9,
@@ -29504,7 +26102,7 @@
         "module": 8,
         "install": 8
       },
-      "word_count": 4934
+      "word_count": 4892
     },
     {
       "filename": "claude-code__plugins__mods__test.md",
@@ -29770,18 +26368,18 @@
       ],
       "terms": {
         "mod": 84,
-        "hook": 42,
-        "line": 42,
-        "code": 40,
-        "claude": 39,
-        "load": 26,
-        "call": 26,
-        "one": 24,
-        "run": 24,
-        "start": 23,
+        "line": 43,
+        "hook": 41,
+        "code": 38,
+        "claude": 37,
+        "load": 25,
+        "call": 25,
+        "start": 24,
+        "one": 23,
+        "run": 23,
         "session": 20,
+        "doesn": 19,
         "log": 18,
-        "doesn": 18,
         "toast": 18,
         "name": 17,
         "reason": 17,
@@ -29789,38 +26387,38 @@
         "module": 16,
         "command": 16,
         "message": 15,
+        "reload": 15,
         "nam": 14,
-        "reload": 14,
         "read": 13,
         "value": 13,
         "pane": 13,
         "refus": 12,
         "install": 12,
-        "copy": 12,
         "show": 12,
-        "plugin": 11,
         "noth": 10,
+        "plugin": 10,
         "transcript": 10,
         "again": 10,
+        "each": 10,
+        "before": 9,
         "check": 9,
         "directory": 9,
         "such": 9,
         "appear": 9,
-        "each": 9,
         "end": 9,
         "time": 9,
-        "before": 8,
         "look": 8,
         "messag": 8,
-        "setting": 8,
         "say": 8,
         "error": 8,
         "open": 8,
+        "copy": 8,
         "fail": 7,
         "another": 7,
-        "interactive": 7
+        "interactive": 7,
+        "setting": 7
       },
-      "word_count": 3472
+      "word_count": 3440
     },
     {
       "filename": "claude-code__plugins__org.md",
@@ -30547,8 +27145,8 @@
         "claude": 147,
         "code": 133,
         "add": 89,
-        "run": 82,
-        "message": 80,
+        "run": 81,
+        "message": 79,
         "error": 74,
         "path": 67,
         "command": 63,
@@ -30570,7 +27168,7 @@
         "shell": 39,
         "server": 39,
         "fix": 38,
-        "show": 37,
+        "show": 36,
         "line": 36,
         "skill": 36,
         "such": 35,
@@ -30581,18 +27179,18 @@
         "step": 33,
         "before": 30,
         "under": 30,
-        "print": 30,
         "check": 30,
         "instead": 29,
         "host": 29,
-        "after": 27,
+        "print": 29,
         "read": 26,
+        "after": 26,
         "git": 25,
         "repository": 25,
         "setting": 25,
         "open": 24
       },
-      "word_count": 13706
+      "word_count": 13695
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -31279,13 +27877,13 @@
         }
       ],
       "terms": {
-        "routine": 116,
-        "run": 95,
+        "routine": 117,
+        "run": 96,
         "claude": 69,
-        "trigger": 67,
+        "trigger": 68,
         "step": 49,
         "routin": 43,
-        "github": 39,
+        "github": 40,
         "session": 35,
         "api": 34,
         "one": 34,
@@ -31301,15 +27899,15 @@
         "code": 22,
         "cloud": 22,
         "start": 22,
+        "event": 21,
+        "request": 21,
         "select": 21,
-        "event": 20,
+        "repository": 20,
         "create": 20,
         "schedule": 19,
         "token": 19,
-        "request": 18,
         "limit": 17,
         "time": 17,
-        "repository": 17,
         "network": 17,
         "see": 17,
         "off": 17,
@@ -31318,19 +27916,19 @@
         "same": 15,
         "click": 15,
         "edit": 15,
-        "branch": 15,
         "usage": 14,
+        "instead": 14,
         "account": 14,
+        "branch": 14,
         "schedul": 13,
         "page": 13,
-        "instead": 13,
         "only": 13,
         "before": 12,
+        "pull": 12,
         "review": 12,
-        "filter": 12,
-        "web": 12
+        "filter": 12
       },
-      "word_count": 5263
+      "word_count": 5289
     },
     {
       "filename": "claude-code__sandbox-environments.md",
@@ -31699,24 +28297,24 @@
         }
       ],
       "terms": {
-        "sandbox": 305,
-        "command": 236,
+        "sandbox": 306,
+        "command": 238,
         "claude": 155,
         "code": 126,
         "setting": 125,
-        "run": 111,
-        "allow": 95,
+        "run": 112,
+        "allow": 96,
         "mode": 74,
         "proxy": 72,
         "set": 67,
-        "tool": 64,
+        "tool": 65,
         "host": 60,
-        "such": 57,
+        "such": 58,
         "manag": 55,
         "permission": 53,
         "file": 52,
         "only": 48,
-        "prompt": 46,
+        "prompt": 47,
         "entry": 46,
         "filesystem": 46,
         "path": 45,
@@ -31737,20 +28335,20 @@
         "rul": 34,
         "fil": 33,
         "user": 33,
+        "match": 33,
+        "still": 33,
         "block": 33,
         "session": 32,
-        "match": 32,
-        "still": 32,
         "each": 31,
         "credential": 30,
+        "add": 29,
         "auto": 29,
         "every": 29,
         "wsl": 28,
         "other": 28,
-        "work": 28,
-        "add": 28
+        "work": 28
       },
-      "word_count": 12063
+      "word_count": 12094
     },
     {
       "filename": "claude-code__scheduled-tasks.md",
@@ -33588,7 +30186,7 @@
         "line": 15,
         "style": 15
       },
-      "word_count": 7327
+      "word_count": 7328
     },
     {
       "filename": "claude-code__settings-example.md",
@@ -34387,14 +30985,14 @@
       "terms": {
         "claude": 623,
         "code": 497,
-        "setting": 425,
+        "setting": 426,
         "file": 302,
         "manag": 253,
         "sandbox": 246,
         "default": 226,
-        "session": 223,
+        "session": 225,
+        "json": 215,
         "model": 214,
-        "json": 213,
         "set": 206,
         "command": 206,
         "key": 199,
@@ -34404,17 +31002,17 @@
         "one": 149,
         "turn": 149,
         "only": 130,
-        "null": 124,
+        "null": 125,
         "run": 117,
+        "theme": 117,
         "unset": 116,
-        "theme": 116,
         "mode": 115,
         "such": 115,
         "every": 110,
         "off": 110,
         "see": 109,
         "each": 105,
-        "user": 103,
+        "user": 105,
         "list": 100,
         "const": 96,
         "block": 96,
@@ -34436,7 +31034,7 @@
         "start": 71,
         "keep": 69
       },
-      "word_count": 53610
+      "word_count": 53761
     },
     {
       "filename": "claude-code__setup.md",
