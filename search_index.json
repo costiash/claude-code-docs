@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T03:20:37.318105Z",
+  "generated_at": "2026-10-10T09:16:05.666014Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -39391,14 +39391,12 @@
         }
       ],
       "terms": {
-        "claude": 11,
-        "migration": 8,
-        "guide": 6,
+        "claude": 9,
+        "migration": 7,
+        "guide": 5,
         "model": 3,
         "api": 3,
         "guid": 2,
-        "fable": 2,
-        "mytho": 2,
         "review": 2,
         "title": 1,
         "url": 1,
@@ -39412,6 +39410,8 @@
         "latest": 1,
         "previou": 1,
         "version": 1,
+        "fable": 1,
+        "mytho": 1,
         "opu": 1,
         "sonnet": 1,
         "haiku": 1,
@@ -39434,7 +39434,7 @@
         "issu": 1,
         "dur": 1
       },
-      "word_count": 94
+      "word_count": 84
     },
     {
       "filename": "docs__en__about-claude__models__model-ids-and-versions.md",
@@ -119285,7 +119285,7 @@
         }
       ],
       "terms": {
-        "claude": 61,
+        "claude": 59,
         "tab": 42,
         "bedrock": 34,
         "global": 30,
@@ -119296,8 +119296,8 @@
         "region": 19,
         "step": 18,
         "acces": 16,
-        "opu": 13,
         "only": 13,
+        "opu": 12,
         "support": 12,
         "role": 12,
         "api": 11,
@@ -119307,15 +119307,14 @@
         "asia": 9,
         "pacific": 9,
         "anthropic": 8,
-        "fable": 8,
         "token": 8,
         "tool": 8,
         "europe": 8,
+        "fable": 7,
         "open": 7,
         "mytho": 7,
         "request": 7,
         "through": 6,
-        "haiku": 6,
         "preview": 6,
         "availability": 6,
         "service": 6,
@@ -119324,6 +119323,7 @@
         "ruby": 6,
         "feature": 5,
         "sonnet": 5,
+        "haiku": 5,
         "requir": 5,
         "account": 5,
         "cli": 5,
@@ -119336,7 +119336,7 @@
         "manag": 4,
         "infrastructure": 4
       },
-      "word_count": 2137
+      "word_count": 2124
     },
     {
       "filename": "docs__en__build-with-claude__claude-in-microsoft-foundry.md",
@@ -122767,13 +122767,13 @@
         }
       ],
       "terms": {
-        "claude": 120,
+        "claude": 117,
         "prompt": 71,
         "opu": 24,
         "model": 22,
         "think": 20,
-        "fable": 20,
         "effort": 20,
+        "fable": 18,
         "sonnet": 17,
         "tool": 17,
         "card": 16,
@@ -122798,9 +122798,8 @@
         "build": 9,
         "cover": 9,
         "formatt": 9,
-        "see": 9,
         "document": 9,
-        "mytho": 8,
+        "see": 8,
         "input": 8,
         "accordion": 8,
         "pattern": 8,
@@ -122808,6 +122807,7 @@
         "icon": 8,
         "href": 8,
         "system": 7,
+        "mytho": 7,
         "specific": 7,
         "follow": 7,
         "long": 7,
@@ -122818,7 +122818,7 @@
         "behavioral": 7,
         "call": 6
       },
-      "word_count": 8304
+      "word_count": 8287
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__overview.md",
@@ -122963,8 +122963,8 @@
         }
       ],
       "terms": {
-        "claude": 55,
-        "fable": 41,
+        "claude": 52,
+        "fable": 40,
         "long": 17,
         "task": 17,
         "tool": 17,
@@ -122974,12 +122974,12 @@
         "model": 12,
         "user": 12,
         "effort": 10,
+        "think": 10,
         "subagent": 10,
+        "work": 9,
         "context": 9,
-        "work": 8,
-        "think": 8,
+        "see": 8,
         "reason": 8,
-        "see": 7,
         "end": 7,
         "only": 7,
         "request": 7,
@@ -122995,7 +122995,6 @@
         "system": 6,
         "agent": 6,
         "progres": 6,
-        "mytho": 5,
         "perform": 5,
         "behavior": 5,
         "call": 5,
@@ -123003,8 +123002,6 @@
         "pattern": 4,
         "cover": 4,
         "scaffold": 4,
-        "chang": 4,
-        "specific": 4,
         "acros": 4,
         "complex": 4,
         "capability": 4,
@@ -123012,9 +123009,12 @@
         "opu": 4,
         "improvement": 4,
         "extend": 4,
-        "cybersecurity": 4
+        "fallback": 4,
+        "cybersecurity": 4,
+        "content": 4,
+        "side": 4
       },
-      "word_count": 2762
+      "word_count": 2752
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-fable-5-1.md",
@@ -123506,8 +123506,8 @@
         "model": 45,
         "think": 44,
         "prompt": 36,
+        "work": 27,
         "tool": 27,
-        "work": 26,
         "task": 25,
         "effort": 23,
         "user": 20,
@@ -123552,7 +123552,7 @@
         "short": 9,
         "still": 9
       },
-      "word_count": 3993
+      "word_count": 4013
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-sonnet-5.md",
@@ -123717,13 +123717,13 @@
         "user": 30,
         "prompt": 29,
         "claude": 28,
-        "work": 27,
+        "work": 28,
         "request": 26,
         "sonnet": 23,
         "turn": 23,
         "json": 22,
+        "block": 21,
         "without": 20,
-        "block": 20,
         "answer": 18,
         "text": 18,
         "level": 17,
@@ -123760,7 +123760,7 @@
         "need": 8,
         "reason": 8
       },
-      "word_count": 3861
+      "word_count": 3879
     },
     {
       "filename": "docs__en__build-with-claude__refusals-and-fallback.md",
@@ -130060,43 +130060,44 @@
       "terms": {
         "chat": 68,
         "project": 45,
+        "claude": 32,
+        "file": 32,
         "content": 31,
-        "file": 31,
         "endpoint": 30,
-        "claude": 29,
-        "list": 27,
-        "fil": 23,
-        "document": 22,
+        "list": 30,
+        "document": 26,
+        "fil": 24,
+        "artifact": 20,
         "delete": 19,
         "user": 19,
-        "artifact": 19,
-        "compliance": 16,
+        "compliance": 17,
         "messag": 16,
-        "one": 15,
-        "each": 15,
-        "api": 14,
-        "return": 14,
+        "one": 16,
+        "each": 16,
+        "api": 15,
+        "return": 15,
+        "text": 15,
         "metadata": 14,
         "attachment": 13,
         "only": 13,
-        "text": 13,
         "organization": 12,
         "delet": 12,
         "message": 12,
         "get": 12,
         "name": 12,
         "page": 11,
+        "upload": 11,
         "response": 11,
         "retrieve": 10,
-        "upload": 10,
+        "download": 10,
         "session": 9,
         "filter": 9,
         "generat": 9,
+        "through": 8,
+        "see": 8,
         "key": 8,
         "sort": 8,
-        "download": 8,
-        "through": 7,
-        "see": 7,
+        "doc": 7,
         "ids": 7,
         "attach": 7,
         "result": 7,
@@ -130104,12 +130105,11 @@
         "field": 7,
         "assistant": 7,
         "com": 6,
+        "set": 6,
         "scope": 6,
-        "other": 6,
-        "tool": 6,
-        "full": 6
+        "other": 6
       },
-      "word_count": 2752
+      "word_count": 2833
     },
     {
       "filename": "docs__en__manage-claude__compliance-errors.md",
@@ -136275,7 +136275,7 @@
         "open": 4,
         "error": 4
       },
-      "word_count": 3133
+      "word_count": 3130
     },
     {
       "filename": "docs__en__managed-agents__sessions.md",
@@ -137012,32 +137012,32 @@
         }
       ],
       "terms": {
-        "claude": 160,
-        "fable": 78,
-        "block": 69,
+        "claude": 156,
+        "fable": 75,
+        "block": 71,
         "turn": 64,
         "tool": 50,
         "model": 49,
         "think": 48,
         "conversation": 34,
-        "mytho": 31,
+        "request": 31,
+        "mytho": 30,
         "see": 30,
-        "request": 30,
         "opu": 29,
         "message": 28,
-        "chang": 27,
+        "chang": 26,
+        "read": 26,
         "prompt": 26,
+        "token": 26,
         "keep": 26,
-        "read": 25,
         "earlier": 24,
         "beta": 24,
-        "api": 22,
-        "token": 22,
-        "effort": 21,
+        "api": 21,
         "edit": 21,
         "only": 21,
         "call": 21,
-        "per": 20,
+        "per": 21,
+        "effort": 20,
         "history": 20,
         "check": 18,
         "compaction": 17,
@@ -137045,25 +137045,25 @@
         "one": 16,
         "cache": 15,
         "set": 15,
-        "level": 15,
         "header": 15,
         "messag": 14,
         "name": 14,
+        "output": 14,
         "cost": 14,
         "system": 14,
         "instruction": 14,
-        "retention": 14,
         "after": 14,
+        "level": 14,
         "any": 13,
         "same": 13,
-        "output": 13,
+        "retention": 13,
         "append": 13,
         "mid": 13,
         "send": 13,
         "each": 13,
         "between": 13
       },
-      "word_count": 9417
+      "word_count": 9427
     },
     {
       "filename": "docs__en__models__fable-5-1__overview.md",
@@ -137306,234 +137306,6 @@
       "word_count": 4044
     },
     {
-      "filename": "docs__en__models__fable-5__introducing-claude-fable-5-and-claude-mythos-5.md",
-      "id": "docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
-      "title": "Introducing Claude Fable 5 and Claude Mythos 5",
-      "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
-      "headings": [
-        {
-          "text": "Models",
-          "level": 2
-        },
-        {
-          "text": "Refusals, fallback, and billing on Claude Fable 5",
-          "level": 2
-        },
-        {
-          "text": "Refusals",
-          "level": 3
-        },
-        {
-          "text": "Fallback",
-          "level": 3
-        },
-        {
-          "text": "Billing",
-          "level": 3
-        },
-        {
-          "text": "Availability",
-          "level": 2
-        },
-        {
-          "text": "Prompting",
-          "level": 2
-        },
-        {
-          "text": "Messages API on Claude Fable 5 and Claude Mythos 5",
-          "level": 2
-        },
-        {
-          "text": "Adaptive thinking is always on",
-          "level": 3
-        },
-        {
-          "text": "Raw thinking content is never returned",
-          "level": 3
-        },
-        {
-          "text": "Supported features",
-          "level": 2
-        },
-        {
-          "text": "Migrating from earlier models",
-          "level": 2
-        },
-        {
-          "text": "Next steps",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "claude": 77,
-        "fable": 36,
-        "mytho": 22,
-        "model": 21,
-        "fallback": 16,
-        "card": 14,
-        "see": 13,
-        "refusal": 13,
-        "think": 13,
-        "bill": 12,
-        "platform": 11,
-        "prompt": 10,
-        "http": 9,
-        "title": 8,
-        "com": 8,
-        "retry": 8,
-        "doc": 7,
-        "api": 7,
-        "build": 7,
-        "request": 7,
-        "icon": 7,
-        "href": 7,
-        "anthropic": 6,
-        "verification": 6,
-        "program": 6,
-        "output": 6,
-        "same": 5,
-        "available": 5,
-        "token": 5,
-        "return": 5,
-        "capabiliti": 4,
-        "reason": 4,
-        "only": 4,
-        "through": 4,
-        "response": 4,
-        "handl": 4,
-        "another": 4,
-        "context": 4,
-        "side": 4,
-        "any": 4,
-        "credit": 4,
-        "cost": 4,
-        "effort": 4,
-        "block": 4,
-        "new": 3,
-        "acces": 3,
-        "long": 3,
-        "work": 3,
-        "organization": 3,
-        "verifi": 3
-      },
-      "word_count": 1006
-    },
-    {
-      "filename": "docs__en__models__fable-5__migration-guide.md",
-      "id": "docs/en/models/fable-5/migration-guide",
-      "title": "Claude Mythos 5 and Claude Fable 5 migration guide",
-      "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide",
-      "headings": [
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Mythos Preview",
-          "level": 2
-        },
-        {
-          "text": "Update your model name",
-          "level": 3
-        },
-        {
-          "text": "Features not available on Claude Mythos 5 and Claude Fable 5",
-          "level": 3
-        },
-        {
-          "text": "Token counting and billing",
-          "level": 3
-        },
-        {
-          "text": "Migration checklist",
-          "level": 3
-        },
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 5",
-          "level": 2
-        },
-        {
-          "text": "Update your model name",
-          "level": 3
-        },
-        {
-          "text": "What changed",
-          "level": 3
-        },
-        {
-          "text": "Migration checklist",
-          "level": 3
-        },
-        {
-          "text": "Migrating to Claude Mythos 5 and Claude Fable 5 from Claude Opus 4.8",
-          "level": 2
-        },
-        {
-          "text": "Update your model name",
-          "level": 3
-        },
-        {
-          "text": "What changed",
-          "level": 3
-        },
-        {
-          "text": "Migration checklist",
-          "level": 3
-        }
-      ],
-      "terms": {
-        "claude": 109,
-        "think": 75,
-        "model": 55,
-        "block": 38,
-        "token": 37,
-        "fable": 34,
-        "mytho": 33,
-        "opu": 29,
-        "output": 29,
-        "same": 28,
-        "return": 26,
-        "see": 24,
-        "api": 20,
-        "request": 19,
-        "error": 19,
-        "data": 17,
-        "retention": 17,
-        "unchang": 17,
-        "any": 14,
-        "before": 14,
-        "migration": 13,
-        "chang": 13,
-        "adaptive": 13,
-        "per": 13,
-        "refusal": 13,
-        "workload": 13,
-        "effort": 12,
-        "field": 12,
-        "available": 11,
-        "content": 11,
-        "parameter": 10,
-        "configuration": 10,
-        "default": 10,
-        "back": 10,
-        "bill": 10,
-        "preview": 9,
-        "migrat": 9,
-        "code": 9,
-        "name": 9,
-        "run": 9,
-        "prefill": 9,
-        "pric": 9,
-        "tool": 9,
-        "text": 9,
-        "only": 8,
-        "alway": 8,
-        "assistant": 8,
-        "prompt": 8,
-        "instead": 8,
-        "zdr": 8
-      },
-      "word_count": 4174
-    },
-    {
       "filename": "docs__en__models__fable-5__overview.md",
       "id": "docs/en/models/fable-5/overview",
       "title": "Claude Fable 5",
@@ -137578,31 +137350,31 @@
         }
       ],
       "terms": {
-        "claude": 71,
-        "fable": 34,
-        "model": 27,
-        "card": 22,
-        "platform": 15,
+        "claude": 65,
+        "fable": 30,
+        "model": 26,
+        "card": 20,
+        "platform": 14,
         "output": 12,
-        "title": 11,
-        "http": 11,
-        "com": 11,
-        "doc": 10,
+        "title": 10,
+        "http": 10,
+        "com": 10,
         "token": 10,
-        "icon": 10,
-        "href": 10,
+        "doc": 9,
         "mtok": 9,
         "prompt": 9,
+        "icon": 9,
+        "href": 9,
         "pric": 8,
         "opu": 8,
-        "api": 8,
-        "mytho": 7,
         "adaptive": 7,
+        "api": 7,
         "input": 6,
         "price": 6,
         "think": 6,
         "ids": 5,
         "context": 5,
+        "mytho": 5,
         "effort": 5,
         "knowledge": 5,
         "cutoff": 5,
@@ -137625,11 +137397,11 @@
         "june": 3,
         "jan": 3,
         "word": 3,
-        "introduc": 3,
         "full": 3,
-        "list": 3
+        "list": 3,
+        "parameter": 3
       },
-      "word_count": 916
+      "word_count": 889
     },
     {
       "filename": "docs__en__models__haiku-4-5__overview.md",
@@ -137727,7 +137499,7 @@
         "see": 3,
         "word": 3
       },
-      "word_count": 911
+      "word_count": 908
     },
     {
       "filename": "docs__en__models__haiku-5-5__migration-guide.md",
@@ -138221,7 +137993,7 @@
         "word": 3,
         "full": 3
       },
-      "word_count": 825
+      "word_count": 822
     },
     {
       "filename": "docs__en__models__opus-4-5__overview.md",
@@ -138315,7 +138087,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 839
+      "word_count": 836
     },
     {
       "filename": "docs__en__models__opus-4-6__overview.md",
@@ -138409,7 +138181,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 846
+      "word_count": 843
     },
     {
       "filename": "docs__en__models__opus-4-7__overview.md",
@@ -138503,7 +138275,7 @@
         "cache": 3,
         "text": 3
       },
-      "word_count": 818
+      "word_count": 815
     },
     {
       "filename": "docs__en__models__opus-4-8__overview.md",
@@ -138597,7 +138369,7 @@
         "text": 3,
         "reference": 2
       },
-      "word_count": 828
+      "word_count": 825
     },
     {
       "filename": "docs__en__models__opus-5-5__migration-guide.md",
@@ -139129,7 +138901,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 875
+      "word_count": 872
     },
     {
       "filename": "docs__en__models__overview.md",
@@ -139399,7 +139171,7 @@
         "reliable": 3,
         "invokemodel": 3
       },
-      "word_count": 846
+      "word_count": 843
     },
     {
       "filename": "docs__en__models__sonnet-5-5__migration-guide.md",
@@ -139891,7 +139663,7 @@
         "full": 3,
         "list": 3
       },
-      "word_count": 931
+      "word_count": 928
     },
     {
       "filename": "docs__en__release-notes__overview.md",
@@ -140510,12 +140282,12 @@
         }
       ],
       "terms": {
-        "claude": 500,
+        "claude": 498,
         "api": 192,
         "model": 151,
-        "beta": 141,
+        "beta": 142,
         "tool": 133,
-        "now": 124,
+        "now": 125,
         "see": 112,
         "opu": 112,
         "header": 87,
@@ -140557,11 +140329,11 @@
         "run": 27,
         "endpoint": 27,
         "call": 27,
-        "chang": 26,
-        "organization": 25,
-        "pric": 25
+        "pric": 26,
+        "chang": 25,
+        "organization": 25
       },
-      "word_count": 13621
+      "word_count": 13625
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",

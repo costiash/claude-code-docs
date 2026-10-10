@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T03:20:32.781964Z",
+  "generated_at": "2026-10-10T09:16:02.309748Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2633,7 +2633,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/models/migration-guide.md",
       "title": "Upgrade between model versions",
       "category": "about_claude",
-      "sha256": "94b0908db7c84f53f4c578823906208591273340cc6251a526063e971ada688a",
+      "sha256": "5d0f9a4ff22990804f1c10a7223fb2ccd588579b72f6f9cd43dad0582634dd61",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8650,7 +8650,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock.md",
       "title": "Amazon Bedrock (Opus 4.7 and later)",
       "category": "core_documentation",
-      "sha256": "dd231da87e85be3e80654ef7aec05611f580c3a758806b90ebfd64b5aaeac9a5",
+      "sha256": "902ceed37cfdf5d28cb08871655194ca1ac538a9f35b71f9354a1f8f6a72ac20",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8947,7 +8947,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md",
       "title": "Prompting best practices",
       "category": "core_documentation",
-      "sha256": "2fd49ceeef3a451adb282c1998ebd3875ba1e88f4ac8d22604721596f71b65d7",
+      "sha256": "057fbadeb4e83266404886593a727fc375ee22bc172126040fc7e7a239f21acf",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8969,7 +8969,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5.md",
       "title": "Prompting Claude Fable 5",
       "category": "core_documentation",
-      "sha256": "0487e942e489fffab11d413caa1b9795ac13463a213df77e545d833fea653bf9",
+      "sha256": "f10e377e6a6d53f848db16c58f6bb23d7e1c03e475788e87d0c6bd99d03603b2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9024,7 +9024,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5.md",
       "title": "Prompting Claude Opus 5.5",
       "category": "core_documentation",
-      "sha256": "f16b9cf4bc48121784a14876bf33658ac810033274abb5fcde8207b7e990c693",
+      "sha256": "3432e66ac97f77b45e1ecba014c9d6d0001be7ab47b55ebe8c70f5aa55883a14",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9046,7 +9046,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5.md",
       "title": "Prompting Claude Sonnet 5.5",
       "category": "core_documentation",
-      "sha256": "34eb77362c09e24e4921750be608d3fab68e1aa2cb423db55922c6174305fcb1",
+      "sha256": "6886cdd2625b73be5bd74420e31c3a050c1c52b8073b9bebe15f4dcf33e44f91",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9629,7 +9629,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-content-data.md",
       "title": "Chats, files, and projects",
       "category": "core_documentation",
-      "sha256": "c92ada7ae89507e958a59763f3176179fd50d51e004e0cc746f122b8d6b501d8",
+      "sha256": "a1c244bd037441f59530783970c3b45fb93e925139aee15002f316d075b186e5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10234,7 +10234,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/session-threads.md",
       "title": "Session threads",
       "category": "core_documentation",
-      "sha256": "a386e066dc797b6dd4400a2c7ebe56c1dc4acb1c8e18f18a2938f5da4c70c3ff",
+      "sha256": "7b088d6a76213eb5c5810f86568017d2ef6b5b08f0f44c4fa374b9f1dd3919a9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10322,7 +10322,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/fable-5-1/migration-guide.md",
       "title": "Migration guide",
       "category": "core_documentation",
-      "sha256": "8de08d8fb59ee2de79e5407c070dbbf25b16a64be9a04856439086affddb99dc",
+      "sha256": "3061276ba9892e6d2706c9e8b523154a8e703a062467e1d34b39280192e0d150",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10349,35 +10349,13 @@
       "fetch_status": "ok"
     },
     {
-      "id": "docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
-      "filename": "docs__en__models__fable-5__introducing-claude-fable-5-and-claude-mythos-5.md",
-      "url": "https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5",
-      "md_url": "https://platform.claude.com/docs/en/models/fable-5/introducing-claude-fable-5-and-claude-mythos-5.md",
-      "title": "Introducing Claude Fable 5 and Claude Mythos 5",
-      "category": "core_documentation",
-      "sha256": "767903cc7d85f5b4b0d458c585556737eba05e4534d979328ddc98e6471ce65a",
-      "lastmod": null,
-      "fetch_status": "ok"
-    },
-    {
-      "id": "docs/en/models/fable-5/migration-guide",
-      "filename": "docs__en__models__fable-5__migration-guide.md",
-      "url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide",
-      "md_url": "https://platform.claude.com/docs/en/models/fable-5/migration-guide.md",
-      "title": "Claude Mythos 5 and Claude Fable 5 migration guide",
-      "category": "core_documentation",
-      "sha256": "d44025ba6672c1247b793a12d1b12fa992d8eda0e97034f19f833d16c4f2900e",
-      "lastmod": null,
-      "fetch_status": "ok"
-    },
-    {
       "id": "docs/en/models/fable-5/overview",
       "filename": "docs__en__models__fable-5__overview.md",
       "url": "https://platform.claude.com/docs/en/models/fable-5/overview",
       "md_url": "https://platform.claude.com/docs/en/models/fable-5/overview.md",
       "title": "Claude Fable 5",
       "category": "core_documentation",
-      "sha256": "3fdbd85b54cd87c9690d4c96f651a7644926d7efab8be6711fc007ed94bd80b0",
+      "sha256": "f5a6e9d40d3e43d78f9f1614bf4eeb32ca98d8178cd2bcb865ec1021b7b6c026",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10388,7 +10366,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/haiku-4-5/overview.md",
       "title": "Claude Haiku 4.5",
       "category": "core_documentation",
-      "sha256": "edf4a4875045f9ca19b30e3ed0c9eafefaaa8f71f4b90c5a86dcc31c5067587b",
+      "sha256": "bec0ed34119af773736e4ee5897e25cf43b1261a5e63b77b0639fb36814f32e7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10443,7 +10421,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/mythos-5/overview.md",
       "title": "Claude Mythos 5",
       "category": "core_documentation",
-      "sha256": "f3079182c2295143bb512003a712fe46b21dacabce9143e990ede9a29307b65a",
+      "sha256": "1d8b6d9aaf721f163b6742f39e3abb72d1b13592ee9020610aba9f20849405a9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10454,7 +10432,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/opus-4-5/overview.md",
       "title": "Claude Opus 4.5",
       "category": "core_documentation",
-      "sha256": "77f0c4b98a522ba509cdc8297d1c42774d5a18de2acc17175874fa1807e46ef9",
+      "sha256": "64137c23b60416a9a5f4780df9206e4c71e36f5b8458fbf90bd253050bb8c19b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10465,7 +10443,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/opus-4-6/overview.md",
       "title": "Claude Opus 4.6",
       "category": "core_documentation",
-      "sha256": "852789b7dfb043f7f7525494474612c5cff50ded6344b4b2a4ce7526d45aa6b1",
+      "sha256": "5fde2113acf9ba0844f868d944a49b526cfedb813e999bae9a4d5e3cb1b61bb1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10476,7 +10454,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/opus-4-7/overview.md",
       "title": "Claude Opus 4.7",
       "category": "core_documentation",
-      "sha256": "97e4e5092f8e68dba1de8ba7485d81abf2734d972f0a49f26eaa73e638a3f692",
+      "sha256": "c9c46645dde9dda623bcbf978fc335d20427490bba5b536f26076b1adb067cee",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10487,7 +10465,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/opus-4-8/overview.md",
       "title": "Claude Opus 4.8",
       "category": "core_documentation",
-      "sha256": "dfd6c920c8e9882719e72a9bd912a95bacc4712d757ea58c3dddc23b34c405af",
+      "sha256": "98460998b3f13e36e3b92297449981386fa68b7a35c5d443dcad7aea63b7376a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10531,7 +10509,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/opus-5/overview.md",
       "title": "Claude Opus 5",
       "category": "core_documentation",
-      "sha256": "deede24b5e43ade8fbda3b6970f7f2cd7c8cdbfbf8f2df18749518ac79ceb9a8",
+      "sha256": "0f40dbeada2f7d315de1fb460e3e38ff1282e0aa0c48b507cf910dc0b1c0f066",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10564,7 +10542,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview.md",
       "title": "Claude Sonnet 4.6",
       "category": "core_documentation",
-      "sha256": "a30294bc483ca94d1d42cbf125208b16067fb2517cf5d8f9f20de5e62833cb0a",
+      "sha256": "6289990a037450f8f9675682d3b115b5d82e4adce3711995f39ba041f9cf4730",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10608,7 +10586,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/sonnet-5/overview.md",
       "title": "Claude Sonnet 5",
       "category": "core_documentation",
-      "sha256": "66050b8820797d2fc9e72dfeeb25634b86bb92d25af4e4d4cd855795bd091276",
+      "sha256": "58a1ca5219a72a21bd4e4a63d9f1094fdfa082caee15eae9997b88b9bf7ed6df",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10619,7 +10597,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "e3071b255e401a312b7805759190c49d69b5dc04fddf7bb181c6d0034e3b1f09",
+      "sha256": "4a41f3fe708501b435899d83a6079bf78369153ffcae59752d984be88cae9255",
       "lastmod": null,
       "fetch_status": "ok"
     },
