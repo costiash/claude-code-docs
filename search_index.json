@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T00:23:57.826515Z",
+  "generated_at": "2026-10-10T03:20:37.318105Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9875,33 +9875,33 @@
         }
       ],
       "terms": {
-        "claude": 111,
-        "code": 70,
-        "browser": 66,
+        "claude": 110,
+        "code": 68,
+        "browser": 65,
         "chrome": 56,
-        "extension": 49,
-        "session": 32,
+        "extension": 48,
+        "session": 31,
         "file": 22,
-        "connect": 19,
-        "prompt": 18,
+        "prompt": 19,
+        "connect": 18,
         "tool": 17,
         "run": 16,
         "before": 15,
-        "ask": 15,
         "organization": 15,
+        "permission": 15,
         "open": 14,
+        "ask": 14,
         "integration": 14,
-        "permission": 14,
         "install": 14,
         "web": 13,
         "tab": 13,
+        "site": 13,
         "work": 13,
         "select": 13,
         "task": 12,
         "read": 12,
         "connection": 12,
         "start": 12,
-        "site": 11,
         "check": 11,
         "enabl": 11,
         "pag": 10,
@@ -9919,14 +9919,14 @@
         "default": 8,
         "show": 8,
         "reconnect": 8,
-        "sett": 8,
         "app": 7,
         "log": 7,
         "cli": 7,
         "new": 7,
-        "any": 7
+        "any": 7,
+        "sign": 7
       },
-      "word_count": 3313
+      "word_count": 3316
     },
     {
       "filename": "claude-code__claude-apps-gateway.md",
@@ -18715,14 +18715,14 @@
         }
       ],
       "terms": {
-        "claude": 443,
+        "claude": 452,
         "error": 135,
-        "code": 117,
+        "code": 122,
         "anthropic": 99,
         "mcp": 96,
         "login": 92,
         "json": 92,
-        "session": 87,
+        "session": 88,
         "model": 86,
         "api": 76,
         "authentication": 74,
@@ -18730,10 +18730,10 @@
         "plugin": 69,
         "request": 65,
         "setting": 61,
-        "path": 57,
+        "path": 58,
         "server": 52,
-        "fail": 51,
-        "file": 46,
+        "fail": 52,
+        "file": 47,
         "token": 46,
         "agent": 43,
         "add": 41,
@@ -18746,12 +18746,12 @@
         "marketplace": 34,
         "prompt": 33,
         "read": 32,
+        "command": 30,
         "cannot": 30,
+        "resume": 30,
         "response": 30,
         "com": 29,
-        "command": 29,
         "permission": 29,
-        "resume": 29,
         "git": 29,
         "network": 28,
         "refus": 28,
@@ -18761,12 +18761,12 @@
         "update": 26,
         "oauth": 26,
         "control": 25,
+        "couldn": 25,
         "manag": 25,
-        "couldn": 23,
         "directory": 23,
-        "usage": 22
+        "again": 23
       },
-      "word_count": 68428
+      "word_count": 68891
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -36603,7 +36603,7 @@
       "terms": {
         "claude": 274,
         "code": 221,
-        "session": 120,
+        "session": 119,
         "open": 111,
         "extension": 77,
         "later": 69,
@@ -36652,7 +36652,7 @@
         "type": 20,
         "ask": 20
       },
-      "word_count": 11507
+      "word_count": 11501
     },
     {
       "filename": "claude-code__web-quickstart.md",

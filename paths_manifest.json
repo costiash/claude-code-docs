@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T00:23:54.494740Z",
+  "generated_at": "2026-10-10T03:20:32.781964Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -565,8 +565,8 @@
       "md_url": "https://code.claude.com/docs/en/chrome.md",
       "title": "Use Claude Code with Chrome",
       "category": "claude_code",
-      "sha256": "f0cdf6585ba559536fd2350f60ddc6ec64cdabf71f4a17db354b2ee9435c36c8",
-      "lastmod": "2026-10-09T20:51:50.214Z",
+      "sha256": "afadfd9114496fac25143a94b59c3a5d553b71df45ba08827dfda901fdb42fd9",
+      "lastmod": "2026-10-10T00:47:16.227Z",
       "fetch_status": "ok"
     },
     {
@@ -1071,8 +1071,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "0b047d3fd6d4293c0022b87d0c091438045d312d111318568bd53902499758cb",
-      "lastmod": "2026-10-09T20:59:22.480Z",
+      "sha256": "514590c7cbbc553215e649b6c3dd68acbe690872b89a27e43fee376f9fe9a1ec",
+      "lastmod": "2026-10-10T01:38:15.448Z",
       "fetch_status": "ok"
     },
     {
@@ -2248,8 +2248,8 @@
       "md_url": "https://code.claude.com/docs/en/vs-code.md",
       "title": "Use Claude Code in VS Code",
       "category": "claude_code",
-      "sha256": "aa45f6bd1108f219b2276ea60124f5d4cf011853692ac1d4b7ca87d2d29ed02e",
-      "lastmod": "2026-10-09T20:58:15.911Z",
+      "sha256": "6311bb85d407a293bbe649f0f42c17683aa0bb63ac63aaaefe52f75aa938fc36",
+      "lastmod": "2026-10-10T00:47:16.232Z",
       "fetch_status": "ok"
     },
     {
