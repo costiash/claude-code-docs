@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T21:15:09.500763Z",
+  "generated_at": "2026-10-11T06:18:04.396334Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -422,8 +422,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-view.md",
       "title": "Manage multiple agents with agent view",
       "category": "claude_code",
-      "sha256": "0ac21f7f3d513836ec2612cb4291725d55bc47e2d8d47b0c20e43ffc61ad2715",
-      "lastmod": "2026-10-10T20:42:42.559Z",
+      "sha256": "c8e2b81092b94b4b3ded2c86b40b8329e73b8f39b36acb3288bd56385bc83266",
+      "lastmod": "2026-10-11T03:14:40.765Z",
       "fetch_status": "ok"
     },
     {
@@ -818,8 +818,8 @@
       "md_url": "https://code.claude.com/docs/en/costs.md",
       "title": "Manage costs effectively",
       "category": "claude_code",
-      "sha256": "fdfc7c104df5e97e90298956fcaffde68a673bd607df833f622147332d853d6a",
-      "lastmod": "2026-10-07T17:51:52.551Z",
+      "sha256": "4f4bca5c46ea26db7653076516f6e29ada41ad853b7b63c37484943b02d65a00",
+      "lastmod": "2026-10-11T03:13:43.980Z",
       "fetch_status": "ok"
     },
     {
@@ -851,8 +851,8 @@
       "md_url": "https://code.claude.com/docs/en/debug-your-config.md",
       "title": "Debug your configuration",
       "category": "claude_code",
-      "sha256": "666461d253efdd3717b6b66f56952fc065123a42959905076630077f8ebfffca",
-      "lastmod": "2026-10-08T20:14:10.994Z",
+      "sha256": "9c8252be1571e49f5e8b7743725a92f5584836577342bc2cbb55fa0e85e8c0b2",
+      "lastmod": "2026-10-11T03:17:06.337Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "6a98132c96cd4e3ba56fddb8a35ded3a415710af457c4b369a575336ff751891",
-      "lastmod": "2026-10-10T17:52:48.149Z",
+      "sha256": "8097c27c0a5dd4b3428a61a9d3a79eb33b57c8eb30a3e5422d471d64c98f515f",
+      "lastmod": "2026-10-11T03:14:40.772Z",
       "fetch_status": "ok"
     },
     {
@@ -2039,8 +2039,8 @@
       "md_url": "https://code.claude.com/docs/en/statusline.md",
       "title": "Customize your status line",
       "category": "claude_code",
-      "sha256": "961458b05ed18ec520f3f77269668262829844c914f42dd64f4c78438c06a472",
-      "lastmod": "2026-10-08T02:40:14.999Z",
+      "sha256": "70800ec65a20b6d025fae667157751e5b44678784f64511be1f5fbb4552d5fc0",
+      "lastmod": "2026-10-11T03:13:43.985Z",
       "fetch_status": "ok"
     },
     {
