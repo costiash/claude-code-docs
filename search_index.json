@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T00:24:58.303085Z",
+  "generated_at": "2026-10-12T03:27:23.482478Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -130146,33 +130146,37 @@
         }
       ],
       "terms": {
+        "java": 76,
+        "php": 76,
+        "csharp": 74,
         "agent": 68,
         "session": 17,
+        "update": 17,
         "version": 16,
-        "update": 16,
         "field": 15,
         "claude": 14,
         "model": 14,
+        "codegroup": 14,
         "object": 13,
-        "codegroup": 12,
+        "list": 13,
         "tool": 11,
         "level": 11,
-        "list": 11,
         "new": 11,
         "see": 10,
         "pin": 10,
         "manag": 9,
+        "set": 9,
         "configuration": 8,
-        "set": 8,
+        "ruby": 8,
+        "cli": 8,
+        "clear": 8,
         "card": 8,
         "reference": 7,
         "chang": 7,
         "replac": 7,
-        "cli": 7,
         "file": 7,
         "omit": 7,
         "default": 7,
-        "clear": 7,
         "title": 6,
         "http": 6,
         "platform": 6,
@@ -130183,21 +130187,17 @@
         "inference": 6,
         "geo": 6,
         "supply": 6,
+        "workflow": 6,
+        "key": 6,
         "value": 6,
         "codegroupitem": 6,
         "creat": 6,
         "stor": 6,
         "time": 5,
         "support": 5,
-        "tip": 5,
-        "effort": 5,
-        "workflow": 5,
-        "key": 5,
-        "run": 5,
-        "read": 5,
-        "one": 5
+        "tip": 5
       },
-      "word_count": 2776
+      "word_count": 3519
     },
     {
       "filename": "docs__en__managed-agents__budgets.md",
@@ -130258,7 +130258,10 @@
       "terms": {
         "session": 77,
         "budget": 62,
-        "list": 27,
+        "java": 41,
+        "php": 41,
+        "csharp": 41,
+        "list": 28,
         "cap": 23,
         "event": 22,
         "request": 19,
@@ -130269,11 +130272,11 @@
         "one": 13,
         "run": 11,
         "each": 10,
-        "set": 9,
         "deployment": 9,
         "cent": 9,
         "price": 9,
         "agent": 8,
+        "set": 8,
         "consum": 8,
         "new": 8,
         "reach": 8,
@@ -130302,12 +130305,9 @@
         "see": 5,
         "object": 5,
         "any": 5,
-        "time": 5,
-        "runn": 5,
-        "total": 5,
-        "use": 5
+        "time": 5
       },
-      "word_count": 2599
+      "word_count": 2881
     },
     {
       "filename": "docs__en__managed-agents__cloud-sandboxes-reference.md",
@@ -130459,7 +130459,7 @@
         "outcome": 29,
         "session": 22,
         "agent": 18,
-        "event": 17,
+        "event": 18,
         "rubric": 13,
         "evaluation": 12,
         "grader": 9,
@@ -130472,6 +130472,9 @@
         "claude": 6,
         "iteration": 6,
         "create": 6,
+        "java": 6,
+        "php": 6,
+        "csharp": 6,
         "start": 6,
         "list": 6,
         "card": 6,
@@ -130502,12 +130505,9 @@
         "example": 3,
         "pas": 3,
         "upload": 3,
-        "through": 3,
-        "user": 3,
-        "orient": 3,
-        "run": 3
+        "through": 3
       },
-      "word_count": 3325
+      "word_count": 3367
     },
     {
       "filename": "docs__en__managed-agents__dreams.md",
@@ -130573,6 +130573,9 @@
         "dream": 51,
         "store": 31,
         "memory": 26,
+        "java": 20,
+        "php": 20,
+        "csharp": 20,
         "session": 16,
         "input": 15,
         "output": 12,
@@ -130594,7 +130597,6 @@
         "note": 4,
         "need": 4,
         "after": 4,
-        "pas": 4,
         "steer": 4,
         "appli": 4,
         "while": 4,
@@ -130607,21 +130609,19 @@
         "produc": 3,
         "value": 3,
         "header": 3,
+        "set": 3,
+        "array": 3,
         "once": 3,
         "model": 3,
         "support": 3,
+        "pas": 3,
         "resource": 3,
         "first": 3,
         "field": 3,
         "creat": 3,
-        "error": 3,
-        "left": 3,
-        "reach": 3,
-        "archive": 3,
-        "return": 3,
-        "default": 3
+        "error": 3
       },
-      "word_count": 2443
+      "word_count": 2551
     },
     {
       "filename": "docs__en__managed-agents__environments.md",
@@ -130676,6 +130676,9 @@
         }
       ],
       "terms": {
+        "java": 40,
+        "php": 40,
+        "csharp": 39,
         "agent": 32,
         "host": 32,
         "environment": 28,
@@ -130722,12 +130725,9 @@
         "platform": 4,
         "com": 4,
         "doc": 4,
-        "each": 4,
-        "same": 4,
-        "get": 4,
-        "own": 4
+        "each": 4
       },
-      "word_count": 3051
+      "word_count": 3288
     },
     {
       "filename": "docs__en__managed-agents__event-deltas.md",
@@ -130819,9 +130819,9 @@
         "every": 4,
         "open": 4,
         "same": 4,
-        "codegroup": 4
+        "java": 4
       },
-      "word_count": 3996
+      "word_count": 4011
     },
     {
       "filename": "docs__en__managed-agents__events-and-streaming.md",
@@ -130902,6 +130902,9 @@
         "claude": 17,
         "stream": 13,
         "interrupt": 12,
+        "java": 11,
+        "php": 11,
+        "csharp": 11,
         "paus": 10,
         "run": 10,
         "manag": 9,
@@ -130938,12 +130941,9 @@
         "example": 5,
         "text": 5,
         "still": 5,
-        "block": 5,
-        "workflow": 5,
-        "stay": 5,
-        "mid": 4
+        "block": 5
       },
-      "word_count": 6316
+      "word_count": 6382
     },
     {
       "filename": "docs__en__managed-agents__files.md",
@@ -130987,6 +130987,9 @@
         "session": 15,
         "file": 13,
         "codegroup": 12,
+        "java": 12,
+        "php": 12,
+        "csharp": 12,
         "upload": 9,
         "list": 9,
         "mount": 6,
@@ -131004,9 +131007,6 @@
         "python": 3,
         "typescript": 3,
         "ruby": 3,
-        "csharp": 3,
-        "java": 3,
-        "php": 3,
         "cli": 3,
         "download": 3,
         "title": 2,
@@ -131033,7 +131033,7 @@
         "appear": 2,
         "finish": 2
       },
-      "word_count": 2030
+      "word_count": 2083
     },
     {
       "filename": "docs__en__managed-agents__github.md",
@@ -131073,6 +131073,9 @@
         "session": 13,
         "repository": 11,
         "codegroup": 10,
+        "java": 10,
+        "php": 10,
+        "csharp": 10,
         "manag": 8,
         "repositori": 8,
         "mcp": 8,
@@ -131114,12 +131117,9 @@
         "declar": 2,
         "cli": 2,
         "codegroupitem": 2,
-        "environment": 2,
-        "creation": 2,
-        "resource": 2,
-        "field": 2
+        "environment": 2
       },
-      "word_count": 2268
+      "word_count": 2321
     },
     {
       "filename": "docs__en__managed-agents__mcp-connector.md",
@@ -131158,6 +131158,9 @@
         }
       ],
       "terms": {
+        "java": 35,
+        "php": 35,
+        "csharp": 35,
         "server": 34,
         "mcp": 32,
         "agent": 23,
@@ -131204,12 +131207,9 @@
         "authenticate": 3,
         "need": 3,
         "unique": 3,
-        "token": 3,
-        "polici": 3,
-        "field": 3,
-        "character": 3
+        "token": 3
       },
-      "word_count": 1561
+      "word_count": 1769
     },
     {
       "filename": "docs__en__managed-agents__memory.md",
@@ -131305,6 +131305,9 @@
         "session": 33,
         "codegroup": 28,
         "agent": 27,
+        "java": 27,
+        "php": 27,
+        "csharp": 27,
         "version": 25,
         "stor": 21,
         "read": 17,
@@ -131332,9 +131335,6 @@
         "python": 9,
         "ruby": 9,
         "typescript": 9,
-        "java": 9,
-        "csharp": 9,
-        "php": 9,
         "any": 8,
         "return": 8,
         "directory": 8,
@@ -131351,7 +131351,7 @@
         "default": 5,
         "user": 5
       },
-      "word_count": 4602
+      "word_count": 4695
     },
     {
       "filename": "docs__en__managed-agents__migration.md",
@@ -131403,6 +131403,9 @@
       ],
       "terms": {
         "agent": 44,
+        "csharp": 20,
+        "java": 20,
+        "php": 20,
         "tool": 16,
         "session": 16,
         "manag": 15,
@@ -131423,21 +131426,18 @@
         "client": 7,
         "migration": 6,
         "call": 6,
-        "csharp": 6,
-        "java": 6,
-        "php": 6,
         "code": 6,
         "server": 6,
         "side": 6,
         "file": 6,
         "chang": 5,
+        "ruby": 5,
         "cli": 5,
         "send": 5,
         "handl": 5,
         "still": 5,
         "field": 5,
         "custom": 4,
-        "ruby": 4,
         "curl": 4,
         "after": 4,
         "every": 4,
@@ -131453,7 +131453,7 @@
         "most": 3,
         "back": 3
       },
-      "word_count": 4259
+      "word_count": 4339
     },
     {
       "filename": "docs__en__managed-agents__multiagent-orchestration.md",
@@ -131533,8 +131533,11 @@
       ],
       "terms": {
         "agent": 224,
-        "list": 68,
+        "list": 81,
         "session": 62,
+        "java": 62,
+        "php": 62,
+        "csharp": 62,
         "run": 61,
         "advisor": 54,
         "workflow": 44,
@@ -131578,12 +131581,9 @@
         "system": 10,
         "consult": 10,
         "prompt": 10,
-        "use": 10,
-        "predefin": 10,
-        "creat": 10,
-        "error": 10
+        "use": 10
       },
-      "word_count": 7129
+      "word_count": 7539
     },
     {
       "filename": "docs__en__managed-agents__onboarding.md",
@@ -131797,6 +131797,9 @@
         "event": 29,
         "toolset": 21,
         "session": 20,
+        "java": 18,
+        "php": 18,
+        "csharp": 18,
         "run": 16,
         "permission": 15,
         "policy": 15,
@@ -131836,12 +131839,9 @@
         "doc": 4,
         "execute": 4,
         "execut": 4,
-        "defaultlanguage": 4,
-        "filename": 4,
-        "without": 4,
-        "array": 4
+        "defaultlanguage": 4
       },
-      "word_count": 3879
+      "word_count": 3982
     },
     {
       "filename": "docs__en__managed-agents__quickstart.md",
@@ -131935,7 +131935,7 @@
         "start": 3,
         "interactive": 3
       },
-      "word_count": 2899
+      "word_count": 2911
     },
     {
       "filename": "docs__en__managed-agents__reference.md",
@@ -131969,6 +131969,9 @@
         "agent": 36,
         "event": 32,
         "session": 30,
+        "java": 30,
+        "php": 30,
+        "csharp": 30,
         "run": 20,
         "claude": 19,
         "thread": 18,
@@ -132012,12 +132015,9 @@
         "list": 4,
         "outcome": 4,
         "environment": 4,
-        "result": 4,
-        "block": 4,
-        "one": 4,
-        "multiagent": 4
+        "result": 4
       },
-      "word_count": 1565
+      "word_count": 1746
     },
     {
       "filename": "docs__en__managed-agents__scheduled-deployments.md",
@@ -132067,6 +132067,9 @@
         "trigger": 8,
         "budget": 8,
         "claude": 7,
+        "java": 7,
+        "php": 7,
+        "csharp": 7,
         "archiv": 7,
         "manag": 6,
         "cron": 6,
@@ -132101,13 +132104,10 @@
         "memory": 3,
         "stor": 3,
         "maximum": 3,
-        "object": 3,
-        "response": 3,
-        "tim": 3,
-        "timezone": 3,
-        "wall": 3
+        "cli": 3,
+        "object": 3
       },
-      "word_count": 2579
+      "word_count": 2638
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes.md",
@@ -132391,6 +132391,9 @@
         "claude": 4,
         "environment": 4,
         "cloud": 4,
+        "java": 4,
+        "php": 4,
+        "csharp": 4,
         "create": 4,
         "filesystem": 4,
         "support": 4,
@@ -132400,12 +132403,9 @@
         "per": 4,
         "example": 4,
         "still": 4,
-        "log": 4,
-        "platform": 3,
-        "prepare": 3,
-        "conflict": 3
+        "log": 4
       },
-      "word_count": 1308
+      "word_count": 1330
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-operations.md",
@@ -132460,6 +132460,9 @@
         "call": 12,
         "host": 11,
         "claim": 10,
+        "csharp": 10,
+        "java": 10,
+        "php": 10,
         "stop": 9,
         "run": 7,
         "before": 7,
@@ -132498,12 +132501,9 @@
         "only": 4,
         "mcp": 4,
         "monitor": 3,
-        "claude": 3,
-        "depth": 3,
-        "fix": 3,
-        "api": 3
+        "claude": 3
       },
-      "word_count": 1590
+      "word_count": 1634
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-reference.md",
@@ -132601,7 +132601,7 @@
         "flag": 3,
         "filesystem": 3
       },
-      "word_count": 1570
+      "word_count": 1576
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-security.md",
@@ -132641,6 +132641,9 @@
         "run": 4,
         "inside": 4,
         "each": 4,
+        "java": 4,
+        "php": 4,
+        "csharp": 4,
         "copy": 4,
         "security": 3,
         "self": 3,
@@ -132666,12 +132669,9 @@
         "url": 2,
         "http": 2,
         "platform": 2,
-        "claude": 2,
-        "com": 2,
-        "doc": 2,
-        "plane": 2
+        "claude": 2
       },
-      "word_count": 717
+      "word_count": 737
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-workers.md",
@@ -132769,7 +132769,7 @@
         "variabl": 4,
         "mount": 4
       },
-      "word_count": 3526
+      "word_count": 3533
     },
     {
       "filename": "docs__en__managed-agents__session-observability.md",
@@ -132851,15 +132851,15 @@
         "track": 3,
         "url": 3,
         "statu": 3,
+        "java": 3,
+        "php": 3,
+        "csharp": 3,
         "every": 3,
         "activity": 3,
         "view": 3,
-        "includ": 3,
-        "inspector": 3,
-        "detail": 3,
-        "tab": 3
+        "includ": 3
       },
-      "word_count": 1040
+      "word_count": 1055
     },
     {
       "filename": "docs__en__managed-agents__session-operations.md",
@@ -132900,6 +132900,9 @@
       "terms": {
         "session": 58,
         "agent": 22,
+        "java": 17,
+        "php": 17,
+        "csharp": 17,
         "run": 14,
         "codegroup": 10,
         "update": 9,
@@ -132944,12 +132947,9 @@
         "filter": 3,
         "mid": 3,
         "back": 3,
-        "change": 3,
-        "set": 3,
-        "become": 3,
-        "even": 3
+        "change": 3
       },
-      "word_count": 2641
+      "word_count": 2761
     },
     {
       "filename": "docs__en__managed-agents__session-threads.md",
@@ -132991,6 +132991,9 @@
         "thread": 108,
         "event": 42,
         "session": 35,
+        "java": 28,
+        "php": 28,
+        "csharp": 28,
         "primary": 25,
         "run": 22,
         "stream": 20,
@@ -133034,12 +133037,9 @@
         "client": 4,
         "idle": 4,
         "associat": 4,
-        "advisor": 4,
-        "follow": 4,
-        "open": 4,
-        "error": 4
+        "advisor": 4
       },
-      "word_count": 3130
+      "word_count": 3304
     },
     {
       "filename": "docs__en__managed-agents__sessions.md",
@@ -133083,6 +133083,9 @@
       ],
       "terms": {
         "session": 70,
+        "java": 50,
+        "php": 50,
+        "csharp": 50,
         "agent": 42,
         "event": 23,
         "codegroup": 16,
@@ -133128,12 +133131,9 @@
         "str": 4,
         "creation": 4,
         "empty": 4,
-        "example": 4,
-        "because": 4,
-        "deployment": 4,
-        "configuration": 4
+        "example": 4
       },
-      "word_count": 4150
+      "word_count": 4426
     },
     {
       "filename": "docs__en__managed-agents__skills.md",
@@ -133165,6 +133165,9 @@
         "repository": 22,
         "session": 16,
         "custom": 13,
+        "java": 12,
+        "php": 12,
+        "csharp": 12,
         "claude": 11,
         "attach": 10,
         "mount": 9,
@@ -133206,12 +133209,9 @@
         "note": 4,
         "default": 4,
         "icon": 4,
-        "href": 4,
-        "description": 3,
-        "give": 3,
-        "specific": 3
+        "href": 4
       },
-      "word_count": 2080
+      "word_count": 2146
     },
     {
       "filename": "docs__en__managed-agents__tools.md",
@@ -133261,6 +133261,9 @@
         "tool": 55,
         "agent": 27,
         "claude": 16,
+        "java": 16,
+        "php": 16,
+        "csharp": 14,
         "web": 11,
         "manag": 10,
         "session": 10,
@@ -133304,12 +133307,9 @@
         "respons": 4,
         "event": 4,
         "stream": 4,
-        "icon": 4,
-        "href": 4,
-        "url": 3,
-        "connector": 3
+        "icon": 4
       },
-      "word_count": 1954
+      "word_count": 2035
     },
     {
       "filename": "docs__en__managed-agents__tools-web-restrictions.md",
@@ -133372,9 +133372,12 @@
         }
       ],
       "terms": {
-        "list": 45,
+        "list": 48,
         "agent": 44,
         "domain": 40,
+        "java": 40,
+        "php": 40,
+        "csharp": 40,
         "tool": 31,
         "session": 25,
         "host": 16,
@@ -133418,12 +133421,9 @@
         "example": 5,
         "within": 5,
         "such": 5,
-        "configuration": 5,
-        "accept": 5,
-        "sett": 5,
-        "rul": 5
+        "configuration": 5
       },
-      "word_count": 2422
+      "word_count": 2666
     },
     {
       "filename": "docs__en__managed-agents__vaults.md",
@@ -133463,6 +133463,9 @@
       ],
       "terms": {
         "credential": 65,
+        "java": 47,
+        "php": 47,
+        "csharp": 47,
         "vault": 31,
         "request": 21,
         "secret": 20,
@@ -133508,12 +133511,9 @@
         "also": 5,
         "both": 5,
         "either": 5,
-        "header": 5,
-        "object": 5,
-        "update": 5,
-        "archive": 5
+        "header": 5
       },
-      "word_count": 3818
+      "word_count": 4104
     },
     {
       "filename": "docs__en__managed-agents__webhooks.md",
@@ -133595,7 +133595,7 @@
         "new": 4,
         "once": 4
       },
-      "word_count": 2485
+      "word_count": 2498
     },
     {
       "filename": "docs__en__managed-agents__workflow-runs.md",
@@ -133653,6 +133653,9 @@
         "run": 223,
         "agent": 95,
         "thread": 86,
+        "java": 78,
+        "php": 78,
+        "csharp": 78,
         "session": 67,
         "event": 53,
         "workflow": 49,
@@ -133665,7 +133668,7 @@
         "phase": 26,
         "limit": 25,
         "open": 25,
-        "list": 22,
+        "list": 24,
         "while": 20,
         "after": 20,
         "budget": 19,
@@ -133696,12 +133699,9 @@
         "see": 12,
         "get": 12,
         "model": 12,
-        "follow": 11,
-        "phas": 11,
-        "until": 11,
-        "lifetime": 11
+        "follow": 11
       },
-      "word_count": 6755
+      "word_count": 7202
     },
     {
       "filename": "docs__en__models__fable-5-1__migration-guide.md",
