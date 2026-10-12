@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-11T21:15:07.547733Z",
+  "generated_at": "2026-10-12T00:24:53.884625Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -378,8 +378,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "632a636818bb0f08f3d95b964acc917dfcf0a45e2e85689f07b639052d1c4c00",
-      "lastmod": "2026-10-11T18:29:05.224Z",
+      "sha256": "c8512286c5c34d2940bd70c28151e7dc5a26bda98265e76ec2e2814ecf3fff9b",
+      "lastmod": "2026-10-11T22:40:42.535Z",
       "fetch_status": "ok"
     },
     {
@@ -477,8 +477,8 @@
       "md_url": "https://code.claude.com/docs/en/authentication.md",
       "title": "Authentication",
       "category": "claude_code",
-      "sha256": "ba0465bf8626b56d86c1d8122f0b1bf5f41b2a121952c7a10e819a9ddcb475a7",
-      "lastmod": "2026-10-10T18:05:34.743Z",
+      "sha256": "c43ef3e8ddcb34ff6ba8b8d9e72276326ba7b672cd99f1252d5167c111ce67ac",
+      "lastmod": "2026-10-11T22:34:48.592Z",
       "fetch_status": "ok"
     },
     {
@@ -961,8 +961,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "7248dc1713497131db6c68a1f721b9ebaec4393f3d8b93434149023338e0f4f3",
-      "lastmod": "2026-10-11T19:36:16.887Z",
+      "sha256": "bf275283d954443212f10ddb6b8fa250ebc943d4b087757dc763996655ecdd7f",
+      "lastmod": "2026-10-11T22:34:48.629Z",
       "fetch_status": "ok"
     },
     {
