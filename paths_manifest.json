@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T00:23:32.931196Z",
+  "generated_at": "2026-10-13T03:21:43.620473Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2831,7 +2831,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool.md",
       "title": "Browser use tool",
       "category": "agents_and_tools",
-      "sha256": "aba7396ce69698adefa980e267df9d0a1c2e0eb0b39fc393b0047251517c964e",
+      "sha256": "d694e598e36324412378041c04dd0eae3c60c8e55eb962f5c75f17a56f0b87f7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2864,7 +2864,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
       "title": "Computer use tool",
       "category": "agents_and_tools",
-      "sha256": "20f325e192d1a46ee7a918808fb0913ab19a838623edd7df163fe95967e61628",
+      "sha256": "2b8e020b988d9159e7c5979cbfe1361eb4b8df76fecb0e1999c78ae61aa132d0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8584,7 +8584,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "72c6c6fdc4d8caaa53fbfe1ae83289400f8fc1ad5043caa5ea455c9ebaaafcbd",
+      "sha256": "8af2eefef81bf7bdb266673f0d708935437056d8cde279c536337e60e0f882b4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9079,7 +9079,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/vision-coordinates.md",
       "title": "Coordinates and bounding boxes",
       "category": "core_documentation",
-      "sha256": "6858de5bd8059664774f4adfcdd5aee59ec13429391af4fc269c2afe16e7dc6f",
+      "sha256": "f10edc10f2163b6922dbaaccaad21530588e25301cb68b7baee3a84ced091177",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9398,7 +9398,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention.md",
       "title": "API and data retention",
       "category": "core_documentation",
-      "sha256": "f8890de505634773f1e940a5816747a05911d4e9a365c4f2ca9ef77cd12600cb",
+      "sha256": "6dd7f4f43b88f9e0fd8ee8d3aa947936b61d75cb88648d1b673350d4862c84cc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9453,7 +9453,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-aws-kms.md",
       "title": "AWS KMS",
       "category": "core_documentation",
-      "sha256": "4011219894a68276690ab376db4f9c8e7f04e363bde264d26c64f5f6d264504c",
+      "sha256": "374cfbcd526b6d8417bb0260e0082c36d232e35e2c21b8b14903149d26ca549e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9464,7 +9464,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-azure-key-vault.md",
       "title": "Azure Key Vault",
       "category": "core_documentation",
-      "sha256": "8f5d765d3f670fd8ab9e112daef613f020ee3ca4de3327dc213460ecb94d9158",
+      "sha256": "f4e7f71cfb5eff7162ff07fd08fa491b8001e824f7461e72249daea10b0c7575",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9475,7 +9475,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-google-cloud-kms.md",
       "title": "Google Cloud KMS",
       "category": "core_documentation",
-      "sha256": "4110b8751296ded7d2513395710bb7d16607829f5f4c0905e55a39c4ba992490",
+      "sha256": "688376f519ecb5c635c5fa01e1b3a5716115c27f0c1ab6fd2216bd137c949f89",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9629,7 +9629,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/plugins-api.md",
       "title": "Plugins API",
       "category": "core_documentation",
-      "sha256": "40364729114eab04817893597257d3fa3c5d1156c025ca9670511d9ccef79530",
+      "sha256": "c969c6e97483e9600d4e61403bd5375eb513e12778183b0916e1b16ccd915c9a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9871,7 +9871,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/event-deltas.md",
       "title": "Event deltas",
       "category": "core_documentation",
-      "sha256": "f632e3fc43db9149b34721d3455b7429d4b425be3501e74e883fe0b12fb46027",
+      "sha256": "0f37f164b032cc962ecfd010b6a11072c3af64503b5728ca496451cdbc7afd89",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9882,7 +9882,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/events-and-streaming.md",
       "title": "Session event stream",
       "category": "core_documentation",
-      "sha256": "50dcae943467dcf8697f5499d01c1ea858a610848edf283dd26c87bac126638f",
+      "sha256": "ed6c8c31e9ec0c612099352a584f370782ee39e37398a7e5897d6c99447f038f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10201,7 +10201,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/workflow-runs.md",
       "title": "Workflow runs",
       "category": "core_documentation",
-      "sha256": "46eadcccb2f32de959b8d4b1fedf772134960af4a9f5a2a42c2758c0ad8a89dc",
+      "sha256": "7d35f8574d5c6f1013896a7d23463b6f2fe34c7d89a51fc1daee9607119ccc54",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10762,7 +10762,7 @@
       "md_url": "https://platform.claude.com/docs/en/test-and-evaluate/develop-tests.md",
       "title": "Define success and build evaluations",
       "category": "test_and_evaluate",
-      "sha256": "a9c8e419d43f3f92f5f33da2e334ee6029d2c10c7d24a0488a112244ccb2667b",
+      "sha256": "262f20a592942b1daf47ad147f75830206ed2d9be39a047f94c96d6ecfffbc3d",
       "lastmod": null,
       "fetch_status": "ok"
     },

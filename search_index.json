@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T00:23:37.406964Z",
+  "generated_at": "2026-10-13T03:21:48.086086Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -39686,31 +39686,31 @@
         "claude": 101,
         "result": 95,
         "member": 80,
-        "tool": 76,
+        "tool": 78,
         "tab": 72,
         "block": 68,
         "text": 58,
         "call": 57,
         "one": 53,
-        "browser": 52,
+        "browser": 51,
         "return": 49,
-        "page": 39,
+        "page": 40,
         "each": 33,
         "api": 31,
+        "toolset": 30,
         "read": 29,
-        "toolset": 28,
         "entry": 27,
         "report": 27,
         "only": 27,
         "download": 27,
         "element": 26,
         "executor": 26,
-        "run": 25,
         "see": 25,
+        "run": 24,
         "screenshot": 24,
         "error": 24,
-        "url": 22,
         "every": 22,
+        "url": 21,
         "other": 21,
         "render": 20,
         "request": 19,
@@ -39724,6 +39724,7 @@
         "open": 16,
         "batch": 16,
         "line": 16,
+        "reference": 15,
         "default": 15,
         "content": 15,
         "action": 15,
@@ -39731,10 +39732,9 @@
         "example": 15,
         "because": 15,
         "doesn": 15,
-        "same": 15,
-        "computer": 14
+        "same": 15
       },
-      "word_count": 10702
+      "word_count": 10718
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md",
@@ -40138,12 +40138,12 @@
       ],
       "terms": {
         "claude": 156,
-        "tool": 119,
-        "computer": 66,
+        "tool": 121,
+        "computer": 67,
         "action": 61,
         "screenshot": 55,
         "block": 44,
-        "toolset": 40,
+        "toolset": 43,
         "member": 39,
         "return": 37,
         "model": 34,
@@ -40175,20 +40175,20 @@
         "title": 19,
         "application": 19,
         "before": 19,
+        "beta": 18,
         "task": 18,
         "limit": 18,
         "sonnet": 17,
-        "beta": 17,
         "version": 17,
         "need": 16,
         "codegroup": 16,
         "display": 16,
         "coordinat": 15,
-        "browser": 14,
         "resolution": 14,
-        "default": 14
+        "default": 14,
+        "zoom": 14
       },
-      "word_count": 12047
+      "word_count": 12071
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__define-tools.md",
@@ -116724,9 +116724,9 @@
         "see": 69,
         "console": 69,
         "anthropic": 66,
-        "workspace": 59,
-        "organization": 52,
-        "key": 51,
+        "workspace": 58,
+        "organization": 53,
+        "key": 52,
         "request": 48,
         "account": 43,
         "limit": 42,
@@ -116739,12 +116739,12 @@
         "available": 33,
         "usage": 30,
         "first": 29,
+        "page": 29,
         "workspac": 28,
-        "page": 27,
+        "data": 27,
         "authentication": 26,
         "bill": 26,
         "support": 26,
-        "data": 26,
         "yes": 26,
         "acces": 25,
         "amazon": 25,
@@ -116768,7 +116768,7 @@
         "marketplace": 18,
         "per": 18
       },
-      "word_count": 8412
+      "word_count": 8426
     },
     {
       "filename": "docs__en__build-with-claude__compaction.md",
@@ -122190,7 +122190,7 @@
         "doc": 5,
         "work": 5
       },
-      "word_count": 4792
+      "word_count": 4796
     },
     {
       "filename": "docs__en__build-with-claude__working-with-messages.md",
@@ -125775,12 +125775,12 @@
         "eligible": 169,
         "claude": 100,
         "zdr": 72,
-        "data": 65,
+        "data": 68,
         "hipaa": 64,
         "api": 63,
         "organization": 52,
         "yes": 52,
-        "retention": 46,
+        "retention": 50,
         "anthropic": 36,
         "featur": 35,
         "readines": 35,
@@ -125795,8 +125795,8 @@
         "code": 24,
         "request": 24,
         "title": 21,
-        "under": 21,
         "step": 21,
+        "under": 20,
         "platform": 19,
         "doe": 17,
         "phi": 17,
@@ -125819,11 +125819,11 @@
         "requir": 11,
         "return": 11,
         "enterprise": 11,
-        "enable": 11,
         "support": 11,
-        "includ": 10
+        "includ": 10,
+        "page": 10
       },
-      "word_count": 4154
+      "word_count": 4182
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -126310,16 +126310,16 @@
         }
       ],
       "terms": {
-        "key": 182,
-        "workspace": 54,
+        "key": 183,
+        "workspace": 50,
         "aws": 45,
         "step": 45,
         "claude": 38,
         "policy": 37,
         "anthropic": 33,
-        "attach": 32,
+        "attach": 33,
         "account": 29,
-        "organization": 26,
+        "organization": 28,
         "kms": 25,
         "condition": 23,
         "compartment": 23,
@@ -126327,27 +126327,29 @@
         "arn": 21,
         "console": 20,
         "add": 20,
-        "encryption": 18,
+        "encryption": 19,
         "cmek": 16,
         "platform": 16,
+        "data": 16,
         "create": 16,
         "tab": 16,
         "encrypt": 15,
+        "list": 15,
         "title": 14,
         "note": 14,
+        "register": 14,
         "statement": 14,
         "decrypt": 14,
         "region": 14,
-        "register": 13,
-        "list": 13,
+        "page": 13,
+        "under": 12,
         "grant": 12,
         "service": 12,
         "iam": 12,
         "click": 12,
-        "data": 10,
-        "under": 10,
         "acces": 10,
         "permission": 10,
+        "select": 10,
         "through": 9,
         "admin": 9,
         "call": 9,
@@ -126357,11 +126359,9 @@
         "set": 8,
         "only": 8,
         "one": 8,
-        "usage": 8,
-        "frame": 8,
-        "select": 8
+        "usage": 8
       },
-      "word_count": 3943
+      "word_count": 3993
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -126392,11 +126392,11 @@
         }
       ],
       "terms": {
-        "key": 98,
+        "key": 99,
         "vault": 38,
         "step": 35,
         "anthropic": 32,
-        "organization": 21,
+        "organization": 22,
         "tag": 16,
         "title": 15,
         "azure": 13,
@@ -126407,32 +126407,32 @@
         "service": 12,
         "principal": 12,
         "tenant": 11,
+        "data": 10,
         "application": 10,
         "click": 10,
+        "encryption": 9,
         "assign": 9,
         "role": 9,
-        "workspace": 9,
-        "encryption": 8,
-        "data": 8,
         "create": 8,
         "operation": 8,
         "frame": 8,
+        "workspace": 8,
         "acces": 7,
-        "open": 7,
+        "select": 7,
         "wrap": 7,
         "unwrap": 7,
         "version": 7,
+        "under": 6,
         "name": 6,
         "already": 6,
+        "open": 6,
         "rsa": 6,
         "note": 6,
-        "select": 6,
+        "page": 6,
         "register": 6,
         "take": 6,
         "codegroup": 6,
-        "under": 5,
         "entra": 5,
-        "setting": 5,
         "field": 5,
         "client": 5,
         "only": 5,
@@ -126443,7 +126443,7 @@
         "console": 5,
         "set": 5
       },
-      "word_count": 2533
+      "word_count": 2557
     },
     {
       "filename": "docs__en__manage-claude__cmek-google-cloud-kms.md",
@@ -126474,35 +126474,36 @@
         }
       ],
       "terms": {
-        "key": 82,
+        "key": 83,
         "step": 33,
         "anthropic": 30,
+        "organization": 22,
         "cloud": 21,
-        "organization": 21,
         "title": 15,
         "kms": 15,
         "service": 13,
         "claude": 12,
         "tab": 12,
         "google": 11,
+        "encryption": 11,
         "add": 11,
         "click": 11,
-        "encryption": 10,
         "encrypt": 10,
         "create": 10,
         "account": 10,
         "label": 10,
-        "workspace": 10,
         "name": 10,
         "note": 9,
+        "workspace": 9,
         "resource": 9,
+        "data": 8,
+        "under": 8,
         "project": 8,
         "decrypt": 8,
         "console": 8,
         "cmek": 7,
-        "under": 7,
         "ring": 7,
-        "data": 6,
+        "page": 7,
         "frame": 6,
         "codegroup": 6,
         "enabl": 5,
@@ -126511,7 +126512,7 @@
         "level": 5,
         "choose": 5,
         "hsm": 5,
-        "open": 5,
+        "select": 5,
         "grant": 5,
         "full": 5,
         "register": 5,
@@ -126522,10 +126523,9 @@
         "admin": 4,
         "email": 4,
         "already": 4,
-        "symmetric": 4,
-        "protection": 4
+        "symmetric": 4
       },
-      "word_count": 2084
+      "word_count": 2108
     },
     {
       "filename": "docs__en__manage-claude__compliance-activity-feed.md",
@@ -128137,7 +128137,7 @@
         "record": 22,
         "limit": 22
       },
-      "word_count": 15567
+      "word_count": 15569
     },
     {
       "filename": "docs__en__manage-claude__rate-limits-api.md",
@@ -130821,7 +130821,7 @@
         "same": 4,
         "java": 4
       },
-      "word_count": 4381
+      "word_count": 4385
     },
     {
       "filename": "docs__en__managed-agents__events-and-streaming.md",
@@ -130943,7 +130943,7 @@
         "still": 5,
         "block": 5
       },
-      "word_count": 6401
+      "word_count": 6413
     },
     {
       "filename": "docs__en__managed-agents__files.md",
@@ -133701,7 +133701,7 @@
         "model": 12,
         "follow": 11
       },
-      "word_count": 7202
+      "word_count": 7204
     },
     {
       "filename": "docs__en__models__fable-5-1__migration-guide.md",
@@ -138186,7 +138186,7 @@
         "application": 4,
         "exact": 4
       },
-      "word_count": 14579
+      "word_count": 14581
     },
     {
       "filename": "docs__en__test-and-evaluate__strengthen-guardrails__handle-streaming-refusals.md",
