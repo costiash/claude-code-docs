@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T06:20:12.059908Z",
+  "generated_at": "2026-10-13T21:15:43.898672Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -873,8 +873,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "1e159a0ea0243f2ae2589cd3ac4076350e025ba6139fe8c9fd1b9ab4f72f156b",
-      "lastmod": "2026-10-11T19:35:47.448Z",
+      "sha256": "4d0b145dbebe4ee284d001637a5945534ad6b94535d699fadfd15e2947e1ad58",
+      "lastmod": "2026-10-13T20:19:33.816Z",
       "fetch_status": "ok"
     },
     {
@@ -906,8 +906,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop-quickstart.md",
       "title": "Get started with the desktop app",
       "category": "claude_code",
-      "sha256": "5ee223d2c8ae3ded78de9937030eb7f9de849b59d80a81d4c45a23bbbce0244f",
-      "lastmod": "2026-10-06T01:05:56.302Z",
+      "sha256": "db00f07bd6115e156fecdc953f482b249d312f28d4d342f84f5b35d4121ce500",
+      "lastmod": "2026-10-13T20:19:33.807Z",
       "fetch_status": "ok"
     },
     {
@@ -1797,8 +1797,8 @@
       "md_url": "https://code.claude.com/docs/en/remote-control.md",
       "title": "Continue local sessions from any device with Remote Control",
       "category": "claude_code",
-      "sha256": "ac36b08871dee9213208a8b4f9378314a6808f332f0a26dd46c3241211409250",
-      "lastmod": "2026-10-11T19:37:03.850Z",
+      "sha256": "b896cd3feb6b92f04c23bd381a8327fd45520990cb188cc48feb15410ffefdc6",
+      "lastmod": "2026-10-13T20:19:33.812Z",
       "fetch_status": "ok"
     },
     {
@@ -6604,7 +6604,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/compliance.md",
       "title": "Compliance API",
       "category": "api_reference",
-      "sha256": "51d960ff97ee856b55ba9600ccae4d1259a6328bdb0a81498518e9b29965f1b0",
+      "sha256": "2773fe09ce155ac31d16a92a3844d861d3ee068a494c245a2a5f6607b503a67c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6615,7 +6615,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/compliance/activities.md",
       "title": "Activities",
       "category": "api_reference",
-      "sha256": "989537802a849fa2516a76053784534d48ceac8cebb1c22eb0b4ebe7bda0c6b3",
+      "sha256": "d884f5aeaa64b7d3c8c1d63b2e993614b5e0b876285f8bc86503c1706008bc30",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -6626,7 +6626,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/compliance/activities/list.md",
       "title": "Query compliance activities",
       "category": "api_reference",
-      "sha256": "8611f11b0b6d9d1480df0a717a5197979349b886d159cd4ff630d9d2c795515d",
+      "sha256": "635435d14d1df29d91950f8d15e66b0cdb298bf9c7fdc31bac5958751bd91a8a",
       "lastmod": null,
       "fetch_status": "ok"
     },
