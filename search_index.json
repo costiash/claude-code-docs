@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T03:21:48.086086Z",
+  "generated_at": "2026-10-13T06:20:16.506935Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -4760,7 +4760,7 @@
       ],
       "terms": {
         "tool": 138,
-        "claude": 100,
+        "claude": 102,
         "session": 93,
         "type": 82,
         "code": 76,
@@ -4810,7 +4810,7 @@
         "project": 26,
         "user": 26
       },
-      "word_count": 20810
+      "word_count": 20808
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -5943,7 +5943,7 @@
         }
       ],
       "terms": {
-        "claude": 25,
+        "claude": 27,
         "tool": 24,
         "task": 21,
         "todo": 15,
@@ -5971,7 +5971,6 @@
         "exampl": 6,
         "available": 5,
         "step": 5,
-        "through": 5,
         "display": 5,
         "follow": 5,
         "option": 5,
@@ -5992,9 +5991,10 @@
         "typ": 4,
         "before": 3,
         "render": 3,
-        "application": 3
+        "application": 3,
+        "structur": 3
       },
-      "word_count": 2154
+      "word_count": 2152
     },
     {
       "filename": "claude-code__agent-sdk__tool-search.md",
@@ -7325,7 +7325,7 @@
         }
       ],
       "terms": {
-        "claude": 397,
+        "claude": 401,
         "code": 344,
         "session": 263,
         "tool": 255,
@@ -7376,7 +7376,7 @@
         "proces": 51,
         "option": 51
       },
-      "word_count": 37778
+      "word_count": 37774
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -14757,7 +14757,7 @@
         }
       ],
       "terms": {
-        "claude": 447,
+        "claude": 449,
         "set": 390,
         "code": 359,
         "default": 170,
@@ -14808,7 +14808,7 @@
         "timeout": 40,
         "google": 40
       },
-      "word_count": 21459
+      "word_count": 21458
     },
     {
       "filename": "claude-code__errors.md",
@@ -15689,16 +15689,16 @@
         "support": 9,
         "requir": 9,
         "same": 9,
+        "opu": 8,
         "messag": 8,
         "analytic": 8,
         "dashboard": 8,
         "work": 7,
         "admin": 7,
         "enabl": 7,
-        "require": 7,
-        "web": 7
+        "sonnet": 7
       },
-      "word_count": 2216
+      "word_count": 2230
     },
     {
       "filename": "claude-code__features-overview.md",
@@ -17159,8 +17159,8 @@
         }
       ],
       "terms": {
-        "model": 112,
-        "claude": 64,
+        "model": 111,
+        "claude": 63,
         "code": 53,
         "google": 44,
         "cloud": 44,
@@ -17210,7 +17210,7 @@
         "such": 7,
         "instead": 7
       },
-      "word_count": 3119
+      "word_count": 3114
     },
     {
       "filename": "claude-code__headless.md",
@@ -18799,7 +18799,7 @@
         }
       ],
       "terms": {
-        "claude": 211,
+        "claude": 210,
         "code": 158,
         "prompt": 98,
         "command": 86,
@@ -18850,7 +18850,7 @@
         "shortcut": 22,
         "runn": 22
       },
-      "word_count": 10577
+      "word_count": 10572
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -19712,7 +19712,7 @@
       ],
       "terms": {
         "gateway": 159,
-        "claude": 98,
+        "claude": 101,
         "code": 82,
         "credential": 72,
         "tab": 58,
@@ -19762,7 +19762,7 @@
         "organization": 11,
         "below": 11
       },
-      "word_count": 5822
+      "word_count": 5832
     },
     {
       "filename": "claude-code__llm-gateway-protocol.md",
@@ -19861,13 +19861,13 @@
         }
       ],
       "terms": {
-        "claude": 120,
+        "claude": 123,
         "gateway": 104,
         "code": 94,
         "request": 92,
         "header": 62,
+        "model": 43,
         "field": 42,
-        "model": 42,
         "format": 40,
         "agent": 35,
         "set": 35,
@@ -19912,7 +19912,7 @@
         "also": 13,
         "entry": 13
       },
-      "word_count": 5798
+      "word_count": 5809
     },
     {
       "filename": "claude-code__llm-gateway-rollout.md",
@@ -20744,7 +20744,7 @@
         "auto": 8,
         "output": 8
       },
-      "word_count": 16528
+      "word_count": 16534
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -27349,7 +27349,7 @@
         }
       ],
       "terms": {
-        "claude": 113,
+        "claude": 112,
         "cache": 112,
         "request": 82,
         "code": 77,
@@ -27400,7 +27400,7 @@
         "apply": 12,
         "usage": 12
       },
-      "word_count": 5888
+      "word_count": 5891
     },
     {
       "filename": "claude-code__prompt-library.md",
@@ -32578,7 +32578,7 @@
         "also": 19,
         "each": 18
       },
-      "word_count": 11745
+      "word_count": 11739
     },
     {
       "filename": "claude-code__troubleshoot-install.md",
