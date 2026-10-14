@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T18:16:52.276704Z",
+  "generated_at": "2026-10-14T21:16:32.435408Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.300",
+          "level": 2
         },
         {
           "text": "2.1.299",
@@ -1691,58 +1695,58 @@
         }
       ],
       "terms": {
-        "fix": 4486,
-        "session": 2028,
-        "now": 1642,
-        "claude": 1510,
-        "add": 909,
-        "after": 868,
-        "tool": 809,
-        "improv": 792,
-        "instead": 787,
-        "prompt": 740,
-        "command": 686,
-        "mode": 681,
-        "agent": 662,
-        "show": 654,
-        "being": 650,
-        "code": 624,
-        "chang": 602,
-        "fail": 592,
-        "background": 583,
-        "plugin": 577,
-        "error": 543,
-        "model": 533,
-        "server": 505,
-        "mcp": 485,
-        "file": 462,
-        "hook": 416,
-        "list": 401,
-        "setting": 400,
-        "terminal": 396,
-        "vscode": 392,
-        "read": 380,
+        "fix": 4546,
+        "session": 2060,
+        "now": 1660,
+        "claude": 1544,
+        "add": 922,
+        "after": 881,
+        "tool": 823,
+        "instead": 797,
+        "improv": 796,
+        "prompt": 752,
+        "command": 695,
+        "mode": 684,
+        "agent": 673,
+        "show": 659,
+        "being": 659,
+        "code": 637,
+        "chang": 616,
+        "fail": 596,
+        "background": 589,
+        "plugin": 579,
+        "error": 547,
+        "model": 538,
+        "server": 509,
+        "mcp": 488,
+        "file": 469,
+        "hook": 427,
+        "setting": 407,
+        "vscode": 404,
+        "list": 403,
+        "terminal": 400,
+        "read": 387,
         "permission": 379,
-        "turn": 364,
-        "window": 361,
-        "auto": 349,
-        "runn": 347,
-        "message": 346,
-        "remote": 337,
-        "start": 335,
-        "while": 333,
-        "longer": 313,
-        "run": 312,
-        "open": 311,
-        "only": 309,
-        "one": 297,
-        "skill": 297,
-        "text": 297,
-        "request": 292,
-        "bash": 276,
-        "subagent": 272
+        "turn": 375,
+        "window": 371,
+        "runn": 359,
+        "auto": 350,
+        "message": 350,
+        "start": 344,
+        "while": 341,
+        "remote": 341,
+        "open": 318,
+        "longer": 316,
+        "run": 315,
+        "only": 313,
+        "text": 303,
+        "one": 302,
+        "skill": 299,
+        "request": 298,
+        "conversation": 277,
+        "bash": 277
       },
-      "word_count": 157613
+      "word_count": 159815
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -9457,58 +9461,58 @@
         }
       ],
       "terms": {
-        "fix": 4652,
-        "session": 2028,
-        "now": 1641,
-        "claude": 1513,
-        "add": 1062,
-        "improv": 885,
-        "after": 868,
-        "tool": 809,
-        "instead": 787,
-        "chang": 757,
-        "prompt": 740,
-        "command": 685,
-        "mode": 681,
-        "agent": 661,
-        "show": 654,
-        "being": 650,
-        "code": 627,
-        "update": 601,
-        "fail": 592,
-        "background": 583,
-        "plugin": 577,
-        "error": 543,
-        "model": 532,
-        "server": 504,
-        "mcp": 485,
-        "file": 463,
-        "expandable": 420,
-        "hook": 416,
-        "list": 402,
-        "setting": 400,
-        "terminal": 396,
-        "vscode": 392,
-        "read": 380,
+        "fix": 4713,
+        "session": 2060,
+        "now": 1659,
+        "claude": 1547,
+        "add": 1076,
+        "improv": 890,
+        "after": 881,
+        "tool": 823,
+        "instead": 797,
+        "chang": 772,
+        "prompt": 752,
+        "command": 694,
+        "mode": 684,
+        "agent": 672,
+        "show": 659,
+        "being": 659,
+        "code": 640,
+        "update": 604,
+        "fail": 596,
+        "background": 589,
+        "plugin": 579,
+        "error": 547,
+        "model": 537,
+        "server": 508,
+        "mcp": 488,
+        "file": 470,
+        "hook": 427,
+        "expandable": 422,
+        "setting": 407,
+        "list": 404,
+        "vscode": 404,
+        "terminal": 400,
+        "read": 387,
         "permission": 379,
-        "turn": 364,
-        "window": 361,
-        "auto": 348,
-        "runn": 347,
-        "message": 346,
-        "remote": 337,
-        "start": 335,
-        "while": 333,
-        "description": 321,
-        "longer": 314,
-        "run": 312,
-        "open": 311,
-        "label": 310,
-        "only": 309,
-        "one": 297,
-        "skill": 297
+        "turn": 375,
+        "window": 371,
+        "runn": 359,
+        "message": 350,
+        "auto": 349,
+        "start": 344,
+        "while": 341,
+        "remote": 341,
+        "description": 324,
+        "open": 318,
+        "longer": 317,
+        "run": 315,
+        "only": 313,
+        "label": 311,
+        "text": 303,
+        "one": 302
       },
-      "word_count": 160781
+      "word_count": 162995
     },
     {
       "filename": "claude-code__channels.md",
@@ -11653,11 +11657,11 @@
         }
       ],
       "terms": {
-        "thread": 303,
-        "project": 286,
-        "claude": 175,
+        "thread": 302,
+        "project": 285,
+        "claude": 174,
         "work": 99,
-        "cloud": 97,
+        "cloud": 96,
         "one": 78,
         "start": 75,
         "session": 69,
@@ -11666,17 +11670,17 @@
         "github": 57,
         "run": 52,
         "add": 51,
-        "environment": 47,
         "each": 45,
         "new": 45,
+        "environment": 45,
         "code": 44,
         "task": 44,
         "repositori": 43,
         "need": 43,
         "open": 43,
         "ask": 39,
-        "setting": 38,
         "step": 37,
+        "setting": 37,
         "app": 36,
         "fil": 36,
         "request": 35,
@@ -11704,7 +11708,7 @@
         "connect": 21,
         "don": 20
       },
-      "word_count": 9510
+      "word_count": 9483
     },
     {
       "filename": "claude-code__claude-security.md",
@@ -12121,26 +12125,26 @@
         }
       ],
       "terms": {
-        "environment": 203,
+        "environment": 204,
         "session": 163,
         "claude": 101,
         "com": 84,
-        "cloud": 80,
+        "cloud": 81,
         "org": 76,
         "run": 67,
         "host": 62,
         "network": 60,
         "script": 56,
         "setup": 47,
+        "secret": 47,
         "install": 47,
         "code": 45,
-        "secret": 45,
         "start": 45,
         "default": 40,
         "www": 40,
-        "add": 38,
+        "add": 39,
+        "one": 37,
         "proxy": 37,
-        "one": 36,
         "setting": 36,
         "anthropic": 34,
         "accordion": 34,
@@ -12151,9 +12155,9 @@
         "own": 29,
         "api": 29,
         "hook": 29,
+        "organization": 26,
         "repo": 26,
         "set": 25,
-        "organization": 25,
         "through": 24,
         "command": 24,
         "key": 23,
@@ -12172,7 +12176,7 @@
         "domain": 19,
         "tool": 19
       },
-      "word_count": 7641
+      "word_count": 7659
     },
     {
       "filename": "claude-code__code-review.md",
@@ -13986,6 +13990,14 @@
           "level": 4
         },
         {
+          "text": "Files and processes on the remote machine",
+          "level": 4
+        },
+        {
+          "text": "Use MCP servers set up on the remote machine",
+          "level": 4
+        },
+        {
           "text": "Open an SSH session from a link",
           "level": 4
         },
@@ -14094,6 +14106,10 @@
           "level": 3
         },
         {
+          "text": "SSH connection fails after you log in",
+          "level": 3
+        },
+        {
           "text": "App won't quit",
           "level": 3
         },
@@ -14111,15 +14127,15 @@
         }
       ],
       "terms": {
-        "claude": 129,
-        "session": 42,
+        "claude": 142,
+        "session": 44,
+        "json": 39,
         "browser": 34,
-        "json": 34,
-        "desktop": 28,
-        "code": 27,
+        "desktop": 29,
+        "code": 28,
+        "ssh": 25,
         "permission": 24,
         "mode": 24,
-        "ssh": 23,
         "prompt": 23,
         "setting": 23,
         "pane": 22,
@@ -14128,41 +14144,41 @@
         "auto": 20,
         "cmd": 20,
         "open": 19,
+        "config": 19,
         "com": 17,
         "diff": 17,
         "click": 17,
+        "run": 17,
         "review": 16,
         "chang": 16,
         "external": 16,
         "fil": 16,
-        "config": 16,
-        "run": 15,
+        "host": 16,
         "edit": 15,
         "window": 14,
+        "server": 14,
+        "true": 14,
         "before": 13,
+        "start": 13,
+        "remote": 13,
         "terminal": 12,
         "tab": 12,
         "see": 12,
         "project": 12,
         "plan": 12,
-        "server": 12,
         "shift": 12,
-        "true": 12,
         "without": 11,
         "check": 11,
         "pres": 11,
-        "host": 11,
         "dev": 11,
-        "start": 10,
         "sit": 10,
-        "ask": 10,
+        "cli": 10,
         "command": 10,
         "action": 10,
         "accept": 10,
-        "user": 10,
-        "sshhostallowlist": 10
+        "user": 10
       },
-      "word_count": 18020
+      "word_count": 18884
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -15526,7 +15542,7 @@
         "cloud": 24,
         "debug": 24
       },
-      "word_count": 71267
+      "word_count": 71268
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -27990,11 +28006,11 @@
         "acces": 26,
         "each": 24,
         "open": 24,
+        "cloud": 23,
         "prompt": 23,
         "cli": 23,
         "start": 23,
         "code": 22,
-        "cloud": 22,
         "token": 22,
         "event": 21,
         "request": 21,
@@ -28024,7 +28040,7 @@
         "such": 12,
         "pull": 12
       },
-      "word_count": 5380
+      "word_count": 5381
     },
     {
       "filename": "claude-code__sandbox-environments.md",
@@ -36721,7 +36737,7 @@
         }
       ],
       "terms": {
-        "claude": 160,
+        "claude": 161,
         "mtok": 157,
         "token": 131,
         "pric": 92,
@@ -36738,8 +36754,8 @@
         "cloud": 28,
         "api": 28,
         "sonnet": 27,
+        "bill": 26,
         "platform": 25,
-        "bill": 25,
         "see": 23,
         "usage": 23,
         "aws": 21,
@@ -36772,7 +36788,7 @@
         "endpoint": 13,
         "rat": 13
       },
-      "word_count": 5357
+      "word_count": 5375
     },
     {
       "filename": "docs__en__about-claude__use-case-guides__commerce-agents.md",
@@ -38569,58 +38585,58 @@
         }
       ],
       "terms": {
-        "tunnel": 82,
+        "tunnel": 83,
         "step": 32,
         "mcp": 30,
         "server": 22,
         "certificate": 21,
         "token": 19,
         "title": 17,
-        "agent": 16,
+        "page": 17,
         "stack": 16,
+        "console": 15,
+        "agent": 15,
         "register": 14,
         "deploy": 14,
+        "workspace": 14,
         "acces": 13,
+        "claude": 12,
+        "create": 12,
         "one": 12,
-        "page": 11,
         "programmatic": 11,
         "click": 11,
-        "console": 10,
-        "create": 10,
         "detail": 10,
         "federation": 10,
-        "workspace": 10,
         "certificat": 9,
         "rule": 9,
-        "new": 9,
-        "list": 9,
         "card": 9,
         "note": 8,
+        "picker": 8,
+        "list": 8,
         "helm": 7,
         "organization": 7,
+        "new": 7,
         "show": 7,
         "add": 7,
         "icon": 7,
         "connection": 7,
-        "manage": 6,
-        "claude": 6,
         "doe": 6,
         "api": 6,
         "identity": 6,
         "open": 6,
-        "picker": 6,
+        "select": 6,
         "domain": 6,
         "flow": 6,
+        "manage": 5,
         "http": 5,
         "platform": 5,
         "com": 5,
         "doc": 5,
         "tool": 5,
         "creat": 5,
-        "account": 5,
-        "choose": 5
+        "account": 5
       },
-      "word_count": 1605
+      "word_count": 1652
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__deploy-compose.md",
@@ -38671,17 +38687,17 @@
         "host": 15,
         "acces": 14,
         "programmatic": 13,
+        "console": 13,
         "token": 13,
         "setup": 12,
-        "console": 12,
         "component": 11,
         "set": 11,
         "certificate": 11,
         "proxy": 10,
         "compose": 9,
         "run": 9,
-        "federation": 8,
         "identity": 8,
+        "federation": 8,
         "register": 8,
         "docker": 7,
         "see": 7,
@@ -38694,6 +38710,7 @@
         "service": 6,
         "deployment": 6,
         "card": 6,
+        "claude": 5,
         "agent": 5,
         "using": 5,
         "note": 5,
@@ -38709,12 +38726,11 @@
         "url": 4,
         "http": 4,
         "platform": 4,
-        "claude": 4,
         "com": 4,
         "doc": 4,
         "tool": 4
       },
-      "word_count": 2226
+      "word_count": 2231
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__deploy-helm.md",
@@ -38781,7 +38797,7 @@
         }
       ],
       "terms": {
-        "tunnel": 44,
+        "tunnel": 45,
         "step": 31,
         "server": 23,
         "mcp": 21,
@@ -38809,9 +38825,12 @@
         "api": 8,
         "tab": 7,
         "run": 7,
+        "workspace": 7,
         "rout": 7,
         "proxy": 7,
         "agent": 6,
+        "also": 6,
+        "domain": 6,
         "stor": 6,
         "sample": 6,
         "renewal": 6,
@@ -38823,16 +38842,13 @@
         "anthropic": 5,
         "one": 5,
         "don": 5,
-        "also": 5,
-        "domain": 5,
         "identity": 5,
         "register": 5,
         "follow": 5,
         "serviceaccount": 5,
-        "cronjob": 5,
-        "namespace": 5
+        "cronjob": 5
       },
-      "word_count": 2524
+      "word_count": 2545
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__overview.md",
@@ -38894,9 +38910,9 @@
         "tunnel": 51,
         "mcp": 47,
         "server": 29,
-        "claude": 15,
+        "claude": 16,
         "card": 14,
-        "agent": 13,
+        "agent": 12,
         "network": 11,
         "anthropic": 11,
         "cloudflare": 11,
@@ -38922,6 +38938,7 @@
         "connection": 6,
         "acces": 6,
         "tls": 6,
+        "console": 6,
         "docker": 6,
         "compose": 6,
         "create": 6,
@@ -38933,16 +38950,15 @@
         "any": 5,
         "stack": 5,
         "component": 5,
-        "manag": 5,
-        "console": 5,
         "helm": 5,
         "security": 5,
         "payload": 5,
         "path": 5,
         "url": 4,
-        "open": 4
+        "open": 4,
+        "outbound": 4
       },
-      "word_count": 1897
+      "word_count": 1901
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__quickstart.md",
@@ -38967,14 +38983,14 @@
       "terms": {
         "tab": 30,
         "title": 20,
-        "tunnel": 17,
+        "tunnel": 18,
         "step": 17,
         "mcp": 13,
         "claude": 9,
         "server": 8,
-        "agent": 7,
         "docker": 7,
         "compose": 7,
+        "agent": 6,
         "deployment": 6,
         "deploy": 6,
         "maco": 6,
@@ -38998,6 +39014,8 @@
         "helm": 3,
         "sample": 3,
         "create": 3,
+        "page": 3,
+        "workspace": 3,
         "set": 3,
         "icon": 3,
         "certificate": 3,
@@ -39012,11 +39030,9 @@
         "path": 2,
         "production": 2,
         "two": 2,
-        "container": 2,
-        "stack": 2,
-        "runn": 2
+        "container": 2
       },
-      "word_count": 1026
+      "word_count": 1044
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-tunnels__reference.md",
@@ -48988,61 +49004,293 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Beta \u203a Organization \u203a Telemetry Destinations",
+          "level": 2
+        },
+        {
+          "text": "Create a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "List Telemetry Destinations",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Retrieve a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Delete a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Test a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Beta \u203a Organization \u203a Telemetry Destinations \u203a Workspaces",
+          "level": 2
+        },
+        {
+          "text": "List Telemetry Destination Workspaces",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Add a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Remove a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "tool": 3766,
+        "tool": 3782,
         "member": 1629,
-        "model": 1600,
-        "default": 1593,
+        "default": 1609,
+        "model": 1604,
         "call": 1566,
-        "agent": 1337,
-        "user": 1298,
-        "session": 1241,
-        "format": 1222,
-        "server": 1159,
-        "content": 1145,
-        "time": 1100,
-        "workspace": 1080,
-        "request": 1037,
-        "result": 979,
-        "only": 966,
-        "version": 940,
-        "return": 936,
-        "per": 894,
-        "whether": 881,
+        "agent": 1386,
+        "user": 1299,
+        "session": 1283,
+        "format": 1248,
+        "content": 1165,
+        "server": 1163,
+        "workspace": 1158,
+        "time": 1137,
+        "request": 1055,
+        "return": 995,
+        "only": 993,
+        "result": 986,
+        "version": 949,
+        "per": 905,
+        "whether": 897,
+        "api": 861,
         "block": 861,
-        "date": 841,
-        "value": 795,
-        "name": 772,
-        "input": 768,
-        "must": 745,
-        "token": 745,
-        "api": 744,
-        "organization": 742,
+        "date": 859,
+        "value": 819,
+        "organization": 780,
+        "name": 780,
+        "input": 778,
+        "must": 753,
+        "token": 751,
         "judg": 742,
-        "enabl": 717,
+        "enabl": 720,
+        "list": 719,
         "claude": 705,
-        "null": 685,
+        "null": 700,
+        "header": 687,
+        "execution": 684,
         "event": 680,
+        "one": 678,
         "key": 670,
-        "minlength": 647,
-        "one": 642,
-        "header": 632,
-        "execution": 632,
+        "run": 661,
+        "minlength": 648,
         "high": 627,
-        "list": 625,
-        "run": 607,
-        "each": 602,
-        "same": 583,
+        "same": 615,
+        "each": 607,
+        "response": 585,
+        "every": 584,
         "toolset": 578,
-        "response": 568,
-        "identifier": 568,
-        "confirmation": 562,
-        "error": 561,
-        "every": 557
+        "identifier": 576,
+        "error": 567,
+        "confirmation": 564
       },
-      "word_count": 348880
+      "word_count": 359796
     },
     {
       "filename": "docs__en__api__beta-headers.md",
@@ -49362,6 +49610,14 @@
           "level": 3
         },
         {
+          "text": "Beta Managed Agents AWS Role Execution Identity",
+          "level": 3
+        },
+        {
+          "text": "Beta Managed Agents AWS Role Execution Identity Params",
+          "level": 3
+        },
+        {
           "text": "Beta Managed Agents Bash Tool Config",
           "level": 3
         },
@@ -49415,6 +49671,14 @@
         },
         {
           "text": "Beta Managed Agents Effort Xhigh",
+          "level": 3
+        },
+        {
+          "text": "Beta Managed Agents Execution Identity",
+          "level": 3
+        },
+        {
+          "text": "Beta Managed Agents Execution Identity Params",
           "level": 3
         },
         {
@@ -49602,6 +49866,14 @@
           "level": 3
         },
         {
+          "text": "Beta Managed Agents Service Account Execution Identity",
+          "level": 3
+        },
+        {
+          "text": "Beta Managed Agents Service Account Execution Identity Params",
+          "level": 3
+        },
+        {
           "text": "Beta Managed Agents Session Thread Agent",
           "level": 3
         },
@@ -49725,7 +49997,7 @@
       "terms": {
         "tool": 1525,
         "call": 921,
-        "agent": 858,
+        "agent": 880,
         "judg": 513,
         "high": 414,
         "server": 404,
@@ -49736,15 +50008,15 @@
         "risk": 342,
         "evaluat": 342,
         "each": 314,
-        "session": 311,
+        "session": 312,
+        "execution": 311,
         "fetch": 292,
-        "execution": 289,
         "allow": 262,
         "url": 261,
         "model": 258,
+        "default": 249,
         "cannot": 246,
         "result": 245,
-        "default": 242,
         "configuration": 230,
         "approv": 215,
         "require": 215,
@@ -49765,16 +50037,16 @@
         "permission": 170,
         "cod": 169,
         "name": 162,
+        "maxlength": 153,
         "must": 151,
         "thread": 151,
-        "maxlength": 149,
         "contribute": 147,
         "minlength": 144,
+        "manag": 140,
         "intelligence": 130,
-        "list": 130,
-        "resolv": 123
+        "list": 130
       },
-      "word_count": 50066
+      "word_count": 50956
     },
     {
       "filename": "docs__en__api__beta__agents__archive.md",
@@ -49811,12 +50083,12 @@
       "terms": {
         "tool": 82,
         "call": 56,
-        "agent": 45,
+        "agent": 46,
         "judg": 33,
         "high": 27,
         "user": 25,
+        "execution": 23,
         "server": 23,
-        "execution": 22,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
@@ -49853,14 +50125,14 @@
         "format": 10,
         "intelligence": 10,
         "thread": 10,
+        "run": 7,
         "powerful": 7,
         "long": 7,
         "runn": 7,
         "default": 7,
-        "contribute": 7,
-        "version": 6
+        "contribute": 7
       },
-      "word_count": 2961
+      "word_count": 3026
     },
     {
       "filename": "docs__en__api__beta__agents__create.md",
@@ -49897,7 +50169,7 @@
       "terms": {
         "tool": 198,
         "call": 123,
-        "agent": 116,
+        "agent": 119,
         "judg": 66,
         "server": 59,
         "high": 56,
@@ -49905,15 +50177,15 @@
         "confirmation": 53,
         "user": 51,
         "model": 44,
+        "default": 44,
         "safe": 44,
         "risk": 44,
         "evaluat": 44,
         "each": 43,
         "session": 43,
-        "default": 42,
         "configuration": 37,
+        "execution": 36,
         "allow": 33,
-        "execution": 33,
         "cannot": 32,
         "approv": 31,
         "require": 31,
@@ -49922,8 +50194,8 @@
         "must": 27,
         "cod": 26,
         "reach": 26,
+        "maxlength": 26,
         "result": 26,
-        "maxlength": 25,
         "input": 24,
         "content": 24,
         "name": 23,
@@ -49946,7 +50218,7 @@
         "enabl": 19,
         "claude": 18
       },
-      "word_count": 7079
+      "word_count": 7211
     },
     {
       "filename": "docs__en__api__beta__agents__list.md",
@@ -49983,12 +50255,12 @@
       "terms": {
         "tool": 82,
         "call": 56,
-        "agent": 47,
+        "agent": 48,
         "judg": 33,
         "high": 27,
         "user": 25,
+        "execution": 23,
         "server": 23,
-        "execution": 22,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
@@ -50029,10 +50301,10 @@
         "default": 9,
         "list": 7,
         "null": 7,
-        "powerful": 7,
-        "long": 7
+        "run": 7,
+        "powerful": 7
       },
-      "word_count": 3040
+      "word_count": 3105
     },
     {
       "filename": "docs__en__api__beta__agents__retrieve.md",
@@ -50073,12 +50345,12 @@
       "terms": {
         "tool": 82,
         "call": 56,
-        "agent": 46,
+        "agent": 47,
         "judg": 33,
         "high": 27,
         "user": 25,
+        "execution": 23,
         "server": 23,
-        "execution": 22,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
@@ -50116,13 +50388,13 @@
         "intelligence": 10,
         "thread": 10,
         "version": 8,
+        "run": 7,
         "powerful": 7,
         "long": 7,
         "runn": 7,
-        "default": 7,
-        "contribute": 7
+        "default": 7
       },
-      "word_count": 2982
+      "word_count": 3047
     },
     {
       "filename": "docs__en__api__beta__agents__update.md",
@@ -50163,33 +50435,33 @@
       "terms": {
         "tool": 198,
         "call": 123,
-        "agent": 114,
+        "agent": 117,
         "judg": 66,
         "server": 60,
         "high": 56,
         "whether": 55,
         "confirmation": 53,
         "user": 51,
+        "default": 44,
         "each": 44,
         "model": 44,
         "safe": 44,
         "risk": 44,
         "evaluat": 44,
         "session": 43,
-        "default": 42,
         "configuration": 37,
+        "execution": 36,
         "cannot": 34,
         "allow": 33,
-        "execution": 33,
         "approv": 31,
         "require": 31,
         "fetch": 31,
         "must": 29,
         "url": 28,
         "result": 27,
+        "maxlength": 26,
         "cod": 26,
         "reach": 26,
-        "maxlength": 25,
         "input": 24,
         "content": 24,
         "name": 23,
@@ -50207,12 +50479,12 @@
         "deny": 22,
         "judgement": 22,
         "ask": 22,
+        "omit": 20,
         "intelligence": 20,
         "list": 20,
-        "omit": 19,
         "enabl": 19
       },
-      "word_count": 7218
+      "word_count": 7353
     },
     {
       "filename": "docs__en__api__beta__agents__versions.md",
@@ -50257,12 +50529,12 @@
       "terms": {
         "tool": 82,
         "call": 56,
-        "agent": 44,
+        "agent": 45,
         "judg": 33,
         "high": 27,
         "user": 25,
+        "execution": 23,
         "server": 23,
-        "execution": 22,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
@@ -50302,11 +50574,11 @@
         "thread": 10,
         "default": 8,
         "null": 7,
+        "run": 7,
         "powerful": 7,
-        "long": 7,
-        "runn": 7
+        "long": 7
       },
-      "word_count": 3008
+      "word_count": 3073
     },
     {
       "filename": "docs__en__api__beta__agents__versions__list.md",
@@ -50347,12 +50619,12 @@
       "terms": {
         "tool": 82,
         "call": 56,
-        "agent": 45,
+        "agent": 46,
         "judg": 33,
         "high": 27,
         "user": 25,
+        "execution": 23,
         "server": 23,
-        "execution": 22,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
@@ -50393,10 +50665,10 @@
         "default": 8,
         "list": 7,
         "null": 7,
-        "powerful": 7,
-        "long": 7
+        "run": 7,
+        "powerful": 7
       },
-      "word_count": 3008
+      "word_count": 3073
     },
     {
       "filename": "docs__en__api__beta__deployment_runs.md",
@@ -50598,7 +50870,7 @@
         "exactly": 6,
         "omit": 5
       },
-      "word_count": 3131
+      "word_count": 3135
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__list.md",
@@ -50684,7 +50956,7 @@
         "manually": 2,
         "directly": 2
       },
-      "word_count": 1016
+      "word_count": 1018
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__retrieve.md",
@@ -50770,7 +51042,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 835
+      "word_count": 837
     },
     {
       "filename": "docs__en__api__beta__deployments.md",
@@ -51168,7 +51440,7 @@
         "type": 40,
         "currency": 40
       },
-      "word_count": 22568
+      "word_count": 22584
     },
     {
       "filename": "docs__en__api__beta__deployments__archive.md",
@@ -51254,7 +51526,7 @@
         "optional": 3,
         "sent": 3
       },
-      "word_count": 1919
+      "word_count": 1921
     },
     {
       "filename": "docs__en__api__beta__deployments__create.md",
@@ -51340,7 +51612,7 @@
         "model": 6,
         "turn": 6
       },
-      "word_count": 3264
+      "word_count": 3266
     },
     {
       "filename": "docs__en__api__beta__deployments__list.md",
@@ -51426,7 +51698,7 @@
         "set": 4,
         "currency": 4
       },
-      "word_count": 2038
+      "word_count": 2040
     },
     {
       "filename": "docs__en__api__beta__deployments__pause.md",
@@ -51512,7 +51784,7 @@
         "optional": 3,
         "sent": 3
       },
-      "word_count": 1919
+      "word_count": 1921
     },
     {
       "filename": "docs__en__api__beta__deployments__retrieve.md",
@@ -51598,7 +51870,7 @@
         "optional": 3,
         "sent": 3
       },
-      "word_count": 1914
+      "word_count": 1916
     },
     {
       "filename": "docs__en__api__beta__deployments__run.md",
@@ -51684,7 +51956,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 839
+      "word_count": 841
     },
     {
       "filename": "docs__en__api__beta__deployments__unpause.md",
@@ -51770,7 +52042,7 @@
         "optional": 3,
         "sent": 3
       },
-      "word_count": 1919
+      "word_count": 1921
     },
     {
       "filename": "docs__en__api__beta__deployments__update.md",
@@ -51860,7 +52132,7 @@
         "send": 6,
         "creat": 6
       },
-      "word_count": 3288
+      "word_count": 3290
     },
     {
       "filename": "docs__en__api__beta__dreams.md",
@@ -52114,7 +52386,7 @@
         "limit": 23,
         "run": 23
       },
-      "word_count": 10642
+      "word_count": 10652
     },
     {
       "filename": "docs__en__api__beta__dreams__archive.md",
@@ -52200,7 +52472,7 @@
         "entry": 3,
         "minlength": 3
       },
-      "word_count": 1444
+      "word_count": 1446
     },
     {
       "filename": "docs__en__api__beta__dreams__cancel.md",
@@ -52286,7 +52558,7 @@
         "why": 3,
         "entry": 3
       },
-      "word_count": 1441
+      "word_count": 1443
     },
     {
       "filename": "docs__en__api__beta__dreams__create.md",
@@ -52372,7 +52644,7 @@
         "while": 4,
         "fail": 4
       },
-      "word_count": 1966
+      "word_count": 1968
     },
     {
       "filename": "docs__en__api__beta__dreams__list.md",
@@ -52458,7 +52730,7 @@
         "cache": 4,
         "get": 3
       },
-      "word_count": 1596
+      "word_count": 1598
     },
     {
       "filename": "docs__en__api__beta__dreams__retrieve.md",
@@ -52544,7 +52816,7 @@
         "date": 3,
         "why": 3
       },
-      "word_count": 1419
+      "word_count": 1421
     },
     {
       "filename": "docs__en__api__beta__environments.md",
@@ -53022,7 +53294,7 @@
         "sandbox": 18,
         "about": 17
       },
-      "word_count": 9651
+      "word_count": 9679
     },
     {
       "filename": "docs__en__api__beta__environments__archive.md",
@@ -53108,7 +53380,7 @@
         "used": 1,
         "create": 1
       },
-      "word_count": 642
+      "word_count": 644
     },
     {
       "filename": "docs__en__api__beta__environments__create.md",
@@ -53194,7 +53466,7 @@
         "human": 2,
         "readable": 2
       },
-      "word_count": 1041
+      "word_count": 1043
     },
     {
       "filename": "docs__en__api__beta__environments__delete.md",
@@ -53278,7 +53550,7 @@
         "default": 1,
         "identifier": 1
       },
-      "word_count": 281
+      "word_count": 283
     },
     {
       "filename": "docs__en__api__beta__environments__list.md",
@@ -53364,7 +53636,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 709
+      "word_count": 711
     },
     {
       "filename": "docs__en__api__beta__environments__retrieve.md",
@@ -53450,7 +53722,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 631
+      "word_count": 633
     },
     {
       "filename": "docs__en__api__beta__environments__update.md",
@@ -53540,7 +53812,7 @@
         "example": 2,
         "credential": 2
       },
-      "word_count": 1034
+      "word_count": 1036
     },
     {
       "filename": "docs__en__api__beta__environments__work.md",
@@ -53850,7 +54122,7 @@
         "state": 10,
         "claude": 9
       },
-      "word_count": 4940
+      "word_count": 4956
     },
     {
       "filename": "docs__en__api__beta__environments__work__ack.md",
@@ -53936,7 +54208,7 @@
         "invoke": 1,
         "directly": 1
       },
-      "word_count": 526
+      "word_count": 528
     },
     {
       "filename": "docs__en__api__beta__environments__work__heartbeat.md",
@@ -54026,7 +54298,7 @@
         "maintain": 1,
         "path": 1
       },
-      "word_count": 387
+      "word_count": 389
     },
     {
       "filename": "docs__en__api__beta__environments__work__list.md",
@@ -54116,7 +54388,7 @@
         "reference": 1,
         "need": 1
       },
-      "word_count": 541
+      "word_count": 543
     },
     {
       "filename": "docs__en__api__beta__environments__work__poll.md",
@@ -54206,7 +54478,7 @@
         "includ": 1,
         "reference": 1
       },
-      "word_count": 587
+      "word_count": 589
     },
     {
       "filename": "docs__en__api__beta__environments__work__retrieve.md",
@@ -54292,7 +54564,7 @@
         "built": 1,
         "sdk": 1
       },
-      "word_count": 567
+      "word_count": 569
     },
     {
       "filename": "docs__en__api__beta__environments__work__stats.md",
@@ -54378,7 +54650,7 @@
         "omit": 1,
         "must": 1
       },
-      "word_count": 373
+      "word_count": 375
     },
     {
       "filename": "docs__en__api__beta__environments__work__stop.md",
@@ -54468,7 +54740,7 @@
         "automatically": 1,
         "pre": 1
       },
-      "word_count": 590
+      "word_count": 592
     },
     {
       "filename": "docs__en__api__beta__environments__work__update.md",
@@ -54558,7 +54830,7 @@
         "call": 1,
         "automatically": 1
       },
-      "word_count": 609
+      "word_count": 611
     },
     {
       "filename": "docs__en__api__beta__files.md",
@@ -54752,7 +55024,7 @@
         "need": 5,
         "act": 5
       },
-      "word_count": 2296
+      "word_count": 2306
     },
     {
       "filename": "docs__en__api__beta__files__delete.md",
@@ -54836,7 +55108,7 @@
         "default": 1,
         "response": 1
       },
-      "word_count": 277
+      "word_count": 279
     },
     {
       "filename": "docs__en__api__beta__files__download.md",
@@ -54905,7 +55177,7 @@
         "must": 1,
         "match": 1
       },
-      "word_count": 234
+      "word_count": 236
     },
     {
       "filename": "docs__en__api__beta__files__list.md",
@@ -54991,7 +55263,7 @@
         "com": 1,
         "doc": 1
       },
-      "word_count": 600
+      "word_count": 602
     },
     {
       "filename": "docs__en__api__beta__files__retrieve_metadata.md",
@@ -55077,7 +55349,7 @@
         "request": 1,
         "only": 1
       },
-      "word_count": 449
+      "word_count": 451
     },
     {
       "filename": "docs__en__api__beta__files__upload.md",
@@ -55163,7 +55435,7 @@
         "history": 1,
         "here": 1
       },
-      "word_count": 517
+      "word_count": 519
     },
     {
       "filename": "docs__en__api__beta__memory_stores.md",
@@ -55625,7 +55897,7 @@
         "identifier": 19,
         "alway": 19
       },
-      "word_count": 10278
+      "word_count": 10306
     },
     {
       "filename": "docs__en__api__beta__memory_stores__archive.md",
@@ -55711,7 +55983,7 @@
         "specify": 1,
         "version": 1
       },
-      "word_count": 515
+      "word_count": 517
     },
     {
       "filename": "docs__en__api__beta__memory_stores__create.md",
@@ -55797,7 +56069,7 @@
         "own": 2,
         "bookkeep": 2
       },
-      "word_count": 610
+      "word_count": 612
     },
     {
       "filename": "docs__en__api__beta__memory_stores__delete.md",
@@ -55883,7 +56155,7 @@
         "retrievable": 1,
         "response": 1
       },
-      "word_count": 300
+      "word_count": 302
     },
     {
       "filename": "docs__en__api__beta__memory_stores__list.md",
@@ -55969,7 +56241,7 @@
         "url": 1,
         "http": 1
       },
-      "word_count": 626
+      "word_count": 628
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories.md",
@@ -56231,7 +56503,7 @@
         "diff": 11,
         "without": 11
       },
-      "word_count": 5529
+      "word_count": 5539
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__create.md",
@@ -56325,7 +56597,7 @@
         "start": 2,
         "contain": 2
       },
-      "word_count": 773
+      "word_count": 775
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__delete.md",
@@ -56415,7 +56687,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 365
+      "word_count": 367
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__list.md",
@@ -56505,7 +56777,7 @@
         "count": 2,
         "toward": 2
       },
-      "word_count": 947
+      "word_count": 949
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__retrieve.md",
@@ -56595,7 +56867,7 @@
         "head": 2,
         "within": 2
       },
-      "word_count": 682
+      "word_count": 684
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__update.md",
@@ -56689,7 +56961,7 @@
         "request": 2,
         "example": 2
       },
-      "word_count": 878
+      "word_count": 880
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions.md",
@@ -56867,7 +57139,7 @@
         "belong": 10,
         "nam": 10
       },
-      "word_count": 4422
+      "word_count": 4428
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__list.md",
@@ -56957,7 +57229,7 @@
         "header": 3,
         "request": 3
       },
-      "word_count": 1247
+      "word_count": 1249
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__redact.md",
@@ -57043,7 +57315,7 @@
         "creat": 2,
         "content": 2
       },
-      "word_count": 961
+      "word_count": 963
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__retrieve.md",
@@ -57133,7 +57405,7 @@
         "field": 2,
         "remain": 2
       },
-      "word_count": 1055
+      "word_count": 1057
     },
     {
       "filename": "docs__en__api__beta__memory_stores__retrieve.md",
@@ -57219,7 +57491,7 @@
         "request": 1,
         "need": 1
       },
-      "word_count": 502
+      "word_count": 504
     },
     {
       "filename": "docs__en__api__beta__memory_stores__update.md",
@@ -57309,7 +57581,7 @@
         "http": 1,
         "platform": 1
       },
-      "word_count": 625
+      "word_count": 627
     },
     {
       "filename": "docs__en__api__beta__messages.md",
@@ -59311,7 +59583,7 @@
         "used": 713,
         "pattern": 633
       },
-      "word_count": 319976
+      "word_count": 319992
     },
     {
       "filename": "docs__en__api__beta__messages__batches.md",
@@ -59557,7 +59829,7 @@
         "nam": 184,
         "entry": 178
       },
-      "word_count": 79114
+      "word_count": 79126
     },
     {
       "filename": "docs__en__api__beta__messages__batches__cancel.md",
@@ -59643,7 +59915,7 @@
         "expir": 2,
         "statu": 2
       },
-      "word_count": 782
+      "word_count": 784
     },
     {
       "filename": "docs__en__api__beta__messages__batches__create.md",
@@ -59729,7 +60001,7 @@
         "minlength": 34,
         "token": 34
       },
-      "word_count": 16794
+      "word_count": 16796
     },
     {
       "filename": "docs__en__api__beta__messages__batches__delete.md",
@@ -59815,7 +60087,7 @@
         "specific": 1,
         "omit": 1
       },
-      "word_count": 321
+      "word_count": 323
     },
     {
       "filename": "docs__en__api__beta__messages__batches__list.md",
@@ -59901,7 +60173,7 @@
         "alway": 2,
         "cancellation": 2
       },
-      "word_count": 860
+      "word_count": 862
     },
     {
       "filename": "docs__en__api__beta__messages__batches__results.md",
@@ -59983,7 +60255,7 @@
         "text": 30,
         "output": 29
       },
-      "word_count": 15025
+      "word_count": 15027
     },
     {
       "filename": "docs__en__api__beta__messages__batches__retrieve.md",
@@ -60069,7 +60341,7 @@
         "title": 1,
         "http": 1
       },
-      "word_count": 742
+      "word_count": 744
     },
     {
       "filename": "docs__en__api__beta__messages__count_tokens.md",
@@ -60155,7 +60427,7 @@
         "via": 32,
         "minlength": 30
       },
-      "word_count": 15035
+      "word_count": 15037
     },
     {
       "filename": "docs__en__api__beta__messages__create.md",
@@ -60241,7 +60513,7 @@
         "nam": 73,
         "entry": 68
       },
-      "word_count": 32270
+      "word_count": 32272
     },
     {
       "filename": "docs__en__api__beta__models.md",
@@ -60399,7 +60671,7 @@
         "str": 9,
         "represent": 9
       },
-      "word_count": 4739
+      "word_count": 4743
     },
     {
       "filename": "docs__en__api__beta__models__list.md",
@@ -60485,7 +60757,7 @@
         "beta": 2,
         "get": 2
       },
-      "word_count": 1486
+      "word_count": 1488
     },
     {
       "filename": "docs__en__api__beta__models__retrieve.md",
@@ -60571,7 +60843,7 @@
         "optional": 2,
         "credential": 2
       },
-      "word_count": 1291
+      "word_count": 1293
     },
     {
       "filename": "docs__en__api__beta__organization.md",
@@ -63755,61 +64027,293 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Organization \u203a Telemetry Destinations",
+          "level": 2
+        },
+        {
+          "text": "Create a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "List Telemetry Destinations",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Retrieve a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Delete a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Test a Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Organization \u203a Telemetry Destinations \u203a Workspaces",
+          "level": 2
+        },
+        {
+          "text": "List Telemetry Destination Workspaces",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Add a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Remove a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "organization": 689,
+        "organization": 727,
+        "api": 562,
         "key": 518,
+        "default": 495,
         "claude": 489,
-        "default": 483,
-        "api": 481,
-        "version": 453,
-        "user": 425,
-        "workspace": 409,
+        "workspace": 487,
+        "version": 462,
+        "user": 426,
         "plugin": 407,
+        "date": 375,
         "group": 371,
-        "date": 357,
-        "null": 349,
-        "return": 333,
+        "null": 362,
+        "return": 356,
+        "time": 342,
         "member": 332,
-        "time": 305,
         "day": 293,
+        "format": 290,
+        "only": 286,
         "account": 271,
-        "format": 264,
-        "only": 259,
-        "request": 252,
-        "per": 250,
+        "header": 270,
+        "request": 270,
+        "per": 261,
+        "one": 252,
+        "response": 250,
         "row": 241,
-        "response": 233,
-        "one": 216,
-        "header": 215,
+        "destination": 229,
+        "list": 227,
+        "read": 221,
+        "name": 218,
+        "number": 215,
+        "token": 214,
         "usage": 213,
-        "read": 212,
-        "name": 210,
         "service": 210,
         "rbac": 210,
-        "number": 209,
-        "token": 208,
-        "scope": 203,
+        "scope": 206,
+        "example": 205,
+        "parameter": 201,
+        "value": 197,
         "tagg": 193,
+        "limit": 192,
         "rule": 191,
-        "parameter": 190,
-        "limit": 190,
-        "example": 189,
-        "alway": 181,
-        "value": 173,
+        "alway": 189,
+        "same": 163,
         "activity": 160,
-        "own": 149,
-        "count": 149,
-        "issuer": 149,
-        "creat": 144,
-        "page": 143,
-        "cowork": 138,
-        "type": 136,
-        "list": 133,
-        "spend": 133
+        "count": 157,
+        "creat": 156,
+        "set": 156,
+        "page": 154,
+        "endpoint": 151,
+        "own": 149
       },
-      "word_count": 84297
+      "word_count": 93052
     },
     {
       "filename": "docs__en__api__beta__organization__analytics.md",
@@ -67348,7 +67852,7 @@
         "includ": 2,
         "empty": 2
       },
-      "word_count": 1097
+      "word_count": 1099
     },
     {
       "filename": "docs__en__api__beta__organization__cost_report__retrieve.md",
@@ -67434,7 +67938,7 @@
         "platform": 1,
         "com": 1
       },
-      "word_count": 718
+      "word_count": 720
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys.md",
@@ -68600,7 +69104,7 @@
         "return": 24,
         "endpoint": 24
       },
-      "word_count": 11211
+      "word_count": 11237
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers.md",
@@ -68814,7 +69318,7 @@
         "minlength": 13,
         "bearer": 13
       },
-      "word_count": 5203
+      "word_count": 5213
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
@@ -68900,7 +69404,7 @@
         "bearer": 2,
         "match": 2
       },
-      "word_count": 795
+      "word_count": 797
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
@@ -68986,7 +69490,7 @@
         "exchange": 3,
         "via": 3
       },
-      "word_count": 1089
+      "word_count": 1091
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
@@ -69072,7 +69576,7 @@
         "without": 2,
         "creat": 2
       },
-      "word_count": 789
+      "word_count": 791
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
@@ -69158,7 +69662,7 @@
         "creat": 2,
         "via": 2
       },
-      "word_count": 756
+      "word_count": 758
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
@@ -69248,7 +69752,7 @@
         "only": 3,
         "match": 3
       },
-      "word_count": 1118
+      "word_count": 1120
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
@@ -69542,7 +70046,7 @@
         "one": 17,
         "whose": 17
       },
-      "word_count": 7598
+      "word_count": 7614
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
@@ -69628,7 +70132,7 @@
         "return": 2,
         "before": 2
       },
-      "word_count": 938
+      "word_count": 940
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
@@ -69714,7 +70218,7 @@
         "non": 4,
         "name": 4
       },
-      "word_count": 1418
+      "word_count": 1420
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
@@ -69800,7 +70304,7 @@
         "header": 2,
         "want": 2
       },
-      "word_count": 872
+      "word_count": 874
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
@@ -69886,7 +70390,7 @@
         "anthropic": 2,
         "condition": 2
       },
-      "word_count": 882
+      "word_count": 884
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
@@ -69976,7 +70480,7 @@
         "ignor": 4,
         "second": 4
       },
-      "word_count": 1467
+      "word_count": 1469
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
@@ -70130,7 +70634,7 @@
         "check": 2,
         "reject": 2
       },
-      "word_count": 1193
+      "word_count": 1199
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
@@ -70220,7 +70724,7 @@
         "belong": 1,
         "membership": 1
       },
-      "word_count": 431
+      "word_count": 433
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
@@ -70310,7 +70814,7 @@
         "effect": 1,
         "alway": 1
       },
-      "word_count": 430
+      "word_count": 432
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
@@ -70396,7 +70900,7 @@
         "session": 1,
         "path": 1
       },
-      "word_count": 311
+      "word_count": 313
     },
     {
       "filename": "docs__en__api__beta__organization__invites.md",
@@ -70521,7 +71025,7 @@
       "terms": {
         "invite": 50,
         "organization": 19,
-        "invit": 17,
+        "invit": 18,
         "user": 17,
         "accept": 16,
         "format": 14,
@@ -70540,6 +71044,7 @@
         "return": 8,
         "default": 8,
         "enterprise": 7,
+        "role": 6,
         "assign": 6,
         "rbac": 6,
         "group": 6,
@@ -70547,7 +71052,6 @@
         "page": 6,
         "seat": 5,
         "parameter": 5,
-        "role": 5,
         "valu": 5,
         "ids": 5,
         "statu": 5,
@@ -70570,7 +71074,7 @@
         "filter": 4,
         "delete": 4
       },
-      "word_count": 1441
+      "word_count": 1454
     },
     {
       "filename": "docs__en__api__beta__organization__invites__create.md",
@@ -70610,13 +71114,14 @@
         "user": 7,
         "accept": 7,
         "claude": 5,
+        "invit": 5,
         "seat": 5,
         "api": 4,
-        "invit": 4,
         "email": 4,
         "format": 4,
         "create": 3,
         "version": 3,
+        "role": 3,
         "assign": 3,
         "enterprise": 3,
         "rbac": 3,
@@ -70630,8 +71135,9 @@
         "purchas": 2,
         "tier": 2,
         "parameter": 2,
-        "role": 2,
         "type": 2,
+        "requir": 2,
+        "scope": 2,
         "ids": 2,
         "title": 1,
         "url": 1,
@@ -70652,11 +71158,9 @@
         "lowest": 1,
         "availability": 1,
         "free": 1,
-        "request": 1,
-        "fail": 1,
-        "error": 1
+        "request": 1
       },
-      "word_count": 416
+      "word_count": 429
     },
     {
       "filename": "docs__en__api__beta__organization__invites__delete.md",
@@ -71206,7 +71710,7 @@
         "read": 9,
         "about": 9
       },
-      "word_count": 3973
+      "word_count": 3991
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__archive.md",
@@ -71292,7 +71796,7 @@
         "archival": 1,
         "irreversible": 1
       },
-      "word_count": 448
+      "word_count": 450
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__list.md",
@@ -71378,7 +71882,7 @@
         "new": 1,
         "should": 1
       },
-      "word_count": 534
+      "word_count": 536
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__retrieve.md",
@@ -71464,7 +71968,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 414
+      "word_count": 416
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__reveal_token.md",
@@ -71550,7 +72054,7 @@
         "same": 1,
         "until": 1
       },
-      "word_count": 341
+      "word_count": 343
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__rotate_token.md",
@@ -71640,7 +72144,7 @@
         "restart": 1,
         "captur": 1
       },
-      "word_count": 356
+      "word_count": 358
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates.md",
@@ -71818,7 +72322,7 @@
         "continue": 4,
         "work": 4
       },
-      "word_count": 1837
+      "word_count": 1845
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__archive.md",
@@ -71904,7 +72408,7 @@
         "trust": 1,
         "record": 1
       },
-      "word_count": 421
+      "word_count": 423
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__create.md",
@@ -71994,7 +72498,7 @@
         "new": 1,
         "should": 1
       },
-      "word_count": 457
+      "word_count": 459
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__list.md",
@@ -72084,7 +72588,7 @@
         "exist": 1,
         "continue": 1
       },
-      "word_count": 472
+      "word_count": 474
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__retrieve.md",
@@ -72170,7 +72674,7 @@
         "parameter": 1,
         "want": 1
       },
-      "word_count": 392
+      "word_count": 394
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces.md",
@@ -72388,7 +72892,7 @@
         "creat": 10,
         "must": 10
       },
-      "word_count": 5142
+      "word_count": 5152
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__list.md",
@@ -72474,7 +72978,7 @@
         "here": 2,
         "token": 2
       },
-      "word_count": 970
+      "word_count": 972
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__retrieve.md",
@@ -72564,7 +73068,7 @@
         "sett": 2,
         "most": 2
       },
-      "word_count": 777
+      "word_count": 779
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__update.md",
@@ -72654,7 +73158,7 @@
         "outcome": 2,
         "read": 2
       },
-      "word_count": 773
+      "word_count": 775
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_archive.md",
@@ -72740,7 +73244,7 @@
         "some": 2,
         "response": 2
       },
-      "word_count": 850
+      "word_count": 852
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_repository.md",
@@ -72826,7 +73330,7 @@
         "form": 2,
         "skip": 2
       },
-      "word_count": 902
+      "word_count": 904
     },
     {
       "filename": "docs__en__api__beta__organization__plugins.md",
@@ -73292,7 +73796,7 @@
         "format": 22,
         "date": 22
       },
-      "word_count": 12304
+      "word_count": 12330
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__create.md",
@@ -73378,7 +73882,7 @@
         "first": 2,
         "contain": 2
       },
-      "word_count": 1355
+      "word_count": 1357
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__delete.md",
@@ -73464,7 +73968,7 @@
         "change": 1,
         "any": 1
       },
-      "word_count": 375
+      "word_count": 377
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings.md",
@@ -73622,7 +74126,7 @@
         "chang": 4,
         "same": 4
       },
-      "word_count": 2166
+      "word_count": 2172
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__list.md",
@@ -73712,7 +74216,7 @@
         "url": 1,
         "http": 1
       },
-      "word_count": 676
+      "word_count": 678
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__remove.md",
@@ -73798,7 +74302,7 @@
         "other": 1,
         "inherit": 1
       },
-      "word_count": 554
+      "word_count": 556
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__set.md",
@@ -73888,7 +74392,7 @@
         "whole": 1,
         "already": 1
       },
-      "word_count": 650
+      "word_count": 652
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__list.md",
@@ -73974,7 +74478,7 @@
         "cli": 3,
         "run": 3
       },
-      "word_count": 1365
+      "word_count": 1367
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__retrieve.md",
@@ -74064,7 +74568,7 @@
         "child": 2,
         "instead": 2
       },
-      "word_count": 1111
+      "word_count": 1113
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__shares.md",
@@ -74166,7 +74670,7 @@
         "whose": 2,
         "role": 2
       },
-      "word_count": 817
+      "word_count": 819
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__shares__list.md",
@@ -74256,7 +74760,7 @@
         "most": 1,
         "recently": 1
       },
-      "word_count": 654
+      "word_count": 656
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__update.md",
@@ -74346,7 +74850,7 @@
         "roll": 2,
         "back": 2
       },
-      "word_count": 1244
+      "word_count": 1246
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions.md",
@@ -74524,7 +75028,7 @@
         "activity": 6,
         "feed": 6
       },
-      "word_count": 3685
+      "word_count": 3693
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__create.md",
@@ -74614,7 +75118,7 @@
         "file": 2,
         "nam": 2
       },
-      "word_count": 997
+      "word_count": 999
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__download.md",
@@ -74696,7 +75200,7 @@
         "doc": 1,
         "get": 1
       },
-      "word_count": 504
+      "word_count": 506
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__list.md",
@@ -74786,7 +75290,7 @@
         "upload": 2,
         "user": 2
       },
-      "word_count": 921
+      "word_count": 923
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__retrieve.md",
@@ -74876,7 +75380,7 @@
         "example": 2,
         "suppli": 2
       },
-      "word_count": 858
+      "word_count": 860
     },
     {
       "filename": "docs__en__api__beta__organization__rate_limits.md",
@@ -77117,7 +77621,7 @@
         "accept": 8,
         "manage": 8
       },
-      "word_count": 4124
+      "word_count": 4140
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
@@ -77203,7 +77707,7 @@
         "wif": 1,
         "idempotent": 1
       },
-      "word_count": 491
+      "word_count": 493
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
@@ -77289,7 +77793,7 @@
         "updat": 2,
         "title": 1
       },
-      "word_count": 557
+      "word_count": 559
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
@@ -77375,7 +77879,7 @@
         "accept": 1,
         "see": 1
       },
-      "word_count": 503
+      "word_count": 505
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
@@ -77461,7 +77965,7 @@
         "about": 1,
         "our": 1
       },
-      "word_count": 450
+      "word_count": 452
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
@@ -77551,7 +78055,7 @@
         "com": 1,
         "doc": 1
       },
-      "word_count": 546
+      "word_count": 548
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
@@ -77705,7 +78209,7 @@
         "read": 3,
         "about": 3
       },
-      "word_count": 1357
+      "word_count": 1363
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
@@ -77795,7 +78299,7 @@
         "address": 1,
         "side": 1
       },
-      "word_count": 446
+      "word_count": 448
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
@@ -77885,7 +78389,7 @@
         "identity": 1,
         "federation": 1
       },
-      "word_count": 535
+      "word_count": 537
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
@@ -77971,7 +78475,7 @@
         "already": 1,
         "remov": 1
       },
-      "word_count": 347
+      "word_count": 349
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits.md",
@@ -78321,7 +78825,7 @@
         "format": 18,
         "time": 18
       },
-      "word_count": 7290
+      "word_count": 7294
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__delete.md",
@@ -79207,7 +79711,7 @@
         "query": 1,
         "parameter": 1
       },
-      "word_count": 649
+      "word_count": 651
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__retrieve.md",
@@ -79379,7 +79883,1347 @@
         "bill": 2,
         "currency": 2
       },
-      "word_count": 817
+      "word_count": 819
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations",
+      "title": "Telemetry Destinations (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations",
+      "headings": [
+        {
+          "text": "Telemetry Destinations",
+          "level": 1
+        },
+        {
+          "text": "Create a Telemetry Destination",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "List Telemetry Destinations",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Retrieve a Telemetry Destination",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Update a Telemetry Destination",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Delete a Telemetry Destination",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Test a Telemetry Destination",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Domain types",
+          "level": 2
+        },
+        {
+          "text": "Beta Deleted Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Content Mode",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Delivery Health",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Disabled Reason",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Disabled Reason Caller",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Disabled Reason Invalid Address",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Disabled Reason Redirect",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Disabled Reason Sustained Failure",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State Disabled",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State Disabled Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State Enabled",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State Enabled Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination State Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Test Failure",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Test Response",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Test Result",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Test Success",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Traces",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Traces Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces All",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces All Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces Exclude",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces Exclude Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces Include",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces Include Params",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspaces Params",
+          "level": 3
+        },
+        {
+          "text": "Telemetry Destinations \u203a Workspaces",
+          "level": 2
+        },
+        {
+          "text": "List Telemetry Destination Workspaces",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Add a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Remove a Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        }
+      ],
+      "terms": {
+        "destination": 392,
+        "list": 158,
+        "api": 146,
+        "workspace": 122,
+        "delivery": 106,
+        "doesn": 102,
+        "workspac": 97,
+        "span": 93,
+        "cover": 89,
+        "disabl": 85,
+        "addres": 81,
+        "telemetry": 75,
+        "fail": 72,
+        "most": 66,
+        "header": 65,
+        "contain": 65,
+        "organization": 59,
+        "one": 59,
+        "change": 59,
+        "update": 58,
+        "same": 54,
+        "set": 51,
+        "export": 50,
+        "time": 50,
+        "such": 46,
+        "trac": 46,
+        "add": 45,
+        "every": 44,
+        "only": 41,
+        "endpoint": 40,
+        "beta": 39,
+        "keep": 39,
+        "metadata": 39,
+        "recent": 37,
+        "create": 36,
+        "later": 36,
+        "answer": 36,
+        "chang": 35,
+        "value": 35,
+        "format": 35,
+        "content": 33,
+        "deliver": 33,
+        "once": 32,
+        "receiv": 32,
+        "failure": 32,
+        "deliveri": 32,
+        "statu": 31,
+        "because": 29,
+        "invalid": 28,
+        "leave": 27
+      },
+      "word_count": 13255
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__create.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/create",
+      "title": "Create a Telemetry Destination (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/create",
+      "headings": [
+        {
+          "text": "Create a Telemetry Destination",
+          "level": 1
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 52,
+        "list": 29,
+        "api": 25,
+        "workspace": 19,
+        "delivery": 17,
+        "most": 16,
+        "cover": 16,
+        "doesn": 16,
+        "organization": 14,
+        "workspac": 14,
+        "contain": 13,
+        "span": 13,
+        "create": 11,
+        "header": 11,
+        "trac": 11,
+        "change": 11,
+        "addres": 10,
+        "every": 10,
+        "update": 10,
+        "same": 10,
+        "one": 9,
+        "export": 9,
+        "add": 9,
+        "only": 9,
+        "fail": 9,
+        "url": 8,
+        "disabl": 8,
+        "such": 8,
+        "set": 8,
+        "time": 8,
+        "endpoint": 7,
+        "leave": 7,
+        "keep": 7,
+        "metadata": 7,
+        "start": 6,
+        "path": 6,
+        "empty": 6,
+        "chang": 6,
+        "once": 6,
+        "nam": 6,
+        "receiv": 6,
+        "content": 6,
+        "format": 6,
+        "telemetry": 5,
+        "post": 5,
+        "register": 5,
+        "collector": 5,
+        "example": 5,
+        "character": 5,
+        "append": 5
+      },
+      "word_count": 2137
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__delete.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/delete",
+      "title": "Delete a Telemetry Destination (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/delete",
+      "headings": [
+        {
+          "text": "Delete a Telemetry Destination",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 11,
+        "delete": 5,
+        "telemetry": 3,
+        "delet": 3,
+        "api": 2,
+        "beta": 2,
+        "list": 2,
+        "span": 2,
+        "cover": 2,
+        "header": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "claude": 1,
+        "com": 1,
+        "doc": 1,
+        "organization": 1,
+        "workspace": 1,
+        "stop": 1,
+        "send": 1,
+        "workspac": 1,
+        "still": 1,
+        "other": 1,
+        "read": 1,
+        "restor": 1,
+        "see": 1,
+        "opentelemetry": 1,
+        "export": 1,
+        "guide": 1,
+        "learn": 1,
+        "about": 1,
+        "manag": 1,
+        "path": 1,
+        "parameter": 1,
+        "optional": 1,
+        "specify": 1,
+        "version": 1,
+        "want": 1,
+        "return": 1,
+        "confirmation": 1,
+        "example": 1,
+        "response": 1
+      },
+      "word_count": 261
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__list.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/list",
+      "title": "List Telemetry Destinations (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/list",
+      "headings": [
+        {
+          "text": "List Telemetry Destinations",
+          "level": 1
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 39,
+        "api": 15,
+        "delivery": 14,
+        "list": 12,
+        "doesn": 11,
+        "cover": 9,
+        "workspac": 9,
+        "fail": 9,
+        "addres": 9,
+        "organization": 8,
+        "time": 8,
+        "most": 7,
+        "workspace": 7,
+        "span": 7,
+        "disabl": 7,
+        "only": 6,
+        "format": 6,
+        "one": 6,
+        "header": 6,
+        "contain": 6,
+        "telemetry": 5,
+        "export": 5,
+        "page": 5,
+        "recent": 5,
+        "later": 5,
+        "such": 5,
+        "first": 4,
+        "return": 4,
+        "date": 4,
+        "endpoint": 4,
+        "value": 4,
+        "change": 4,
+        "failure": 4,
+        "chang": 4,
+        "set": 4,
+        "receiv": 4,
+        "metadata": 4,
+        "trac": 4,
+        "content": 4,
+        "url": 3,
+        "response": 3,
+        "isn": 3,
+        "even": 3,
+        "whose": 3,
+        "creat": 3,
+        "message": 3,
+        "never": 3,
+        "successful": 3,
+        "null": 3,
+        "register": 3
+      },
+      "word_count": 1314
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__retrieve.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/retrieve",
+      "title": "Retrieve a Telemetry Destination (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/retrieve",
+      "headings": [
+        {
+          "text": "Retrieve a Telemetry Destination",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 37,
+        "api": 16,
+        "delivery": 16,
+        "span": 10,
+        "fail": 9,
+        "doesn": 9,
+        "addres": 9,
+        "disabl": 8,
+        "cover": 8,
+        "time": 8,
+        "organization": 7,
+        "most": 7,
+        "header": 7,
+        "contain": 7,
+        "workspac": 7,
+        "recent": 6,
+        "export": 6,
+        "workspace": 6,
+        "list": 6,
+        "telemetry": 5,
+        "endpoint": 5,
+        "format": 5,
+        "later": 5,
+        "such": 5,
+        "deliver": 4,
+        "every": 4,
+        "date": 4,
+        "value": 4,
+        "change": 4,
+        "failure": 4,
+        "chang": 4,
+        "set": 4,
+        "only": 4,
+        "receiv": 4,
+        "metadata": 4,
+        "trac": 4,
+        "content": 4,
+        "retrieve": 3,
+        "url": 3,
+        "http": 3,
+        "opentelemetry": 3,
+        "creat": 3,
+        "message": 3,
+        "never": 3,
+        "successful": 3,
+        "register": 3,
+        "whether": 3,
+        "deliveri": 3,
+        "update": 3,
+        "because": 3
+      },
+      "word_count": 1222
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__test.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/test",
+      "title": "Test a Telemetry Destination (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/test",
+      "headings": [
+        {
+          "text": "Test a Telemetry Destination",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 16,
+        "test": 12,
+        "span": 5,
+        "answer": 5,
+        "statu": 5,
+        "one": 4,
+        "header": 4,
+        "telemetry": 3,
+        "response": 3,
+        "http": 2,
+        "com": 2,
+        "beta": 2,
+        "type": 2,
+        "reason": 2,
+        "return": 2,
+        "deliver": 2,
+        "title": 1,
+        "url": 1,
+        "platform": 1,
+        "claude": 1,
+        "doc": 1,
+        "api": 1,
+        "organization": 1,
+        "post": 1,
+        "send": 1,
+        "nam": 1,
+        "register": 1,
+        "once": 1,
+        "without": 1,
+        "retri": 1,
+        "report": 1,
+        "whether": 1,
+        "configuration": 1,
+        "change": 1,
+        "disabl": 1,
+        "too": 1,
+        "wait": 1,
+        "second": 1,
+        "between": 1,
+        "request": 1,
+        "sooner": 1,
+        "path": 1,
+        "parameter": 1,
+        "start": 1,
+        "optional": 1,
+        "specify": 1,
+        "version": 1,
+        "want": 1,
+        "result": 1,
+        "sent": 1
+      },
+      "word_count": 403
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__update.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/update",
+      "title": "Update a Telemetry Destination (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/update",
+      "headings": [
+        {
+          "text": "Update a Telemetry Destination",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 59,
+        "list": 30,
+        "api": 25,
+        "workspace": 20,
+        "change": 19,
+        "header": 19,
+        "update": 18,
+        "doesn": 18,
+        "workspac": 16,
+        "cover": 16,
+        "same": 15,
+        "set": 15,
+        "delivery": 15,
+        "span": 14,
+        "create": 12,
+        "contain": 12,
+        "organization": 11,
+        "one": 11,
+        "keep": 11,
+        "trac": 11,
+        "every": 10,
+        "value": 10,
+        "most": 10,
+        "endpoint": 9,
+        "request": 9,
+        "chang": 9,
+        "export": 9,
+        "disabl": 9,
+        "time": 9,
+        "fail": 9,
+        "addres": 9,
+        "telemetry": 8,
+        "url": 8,
+        "only": 8,
+        "such": 8,
+        "add": 8,
+        "new": 7,
+        "metadata": 7,
+        "register": 6,
+        "receiv": 6,
+        "deliveri": 6,
+        "after": 6,
+        "later": 6,
+        "content": 6,
+        "format": 6,
+        "leave": 6,
+        "empty": 6,
+        "once": 6,
+        "post": 5,
+        "setting": 5
+      },
+      "word_count": 2318
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/workspaces",
+      "title": "Workspaces (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/workspaces",
+      "headings": [
+        {
+          "text": "Workspaces",
+          "level": 1
+        },
+        {
+          "text": "List Telemetry Destination Workspaces",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Add a Telemetry Destination Workspace",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Remove a Telemetry Destination Workspace",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Domain types",
+          "level": 2
+        },
+        {
+          "text": "Beta Deleted Telemetry Destination Workspace",
+          "level": 3
+        },
+        {
+          "text": "Beta Telemetry Destination Workspace",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "workspace": 35,
+        "destination": 34,
+        "list": 20,
+        "telemetry": 13,
+        "workspac": 11,
+        "return": 8,
+        "add": 8,
+        "under": 8,
+        "beta": 6,
+        "page": 6,
+        "header": 6,
+        "time": 6,
+        "doesn": 5,
+        "cover": 5,
+        "remov": 5,
+        "api": 4,
+        "entry": 4,
+        "parameter": 4,
+        "format": 4,
+        "response": 4,
+        "one": 4,
+        "first": 3,
+        "whose": 3,
+        "archiv": 3,
+        "see": 3,
+        "opentelemetry": 3,
+        "export": 3,
+        "guide": 3,
+        "learn": 3,
+        "about": 3,
+        "choos": 3,
+        "path": 3,
+        "optional": 3,
+        "specify": 3,
+        "version": 3,
+        "want": 3,
+        "date": 3,
+        "example": 3,
+        "remove": 3,
+        "get": 2,
+        "newest": 2,
+        "entri": 2,
+        "cursor": 2,
+        "span": 2,
+        "start": 2,
+        "going": 2,
+        "stop": 2,
+        "isn": 2,
+        "every": 2,
+        "except": 2
+      },
+      "word_count": 1130
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__add.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/workspaces/add",
+      "title": "Add a Telemetry Destination Workspace (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/workspaces/add",
+      "headings": [
+        {
+          "text": "Add a Telemetry Destination Workspace",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "workspace": 14,
+        "destination": 13,
+        "add": 8,
+        "list": 7,
+        "telemetry": 5,
+        "workspac": 4,
+        "under": 4,
+        "return": 3,
+        "cover": 3,
+        "api": 2,
+        "beta": 2,
+        "one": 2,
+        "entry": 2,
+        "doesn": 2,
+        "header": 2,
+        "time": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "claude": 1,
+        "com": 1,
+        "doc": 1,
+        "organization": 1,
+        "post": 1,
+        "span": 1,
+        "start": 1,
+        "going": 1,
+        "stop": 1,
+        "hold": 1,
+        "most": 1,
+        "already": 1,
+        "chang": 1,
+        "noth": 1,
+        "exist": 1,
+        "archiv": 1,
+        "isn": 1,
+        "yet": 1,
+        "whose": 1,
+        "change": 1,
+        "such": 1,
+        "update": 1,
+        "see": 1,
+        "opentelemetry": 1,
+        "export": 1,
+        "guide": 1,
+        "learn": 1,
+        "about": 1,
+        "choos": 1,
+        "path": 1
+      },
+      "word_count": 376
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__list.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/workspaces/list",
+      "title": "List Telemetry Destination Workspaces (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/workspaces/list",
+      "headings": [
+        {
+          "text": "List Telemetry Destination Workspaces",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "list": 8,
+        "destination": 8,
+        "workspac": 6,
+        "page": 6,
+        "telemetry": 4,
+        "workspace": 3,
+        "first": 3,
+        "beta": 2,
+        "get": 2,
+        "newest": 2,
+        "parameter": 2,
+        "entri": 2,
+        "return": 2,
+        "format": 2,
+        "cursor": 2,
+        "response": 2,
+        "header": 2,
+        "time": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "claude": 1,
+        "com": 1,
+        "doc": 1,
+        "api": 1,
+        "organization": 1,
+        "entry": 1,
+        "whose": 1,
+        "doesn": 1,
+        "empty": 1,
+        "includ": 1,
+        "archiv": 1,
+        "see": 1,
+        "opentelemetry": 1,
+        "export": 1,
+        "guide": 1,
+        "learn": 1,
+        "about": 1,
+        "choos": 1,
+        "path": 1,
+        "query": 1,
+        "number": 1,
+        "per": 1,
+        "between": 1,
+        "default": 1,
+        "int": 1,
+        "opaque": 1,
+        "previou": 1,
+        "leave": 1
+      },
+      "word_count": 343
+    },
+    {
+      "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__remove.md",
+      "id": "docs/en/api/beta/organization/telemetry_destinations/workspaces/remove",
+      "title": "Remove a Telemetry Destination Workspace (Beta)",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/workspaces/remove",
+      "headings": [
+        {
+          "text": "Remove a Telemetry Destination Workspace",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "destination": 10,
+        "workspace": 10,
+        "remove": 5,
+        "telemetry": 4,
+        "list": 4,
+        "api": 3,
+        "remov": 3,
+        "return": 3,
+        "beta": 2,
+        "workspac": 2,
+        "under": 2,
+        "header": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "claude": 1,
+        "com": 1,
+        "doc": 1,
+        "organization": 1,
+        "delete": 1,
+        "one": 1,
+        "span": 1,
+        "stop": 1,
+        "going": 1,
+        "start": 1,
+        "archiv": 1,
+        "too": 1,
+        "isn": 1,
+        "whose": 1,
+        "doesn": 1,
+        "see": 1,
+        "opentelemetry": 1,
+        "export": 1,
+        "guide": 1,
+        "learn": 1,
+        "about": 1,
+        "choos": 1,
+        "path": 1,
+        "parameter": 1,
+        "optional": 1,
+        "specify": 1,
+        "version": 1,
+        "want": 1,
+        "confirmation": 1,
+        "example": 1,
+        "response": 1
+      },
+      "word_count": 308
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report.md",
@@ -79505,7 +81349,7 @@
         "through": 6,
         "subscription": 6
       },
-      "word_count": 2724
+      "word_count": 2726
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report__retrieve_claude_code.md",
@@ -79677,7 +81521,7 @@
         "end": 2,
         "requir": 2
       },
-      "word_count": 1043
+      "word_count": 1045
     },
     {
       "filename": "docs__en__api__beta__organization__users.md",
@@ -79804,7 +81648,7 @@
         }
       ],
       "terms": {
-        "user": 49,
+        "user": 50,
         "organization": 20,
         "version": 12,
         "object": 10,
@@ -79813,11 +81657,11 @@
         "type": 8,
         "claude": 7,
         "return": 7,
+        "role": 7,
         "page": 6,
         "email": 6,
         "accept": 6,
         "alway": 6,
-        "role": 6,
         "parameter": 5,
         "format": 5,
         "indicat": 5,
@@ -79855,7 +81699,7 @@
         "depend": 2,
         "console": 2
       },
-      "word_count": 971
+      "word_count": 985
     },
     {
       "filename": "docs__en__api__beta__organization__users__list.md",
@@ -80126,12 +81970,12 @@
         }
       ],
       "terms": {
-        "user": 12,
+        "user": 13,
         "organization": 7,
         "update": 4,
         "api": 4,
+        "role": 4,
         "claude": 3,
-        "role": 3,
         "version": 3,
         "accept": 3,
         "parameter": 2,
@@ -80162,6 +82006,10 @@
         "assign": 1,
         "through": 1,
         "enterprise": 1,
+        "chang": 1,
+        "requir": 1,
+        "scope": 1,
+        "addition": 1,
         "return": 1,
         "object": 1,
         "alway": 1,
@@ -80171,13 +82019,9 @@
         "str": 1,
         "indicat": 1,
         "join": 1,
-        "format": 1,
-        "date": 1,
-        "time": 1,
-        "email": 1,
-        "name": 1
+        "format": 1
       },
-      "word_count": 237
+      "word_count": 251
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces.md",
@@ -80707,7 +82551,7 @@
         "group": 17,
         "read": 16
       },
-      "word_count": 8239
+      "word_count": 8251
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__archive.md",
@@ -80879,7 +82723,7 @@
         "appli": 2,
         "omit": 2
       },
-      "word_count": 990
+      "word_count": 992
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
@@ -82051,7 +83895,7 @@
         "exist": 5,
         "remov": 5
       },
-      "word_count": 2105
+      "word_count": 2115
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
@@ -82141,7 +83985,7 @@
         "manage": 1,
         "wif": 1
       },
-      "word_count": 472
+      "word_count": 474
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
@@ -82231,7 +84075,7 @@
         "manage": 1,
         "wif": 1
       },
-      "word_count": 452
+      "word_count": 454
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
@@ -82317,7 +84161,7 @@
         "against": 1,
         "persist": 1
       },
-      "word_count": 338
+      "word_count": 340
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
@@ -82403,7 +84247,7 @@
         "add": 1,
         "assign": 1
       },
-      "word_count": 401
+      "word_count": 403
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
@@ -82493,7 +84337,7 @@
         "replac": 1,
         "current": 1
       },
-      "word_count": 430
+      "word_count": 432
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
@@ -83276,30 +85120,30 @@
       "terms": {
         "tool": 2489,
         "call": 1530,
-        "agent": 1156,
-        "session": 1031,
+        "agent": 1217,
+        "session": 1095,
         "server": 899,
         "judg": 874,
         "user": 731,
         "high": 708,
         "event": 674,
+        "execution": 662,
         "confirmation": 647,
         "evaluat": 624,
         "content": 606,
         "format": 600,
-        "execution": 598,
         "model": 585,
         "risk": 584,
         "safe": 576,
         "thread": 542,
         "whether": 522,
         "result": 516,
+        "run": 467,
         "time": 465,
         "allow": 458,
         "input": 436,
         "each": 435,
         "url": 422,
-        "run": 406,
         "configuration": 399,
         "reach": 374,
         "fetch": 372,
@@ -83325,7 +85169,7 @@
         "far": 286,
         "error": 267
       },
-      "word_count": 120818
+      "word_count": 123120
     },
     {
       "filename": "docs__en__api__beta__sessions__archive.md",
@@ -83362,15 +85206,15 @@
       "terms": {
         "tool": 86,
         "call": 56,
-        "session": 44,
-        "agent": 43,
+        "session": 48,
+        "agent": 47,
         "judg": 33,
         "format": 30,
         "user": 28,
         "server": 28,
         "high": 27,
+        "execution": 26,
         "confirmation": 23,
-        "execution": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
@@ -83408,10 +85252,10 @@
         "store": 11,
         "intelligence": 10,
         "name": 10,
-        "null": 9,
-        "runn": 8
+        "creation": 9,
+        "principal": 9
       },
-      "word_count": 4228
+      "word_count": 4366
     },
     {
       "filename": "docs__en__api__beta__sessions__create.md",
@@ -83448,8 +85292,8 @@
       "terms": {
         "tool": 203,
         "call": 123,
-        "agent": 78,
-        "session": 70,
+        "agent": 82,
+        "session": 74,
         "judg": 66,
         "server": 61,
         "high": 56,
@@ -83463,13 +85307,13 @@
         "minlength": 41,
         "default": 40,
         "each": 38,
+        "execution": 37,
         "maxlength": 36,
         "url": 35,
         "configuration": 35,
         "content": 35,
         "format": 34,
         "fetch": 34,
-        "execution": 33,
         "approv": 31,
         "require": 31,
         "allow": 31,
@@ -83497,7 +85341,7 @@
         "intelligence": 20,
         "only": 17
       },
-      "word_count": 8614
+      "word_count": 8752
     },
     {
       "filename": "docs__en__api__beta__sessions__delete.md",
@@ -83573,7 +85417,7 @@
         "delet": 1,
         "response": 1
       },
-      "word_count": 248
+      "word_count": 250
     },
     {
       "filename": "docs__en__api__beta__sessions__events.md",
@@ -84125,10 +85969,10 @@
       ],
       "terms": {
         "event": 789,
-        "agent": 608,
+        "agent": 624,
         "tool": 580,
-        "session": 540,
-        "run": 509,
+        "session": 556,
+        "run": 525,
         "content": 508,
         "server": 416,
         "error": 386,
@@ -84151,8 +85995,8 @@
         "timestamp": 220,
         "data": 212,
         "input": 199,
+        "execution": 195,
         "user": 184,
-        "execution": 179,
         "base": 178,
         "should": 177,
         "judg": 170,
@@ -84162,10 +86006,10 @@
         "budget": 160,
         "permission": 153,
         "request": 145,
+        "return": 140,
         "policy": 139,
         "idle": 138,
         "high": 138,
-        "return": 132,
         "only": 132,
         "confirmation": 132,
         "allow": 132,
@@ -84175,7 +86019,7 @@
         "message": 124,
         "emitt": 124
       },
-      "word_count": 61658
+      "word_count": 62168
     },
     {
       "filename": "docs__en__api__beta__sessions__events__list.md",
@@ -84216,9 +86060,9 @@
       "terms": {
         "event": 131,
         "tool": 121,
-        "session": 97,
-        "agent": 86,
-        "run": 82,
+        "session": 101,
+        "agent": 90,
+        "run": 86,
         "server": 71,
         "format": 68,
         "call": 64,
@@ -84234,20 +86078,20 @@
         "unique": 43,
         "model": 43,
         "timestamp": 42,
+        "execution": 39,
         "input": 38,
         "judg": 37,
         "user": 36,
         "url": 35,
-        "execution": 35,
         "evaluat": 35,
         "text": 30,
         "high": 30,
+        "return": 29,
         "budget": 29,
         "confirmation": 28,
         "permission": 28,
         "should": 28,
         "turn": 28,
-        "return": 27,
         "policy": 26,
         "allow": 26,
         "whether": 25,
@@ -84260,12 +86104,12 @@
         "safe": 23,
         "name": 22,
         "int": 21,
+        "alway": 21,
         "reach": 21,
         "same": 21,
-        "only": 20,
-        "data": 20
+        "only": 20
       },
-      "word_count": 10386
+      "word_count": 10514
     },
     {
       "filename": "docs__en__api__beta__sessions__events__send.md",
@@ -84355,7 +86199,7 @@
         "context": 6,
         "correspond": 6
       },
-      "word_count": 2584
+      "word_count": 2586
     },
     {
       "filename": "docs__en__api__beta__sessions__events__stream.md",
@@ -84396,9 +86240,9 @@
       "terms": {
         "event": 159,
         "tool": 121,
-        "session": 97,
-        "agent": 94,
-        "run": 82,
+        "session": 101,
+        "agent": 98,
+        "run": 86,
         "server": 72,
         "content": 71,
         "call": 64,
@@ -84414,11 +86258,11 @@
         "unique": 43,
         "timestamp": 42,
         "date": 42,
+        "execution": 39,
         "input": 38,
         "judg": 37,
         "user": 36,
         "url": 35,
-        "execution": 35,
         "evaluat": 35,
         "text": 30,
         "high": 30,
@@ -84438,14 +86282,14 @@
         "automatically": 25,
         "idle": 24,
         "same": 24,
+        "return": 23,
         "safe": 23,
         "before": 22,
         "message": 22,
         "type": 22,
-        "name": 22,
-        "return": 21
+        "name": 22
       },
-      "word_count": 10591
+      "word_count": 10719
     },
     {
       "filename": "docs__en__api__beta__sessions__list.md",
@@ -84481,17 +86325,17 @@
       ],
       "terms": {
         "tool": 87,
-        "session": 56,
+        "session": 60,
         "call": 56,
-        "agent": 46,
+        "agent": 50,
         "format": 36,
         "judg": 33,
         "user": 29,
         "time": 28,
         "server": 28,
         "high": 27,
+        "execution": 26,
         "confirmation": 24,
-        "execution": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
@@ -84529,9 +86373,9 @@
         "deny": 11,
         "judgement": 11,
         "ask": 11,
-        "default": 10
+        "return": 10
       },
-      "word_count": 4512
+      "word_count": 4650
     },
     {
       "filename": "docs__en__api__beta__sessions__resources.md",
@@ -84761,7 +86605,7 @@
         "mode": 7,
         "read": 7
       },
-      "word_count": 3520
+      "word_count": 3530
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__add.md",
@@ -84851,7 +86695,7 @@
         "mount": 1,
         "container": 1
       },
-      "word_count": 327
+      "word_count": 329
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__delete.md",
@@ -84927,7 +86771,7 @@
         "deletion": 1,
         "response": 1
       },
-      "word_count": 250
+      "word_count": 252
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__list.md",
@@ -85017,7 +86861,7 @@
         "api": 1,
         "get": 1
       },
-      "word_count": 621
+      "word_count": 623
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__retrieve.md",
@@ -85103,7 +86947,7 @@
         "request": 1,
         "value": 1
       },
-      "word_count": 538
+      "word_count": 540
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__update.md",
@@ -85193,7 +87037,7 @@
         "select": 1,
         "request": 1
       },
-      "word_count": 571
+      "word_count": 573
     },
     {
       "filename": "docs__en__api__beta__sessions__retrieve.md",
@@ -85230,15 +87074,15 @@
       "terms": {
         "tool": 86,
         "call": 56,
-        "session": 44,
-        "agent": 43,
+        "session": 48,
+        "agent": 47,
         "judg": 33,
         "format": 30,
         "user": 28,
         "server": 28,
         "high": 27,
+        "execution": 26,
         "confirmation": 23,
-        "execution": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
@@ -85276,10 +87120,10 @@
         "store": 11,
         "intelligence": 10,
         "name": 10,
-        "null": 9,
-        "runn": 8
+        "creation": 9,
+        "principal": 9
       },
-      "word_count": 4225
+      "word_count": 4363
     },
     {
       "filename": "docs__en__api__beta__sessions__threads.md",
@@ -85461,18 +87305,18 @@
         "tool": 787,
         "call": 472,
         "event": 424,
-        "session": 395,
-        "agent": 372,
+        "session": 416,
+        "agent": 388,
         "thread": 363,
         "server": 355,
         "judg": 276,
+        "run": 271,
         "format": 267,
         "content": 258,
-        "run": 255,
+        "execution": 243,
         "user": 237,
         "high": 225,
         "time": 222,
-        "execution": 222,
         "model": 220,
         "evaluat": 215,
         "result": 202,
@@ -85509,7 +87353,7 @@
         "deny": 103,
         "resolv": 101
       },
-      "word_count": 46326
+      "word_count": 47042
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__archive.md",
@@ -85550,14 +87394,14 @@
         "judg": 33,
         "server": 28,
         "high": 27,
+        "execution": 26,
         "user": 26,
-        "execution": 24,
-        "session": 23,
+        "session": 25,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
-        "agent": 19,
+        "agent": 20,
         "model": 17,
         "each": 16,
         "allow": 16,
@@ -85595,7 +87439,7 @@
         "null": 8,
         "powerful": 7
       },
-      "word_count": 3260
+      "word_count": 3334
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events.md",
@@ -85668,9 +87512,9 @@
       "terms": {
         "event": 277,
         "tool": 242,
-        "session": 195,
-        "agent": 180,
-        "run": 164,
+        "session": 203,
+        "agent": 188,
+        "run": 172,
         "server": 143,
         "content": 133,
         "thread": 131,
@@ -85686,10 +87530,10 @@
         "unique": 86,
         "timestamp": 84,
         "date": 84,
+        "execution": 78,
         "input": 76,
         "judg": 74,
         "user": 72,
-        "execution": 70,
         "evaluat": 70,
         "url": 69,
         "text": 60,
@@ -85708,16 +87552,16 @@
         "automatically": 50,
         "idle": 48,
         "only": 47,
+        "return": 46,
         "safe": 46,
         "same": 45,
         "name": 44,
         "before": 43,
-        "return": 42,
         "stream": 42,
-        "reach": 42,
-        "int": 41
+        "alway": 42,
+        "reach": 42
       },
-      "word_count": 20764
+      "word_count": 21020
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__list.md",
@@ -85758,9 +87602,9 @@
       "terms": {
         "tool": 121,
         "event": 119,
-        "session": 99,
-        "agent": 86,
-        "run": 82,
+        "session": 103,
+        "agent": 90,
+        "run": 86,
         "server": 71,
         "thread": 67,
         "format": 64,
@@ -85776,11 +87620,11 @@
         "model": 43,
         "timestamp": 42,
         "date": 42,
+        "execution": 39,
         "input": 38,
         "judg": 37,
         "user": 36,
         "url": 35,
-        "execution": 35,
         "evaluat": 35,
         "text": 30,
         "high": 30,
@@ -85797,17 +87641,17 @@
         "emitt": 24,
         "idle": 24,
         "request": 23,
+        "return": 23,
         "safe": 23,
         "name": 22,
         "int": 21,
-        "return": 21,
+        "alway": 21,
         "before": 21,
         "reach": 21,
         "same": 21,
-        "only": 20,
-        "data": 20
+        "only": 20
       },
-      "word_count": 10173
+      "word_count": 10301
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__stream.md",
@@ -85848,9 +87692,9 @@
       "terms": {
         "event": 159,
         "tool": 121,
-        "session": 99,
-        "agent": 94,
-        "run": 82,
+        "session": 103,
+        "agent": 98,
+        "run": 86,
         "server": 72,
         "content": 71,
         "thread": 67,
@@ -85866,11 +87710,11 @@
         "unique": 43,
         "timestamp": 42,
         "date": 42,
+        "execution": 39,
         "input": 38,
         "judg": 37,
         "user": 36,
         "url": 35,
-        "execution": 35,
         "evaluat": 35,
         "text": 30,
         "high": 30,
@@ -85890,14 +87734,14 @@
         "automatically": 25,
         "idle": 24,
         "same": 24,
+        "return": 23,
         "safe": 23,
         "before": 22,
         "message": 22,
         "type": 22,
-        "name": 22,
-        "return": 21
+        "name": 22
       },
-      "word_count": 10601
+      "word_count": 10729
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__list.md",
@@ -85943,13 +87787,13 @@
         "server": 28,
         "high": 27,
         "user": 26,
-        "session": 23,
-        "execution": 23,
+        "session": 25,
+        "execution": 25,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
-        "agent": 19,
+        "agent": 20,
         "format": 17,
         "model": 17,
         "allow": 16,
@@ -85987,7 +87831,7 @@
         "list": 8,
         "default": 8
       },
-      "word_count": 3344
+      "word_count": 3418
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__retrieve.md",
@@ -86028,14 +87872,14 @@
         "judg": 33,
         "server": 28,
         "high": 27,
+        "execution": 26,
         "user": 26,
-        "execution": 24,
-        "session": 23,
+        "session": 25,
         "confirmation": 22,
         "safe": 22,
         "risk": 22,
         "evaluat": 22,
-        "agent": 19,
+        "agent": 20,
         "model": 17,
         "each": 16,
         "allow": 16,
@@ -86073,7 +87917,7 @@
         "null": 8,
         "powerful": 7
       },
-      "word_count": 3257
+      "word_count": 3331
     },
     {
       "filename": "docs__en__api__beta__sessions__update.md",
@@ -86114,19 +87958,19 @@
       "terms": {
         "tool": 201,
         "call": 122,
-        "session": 67,
+        "session": 71,
         "judg": 66,
         "server": 59,
+        "agent": 54,
         "confirmation": 54,
         "user": 53,
-        "agent": 50,
         "whether": 50,
         "high": 49,
         "safe": 44,
         "risk": 44,
         "evaluat": 44,
+        "execution": 37,
         "each": 35,
-        "execution": 33,
         "configuration": 32,
         "allow": 32,
         "fetch": 32,
@@ -86163,7 +88007,7 @@
         "contribute": 15,
         "one": 14
       },
-      "word_count": 7130
+      "word_count": 7268
     },
     {
       "filename": "docs__en__api__beta__skills.md",
@@ -86465,7 +88309,7 @@
         "here": 9,
         "specify": 9
       },
-      "word_count": 4163
+      "word_count": 4181
     },
     {
       "filename": "docs__en__api__beta__skills__create.md",
@@ -86551,7 +88395,7 @@
         "sample": 2,
         "resolv": 2
       },
-      "word_count": 531
+      "word_count": 533
     },
     {
       "filename": "docs__en__api__beta__skills__delete.md",
@@ -86637,7 +88481,7 @@
         "object": 1,
         "type": 1
       },
-      "word_count": 296
+      "word_count": 298
     },
     {
       "filename": "docs__en__api__beta__skills__list.md",
@@ -86723,7 +88567,7 @@
         "author": 2,
         "private": 2
       },
-      "word_count": 596
+      "word_count": 598
     },
     {
       "filename": "docs__en__api__beta__skills__retrieve.md",
@@ -86809,7 +88653,7 @@
         "parameter": 1,
         "about": 1
       },
-      "word_count": 480
+      "word_count": 482
     },
     {
       "filename": "docs__en__api__beta__skills__versions.md",
@@ -87007,7 +88851,7 @@
         "specific": 5,
         "omit": 5
       },
-      "word_count": 2156
+      "word_count": 2166
     },
     {
       "filename": "docs__en__api__beta__skills__versions__create.md",
@@ -87097,7 +88941,7 @@
         "one": 1,
         "belong": 1
       },
-      "word_count": 449
+      "word_count": 451
     },
     {
       "filename": "docs__en__api__beta__skills__versions__delete.md",
@@ -87183,7 +89027,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 330
+      "word_count": 332
     },
     {
       "filename": "docs__en__api__beta__skills__versions__download.md",
@@ -87261,7 +89105,7 @@
         "need": 1,
         "act": 1
       },
-      "word_count": 283
+      "word_count": 285
     },
     {
       "filename": "docs__en__api__beta__skills__versions__list.md",
@@ -87351,7 +89195,7 @@
         "previou": 1,
         "read": 1
       },
-      "word_count": 497
+      "word_count": 499
     },
     {
       "filename": "docs__en__api__beta__skills__versions__retrieve.md",
@@ -87437,7 +89281,7 @@
         "specify": 1,
         "select": 1
       },
-      "word_count": 442
+      "word_count": 444
     },
     {
       "filename": "docs__en__api__beta__tunnels.md",
@@ -87771,7 +89615,7 @@
         "only": 10,
         "need": 10
       },
-      "word_count": 4311
+      "word_count": 4331
     },
     {
       "filename": "docs__en__api__beta__tunnels__archive.md",
@@ -87857,7 +89701,7 @@
         "irreversible": 1,
         "every": 1
       },
-      "word_count": 426
+      "word_count": 428
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates.md",
@@ -88035,7 +89879,7 @@
         "supersed": 4,
         "admin": 4
       },
-      "word_count": 1874
+      "word_count": 1882
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__archive.md",
@@ -88121,7 +89965,7 @@
         "retain": 1,
         "last": 1
       },
-      "word_count": 440
+      "word_count": 442
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__create.md",
@@ -88211,7 +90055,7 @@
         "public": 1,
         "anthropic": 1
       },
-      "word_count": 455
+      "word_count": 457
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__list.md",
@@ -88301,7 +90145,7 @@
         "admin": 1,
         "endpoint": 1
       },
-      "word_count": 480
+      "word_count": 482
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__retrieve.md",
@@ -88387,7 +90231,7 @@
         "select": 1,
         "request": 1
       },
-      "word_count": 404
+      "word_count": 406
     },
     {
       "filename": "docs__en__api__beta__tunnels__create.md",
@@ -88473,7 +90317,7 @@
         "dur": 1,
         "migration": 1
       },
-      "word_count": 429
+      "word_count": 431
     },
     {
       "filename": "docs__en__api__beta__tunnels__list.md",
@@ -88559,7 +90403,7 @@
         "endpoint": 1,
         "remain": 1
       },
-      "word_count": 468
+      "word_count": 470
     },
     {
       "filename": "docs__en__api__beta__tunnels__retrieve.md",
@@ -88645,7 +90489,7 @@
         "version": 1,
         "want": 1
       },
-      "word_count": 387
+      "word_count": 389
     },
     {
       "filename": "docs__en__api__beta__tunnels__reveal_token.md",
@@ -88731,7 +90575,7 @@
         "appear": 1,
         "intermediary": 1
       },
-      "word_count": 356
+      "word_count": 358
     },
     {
       "filename": "docs__en__api__beta__tunnels__rotate_token.md",
@@ -88821,7 +90665,7 @@
         "after": 1,
         "path": 1
       },
-      "word_count": 371
+      "word_count": 373
     },
     {
       "filename": "docs__en__api__beta__user_profiles.md",
@@ -89035,7 +90879,7 @@
         "maxlength": 13,
         "product": 12
       },
-      "word_count": 6638
+      "word_count": 6648
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create.md",
@@ -89121,7 +90965,7 @@
         "anthropic": 4,
         "open": 4
       },
-      "word_count": 1524
+      "word_count": 1526
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create_enrollment_url.md",
@@ -89207,7 +91051,7 @@
         "alway": 1,
         "expir": 1
       },
-      "word_count": 309
+      "word_count": 311
     },
     {
       "filename": "docs__en__api__beta__user_profiles__list.md",
@@ -89293,7 +91137,7 @@
         "credential": 2,
         "unique": 2
       },
-      "word_count": 1042
+      "word_count": 1044
     },
     {
       "filename": "docs__en__api__beta__user_profiles__retrieve.md",
@@ -89379,7 +91223,7 @@
         "hash": 2,
         "open": 2
       },
-      "word_count": 916
+      "word_count": 918
     },
     {
       "filename": "docs__en__api__beta__user_profiles__update.md",
@@ -89469,7 +91313,7 @@
         "only": 3,
         "must": 3
       },
-      "word_count": 1520
+      "word_count": 1522
     },
     {
       "filename": "docs__en__api__beta__vaults.md",
@@ -89879,7 +91723,7 @@
         "sent": 14,
         "must": 14
       },
-      "word_count": 7440
+      "word_count": 7466
     },
     {
       "filename": "docs__en__api__beta__vaults__archive.md",
@@ -89965,7 +91809,7 @@
         "null": 1,
         "human": 1
       },
-      "word_count": 333
+      "word_count": 335
     },
     {
       "filename": "docs__en__api__beta__vaults__create.md",
@@ -90051,7 +91895,7 @@
         "parameter": 1,
         "character": 1
       },
-      "word_count": 375
+      "word_count": 377
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials.md",
@@ -90441,7 +92285,7 @@
         "vault": 21,
         "configuration": 21
       },
-      "word_count": 8637
+      "word_count": 8651
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__archive.md",
@@ -90527,7 +92371,7 @@
         "any": 2,
         "entry": 2
       },
-      "word_count": 696
+      "word_count": 698
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__create.md",
@@ -90617,7 +92461,7 @@
         "any": 3,
         "network": 3
       },
-      "word_count": 1197
+      "word_count": 1199
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__delete.md",
@@ -90694,7 +92538,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 268
+      "word_count": 270
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__list.md",
@@ -90784,7 +92628,7 @@
         "body": 2,
         "variable": 2
       },
-      "word_count": 748
+      "word_count": 750
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md",
@@ -90870,7 +92714,7 @@
         "post": 1,
         "path": 1
       },
-      "word_count": 601
+      "word_count": 603
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__retrieve.md",
@@ -90956,7 +92800,7 @@
         "any": 2,
         "entry": 2
       },
-      "word_count": 693
+      "word_count": 695
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__update.md",
@@ -91046,7 +92890,7 @@
         "key": 3,
         "return": 3
       },
-      "word_count": 1128
+      "word_count": 1130
     },
     {
       "filename": "docs__en__api__beta__vaults__delete.md",
@@ -91122,7 +92966,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 258
+      "word_count": 260
     },
     {
       "filename": "docs__en__api__beta__vaults__list.md",
@@ -91208,7 +93052,7 @@
         "need": 1,
         "act": 1
       },
-      "word_count": 383
+      "word_count": 385
     },
     {
       "filename": "docs__en__api__beta__vaults__retrieve.md",
@@ -91294,7 +93138,7 @@
         "null": 1,
         "human": 1
       },
-      "word_count": 330
+      "word_count": 332
     },
     {
       "filename": "docs__en__api__beta__vaults__update.md",
@@ -91384,7 +93228,7 @@
         "match": 1,
         "body": 1
       },
-      "word_count": 394
+      "word_count": 396
     },
     {
       "filename": "docs__en__api__beta__webhooks.md",
@@ -92024,7 +93868,7 @@
         "additional": 5,
         "option": 5
       },
-      "word_count": 1746
+      "word_count": 1748
     },
     {
       "filename": "docs__en__api__completions__create.md",
@@ -92110,7 +93954,7 @@
         "capable": 4,
         "biology": 4
       },
-      "word_count": 1394
+      "word_count": 1396
     },
     {
       "filename": "docs__en__api__compliance.md",
@@ -93081,58 +94925,58 @@
         }
       ],
       "terms": {
-        "default": 8791,
-        "actor": 5878,
-        "organization": 4133,
-        "activity": 3235,
-        "assert": 2638,
-        "format": 2282,
-        "account": 2263,
-        "provider": 2149,
-        "issuer": 2135,
-        "party": 2113,
-        "user": 2019,
-        "api": 1834,
-        "email": 1683,
-        "anthropic": 1640,
-        "federation": 1625,
-        "bound": 1622,
-        "verifi": 1621,
-        "oidc": 1614,
-        "aws": 1594,
-        "attest": 1589,
-        "customer": 1588,
-        "federat": 1587,
-        "credential": 1300,
-        "null": 1215,
-        "identifier": 1198,
-        "token": 1187,
-        "service": 1155,
-        "via": 1137,
-        "identity": 1128,
-        "without": 1119,
-        "external": 1114,
-        "system": 1090,
-        "device": 1089,
-        "present": 1084,
-        "act": 1077,
-        "perform": 1068,
-        "authenticat": 1066,
-        "register": 1066,
-        "gcp": 1061,
-        "automat": 1061,
-        "occurr": 1057,
-        "azure": 1054,
-        "project": 942,
+        "default": 8807,
+        "actor": 5889,
+        "organization": 4142,
+        "activity": 3241,
+        "assert": 2643,
+        "format": 2286,
+        "account": 2267,
+        "provider": 2153,
+        "issuer": 2139,
+        "party": 2117,
+        "user": 2022,
+        "api": 1837,
+        "email": 1686,
+        "anthropic": 1643,
+        "federation": 1628,
+        "bound": 1625,
+        "verifi": 1624,
+        "oidc": 1617,
+        "aws": 1597,
+        "attest": 1592,
+        "customer": 1591,
+        "federat": 1590,
+        "credential": 1302,
+        "null": 1217,
+        "identifier": 1200,
+        "token": 1189,
+        "service": 1157,
+        "via": 1139,
+        "identity": 1130,
+        "without": 1121,
+        "external": 1116,
+        "system": 1092,
+        "device": 1091,
+        "present": 1086,
+        "act": 1079,
+        "perform": 1070,
+        "authenticat": 1068,
+        "register": 1068,
+        "gcp": 1063,
+        "automat": 1063,
+        "occurr": 1059,
+        "azure": 1056,
+        "project": 943,
         "claude": 885,
-        "request": 857,
-        "admin": 744,
-        "key": 738,
-        "time": 724,
-        "name": 679,
-        "app": 647
+        "request": 858,
+        "admin": 745,
+        "key": 739,
+        "time": 725,
+        "name": 680,
+        "app": 648
       },
-      "word_count": 359587
+      "word_count": 360208
     },
     {
       "filename": "docs__en__api__compliance__activities.md",
@@ -93179,58 +95023,58 @@
         }
       ],
       "terms": {
-        "default": 17341,
-        "actor": 11735,
-        "organization": 7655,
-        "activity": 6415,
-        "assert": 5270,
-        "account": 4446,
-        "provider": 4294,
-        "issuer": 4262,
-        "format": 4240,
-        "party": 4220,
-        "user": 3676,
-        "api": 3450,
-        "email": 3292,
-        "anthropic": 3246,
-        "federation": 3230,
-        "verifi": 3224,
-        "oidc": 3212,
-        "bound": 3204,
-        "aws": 3184,
-        "attest": 3174,
-        "federat": 3172,
-        "customer": 3170,
-        "credential": 2534,
-        "token": 2288,
-        "service": 2276,
-        "null": 2274,
-        "identifier": 2272,
-        "identity": 2234,
-        "external": 2208,
-        "via": 2207,
-        "system": 2170,
-        "device": 2166,
-        "present": 2159,
-        "without": 2150,
-        "act": 2142,
-        "perform": 2132,
-        "register": 2128,
-        "authenticat": 2121,
-        "gcp": 2120,
-        "automat": 2114,
-        "occurr": 2112,
-        "azure": 2108,
-        "project": 1594,
-        "request": 1524,
-        "admin": 1368,
-        "key": 1326,
-        "name": 1292,
+        "default": 17373,
+        "actor": 11757,
+        "organization": 7671,
+        "activity": 6427,
+        "assert": 5280,
+        "account": 4454,
+        "provider": 4302,
+        "issuer": 4270,
+        "format": 4248,
+        "party": 4228,
+        "user": 3682,
+        "api": 3456,
+        "email": 3298,
+        "anthropic": 3252,
+        "federation": 3236,
+        "verifi": 3230,
+        "oidc": 3218,
+        "bound": 3210,
+        "aws": 3190,
+        "attest": 3180,
+        "federat": 3178,
+        "customer": 3176,
+        "credential": 2538,
+        "token": 2292,
+        "service": 2280,
+        "null": 2278,
+        "identifier": 2276,
+        "identity": 2238,
+        "external": 2212,
+        "via": 2211,
+        "system": 2174,
+        "device": 2170,
+        "present": 2163,
+        "without": 2154,
+        "act": 2146,
+        "perform": 2136,
+        "register": 2132,
+        "authenticat": 2125,
+        "gcp": 2124,
+        "automat": 2118,
+        "occurr": 2116,
+        "azure": 2112,
+        "project": 1596,
+        "request": 1526,
+        "admin": 1370,
+        "key": 1328,
+        "name": 1294,
         "claude": 1246,
-        "sync": 1216,
-        "app": 1200
+        "sync": 1218,
+        "app": 1202
       },
-      "word_count": 670219
+      "word_count": 671425
     },
     {
       "filename": "docs__en__api__compliance__activities__list.md",
@@ -93265,58 +95109,58 @@
         }
       ],
       "terms": {
-        "default": 8679,
-        "actor": 5878,
-        "organization": 4007,
-        "activity": 3225,
-        "assert": 2635,
-        "account": 2243,
-        "provider": 2149,
-        "issuer": 2135,
-        "format": 2125,
-        "party": 2111,
-        "user": 1904,
-        "api": 1765,
-        "email": 1657,
-        "anthropic": 1635,
-        "federation": 1625,
-        "verifi": 1618,
-        "oidc": 1614,
-        "bound": 1604,
-        "aws": 1594,
-        "attest": 1589,
-        "federat": 1587,
-        "customer": 1586,
-        "credential": 1300,
-        "token": 1162,
-        "service": 1151,
-        "null": 1141,
-        "identifier": 1137,
-        "identity": 1127,
-        "via": 1118,
-        "external": 1114,
-        "system": 1089,
-        "device": 1089,
-        "without": 1083,
-        "present": 1081,
-        "act": 1077,
-        "perform": 1068,
-        "register": 1066,
-        "authenticat": 1062,
-        "gcp": 1061,
-        "occurr": 1057,
-        "automat": 1057,
-        "azure": 1054,
-        "project": 844,
-        "request": 810,
+        "default": 8695,
+        "actor": 5889,
+        "organization": 4016,
+        "activity": 3231,
+        "assert": 2640,
+        "account": 2247,
+        "provider": 2153,
+        "issuer": 2139,
+        "format": 2129,
+        "party": 2115,
+        "user": 1907,
+        "api": 1768,
+        "email": 1660,
+        "anthropic": 1638,
+        "federation": 1628,
+        "verifi": 1621,
+        "oidc": 1617,
+        "bound": 1607,
+        "aws": 1597,
+        "attest": 1592,
+        "federat": 1590,
+        "customer": 1589,
+        "credential": 1302,
+        "token": 1164,
+        "service": 1153,
+        "null": 1143,
+        "identifier": 1139,
+        "identity": 1129,
+        "via": 1120,
+        "external": 1116,
+        "system": 1091,
+        "device": 1091,
+        "without": 1085,
+        "present": 1083,
+        "act": 1079,
+        "perform": 1070,
+        "register": 1068,
+        "authenticat": 1064,
+        "gcp": 1063,
+        "occurr": 1059,
+        "automat": 1059,
+        "azure": 1056,
+        "project": 845,
+        "request": 811,
         "claude": 767,
-        "admin": 743,
-        "key": 685,
-        "name": 652,
-        "sync": 626,
-        "app": 621
+        "admin": 744,
+        "key": 686,
+        "name": 653,
+        "sync": 627,
+        "app": 622
       },
-      "word_count": 342962
+      "word_count": 343583
     },
     {
       "filename": "docs__en__api__compliance__apps.md",
@@ -103813,7 +105657,7 @@
         "value": 8,
         "belong": 8
       },
-      "word_count": 4443
+      "word_count": 4447
     },
     {
       "filename": "docs__en__api__models__list.md",
@@ -103899,7 +105743,7 @@
         "schedul": 3,
         "line": 3
       },
-      "word_count": 1426
+      "word_count": 1428
     },
     {
       "filename": "docs__en__api__models__retrieve.md",
@@ -103985,7 +105829,161 @@
         "want": 2,
         "optional": 2
       },
-      "word_count": 1231
+      "word_count": 1233
+    },
+    {
+      "filename": "docs__en__api__opentelemetry__spans.md",
+      "id": "docs/en/api/opentelemetry/spans",
+      "title": "Spans",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/opentelemetry/spans",
+      "headings": [
+        {
+          "text": "Span names and kinds",
+          "level": 2
+        },
+        {
+          "text": "Span status",
+          "level": 2
+        },
+        {
+          "text": "Attributes",
+          "level": 2
+        },
+        {
+          "text": "Common attributes",
+          "level": 3
+        },
+        {
+          "text": "Session attributes",
+          "level": 3
+        },
+        {
+          "text": "Content attributes",
+          "level": 3
+        },
+        {
+          "text": "Token usage",
+          "level": 3
+        },
+        {
+          "text": "Spans",
+          "level": 2
+        },
+        {
+          "text": "`anthropic.messages.create`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.messages.count_tokens`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.sessions.create`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.sessions.events.send`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.sessions.update`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.session.turn`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.model_request`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.tool_use`, `anthropic.mcp_tool_use`, and `anthropic.custom_tool_use`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.compaction`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.session.outcome_evaluation`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.messages.tool_runner`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.messages.batches.<method>`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.sessions.<method>`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.environment.work`",
+          "level": 3
+        },
+        {
+          "text": "`anthropic.<resources>.<method>`",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "span": 181,
+        "request": 118,
+        "api": 86,
+        "tool": 83,
+        "sdk": 69,
+        "agent": 50,
+        "absent": 38,
+        "session": 34,
+        "each": 32,
+        "turn": 31,
+        "messag": 30,
+        "attribut": 27,
+        "type": 26,
+        "manag": 26,
+        "token": 25,
+        "children": 25,
+        "only": 24,
+        "model": 24,
+        "description": 23,
+        "fail": 23,
+        "thread": 23,
+        "example": 22,
+        "one": 22,
+        "run": 22,
+        "content": 22,
+        "badge": 22,
+        "response": 21,
+        "event": 20,
+        "attribute": 19,
+        "doesn": 19,
+        "start": 18,
+        "parent": 18,
+        "opentelemetry": 17,
+        "application": 17,
+        "name": 17,
+        "none": 17,
+        "error": 17,
+        "method": 16,
+        "such": 16,
+        "current": 16,
+        "emit": 15,
+        "follow": 15,
+        "stream": 15,
+        "set": 14,
+        "kind": 14,
+        "server": 14,
+        "source": 14,
+        "end": 13,
+        "result": 13,
+        "usage": 13
+      },
+      "word_count": 5462
     },
     {
       "filename": "docs__en__api__organization.md",
@@ -105547,8 +107545,8 @@
         "claude": 101,
         "date": 98,
         "parameter": 83,
+        "user": 82,
         "example": 81,
-        "user": 81,
         "aws": 80,
         "archiv": 80,
         "response": 77,
@@ -105562,9 +107560,9 @@
         "must": 68,
         "jwk": 68,
         "alway": 65,
+        "role": 65,
         "match": 65,
         "object": 64,
-        "role": 63,
         "identity": 63,
         "member": 63,
         "list": 62,
@@ -105579,7 +107577,7 @@
         "history": 58,
         "single": 58
       },
-      "word_count": 27338
+      "word_count": 27365
     },
     {
       "filename": "docs__en__api__organization__api_keys.md",
@@ -109399,7 +111397,7 @@
       "terms": {
         "invite": 50,
         "organization": 19,
-        "invit": 17,
+        "invit": 18,
         "user": 17,
         "accept": 16,
         "format": 14,
@@ -109418,6 +111416,7 @@
         "return": 8,
         "default": 8,
         "enterprise": 7,
+        "role": 6,
         "assign": 6,
         "rbac": 6,
         "group": 6,
@@ -109425,7 +111424,6 @@
         "page": 6,
         "seat": 5,
         "parameter": 5,
-        "role": 5,
         "valu": 5,
         "ids": 5,
         "statu": 5,
@@ -109448,7 +111446,7 @@
         "filter": 4,
         "delete": 4
       },
-      "word_count": 1440
+      "word_count": 1453
     },
     {
       "filename": "docs__en__api__organization__invites__create.md",
@@ -109488,13 +111486,14 @@
         "user": 7,
         "accept": 7,
         "claude": 5,
+        "invit": 5,
         "seat": 5,
         "api": 4,
-        "invit": 4,
         "email": 4,
         "format": 4,
         "create": 3,
         "version": 3,
+        "role": 3,
         "assign": 3,
         "enterprise": 3,
         "rbac": 3,
@@ -109508,8 +111507,9 @@
         "purchas": 2,
         "tier": 2,
         "parameter": 2,
-        "role": 2,
         "type": 2,
+        "requir": 2,
+        "scope": 2,
         "ids": 2,
         "title": 1,
         "url": 1,
@@ -109530,11 +111530,9 @@
         "availability": 1,
         "free": 1,
         "request": 1,
-        "fail": 1,
-        "error": 1,
-        "rather": 1
+        "fail": 1
       },
-      "word_count": 416
+      "word_count": 429
     },
     {
       "filename": "docs__en__api__organization__invites__delete.md",
@@ -111318,7 +113316,7 @@
         }
       ],
       "terms": {
-        "user": 49,
+        "user": 50,
         "organization": 20,
         "version": 12,
         "object": 10,
@@ -111327,11 +113325,11 @@
         "type": 8,
         "claude": 7,
         "return": 7,
+        "role": 7,
         "page": 6,
         "email": 6,
         "accept": 6,
         "alway": 6,
-        "role": 6,
         "parameter": 5,
         "format": 5,
         "indicat": 5,
@@ -111369,7 +113367,7 @@
         "console": 2,
         "enterprise": 2
       },
-      "word_count": 970
+      "word_count": 984
     },
     {
       "filename": "docs__en__api__organization__users__list.md",
@@ -111638,12 +113636,12 @@
         }
       ],
       "terms": {
-        "user": 12,
+        "user": 13,
         "organization": 7,
         "update": 4,
         "api": 4,
+        "role": 4,
         "claude": 3,
-        "role": 3,
         "version": 3,
         "accept": 3,
         "parameter": 2,
@@ -111673,6 +113671,10 @@
         "assign": 1,
         "through": 1,
         "enterprise": 1,
+        "chang": 1,
+        "requir": 1,
+        "scope": 1,
+        "addition": 1,
         "return": 1,
         "object": 1,
         "alway": 1,
@@ -111683,13 +113685,9 @@
         "indicat": 1,
         "join": 1,
         "format": 1,
-        "date": 1,
-        "time": 1,
-        "email": 1,
-        "name": 1,
-        "example": 1
+        "date": 1
       },
-      "word_count": 237
+      "word_count": 251
     },
     {
       "filename": "docs__en__api__organization__workspaces.md",
@@ -114166,19 +116164,19 @@
         }
       ],
       "terms": {
-        "api": 61,
+        "api": 62,
         "claude": 40,
         "limit": 28,
         "platform": 26,
         "request": 24,
         "see": 22,
+        "page": 17,
         "rate": 16,
-        "page": 16,
         "header": 15,
         "cloud": 15,
         "agent": 15,
+        "key": 15,
         "endpoint": 14,
-        "key": 14,
         "response": 14,
         "sdk": 13,
         "note": 11,
@@ -114199,6 +116197,7 @@
         "model": 7,
         "direct": 7,
         "messag": 7,
+        "console": 7,
         "each": 7,
         "availability": 7,
         "cursor": 7,
@@ -114214,10 +116213,9 @@
         "detail": 5,
         "version": 5,
         "reference": 5,
-        "spend": 5,
-        "handl": 5
+        "spend": 5
       },
-      "word_count": 1752
+      "word_count": 1768
     },
     {
       "filename": "docs__en__api__rate-limits.md",
@@ -114286,7 +116284,7 @@
       "terms": {
         "limit": 168,
         "rate": 92,
-        "claude": 65,
+        "claude": 68,
         "token": 63,
         "request": 52,
         "per": 45,
@@ -114308,11 +116306,11 @@
         "see": 16,
         "itpm": 16,
         "note": 15,
+        "page": 14,
         "set": 14,
         "header": 14,
         "model": 14,
         "sonnet": 14,
-        "page": 13,
         "cap": 13,
         "cach": 13,
         "count": 13,
@@ -114323,6 +116321,7 @@
         "cache": 11,
         "toward": 11,
         "platform": 10,
+        "console": 10,
         "rpm": 10,
         "each": 10,
         "only": 10,
@@ -114332,10 +116331,9 @@
         "anthropic": 8,
         "fast": 8,
         "mode": 8,
-        "being": 8,
-        "step": 8
+        "being": 8
       },
-      "word_count": 3551
+      "word_count": 3565
     },
     {
       "filename": "docs__en__api__service-tiers.md",
@@ -116830,11 +118828,11 @@
       ],
       "terms": {
         "aws": 222,
-        "claude": 215,
+        "claude": 217,
         "platform": 96,
         "api": 88,
+        "console": 71,
         "see": 69,
-        "console": 69,
         "anthropic": 66,
         "workspace": 57,
         "organization": 53,
@@ -116880,7 +118878,7 @@
         "per": 18,
         "client": 18
       },
-      "word_count": 8405
+      "word_count": 8412
     },
     {
       "filename": "docs__en__build-with-claude__compaction.md",
@@ -123222,7 +125220,7 @@
       ],
       "terms": {
         "model": 41,
-        "app": 29,
+        "app": 31,
         "claude": 28,
         "api": 25,
         "request": 19,
@@ -123232,24 +125230,25 @@
         "framework": 13,
         "server": 11,
         "device": 11,
+        "integration": 11,
         "tool": 10,
+        "each": 10,
         "attest": 10,
         "side": 9,
         "capabiliti": 9,
         "through": 8,
         "see": 8,
         "pas": 8,
-        "each": 8,
+        "one": 8,
         "effort": 8,
         "level": 8,
-        "integration": 8,
+        "workspace": 8,
         "beta": 7,
         "accept": 7,
         "available": 6,
         "note": 6,
         "messag": 6,
         "key": 6,
-        "one": 6,
         "token": 6,
         "xcode": 5,
         "add": 5,
@@ -123269,10 +125268,9 @@
         "session": 4,
         "target": 4,
         "client": 4,
-        "surface": 4,
-        "provider": 4
+        "surface": 4
       },
-      "word_count": 1907
+      "word_count": 1947
     },
     {
       "filename": "docs__en__cli-sdks-libraries__libraries__openai-sdk.md",
@@ -124914,22 +126912,22 @@
         "key": 50,
         "api": 29,
         "create": 14,
-        "claude": 11,
+        "claude": 13,
+        "console": 10,
         "account": 10,
         "step": 10,
         "admin": 8,
         "work": 7,
         "service": 7,
-        "console": 6,
         "workspace": 6,
         "title": 5,
+        "page": 5,
         "organization": 5,
         "also": 4,
         "choose": 4,
         "personal": 4,
         "get": 3,
         "one": 3,
-        "setting": 3,
         "stop": 3,
         "workload": 3,
         "such": 3,
@@ -124944,7 +126942,6 @@
         "automatically": 2,
         "sign": 2,
         "don": 2,
-        "page": 2,
         "set": 2,
         "scope": 2,
         "copy": 2,
@@ -124960,9 +126957,10 @@
         "endpoint": 2,
         "note": 2,
         "url": 1,
-        "doc": 1
+        "doc": 1,
+        "description": 1
       },
-      "word_count": 573
+      "word_count": 590
     },
     {
       "filename": "docs__en__get-started.md",
@@ -125128,7 +127126,7 @@
         }
       ],
       "terms": {
-        "claude": 35,
+        "claude": 36,
         "card": 14,
         "title": 13,
         "step": 13,
@@ -125168,7 +127166,6 @@
         "vision": 3,
         "tool": 3,
         "cost": 3,
-        "developer": 3,
         "help": 3,
         "col": 3,
         "statu": 3,
@@ -125177,7 +127174,8 @@
         "note": 2,
         "control": 2,
         "runn": 2,
-        "see": 2
+        "see": 2,
+        "generation": 2
       },
       "word_count": 616
     },
@@ -125467,7 +127465,7 @@
         "list": 18,
         "latest": 18
       },
-      "word_count": 7157
+      "word_count": 7177
     },
     {
       "filename": "docs__en__manage-claude__admin-api.md",
@@ -125571,9 +127569,9 @@
         "workspace": 26,
         "token": 22,
         "see": 20,
+        "claude": 18,
         "manage": 18,
         "account": 18,
-        "claude": 17,
         "service": 14,
         "endpoint": 14,
         "federation": 13,
@@ -125589,13 +127587,13 @@
         "permission": 8,
         "cli": 8,
         "personal": 7,
+        "page": 7,
         "acces": 7,
         "create": 7,
         "bearer": 7,
         "workload": 7,
         "work": 7,
         "title": 6,
-        "page": 6,
         "read": 6,
         "return": 6,
         "identity": 6,
@@ -125613,7 +127611,7 @@
         "each": 5,
         "wif": 5
       },
-      "word_count": 4683
+      "word_count": 4686
     },
     {
       "filename": "docs__en__manage-claude__admin-api-keys.md",
@@ -125652,9 +127650,9 @@
         "key": 39,
         "claude": 35,
         "organization": 31,
-        "admin": 25,
+        "admin": 26,
         "step": 21,
-        "create": 20,
+        "create": 19,
         "compliance": 15,
         "scop": 14,
         "title": 13,
@@ -125671,7 +127669,6 @@
         "manage": 7,
         "console": 7,
         "only": 7,
-        "setting": 7,
         "owner": 7,
         "platform": 6,
         "every": 6,
@@ -125681,6 +127678,7 @@
         "com": 5,
         "doc": 5,
         "one": 5,
+        "setting": 5,
         "group": 5,
         "select": 5,
         "request": 5,
@@ -125699,7 +127697,7 @@
         "cost": 3,
         "each": 3
       },
-      "word_count": 1022
+      "word_count": 1026
     },
     {
       "filename": "docs__en__manage-claude__analytics-api.md",
@@ -125797,7 +127795,7 @@
         "doc": 5,
         "use": 5
       },
-      "word_count": 1797
+      "word_count": 1798
     },
     {
       "filename": "docs__en__manage-claude__api-and-data-retention.md",
@@ -125890,14 +127888,14 @@
         "data": 69,
         "hipaa": 65,
         "api": 63,
-        "organization": 53,
+        "organization": 55,
         "yes": 53,
         "retention": 51,
         "anthropic": 37,
         "featur": 35,
         "readines": 35,
         "tool": 35,
-        "see": 33,
+        "see": 34,
         "feature": 30,
         "cover": 29,
         "accordion": 28,
@@ -125917,6 +127915,7 @@
         "model": 15,
         "appli": 15,
         "enabl": 14,
+        "page": 13,
         "handl": 13,
         "table": 13,
         "prompt": 13,
@@ -125932,10 +127931,9 @@
         "return": 11,
         "enterprise": 11,
         "support": 11,
-        "includ": 10,
-        "page": 10
+        "workspace": 11
       },
-      "word_count": 4243
+      "word_count": 4280
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -125962,17 +127960,18 @@
         }
       ],
       "terms": {
-        "app": 41,
+        "app": 43,
         "attest": 19,
         "claude": 17,
-        "integration": 10,
+        "integration": 13,
         "api": 9,
+        "workspace": 9,
         "apple": 8,
         "foundation": 6,
         "model": 6,
         "device": 5,
-        "workspace": 5,
         "token": 5,
+        "one": 5,
         "call": 4,
         "key": 4,
         "register": 4,
@@ -125986,14 +127985,16 @@
         "platform": 3,
         "com": 3,
         "doc": 3,
+        "page": 3,
         "swift": 3,
         "package": 3,
         "beta": 3,
+        "each": 3,
         "acces": 3,
         "authentication": 3,
         "request": 3,
         "new": 3,
-        "one": 3,
+        "select": 3,
         "manage": 2,
         "genuine": 2,
         "installation": 2,
@@ -126008,12 +128009,9 @@
         "through": 2,
         "requir": 2,
         "configuration": 2,
-        "use": 2,
-        "anthropic": 2,
-        "available": 2,
-        "only": 2
+        "use": 2
       },
-      "word_count": 546
+      "word_count": 586
     },
     {
       "filename": "docs__en__manage-claude__authentication.md",
@@ -126063,26 +128061,26 @@
         "key": 60,
         "api": 31,
         "workspace": 31,
-        "claude": 23,
+        "claude": 25,
         "identity": 20,
         "app": 19,
-        "service": 15,
-        "account": 15,
+        "service": 16,
+        "account": 16,
         "workload": 14,
         "federation": 14,
         "attest": 10,
         "request": 10,
         "token": 10,
         "card": 10,
-        "platform": 8,
+        "platform": 9,
         "header": 8,
         "acces": 8,
         "personal": 8,
         "create": 8,
         "http": 7,
+        "com": 7,
         "work": 7,
         "title": 6,
-        "com": 6,
         "doc": 6,
         "manage": 6,
         "secret": 6,
@@ -126090,6 +128088,7 @@
         "ios": 6,
         "maco": 6,
         "user": 6,
+        "console": 6,
         "organization": 6,
         "only": 6,
         "where": 5,
@@ -126098,7 +128097,6 @@
         "end": 5,
         "call": 5,
         "own": 5,
-        "console": 5,
         "workspac": 5,
         "archiv": 5,
         "set": 5,
@@ -126111,7 +128109,7 @@
         "single": 4,
         "creat": 4
       },
-      "word_count": 2697
+      "word_count": 2712
     },
     {
       "filename": "docs__en__manage-claude__claude-code-analytics-api.md",
@@ -126222,7 +128220,7 @@
         }
       ],
       "terms": {
-        "claude": 53,
+        "claude": 54,
         "code": 44,
         "api": 38,
         "analytic": 21,
@@ -126273,7 +128271,7 @@
         "using": 4,
         "report": 4
       },
-      "word_count": 1537
+      "word_count": 1540
     },
     {
       "filename": "docs__en__manage-claude__cmek.md",
@@ -126450,15 +128448,15 @@
         "title": 14,
         "note": 14,
         "register": 14,
+        "page": 14,
         "statement": 14,
         "decrypt": 14,
         "region": 14,
-        "page": 13,
-        "under": 12,
         "grant": 12,
         "service": 12,
         "iam": 12,
         "click": 12,
+        "under": 11,
         "acces": 10,
         "permission": 10,
         "select": 10,
@@ -126473,7 +128471,7 @@
         "one": 8,
         "usage": 8
       },
-      "word_count": 3993
+      "word_count": 3994
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -126530,20 +128528,20 @@
         "frame": 8,
         "workspace": 8,
         "acces": 7,
+        "page": 7,
         "select": 7,
         "wrap": 7,
         "unwrap": 7,
         "version": 7,
-        "under": 6,
         "name": 6,
         "already": 6,
         "open": 6,
         "rsa": 6,
         "note": 6,
-        "page": 6,
         "register": 6,
         "take": 6,
         "codegroup": 6,
+        "under": 5,
         "entra": 5,
         "field": 5,
         "client": 5,
@@ -126555,7 +128553,7 @@
         "console": 5,
         "set": 5
       },
-      "word_count": 2557
+      "word_count": 2558
     },
     {
       "filename": "docs__en__manage-claude__cmek-google-cloud-kms.md",
@@ -126609,13 +128607,13 @@
         "workspace": 9,
         "resource": 9,
         "data": 8,
-        "under": 8,
         "project": 8,
         "decrypt": 8,
+        "page": 8,
         "console": 8,
         "cmek": 7,
+        "under": 7,
         "ring": 7,
-        "page": 7,
         "frame": 6,
         "codegroup": 6,
         "enabl": 5,
@@ -126637,7 +128635,7 @@
         "already": 4,
         "symmetric": 4
       },
-      "word_count": 2108
+      "word_count": 2109
     },
     {
       "filename": "docs__en__manage-claude__compliance-activity-feed.md",
@@ -126844,26 +128842,27 @@
         }
       ],
       "terms": {
-        "key": 93,
+        "key": 94,
         "organization": 73,
-        "api": 69,
+        "api": 70,
+        "compliance": 57,
         "claude": 56,
-        "compliance": 55,
         "admin": 28,
-        "acces": 25,
+        "acces": 26,
         "step": 22,
         "activity": 20,
         "create": 18,
         "console": 18,
         "parent": 16,
-        "setting": 16,
+        "scop": 15,
         "read": 15,
-        "scop": 14,
         "feed": 14,
         "title": 11,
         "owner": 11,
         "only": 11,
+        "setting": 11,
         "delete": 11,
+        "page": 9,
         "session": 9,
         "plugin": 9,
         "set": 8,
@@ -126892,10 +128891,9 @@
         "role": 5,
         "call": 5,
         "secret": 5,
-        "section": 5,
         "record": 5
       },
-      "word_count": 1952
+      "word_count": 1974
     },
     {
       "filename": "docs__en__manage-claude__compliance-content-data.md",
@@ -127151,9 +129149,9 @@
         "see": 22,
         "project": 22,
         "acces": 22,
+        "page": 21,
         "body": 21,
         "value": 21,
-        "page": 20,
         "header": 20,
         "activity": 20,
         "transcript": 19,
@@ -127175,7 +129173,7 @@
         "limit": 14,
         "exist": 13
       },
-      "word_count": 6085
+      "word_count": 6088
     },
     {
       "filename": "docs__en__manage-claude__compliance-faq.md",
@@ -127198,17 +129196,17 @@
         }
       ],
       "terms": {
-        "claude": 89,
+        "claude": 90,
         "api": 75,
         "organization": 74,
         "session": 65,
-        "compliance": 60,
+        "compliance": 63,
         "accordion": 36,
         "key": 34,
         "endpoint": 32,
         "activity": 28,
         "content": 28,
-        "console": 25,
+        "console": 26,
         "return": 20,
         "title": 19,
         "only": 19,
@@ -127246,10 +129244,10 @@
         "delet": 9,
         "captur": 9,
         "tool": 9,
-        "setting": 8,
-        "while": 8
+        "while": 8,
+        "prompt": 8
       },
-      "word_count": 2847
+      "word_count": 2859
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -127586,7 +129584,7 @@
         }
       ],
       "terms": {
-        "workspace": 31,
+        "workspace": 33,
         "claude": 26,
         "geo": 24,
         "pric": 20,
@@ -127605,22 +129603,22 @@
         "available": 8,
         "only": 8,
         "run": 7,
+        "console": 7,
         "appli": 7,
         "see": 7,
         "token": 7,
-        "setting": 6,
         "level": 6,
         "support": 6,
         "session": 6,
+        "create": 6,
         "standard": 6,
         "card": 6,
         "manage": 5,
         "stor": 5,
+        "setting": 5,
         "set": 5,
-        "console": 5,
         "also": 5,
         "chang": 5,
-        "new": 5,
         "multiplier": 5,
         "global": 5,
         "rout": 5,
@@ -127631,13 +129629,13 @@
         "through": 4,
         "configur": 4,
         "manag": 4,
-        "create": 4,
         "each": 4,
         "infrastructure": 4,
         "availability": 4,
-        "usage": 4
+        "usage": 4,
+        "aws": 4
       },
-      "word_count": 1619
+      "word_count": 1643
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks.md",
@@ -127984,6 +129982,304 @@
         "identifier": 9
       },
       "word_count": 5560
+    },
+    {
+      "filename": "docs__en__manage-claude__opentelemetry.md",
+      "id": "docs/en/manage-claude/opentelemetry",
+      "title": "Overview",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry",
+      "headings": [
+        {
+          "text": "Get started",
+          "level": 2
+        },
+        {
+          "text": "Send traces to a partner platform",
+          "level": 2
+        },
+        {
+          "text": "Content modes",
+          "level": 2
+        },
+        {
+          "text": "Content limits",
+          "level": 3
+        },
+        {
+          "text": "Example traces and how to read them",
+          "level": 2
+        },
+        {
+          "text": "A Messages API request",
+          "level": 3
+        },
+        {
+          "text": "A Managed Agents session",
+          "level": 3
+        },
+        {
+          "text": "Counting tokens",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "span": 92,
+        "platform": 60,
+        "claude": 56,
+        "request": 54,
+        "api": 42,
+        "http": 40,
+        "doc": 39,
+        "tool": 39,
+        "com": 37,
+        "sdk": 30,
+        "card": 30,
+        "partner": 26,
+        "each": 24,
+        "imag": 24,
+        "logo": 23,
+        "svg": 23,
+        "agent": 22,
+        "trac": 21,
+        "observability": 21,
+        "content": 20,
+        "session": 19,
+        "opentelemetry": 18,
+        "title": 17,
+        "model": 17,
+        "turn": 16,
+        "href": 15,
+        "messag": 14,
+        "token": 14,
+        "send": 14,
+        "trace": 13,
+        "set": 13,
+        "client": 13,
+        "runner": 12,
+        "image": 12,
+        "manag": 11,
+        "run": 11,
+        "imagedark": 11,
+        "dark": 11,
+        "imageheight": 11,
+        "application": 10,
+        "full": 10,
+        "attribut": 10,
+        "usage": 10,
+        "result": 10,
+        "see": 9,
+        "example": 9,
+        "imageoffsetleft": 9,
+        "prompt": 9,
+        "thread": 9,
+        "anthropic": 8
+      },
+      "word_count": 2270
+    },
+    {
+      "filename": "docs__en__manage-claude__opentelemetry__api.md",
+      "id": "docs/en/manage-claude/opentelemetry/api",
+      "title": "Get Claude API spans",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/api",
+      "headings": [
+        {
+          "text": "What you need",
+          "level": 2
+        },
+        {
+          "text": "1. Add a destination",
+          "level": 2
+        },
+        {
+          "text": "Admin API and CLI",
+          "level": 3
+        },
+        {
+          "text": "2. Choose workspaces for a destination",
+          "level": 2
+        },
+        {
+          "text": "3. Check that spans arrive",
+          "level": 2
+        },
+        {
+          "text": "4. Connect API spans to your own traces",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        },
+        {
+          "text": "Delivery and health",
+          "level": 2
+        },
+        {
+          "text": "Limits",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "Delivery errors",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "api": 50,
+        "destination": 43,
+        "span": 40,
+        "request": 29,
+        "endpoint": 27,
+        "platform": 26,
+        "claude": 25,
+        "delivery": 23,
+        "send": 21,
+        "header": 21,
+        "url": 20,
+        "see": 20,
+        "workspace": 19,
+        "trac": 18,
+        "otlp": 16,
+        "workspac": 16,
+        "add": 15,
+        "observability": 15,
+        "http": 14,
+        "console": 14,
+        "opentelemetry": 13,
+        "each": 12,
+        "error": 12,
+        "show": 11,
+        "content": 11,
+        "messag": 10,
+        "agent": 10,
+        "example": 10,
+        "select": 10,
+        "manag": 9,
+        "session": 9,
+        "fail": 9,
+        "aws": 8,
+        "under": 8,
+        "organization": 8,
+        "own": 8,
+        "set": 8,
+        "doesn": 8,
+        "trace": 8,
+        "admin": 7,
+        "change": 7,
+        "setting": 7,
+        "choose": 7,
+        "sdk": 7,
+        "disabl": 7,
+        "title": 6,
+        "cover": 6,
+        "after": 6,
+        "click": 6,
+        "other": 6
+      },
+      "word_count": 3497
+    },
+    {
+      "filename": "docs__en__manage-claude__opentelemetry__sdk.md",
+      "id": "docs/en/manage-claude/opentelemetry/sdk",
+      "title": "Get Claude SDK spans",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk",
+      "headings": [
+        {
+          "text": "1. Install the SDK",
+          "level": 2
+        },
+        {
+          "text": "2. Register a tracer provider",
+          "level": 2
+        },
+        {
+          "text": "3. Send spans to your observability platform",
+          "level": 2
+        },
+        {
+          "text": "4. Configure the SDK",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        },
+        {
+          "text": "Tracing a stream",
+          "level": 2
+        },
+        {
+          "text": "Tracing a Managed Agents self-hosted sandbox",
+          "level": 2
+        },
+        {
+          "text": "Trace context and baggage",
+          "level": 2
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "span": 53,
+        "sdk": 50,
+        "opentelemetry": 19,
+        "claude": 19,
+        "send": 18,
+        "exporter": 17,
+        "tab": 16,
+        "tool": 15,
+        "platform": 13,
+        "each": 13,
+        "request": 13,
+        "api": 13,
+        "trace": 12,
+        "trac": 12,
+        "application": 12,
+        "doesn": 12,
+        "typescript": 12,
+        "java": 12,
+        "php": 12,
+        "title": 11,
+        "install": 11,
+        "console": 10,
+        "example": 9,
+        "step": 9,
+        "register": 9,
+        "tracer": 9,
+        "provider": 9,
+        "context": 9,
+        "observability": 8,
+        "yet": 8,
+        "next": 8,
+        "print": 8,
+        "codegroup": 8,
+        "csharp": 8,
+        "call": 8,
+        "one": 8,
+        "stream": 8,
+        "beta": 7,
+        "option": 7,
+        "set": 7,
+        "read": 7,
+        "http": 6,
+        "nest": 6,
+        "own": 6,
+        "version": 6,
+        "python": 6,
+        "see": 6,
+        "under": 6,
+        "client": 6,
+        "header": 6
+      },
+      "word_count": 2924
     },
     {
       "filename": "docs__en__manage-claude__plugins-api.md",
@@ -128338,18 +130634,18 @@
         "response": 8,
         "parameter": 8,
         "limiter": 8,
+        "claude": 7,
         "query": 7,
         "admin": 7,
         "every": 7,
         "only": 7,
         "override": 7,
         "type": 7,
-        "claude": 6,
+        "page": 6,
         "configur": 6,
         "key": 6,
         "default": 6,
         "such": 6,
-        "page": 5,
         "read": 5,
         "level": 5,
         "any": 5,
@@ -128367,7 +130663,7 @@
         "acces": 3,
         "workspac": 3
       },
-      "word_count": 3861
+      "word_count": 3864
     },
     {
       "filename": "docs__en__manage-claude__spend-limits-api.md",
@@ -128683,7 +130979,7 @@
         "api": 51,
         "usage": 50,
         "cost": 44,
-        "claude": 24,
+        "claude": 25,
         "key": 20,
         "organization": 15,
         "data": 15,
@@ -128728,10 +131024,10 @@
         "request": 5,
         "value": 5,
         "com": 4,
-        "available": 4,
-        "optimize": 4
+        "page": 4,
+        "available": 4
       },
-      "word_count": 1725
+      "word_count": 1732
     },
     {
       "filename": "docs__en__manage-claude__user-management.md",
@@ -129049,8 +131345,8 @@
         "list": 10,
         "manage": 9,
         "request": 9,
+        "page": 9,
         "every": 8,
-        "page": 8,
         "read": 8,
         "step": 8,
         "console": 7,
@@ -129079,7 +131375,7 @@
         "target": 5,
         "whose": 5
       },
-      "word_count": 4006
+      "word_count": 4007
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__aws.md",
@@ -129162,6 +131458,7 @@
         "pod": 10,
         "rule": 10,
         "url": 9,
+        "claude": 9,
         "path": 9,
         "anthropic": 9,
         "call": 8,
@@ -129169,9 +131466,9 @@
         "sdk": 8,
         "cluster": 8,
         "title": 7,
-        "claude": 7,
         "oidc": 7,
         "claim": 7,
+        "console": 6,
         "wizard": 6,
         "register": 6,
         "creat": 6,
@@ -129182,18 +131479,17 @@
         "only": 5,
         "inside": 5,
         "fail": 5,
+        "page": 5,
         "value": 5,
         "audience": 5,
         "rul": 4,
         "see": 4,
-        "console": 4,
         "web": 4,
         "same": 4,
         "configure": 4,
-        "setting": 4,
         "per": 4
       },
-      "word_count": 3006
+      "word_count": 3018
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__azure.md",
@@ -129281,12 +131577,12 @@
         "registration": 21,
         "federation": 21,
         "exchange": 21,
+        "claude": 20,
         "client": 20,
         "anthropic": 19,
         "register": 18,
         "azure": 17,
         "value": 17,
-        "claude": 16,
         "set": 15,
         "account": 15,
         "wizard": 15,
@@ -129311,11 +131607,11 @@
         "configure": 9,
         "path": 9,
         "creat": 9,
+        "page": 9,
         "default": 9,
-        "kubernet": 9,
-        "acces": 8
+        "kubernet": 9
       },
-      "word_count": 6294
+      "word_count": 6318
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__gcp.md",
@@ -129366,7 +131662,7 @@
         "rule": 11,
         "gke": 10,
         "claim": 10,
-        "claude": 8,
+        "claude": 9,
         "run": 8,
         "engine": 8,
         "anthropic": 8,
@@ -129401,11 +131697,11 @@
         "discovery": 3,
         "register": 3,
         "rul": 3,
+        "console": 3,
         "configure": 3,
-        "side": 3,
-        "inside": 3
+        "side": 3
       },
-      "word_count": 1957
+      "word_count": 1963
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__github-actions.md",
@@ -129451,9 +131747,9 @@
         "match": 11,
         "run": 9,
         "request": 9,
+        "claude": 8,
         "anthropic": 8,
         "job": 8,
-        "claude": 7,
         "identity": 7,
         "repository": 7,
         "action": 6,
@@ -129468,6 +131764,7 @@
         "call": 4,
         "branch": 4,
         "against": 4,
+        "console": 4,
         "sdk": 4,
         "pin": 4,
         "wif": 3,
@@ -129479,8 +131776,7 @@
         "service": 3,
         "account": 3,
         "permission": 3,
-        "console": 3,
-        "under": 3,
+        "page": 3,
         "only": 3,
         "add": 3,
         "variabl": 3,
@@ -129495,7 +131791,7 @@
         "url": 2,
         "provider": 2
       },
-      "word_count": 1519
+      "word_count": 1526
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__kubernetes.md",
@@ -129548,9 +131844,9 @@
         "api": 7,
         "project": 7,
         "url": 6,
+        "claude": 6,
         "manag": 6,
         "every": 6,
-        "claude": 5,
         "provider": 5,
         "server": 5,
         "set": 5,
@@ -129573,6 +131869,7 @@
         "through": 3,
         "each": 3,
         "claim": 3,
+        "page": 3,
         "rul": 3,
         "default": 3,
         "one": 3,
@@ -129580,12 +131877,11 @@
         "fetch": 3,
         "register": 3,
         "mode": 3,
+        "console": 3,
         "wizard": 3,
-        "creat": 3,
-        "fail": 3,
-        "scope": 3
+        "creat": 3
       },
-      "word_count": 1481
+      "word_count": 1487
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__okta.md",
@@ -129642,12 +131938,13 @@
         "scope": 8,
         "create": 8,
         "client": 8,
+        "claude": 7,
         "issuer": 7,
-        "claude": 6,
         "wif": 5,
         "application": 5,
         "api": 5,
         "configure": 5,
+        "console": 5,
         "audience": 5,
         "each": 5,
         "url": 4,
@@ -129659,7 +131956,6 @@
         "path": 4,
         "endpoint": 4,
         "follow": 4,
-        "console": 4,
         "request": 4,
         "set": 4,
         "call": 4,
@@ -129675,7 +131971,7 @@
         "authentication": 3,
         "account": 3
       },
-      "word_count": 2123
+      "word_count": 2129
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__spiffe.md",
@@ -129736,7 +132032,7 @@
         "federation": 25,
         "provider": 24,
         "issuer": 22,
-        "claude": 20,
+        "claude": 21,
         "anthropic": 20,
         "token": 19,
         "register": 17,
@@ -129777,7 +132073,7 @@
         "any": 7,
         "mode": 7
       },
-      "word_count": 3318
+      "word_count": 3324
     },
     {
       "filename": "docs__en__manage-claude__wif-reference.md",
@@ -129898,9 +132194,9 @@
         "str": 17,
         "match": 16,
         "step": 15,
+        "claude": 14,
         "request": 14,
         "set": 14,
-        "claude": 13,
         "environment": 13,
         "only": 13,
         "provider": 12,
@@ -129931,7 +132227,7 @@
         "yes": 8,
         "mint": 8
       },
-      "word_count": 3791
+      "word_count": 3796
     },
     {
       "filename": "docs__en__manage-claude__workload-identity-federation.md",
@@ -130004,7 +132300,7 @@
         "api": 25,
         "provider": 25,
         "jwt": 24,
-        "claude": 22,
+        "claude": 23,
         "key": 21,
         "rule": 21,
         "exchange": 16,
@@ -130045,7 +132341,7 @@
         "href": 7,
         "liv": 6
       },
-      "word_count": 2834
+      "word_count": 2840
     },
     {
       "filename": "docs__en__manage-claude__workspaces.md",
@@ -130160,17 +132456,18 @@
         }
       ],
       "terms": {
-        "workspace": 153,
+        "workspace": 155,
         "api": 59,
         "key": 55,
         "organization": 48,
         "workspac": 47,
         "limit": 45,
-        "claude": 34,
+        "claude": 38,
         "member": 34,
         "admin": 28,
         "acces": 22,
         "step": 22,
+        "console": 21,
         "bill": 20,
         "code": 19,
         "title": 18,
@@ -130179,9 +132476,9 @@
         "account": 17,
         "user": 17,
         "usage": 16,
-        "console": 16,
+        "create": 16,
         "accordion": 16,
-        "create": 15,
+        "page": 15,
         "role": 15,
         "cost": 14,
         "creat": 14,
@@ -130198,6 +132495,7 @@
         "set": 11,
         "service": 10,
         "header": 10,
+        "open": 10,
         "request": 10,
         "team": 9,
         "each": 9,
@@ -130207,11 +132505,9 @@
         "remov": 9,
         "click": 9,
         "work": 8,
-        "page": 8,
-        "token": 8,
-        "every": 7
+        "token": 8
       },
-      "word_count": 4350
+      "word_count": 4391
     },
     {
       "filename": "docs__en__managed-agents__agent-setup.md",
@@ -132504,17 +134800,17 @@
         }
       ],
       "terms": {
-        "host": 33,
+        "host": 34,
         "worker": 31,
         "agent": 28,
-        "environment": 27,
+        "environment": 28,
         "sandbox": 23,
         "self": 22,
         "session": 22,
         "manag": 21,
         "step": 19,
+        "claude": 18,
         "title": 17,
-        "claude": 17,
         "tool": 17,
         "platform": 14,
         "anthropic": 13,
@@ -132531,6 +134827,7 @@
         "cli": 7,
         "control": 6,
         "queue": 6,
+        "create": 6,
         "stor": 6,
         "model": 6,
         "see": 6,
@@ -132541,7 +134838,6 @@
         "server": 6,
         "icon": 6,
         "href": 6,
-        "create": 5,
         "memory": 5,
         "call": 5,
         "sdk": 5,
@@ -132555,7 +134851,7 @@
         "stay": 4,
         "data": 4
       },
-      "word_count": 2082
+      "word_count": 2090
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-custom-tools.md",
@@ -133159,24 +135455,24 @@
       ],
       "terms": {
         "session": 55,
-        "agent": 17,
+        "agent": 16,
         "event": 16,
         "thread": 14,
         "cost": 11,
         "tool": 10,
         "usage": 9,
         "stream": 9,
-        "manag": 8,
         "token": 8,
         "list": 8,
         "one": 8,
-        "select": 7,
+        "claude": 7,
+        "manag": 7,
         "time": 7,
         "request": 7,
         "budget": 7,
-        "claude": 6,
         "read": 6,
         "see": 6,
+        "select": 6,
         "per": 6,
         "platform": 5,
         "open": 5,
@@ -133209,7 +135505,7 @@
         "inspector": 3,
         "detail": 3
       },
-      "word_count": 1046
+      "word_count": 1045
     },
     {
       "filename": "docs__en__managed-agents__session-operations.md",
@@ -133895,7 +136191,7 @@
       ],
       "terms": {
         "event": 72,
-        "endpoint": 22,
+        "endpoint": 23,
         "archiv": 21,
         "agent": 18,
         "session": 18,
@@ -133925,6 +136221,7 @@
         "memory": 7,
         "attempt": 7,
         "retri": 6,
+        "each": 6,
         "only": 6,
         "vault": 6,
         "emitt": 6,
@@ -133932,20 +136229,19 @@
         "emit": 6,
         "url": 5,
         "chang": 5,
-        "each": 5,
         "error": 5,
         "because": 5,
         "includ": 5,
+        "one": 5,
         "manag": 4,
         "without": 4,
         "while": 4,
         "stream": 4,
         "directly": 4,
         "example": 4,
-        "new": 4,
-        "once": 4
+        "new": 4
       },
-      "word_count": 2498
+      "word_count": 2518
     },
     {
       "filename": "docs__en__managed-agents__workflow-runs.md",
