@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T03:16:27.568229Z",
+  "generated_at": "2026-10-14T06:18:10.155892Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -466,8 +466,8 @@
       "md_url": "https://code.claude.com/docs/en/artifacts.md",
       "title": "Share session output as artifacts",
       "category": "claude_code",
-      "sha256": "91db43877648f4cc2864a4eca51771960323cbafa26f7f9c06bf10021be5c5eb",
-      "lastmod": "2026-10-08T22:44:59.311Z",
+      "sha256": "b1c6bd9b1944d46fa002afdccc90ff532f2fe46f6e93bdcf4328621ace2281c0",
+      "lastmod": "2026-10-14T03:35:39.856Z",
       "fetch_status": "ok"
     },
     {
@@ -532,8 +532,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "ec94562ba87d7910b82cfb83223ba14bf3b39e9901b69b4487c907b661023e3a",
-      "lastmod": "2026-10-09T19:44:57.631Z",
+      "sha256": "dfc62da25a39339848ffedb7cf2beadf51f41458d7b681d79d25b22274550d5e",
+      "lastmod": "2026-10-14T03:09:47.306Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "d2b29e8c00596e9a6c187f9e8255d9b8395be6c964ae8bcc9fa04f53cb01ea71",
-      "lastmod": "2026-10-14T01:12:20.171Z",
+      "sha256": "a439ceb1794acfc428a12ebd21ce1233a6e0df45513a9957b5e7f9a8a7d011d9",
+      "lastmod": "2026-10-14T03:38:46.792Z",
       "fetch_status": "ok"
     },
     {
@@ -961,8 +961,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "9f32eeb8421d2f720c6f7a8a4c1382e39465550db941552be7caf0b2b98a47dc",
-      "lastmod": "2026-10-14T01:12:20.180Z",
+      "sha256": "b9a6292b0ca669f9a047a288f158673a80153fe256f5267e1795e7dc7d0d5dd2",
+      "lastmod": "2026-10-14T03:25:02.662Z",
       "fetch_status": "ok"
     },
     {
@@ -1126,8 +1126,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "c43a2f59cea3a45e2d1fc17308713d65d0ac11eb16e7e896aa0544d0231caaba",
-      "lastmod": "2026-10-14T02:36:06.946Z",
+      "sha256": "0ccea55b53b6b616134028b857028cf3822b89958a9c4b23806287dddeefe954",
+      "lastmod": "2026-10-14T03:30:27.317Z",
       "fetch_status": "ok"
     },
     {
@@ -1159,8 +1159,8 @@
       "md_url": "https://code.claude.com/docs/en/interactive-mode.md",
       "title": "Interactive mode",
       "category": "claude_code",
-      "sha256": "cb5639a1fea0feae46bde00531961df90905c5624b260672ad540c607a95c0fe",
-      "lastmod": "2026-10-13T04:17:14.823Z",
+      "sha256": "9c45cebdde1c3a9e4698e0b2dab53c1a5382066efce6005e3cbf3fb9efde2b35",
+      "lastmod": "2026-10-14T03:38:46.774Z",
       "fetch_status": "ok"
     },
     {
@@ -1423,8 +1423,8 @@
       "md_url": "https://code.claude.com/docs/en/plugin-evals.md",
       "title": "Test plugins with evals",
       "category": "claude_code",
-      "sha256": "943a63ef6fd88dd8c6451e344436b44e4294bf0f92f2047a784a1fd9c4b9f51d",
-      "lastmod": "2026-10-08T18:23:29.269Z",
+      "sha256": "3aa9a4f55aa6f618ddc66d7e6448eed3163eabbc2e3af35261f761aab3b0afb2",
+      "lastmod": "2026-10-14T03:20:37.724Z",
       "fetch_status": "ok"
     },
     {
@@ -1654,8 +1654,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/overview.md",
       "title": "Mods overview",
       "category": "claude_code",
-      "sha256": "fe5601eb58bd3be5cb06eb28fda9cbf09852ece268729d71b3cfffed882a2825",
-      "lastmod": "2026-10-08T20:16:31.500Z",
+      "sha256": "9d2ed34f2a7bc14ce8f3c4fe844cfa9733a4dbaee02495f9a4488e54de1029ce",
+      "lastmod": "2026-10-14T03:38:46.773Z",
       "fetch_status": "ok"
     },
     {
@@ -1709,8 +1709,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/overview.md",
       "title": "Plugins overview",
       "category": "claude_code",
-      "sha256": "eb8b9f92d75d42d777d3bdbc89273c2df881b6a3cf58afaa63418d55a70538f5",
-      "lastmod": "2026-10-02T04:12:04.132Z",
+      "sha256": "a33630ffe4a2432e4204fa0a512cffda4a037cf1441fb964a2104517589c8654",
+      "lastmod": "2026-10-14T03:38:46.761Z",
       "fetch_status": "ok"
     },
     {
@@ -1995,8 +1995,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "319cb41056b3b3b88fbf0240ebafacd7ce07e685b48b4915538f3431784e9773",
-      "lastmod": "2026-10-14T02:36:06.958Z",
+      "sha256": "2db996847f31ad322a4eff57aa8a1e5ca4618701fd1caf2191327a3922be095c",
+      "lastmod": "2026-10-14T03:32:07.978Z",
       "fetch_status": "ok"
     },
     {
