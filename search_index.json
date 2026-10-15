@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T03:15:54.320010Z",
+  "generated_at": "2026-10-15T06:18:24.747595Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14038,6 +14038,26 @@
           "level": 5
         },
         {
+          "text": "Connections that close before login",
+          "level": 4
+        },
+        {
+          "text": "Recognize a test in the SSH server's log",
+          "level": 5
+        },
+        {
+          "text": "Check whether the SSH server itself refuses the address",
+          "level": 5
+        },
+        {
+          "text": "Check whether fail2ban counts Desktop's tests",
+          "level": 5
+        },
+        {
+          "text": "Prevent a ban by fail2ban",
+          "level": 5
+        },
+        {
           "text": "Use MCP servers set up on the remote machine",
           "level": 4
         },
@@ -14180,30 +14200,32 @@
         "session": 48,
         "json": 41,
         "browser": 35,
+        "mode": 31,
         "desktop": 30,
         "code": 28,
         "setting": 25,
         "pane": 24,
         "prompt": 24,
         "permission": 24,
-        "mode": 24,
+        "config": 24,
         "com": 22,
         "app": 22,
-        "config": 22,
+        "host": 22,
         "file": 21,
         "open": 21,
         "run": 20,
         "auto": 20,
-        "host": 20,
         "cmd": 20,
         "devbox": 20,
+        "remote": 19,
         "click": 18,
+        "port": 18,
         "diff": 17,
-        "remote": 17,
         "server": 17,
         "review": 16,
         "chang": 16,
         "external": 16,
+        "connection": 16,
         "fil": 16,
         "edit": 15,
         "user": 15,
@@ -14212,6 +14234,8 @@
         "true": 14,
         "proxycommand": 14,
         "start": 13,
+        "read": 13,
+        "sshd": 13,
         "terminal": 12,
         "tab": 12,
         "see": 12,
@@ -14220,13 +14244,9 @@
         "command": 12,
         "plan": 12,
         "dev": 12,
-        "shift": 12,
-        "example": 12,
-        "without": 11,
-        "pres": 11,
-        "port": 11
+        "shift": 12
       },
-      "word_count": 21188
+      "word_count": 22107
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
