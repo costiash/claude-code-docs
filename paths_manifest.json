@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T00:21:38.456266Z",
+  "generated_at": "2026-10-15T03:15:49.759959Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -191,8 +191,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/observability.md",
       "title": "Observability with OpenTelemetry",
       "category": "agent_sdk",
-      "sha256": "1ac3a6038dd6a5ad9007987d48f3a7a6bc2d6b2889ac32fb5956d390a37d7e14",
-      "lastmod": "2026-09-28T23:54:40.887Z",
+      "sha256": "4df4a9bacf53675a2e013d5fde79900919c88f2f803d5b8402cb835e961ff495",
+      "lastmod": "2026-10-15T01:28:56.078Z",
       "fetch_status": "ok"
     },
     {
@@ -466,8 +466,8 @@
       "md_url": "https://code.claude.com/docs/en/artifacts.md",
       "title": "Share session output as artifacts",
       "category": "claude_code",
-      "sha256": "b1c6bd9b1944d46fa002afdccc90ff532f2fe46f6e93bdcf4328621ace2281c0",
-      "lastmod": "2026-10-14T03:35:39.856Z",
+      "sha256": "576f8135d78e2358554d9e3779dd223eda358549b60a6d7e54d47be45c6962b6",
+      "lastmod": "2026-10-15T01:32:55.893Z",
       "fetch_status": "ok"
     },
     {
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "8157072e9e1a5ba4598c8676a0672128d12de5f69547cef3f9ed84e87f4f6474",
-      "lastmod": "2026-10-14T16:37:50.300Z",
+      "sha256": "54351937e4d1a8b7b79d43fc9784709be4fd0a2c5d2423c5388fa2ff88550b3a",
+      "lastmod": "2026-10-15T01:32:55.907Z",
       "fetch_status": "ok"
     },
     {
@@ -1346,8 +1346,8 @@
       "md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
       "title": "Monitoring",
       "category": "claude_code",
-      "sha256": "cbd1ffa0b7e8a36a5e501ce68e174ac0c1105f404d45c31320806ffb37d4c8bf",
-      "lastmod": "2026-10-14T02:36:06.941Z",
+      "sha256": "72374067fb003eb1c3287d1517147924c1c7475f50663e08d1d2cf26577ba188",
+      "lastmod": "2026-10-15T01:28:56.095Z",
       "fetch_status": "ok"
     },
     {
@@ -2138,8 +2138,8 @@
       "md_url": "https://code.claude.com/docs/en/vs-code.md",
       "title": "Use Claude Code in VS Code",
       "category": "claude_code",
-      "sha256": "707d0adea02c6e267f532eb893d683164e4f9193fdac6d03463443abf92b73b6",
-      "lastmod": "2026-10-10T16:37:53.059Z",
+      "sha256": "b3805ed6ffeabfa2aece56253473d418da5c97b89adb4eb5554bf39f0a2484f6",
+      "lastmod": "2026-10-15T01:30:41.095Z",
       "fetch_status": "ok"
     },
     {
@@ -2446,8 +2446,8 @@
       "md_url": "https://code.claude.com/docs/en/workflows.md",
       "title": "Orchestrate subagents at scale with dynamic workflows",
       "category": "claude_code",
-      "sha256": "764adc113891e88b0c6fc70e6aa51d3c5d207a773e9747f9e4f4e9b0e1a392e9",
-      "lastmod": "2026-10-14T02:36:06.926Z",
+      "sha256": "a324b4814d760d6c6f115a0a534123fe71acc40e4a9fa63f0e2f85200df197dd",
+      "lastmod": "2026-10-15T01:29:36.466Z",
       "fetch_status": "ok"
     },
     {
@@ -6703,7 +6703,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions.md",
       "title": "IAM actions (Claude Platform on AWS)",
       "category": "api_reference",
-      "sha256": "46c056ab748e95e5c4d7cb6da5b9222ef2bee21047bfc2ae3b038d36cd074d4b",
+      "sha256": "cdab47a48fba79d40feafd978d9b9e54306b337694bcf3119508aeb578c10264",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -8727,7 +8727,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "97c763f7ae548739b48dfc81f1222af1037c4d10aca1beaf9b9d5d3c1aa0774f",
+      "sha256": "a6a9e2ece98885b55fd0f8fe5b07da56c6afbf68a7d9a9fc6763981ee9303c5a",
       "lastmod": null,
       "fetch_status": "ok"
     },
