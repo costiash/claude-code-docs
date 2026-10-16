@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T03:16:08.383160Z",
+  "generated_at": "2026-10-16T06:18:51.578436Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -38589,11 +38589,14 @@
         "languag": 6,
         "available": 6,
         "repository": 6,
+        "install": 6,
         "pattern": 6,
         "migrat": 6,
+        "ask": 6,
         "example": 6,
         "before": 6,
         "card": 6,
+        "title": 5,
         "http": 5,
         "com": 5,
         "stream": 5,
@@ -38604,13 +38607,10 @@
         "php": 5,
         "also": 5,
         "where": 5,
-        "install": 5,
         "migration": 5,
-        "chang": 5,
-        "think": 5,
-        "through": 5
+        "chang": 5
       },
-      "word_count": 1942
+      "word_count": 1944
     },
     {
       "filename": "docs__en__agents-and-tools__agent-skills__enterprise.md",
@@ -107169,7 +107169,7 @@
         }
       ],
       "terms": {
-        "span": 181,
+        "span": 182,
         "request": 118,
         "api": 86,
         "tool": 83,
@@ -107210,9 +107210,9 @@
         "such": 16,
         "current": 16,
         "emit": 15,
+        "set": 15,
         "follow": 15,
         "stream": 15,
-        "set": 14,
         "kind": 14,
         "server": 14,
         "source": 14,
@@ -107220,7 +107220,7 @@
         "result": 13,
         "usage": 13
       },
-      "word_count": 5462
+      "word_count": 5463
     },
     {
       "filename": "docs__en__api__organization.md",
@@ -131404,12 +131404,12 @@
         "agent": 10,
         "example": 10,
         "select": 10,
+        "set": 9,
         "manag": 9,
         "session": 9,
         "fail": 9,
         "under": 8,
         "organization": 8,
-        "set": 8,
         "trace": 8,
         "aws": 7,
         "admin": 7,
@@ -131426,7 +131426,7 @@
         "click": 6,
         "other": 6
       },
-      "word_count": 3467
+      "word_count": 3468
     },
     {
       "filename": "docs__en__manage-claude__opentelemetry__sdk.md",
@@ -131501,6 +131501,7 @@
         "tracer": 9,
         "provider": 9,
         "context": 9,
+        "set": 8,
         "observability": 8,
         "yet": 8,
         "next": 8,
@@ -131512,7 +131513,6 @@
         "stream": 8,
         "beta": 7,
         "option": 7,
-        "set": 7,
         "read": 7,
         "http": 6,
         "nest": 6,
@@ -131524,7 +131524,7 @@
         "header": 6,
         "doc": 5
       },
-      "word_count": 2904
+      "word_count": 2905
     },
     {
       "filename": "docs__en__manage-claude__plugins-api.md",
@@ -132683,7 +132683,7 @@
         }
       ],
       "terms": {
-        "token": 31,
+        "token": 32,
         "account": 24,
         "aws": 23,
         "federation": 21,
@@ -132723,18 +132723,18 @@
         "credential": 5,
         "only": 5,
         "inside": 5,
+        "see": 5,
         "fail": 5,
         "page": 5,
         "value": 5,
         "audience": 5,
+        "provider": 4,
         "rul": 4,
-        "see": 4,
         "web": 4,
         "same": 4,
-        "configure": 4,
-        "per": 4
+        "configure": 4
       },
-      "word_count": 3018
+      "word_count": 3162
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__azure.md",
@@ -132805,9 +132805,9 @@
         }
       ],
       "terms": {
-        "token": 127,
+        "token": 129,
         "identity": 69,
-        "entra": 55,
+        "entra": 57,
         "workload": 39,
         "issuer": 38,
         "manag": 37,
@@ -132828,11 +132828,11 @@
         "register": 18,
         "azure": 17,
         "value": 17,
+        "see": 16,
         "set": 15,
         "account": 15,
         "wizard": 15,
         "microsoft": 14,
-        "see": 14,
         "issu": 12,
         "aks": 12,
         "assign": 12,
@@ -132856,7 +132856,7 @@
         "default": 9,
         "kubernet": 9
       },
-      "word_count": 6318
+      "word_count": 6621
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__gcp.md",
@@ -132896,7 +132896,7 @@
       ],
       "terms": {
         "google": 27,
-        "token": 24,
+        "token": 25,
         "service": 23,
         "cloud": 22,
         "account": 22,
@@ -132934,19 +132934,19 @@
         "numeric": 4,
         "cluster": 4,
         "same": 4,
+        "see": 4,
         "creat": 4,
         "one": 4,
         "title": 3,
+        "provider": 3,
         "any": 3,
         "oidc": 3,
         "discovery": 3,
         "register": 3,
         "rul": 3,
-        "console": 3,
-        "configure": 3,
-        "side": 3
+        "console": 3
       },
-      "word_count": 1963
+      "word_count": 2099
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__github-actions.md",
@@ -133036,7 +133036,7 @@
         "url": 2,
         "provider": 2
       },
-      "word_count": 1526
+      "word_count": 1528
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__kubernetes.md",
@@ -133165,11 +133165,11 @@
         }
       ],
       "terms": {
-        "okta": 29,
+        "okta": 30,
         "server": 19,
+        "token": 18,
         "authorization": 17,
         "service": 16,
-        "token": 16,
         "custom": 13,
         "claim": 12,
         "app": 12,
@@ -133177,13 +133177,13 @@
         "rule": 10,
         "workload": 9,
         "federation": 9,
-        "anthropic": 9,
         "one": 9,
         "match": 9,
+        "claude": 8,
+        "anthropic": 8,
         "scope": 8,
         "create": 8,
         "client": 8,
-        "claude": 7,
         "issuer": 7,
         "wif": 5,
         "application": 5,
@@ -133191,8 +133191,8 @@
         "configure": 5,
         "console": 5,
         "audience": 5,
-        "each": 5,
         "url": 4,
+        "provider": 4,
         "identity": 4,
         "issu": 4,
         "through": 4,
@@ -133202,10 +133202,11 @@
         "endpoint": 4,
         "follow": 4,
         "request": 4,
+        "example": 4,
         "set": 4,
         "call": 4,
+        "each": 4,
         "exchange": 4,
-        "provider": 3,
         "oidc": 3,
         "note": 3,
         "must": 3,
@@ -133213,10 +133214,9 @@
         "key": 3,
         "ensure": 3,
         "configuration": 3,
-        "authentication": 3,
-        "account": 3
+        "authentication": 3
       },
-      "word_count": 2129
+      "word_count": 2261
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__spiffe.md",
@@ -133272,14 +133272,14 @@
         "spire": 44,
         "svid": 34,
         "jwt": 33,
+        "provider": 28,
         "api": 26,
         "discovery": 26,
         "federation": 25,
-        "provider": 24,
         "issuer": 22,
+        "token": 22,
         "claude": 21,
         "anthropic": 20,
-        "token": 19,
         "register": 17,
         "url": 16,
         "oidc": 16,
@@ -133318,7 +133318,7 @@
         "any": 7,
         "mode": 7
       },
-      "word_count": 3324
+      "word_count": 3331
     },
     {
       "filename": "docs__en__manage-claude__wif-reference.md",
@@ -133437,19 +133437,19 @@
         "profile": 17,
         "exchange": 17,
         "str": 17,
+        "error": 16,
         "match": 16,
+        "request": 15,
         "step": 15,
         "claude": 14,
-        "request": 14,
+        "only": 14,
         "set": 14,
         "environment": 13,
-        "only": 13,
         "provider": 12,
         "requir": 12,
         "anthropic": 12,
         "one": 12,
         "sign": 12,
-        "error": 11,
         "file": 11,
         "check": 11,
         "configuration": 10,
@@ -133463,16 +133463,16 @@
         "organization": 9,
         "service": 9,
         "account": 9,
+        "response": 9,
         "variable": 9,
         "credential": 9,
         "against": 9,
         "reference": 8,
         "url": 8,
         "each": 8,
-        "yes": 8,
-        "mint": 8
+        "yes": 8
       },
-      "word_count": 3796
+      "word_count": 3844
     },
     {
       "filename": "docs__en__manage-claude__workload-identity-federation.md",

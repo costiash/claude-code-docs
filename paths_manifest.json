@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T03:16:03.829755Z",
+  "generated_at": "2026-10-16T06:18:46.985351Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2721,7 +2721,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill.md",
       "title": "Overview",
       "category": "agents_and_tools",
-      "sha256": "4344f20b49957989b143a27345ab4fcb5fd6369bc30bce9589b2f67018b8eaab",
+      "sha256": "652e0d0fee8928ce066ef208fb58c1ba94a1fcb9bc15ae02e308f3345e861cb7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -7737,7 +7737,7 @@
       "md_url": "https://platform.claude.com/docs/en/api/opentelemetry/spans.md",
       "title": "Spans",
       "category": "api_reference",
-      "sha256": "a4b7ed16bf4a0acc05b33c620076ebf1bbfca16a86b92676eff187a45d2e2ef9",
+      "sha256": "2be70cad118b673be529867672e3bfb4529a6485023a14b12ab8944e0a23c964",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9871,7 +9871,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/api.md",
       "title": "Get Claude API spans",
       "category": "core_documentation",
-      "sha256": "eda24aa81f139a3dce8bb16f7d43e542e130cc01acaf133b00b27322aa5c512a",
+      "sha256": "2dd7a7448f9e4aa40794e3a04d0bc2bd3fd03ff16621fccf50a96abacd1e3690",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9882,7 +9882,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk.md",
       "title": "Get Claude SDK spans",
       "category": "core_documentation",
-      "sha256": "d50211c0b400bb726bb5db247002a6761cd89d5bd266f8be891432c1d8aaf6d5",
+      "sha256": "48f9d2cfa96747bdfd7518ac87d747be70d7757bbc86c5c28375df9093c05c82",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9959,7 +9959,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/aws.md",
       "title": "AWS",
       "category": "core_documentation",
-      "sha256": "081f8461c4485db0116bd0e4d96ebc17730ba49611018ea27f450f53c500a88d",
+      "sha256": "493cb5cd155a04c05d61a85bfa60781a091f28f01fa6b6ee80615acb06889995",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9970,7 +9970,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/azure.md",
       "title": "Microsoft Entra ID",
       "category": "core_documentation",
-      "sha256": "96f5c6bdf9b48efe7c8225760f38b359dc3d8c8e8958d843de151af7d6fe192d",
+      "sha256": "b02faf5c7c857f694e0070dde7076ce1903de22edaf31c88a6cc16a4b741f8e8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9981,7 +9981,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp.md",
       "title": "Google Cloud",
       "category": "core_documentation",
-      "sha256": "05486eb6c4d79474014476ae5d0e4b4431e9b071353f99111bb8d4fe77286466",
+      "sha256": "89e3c2b905b74a271664015b824d9c51cdedb3d737cfe86e158a8e915c92472b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9992,7 +9992,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions.md",
       "title": "GitHub Actions",
       "category": "core_documentation",
-      "sha256": "4933fab6a73e634e39194c96a667a718644cea9615fa15bf1a409820118ecb47",
+      "sha256": "3da34c9eabdee4509ae4315efcc36ba6c3c895dcb17d6daa7e068fcb15385d9e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10014,7 +10014,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/okta.md",
       "title": "Okta",
       "category": "core_documentation",
-      "sha256": "b18a6d97107068a1d817731591579f91b0011246ec849e48f4f46bbbd11dbd6d",
+      "sha256": "b491ec2861e56ac953153a67983b3376ecbf8d835b004350f73e0129b4fb7ad8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10025,7 +10025,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe.md",
       "title": "SPIFFE",
       "category": "core_documentation",
-      "sha256": "a727c3a01a70c0dbcc92dce78ad1c66b1cfb631783df7e651f666ac292848022",
+      "sha256": "ccdb145d469a6184b129c56b72cc5881e82ed0aee47b12a738a6089f1a8997cc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10036,7 +10036,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-reference.md",
       "title": "WIF reference",
       "category": "core_documentation",
-      "sha256": "23a976fa22070b8ba2dc1d5c723fcc0ac033cf33c9ea63109e4704aa7b9047a7",
+      "sha256": "aba756d214e0a9b9c393c3bb94148e7aabd5c18a7fd4180d5cbdd875a7803b5b",
       "lastmod": null,
       "fetch_status": "ok"
     },
