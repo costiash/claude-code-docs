@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T21:16:58.488177Z",
+  "generated_at": "2026-10-16T00:22:27.424806Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -19515,22 +19515,22 @@
         }
       ],
       "terms": {
-        "claude": 227,
-        "code": 166,
+        "claude": 229,
+        "code": 168,
         "prompt": 104,
         "command": 88,
         "session": 79,
         "turn": 66,
+        "line": 56,
         "one": 56,
         "mode": 55,
-        "line": 55,
         "pres": 52,
         "run": 48,
         "input": 47,
         "open": 47,
         "text": 47,
+        "start": 45,
         "background": 44,
-        "start": 44,
         "word": 43,
         "list": 40,
         "terminal": 36,
@@ -19547,26 +19547,26 @@
         "doesn": 29,
         "end": 29,
         "wait": 29,
+        "cursor": 28,
         "only": 28,
         "send": 28,
         "see": 27,
+        "later": 27,
         "queu": 27,
         "first": 26,
-        "cursor": 26,
+        "requir": 26,
         "history": 26,
         "suggestion": 26,
+        "next": 26,
         "panel": 26,
-        "later": 25,
         "off": 25,
         "answer": 25,
-        "next": 25,
         "check": 25,
-        "requir": 24,
         "search": 24,
         "shell": 24,
         "type": 24
       },
-      "word_count": 11215
+      "word_count": 11274
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -37511,13 +37511,13 @@
         }
       ],
       "terms": {
-        "claude": 163,
+        "claude": 165,
         "mtok": 157,
         "token": 131,
         "pric": 92,
         "tool": 65,
         "model": 59,
-        "opu": 44,
+        "opu": 45,
         "prompt": 39,
         "input": 37,
         "ccu": 36,
@@ -37562,7 +37562,7 @@
         "same": 13,
         "endpoint": 13
       },
-      "word_count": 5375
+      "word_count": 5389
     },
     {
       "filename": "docs__en__about-claude__use-case-guides__commerce-agents.md",
@@ -50193,7 +50193,7 @@
       "terms": {
         "tool": 3782,
         "member": 1629,
-        "default": 1609,
+        "default": 1617,
         "model": 1604,
         "call": 1566,
         "agent": 1386,
@@ -50202,11 +50202,11 @@
         "format": 1248,
         "content": 1165,
         "server": 1163,
-        "workspace": 1158,
-        "time": 1137,
+        "workspace": 1159,
+        "time": 1151,
         "request": 1055,
+        "only": 1007,
         "return": 995,
-        "only": 993,
         "result": 986,
         "version": 949,
         "per": 905,
@@ -50214,16 +50214,16 @@
         "api": 861,
         "block": 861,
         "date": 859,
+        "organization": 823,
         "value": 819,
-        "organization": 780,
         "name": 780,
         "input": 778,
         "must": 753,
         "token": 751,
         "judg": 742,
         "enabl": 720,
+        "claude": 719,
         "list": 719,
-        "claude": 705,
         "null": 700,
         "header": 687,
         "execution": 684,
@@ -50232,8 +50232,8 @@
         "key": 670,
         "run": 661,
         "minlength": 648,
+        "same": 629,
         "high": 627,
-        "same": 615,
         "each": 607,
         "response": 585,
         "every": 584,
@@ -50242,7 +50242,7 @@
         "error": 567,
         "confirmation": 564
       },
-      "word_count": 359796
+      "word_count": 360558
     },
     {
       "filename": "docs__en__api__beta-headers.md",
@@ -65214,12 +65214,12 @@
         }
       ],
       "terms": {
-        "organization": 727,
+        "organization": 770,
         "api": 562,
         "key": 518,
-        "default": 495,
-        "claude": 489,
-        "workspace": 487,
+        "claude": 503,
+        "default": 503,
+        "workspace": 488,
         "version": 462,
         "user": 426,
         "plugin": 407,
@@ -65227,11 +65227,11 @@
         "group": 371,
         "null": 362,
         "return": 356,
-        "time": 342,
+        "time": 356,
         "member": 332,
+        "only": 300,
         "day": 293,
         "format": 290,
-        "only": 286,
         "account": 271,
         "header": 270,
         "request": 270,
@@ -65239,33 +65239,33 @@
         "one": 252,
         "response": 250,
         "row": 241,
+        "scope": 236,
+        "read": 235,
+        "usage": 235,
         "destination": 229,
         "list": 227,
-        "read": 221,
         "name": 218,
         "number": 215,
         "token": 214,
-        "usage": 213,
         "service": 210,
         "rbac": 210,
-        "scope": 206,
         "example": 205,
         "parameter": 201,
+        "alway": 197,
         "value": 197,
+        "limit": 194,
         "tagg": 193,
-        "limit": 192,
         "rule": 191,
-        "alway": 189,
-        "same": 163,
+        "same": 177,
+        "set": 170,
         "activity": 160,
         "count": 157,
+        "type": 156,
         "creat": 156,
-        "set": 156,
         "page": 154,
-        "endpoint": 151,
-        "own": 149
+        "endpoint": 151
       },
-      "word_count": 93052
+      "word_count": 93814
     },
     {
       "filename": "docs__en__api__beta__organization__analytics.md",
@@ -79569,6 +79569,10 @@
           "level": 3
         },
         {
+          "text": "Beta Spend Limit Usage Tier Scope",
+          "level": 3
+        },
+        {
           "text": "Beta Spend Limit User Actor",
           "level": 3
         },
@@ -79726,37 +79730,43 @@
         }
       ],
       "terms": {
-        "limit": 167,
-        "spend": 128,
-        "organization": 125,
-        "scope": 111,
-        "default": 108,
+        "organization": 180,
+        "limit": 170,
+        "scope": 152,
+        "spend": 147,
+        "default": 119,
         "user": 61,
         "member": 60,
+        "claude": 58,
+        "cap": 57,
         "delet": 57,
+        "alway": 53,
         "account": 53,
+        "only": 49,
+        "type": 49,
         "period": 46,
         "appli": 46,
-        "workspace": 45,
+        "workspace": 46,
+        "tier": 44,
+        "read": 44,
         "tagg": 43,
-        "alway": 42,
-        "claude": 40,
+        "console": 42,
+        "usage": 41,
+        "anthropic": 40,
         "select": 38,
-        "type": 38,
         "unit": 36,
+        "time": 36,
         "been": 36,
         "api": 35,
         "unavailable": 35,
-        "only": 31,
+        "set": 34,
         "null": 29,
         "version": 28,
-        "read": 26,
         "decimal": 25,
         "minor": 25,
         "one": 25,
         "effective": 25,
         "key": 24,
-        "console": 24,
         "request": 24,
         "cent": 24,
         "scop": 23,
@@ -79764,20 +79774,14 @@
         "row": 22,
         "underly": 22,
         "true": 22,
-        "cap": 21,
         "within": 21,
+        "monthly": 19,
         "non": 19,
         "negative": 19,
         "str": 19,
-        "each": 19,
-        "single": 19,
-        "date": 19,
-        "usd": 18,
-        "report": 18,
-        "format": 18,
-        "time": 18
+        "each": 19
       },
-      "word_count": 7294
+      "word_count": 8287
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__delete.md",
@@ -79812,14 +79816,15 @@
         }
       ],
       "terms": {
-        "limit": 8,
+        "limit": 10,
         "spend": 7,
+        "organization": 6,
         "delete": 5,
-        "organization": 5,
         "delet": 5,
         "claude": 4,
         "api": 3,
         "version": 3,
+        "workspace": 2,
         "title": 1,
         "url": 1,
         "http": 1,
@@ -79846,7 +79851,6 @@
         "via": 1,
         "endpoint": 1,
         "console": 1,
-        "workspace": 1,
         "through": 1,
         "early": 1,
         "acces": 1,
@@ -79863,7 +79867,7 @@
         "return": 1,
         "default": 1
       },
-      "word_count": 148
+      "word_count": 156
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__effective.md",
@@ -79902,40 +79906,45 @@
         }
       ],
       "terms": {
+        "organization": 18,
+        "spend": 14,
         "member": 14,
-        "organization": 12,
-        "spend": 12,
+        "scope": 13,
         "limit": 12,
-        "default": 11,
+        "default": 12,
         "period": 10,
-        "scope": 9,
+        "claude": 8,
         "effective": 7,
         "user": 7,
-        "claude": 6,
         "row": 6,
+        "only": 5,
+        "console": 5,
+        "read": 5,
         "account": 5,
         "delet": 5,
+        "cap": 5,
         "api": 4,
         "one": 4,
         "tagg": 4,
         "unavailable": 4,
         "been": 4,
+        "type": 4,
+        "alway": 4,
         "unit": 4,
+        "usage": 4,
         "select": 4,
+        "tier": 4,
         "workspace": 4,
+        "anthropic": 4,
         "each": 3,
         "return": 3,
         "per": 3,
         "resolv": 3,
-        "only": 3,
-        "console": 3,
         "report": 3,
         "version": 3,
-        "read": 3,
         "null": 3,
         "actor": 3,
-        "type": 3,
-        "alway": 3,
+        "set": 3,
         "decimal": 3,
         "minor": 3,
         "cent": 3,
@@ -79946,14 +79955,9 @@
         "acros": 2,
         "pag": 2,
         "maximum": 2,
-        "page": 2,
-        "carry": 2,
-        "response": 2,
-        "restrict": 2,
-        "maxitem": 2,
-        "underly": 2
+        "page": 2
       },
-      "word_count": 725
+      "word_count": 831
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__effective__list.md",
@@ -79988,41 +79992,46 @@
         }
       ],
       "terms": {
+        "organization": 18,
+        "spend": 15,
         "member": 14,
-        "spend": 13,
         "limit": 13,
-        "organization": 12,
-        "default": 11,
+        "scope": 13,
+        "default": 12,
         "period": 10,
-        "scope": 9,
+        "claude": 8,
         "user": 7,
         "effective": 6,
-        "claude": 6,
         "row": 6,
+        "only": 5,
+        "console": 5,
+        "read": 5,
         "account": 5,
         "delet": 5,
+        "cap": 5,
         "list": 4,
         "api": 4,
         "one": 4,
         "tagg": 4,
         "unavailable": 4,
         "been": 4,
+        "type": 4,
+        "alway": 4,
         "unit": 4,
+        "usage": 4,
         "select": 4,
+        "tier": 4,
         "workspace": 4,
+        "anthropic": 4,
         "each": 3,
         "return": 3,
         "per": 3,
         "resolv": 3,
-        "only": 3,
-        "console": 3,
         "report": 3,
         "version": 3,
-        "read": 3,
         "null": 3,
         "actor": 3,
-        "type": 3,
-        "alway": 3,
+        "set": 3,
         "decimal": 3,
         "minor": 3,
         "cent": 3,
@@ -80032,14 +80041,9 @@
         "acros": 2,
         "pag": 2,
         "maximum": 2,
-        "page": 2,
-        "carry": 2,
-        "response": 2,
-        "restrict": 2,
-        "maxitem": 2,
-        "underly": 2
+        "page": 2
       },
-      "word_count": 726
+      "word_count": 832
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__increase_requests.md",
@@ -80174,24 +80178,34 @@
         }
       ],
       "terms": {
-        "organization": 87,
+        "organization": 129,
+        "scope": 84,
+        "spend": 80,
         "limit": 80,
-        "spend": 66,
-        "default": 64,
-        "scope": 58,
+        "default": 70,
         "account": 54,
         "delet": 54,
         "user": 50,
         "member": 40,
+        "only": 40,
+        "cap": 40,
         "unavailable": 36,
         "been": 36,
+        "claude": 33,
+        "read": 32,
         "null": 30,
+        "time": 30,
         "period": 30,
+        "anthropic": 30,
         "api": 29,
         "unit": 29,
         "request": 28,
+        "alway": 28,
+        "usage": 28,
         "select": 28,
-        "only": 26,
+        "console": 28,
+        "type": 26,
+        "tier": 26,
         "workspace": 26,
         "underly": 24,
         "true": 24,
@@ -80200,15 +80214,12 @@
         "appli": 24,
         "increase": 23,
         "tagg": 23,
-        "alway": 22,
+        "set": 22,
         "decimal": 21,
         "minor": 21,
         "within": 20,
-        "type": 20,
         "effective": 20,
         "cent": 20,
-        "claude": 19,
-        "read": 18,
         "actor": 18,
         "admin": 18,
         "act": 18,
@@ -80216,16 +80227,9 @@
         "row": 18,
         "format": 16,
         "date": 16,
-        "time": 16,
-        "one": 16,
-        "non": 15,
-        "negative": 15,
-        "str": 15,
-        "report": 14,
-        "usd": 14,
-        "single": 14
+        "one": 16
       },
-      "word_count": 4888
+      "word_count": 5618
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__increase_requests__approve.md",
@@ -80264,58 +80268,58 @@
         }
       ],
       "terms": {
+        "organization": 27,
         "limit": 25,
-        "spend": 20,
-        "organization": 18,
-        "scope": 13,
-        "default": 12,
+        "spend": 23,
+        "scope": 18,
+        "default": 13,
         "user": 10,
+        "cap": 10,
         "account": 9,
         "delet": 9,
+        "claude": 8,
         "member": 8,
+        "only": 8,
         "request": 7,
         "period": 7,
+        "anthropic": 7,
+        "read": 7,
         "unit": 7,
+        "time": 7,
         "increase": 6,
         "api": 6,
         "unavailable": 6,
         "been": 6,
+        "alway": 6,
         "appli": 6,
+        "usage": 6,
         "select": 6,
-        "claude": 5,
+        "console": 6,
+        "set": 5,
         "decimal": 5,
         "minor": 5,
         "null": 5,
-        "only": 5,
-        "alway": 5,
+        "type": 5,
         "tagg": 5,
+        "tier": 5,
         "workspace": 5,
         "approve": 4,
-        "read": 4,
         "non": 4,
         "negative": 4,
         "str": 4,
         "within": 4,
         "underly": 4,
         "true": 4,
-        "type": 4,
         "scop": 4,
         "key": 4,
         "format": 4,
         "date": 4,
-        "time": 4,
-        "cap": 4,
         "one": 4,
         "cent": 4,
         "effective": 4,
-        "per": 3,
-        "version": 3,
-        "integer": 3,
-        "actor": 3,
-        "admin": 3,
-        "act": 3
+        "per": 3
       },
-      "word_count": 1094
+      "word_count": 1247
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__increase_requests__deny.md",
@@ -80354,38 +80358,45 @@
         }
       ],
       "terms": {
-        "organization": 14,
+        "organization": 20,
+        "spend": 13,
         "limit": 12,
-        "spend": 11,
-        "default": 10,
+        "scope": 12,
+        "default": 11,
         "account": 9,
         "delet": 9,
         "user": 8,
-        "scope": 8,
         "request": 7,
         "increase": 6,
+        "claude": 6,
         "api": 6,
         "unavailable": 6,
         "been": 6,
+        "only": 6,
         "member": 6,
         "deny": 5,
+        "anthropic": 5,
+        "read": 5,
         "null": 5,
-        "claude": 4,
+        "cap": 5,
+        "set": 4,
         "underly": 4,
         "true": 4,
-        "only": 4,
+        "type": 4,
+        "alway": 4,
         "scop": 4,
         "key": 4,
+        "time": 4,
         "unit": 4,
         "period": 4,
+        "usage": 4,
         "select": 4,
+        "tier": 4,
         "workspace": 4,
+        "console": 4,
         "version": 3,
-        "read": 3,
         "within": 3,
         "actor": 3,
-        "type": 3,
-        "alway": 3,
         "tagg": 3,
         "admin": 3,
         "act": 3,
@@ -80396,16 +80407,9 @@
         "minor": 3,
         "cent": 3,
         "appli": 3,
-        "return": 2,
-        "email": 2,
-        "set": 2,
-        "parameter": 2,
-        "current": 2,
-        "name": 2,
-        "format": 2,
-        "date": 2
+        "return": 2
       },
-      "word_count": 782
+      "word_count": 888
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__increase_requests__list.md",
@@ -80440,40 +80444,47 @@
         }
       ],
       "terms": {
-        "organization": 14,
+        "organization": 20,
+        "spend": 12,
+        "default": 12,
+        "scope": 12,
         "limit": 11,
-        "default": 11,
-        "spend": 10,
         "account": 9,
         "delet": 9,
         "user": 8,
-        "scope": 8,
         "request": 7,
         "member": 7,
+        "claude": 6,
         "api": 6,
         "unavailable": 6,
         "been": 6,
+        "only": 6,
         "increase": 5,
+        "read": 5,
         "null": 5,
+        "cap": 5,
         "list": 4,
-        "claude": 4,
         "tagg": 4,
         "underly": 4,
         "true": 4,
-        "only": 4,
+        "type": 4,
+        "alway": 4,
         "scop": 4,
         "key": 4,
+        "time": 4,
         "unit": 4,
         "period": 4,
+        "usage": 4,
         "select": 4,
+        "tier": 4,
         "workspace": 4,
+        "console": 4,
+        "anthropic": 4,
         "requester": 3,
         "version": 3,
-        "read": 3,
         "within": 3,
         "actor": 3,
-        "type": 3,
-        "alway": 3,
+        "set": 3,
         "admin": 3,
         "act": 3,
         "behalf": 3,
@@ -80482,16 +80493,9 @@
         "decimal": 3,
         "minor": 3,
         "cent": 3,
-        "appli": 3,
-        "filter": 2,
-        "response": 2,
-        "return": 2,
-        "current": 2,
-        "name": 2,
-        "format": 2,
-        "date": 2
+        "appli": 3
       },
-      "word_count": 828
+      "word_count": 934
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__increase_requests__retrieve.md",
@@ -80526,38 +80530,46 @@
         }
       ],
       "terms": {
-        "organization": 14,
+        "organization": 20,
+        "spend": 13,
         "limit": 12,
-        "spend": 11,
-        "default": 10,
+        "scope": 12,
+        "default": 11,
         "account": 9,
         "delet": 9,
         "user": 8,
-        "scope": 8,
         "request": 7,
         "increase": 6,
+        "claude": 6,
         "api": 6,
         "unavailable": 6,
         "been": 6,
+        "only": 6,
         "member": 6,
         "period": 5,
+        "read": 5,
         "null": 5,
-        "claude": 4,
+        "cap": 5,
         "underly": 4,
         "true": 4,
-        "only": 4,
+        "type": 4,
+        "alway": 4,
         "scop": 4,
         "key": 4,
+        "time": 4,
         "unit": 4,
+        "usage": 4,
         "select": 4,
+        "tier": 4,
         "workspace": 4,
+        "console": 4,
+        "anthropic": 4,
         "get": 3,
+        "while": 3,
         "version": 3,
-        "read": 3,
         "within": 3,
         "actor": 3,
-        "type": 3,
-        "alway": 3,
+        "set": 3,
         "tagg": 3,
         "admin": 3,
         "act": 3,
@@ -80567,17 +80579,9 @@
         "decimal": 3,
         "minor": 3,
         "cent": 3,
-        "appli": 3,
-        "retrieve": 2,
-        "response": 2,
-        "current": 2,
-        "name": 2,
-        "format": 2,
-        "date": 2,
-        "time": 2,
-        "report": 2
+        "appli": 3
       },
-      "word_count": 765
+      "word_count": 871
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__list.md",
@@ -80613,41 +80617,45 @@
       ],
       "terms": {
         "limit": 19,
-        "spend": 11,
-        "organization": 10,
-        "scope": 10,
-        "default": 9,
-        "claude": 5,
-        "type": 5,
+        "organization": 13,
+        "scope": 13,
+        "spend": 12,
+        "default": 10,
+        "claude": 6,
+        "type": 6,
+        "alway": 5,
         "appli": 5,
         "list": 4,
-        "alway": 4,
+        "only": 4,
         "tagg": 4,
+        "cap": 4,
         "order": 3,
-        "only": 3,
+        "console": 3,
         "version": 3,
+        "read": 3,
+        "time": 3,
+        "usage": 3,
+        "tier": 3,
         "workspace": 3,
         "api": 2,
         "beta": 2,
         "group": 2,
         "within": 2,
-        "console": 2,
+        "creation": 2,
         "maximum": 2,
         "response": 2,
         "return": 2,
         "header": 2,
-        "read": 2,
         "unit": 2,
-        "cap": 2,
         "rfc": 2,
         "datetime": 2,
         "format": 2,
         "date": 2,
-        "time": 2,
         "switch": 2,
         "each": 2,
         "select": 2,
         "member": 2,
+        "anthropic": 2,
         "title": 1,
         "url": 1,
         "http": 1,
@@ -80657,13 +80665,9 @@
         "get": 1,
         "come": 1,
         "fix": 1,
-        "creation": 1,
-        "support": 1,
-        "enterprise": 1,
-        "query": 1,
-        "parameter": 1
+        "support": 1
       },
-      "word_count": 651
+      "word_count": 710
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__retrieve.md",
@@ -80699,22 +80703,25 @@
       ],
       "terms": {
         "limit": 18,
-        "spend": 14,
-        "scope": 9,
-        "organization": 7,
-        "default": 7,
+        "spend": 15,
+        "scope": 12,
+        "organization": 10,
+        "default": 8,
+        "cap": 5,
+        "alway": 5,
         "appli": 5,
-        "alway": 4,
+        "claude": 4,
+        "type": 4,
         "tagg": 4,
         "get": 3,
-        "claude": 3,
         "version": 3,
-        "cap": 3,
-        "type": 3,
+        "read": 3,
+        "time": 3,
+        "usage": 3,
+        "tier": 3,
         "workspace": 3,
         "api": 2,
         "retrieve": 2,
-        "read": 2,
         "configur": 2,
         "one": 2,
         "period": 2,
@@ -80723,11 +80730,13 @@
         "datetime": 2,
         "format": 2,
         "date": 2,
-        "time": 2,
+        "only": 2,
         "switch": 2,
         "each": 2,
         "select": 2,
         "member": 2,
+        "console": 2,
+        "anthropic": 2,
         "title": 1,
         "url": 1,
         "http": 1,
@@ -80742,14 +80751,9 @@
         "about": 1,
         "our": 1,
         "history": 1,
-        "here": 1,
-        "return": 1,
-        "meter": 1,
-        "object": 1,
-        "unique": 1,
-        "amount": 1
+        "here": 1
       },
-      "word_count": 427
+      "word_count": 486
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__set.md",
@@ -80785,57 +80789,57 @@
       ],
       "terms": {
         "limit": 29,
-        "scope": 17,
-        "organization": 16,
-        "spend": 15,
-        "default": 11,
-        "set": 9,
-        "claude": 9,
+        "scope": 20,
+        "organization": 19,
+        "spend": 16,
+        "default": 12,
+        "set": 10,
+        "claude": 10,
+        "alway": 8,
         "appli": 8,
-        "alway": 7,
+        "cap": 6,
+        "type": 6,
         "tagg": 6,
         "workspace": 6,
         "period": 5,
-        "type": 5,
-        "console": 4,
+        "console": 5,
+        "tier": 4,
         "acces": 4,
+        "anthropic": 4,
         "version": 4,
-        "cap": 4,
         "select": 4,
         "member": 4,
         "api": 3,
         "sett": 3,
         "configur": 3,
         "amount": 3,
+        "read": 3,
         "unit": 3,
+        "only": 3,
         "each": 3,
         "other": 3,
         "one": 3,
+        "time": 3,
+        "usage": 3,
         "beta": 2,
         "enterprise": 2,
         "seat": 2,
-        "tier": 2,
         "group": 2,
+        "monthly": 2,
         "early": 2,
         "preview": 2,
         "request": 2,
         "contact": 2,
-        "anthropic": 2,
         "account": 2,
         "team": 2,
         "header": 2,
         "want": 2,
-        "read": 2,
         "non": 2,
         "negative": 2,
         "integer": 2,
-        "decimal": 2,
-        "str": 2,
-        "minor": 2,
-        "bill": 2,
-        "currency": 2
+        "decimal": 2
       },
-      "word_count": 819
+      "word_count": 878
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations.md",
@@ -95808,7 +95812,7 @@
           "level": 5
         },
         {
-          "text": "Compliance API \u203a Code \u203a Artifacts",
+          "text": "Compliance API \u203a Apps \u203a Code \u203a Artifacts",
           "level": 2
         },
         {
@@ -95841,6 +95845,30 @@
         },
         {
           "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Download Code Artifact Content",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
           "level": 4
         },
         {
@@ -95877,9 +95905,9 @@
         }
       ],
       "terms": {
-        "default": 8807,
+        "default": 8810,
         "actor": 5889,
-        "organization": 4142,
+        "organization": 4150,
         "activity": 3241,
         "assert": 2643,
         "format": 2286,
@@ -95888,25 +95916,25 @@
         "issuer": 2139,
         "party": 2117,
         "user": 2022,
-        "api": 1837,
+        "api": 1840,
         "email": 1686,
-        "anthropic": 1643,
+        "anthropic": 1646,
         "federation": 1628,
         "bound": 1625,
         "verifi": 1624,
         "oidc": 1617,
         "aws": 1597,
+        "customer": 1593,
         "attest": 1592,
-        "customer": 1591,
         "federat": 1590,
         "credential": 1302,
-        "null": 1217,
+        "null": 1219,
         "identifier": 1200,
         "token": 1189,
         "service": 1157,
         "via": 1139,
         "identity": 1130,
-        "without": 1121,
+        "without": 1126,
         "external": 1116,
         "system": 1092,
         "device": 1091,
@@ -95919,16 +95947,16 @@
         "automat": 1063,
         "occurr": 1059,
         "azure": 1056,
-        "project": 943,
-        "claude": 885,
-        "request": 858,
+        "project": 944,
+        "claude": 896,
+        "request": 864,
         "admin": 745,
-        "key": 739,
+        "key": 742,
         "time": 725,
-        "name": 680,
-        "app": 648
+        "name": 682,
+        "app": 651
       },
-      "word_count": 360208
+      "word_count": 361074
     },
     {
       "filename": "docs__en__api__compliance__activities.md",
@@ -95975,9 +96003,9 @@
         }
       ],
       "terms": {
-        "default": 17373,
+        "default": 17379,
         "actor": 11757,
-        "organization": 7671,
+        "organization": 7679,
         "activity": 6427,
         "assert": 5280,
         "account": 4454,
@@ -95988,7 +96016,7 @@
         "user": 3682,
         "api": 3456,
         "email": 3298,
-        "anthropic": 3252,
+        "anthropic": 3256,
         "federation": 3236,
         "verifi": 3230,
         "oidc": 3218,
@@ -96000,7 +96028,7 @@
         "credential": 2538,
         "token": 2292,
         "service": 2280,
-        "null": 2278,
+        "null": 2280,
         "identifier": 2276,
         "identity": 2238,
         "external": 2212,
@@ -96008,7 +96036,7 @@
         "system": 2174,
         "device": 2170,
         "present": 2163,
-        "without": 2154,
+        "without": 2158,
         "act": 2146,
         "perform": 2136,
         "register": 2132,
@@ -96017,16 +96045,16 @@
         "automat": 2118,
         "occurr": 2116,
         "azure": 2112,
-        "project": 1596,
-        "request": 1526,
+        "project": 1598,
+        "request": 1530,
         "admin": 1370,
         "key": 1328,
         "name": 1294,
-        "claude": 1246,
+        "claude": 1252,
         "sync": 1218,
-        "app": 1202
+        "app": 1204
       },
-      "word_count": 671425
+      "word_count": 671933
     },
     {
       "filename": "docs__en__api__compliance__activities__list.md",
@@ -96061,9 +96089,9 @@
         }
       ],
       "terms": {
-        "default": 8695,
+        "default": 8698,
         "actor": 5889,
-        "organization": 4016,
+        "organization": 4021,
         "activity": 3231,
         "assert": 2640,
         "account": 2247,
@@ -96074,7 +96102,7 @@
         "user": 1907,
         "api": 1768,
         "email": 1660,
-        "anthropic": 1638,
+        "anthropic": 1641,
         "federation": 1628,
         "verifi": 1621,
         "oidc": 1617,
@@ -96086,14 +96114,14 @@
         "credential": 1302,
         "token": 1164,
         "service": 1153,
-        "null": 1143,
+        "null": 1144,
         "identifier": 1139,
         "identity": 1129,
         "via": 1120,
         "external": 1116,
         "system": 1091,
         "device": 1091,
-        "without": 1085,
+        "without": 1088,
         "present": 1083,
         "act": 1079,
         "perform": 1070,
@@ -96103,16 +96131,16 @@
         "occurr": 1059,
         "automat": 1059,
         "azure": 1056,
-        "project": 845,
-        "request": 811,
-        "claude": 767,
+        "project": 846,
+        "request": 814,
+        "claude": 770,
         "admin": 744,
         "key": 686,
         "name": 653,
         "sync": 627,
-        "app": 622
+        "app": 623
       },
-      "word_count": 343583
+      "word_count": 343901
     },
     {
       "filename": "docs__en__api__compliance__apps.md",
@@ -96724,61 +96752,153 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Apps \u203a Code \u203a Artifacts",
+          "level": 2
+        },
+        {
+          "text": "List Code Artifacts",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Download Code Artifact Version Content",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Download Code Artifact Content",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Delete Code Artifact",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "session": 152,
-        "format": 125,
-        "time": 113,
-        "claude": 100,
-        "user": 99,
+        "session": 154,
+        "format": 136,
+        "time": 128,
+        "version": 125,
+        "claude": 115,
+        "user": 105,
         "project": 98,
-        "default": 83,
-        "version": 82,
-        "content": 81,
+        "return": 94,
+        "content": 93,
+        "organization": 89,
+        "default": 86,
+        "file": 80,
         "chat": 79,
-        "return": 75,
-        "organization": 75,
-        "file": 72,
-        "date": 70,
-        "null": 67,
-        "result": 60,
-        "read": 56,
+        "artifact": 78,
+        "date": 76,
+        "null": 71,
+        "result": 63,
+        "read": 63,
+        "page": 57,
+        "filter": 56,
+        "rfc": 56,
         "tool": 56,
         "messag": 54,
+        "text": 54,
         "endpoint": 53,
-        "filter": 52,
-        "rfc": 52,
-        "page": 48,
-        "text": 46,
+        "identifier": 51,
+        "response": 49,
+        "set": 47,
+        "opaque": 46,
+        "delet": 44,
+        "value": 44,
         "document": 44,
-        "response": 43,
-        "opaque": 42,
-        "identifier": 42,
-        "value": 41,
+        "parameter": 43,
+        "after": 42,
+        "request": 42,
+        "get": 40,
         "call": 40,
-        "after": 38,
-        "set": 38,
-        "request": 38,
-        "delet": 37,
-        "maximum": 37,
-        "get": 34,
-        "parameter": 34,
-        "pas": 34,
-        "key": 33,
-        "timestamp": 33,
-        "alway": 33,
-        "list": 32,
-        "message": 32,
-        "creat": 32,
-        "tagg": 32,
-        "boundary": 32,
-        "str": 31,
-        "history": 31,
-        "treat": 30,
-        "app": 29
+        "list": 39,
+        "maximum": 39,
+        "only": 39,
+        "one": 39,
+        "tagg": 38,
+        "key": 37,
+        "history": 36,
+        "pas": 35,
+        "api": 34,
+        "timestamp": 34,
+        "str": 33,
+        "header": 33,
+        "field": 33
       },
-      "word_count": 12545
+      "word_count": 14336
     },
     {
       "filename": "docs__en__api__compliance__apps__artifacts.md",
@@ -98302,6 +98422,666 @@
         "user": 5
       },
       "word_count": 1786
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code.md",
+      "id": "docs/en/api/compliance/apps/code",
+      "title": "Code",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code",
+      "headings": [
+        {
+          "text": "Code",
+          "level": 1
+        },
+        {
+          "text": "Code \u203a Artifacts",
+          "level": 2
+        },
+        {
+          "text": "List Code Artifacts",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Download Code Artifact Version Content",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Download Code Artifact Content",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Delete Code Artifact",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        }
+      ],
+      "terms": {
+        "artifact": 50,
+        "version": 43,
+        "return": 19,
+        "claude": 16,
+        "doc": 16,
+        "time": 15,
+        "organization": 14,
+        "code": 13,
+        "only": 13,
+        "owner": 13,
+        "one": 13,
+        "content": 12,
+        "publish": 11,
+        "format": 11,
+        "identifier": 9,
+        "set": 9,
+        "parameter": 9,
+        "page": 9,
+        "api": 8,
+        "export": 8,
+        "download": 8,
+        "text": 8,
+        "file": 8,
+        "list": 7,
+        "delet": 7,
+        "read": 7,
+        "zip": 7,
+        "get": 6,
+        "response": 6,
+        "date": 6,
+        "user": 6,
+        "header": 6,
+        "tagg": 6,
+        "example": 6,
+        "fil": 6,
+        "archive": 6,
+        "before": 5,
+        "index": 5,
+        "history": 5,
+        "type": 5,
+        "parent": 4,
+        "after": 4,
+        "filter": 4,
+        "ids": 4,
+        "opaque": 4,
+        "field": 4,
+        "next": 4,
+        "updat": 4,
+        "rfc": 4,
+        "see": 4
+      },
+      "word_count": 1797
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code__artifacts.md",
+      "id": "docs/en/api/compliance/apps/code/artifacts",
+      "title": "Artifacts",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code/artifacts",
+      "headings": [
+        {
+          "text": "Artifacts",
+          "level": 1
+        },
+        {
+          "text": "List Code Artifacts",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Download Code Artifact Version Content",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Download Code Artifact Content",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Delete Code Artifact",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Domain types",
+          "level": 2
+        },
+        {
+          "text": "Artifact List Response",
+          "level": 3
+        },
+        {
+          "text": "Artifact Delete Response",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "artifact": 73,
+        "version": 56,
+        "owner": 25,
+        "claude": 22,
+        "doc": 22,
+        "return": 19,
+        "organization": 18,
+        "publish": 18,
+        "time": 17,
+        "only": 16,
+        "identifier": 15,
+        "one": 15,
+        "code": 14,
+        "content": 13,
+        "format": 13,
+        "delet": 12,
+        "set": 11,
+        "user": 11,
+        "page": 10,
+        "download": 10,
+        "text": 10,
+        "list": 9,
+        "parameter": 9,
+        "response": 9,
+        "read": 9,
+        "tagg": 9,
+        "api": 8,
+        "export": 8,
+        "date": 8,
+        "null": 8,
+        "file": 8,
+        "type": 7,
+        "zip": 7,
+        "get": 6,
+        "before": 6,
+        "field": 6,
+        "header": 6,
+        "account": 6,
+        "non": 6,
+        "example": 6,
+        "fil": 6,
+        "archive": 6,
+        "title": 5,
+        "parent": 5,
+        "after": 5,
+        "opaque": 5,
+        "see": 5,
+        "index": 5,
+        "history": 5,
+        "built": 5
+      },
+      "word_count": 2280
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code__artifacts__delete.md",
+      "id": "docs/en/api/compliance/apps/code/artifacts/delete",
+      "title": "Delete Code Artifact",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code/artifacts/delete",
+      "headings": [
+        {
+          "text": "Delete Code Artifact",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "artifact": 10,
+        "delete": 5,
+        "code": 5,
+        "delet": 4,
+        "version": 4,
+        "return": 3,
+        "claude": 2,
+        "api": 2,
+        "response": 2,
+        "deletion": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "compliance": 1,
+        "app": 1,
+        "permanently": 1,
+        "destructive": 1,
+        "operation": 1,
+        "cannot": 1,
+        "undone": 1,
+        "mean": 1,
+        "initiat": 1,
+        "claim": 1,
+        "content": 1,
+        "removal": 1,
+        "complet": 1,
+        "asynchronously": 1,
+        "don": 1,
+        "exist": 1,
+        "belong": 1,
+        "another": 1,
+        "parent": 1,
+        "organization": 1,
+        "repeat": 1,
+        "already": 1,
+        "path": 1,
+        "parameter": 1,
+        "tagg": 1,
+        "cart": 1,
+        "abc": 1,
+        "header": 1,
+        "want": 1,
+        "read": 1,
+        "about": 1,
+        "our": 1,
+        "history": 1,
+        "here": 1
+      },
+      "word_count": 165
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code__artifacts__download.md",
+      "id": "docs/en/api/compliance/apps/code/artifacts/download",
+      "title": "Download Code Artifact Content",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code/artifacts/download",
+      "headings": [
+        {
+          "text": "Download Code Artifact Content",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "artifact": 9,
+        "version": 7,
+        "download": 6,
+        "doc": 6,
+        "claude": 5,
+        "text": 5,
+        "content": 4,
+        "return": 4,
+        "code": 3,
+        "api": 3,
+        "zip": 3,
+        "archive": 3,
+        "fil": 3,
+        "one": 3,
+        "tab": 3,
+        "set": 3,
+        "any": 3,
+        "other": 3,
+        "key": 3,
+        "example": 3,
+        "export": 3,
+        "com": 2,
+        "word": 2,
+        "per": 2,
+        "request": 2,
+        "latest": 2,
+        "read": 2,
+        "organization": 2,
+        "customer": 2,
+        "manag": 2,
+        "encryption": 2,
+        "right": 2,
+        "now": 2,
+        "header": 2,
+        "parameter": 2,
+        "only": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "compliance": 1,
+        "app": 1,
+        "get": 1,
+        "stream": 1,
+        "current": 1,
+        "response": 1,
+        "body": 1,
+        "must": 1,
+        "don": 1,
+        "exist": 1
+      },
+      "word_count": 324
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code__artifacts__list.md",
+      "id": "docs/en/api/compliance/apps/code/artifacts/list",
+      "title": "List Code Artifacts",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code/artifacts/list",
+      "headings": [
+        {
+          "text": "List Code Artifacts",
+          "level": 1
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "artifact": 28,
+        "version": 16,
+        "time": 15,
+        "owner": 13,
+        "format": 11,
+        "publish": 10,
+        "organization": 9,
+        "identifier": 8,
+        "claude": 7,
+        "page": 7,
+        "only": 7,
+        "doc": 6,
+        "return": 6,
+        "date": 6,
+        "user": 6,
+        "list": 5,
+        "code": 5,
+        "before": 5,
+        "set": 4,
+        "after": 4,
+        "filter": 4,
+        "ids": 4,
+        "field": 4,
+        "next": 4,
+        "updat": 4,
+        "rfc": 4,
+        "see": 4,
+        "null": 4,
+        "title": 3,
+        "result": 3,
+        "empty": 3,
+        "export": 3,
+        "enumerate": 3,
+        "delet": 3,
+        "opaque": 3,
+        "completenes": 3,
+        "caveat": 3,
+        "read": 3,
+        "tagg": 3,
+        "account": 3,
+        "non": 3,
+        "api": 2,
+        "compliance": 2,
+        "own": 2,
+        "under": 2,
+        "parent": 2,
+        "sort": 2,
+        "still": 2,
+        "continue": 2,
+        "until": 2
+      },
+      "word_count": 914
+    },
+    {
+      "filename": "docs__en__api__compliance__apps__code__artifacts__retrieve_version.md",
+      "id": "docs/en/api/compliance/apps/code/artifacts/retrieve_version",
+      "title": "Download Code Artifact Version Content",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/compliance/apps/code/artifacts/retrieve_version",
+      "headings": [
+        {
+          "text": "Download Code Artifact Version Content",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "version": 18,
+        "artifact": 10,
+        "one": 9,
+        "content": 7,
+        "file": 7,
+        "doc": 6,
+        "return": 6,
+        "claude": 5,
+        "code": 4,
+        "api": 4,
+        "get": 4,
+        "list": 4,
+        "zip": 4,
+        "only": 4,
+        "parameter": 4,
+        "download": 3,
+        "fil": 3,
+        "archive": 3,
+        "type": 3,
+        "com": 2,
+        "app": 2,
+        "stream": 2,
+        "body": 2,
+        "organization": 2,
+        "history": 2,
+        "retry": 2,
+        "set": 2,
+        "name": 2,
+        "cannot": 2,
+        "export": 2,
+        "page": 2,
+        "display": 2,
+        "never": 2,
+        "back": 2,
+        "usually": 2,
+        "encod": 2,
+        "abort": 2,
+        "header": 2,
+        "index": 2,
+        "without": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "compliance": 1,
+        "retrieve": 1,
+        "response": 1,
+        "don": 1,
+        "exist": 1,
+        "belong": 1
+      },
+      "word_count": 417
     },
     {
       "filename": "docs__en__api__compliance__apps__projects.md",
@@ -100780,532 +101560,6 @@
       "word_count": 1340
     },
     {
-      "filename": "docs__en__api__compliance__code.md",
-      "id": "docs/en/api/compliance/code",
-      "title": "Code",
-      "category": "api_reference",
-      "url": "https://platform.claude.com/docs/en/api/compliance/code",
-      "headings": [
-        {
-          "text": "Code",
-          "level": 1
-        },
-        {
-          "text": "Code \u203a Artifacts",
-          "level": 2
-        },
-        {
-          "text": "List Code Artifacts",
-          "level": 3
-        },
-        {
-          "text": "Query parameters",
-          "level": 4
-        },
-        {
-          "text": "Headers",
-          "level": 4
-        },
-        {
-          "text": "Returns",
-          "level": 4
-        },
-        {
-          "text": "Example",
-          "level": 4
-        },
-        {
-          "text": "Response (200)",
-          "level": 5
-        },
-        {
-          "text": "Download Code Artifact Version Content",
-          "level": 3
-        },
-        {
-          "text": "Path parameters",
-          "level": 4
-        },
-        {
-          "text": "Headers",
-          "level": 4
-        },
-        {
-          "text": "Example",
-          "level": 4
-        },
-        {
-          "text": "Delete Code Artifact",
-          "level": 3
-        },
-        {
-          "text": "Path parameters",
-          "level": 4
-        },
-        {
-          "text": "Headers",
-          "level": 4
-        },
-        {
-          "text": "Returns",
-          "level": 4
-        },
-        {
-          "text": "Example",
-          "level": 4
-        },
-        {
-          "text": "Response (200)",
-          "level": 5
-        }
-      ],
-      "terms": {
-        "artifact": 40,
-        "version": 29,
-        "time": 15,
-        "return": 14,
-        "owner": 13,
-        "code": 12,
-        "organization": 11,
-        "publish": 11,
-        "format": 11,
-        "identifier": 9,
-        "content": 9,
-        "only": 9,
-        "claude": 8,
-        "delet": 7,
-        "list": 6,
-        "page": 6,
-        "date": 6,
-        "user": 6,
-        "api": 5,
-        "before": 5,
-        "response": 5,
-        "read": 5,
-        "tagg": 5,
-        "parent": 4,
-        "set": 4,
-        "after": 4,
-        "parameter": 4,
-        "filter": 4,
-        "ids": 4,
-        "opaque": 4,
-        "field": 4,
-        "next": 4,
-        "updat": 4,
-        "rfc": 4,
-        "header": 4,
-        "history": 4,
-        "title": 3,
-        "compliance": 3,
-        "result": 3,
-        "still": 3,
-        "export": 3,
-        "enumerate": 3,
-        "default": 3,
-        "see": 3,
-        "completenes": 3,
-        "caveat": 3,
-        "want": 3,
-        "about": 3,
-        "our": 3,
-        "here": 3
-      },
-      "word_count": 1253
-    },
-    {
-      "filename": "docs__en__api__compliance__code__artifacts.md",
-      "id": "docs/en/api/compliance/code/artifacts",
-      "title": "Artifacts",
-      "category": "api_reference",
-      "url": "https://platform.claude.com/docs/en/api/compliance/code/artifacts",
-      "headings": [
-        {
-          "text": "Artifacts",
-          "level": 1
-        },
-        {
-          "text": "List Code Artifacts",
-          "level": 2
-        },
-        {
-          "text": "Query parameters",
-          "level": 3
-        },
-        {
-          "text": "Headers",
-          "level": 3
-        },
-        {
-          "text": "Returns",
-          "level": 3
-        },
-        {
-          "text": "Example",
-          "level": 3
-        },
-        {
-          "text": "Response (200)",
-          "level": 4
-        },
-        {
-          "text": "Download Code Artifact Version Content",
-          "level": 2
-        },
-        {
-          "text": "Path parameters",
-          "level": 3
-        },
-        {
-          "text": "Headers",
-          "level": 3
-        },
-        {
-          "text": "Example",
-          "level": 3
-        },
-        {
-          "text": "Delete Code Artifact",
-          "level": 2
-        },
-        {
-          "text": "Path parameters",
-          "level": 3
-        },
-        {
-          "text": "Headers",
-          "level": 3
-        },
-        {
-          "text": "Returns",
-          "level": 3
-        },
-        {
-          "text": "Example",
-          "level": 3
-        },
-        {
-          "text": "Response (200)",
-          "level": 4
-        },
-        {
-          "text": "Domain types",
-          "level": 2
-        },
-        {
-          "text": "Artifact List Response",
-          "level": 3
-        },
-        {
-          "text": "Artifact Delete Response",
-          "level": 3
-        }
-      ],
-      "terms": {
-        "artifact": 63,
-        "version": 41,
-        "owner": 25,
-        "publish": 18,
-        "time": 17,
-        "organization": 15,
-        "identifier": 15,
-        "return": 14,
-        "code": 13,
-        "format": 13,
-        "claude": 12,
-        "delet": 12,
-        "only": 11,
-        "user": 11,
-        "content": 10,
-        "list": 8,
-        "response": 8,
-        "date": 8,
-        "tagg": 8,
-        "read": 7,
-        "set": 6,
-        "before": 6,
-        "field": 6,
-        "page": 6,
-        "null": 6,
-        "account": 6,
-        "non": 6,
-        "title": 5,
-        "api": 5,
-        "parent": 5,
-        "after": 5,
-        "opaque": 5,
-        "built": 5,
-        "made": 5,
-        "design": 5,
-        "one": 5,
-        "retain": 5,
-        "doc": 4,
-        "still": 4,
-        "parameter": 4,
-        "default": 4,
-        "filter": 4,
-        "ids": 4,
-        "next": 4,
-        "updat": 4,
-        "rfc": 4,
-        "header": 4,
-        "history": 4,
-        "type": 4,
-        "belong": 4
-      },
-      "word_count": 1702
-    },
-    {
-      "filename": "docs__en__api__compliance__code__artifacts__delete.md",
-      "id": "docs/en/api/compliance/code/artifacts/delete",
-      "title": "Delete Code Artifact",
-      "category": "api_reference",
-      "url": "https://platform.claude.com/docs/en/api/compliance/code/artifacts/delete",
-      "headings": [
-        {
-          "text": "Delete Code Artifact",
-          "level": 1
-        },
-        {
-          "text": "Path parameters",
-          "level": 2
-        },
-        {
-          "text": "Headers",
-          "level": 2
-        },
-        {
-          "text": "Returns",
-          "level": 2
-        },
-        {
-          "text": "Example",
-          "level": 2
-        },
-        {
-          "text": "Response (200)",
-          "level": 3
-        }
-      ],
-      "terms": {
-        "artifact": 10,
-        "delete": 5,
-        "code": 5,
-        "delet": 4,
-        "version": 4,
-        "return": 3,
-        "claude": 2,
-        "api": 2,
-        "response": 2,
-        "deletion": 2,
-        "title": 1,
-        "url": 1,
-        "http": 1,
-        "platform": 1,
-        "com": 1,
-        "doc": 1,
-        "compliance": 1,
-        "permanently": 1,
-        "destructive": 1,
-        "operation": 1,
-        "cannot": 1,
-        "undone": 1,
-        "mean": 1,
-        "initiat": 1,
-        "claim": 1,
-        "content": 1,
-        "removal": 1,
-        "complet": 1,
-        "asynchronously": 1,
-        "don": 1,
-        "exist": 1,
-        "belong": 1,
-        "another": 1,
-        "parent": 1,
-        "organization": 1,
-        "repeat": 1,
-        "already": 1,
-        "path": 1,
-        "parameter": 1,
-        "tagg": 1,
-        "cart": 1,
-        "abc": 1,
-        "header": 1,
-        "want": 1,
-        "read": 1,
-        "about": 1,
-        "our": 1,
-        "history": 1,
-        "here": 1,
-        "constant": 1
-      },
-      "word_count": 165
-    },
-    {
-      "filename": "docs__en__api__compliance__code__artifacts__list.md",
-      "id": "docs/en/api/compliance/code/artifacts/list",
-      "title": "List Code Artifacts",
-      "category": "api_reference",
-      "url": "https://platform.claude.com/docs/en/api/compliance/code/artifacts/list",
-      "headings": [
-        {
-          "text": "List Code Artifacts",
-          "level": 1
-        },
-        {
-          "text": "Query parameters",
-          "level": 2
-        },
-        {
-          "text": "Headers",
-          "level": 2
-        },
-        {
-          "text": "Returns",
-          "level": 2
-        },
-        {
-          "text": "Example",
-          "level": 2
-        },
-        {
-          "text": "Response (200)",
-          "level": 3
-        }
-      ],
-      "terms": {
-        "artifact": 28,
-        "time": 15,
-        "version": 15,
-        "owner": 13,
-        "format": 11,
-        "publish": 10,
-        "organization": 9,
-        "identifier": 8,
-        "return": 6,
-        "page": 6,
-        "only": 6,
-        "date": 6,
-        "user": 6,
-        "list": 5,
-        "code": 5,
-        "claude": 5,
-        "before": 5,
-        "set": 4,
-        "after": 4,
-        "filter": 4,
-        "ids": 4,
-        "field": 4,
-        "next": 4,
-        "updat": 4,
-        "rfc": 4,
-        "title": 3,
-        "result": 3,
-        "export": 3,
-        "enumerate": 3,
-        "delet": 3,
-        "opaque": 3,
-        "see": 3,
-        "completenes": 3,
-        "caveat": 3,
-        "read": 3,
-        "tagg": 3,
-        "null": 3,
-        "account": 3,
-        "non": 3,
-        "doc": 2,
-        "api": 2,
-        "compliance": 2,
-        "own": 2,
-        "under": 2,
-        "parent": 2,
-        "sort": 2,
-        "empty": 2,
-        "still": 2,
-        "continue": 2,
-        "until": 2
-      },
-      "word_count": 880
-    },
-    {
-      "filename": "docs__en__api__compliance__code__artifacts__retrieve_version.md",
-      "id": "docs/en/api/compliance/code/artifacts/retrieve_version",
-      "title": "Download Code Artifact Version Content",
-      "category": "api_reference",
-      "url": "https://platform.claude.com/docs/en/api/compliance/code/artifacts/retrieve_version",
-      "headings": [
-        {
-          "text": "Download Code Artifact Version Content",
-          "level": 1
-        },
-        {
-          "text": "Path parameters",
-          "level": 2
-        },
-        {
-          "text": "Headers",
-          "level": 2
-        },
-        {
-          "text": "Example",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "version": 12,
-        "artifact": 7,
-        "content": 7,
-        "return": 5,
-        "code": 4,
-        "claude": 3,
-        "api": 3,
-        "list": 3,
-        "only": 3,
-        "download": 2,
-        "compliance": 2,
-        "stream": 2,
-        "one": 2,
-        "body": 2,
-        "history": 2,
-        "retry": 2,
-        "file": 2,
-        "encod": 2,
-        "abort": 2,
-        "header": 2,
-        "title": 1,
-        "url": 1,
-        "http": 1,
-        "platform": 1,
-        "com": 1,
-        "doc": 1,
-        "retrieve": 1,
-        "get": 1,
-        "response": 1,
-        "don": 1,
-        "exist": 1,
-        "belong": 1,
-        "another": 1,
-        "parent": 1,
-        "organization": 1,
-        "start": 1,
-        "subsequent": 1,
-        "publish": 1,
-        "rotat": 1,
-        "retain": 1,
-        "while": 1,
-        "upload": 1,
-        "still": 1,
-        "flight": 1,
-        "abandon": 1,
-        "backoff": 1,
-        "because": 1,
-        "single": 1,
-        "oversiz": 1,
-        "mid": 1
-      },
-      "word_count": 222
-    },
-    {
       "filename": "docs__en__api__compliance__groups.md",
       "id": "docs/en/api/compliance/groups",
       "title": "Groups",
@@ -102066,7 +102320,7 @@
         "sett": 6,
         "pas": 5
       },
-      "word_count": 2131
+      "word_count": 2133
     },
     {
       "filename": "docs__en__api__compliance__organizations__list.md",
@@ -102772,7 +103026,7 @@
         "enabl": 4,
         "sso": 4
       },
-      "word_count": 1706
+      "word_count": 1710
     },
     {
       "filename": "docs__en__api__compliance__organizations__settings__retrieve.md",
@@ -102858,7 +103112,7 @@
         "date": 2,
         "active": 2
       },
-      "word_count": 919
+      "word_count": 921
     },
     {
       "filename": "docs__en__api__compliance__organizations__users.md",
@@ -121091,7 +121345,7 @@
     {
       "filename": "docs__en__build-with-claude__fast-mode.md",
       "id": "docs/en/build-with-claude/fast-mode",
-      "title": "Fast mode (research preview)",
+      "title": "Fast mode",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "headings": [
@@ -121141,10 +121395,10 @@
         }
       ],
       "terms": {
-        "fast": 48,
-        "claude": 46,
-        "mode": 45,
-        "opu": 30,
+        "fast": 50,
+        "claude": 48,
+        "mode": 47,
+        "opu": 31,
         "request": 21,
         "token": 17,
         "model": 15,
@@ -121153,10 +121407,10 @@
         "pric": 14,
         "rate": 13,
         "header": 12,
+        "available": 12,
         "standard": 12,
         "spe": 12,
         "output": 11,
-        "available": 11,
         "error": 11,
         "platform": 8,
         "support": 8,
@@ -121192,7 +121446,7 @@
         "icon": 4,
         "href": 4
       },
-      "word_count": 2710
+      "word_count": 2734
     },
     {
       "filename": "docs__en__build-with-claude__files.md",
@@ -130090,7 +130344,7 @@
         "type": 37,
         "fix": 33,
         "cause": 30,
-        "message": 29,
+        "message": 30,
         "chat": 28,
         "claude": 25,
         "local": 25,
@@ -130099,25 +130353,25 @@
         "delet": 24,
         "messag": 23,
         "retry": 23,
-        "read": 23,
         "scope": 23,
         "doe": 23,
         "see": 22,
+        "read": 22,
         "project": 22,
         "acces": 22,
         "page": 21,
-        "body": 21,
         "value": 21,
         "header": 20,
+        "body": 20,
         "activity": 20,
         "transcript": 19,
+        "parameter": 19,
         "response": 18,
-        "parameter": 18,
         "without": 18,
+        "only": 18,
         "admin": 18,
         "second": 17,
         "cursor": 17,
-        "only": 17,
         "same": 16,
         "found": 16,
         "parent": 16,
@@ -130129,7 +130383,7 @@
         "limit": 14,
         "exist": 13
       },
-      "word_count": 6088
+      "word_count": 6126
     },
     {
       "filename": "docs__en__manage-claude__compliance-faq.md",
@@ -130443,9 +130697,9 @@
         "code": 23,
         "key": 23,
         "run": 22,
+        "each": 21,
         "result": 21,
         "message": 21,
-        "each": 20,
         "remote": 19,
         "default": 19,
         "only": 18,
@@ -130466,14 +130720,14 @@
         "pas": 14,
         "app": 13,
         "example": 13,
+        "bound": 13,
         "doe": 13,
         "same": 12,
         "appear": 12,
         "new": 11,
-        "assistant": 11,
-        "anthropic": 11
+        "assistant": 11
       },
-      "word_count": 5722
+      "word_count": 5746
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
