@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T06:18:51.578436Z",
+  "generated_at": "2026-10-16T15:15:32.296804Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -40628,7 +40628,7 @@
         "upload": 15,
         "partner": 14
       },
-      "word_count": 8800
+      "word_count": 8802
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__browser-use-tool.md",
@@ -121081,7 +121081,7 @@
         "top": 9,
         "adaptive": 9
       },
-      "word_count": 4876
+      "word_count": 4882
     },
     {
       "filename": "docs__en__build-with-claude__embeddings.md",
@@ -122005,7 +122005,7 @@
         "definition": 12,
         "change": 11
       },
-      "word_count": 11039
+      "word_count": 11045
     },
     {
       "filename": "docs__en__build-with-claude__multilingual-support.md",
@@ -122501,7 +122501,7 @@
         "user": 9,
         "message": 9
       },
-      "word_count": 12587
+      "word_count": 12595
     },
     {
       "filename": "docs__en__build-with-claude__prompt-caching.md",
@@ -123255,7 +123255,7 @@
         "lead": 7,
         "follow": 7
       },
-      "word_count": 6662
+      "word_count": 6668
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-haiku-5-5.md",
@@ -129563,14 +129563,14 @@
         }
       ],
       "terms": {
-        "claude": 78,
+        "claude": 82,
         "key": 76,
-        "cmek": 35,
+        "cmek": 38,
         "data": 33,
         "anthropic": 31,
-        "platform": 22,
-        "aws": 22,
-        "kms": 19,
+        "platform": 26,
+        "aws": 24,
+        "kms": 17,
         "encryption": 15,
         "workspace": 15,
         "under": 15,
@@ -129600,6 +129600,7 @@
         "turn": 7,
         "google": 6,
         "account": 6,
+        "set": 6,
         "console": 6,
         "setting": 6,
         "request": 6,
@@ -129611,10 +129612,9 @@
         "skill": 6,
         "off": 6,
         "analytic": 6,
-        "requir": 6,
-        "card": 6
+        "requir": 6
       },
-      "word_count": 2224
+      "word_count": 2247
     },
     {
       "filename": "docs__en__manage-claude__cmek-aws-kms.md",
@@ -129636,23 +129636,23 @@
           "level": 2
         },
         {
+          "text": "Prepare the key policy",
+          "level": 3
+        },
+        {
+          "text": "Create the key",
+          "level": 3
+        },
+        {
           "text": "Register the key with Anthropic",
           "level": 2
         },
         {
-          "text": "Set up CMEK on Claude Platform on AWS",
+          "text": "Troubleshoot validation",
           "level": 2
         },
         {
-          "text": "Prerequisites",
-          "level": 3
-        },
-        {
-          "text": "Create the KMS key",
-          "level": 3
-        },
-        {
-          "text": "Register and attach the key",
+          "text": "Expected errors in CloudTrail",
           "level": 3
         },
         {
@@ -129661,58 +129661,58 @@
         }
       ],
       "terms": {
-        "key": 183,
-        "workspace": 50,
-        "aws": 45,
-        "step": 45,
-        "claude": 39,
-        "policy": 37,
-        "anthropic": 33,
-        "attach": 33,
-        "account": 29,
-        "organization": 28,
-        "kms": 25,
-        "condition": 23,
-        "compartment": 23,
-        "principal": 22,
-        "arn": 21,
-        "console": 20,
-        "add": 20,
-        "encryption": 19,
-        "cmek": 16,
-        "platform": 16,
-        "data": 16,
-        "create": 16,
-        "tab": 16,
-        "encrypt": 15,
-        "list": 15,
-        "title": 14,
-        "note": 14,
-        "register": 14,
-        "page": 14,
-        "statement": 14,
-        "decrypt": 14,
-        "region": 14,
-        "grant": 12,
-        "service": 12,
-        "iam": 12,
-        "click": 12,
-        "under": 11,
-        "acces": 10,
-        "permission": 10,
-        "select": 10,
-        "set": 9,
-        "through": 9,
-        "admin": 9,
-        "call": 9,
-        "warn": 8,
-        "role": 8,
-        "validation": 8,
-        "only": 8,
-        "one": 8,
-        "usage": 8
+        "key": 116,
+        "step": 54,
+        "title": 28,
+        "organization": 24,
+        "policy": 24,
+        "aws": 23,
+        "click": 21,
+        "workspace": 20,
+        "tab": 19,
+        "claude": 17,
+        "kms": 16,
+        "anthropic": 15,
+        "add": 15,
+        "encryption": 13,
+        "arn": 13,
+        "cmek": 12,
+        "select": 12,
+        "create": 11,
+        "attach": 11,
+        "replace": 9,
+        "validation": 9,
+        "list": 8,
+        "compartment": 8,
+        "region": 8,
+        "data": 7,
+        "console": 7,
+        "page": 7,
+        "see": 7,
+        "already": 7,
+        "next": 7,
+        "warn": 6,
+        "under": 6,
+        "note": 6,
+        "account": 6,
+        "acces": 6,
+        "any": 6,
+        "copy": 6,
+        "field": 6,
+        "open": 6,
+        "frame": 6,
+        "error": 6,
+        "check": 6,
+        "confirm": 6,
+        "codegroup": 6,
+        "platform": 5,
+        "one": 5,
+        "setting": 5,
+        "don": 5,
+        "condition": 5,
+        "fail": 5
       },
-      "word_count": 3994
+      "word_count": 2454
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -129734,7 +129734,19 @@
           "level": 2
         },
         {
+          "text": "Create the key and grant access",
+          "level": 3
+        },
+        {
+          "text": "Check your vault configuration",
+          "level": 3
+        },
+        {
           "text": "Register the key with Anthropic",
+          "level": 2
+        },
+        {
+          "text": "Troubleshoot validation",
           "level": 2
         },
         {
@@ -129743,58 +129755,152 @@
         }
       ],
       "terms": {
-        "key": 99,
-        "vault": 38,
-        "step": 35,
-        "anthropic": 32,
-        "organization": 22,
-        "tag": 16,
-        "title": 15,
+        "key": 108,
+        "step": 71,
+        "title": 33,
+        "vault": 30,
+        "organization": 28,
+        "anthropic": 24,
+        "click": 23,
+        "tag": 22,
+        "tab": 22,
+        "name": 19,
+        "select": 15,
+        "add": 14,
         "azure": 13,
-        "claude": 13,
-        "add": 13,
-        "tab": 13,
-        "cmek": 12,
-        "service": 12,
-        "principal": 12,
-        "tenant": 11,
-        "data": 10,
-        "application": 10,
-        "click": 10,
-        "encryption": 9,
-        "assign": 9,
-        "role": 9,
-        "create": 8,
+        "create": 13,
+        "claude": 11,
+        "encryption": 11,
+        "acces": 11,
+        "service": 11,
+        "principal": 11,
+        "open": 11,
+        "cmek": 10,
+        "value": 10,
+        "workspace": 10,
         "operation": 8,
-        "frame": 8,
-        "workspace": 8,
-        "acces": 7,
+        "validation": 8,
+        "confirm": 8,
+        "role": 7,
+        "application": 7,
+        "field": 7,
+        "rsa": 7,
+        "replace": 7,
         "page": 7,
-        "select": 7,
-        "wrap": 7,
-        "unwrap": 7,
+        "next": 7,
+        "enter": 7,
         "version": 7,
-        "set": 6,
-        "name": 6,
+        "check": 7,
+        "under": 6,
+        "setting": 6,
+        "assign": 6,
+        "permitt": 6,
         "already": 6,
-        "open": 6,
-        "rsa": 6,
-        "note": 6,
-        "register": 6,
+        "frame": 6,
+        "valu": 6,
+        "attach": 6,
         "take": 6,
         "codegroup": 6,
-        "under": 5,
-        "entra": 5,
-        "field": 5,
-        "client": 5,
-        "only": 5,
-        "object": 5,
-        "portal": 5,
-        "enterprise": 5,
         "show": 5,
-        "console": 5
+        "tenant": 5,
+        "request": 5,
+        "display": 5
       },
-      "word_count": 2558
+      "word_count": 2662
+    },
+    {
+      "filename": "docs__en__manage-claude__cmek-claude-platform-on-aws.md",
+      "id": "docs/en/manage-claude/cmek-claude-platform-on-aws",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/cmek-claude-platform-on-aws",
+      "headings": [
+        {
+          "text": "Prerequisites",
+          "level": 2
+        },
+        {
+          "text": "AWS service principal for Anthropic",
+          "level": 2
+        },
+        {
+          "text": "Encryption key setup",
+          "level": 2
+        },
+        {
+          "text": "Prepare the key policy",
+          "level": 3
+        },
+        {
+          "text": "Create the key",
+          "level": 3
+        },
+        {
+          "text": "Register the key with Anthropic",
+          "level": 2
+        },
+        {
+          "text": "Troubleshoot validation",
+          "level": 2
+        },
+        {
+          "text": "Terraform",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "key": 100,
+        "step": 33,
+        "aws": 29,
+        "policy": 22,
+        "claude": 18,
+        "workspace": 18,
+        "click": 18,
+        "title": 16,
+        "kms": 13,
+        "arn": 13,
+        "create": 11,
+        "attach": 11,
+        "select": 11,
+        "add": 10,
+        "platform": 9,
+        "encryption": 9,
+        "account": 9,
+        "console": 9,
+        "principal": 9,
+        "condition": 9,
+        "region": 9,
+        "cmek": 8,
+        "see": 7,
+        "tab": 7,
+        "anthropic": 6,
+        "permission": 6,
+        "register": 6,
+        "list": 6,
+        "service": 6,
+        "compartment": 6,
+        "page": 6,
+        "frame": 6,
+        "under": 5,
+        "organization": 5,
+        "any": 5,
+        "already": 5,
+        "replace": 5,
+        "open": 5,
+        "next": 5,
+        "customer": 4,
+        "manag": 4,
+        "instead": 4,
+        "warn": 4,
+        "data": 4,
+        "encrypt": 4,
+        "iam": 4,
+        "sign": 4,
+        "optional": 4,
+        "copy": 4,
+        "note": 4
+      },
+      "word_count": 1425
     },
     {
       "filename": "docs__en__manage-claude__cmek-google-cloud-kms.md",
@@ -129820,63 +129926,67 @@
           "level": 2
         },
         {
+          "text": "Troubleshoot validation",
+          "level": 2
+        },
+        {
           "text": "Terraform",
           "level": 2
         }
       ],
       "terms": {
-        "key": 83,
-        "step": 33,
-        "anthropic": 30,
-        "organization": 22,
-        "cloud": 21,
-        "title": 15,
+        "key": 96,
+        "step": 59,
+        "title": 30,
+        "organization": 30,
+        "anthropic": 23,
+        "cloud": 22,
+        "name": 21,
+        "label": 19,
+        "tab": 18,
+        "click": 16,
+        "resource": 16,
+        "google": 15,
         "kms": 15,
-        "claude": 13,
+        "add": 15,
         "service": 13,
-        "tab": 12,
-        "google": 11,
+        "claude": 11,
         "encryption": 11,
-        "add": 11,
-        "click": 11,
-        "encrypt": 10,
-        "create": 10,
-        "account": 10,
-        "label": 10,
-        "name": 10,
-        "note": 9,
-        "workspace": 9,
-        "resource": 9,
+        "create": 11,
+        "account": 11,
+        "ring": 10,
+        "acces": 10,
+        "select": 10,
+        "workspace": 10,
+        "page": 9,
+        "cmek": 8,
         "data": 8,
-        "project": 8,
-        "decrypt": 8,
-        "page": 8,
-        "console": 8,
-        "cmek": 7,
-        "under": 7,
-        "ring": 7,
+        "see": 8,
+        "validation": 8,
+        "full": 8,
+        "project": 7,
+        "copy": 7,
+        "enter": 7,
+        "check": 7,
+        "note": 6,
+        "replace": 6,
+        "already": 6,
+        "open": 6,
         "frame": 6,
+        "grant": 6,
+        "attach": 6,
+        "confirm": 6,
         "codegroup": 6,
-        "set": 5,
-        "enabl": 5,
         "api": 5,
-        "acces": 5,
-        "level": 5,
-        "choose": 5,
-        "hsm": 5,
-        "select": 5,
-        "grant": 5,
-        "full": 5,
-        "register": 5,
-        "attach": 5,
-        "warn": 4,
-        "iam": 4,
-        "admin": 4,
-        "email": 4,
-        "already": 4,
-        "symmetric": 4
+        "command": 5,
+        "location": 5,
+        "symmetric": 5,
+        "fail": 5,
+        "one": 5,
+        "console": 5,
+        "setting": 5
       },
-      "word_count": 2109
+      "word_count": 2301
     },
     {
       "filename": "docs__en__manage-claude__compliance-activity-feed.md",
@@ -129997,20 +130107,20 @@
         }
       ],
       "terms": {
-        "claude": 53,
+        "claude": 55,
         "compliance": 40,
         "api": 34,
         "organization": 27,
         "key": 20,
-        "session": 18,
+        "session": 19,
         "card": 18,
+        "doc": 12,
         "activity": 12,
         "platform": 11,
         "endpoint": 11,
         "title": 10,
         "http": 10,
         "com": 10,
-        "doc": 10,
         "manage": 10,
         "acces": 10,
         "chat": 10,
@@ -130026,6 +130136,7 @@
         "see": 7,
         "cowork": 6,
         "code": 6,
+        "google": 6,
         "retrieve": 6,
         "request": 6,
         "data": 6,
@@ -130045,10 +130156,9 @@
         "header": 4,
         "parent": 4,
         "anthropic": 4,
-        "analytic": 4,
-        "opentelemetry": 4
+        "analytic": 4
       },
-      "word_count": 1106
+      "word_count": 1131
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -130440,7 +130550,7 @@
         "claude": 90,
         "api": 75,
         "organization": 74,
-        "session": 65,
+        "session": 66,
         "compliance": 63,
         "accordion": 36,
         "key": 34,
@@ -130486,9 +130596,9 @@
         "captur": 9,
         "tool": 9,
         "while": 8,
-        "prompt": 8
+        "other": 8
       },
-      "word_count": 2859
+      "word_count": 2881
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -130707,21 +130817,22 @@
         }
       ],
       "terms": {
-        "session": 174,
-        "claude": 78,
-        "endpoint": 57,
+        "session": 181,
+        "claude": 87,
+        "endpoint": 59,
         "return": 56,
-        "user": 43,
+        "user": 45,
         "transcript": 40,
+        "local": 39,
         "content": 39,
-        "local": 38,
+        "api": 34,
         "organization": 34,
-        "api": 33,
         "call": 32,
         "messag": 30,
         "compliance": 28,
         "list": 28,
         "request": 27,
+        "google": 25,
         "tool": 25,
         "retention": 25,
         "block": 25,
@@ -130736,29 +130847,28 @@
         "only": 18,
         "captur": 18,
         "cowork": 17,
+        "see": 17,
         "carri": 17,
         "page": 16,
-        "see": 16,
+        "response": 16,
         "client": 15,
         "cloud": 15,
         "period": 15,
-        "response": 15,
+        "one": 15,
         "through": 14,
         "set": 14,
         "conversation": 14,
         "read": 14,
-        "one": 14,
+        "doe": 14,
         "pas": 14,
         "app": 13,
+        "valu": 13,
         "example": 13,
         "bound": 13,
-        "doe": 13,
-        "same": 12,
-        "appear": 12,
-        "new": 11,
-        "assistant": 11
+        "add": 12,
+        "same": 12
       },
-      "word_count": 5746
+      "word_count": 5988
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -131026,7 +131136,7 @@
       ],
       "terms": {
         "server": 51,
-        "request": 48,
+        "request": 49,
         "verdict": 44,
         "security": 38,
         "inference": 32,
@@ -131050,7 +131160,7 @@
         "shadow": 15,
         "allow": 14,
         "sign": 14,
-        "trip": 13,
+        "trip": 14,
         "setting": 12,
         "error": 12,
         "record": 12,
@@ -131058,25 +131168,25 @@
         "enforcement": 11,
         "only": 11,
         "see": 11,
+        "test": 11,
         "under": 11,
         "circuit": 11,
         "before": 10,
         "page": 10,
-        "test": 10,
+        "anthropic": 10,
         "every": 10,
         "while": 10,
         "rol": 9,
-        "anthropic": 9,
+        "connection": 9,
         "handl": 8,
         "inspect": 8,
         "back": 8,
         "custom": 8,
         "sent": 8,
         "addres": 8,
-        "http": 7,
-        "configuration": 7
+        "also": 8
       },
-      "word_count": 2903
+      "word_count": 2924
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks-endpoint.md",
@@ -131175,15 +131285,15 @@
         }
       ],
       "terms": {
-        "tool": 67,
+        "tool": 68,
         "request": 50,
         "server": 45,
-        "call": 34,
+        "call": 35,
         "anthropic": 26,
         "block": 26,
         "inference": 25,
+        "claude": 25,
         "field": 25,
-        "claude": 24,
         "hook": 23,
         "verdict": 23,
         "frame": 23,
@@ -131226,7 +131336,7 @@
         "send": 9,
         "identifier": 9
       },
-      "word_count": 5625
+      "word_count": 5638
     },
     {
       "filename": "docs__en__manage-claude__opentelemetry.md",
@@ -137808,7 +137918,7 @@
         "send": 13,
         "each": 13
       },
-      "word_count": 9427
+      "word_count": 9439
     },
     {
       "filename": "docs__en__models__fable-5-1__overview.md",
@@ -138048,7 +138158,7 @@
         "cost": 7,
         "work": 7
       },
-      "word_count": 4044
+      "word_count": 4050
     },
     {
       "filename": "docs__en__models__fable-5__overview.md",
