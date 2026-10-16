@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T15:15:32.296804Z",
+  "generated_at": "2026-10-16T18:16:29.709897Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14802,7 +14802,7 @@
         "dev": 12,
         "shift": 12
       },
-      "word_count": 22107
+      "word_count": 22117
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -129811,7 +129811,7 @@
     {
       "filename": "docs__en__manage-claude__cmek-claude-platform-on-aws.md",
       "id": "docs/en/manage-claude/cmek-claude-platform-on-aws",
-      "title": "Untitled",
+      "title": "Claude Platform on AWS",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/manage-claude/cmek-claude-platform-on-aws",
       "headings": [
