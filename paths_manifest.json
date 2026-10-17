@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-16T21:14:43.126260Z",
+  "generated_at": "2026-10-17T00:21:58.508302Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -533,7 +533,7 @@
       "title": "Claude Code changelog",
       "category": "claude_code",
       "sha256": "6ffdcd0453c90a74d8542f1565f397198cab0a777716598ac35421e3347a5a52",
-      "lastmod": "2026-10-15T19:53:08.969Z",
+      "lastmod": "2026-10-16T21:03:42.462Z",
       "fetch_status": "ok"
     },
     {
@@ -1698,8 +1698,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/gallery.md",
       "title": "Interface gallery for mods",
       "category": "claude_code",
-      "sha256": "939381e8a1b63a4a0d4b03e7a80a0e73acc35c622f552faa663db18ffbce41fe",
-      "lastmod": "2026-10-15T16:35:18.806Z",
+      "sha256": "c62a9fdf24e334a0e97b8d1a56792911786e6614cf945669f0ad981d03337715",
+      "lastmod": "2026-10-16T21:17:36.825Z",
       "fetch_status": "ok"
     },
     {
@@ -1709,8 +1709,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/interface.md",
       "title": "Draw in the interface with a mod",
       "category": "claude_code",
-      "sha256": "0847364fb41a7c1b178400296bff7f5afd8aab021230730084e9e0e10e85b261",
-      "lastmod": "2026-10-15T16:35:18.805Z",
+      "sha256": "3799ccf1061b6f1493a846634eb1f2fd75328232633f5e786d107837cd11c2ad",
+      "lastmod": "2026-10-16T21:17:36.826Z",
       "fetch_status": "ok"
     },
     {
@@ -1731,8 +1731,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/reference.md",
       "title": "Mods reference",
       "category": "claude_code",
-      "sha256": "e466c9b5ac7e5ecde1b5c5ac4097af98493d47f83f38a0534da56138058dd12b",
-      "lastmod": "2026-10-15T16:35:18.811Z",
+      "sha256": "83787e396a7ca50eaf93ab28e31f760a33286fab86aa087592042eb059f35725",
+      "lastmod": "2026-10-16T21:17:36.828Z",
       "fetch_status": "ok"
     },
     {
