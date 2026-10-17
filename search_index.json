@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-17T03:15:42.427410Z",
+  "generated_at": "2026-10-17T06:17:35.920285Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -4781,7 +4781,7 @@
       "terms": {
         "tool": 138,
         "claude": 103,
-        "session": 95,
+        "session": 94,
         "type": 82,
         "code": 77,
         "sdk": 74,
@@ -4815,22 +4815,22 @@
         "server": 33,
         "optional": 32,
         "only": 32,
-        "sandbox": 32,
         "stream": 31,
         "request": 31,
         "token": 31,
-        "command": 30,
+        "sandbox": 31,
         "configuration": 29,
+        "command": 29,
         "setting": 29,
         "error": 29,
         "event": 28,
         "api": 27,
         "key": 27,
-        "list": 27,
         "read": 26,
+        "list": 26,
         "project": 26
       },
-      "word_count": 20887
+      "word_count": 20870
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -7347,7 +7347,7 @@
       "terms": {
         "claude": 406,
         "code": 348,
-        "session": 268,
+        "session": 267,
         "tool": 255,
         "later": 196,
         "field": 179,
@@ -7364,7 +7364,7 @@
         "result": 116,
         "model": 115,
         "call": 112,
-        "list": 107,
+        "list": 106,
         "run": 103,
         "such": 98,
         "only": 98,
@@ -7379,12 +7379,12 @@
         "setting": 79,
         "mcp": 78,
         "each": 69,
-        "command": 69,
+        "command": 68,
         "before": 66,
         "report": 64,
         "carri": 64,
         "messag": 63,
-        "file": 60,
+        "file": 59,
         "same": 59,
         "value": 59,
         "mode": 58,
@@ -7396,7 +7396,7 @@
         "proces": 52,
         "block": 52
       },
-      "word_count": 37977
+      "word_count": 37958
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
