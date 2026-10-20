@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-20T03:16:05.983431Z",
+  "generated_at": "2026-10-20T06:17:58.923787Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -103,8 +103,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/custom-tools.md",
       "title": "Give Claude custom tools",
       "category": "agent_sdk",
-      "sha256": "40da8ca864dc53b14ee9a880ecd389904feca976830f97bbe5bc924e209f3aff",
-      "lastmod": "2026-10-17T01:27:35.660Z",
+      "sha256": "6473f30bd67d943d1eb51e3634bc7ca1f7473b1b0d64ec0670a4d988da6d95a4",
+      "lastmod": "2026-10-20T04:09:08.302Z",
       "fetch_status": "ok"
     },
     {
@@ -1676,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/create.md",
       "title": "Create a mod",
       "category": "claude_code",
-      "sha256": "9e50b9553209dfc9acffb67cecaf67cd7b72777fdf98337ca9ec8f5e8518430b",
-      "lastmod": "2026-10-17T01:27:35.631Z",
+      "sha256": "314a6f37d8ae3689d7dc887815cf6f497eb453b1aa48e07f8551ed7035cf1dac",
+      "lastmod": "2026-10-20T04:09:08.292Z",
       "fetch_status": "ok"
     },
     {

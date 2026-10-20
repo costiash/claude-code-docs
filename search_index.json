@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-20T03:16:10.624966Z",
+  "generated_at": "2026-10-20T06:18:03.566978Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -2714,7 +2714,7 @@
         "control": 6,
         "raw": 6
       },
-      "word_count": 4705
+      "word_count": 4704
     },
     {
       "filename": "claude-code__agent-sdk__examples.md",
@@ -26292,7 +26292,7 @@
         "every": 8,
         "api": 8
       },
-      "word_count": 3654
+      "word_count": 3658
     },
     {
       "filename": "claude-code__plugins__mods__events.md",
