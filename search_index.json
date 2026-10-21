@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T06:19:21.993650Z",
+  "generated_at": "2026-10-21T09:17:29.933645Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -3292,6 +3292,18 @@
           "level": 2
         },
         {
+          "text": "Named servers",
+          "level": 3
+        },
+        {
+          "text": "Set the first-turn wait yourself",
+          "level": 3
+        },
+        {
+          "text": "Make startup wait for servers",
+          "level": 3
+        },
+        {
           "text": "Allow MCP tools",
           "level": 2
         },
@@ -3389,32 +3401,32 @@
         }
       ],
       "terms": {
-        "server": 127,
+        "server": 129,
         "tool": 81,
         "mcp": 55,
         "connect": 30,
         "code": 28,
         "claude": 27,
-        "wait": 25,
-        "first": 24,
+        "wait": 27,
+        "first": 25,
         "connection": 22,
+        "turn": 22,
         "sdk": 21,
-        "turn": 21,
         "file": 18,
         "see": 17,
         "list": 17,
+        "set": 16,
         "http": 15,
-        "set": 15,
         "agent": 14,
         "message": 14,
         "search": 13,
         "call": 13,
+        "nam": 11,
         "before": 10,
         "example": 10,
         "init": 10,
         "sse": 10,
         "remote": 10,
-        "nam": 10,
         "permission": 10,
         "environment": 10,
         "token": 10,
@@ -3440,7 +3452,7 @@
         "proces": 7,
         "plugin": 7
       },
-      "word_count": 4621
+      "word_count": 4636
     },
     {
       "filename": "claude-code__agent-sdk__migration-guide.md",
@@ -6081,18 +6093,18 @@
         }
       ],
       "terms": {
-        "tool": 73,
+        "tool": 72,
         "search": 38,
         "load": 18,
-        "sdk": 17,
-        "definition": 16,
-        "context": 13,
+        "definition": 17,
+        "sdk": 16,
         "agent": 12,
+        "context": 12,
         "model": 12,
         "upfront": 10,
         "server": 9,
-        "window": 8,
         "mcp": 8,
+        "window": 7,
         "claude": 6,
         "default": 6,
         "api": 6,
@@ -6103,20 +6115,19 @@
         "set": 5,
         "see": 5,
         "platform": 5,
+        "later": 5,
         "documentation": 4,
         "code": 4,
         "demand": 4,
         "instead": 4,
         "turn": 4,
-        "every": 4,
         "deployment": 4,
         "override": 4,
         "opu": 4,
         "sonnet": 4,
-        "later": 4,
         "earlier": 4,
         "gateway": 4,
-        "count": 4,
+        "off": 4,
         "defer": 4,
         "custom": 4,
         "prompt": 4,
@@ -6130,9 +6141,10 @@
         "configure": 3,
         "relevant": 3,
         "where": 3,
-        "messag": 3
+        "messag": 3,
+        "add": 3
       },
-      "word_count": 1493
+      "word_count": 1492
     },
     {
       "filename": "claude-code__agent-sdk__troubleshooting.md",
@@ -15665,8 +15677,8 @@
         "see": 110,
         "setting": 96,
         "variable": 89,
+        "turn": 88,
         "command": 87,
-        "turn": 87,
         "request": 80,
         "such": 79,
         "off": 78,
@@ -15684,9 +15696,9 @@
         "mcp": 51,
         "disable": 50,
         "shell": 48,
+        "window": 48,
         "ignor": 48,
         "read": 47,
-        "window": 47,
         "only": 47,
         "sett": 47,
         "override": 47,
@@ -15704,7 +15716,7 @@
         "cloud": 41,
         "millisecond": 40
       },
-      "word_count": 21386
+      "word_count": 21388
     },
     {
       "filename": "claude-code__errors.md",
@@ -22212,6 +22224,10 @@
           "level": 4
         },
         {
+          "text": "Tools that stay deferred below the `ENABLE_TOOL_SEARCH=auto` threshold",
+          "level": 4
+        },
+        {
           "text": "Exempt a server from deferral",
           "level": 3
         },
@@ -22238,7 +22254,7 @@
         "server": 104,
         "json": 54,
         "code": 51,
-        "tool": 49,
+        "tool": 50,
         "add": 30,
         "name": 27,
         "list": 26,
@@ -22251,7 +22267,7 @@
         "header": 17,
         "true": 17,
         "connect": 16,
-        "enable": 15,
+        "enable": 16,
         "timeout": 15,
         "option": 14,
         "project": 14,
@@ -22261,8 +22277,9 @@
         "client": 13,
         "key": 13,
         "config": 13,
+        "search": 13,
         "var": 12,
-        "search": 12,
+        "auto": 12,
         "user": 11,
         "remote": 11,
         "stdio": 11,
@@ -22274,7 +22291,6 @@
         "scop": 10,
         "block": 10,
         "scope": 10,
-        "auto": 10,
         "support": 9,
         "get": 9,
         "max": 9,
@@ -22284,7 +22300,7 @@
         "install": 8,
         "proces": 8
       },
-      "word_count": 17334
+      "word_count": 17411
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -29628,7 +29644,7 @@
         "apply": 12,
         "while": 12
       },
-      "word_count": 5823
+      "word_count": 5819
     },
     {
       "filename": "claude-code__prompt-library.md",
@@ -33552,7 +33568,7 @@
         "before": 9,
         "alpine": 9
       },
-      "word_count": 4317
+      "word_count": 4207
     },
     {
       "filename": "claude-code__skills.md",

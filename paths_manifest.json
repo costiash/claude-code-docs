@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T06:19:18.470182Z",
+  "generated_at": "2026-10-21T09:17:27.158702Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -158,8 +158,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/mcp.md",
       "title": "Connect to external tools with MCP",
       "category": "agent_sdk",
-      "sha256": "517caf38b952359b02ec1fe26ba084693fb05625aead51e5d7b268fcd007e3a8",
-      "lastmod": "2026-10-21T01:30:38.069Z",
+      "sha256": "11ba3a216dd1f95c3a50ed0005b7bce60b0ea7eb49f0403bc99800eca16ba8fd",
+      "lastmod": "2026-10-21T06:28:46.611Z",
       "fetch_status": "ok"
     },
     {
@@ -236,7 +236,7 @@
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
       "sha256": "734b9e3eeae40614fa93a269f21b417cc74571503804352c97e7c9c0ab58cf93",
-      "lastmod": "2026-10-21T01:41:02.903Z",
+      "lastmod": "2026-10-21T06:28:20.539Z",
       "fetch_status": "ok"
     },
     {
@@ -356,8 +356,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/tool-search.md",
       "title": "Scale to many tools with tool search",
       "category": "agent_sdk",
-      "sha256": "83e4458529cc65973d00b46afb56f6526243d2e37535cdff004ac33205d85519",
-      "lastmod": "2026-10-21T00:36:20.012Z",
+      "sha256": "b62a1bf88f85d7fa01a77ac73187167c6f011b8f403862f0ffc03259b0cdeff0",
+      "lastmod": "2026-10-21T06:28:20.513Z",
       "fetch_status": "ok"
     },
     {
@@ -379,7 +379,7 @@
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
       "sha256": "7d5cc0cd4a62bde3de703ff1caa2d7b007af11151b9686d4b34815709206ac7f",
-      "lastmod": "2026-10-21T02:01:04.084Z",
+      "lastmod": "2026-10-21T06:28:20.540Z",
       "fetch_status": "ok"
     },
     {
@@ -863,7 +863,7 @@
       "title": "Explore the context window",
       "category": "claude_code",
       "sha256": "168ad687a36f4c4fd7c8531efe37be728f600b417a23119c4b37439a66b2bbf8",
-      "lastmod": "2026-10-20T02:34:53.883Z",
+      "lastmod": "2026-10-21T06:28:20.442Z",
       "fetch_status": "ok"
     },
     {
@@ -1016,8 +1016,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "87372c54d6085f00015cd97825c7e3d154012ccdf4d23c13ae79b26a2149721d",
-      "lastmod": "2026-10-21T01:30:38.090Z",
+      "sha256": "6c0123f6d94a3024920a3c0874647f957374b37663c13973e51bf3683c2d1cd8",
+      "lastmod": "2026-10-21T06:28:20.441Z",
       "fetch_status": "ok"
     },
     {
@@ -1346,8 +1346,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "835b28f2bdec4e7388f1caf8dd5a2b2c34ada3a474b7ee00f52bb44463f65106",
-      "lastmod": "2026-10-21T00:36:20.028Z",
+      "sha256": "8b24c6f03ee12b9a372022c08737a5796727be80183a5ea4357815e92fa18261",
+      "lastmod": "2026-10-21T06:28:20.346Z",
       "fetch_status": "ok"
     },
     {
@@ -1830,8 +1830,8 @@
       "md_url": "https://code.claude.com/docs/en/prompt-caching.md",
       "title": "How Claude Code uses prompt caching",
       "category": "claude_code",
-      "sha256": "c4d97362bf727ee7a6dfa34d1ff9478c05b20075f4c043b77de10616aea106d8",
-      "lastmod": "2026-10-21T02:07:38.191Z",
+      "sha256": "714b52ebc13d5643807a82c4274c6641fab64f59e4979dd3d437c1f58ef282a3",
+      "lastmod": "2026-10-21T06:28:20.310Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/setup.md",
       "title": "Advanced setup",
       "category": "claude_code",
-      "sha256": "dd6dce8da7f515ff0039bb3b4c6f5a4143cc0f74f363a741c5087328ae80a63c",
-      "lastmod": "2026-10-20T18:57:47.054Z",
+      "sha256": "bd8b966c47f7083371fc30c9dc821b776596f6d96509ee25859513ba6b802005",
+      "lastmod": "2026-10-21T06:28:20.251Z",
       "fetch_status": "ok"
     },
     {
