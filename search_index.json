@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T00:23:06.440250Z",
+  "generated_at": "2026-10-21T03:18:22.494169Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12,6 +12,10 @@
         {
           "text": "Changelog",
           "level": 1
+        },
+        {
+          "text": "2.1.306",
+          "level": 2
         },
         {
           "text": "2.1.305",
@@ -1715,30 +1719,30 @@
         }
       ],
       "terms": {
-        "fix": 4695,
-        "session": 2129,
+        "fix": 4697,
+        "session": 2132,
         "now": 1713,
         "claude": 1630,
         "add": 955,
         "after": 918,
-        "tool": 839,
+        "tool": 840,
         "improv": 825,
         "instead": 817,
-        "prompt": 769,
+        "prompt": 770,
         "command": 712,
         "mode": 706,
         "agent": 690,
-        "being": 687,
+        "being": 688,
         "show": 681,
         "code": 669,
         "chang": 645,
         "fail": 619,
         "plugin": 599,
         "background": 594,
-        "error": 564,
+        "error": 565,
         "model": 560,
         "server": 530,
-        "mcp": 496,
+        "mcp": 497,
         "file": 485,
         "hook": 454,
         "setting": 430,
@@ -1750,7 +1754,7 @@
         "permission": 387,
         "window": 380,
         "runn": 370,
-        "start": 368,
+        "start": 369,
         "auto": 359,
         "message": 357,
         "while": 352,
@@ -1766,7 +1770,7 @@
         "conversation": 296,
         "subagent": 287
       },
-      "word_count": 165534
+      "word_count": 165576
     },
     {
       "filename": "claude-code__accessibility.md",
@@ -2053,13 +2057,13 @@
         }
       ],
       "terms": {
-        "advisor": 116,
-        "model": 70,
-        "claude": 50,
+        "advisor": 117,
+        "model": 69,
+        "claude": 49,
         "fable": 46,
         "main": 32,
-        "code": 30,
-        "session": 25,
+        "code": 29,
+        "session": 24,
         "opu": 23,
         "usage": 22,
         "sonnet": 19,
@@ -2072,25 +2076,24 @@
         "api": 12,
         "bill": 12,
         "set": 12,
-        "request": 11,
         "pair": 10,
         "task": 10,
         "requir": 10,
+        "run": 10,
         "plan": 10,
         "consent": 10,
         "credit": 10,
+        "without": 10,
         "doesn": 10,
-        "run": 9,
+        "request": 10,
         "accept": 9,
         "where": 9,
         "turn": 9,
         "flag": 9,
-        "without": 9,
         "guidance": 8,
         "switch": 8,
         "cost": 8,
         "conversation": 7,
-        "also": 7,
         "one": 7,
         "sav": 7,
         "available": 6,
@@ -2102,9 +2105,10 @@
         "command": 6,
         "start": 6,
         "off": 6,
+        "also": 6,
         "point": 6
       },
-      "word_count": 2539
+      "word_count": 2535
     },
     {
       "filename": "claude-code__agent-sdk__agent-loop.md",
@@ -2740,22 +2744,26 @@
           "level": 2
         },
         {
+          "text": "Fork a complete project",
+          "level": 2
+        },
+        {
           "text": "Work through a Python recipe",
           "level": 2
         }
       ],
       "terms": {
-        "agent": 11,
-        "claude": 7,
-        "sdk": 5,
+        "agent": 13,
+        "claude": 8,
+        "sdk": 6,
         "cookbook": 5,
-        "build": 4,
+        "build": 5,
+        "python": 5,
+        "complete": 4,
+        "project": 4,
         "recip": 4,
         "application": 4,
-        "python": 4,
-        "complete": 3,
-        "project": 3,
-        "start": 3,
+        "start": 4,
         "one": 3,
         "work": 3,
         "demo": 3,
@@ -2796,7 +2804,7 @@
         "exampl": 1,
         "page": 1
       },
-      "word_count": 242
+      "word_count": 268
     },
     {
       "filename": "claude-code__agent-sdk__file-checkpointing.md",
@@ -3055,8 +3063,8 @@
         "sdk": 29,
         "matcher": 28,
         "code": 26,
+        "call": 24,
         "input": 24,
-        "call": 23,
         "session": 23,
         "output": 21,
         "return": 21,
@@ -3096,7 +3104,7 @@
         "name": 9,
         "such": 9
       },
-      "word_count": 5707
+      "word_count": 5714
     },
     {
       "filename": "claude-code__agent-sdk__hosting.md",
@@ -3381,58 +3389,58 @@
         }
       ],
       "terms": {
-        "server": 120,
+        "server": 127,
         "tool": 81,
-        "mcp": 53,
-        "connect": 29,
+        "mcp": 55,
+        "connect": 30,
         "code": 28,
         "claude": 27,
+        "wait": 25,
+        "first": 24,
         "connection": 22,
         "sdk": 21,
-        "first": 20,
-        "wait": 20,
-        "turn": 18,
+        "turn": 21,
+        "file": 18,
         "see": 17,
+        "list": 17,
         "http": 15,
-        "list": 15,
-        "file": 14,
+        "set": 15,
         "agent": 14,
-        "search": 14,
         "message": 14,
-        "set": 13,
-        "call": 12,
-        "without": 11,
-        "environment": 11,
-        "available": 10,
+        "search": 13,
+        "call": 13,
+        "before": 10,
         "example": 10,
-        "pas": 10,
+        "init": 10,
         "sse": 10,
         "remote": 10,
+        "nam": 10,
+        "permission": 10,
+        "environment": 10,
         "token": 10,
-        "before": 9,
-        "error": 9,
-        "init": 9,
+        "without": 9,
+        "pas": 9,
+        "start": 9,
         "fail": 9,
         "statu": 9,
-        "permission": 9,
         "check": 9,
-        "run": 8,
+        "available": 8,
+        "error": 8,
         "configuration": 8,
-        "each": 8,
+        "second": 8,
+        "includ": 8,
         "full": 8,
         "typescript": 8,
         "query": 7,
+        "run": 7,
         "result": 7,
-        "start": 7,
+        "option": 7,
         "default": 7,
-        "emit": 7,
-        "own": 7,
-        "also": 7,
-        "credential": 7,
-        "documentation": 6,
-        "cover": 6
+        "cach": 7,
+        "proces": 7,
+        "plugin": 7
       },
-      "word_count": 4476
+      "word_count": 4621
     },
     {
       "filename": "claude-code__agent-sdk__migration-guide.md",
@@ -4006,11 +4014,11 @@
         "list": 10,
         "network": 10,
         "agent": 9,
-        "doe": 9,
         "removal": 9,
-        "block": 9
+        "block": 9,
+        "reach": 9
       },
-      "word_count": 3259
+      "word_count": 3254
     },
     {
       "filename": "claude-code__agent-sdk__plugins.md",
@@ -4791,58 +4799,58 @@
         }
       ],
       "terms": {
-        "tool": 138,
-        "claude": 103,
-        "session": 94,
+        "tool": 142,
+        "claude": 104,
+        "session": 95,
         "type": 82,
-        "code": 77,
+        "code": 78,
         "sdk": 74,
         "field": 71,
         "input": 64,
         "description": 61,
         "output": 56,
-        "message": 54,
-        "model": 54,
+        "message": 55,
+        "model": 55,
         "see": 52,
         "hook": 52,
         "subagent": 52,
-        "agent": 47,
-        "prompt": 45,
+        "prompt": 50,
+        "agent": 46,
+        "call": 41,
+        "such": 40,
         "cli": 40,
         "set": 40,
-        "such": 39,
+        "result": 39,
         "permission": 39,
         "default": 38,
-        "call": 38,
         "later": 38,
-        "result": 38,
         "task": 36,
         "requir": 36,
         "name": 36,
         "return": 35,
         "identifier": 35,
         "python": 34,
+        "server": 34,
         "messag": 33,
         "example": 33,
-        "server": 33,
         "stream": 32,
         "optional": 32,
         "only": 32,
-        "request": 31,
         "token": 31,
         "sandbox": 31,
+        "request": 30,
+        "error": 30,
         "configuration": 29,
+        "read": 29,
         "command": 29,
         "setting": 29,
-        "error": 29,
+        "api": 28,
         "event": 28,
-        "api": 27,
         "key": 27,
-        "run": 26,
-        "read": 26,
-        "list": 26
+        "run": 27,
+        "one": 26
       },
-      "word_count": 20935
+      "word_count": 21115
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -5535,11 +5543,11 @@
         }
       ],
       "terms": {
-        "stream": 24,
-        "tool": 21,
+        "stream": 25,
+        "tool": 22,
+        "call": 15,
         "message": 14,
         "text": 13,
-        "call": 13,
         "block": 12,
         "event": 12,
         "agent": 10,
@@ -5552,12 +5560,12 @@
         "code": 6,
         "each": 6,
         "receive": 6,
-        "output": 6,
         "input": 6,
         "typescript": 6,
         "typ": 6,
         "turn": 6,
         "partial": 5,
+        "output": 5,
         "enabl": 5,
         "end": 5,
         "cut": 5,
@@ -5565,7 +5573,6 @@
         "respons": 4,
         "real": 4,
         "time": 4,
-        "see": 4,
         "contain": 4,
         "raw": 4,
         "api": 4,
@@ -5577,6 +5584,7 @@
         "non": 3,
         "generat": 3,
         "enable": 3,
+        "see": 3,
         "also": 3,
         "arrive": 3,
         "need": 3,
@@ -5586,7 +5594,7 @@
         "subagent": 3,
         "start": 3
       },
-      "word_count": 1679
+      "word_count": 1687
     },
     {
       "filename": "claude-code__agent-sdk__streaming-vs-single-mode.md",
@@ -5718,6 +5726,10 @@
           "level": 2
         },
         {
+          "text": "Recognize the StructuredOutput tool call",
+          "level": 2
+        },
+        {
           "text": "Error handling",
           "level": 2
         },
@@ -5727,58 +5739,58 @@
         }
       ],
       "terms": {
-        "schema": 34,
+        "schema": 36,
         "output": 26,
+        "agent": 23,
         "structur": 21,
-        "agent": 19,
         "json": 15,
-        "result": 9,
-        "error": 9,
-        "data": 8,
-        "object": 8,
-        "tool": 7,
+        "tool": 12,
+        "result": 11,
+        "error": 10,
+        "object": 10,
+        "call": 10,
+        "data": 9,
+        "get": 7,
+        "return": 7,
+        "validat": 7,
         "need": 7,
         "typ": 7,
         "before": 6,
-        "get": 6,
-        "return": 6,
-        "validat": 6,
         "zod": 6,
         "define": 6,
+        "match": 6,
+        "message": 6,
         "example": 6,
         "pydantic": 5,
         "type": 5,
         "task": 5,
         "sdk": 5,
         "validation": 5,
+        "typescript": 5,
+        "python": 5,
         "without": 5,
-        "match": 4,
+        "block": 5,
+        "claude": 4,
         "retry": 4,
-        "typescript": 4,
-        "python": 4,
+        "handl": 4,
         "directly": 4,
         "field": 4,
+        "defin": 4,
+        "list": 4,
+        "each": 4,
         "run": 4,
+        "nam": 4,
         "documentation": 3,
-        "claude": 3,
         "shape": 3,
         "want": 3,
         "back": 3,
         "any": 3,
         "end": 3,
         "prompt": 3,
-        "handl": 3,
-        "full": 3,
-        "text": 3,
-        "pas": 3,
-        "app": 3,
-        "parse": 3,
-        "option": 3,
-        "message": 3,
-        "includ": 3,
-        "below": 3
+        "instead": 3,
+        "see": 3
       },
-      "word_count": 2427
+      "word_count": 2624
     },
     {
       "filename": "claude-code__agent-sdk__subagents.md",
@@ -6069,11 +6081,11 @@
         }
       ],
       "terms": {
-        "tool": 70,
-        "search": 36,
+        "tool": 73,
+        "search": 38,
         "load": 18,
-        "sdk": 18,
-        "definition": 15,
+        "sdk": 17,
+        "definition": 16,
         "context": 13,
         "agent": 12,
         "model": 12,
@@ -6081,46 +6093,46 @@
         "server": 9,
         "window": 8,
         "mcp": 8,
+        "claude": 6,
         "default": 6,
         "api": 6,
         "result": 6,
-        "claude": 5,
         "discover": 5,
         "available": 5,
         "one": 5,
-        "override": 5,
+        "set": 5,
+        "see": 5,
         "platform": 5,
-        "opu": 5,
-        "sonnet": 5,
         "documentation": 4,
+        "code": 4,
         "demand": 4,
         "instead": 4,
         "turn": 4,
-        "set": 4,
         "every": 4,
-        "see": 4,
         "deployment": 4,
-        "google": 4,
-        "cloud": 4,
-        "haiku": 4,
+        "override": 4,
+        "opu": 4,
+        "sonnet": 4,
         "later": 4,
         "earlier": 4,
+        "gateway": 4,
         "count": 4,
         "defer": 4,
         "custom": 4,
         "prompt": 4,
         "full": 4,
         "reference": 4,
-        "code": 3,
+        "before": 3,
         "scale": 3,
         "need": 3,
         "work": 3,
         "list": 3,
         "configure": 3,
         "relevant": 3,
-        "most": 3
+        "where": 3,
+        "messag": 3
       },
-      "word_count": 1488
+      "word_count": 1493
     },
     {
       "filename": "claude-code__agent-sdk__troubleshooting.md",
@@ -7369,13 +7381,13 @@
         }
       ],
       "terms": {
-        "claude": 406,
-        "code": 348,
+        "claude": 407,
+        "code": 349,
         "session": 269,
-        "tool": 254,
+        "tool": 256,
         "later": 197,
         "field": 179,
-        "message": 175,
+        "message": 176,
         "agent": 166,
         "sdk": 165,
         "requir": 159,
@@ -7387,18 +7399,18 @@
         "result": 117,
         "one": 116,
         "model": 115,
-        "call": 111,
+        "call": 113,
         "list": 106,
         "task": 106,
         "run": 104,
         "such": 99,
         "only": 97,
-        "see": 95,
+        "see": 96,
         "subagent": 92,
         "prompt": 87,
         "request": 83,
         "user": 82,
-        "type": 81,
+        "type": 82,
         "read": 80,
         "setting": 79,
         "mcp": 78,
@@ -7420,7 +7432,7 @@
         "proces": 52,
         "block": 52
       },
-      "word_count": 38112
+      "word_count": 38155
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -8145,19 +8157,19 @@
         }
       ],
       "terms": {
-        "session": 712,
+        "session": 709,
         "background": 206,
-        "claude": 203,
-        "agent": 167,
-        "code": 148,
-        "view": 141,
-        "start": 135,
+        "claude": 202,
+        "agent": 166,
+        "code": 147,
+        "view": 140,
+        "start": 134,
         "row": 122,
-        "open": 116,
-        "dispatch": 107,
+        "open": 115,
+        "dispatch": 106,
         "show": 106,
         "run": 104,
-        "directory": 98,
+        "directory": 97,
         "worktree": 96,
         "prompt": 88,
         "proces": 86,
@@ -8185,8 +8197,8 @@
         "shell": 57,
         "again": 54,
         "subagent": 53,
-        "mode": 53,
         "name": 52,
+        "mode": 51,
         "copy": 51,
         "stop": 50,
         "only": 47,
@@ -8194,9 +8206,9 @@
         "fail": 45,
         "exit": 44,
         "own": 44,
-        "new": 43
+        "reply": 43
       },
-      "word_count": 21037
+      "word_count": 20990
     },
     {
       "filename": "claude-code__agents.md",
@@ -9537,58 +9549,58 @@
         }
       ],
       "terms": {
-        "fix": 4840,
-        "session": 2121,
-        "now": 1702,
-        "claude": 1620,
-        "add": 1106,
-        "improv": 914,
-        "after": 914,
-        "tool": 838,
-        "instead": 813,
-        "chang": 798,
-        "prompt": 767,
-        "command": 709,
-        "mode": 701,
-        "agent": 688,
-        "being": 684,
-        "show": 679,
-        "code": 666,
-        "fail": 615,
-        "plugin": 597,
-        "background": 593,
-        "error": 561,
-        "model": 556,
-        "server": 526,
-        "mcp": 494,
-        "file": 484,
-        "hook": 450,
-        "setting": 426,
-        "vscode": 419,
-        "list": 417,
-        "terminal": 411,
-        "read": 397,
+        "fix": 4866,
+        "session": 2129,
+        "now": 1712,
+        "claude": 1633,
+        "add": 1113,
+        "improv": 920,
+        "after": 918,
+        "tool": 839,
+        "instead": 817,
+        "chang": 805,
+        "prompt": 769,
+        "command": 711,
+        "mode": 706,
+        "agent": 689,
+        "being": 687,
+        "show": 681,
+        "code": 672,
+        "fail": 619,
+        "plugin": 599,
+        "background": 594,
+        "error": 564,
+        "model": 559,
+        "server": 529,
+        "mcp": 496,
+        "file": 486,
+        "hook": 454,
+        "setting": 430,
+        "vscode": 422,
+        "list": 419,
+        "terminal": 414,
+        "read": 399,
         "turn": 393,
-        "permission": 386,
+        "permission": 387,
         "window": 380,
-        "runn": 367,
-        "start": 362,
+        "runn": 370,
+        "start": 368,
         "auto": 358,
-        "message": 356,
-        "while": 349,
-        "remote": 348,
-        "run": 334,
-        "longer": 327,
-        "only": 327,
-        "open": 324,
-        "one": 320,
-        "skill": 319,
-        "text": 317,
-        "request": 309,
-        "conversation": 293,
-        "subagent": 283
+        "message": 357,
+        "while": 352,
+        "remote": 350,
+        "run": 337,
+        "longer": 332,
+        "only": 330,
+        "open": 327,
+        "one": 324,
+        "text": 320,
+        "skill": 320,
+        "request": 311,
+        "conversation": 296,
+        "subagent": 287
       },
-      "word_count": 165255
+      "word_count": 166212
     },
     {
       "filename": "claude-code__channels.md",
@@ -10529,41 +10541,41 @@
         }
       ],
       "terms": {
-        "gateway": 345,
-        "claude": 165,
+        "gateway": 349,
+        "claude": 167,
         "upstream": 142,
         "set": 127,
-        "key": 120,
+        "key": 121,
         "request": 109,
-        "code": 104,
-        "policy": 103,
+        "code": 106,
+        "policy": 104,
         "developer": 100,
-        "model": 92,
+        "model": 95,
         "one": 88,
+        "block": 86,
         "every": 84,
-        "block": 83,
-        "list": 74,
+        "list": 75,
         "only": 70,
         "desktop": 69,
+        "client": 67,
         "token": 67,
         "session": 66,
-        "client": 65,
         "idp": 64,
         "proxy": 64,
         "each": 62,
+        "later": 62,
         "setting": 60,
-        "later": 59,
         "default": 58,
         "sign": 56,
         "start": 56,
-        "own": 55,
-        "requir": 51,
+        "own": 56,
+        "requir": 54,
         "per": 51,
         "group": 49,
         "such": 49,
         "bedrock": 47,
+        "server": 47,
         "user": 46,
-        "server": 45,
         "fail": 44,
         "see": 44,
         "boot": 43,
@@ -10580,7 +10592,7 @@
         "aws": 37,
         "through": 37
       },
-      "word_count": 19048
+      "word_count": 19139
     },
     {
       "filename": "claude-code__claude-apps-gateway-deploy.md",
@@ -12470,6 +12482,10 @@
           "level": 3
         },
         {
+          "text": "Include other files in REVIEW\\.md",
+          "level": 3
+        },
+        {
           "text": "Which branch REVIEW\\.md is read from",
           "level": 3
         },
@@ -12487,58 +12503,58 @@
         }
       ],
       "terms": {
-        "review": 45,
-        "branch": 26,
-        "code": 19,
-        "read": 16,
-        "default": 14,
-        "fil": 13,
-        "request": 12,
-        "file": 11,
-        "pull": 11,
-        "repository": 11,
-        "root": 10,
-        "protect": 9,
+        "review": 55,
+        "branch": 31,
+        "file": 29,
+        "fil": 24,
+        "code": 22,
+        "read": 20,
+        "root": 17,
+        "includ": 16,
+        "default": 15,
+        "pull": 14,
+        "request": 14,
+        "repository": 14,
+        "check": 13,
+        "instruction": 11,
+        "protect": 11,
+        "run": 10,
+        "add": 9,
         "find": 9,
-        "add": 8,
-        "check": 8,
         "change": 8,
-        "instruction": 8,
+        "chang": 8,
+        "subdirectory": 8,
+        "line": 8,
         "claude": 7,
         "severity": 7,
+        "path": 7,
         "nit": 7,
-        "run": 7,
-        "path": 6,
-        "chang": 6,
-        "subdirectory": 6,
+        "one": 7,
+        "keep": 7,
+        "rule": 6,
+        "level": 6,
+        "rul": 6,
+        "only": 6,
+        "example": 6,
+        "include": 6,
         "protection": 6,
-        "rule": 5,
-        "one": 5,
+        "skip": 5,
         "project": 5,
-        "level": 5,
-        "rul": 5,
-        "example": 5,
+        "report": 5,
+        "name": 5,
         "ruleset": 5,
         "before": 4,
-        "skip": 4,
+        "copy": 4,
         "comment": 4,
         "generat": 4,
+        "put": 4,
         "want": 4,
-        "only": 4,
+        "each": 4,
         "service": 4,
-        "keep": 4,
-        "like": 4,
-        "first": 4,
-        "important": 4,
-        "target": 4,
-        "base": 4,
-        "flag": 3,
-        "see": 3,
-        "copy": 3,
-        "team": 3,
-        "context": 3
+        "own": 4,
+        "like": 4
       },
-      "word_count": 1293
+      "word_count": 1734
     },
     {
       "filename": "claude-code__code-review-local.md",
@@ -12927,30 +12943,34 @@
         }
       ],
       "terms": {
-        "review": 85,
+        "review": 89,
         "code": 35,
         "comment": 31,
         "run": 30,
-        "check": 26,
-        "request": 18,
+        "check": 29,
+        "request": 20,
+        "pull": 18,
         "claude": 16,
-        "pull": 16,
         "repository": 13,
         "start": 12,
+        "link": 12,
         "budget": 11,
         "didn": 10,
         "see": 9,
+        "skipp": 8,
         "limit": 8,
         "post": 8,
+        "file": 7,
         "finding": 7,
         "title": 7,
         "inline": 7,
         "appear": 7,
         "command": 7,
         "acces": 7,
-        "skipp": 6,
         "doesn": 6,
+        "chang": 6,
         "read": 6,
+        "write": 6,
         "admin": 6,
         "usage": 6,
         "github": 6,
@@ -12963,22 +12983,18 @@
         "show": 5,
         "new": 5,
         "spend": 5,
+        "message": 5,
         "ask": 5,
-        "write": 5,
-        "branch": 5,
         "app": 5,
         "one": 4,
         "found": 4,
         "don": 4,
-        "chang": 4,
         "tim": 4,
-        "message": 4,
         "add": 4,
         "need": 4,
-        "reach": 4,
-        "click": 4
+        "only": 4
       },
-      "word_count": 1373
+      "word_count": 1494
     },
     {
       "filename": "claude-code__commands.md",
@@ -13013,16 +13029,16 @@
         }
       ],
       "terms": {
-        "claude": 158,
+        "claude": 165,
         "code": 99,
         "session": 79,
-        "command": 63,
+        "command": 64,
         "run": 53,
         "skill": 44,
         "available": 40,
         "open": 39,
+        "see": 36,
         "requir": 36,
-        "see": 34,
         "current": 33,
         "turn": 33,
         "conversation": 33,
@@ -13052,6 +13068,7 @@
         "such": 16,
         "plan": 16,
         "list": 16,
+        "design": 16,
         "view": 16,
         "model": 15,
         "menu": 15,
@@ -13061,10 +13078,9 @@
         "while": 14,
         "finish": 14,
         "dialog": 14,
-        "project": 14,
-        "change": 14
+        "project": 14
       },
-      "word_count": 7141
+      "word_count": 7187
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -14006,8 +14022,8 @@
         "line": 20,
         "socket": 20,
         "run": 19,
-        "only": 19,
         "notice": 18,
+        "only": 18,
         "setting": 18,
         "cloud": 17,
         "arriv": 17,
@@ -14034,7 +14050,7 @@
         "agent": 12,
         "connection": 12
       },
-      "word_count": 5064
+      "word_count": 5063
     },
     {
       "filename": "claude-code__data-usage.md",
@@ -15637,31 +15653,31 @@
         }
       ],
       "terms": {
-        "claude": 453,
-        "set": 395,
-        "code": 359,
-        "default": 166,
+        "claude": 452,
+        "set": 392,
+        "code": 358,
+        "default": 164,
         "session": 160,
-        "model": 146,
+        "model": 145,
         "requir": 119,
         "later": 119,
-        "tool": 111,
-        "see": 109,
+        "tool": 113,
+        "see": 110,
         "setting": 96,
         "variable": 89,
         "command": 87,
         "turn": 87,
-        "such": 80,
         "request": 80,
-        "off": 77,
+        "such": 79,
+        "off": 78,
         "server": 76,
-        "value": 75,
+        "value": 74,
         "agent": 72,
         "file": 62,
         "background": 61,
-        "instead": 58,
         "api": 58,
         "mode": 58,
+        "instead": 57,
         "run": 54,
         "before": 53,
         "platform": 53,
@@ -15675,20 +15691,20 @@
         "sett": 47,
         "override": 47,
         "prompt": 47,
-        "wait": 47,
+        "gateway": 46,
         "bash": 46,
+        "wait": 46,
         "also": 45,
         "limit": 45,
         "variabl": 44,
         "path": 43,
         "still": 43,
-        "gateway": 42,
         "one": 41,
         "terminal": 41,
         "cloud": 41,
         "millisecond": 40
       },
-      "word_count": 21410
+      "word_count": 21386
     },
     {
       "filename": "claude-code__errors.md",
@@ -15878,7 +15894,7 @@
           "level": 3
         },
         {
-          "text": "Failed to start OAuth callback server",
+          "text": "Couldn't start the local listener that receives the browser sign-in",
           "level": 3
         },
         {
@@ -16794,6 +16810,10 @@
           "level": 3
         },
         {
+          "text": "Matches no tool \u00b7 check for typos",
+          "level": 3
+        },
+        {
           "text": "Is not matched by file permission checks",
           "level": 3
         },
@@ -16839,58 +16859,58 @@
         }
       ],
       "terms": {
-        "claude": 497,
+        "claude": 505,
         "error": 143,
-        "code": 131,
+        "code": 134,
+        "json": 105,
         "mcp": 104,
-        "anthropic": 104,
-        "json": 103,
-        "login": 102,
-        "session": 96,
+        "login": 103,
+        "anthropic": 103,
+        "session": 98,
         "model": 91,
         "name": 88,
+        "authentication": 81,
         "api": 80,
-        "authentication": 79,
         "plugin": 79,
-        "setting": 74,
+        "setting": 78,
         "request": 72,
-        "path": 62,
-        "fail": 57,
-        "server": 56,
-        "file": 53,
+        "path": 68,
+        "fail": 59,
+        "server": 58,
+        "file": 54,
         "token": 50,
+        "tool": 46,
         "agent": 43,
+        "read": 43,
+        "add": 43,
         "remote": 42,
-        "read": 42,
-        "add": 42,
-        "tool": 41,
-        "command": 37,
+        "command": 39,
         "statu": 37,
         "could": 37,
+        "permission": 37,
         "marketplace": 37,
         "limit": 36,
         "run": 36,
         "key": 36,
+        "check": 34,
         "cannot": 34,
-        "prompt": 33,
+        "manag": 34,
         "control": 32,
-        "check": 31,
-        "manag": 31,
-        "permission": 31,
+        "prompt": 32,
+        "couldn": 31,
         "network": 30,
+        "output": 30,
         "resume": 30,
         "response": 30,
         "com": 29,
-        "couldn": 29,
         "refus": 29,
+        "debug": 29,
         "git": 29,
-        "output": 28,
         "update": 28,
-        "oauth": 27,
-        "too": 26,
-        "cloud": 25
+        "oauth": 28,
+        "too": 26
       },
-      "word_count": 75629
+      "word_count": 76909
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -17091,11 +17111,11 @@
         "microsoft": 12,
         "foundry": 12,
         "console": 11,
+        "support": 11,
         "server": 11,
         "gateway": 11,
         "machine": 11,
         "availability": 10,
-        "support": 10,
         "account": 10,
         "team": 10,
         "manag": 10,
@@ -17112,9 +17132,9 @@
         "partial": 7,
         "admin": 7,
         "enabl": 7,
-        "sonnet": 7
+        "search": 7
       },
-      "word_count": 2140
+      "word_count": 2132
     },
     {
       "filename": "claude-code__features-overview.md",
@@ -19660,8 +19680,8 @@
         "action": 55,
         "call": 55,
         "only": 55,
+        "plugin": 54,
         "agent": 54,
-        "plugin": 53,
         "bash": 53,
         "set": 53,
         "output": 52,
@@ -19688,7 +19708,7 @@
         "fir": 36,
         "such": 36
       },
-      "word_count": 37283
+      "word_count": 37417
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -19835,7 +19855,7 @@
         }
       ],
       "terms": {
-        "hook": 224,
+        "hook": 225,
         "claude": 136,
         "code": 99,
         "tool": 70,
@@ -19845,7 +19865,7 @@
         "json": 47,
         "run": 45,
         "file": 42,
-        "exit": 42,
+        "exit": 41,
         "session": 40,
         "block": 38,
         "call": 34,
@@ -19863,30 +19883,30 @@
         "setting": 23,
         "instead": 23,
         "only": 23,
+        "notification": 22,
         "agent": 22,
         "after": 22,
         "matcher": 22,
-        "notification": 21,
         "match": 21,
+        "return": 20,
         "every": 20,
         "edit": 19,
         "mcp": 19,
         "each": 19,
-        "return": 19,
         "stdout": 19,
         "shell": 18,
         "start": 18,
         "reference": 18,
+        "set": 18,
         "model": 17,
-        "set": 17,
         "appear": 17,
         "server": 17,
         "full": 16,
         "show": 16,
-        "decision": 15,
-        "check": 15
+        "turn": 16,
+        "decision": 15
       },
-      "word_count": 8602
+      "word_count": 8627
     },
     {
       "filename": "claude-code__how-claude-code-works.md",
@@ -21203,12 +21223,12 @@
         "header": 28,
         "block": 27,
         "run": 24,
-        "see": 23,
+        "see": 24,
         "session": 23,
+        "nam": 23,
         "check": 22,
         "url": 22,
         "send": 22,
-        "nam": 22,
         "variabl": 22,
         "configuration": 21,
         "key": 20,
@@ -21242,7 +21262,7 @@
         "need": 11,
         "token": 11
       },
-      "word_count": 5760
+      "word_count": 5776
     },
     {
       "filename": "claude-code__llm-gateway-protocol.md",
@@ -21312,8 +21332,16 @@
           "level": 2
         },
         {
+          "text": "Beta header and body field pairs",
+          "level": 3
+        },
+        {
           "text": "Automatic retry and error forwarding",
           "level": 3
+        },
+        {
+          "text": "Retry without tool search",
+          "level": 4
         },
         {
           "text": "Disable pre-release capabilities",
@@ -21341,58 +21369,58 @@
         }
       ],
       "terms": {
-        "claude": 128,
-        "gateway": 105,
-        "code": 97,
-        "request": 92,
-        "header": 64,
-        "model": 46,
-        "field": 44,
+        "claude": 138,
+        "gateway": 111,
+        "code": 107,
+        "request": 103,
+        "header": 65,
+        "field": 51,
+        "model": 47,
         "format": 40,
-        "set": 37,
+        "set": 39,
+        "upstream": 37,
         "agent": 35,
-        "forward": 33,
-        "upstream": 33,
+        "forward": 34,
+        "developer": 31,
+        "block": 31,
+        "tool": 31,
         "anthropic": 29,
-        "block": 29,
         "through": 29,
         "platform": 29,
-        "body": 27,
+        "body": 28,
+        "send": 27,
         "bedrock": 27,
-        "send": 26,
-        "developer": 26,
         "prompt": 26,
         "amazon": 25,
-        "tool": 25,
+        "see": 24,
         "only": 24,
+        "value": 24,
+        "messag": 22,
         "provider": 22,
-        "value": 21,
-        "see": 19,
-        "one": 19,
-        "messag": 19,
-        "beta": 19,
+        "one": 21,
+        "without": 21,
+        "beta": 21,
+        "keep": 20,
+        "system": 20,
+        "later": 19,
         "api": 18,
         "response": 18,
         "cloud": 18,
+        "such": 18,
+        "entry": 18,
         "endpoint": 17,
         "doesn": 17,
         "default": 17,
-        "system": 17,
-        "such": 17,
-        "entry": 16,
+        "reject": 17,
+        "conversation": 17,
+        "retry": 17,
+        "before": 16,
+        "every": 16,
+        "own": 15,
         "each": 15,
-        "connection": 15,
-        "every": 15,
-        "error": 15,
-        "conversation": 15,
-        "keep": 14,
-        "discovery": 14,
-        "client": 14,
-        "valu": 14,
-        "nam": 14,
-        "also": 14
+        "connection": 15
       },
-      "word_count": 6005
+      "word_count": 6358
     },
     {
       "filename": "claude-code__llm-gateway-rollout.md",
@@ -22176,6 +22204,10 @@
           "level": 3
         },
         {
+          "text": "Tool search through an LLM gateway",
+          "level": 4
+        },
+        {
           "text": "Exempt a server from deferral",
           "level": 3
         },
@@ -22198,23 +22230,24 @@
       ],
       "terms": {
         "mcp": 203,
-        "claude": 154,
+        "claude": 155,
         "server": 104,
         "json": 54,
-        "code": 50,
-        "tool": 46,
+        "code": 51,
+        "tool": 49,
         "add": 30,
         "name": 27,
         "list": 26,
-        "url": 26,
-        "anthropic": 24,
+        "url": 24,
         "plugin": 23,
         "token": 23,
+        "anthropic": 22,
         "command": 21,
         "http": 19,
         "header": 17,
+        "true": 17,
         "connect": 16,
-        "true": 16,
+        "enable": 15,
         "timeout": 15,
         "option": 14,
         "project": 14,
@@ -22223,9 +22256,9 @@
         "oauth": 13,
         "client": 13,
         "key": 13,
-        "enable": 13,
         "config": 13,
         "var": 12,
+        "search": 12,
         "user": 11,
         "remote": 11,
         "stdio": 11,
@@ -22237,7 +22270,7 @@
         "scop": 10,
         "block": 10,
         "scope": 10,
-        "search": 10,
+        "auto": 10,
         "support": 9,
         "get": 9,
         "max": 9,
@@ -22245,10 +22278,9 @@
         "read": 8,
         "session": 8,
         "install": 8,
-        "proces": 8,
-        "default": 8
+        "proces": 8
       },
-      "word_count": 17181
+      "word_count": 17334
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -23040,8 +23072,8 @@
       ],
       "terms": {
         "model": 565,
-        "claude": 280,
-        "code": 224,
+        "claude": 279,
+        "code": 223,
         "session": 171,
         "default": 170,
         "set": 153,
@@ -23070,18 +23102,18 @@
         "see": 49,
         "variable": 49,
         "agent": 48,
-        "appli": 48,
+        "appli": 47,
         "later": 46,
+        "start": 46,
         "also": 45,
-        "start": 45,
         "before": 44,
         "api": 43,
         "one": 43,
         "only": 43,
         "user": 42,
-        "show": 42,
+        "instead": 41,
+        "show": 41,
         "sett": 40,
-        "instead": 40,
         "through": 39,
         "allowlist": 39,
         "environment": 38,
@@ -23090,7 +23122,7 @@
         "bedrock": 37,
         "block": 37
       },
-      "word_count": 16888
+      "word_count": 16898
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -23944,6 +23976,10 @@
           "level": 2
         },
         {
+          "text": "Bypass permissions ignored in a background session",
+          "level": 3
+        },
+        {
           "text": "Protected paths",
           "level": 2
         },
@@ -24003,23 +24039,23 @@
       "terms": {
         "mode": 262,
         "claude": 216,
-        "session": 172,
+        "session": 174,
         "code": 168,
-        "permission": 120,
+        "permission": 122,
         "auto": 119,
         "prompt": 114,
-        "start": 101,
+        "start": 102,
         "classifier": 92,
         "path": 90,
         "command": 83,
-        "run": 80,
+        "run": 79,
         "set": 72,
         "read": 68,
         "such": 60,
         "action": 57,
         "check": 56,
         "plan": 53,
-        "setting": 52,
+        "setting": 53,
         "work": 52,
         "block": 49,
         "review": 48,
@@ -24044,15 +24080,15 @@
         "before": 32,
         "one": 32,
         "directory": 32,
+        "request": 32,
         "approv": 31,
-        "request": 31,
         "manual": 30,
         "edit": 30,
         "also": 30,
         "each": 30,
         "tool": 30
       },
-      "word_count": 13524
+      "word_count": 13563
     },
     {
       "filename": "claude-code__permissions.md",
@@ -24294,7 +24330,7 @@
         "set": 27,
         "same": 27
       },
-      "word_count": 12109
+      "word_count": 12106
     },
     {
       "filename": "claude-code__platforms.md",
@@ -27011,58 +27047,58 @@
         }
       ],
       "terms": {
-        "call": 58,
-        "claude": 43,
-        "mod": 40,
-        "hook": 32,
-        "start": 30,
-        "user": 30,
+        "call": 66,
+        "claude": 49,
+        "mod": 47,
+        "hook": 39,
+        "user": 36,
+        "start": 32,
         "command": 28,
+        "session": 27,
         "message": 26,
         "prompt": 26,
+        "code": 24,
+        "run": 24,
         "api": 22,
         "tool": 21,
-        "session": 21,
-        "such": 19,
+        "such": 20,
+        "turn": 20,
+        "name": 20,
+        "one": 20,
         "read": 19,
-        "turn": 19,
-        "name": 19,
         "after": 19,
-        "one": 19,
-        "run": 18,
+        "before": 18,
         "work": 18,
-        "code": 17,
+        "send": 18,
         "model": 16,
+        "event": 16,
+        "text": 16,
         "input": 16,
-        "send": 16,
-        "before": 15,
-        "event": 15,
+        "resolv": 16,
         "request": 15,
         "refus": 15,
-        "text": 14,
+        "return": 14,
         "breakpoint": 14,
-        "return": 13,
+        "runn": 13,
         "next": 13,
-        "resolv": 13,
-        "runn": 12,
         "add": 11,
         "see": 11,
+        "show": 11,
         "noth": 11,
+        "answer": 11,
         "cache": 11,
+        "set": 10,
         "register": 10,
+        "doesn": 10,
         "error": 10,
+        "own": 10,
         "block": 10,
+        "reject": 10,
         "keep": 10,
-        "set": 9,
         "between": 9,
-        "show": 9,
-        "result": 9,
-        "field": 9,
-        "later": 9,
-        "own": 9,
-        "job": 9
+        "result": 9
       },
-      "word_count": 4644
+      "word_count": 5104
     },
     {
       "filename": "claude-code__plugins__mods__create.md",
@@ -27966,7 +28002,7 @@
         "once": 11,
         "skill": 11
       },
-      "word_count": 6031
+      "word_count": 6032
     },
     {
       "filename": "claude-code__plugins__mods__test.md",
@@ -28068,7 +28104,7 @@
         "clock": 6,
         "list": 6
       },
-      "word_count": 4033
+      "word_count": 4057
     },
     {
       "filename": "claude-code__plugins__mods__troubleshoot.md",
@@ -29533,11 +29569,11 @@
         }
       ],
       "terms": {
+        "claude": 112,
         "cache": 112,
-        "claude": 111,
         "request": 79,
-        "code": 76,
-        "conversation": 66,
+        "code": 77,
+        "conversation": 65,
         "model": 57,
         "session": 55,
         "cach": 48,
@@ -29584,7 +29620,7 @@
         "apply": 12,
         "while": 12
       },
-      "word_count": 5830
+      "word_count": 5823
     },
     {
       "filename": "claude-code__prompt-library.md",
@@ -30404,6 +30440,10 @@
           "level": 3
         },
         {
+          "text": "Denied paths that pass through a symlink",
+          "level": 4
+        },
+        {
           "text": "Network isolation",
           "level": 3
         },
@@ -30545,7 +30585,7 @@
         }
       ],
       "terms": {
-        "sandbox": 310,
+        "sandbox": 312,
         "command": 249,
         "claude": 156,
         "code": 127,
@@ -30556,16 +30596,16 @@
         "proxy": 72,
         "set": 68,
         "tool": 65,
+        "such": 61,
         "host": 60,
-        "such": 60,
         "manag": 55,
         "permission": 54,
         "file": 52,
         "prompt": 51,
         "only": 48,
+        "path": 48,
         "entry": 46,
         "filesystem": 46,
-        "path": 45,
         "read": 45,
         "network": 42,
         "isolation": 42,
@@ -30578,25 +30618,25 @@
         "acces": 38,
         "directory": 38,
         "match": 37,
+        "entri": 36,
         "see": 35,
         "rul": 35,
         "list": 35,
         "still": 35,
-        "entri": 35,
         "block": 34,
         "fil": 33,
         "session": 33,
         "user": 33,
         "rule": 33,
         "each": 31,
+        "through": 31,
         "credential": 30,
         "add": 29,
         "write": 29,
-        "through": 29,
         "auto": 29,
         "every": 29
       },
-      "word_count": 12398
+      "word_count": 12449
     },
     {
       "filename": "claude-code__scheduled-tasks.md",
@@ -31243,9 +31283,9 @@
         }
       ],
       "terms": {
-        "session": 299,
-        "runner": 187,
-        "hook": 146,
+        "session": 300,
+        "runner": 188,
+        "hook": 149,
         "claude": 73,
         "server": 61,
         "environment": 59,
@@ -31256,45 +31296,45 @@
         "git": 45,
         "set": 42,
         "host": 40,
+        "exit": 40,
+        "request": 39,
         "wrapper": 38,
-        "exit": 38,
         "one": 38,
-        "request": 38,
         "such": 37,
         "repository": 35,
-        "start": 34,
+        "start": 35,
         "setting": 33,
         "work": 32,
         "see": 32,
-        "don": 31,
-        "own": 30,
+        "don": 32,
+        "own": 31,
         "tool": 29,
         "spawn": 28,
+        "command": 28,
         "doesn": 27,
         "before": 26,
         "per": 26,
+        "each": 26,
         "child": 26,
+        "after": 26,
         "model": 26,
         "configuration": 25,
-        "each": 25,
+        "only": 25,
         "read": 25,
         "every": 25,
-        "command": 25,
-        "only": 24,
         "directory": 24,
-        "after": 24,
         "script": 23,
         "token": 23,
         "path": 23,
         "instead": 22,
+        "same": 22,
         "flag": 21,
         "prompt": 21,
         "cloud": 20,
         "value": 20,
-        "anthropic": 20,
-        "same": 20
+        "anthropic": 20
       },
-      "word_count": 10803
+      "word_count": 10988
     },
     {
       "filename": "claude-code__self-hosted-environments-deploy.md",
@@ -33294,7 +33334,7 @@
         "such": 115,
         "every": 109,
         "see": 109,
-        "each": 105,
+        "each": 106,
         "null": 105,
         "user": 103,
         "block": 96,
@@ -33312,13 +33352,13 @@
         "later": 76,
         "fil": 75,
         "start": 74,
-        "entry": 73,
+        "entry": 74,
         "requir": 73,
         "keep": 71,
         "boolean": 70,
-        "add": 68
+        "add": 69
       },
-      "word_count": 52079
+      "word_count": 52112
     },
     {
       "filename": "claude-code__setup.md",
@@ -49682,6 +49722,34 @@
           "level": 5
         },
         {
+          "text": "Set Workspace Rate Limits",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
           "text": "Beta \u203a Organization \u203a Workspaces \u203a Members",
           "level": 2
         },
@@ -51904,61 +51972,213 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Beta \u203a Organization \u203a Webhooks",
+          "level": 2
+        },
+        {
+          "text": "Create Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "List Organization Webhook Endpoints",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Get Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Delete Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Regenerate Organization Webhook Endpoint Signing Secret",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "tool": 3792,
+        "tool": 3795,
         "member": 1629,
-        "model": 1620,
-        "default": 1610,
+        "default": 1628,
+        "model": 1623,
         "call": 1563,
         "agent": 1385,
         "user": 1307,
         "session": 1282,
-        "format": 1236,
-        "version": 1179,
+        "format": 1256,
+        "request": 1237,
+        "version": 1200,
+        "workspace": 1186,
         "server": 1171,
-        "workspace": 1169,
         "content": 1164,
-        "request": 1156,
-        "time": 1152,
-        "only": 1024,
-        "return": 990,
-        "result": 989,
-        "api": 953,
-        "per": 910,
-        "whether": 908,
+        "time": 1160,
+        "only": 1035,
+        "return": 1019,
+        "result": 990,
+        "api": 976,
+        "per": 917,
+        "whether": 913,
+        "organization": 897,
+        "date": 868,
         "block": 863,
-        "date": 860,
-        "must": 841,
-        "value": 824,
-        "organization": 823,
-        "claude": 814,
-        "name": 782,
+        "must": 854,
+        "value": 831,
+        "claude": 821,
+        "name": 783,
         "input": 778,
         "token": 768,
         "judg": 742,
-        "enabl": 720,
-        "list": 716,
-        "one": 713,
-        "header": 693,
-        "null": 687,
+        "enabl": 731,
+        "list": 729,
+        "one": 721,
+        "header": 718,
+        "null": 688,
+        "event": 687,
         "execution": 684,
-        "event": 680,
+        "run": 673,
         "key": 669,
-        "run": 661,
-        "minlength": 648,
-        "same": 641,
+        "minlength": 650,
+        "same": 648,
         "high": 627,
-        "each": 605,
-        "response": 602,
-        "every": 586,
+        "each": 624,
+        "response": 613,
+        "every": 598,
+        "read": 585,
         "toolset": 578,
-        "read": 577,
-        "error": 567,
-        "url": 566
+        "url": 572,
+        "error": 567
       },
-      "word_count": 365175
+      "word_count": 370375
     },
     {
       "filename": "docs__en__api__beta-headers.md",
@@ -52714,7 +52934,7 @@
         "intelligence": 130,
         "list": 130
       },
-      "word_count": 51076
+      "word_count": 51088
     },
     {
       "filename": "docs__en__api__beta__agents__archive.md",
@@ -52800,7 +53020,7 @@
         "runn": 7,
         "default": 7
       },
-      "word_count": 3046
+      "word_count": 3048
     },
     {
       "filename": "docs__en__api__beta__agents__create.md",
@@ -52886,7 +53106,7 @@
         "claude": 19,
         "enabl": 19
       },
-      "word_count": 7231
+      "word_count": 7233
     },
     {
       "filename": "docs__en__api__beta__agents__list.md",
@@ -52972,7 +53192,7 @@
         "null": 7,
         "run": 7
       },
-      "word_count": 3125
+      "word_count": 3127
     },
     {
       "filename": "docs__en__api__beta__agents__retrieve.md",
@@ -53062,7 +53282,7 @@
         "runn": 7,
         "default": 7
       },
-      "word_count": 3067
+      "word_count": 3069
     },
     {
       "filename": "docs__en__api__beta__agents__update.md",
@@ -53152,7 +53372,7 @@
         "list": 20,
         "claude": 19
       },
-      "word_count": 7373
+      "word_count": 7375
     },
     {
       "filename": "docs__en__api__beta__agents__versions.md",
@@ -53246,7 +53466,7 @@
         "powerful": 7,
         "long": 7
       },
-      "word_count": 3093
+      "word_count": 3095
     },
     {
       "filename": "docs__en__api__beta__agents__versions__list.md",
@@ -53336,7 +53556,7 @@
         "run": 7,
         "powerful": 7
       },
-      "word_count": 3093
+      "word_count": 3095
     },
     {
       "filename": "docs__en__api__beta__deployment_runs.md",
@@ -53538,7 +53758,7 @@
         "populat": 6,
         "exactly": 6
       },
-      "word_count": 3175
+      "word_count": 3179
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__list.md",
@@ -53624,7 +53844,7 @@
         "int": 2,
         "opaque": 2
       },
-      "word_count": 1038
+      "word_count": 1040
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__retrieve.md",
@@ -53710,7 +53930,7 @@
         "trigger": 2,
         "cron": 2
       },
-      "word_count": 857
+      "word_count": 859
     },
     {
       "filename": "docs__en__api__beta__deployments.md",
@@ -54108,7 +54328,7 @@
         "block": 40,
         "type": 40
       },
-      "word_count": 22744
+      "word_count": 22760
     },
     {
       "filename": "docs__en__api__beta__deployments__archive.md",
@@ -54194,7 +54414,7 @@
         "path": 3,
         "identifier": 3
       },
-      "word_count": 1941
+      "word_count": 1943
     },
     {
       "filename": "docs__en__api__beta__deployments__create.md",
@@ -54280,7 +54500,7 @@
         "model": 6,
         "turn": 6
       },
-      "word_count": 3286
+      "word_count": 3288
     },
     {
       "filename": "docs__en__api__beta__deployments__list.md",
@@ -54366,7 +54586,7 @@
         "memory": 4,
         "container": 4
       },
-      "word_count": 2060
+      "word_count": 2062
     },
     {
       "filename": "docs__en__api__beta__deployments__pause.md",
@@ -54452,7 +54672,7 @@
         "path": 3,
         "identifier": 3
       },
-      "word_count": 1941
+      "word_count": 1943
     },
     {
       "filename": "docs__en__api__beta__deployments__retrieve.md",
@@ -54538,7 +54758,7 @@
         "path": 3,
         "identifier": 3
       },
-      "word_count": 1936
+      "word_count": 1938
     },
     {
       "filename": "docs__en__api__beta__deployments__run.md",
@@ -54624,7 +54844,7 @@
         "trigger": 2,
         "cron": 2
       },
-      "word_count": 861
+      "word_count": 863
     },
     {
       "filename": "docs__en__api__beta__deployments__unpause.md",
@@ -54710,7 +54930,7 @@
         "path": 3,
         "identifier": 3
       },
-      "word_count": 1941
+      "word_count": 1943
     },
     {
       "filename": "docs__en__api__beta__deployments__update.md",
@@ -54800,7 +55020,7 @@
         "specifi": 6,
         "creat": 6
       },
-      "word_count": 3310
+      "word_count": 3312
     },
     {
       "filename": "docs__en__api__beta__dreams.md",
@@ -55054,7 +55274,7 @@
         "limit": 23,
         "run": 23
       },
-      "word_count": 10752
+      "word_count": 10762
     },
     {
       "filename": "docs__en__api__beta__dreams__archive.md",
@@ -55140,7 +55360,7 @@
         "date": 3,
         "why": 3
       },
-      "word_count": 1466
+      "word_count": 1468
     },
     {
       "filename": "docs__en__api__beta__dreams__cancel.md",
@@ -55226,7 +55446,7 @@
         "rfc": 3,
         "date": 3
       },
-      "word_count": 1463
+      "word_count": 1465
     },
     {
       "filename": "docs__en__api__beta__dreams__create.md",
@@ -55312,7 +55532,7 @@
         "output": 4,
         "while": 4
       },
-      "word_count": 1988
+      "word_count": 1990
     },
     {
       "filename": "docs__en__api__beta__dreams__list.md",
@@ -55398,7 +55618,7 @@
         "cache": 4,
         "get": 3
       },
-      "word_count": 1618
+      "word_count": 1620
     },
     {
       "filename": "docs__en__api__beta__dreams__retrieve.md",
@@ -55484,7 +55704,7 @@
         "response": 3,
         "rfc": 3
       },
-      "word_count": 1441
+      "word_count": 1443
     },
     {
       "filename": "docs__en__api__beta__environments.md",
@@ -55962,7 +56182,7 @@
         "sandbox": 18,
         "about": 17
       },
-      "word_count": 9679
+      "word_count": 9707
     },
     {
       "filename": "docs__en__api__beta__environments__archive.md",
@@ -56048,7 +56268,7 @@
         "used": 1,
         "create": 1
       },
-      "word_count": 644
+      "word_count": 646
     },
     {
       "filename": "docs__en__api__beta__environments__create.md",
@@ -56134,7 +56354,7 @@
         "human": 2,
         "readable": 2
       },
-      "word_count": 1043
+      "word_count": 1045
     },
     {
       "filename": "docs__en__api__beta__environments__delete.md",
@@ -56218,7 +56438,7 @@
         "default": 1,
         "identifier": 1
       },
-      "word_count": 283
+      "word_count": 285
     },
     {
       "filename": "docs__en__api__beta__environments__list.md",
@@ -56304,7 +56524,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 711
+      "word_count": 713
     },
     {
       "filename": "docs__en__api__beta__environments__retrieve.md",
@@ -56390,7 +56610,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 633
+      "word_count": 635
     },
     {
       "filename": "docs__en__api__beta__environments__update.md",
@@ -56480,7 +56700,7 @@
         "example": 2,
         "credential": 2
       },
-      "word_count": 1036
+      "word_count": 1038
     },
     {
       "filename": "docs__en__api__beta__environments__work.md",
@@ -56790,7 +57010,7 @@
         "state": 10,
         "claude": 9
       },
-      "word_count": 4956
+      "word_count": 4972
     },
     {
       "filename": "docs__en__api__beta__environments__work__ack.md",
@@ -56876,7 +57096,7 @@
         "invoke": 1,
         "directly": 1
       },
-      "word_count": 528
+      "word_count": 530
     },
     {
       "filename": "docs__en__api__beta__environments__work__heartbeat.md",
@@ -56966,7 +57186,7 @@
         "maintain": 1,
         "path": 1
       },
-      "word_count": 389
+      "word_count": 391
     },
     {
       "filename": "docs__en__api__beta__environments__work__list.md",
@@ -57056,7 +57276,7 @@
         "reference": 1,
         "need": 1
       },
-      "word_count": 543
+      "word_count": 545
     },
     {
       "filename": "docs__en__api__beta__environments__work__poll.md",
@@ -57146,7 +57366,7 @@
         "includ": 1,
         "reference": 1
       },
-      "word_count": 589
+      "word_count": 591
     },
     {
       "filename": "docs__en__api__beta__environments__work__retrieve.md",
@@ -57232,7 +57452,7 @@
         "built": 1,
         "sdk": 1
       },
-      "word_count": 569
+      "word_count": 571
     },
     {
       "filename": "docs__en__api__beta__environments__work__stats.md",
@@ -57318,7 +57538,7 @@
         "omit": 1,
         "must": 1
       },
-      "word_count": 375
+      "word_count": 377
     },
     {
       "filename": "docs__en__api__beta__environments__work__stop.md",
@@ -57408,7 +57628,7 @@
         "automatically": 1,
         "pre": 1
       },
-      "word_count": 592
+      "word_count": 594
     },
     {
       "filename": "docs__en__api__beta__environments__work__update.md",
@@ -57498,7 +57718,7 @@
         "call": 1,
         "automatically": 1
       },
-      "word_count": 611
+      "word_count": 613
     },
     {
       "filename": "docs__en__api__beta__files.md",
@@ -57692,7 +57912,7 @@
         "need": 5,
         "act": 5
       },
-      "word_count": 2306
+      "word_count": 2316
     },
     {
       "filename": "docs__en__api__beta__files__delete.md",
@@ -57776,7 +57996,7 @@
         "default": 1,
         "response": 1
       },
-      "word_count": 279
+      "word_count": 281
     },
     {
       "filename": "docs__en__api__beta__files__download.md",
@@ -57845,7 +58065,7 @@
         "must": 1,
         "match": 1
       },
-      "word_count": 236
+      "word_count": 238
     },
     {
       "filename": "docs__en__api__beta__files__list.md",
@@ -57931,7 +58151,7 @@
         "com": 1,
         "doc": 1
       },
-      "word_count": 602
+      "word_count": 604
     },
     {
       "filename": "docs__en__api__beta__files__retrieve_metadata.md",
@@ -58017,7 +58237,7 @@
         "request": 1,
         "only": 1
       },
-      "word_count": 451
+      "word_count": 453
     },
     {
       "filename": "docs__en__api__beta__files__upload.md",
@@ -58103,7 +58323,7 @@
         "history": 1,
         "here": 1
       },
-      "word_count": 519
+      "word_count": 521
     },
     {
       "filename": "docs__en__api__beta__memory_stores.md",
@@ -58565,7 +58785,7 @@
         "populat": 22,
         "guide": 21
       },
-      "word_count": 10970
+      "word_count": 10998
     },
     {
       "filename": "docs__en__api__beta__memory_stores__archive.md",
@@ -58651,7 +58871,7 @@
         "unchang": 1,
         "want": 1
       },
-      "word_count": 579
+      "word_count": 581
     },
     {
       "filename": "docs__en__api__beta__memory_stores__create.md",
@@ -58737,7 +58957,7 @@
         "contain": 2,
         "includ": 2
       },
-      "word_count": 727
+      "word_count": 729
     },
     {
       "filename": "docs__en__api__beta__memory_stores__delete.md",
@@ -58823,7 +59043,7 @@
         "identifier": 1,
         "longer": 1
       },
-      "word_count": 321
+      "word_count": 323
     },
     {
       "filename": "docs__en__api__beta__memory_stores__list.md",
@@ -58909,7 +59129,7 @@
         "pair": 2,
         "most": 2
       },
-      "word_count": 670
+      "word_count": 672
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories.md",
@@ -59171,7 +59391,7 @@
         "start": 12,
         "use": 12
       },
-      "word_count": 5636
+      "word_count": 5646
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__create.md",
@@ -59265,7 +59485,7 @@
         "empty": 2,
         "case": 2
       },
-      "word_count": 803
+      "word_count": 805
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__delete.md",
@@ -59355,7 +59575,7 @@
         "here": 1,
         "endpoint": 1
       },
-      "word_count": 398
+      "word_count": 400
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__list.md",
@@ -59445,7 +59665,7 @@
         "most": 2,
         "count": 2
       },
-      "word_count": 971
+      "word_count": 973
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__retrieve.md",
@@ -59535,7 +59755,7 @@
         "learn": 2,
         "unique": 2
       },
-      "word_count": 698
+      "word_count": 700
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__update.md",
@@ -59629,7 +59849,7 @@
         "credential": 2,
         "one": 2
       },
-      "word_count": 905
+      "word_count": 907
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions.md",
@@ -59807,7 +60027,7 @@
         "get": 10,
         "written": 10
       },
-      "word_count": 4586
+      "word_count": 4592
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__list.md",
@@ -59897,7 +60117,7 @@
         "about": 3,
         "request": 3
       },
-      "word_count": 1282
+      "word_count": 1284
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__redact.md",
@@ -59983,7 +60203,7 @@
         "rfc": 2,
         "date": 2
       },
-      "word_count": 1013
+      "word_count": 1015
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__retrieve.md",
@@ -60073,7 +60293,7 @@
         "response": 2,
         "includ": 2
       },
-      "word_count": 1095
+      "word_count": 1097
     },
     {
       "filename": "docs__en__api__beta__memory_stores__retrieve.md",
@@ -60159,7 +60379,7 @@
         "here": 1,
         "endpoint": 1
       },
-      "word_count": 562
+      "word_count": 564
     },
     {
       "filename": "docs__en__api__beta__memory_stores__update.md",
@@ -60249,7 +60469,7 @@
         "mount": 2,
         "delete": 2
       },
-      "word_count": 711
+      "word_count": 713
     },
     {
       "filename": "docs__en__api__beta__messages.md",
@@ -62200,11 +62420,11 @@
         }
       ],
       "terms": {
-        "tool": 6728,
+        "tool": 6736,
         "member": 5773,
-        "model": 3280,
+        "model": 3276,
         "block": 2930,
-        "default": 2807,
+        "default": 2815,
         "toolset": 2482,
         "per": 2380,
         "enabl": 2260,
@@ -62219,39 +62439,39 @@
         "value": 1254,
         "serv": 1253,
         "false": 1229,
+        "whose": 1199,
         "overrid": 1191,
         "must": 1184,
+        "cache": 1177,
         "config": 1172,
         "minimum": 1159,
-        "whose": 1151,
+        "request": 1157,
         "resolv": 1132,
         "offer": 1130,
-        "cache": 1129,
         "defer": 1128,
         "documentation": 1112,
         "resolve": 1104,
         "withheld": 1104,
         "true": 1074,
         "server": 1065,
-        "token": 1004,
-        "request": 993,
+        "token": 1000,
         "call": 988,
-        "only": 953,
+        "only": 965,
         "return": 864,
         "control": 864,
-        "create": 851,
+        "create": 847,
         "reference": 842,
+        "includ": 829,
         "search": 828,
         "breakpoint": 825,
-        "includ": 821,
-        "prompt": 800,
+        "prompt": 808,
         "nam": 796,
         "name": 792,
         "number": 740,
         "used": 713,
         "pattern": 633
       },
-      "word_count": 320028
+      "word_count": 323256
     },
     {
       "filename": "docs__en__api__beta__messages__batches.md",
@@ -62446,35 +62666,35 @@
         }
       ],
       "terms": {
-        "tool": 1525,
+        "tool": 1529,
         "member": 1257,
-        "model": 823,
-        "default": 821,
+        "default": 823,
+        "model": 822,
         "block": 711,
         "toolset": 552,
         "per": 520,
+        "request": 517,
         "enabl": 493,
-        "request": 450,
         "schema": 401,
         "result": 391,
         "load": 377,
         "content": 363,
-        "token": 346,
+        "token": 345,
         "same": 332,
         "input": 320,
         "every": 318,
+        "cache": 299,
+        "whose": 288,
         "value": 286,
         "minimum": 286,
         "whether": 286,
         "serv": 285,
-        "cache": 275,
         "false": 273,
         "must": 266,
-        "whose": 264,
         "number": 263,
         "overrid": 261,
+        "only": 257,
         "true": 255,
-        "only": 252,
         "resolv": 246,
         "defer": 246,
         "offer": 245,
@@ -62486,18 +62706,18 @@
         "message": 235,
         "used": 215,
         "return": 208,
+        "includ": 202,
         "search": 201,
-        "includ": 198,
-        "create": 197,
-        "prompt": 196,
+        "prompt": 200,
+        "create": 196,
         "call": 192,
         "name": 192,
         "batch": 189,
         "reference": 189,
-        "nam": 184,
-        "entry": 178
+        "entry": 186,
+        "nam": 184
       },
-      "word_count": 79138
+      "word_count": 80387
     },
     {
       "filename": "docs__en__api__beta__messages__batches__cancel.md",
@@ -62583,7 +62803,7 @@
         "expir": 2,
         "statu": 2
       },
-      "word_count": 784
+      "word_count": 786
     },
     {
       "filename": "docs__en__api__beta__messages__batches__create.md",
@@ -62620,15 +62840,15 @@
       "terms": {
         "tool": 317,
         "member": 257,
-        "model": 171,
+        "model": 170,
         "block": 151,
         "toolset": 116,
         "per": 107,
         "enabl": 101,
         "content": 99,
-        "default": 88,
+        "request": 94,
+        "default": 90,
         "schema": 85,
-        "request": 79,
         "load": 77,
         "cache": 67,
         "every": 66,
@@ -62636,8 +62856,8 @@
         "control": 62,
         "whether": 62,
         "value": 61,
-        "create": 59,
-        "only": 58,
+        "only": 59,
+        "create": 58,
         "must": 58,
         "server": 58,
         "serv": 57,
@@ -62667,9 +62887,9 @@
         "nam": 36,
         "batch": 34,
         "minlength": 34,
-        "token": 34
+        "set": 34
       },
-      "word_count": 16808
+      "word_count": 17179
     },
     {
       "filename": "docs__en__api__beta__messages__batches__delete.md",
@@ -62755,7 +62975,7 @@
         "specific": 1,
         "omit": 1
       },
-      "word_count": 323
+      "word_count": 325
     },
     {
       "filename": "docs__en__api__beta__messages__batches__list.md",
@@ -62841,7 +63061,7 @@
         "alway": 2,
         "cancellation": 2
       },
-      "word_count": 862
+      "word_count": 864
     },
     {
       "filename": "docs__en__api__beta__messages__batches__results.md",
@@ -62872,7 +63092,7 @@
         }
       ],
       "terms": {
-        "tool": 302,
+        "tool": 303,
         "member": 250,
         "default": 175,
         "model": 163,
@@ -62880,8 +63100,8 @@
         "toolset": 109,
         "per": 103,
         "enabl": 98,
+        "request": 95,
         "result": 84,
-        "request": 82,
         "schema": 79,
         "token": 78,
         "load": 75,
@@ -62890,13 +63110,13 @@
         "content": 66,
         "every": 62,
         "minimum": 60,
+        "whose": 59,
+        "cache": 58,
         "serv": 57,
         "value": 56,
         "whether": 56,
         "false": 55,
-        "whose": 53,
         "must": 52,
-        "cache": 52,
         "overrid": 52,
         "true": 51,
         "number": 51,
@@ -62908,14 +63128,14 @@
         "documentation": 48,
         "withheld": 48,
         "used": 46,
+        "only": 45,
         "server": 45,
-        "only": 44,
         "search": 42,
-        "entry": 41,
-        "includ": 39,
+        "entry": 42,
+        "includ": 40,
+        "prompt": 39,
         "return": 38,
         "reference": 38,
-        "prompt": 38,
         "name": 37,
         "nam": 37,
         "call": 36,
@@ -62923,7 +63143,7 @@
         "text": 30,
         "output": 29
       },
-      "word_count": 15027
+      "word_count": 15246
     },
     {
       "filename": "docs__en__api__beta__messages__batches__retrieve.md",
@@ -63009,7 +63229,7 @@
         "title": 1,
         "http": 1
       },
-      "word_count": 744
+      "word_count": 746
     },
     {
       "filename": "docs__en__api__beta__messages__count_tokens.md",
@@ -63095,7 +63315,7 @@
         "via": 32,
         "minlength": 30
       },
-      "word_count": 15049
+      "word_count": 15051
     },
     {
       "filename": "docs__en__api__beta__messages__create.md",
@@ -63130,58 +63350,58 @@
         }
       ],
       "terms": {
-        "tool": 626,
+        "tool": 627,
         "member": 507,
-        "model": 352,
+        "model": 351,
         "block": 316,
-        "default": 247,
+        "default": 249,
         "toolset": 225,
         "per": 214,
         "enabl": 199,
         "content": 174,
+        "request": 168,
         "schema": 164,
         "load": 152,
-        "request": 140,
-        "token": 134,
+        "token": 133,
         "same": 130,
         "input": 128,
+        "cache": 128,
         "every": 128,
         "result": 126,
-        "cache": 122,
         "whether": 119,
         "value": 118,
         "serv": 116,
         "server": 112,
+        "whose": 110,
         "minimum": 108,
         "false": 108,
         "must": 107,
         "overrid": 105,
-        "whose": 104,
+        "only": 102,
         "true": 102,
         "offer": 101,
-        "only": 100,
         "resolv": 100,
         "defer": 99,
         "config": 97,
         "documentation": 97,
         "resolve": 96,
         "withheld": 96,
-        "create": 94,
+        "create": 93,
         "return": 90,
         "control": 90,
         "call": 84,
+        "includ": 84,
+        "prompt": 83,
         "breakpoint": 83,
-        "includ": 83,
-        "prompt": 82,
         "used": 81,
         "name": 81,
         "number": 78,
         "search": 75,
         "reference": 74,
         "nam": 73,
-        "entry": 68
+        "entry": 73
       },
-      "word_count": 32284
+      "word_count": 32872
     },
     {
       "filename": "docs__en__api__beta__models.md",
@@ -63339,7 +63559,7 @@
         "object": 10,
         "workspace": 10
       },
-      "word_count": 5317
+      "word_count": 5321
     },
     {
       "filename": "docs__en__api__beta__models__list.md",
@@ -63425,7 +63645,7 @@
         "turn": 3,
         "between": 3
       },
-      "word_count": 1587
+      "word_count": 1589
     },
     {
       "filename": "docs__en__api__beta__models__retrieve.md",
@@ -63511,7 +63731,7 @@
         "represent": 3,
         "format": 3
       },
-      "word_count": 1392
+      "word_count": 1394
     },
     {
       "filename": "docs__en__api__beta__organization.md",
@@ -64690,6 +64910,34 @@
         },
         {
           "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Set Workspace Rate Limits",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
           "level": 4
         },
         {
@@ -66927,61 +67175,213 @@
         {
           "text": "Response (200)",
           "level": 5
+        },
+        {
+          "text": "Organization \u203a Webhooks",
+          "level": 2
+        },
+        {
+          "text": "Create Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "List Organization Webhook Endpoints",
+          "level": 3
+        },
+        {
+          "text": "Query parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Get Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Update Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Delete Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Regenerate Organization Webhook Endpoint Signing Secret",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
         }
       ],
       "terms": {
-        "organization": 770,
-        "api": 571,
+        "organization": 842,
+        "api": 590,
+        "claude": 521,
         "key": 518,
-        "claude": 514,
-        "default": 503,
-        "version": 492,
-        "workspace": 488,
+        "default": 517,
+        "version": 513,
+        "workspace": 505,
         "user": 426,
         "plugin": 414,
-        "date": 375,
-        "group": 372,
-        "return": 362,
-        "time": 360,
-        "null": 352,
+        "return": 391,
+        "group": 386,
+        "date": 383,
+        "time": 368,
+        "null": 353,
         "member": 332,
-        "only": 310,
+        "only": 317,
+        "format": 306,
+        "request": 304,
         "day": 293,
-        "format": 290,
-        "request": 279,
+        "header": 287,
         "account": 271,
-        "header": 268,
-        "one": 263,
-        "per": 261,
-        "response": 252,
-        "read": 249,
+        "one": 269,
+        "per": 268,
+        "response": 263,
+        "read": 257,
+        "endpoint": 256,
         "row": 241,
+        "list": 240,
         "scope": 236,
         "usage": 236,
         "destination": 229,
-        "list": 227,
-        "name": 218,
-        "number": 215,
-        "token": 215,
+        "example": 223,
+        "limit": 221,
+        "name": 219,
+        "value": 217,
+        "token": 217,
+        "number": 216,
+        "parameter": 210,
         "service": 210,
-        "value": 210,
         "rbac": 210,
-        "example": 208,
-        "parameter": 201,
-        "limit": 198,
-        "alway": 197,
+        "alway": 209,
         "tagg": 193,
         "rule": 191,
-        "same": 181,
-        "set": 170,
-        "endpoint": 160,
-        "activity": 160,
-        "count": 157,
-        "type": 156,
-        "creat": 156,
-        "page": 154
+        "same": 188,
+        "set": 180,
+        "type": 163,
+        "creat": 160,
+        "must": 160,
+        "count": 160,
+        "activity": 160
       },
-      "word_count": 94856
+      "word_count": 98636
     },
     {
       "filename": "docs__en__api__beta__organization__analytics.md",
@@ -70520,7 +70920,7 @@
         "includ": 2,
         "empty": 2
       },
-      "word_count": 1147
+      "word_count": 1149
     },
     {
       "filename": "docs__en__api__beta__organization__cost_report__retrieve.md",
@@ -70606,7 +71006,7 @@
         "platform": 1,
         "com": 1
       },
-      "word_count": 745
+      "word_count": 747
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys.md",
@@ -71772,7 +72172,7 @@
         "return": 24,
         "endpoint": 24
       },
-      "word_count": 11237
+      "word_count": 11263
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers.md",
@@ -71986,7 +72386,7 @@
         "minlength": 13,
         "bearer": 13
       },
-      "word_count": 5213
+      "word_count": 5223
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__archive.md",
@@ -72072,7 +72472,7 @@
         "bearer": 2,
         "match": 2
       },
-      "word_count": 797
+      "word_count": 799
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
@@ -72158,7 +72558,7 @@
         "exchange": 3,
         "via": 3
       },
-      "word_count": 1091
+      "word_count": 1093
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
@@ -72244,7 +72644,7 @@
         "without": 2,
         "creat": 2
       },
-      "word_count": 791
+      "word_count": 793
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
@@ -72330,7 +72730,7 @@
         "creat": 2,
         "via": 2
       },
-      "word_count": 758
+      "word_count": 760
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
@@ -72420,7 +72820,7 @@
         "only": 3,
         "match": 3
       },
-      "word_count": 1120
+      "word_count": 1122
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
@@ -72714,7 +73114,7 @@
         "one": 17,
         "whose": 17
       },
-      "word_count": 7614
+      "word_count": 7630
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__archive.md",
@@ -72800,7 +73200,7 @@
         "return": 2,
         "before": 2
       },
-      "word_count": 940
+      "word_count": 942
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
@@ -72886,7 +73286,7 @@
         "non": 4,
         "name": 4
       },
-      "word_count": 1420
+      "word_count": 1422
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
@@ -72972,7 +73372,7 @@
         "header": 2,
         "want": 2
       },
-      "word_count": 874
+      "word_count": 876
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
@@ -73058,7 +73458,7 @@
         "anthropic": 2,
         "condition": 2
       },
-      "word_count": 884
+      "word_count": 886
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
@@ -73148,7 +73548,7 @@
         "ignor": 4,
         "second": 4
       },
-      "word_count": 1469
+      "word_count": 1471
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
@@ -73302,7 +73702,7 @@
         "check": 2,
         "reject": 2
       },
-      "word_count": 1199
+      "word_count": 1205
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__add.md",
@@ -73392,7 +73792,7 @@
         "belong": 1,
         "membership": 1
       },
-      "word_count": 433
+      "word_count": 435
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
@@ -73482,7 +73882,7 @@
         "effect": 1,
         "alway": 1
       },
-      "word_count": 432
+      "word_count": 434
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
@@ -73568,7 +73968,7 @@
         "session": 1,
         "path": 1
       },
-      "word_count": 313
+      "word_count": 315
     },
     {
       "filename": "docs__en__api__beta__organization__invites.md",
@@ -74378,7 +74778,7 @@
         "read": 9,
         "about": 9
       },
-      "word_count": 3991
+      "word_count": 4009
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__archive.md",
@@ -74464,7 +74864,7 @@
         "archival": 1,
         "irreversible": 1
       },
-      "word_count": 450
+      "word_count": 452
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__list.md",
@@ -74550,7 +74950,7 @@
         "new": 1,
         "should": 1
       },
-      "word_count": 536
+      "word_count": 538
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__retrieve.md",
@@ -74636,7 +75036,7 @@
         "path": 1,
         "parameter": 1
       },
-      "word_count": 416
+      "word_count": 418
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__reveal_token.md",
@@ -74722,7 +75122,7 @@
         "same": 1,
         "until": 1
       },
-      "word_count": 343
+      "word_count": 345
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__rotate_token.md",
@@ -74812,7 +75212,7 @@
         "restart": 1,
         "captur": 1
       },
-      "word_count": 358
+      "word_count": 360
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates.md",
@@ -74990,7 +75390,7 @@
         "continue": 4,
         "work": 4
       },
-      "word_count": 1845
+      "word_count": 1853
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__archive.md",
@@ -75076,7 +75476,7 @@
         "trust": 1,
         "record": 1
       },
-      "word_count": 423
+      "word_count": 425
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__create.md",
@@ -75166,7 +75566,7 @@
         "new": 1,
         "should": 1
       },
-      "word_count": 459
+      "word_count": 461
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__list.md",
@@ -75256,7 +75656,7 @@
         "exist": 1,
         "continue": 1
       },
-      "word_count": 474
+      "word_count": 476
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__retrieve.md",
@@ -75342,7 +75742,7 @@
         "parameter": 1,
         "want": 1
       },
-      "word_count": 394
+      "word_count": 396
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces.md",
@@ -75560,7 +75960,7 @@
         "creat": 10,
         "accept": 10
       },
-      "word_count": 5230
+      "word_count": 5240
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__list.md",
@@ -75646,7 +76046,7 @@
         "here": 2,
         "token": 2
       },
-      "word_count": 972
+      "word_count": 974
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__retrieve.md",
@@ -75736,7 +76136,7 @@
         "sett": 2,
         "most": 2
       },
-      "word_count": 779
+      "word_count": 781
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__update.md",
@@ -75826,7 +76226,7 @@
         "outcome": 2,
         "read": 2
       },
-      "word_count": 775
+      "word_count": 777
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_archive.md",
@@ -75912,7 +76312,7 @@
         "some": 2,
         "response": 2
       },
-      "word_count": 852
+      "word_count": 854
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_repository.md",
@@ -75998,7 +76398,7 @@
         "com": 2,
         "whether": 2
       },
-      "word_count": 982
+      "word_count": 984
     },
     {
       "filename": "docs__en__api__beta__organization__plugins.md",
@@ -76464,7 +76864,7 @@
         "same": 25,
         "admin": 23
       },
-      "word_count": 13215
+      "word_count": 13241
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__create.md",
@@ -76550,7 +76950,7 @@
         "hook": 3,
         "command": 3
       },
-      "word_count": 1489
+      "word_count": 1491
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__delete.md",
@@ -76636,7 +77036,7 @@
         "change": 1,
         "any": 1
       },
-      "word_count": 377
+      "word_count": 379
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings.md",
@@ -76794,7 +77194,7 @@
         "chang": 4,
         "same": 4
       },
-      "word_count": 2172
+      "word_count": 2178
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__list.md",
@@ -76884,7 +77284,7 @@
         "url": 1,
         "http": 1
       },
-      "word_count": 678
+      "word_count": 680
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__remove.md",
@@ -76970,7 +77370,7 @@
         "other": 1,
         "inherit": 1
       },
-      "word_count": 556
+      "word_count": 558
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__set.md",
@@ -77060,7 +77460,7 @@
         "whole": 1,
         "already": 1
       },
-      "word_count": 652
+      "word_count": 654
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__list.md",
@@ -77146,7 +77546,7 @@
         "parent": 3,
         "set": 3
       },
-      "word_count": 1499
+      "word_count": 1501
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__retrieve.md",
@@ -77236,7 +77636,7 @@
         "retrieve": 2,
         "admin": 2
       },
-      "word_count": 1245
+      "word_count": 1247
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__shares.md",
@@ -77338,7 +77738,7 @@
         "whose": 2,
         "role": 2
       },
-      "word_count": 819
+      "word_count": 821
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__shares__list.md",
@@ -77428,7 +77828,7 @@
         "most": 1,
         "recently": 1
       },
-      "word_count": 656
+      "word_count": 658
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__update.md",
@@ -77518,7 +77918,7 @@
         "run": 3,
         "mechanism": 3
       },
-      "word_count": 1378
+      "word_count": 1380
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions.md",
@@ -77696,7 +78096,7 @@
         "digit": 8,
         "suppli": 8
       },
-      "word_count": 3993
+      "word_count": 4001
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__create.md",
@@ -77786,7 +78186,7 @@
         "form": 2,
         "one": 2
       },
-      "word_count": 1074
+      "word_count": 1076
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__download.md",
@@ -77868,7 +78268,7 @@
         "doc": 1,
         "get": 1
       },
-      "word_count": 506
+      "word_count": 508
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__list.md",
@@ -77958,7 +78358,7 @@
         "verdict": 2,
         "upload": 2
       },
-      "word_count": 998
+      "word_count": 1000
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__retrieve.md",
@@ -78048,7 +78448,7 @@
         "user": 2,
         "actor": 2
       },
-      "word_count": 935
+      "word_count": 937
     },
     {
       "filename": "docs__en__api__beta__organization__rate_limits.md",
@@ -78126,7 +78526,7 @@
         "organization": 55,
         "limit": 51,
         "rate": 44,
-        "group": 41,
+        "group": 43,
         "identifier": 40,
         "entry": 30,
         "example": 25,
@@ -78158,6 +78558,7 @@
         "skill": 7,
         "family": 6,
         "equal": 6,
+        "set": 5,
         "valu": 5,
         "list": 4,
         "messag": 4,
@@ -78169,12 +78570,11 @@
         "instead": 4,
         "surface": 3,
         "category": 3,
-        "set": 3,
         "single": 3,
         "remain": 3,
         "nam": 3
       },
-      "word_count": 1652
+      "word_count": 1676
     },
     {
       "filename": "docs__en__api__beta__organization__rate_limits__list.md",
@@ -78212,7 +78612,7 @@
         "organization": 21,
         "limit": 21,
         "rate": 18,
-        "group": 15,
+        "group": 16,
         "entry": 14,
         "identifier": 14,
         "api": 11,
@@ -78240,6 +78640,7 @@
         "batch": 3,
         "web": 3,
         "search": 3,
+        "set": 3,
         "valu": 3,
         "single": 3,
         "remain": 3,
@@ -78254,13 +78655,12 @@
         "message": 2,
         "tool": 2,
         "contain": 2,
-        "set": 2,
         "omitt": 2,
         "result": 2,
         "filter": 2,
         "maximum": 2
       },
-      "word_count": 795
+      "word_count": 807
     },
     {
       "filename": "docs__en__api__beta__organization__rbac_groups.md",
@@ -80289,7 +80689,7 @@
         "accept": 8,
         "manage": 8
       },
-      "word_count": 4140
+      "word_count": 4156
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__archive.md",
@@ -80375,7 +80775,7 @@
         "wif": 1,
         "idempotent": 1
       },
-      "word_count": 493
+      "word_count": 495
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
@@ -80461,7 +80861,7 @@
         "updat": 2,
         "title": 1
       },
-      "word_count": 559
+      "word_count": 561
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
@@ -80547,7 +80947,7 @@
         "accept": 1,
         "see": 1
       },
-      "word_count": 505
+      "word_count": 507
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
@@ -80633,7 +81033,7 @@
         "about": 1,
         "our": 1
       },
-      "word_count": 452
+      "word_count": 454
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
@@ -80723,7 +81123,7 @@
         "com": 1,
         "doc": 1
       },
-      "word_count": 548
+      "word_count": 550
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
@@ -80877,7 +81277,7 @@
         "read": 3,
         "about": 3
       },
-      "word_count": 1363
+      "word_count": 1369
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__add.md",
@@ -80967,7 +81367,7 @@
         "address": 1,
         "side": 1
       },
-      "word_count": 448
+      "word_count": 450
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
@@ -81057,7 +81457,7 @@
         "identity": 1,
         "federation": 1
       },
-      "word_count": 537
+      "word_count": 539
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
@@ -81143,7 +81543,7 @@
         "already": 1,
         "remov": 1
       },
-      "word_count": 349
+      "word_count": 351
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits.md",
@@ -81497,7 +81897,7 @@
         "str": 19,
         "each": 19
       },
-      "word_count": 8287
+      "word_count": 8291
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__delete.md",
@@ -82383,7 +82783,7 @@
         "fix": 1,
         "support": 1
       },
-      "word_count": 710
+      "word_count": 712
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__retrieve.md",
@@ -82555,7 +82955,7 @@
         "integer": 2,
         "decimal": 2
       },
-      "word_count": 878
+      "word_count": 880
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations.md",
@@ -82969,7 +83369,7 @@
         "because": 29,
         "invalid": 28
       },
-      "word_count": 13435
+      "word_count": 13453
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__create.md",
@@ -83055,7 +83455,7 @@
         "collector": 5,
         "example": 5
       },
-      "word_count": 2157
+      "word_count": 2159
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__delete.md",
@@ -83138,7 +83538,7 @@
         "example": 1,
         "response": 1
       },
-      "word_count": 281
+      "word_count": 283
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__list.md",
@@ -83224,7 +83624,7 @@
         "successful": 3,
         "null": 3
       },
-      "word_count": 1334
+      "word_count": 1336
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__retrieve.md",
@@ -83310,7 +83710,7 @@
         "register": 3,
         "whether": 3
       },
-      "word_count": 1242
+      "word_count": 1244
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__test.md",
@@ -83396,7 +83796,7 @@
         "our": 1,
         "history": 1
       },
-      "word_count": 423
+      "word_count": 425
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__update.md",
@@ -83486,7 +83886,7 @@
         "once": 6,
         "post": 5
       },
-      "word_count": 2338
+      "word_count": 2340
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces.md",
@@ -83640,7 +84040,7 @@
         "entri": 2,
         "cursor": 2
       },
-      "word_count": 1190
+      "word_count": 1196
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__add.md",
@@ -83726,7 +84126,7 @@
         "learn": 1,
         "choos": 1
       },
-      "word_count": 396
+      "word_count": 398
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__list.md",
@@ -83816,7 +84216,7 @@
         "opaque": 1,
         "previou": 1
       },
-      "word_count": 363
+      "word_count": 365
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__remove.md",
@@ -83902,7 +84302,7 @@
         "must": 1,
         "send": 1
       },
-      "word_count": 328
+      "word_count": 330
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report.md",
@@ -84028,7 +84428,7 @@
         "subscription": 6,
         "breakdown": 6
       },
-      "word_count": 2753
+      "word_count": 2755
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report__retrieve_claude_code.md",
@@ -84200,7 +84600,7 @@
         "end": 2,
         "support": 2
       },
-      "word_count": 1051
+      "word_count": 1053
     },
     {
       "filename": "docs__en__api__beta__organization__users.md",
@@ -84703,6 +85103,763 @@
       "word_count": 251
     },
     {
+      "filename": "docs__en__api__beta__organization__webhooks.md",
+      "id": "docs/en/api/beta/organization/webhooks",
+      "title": "Webhooks",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks",
+      "headings": [
+        {
+          "text": "Webhooks",
+          "level": 1
+        },
+        {
+          "text": "Create Organization Webhook Endpoint",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "List Organization Webhook Endpoints",
+          "level": 2
+        },
+        {
+          "text": "Query parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Get Organization Webhook Endpoint",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Update Organization Webhook Endpoint",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Delete Organization Webhook Endpoint",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Regenerate Organization Webhook Endpoint Signing Secret",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
+          "text": "Domain types",
+          "level": 2
+        },
+        {
+          "text": "Beta Deleted Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Beta New Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Beta Organization Webhook Endpoint",
+          "level": 3
+        },
+        {
+          "text": "Beta Organization Webhook Endpoint Signing Secret",
+          "level": 3
+        },
+        {
+          "text": "Beta Organization Webhook Endpoint State",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "endpoint": 127,
+        "webhook": 62,
+        "organization": 59,
+        "return": 27,
+        "beta": 24,
+        "request": 24,
+        "format": 24,
+        "deliveri": 20,
+        "empty": 19,
+        "header": 18,
+        "version": 18,
+        "str": 18,
+        "sign": 16,
+        "secret": 16,
+        "sent": 15,
+        "disabl": 14,
+        "anthropic": 14,
+        "about": 14,
+        "api": 13,
+        "enabl": 13,
+        "must": 13,
+        "response": 12,
+        "rfc": 12,
+        "date": 12,
+        "time": 12,
+        "none": 12,
+        "given": 12,
+        "url": 9,
+        "http": 9,
+        "event": 9,
+        "typ": 9,
+        "deliver": 9,
+        "list": 9,
+        "not": 8,
+        "short": 8,
+        "label": 8,
+        "new": 8,
+        "whether": 8,
+        "claude": 7,
+        "read": 7,
+        "include": 7,
+        "send": 7,
+        "parameter": 7,
+        "last": 7,
+        "chang": 7,
+        "delet": 7,
+        "belong": 6,
+        "one": 6,
+        "every": 6,
+        "without": 6
+      },
+      "word_count": 3168
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__create.md",
+      "id": "docs/en/api/beta/organization/webhooks/create",
+      "title": "Create Organization Webhook Endpoint",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/create",
+      "headings": [
+        {
+          "text": "Create Organization Webhook Endpoint",
+          "level": 1
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "endpoint": 23,
+        "organization": 13,
+        "webhook": 10,
+        "return": 5,
+        "create": 4,
+        "beta": 4,
+        "sign": 4,
+        "secret": 4,
+        "request": 4,
+        "deliveri": 4,
+        "format": 4,
+        "url": 3,
+        "http": 3,
+        "api": 3,
+        "enabl": 3,
+        "disabl": 3,
+        "response": 3,
+        "must": 3,
+        "header": 3,
+        "anthropic": 3,
+        "version": 3,
+        "about": 3,
+        "sent": 3,
+        "empty": 3,
+        "str": 3,
+        "claude": 2,
+        "one": 2,
+        "read": 2,
+        "store": 2,
+        "event": 2,
+        "typ": 2,
+        "deliver": 2,
+        "not": 2,
+        "short": 2,
+        "label": 2,
+        "rfc": 2,
+        "date": 2,
+        "time": 2,
+        "none": 2,
+        "given": 2,
+        "title": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "post": 1,
+        "belong": 1,
+        "rather": 1,
+        "workspac": 1,
+        "most": 1,
+        "includ": 1
+      },
+      "word_count": 567
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__delete.md",
+      "id": "docs/en/api/beta/organization/webhooks/delete",
+      "title": "Delete Organization Webhook Endpoint",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/delete",
+      "headings": [
+        {
+          "text": "Delete Organization Webhook Endpoint",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "webhook": 10,
+        "endpoint": 10,
+        "organization": 9,
+        "delete": 5,
+        "beta": 4,
+        "request": 4,
+        "api": 3,
+        "header": 3,
+        "return": 3,
+        "version": 3,
+        "delet": 3,
+        "claude": 2,
+        "must": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "every": 1,
+        "include": 1,
+        "without": 1,
+        "exactly": 1,
+        "did": 1,
+        "exist": 1,
+        "anthropic": 1,
+        "turn": 1,
+        "each": 1,
+        "until": 1,
+        "your": 1,
+        "also": 1,
+        "available": 1,
+        "hipaa": 1,
+        "readines": 1,
+        "enabl": 1,
+        "path": 1,
+        "parameter": 1,
+        "maxlength": 1,
+        "want": 1,
+        "read": 1,
+        "about": 1,
+        "our": 1,
+        "history": 1,
+        "here": 1,
+        "send": 1,
+        "alway": 1,
+        "default": 1,
+        "example": 1,
+        "response": 1
+      },
+      "word_count": 297
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__list.md",
+      "id": "docs/en/api/beta/organization/webhooks/list",
+      "title": "List Organization Webhook Endpoints",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/list",
+      "headings": [
+        {
+          "text": "List Organization Webhook Endpoints",
+          "level": 1
+        },
+        {
+          "text": "Query parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "endpoint": 23,
+        "organization": 11,
+        "webhook": 11,
+        "list": 9,
+        "return": 6,
+        "page": 5,
+        "beta": 4,
+        "request": 4,
+        "format": 4,
+        "api": 3,
+        "header": 3,
+        "cursor": 3,
+        "first": 3,
+        "before": 3,
+        "order": 3,
+        "default": 3,
+        "version": 3,
+        "empty": 3,
+        "str": 3,
+        "url": 2,
+        "http": 2,
+        "claude": 2,
+        "belong": 2,
+        "include": 2,
+        "must": 2,
+        "anthropic": 2,
+        "enabl": 2,
+        "object": 2,
+        "about": 2,
+        "rfc": 2,
+        "date": 2,
+        "time": 2,
+        "none": 2,
+        "given": 2,
+        "disabl": 2,
+        "whether": 2,
+        "deliveri": 2,
+        "sent": 2,
+        "last": 2,
+        "title": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "get": 1,
+        "rather": 1,
+        "one": 1,
+        "workspac": 1,
+        "doe": 1,
+        "workspace": 1,
+        "every": 1
+      },
+      "word_count": 615
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__regenerate_signing_secret.md",
+      "id": "docs/en/api/beta/organization/webhooks/regenerate_signing_secret",
+      "title": "Regenerate Organization Webhook Endpoint Signing Secret",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/regenerate_signing_secret",
+      "headings": [
+        {
+          "text": "Regenerate Organization Webhook Endpoint Signing Secret",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "organization": 9,
+        "webhook": 8,
+        "endpoint": 8,
+        "secret": 8,
+        "sign": 7,
+        "return": 5,
+        "beta": 4,
+        "request": 4,
+        "regenerate": 3,
+        "api": 3,
+        "new": 3,
+        "response": 3,
+        "header": 3,
+        "version": 3,
+        "claude": 2,
+        "must": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "post": 1,
+        "replace": 1,
+        "old": 1,
+        "stop": 1,
+        "work": 1,
+        "immediately": 1,
+        "only": 1,
+        "every": 1,
+        "include": 1,
+        "without": 1,
+        "exactly": 1,
+        "did": 1,
+        "exist": 1,
+        "anthropic": 1,
+        "turn": 1,
+        "each": 1,
+        "until": 1,
+        "your": 1,
+        "also": 1,
+        "available": 1,
+        "hipaa": 1,
+        "readines": 1,
+        "enabl": 1,
+        "path": 1,
+        "parameter": 1,
+        "maxlength": 1,
+        "want": 1,
+        "read": 1
+      },
+      "word_count": 323
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__retrieve.md",
+      "id": "docs/en/api/beta/organization/webhooks/retrieve",
+      "title": "Get Organization Webhook Endpoint",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/retrieve",
+      "headings": [
+        {
+          "text": "Get Organization Webhook Endpoint",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "endpoint": 17,
+        "organization": 9,
+        "webhook": 9,
+        "beta": 4,
+        "request": 4,
+        "format": 4,
+        "get": 3,
+        "api": 3,
+        "header": 3,
+        "return": 3,
+        "version": 3,
+        "empty": 3,
+        "str": 3,
+        "url": 2,
+        "http": 2,
+        "claude": 2,
+        "retrieve": 2,
+        "must": 2,
+        "anthropic": 2,
+        "enabl": 2,
+        "about": 2,
+        "rfc": 2,
+        "date": 2,
+        "time": 2,
+        "none": 2,
+        "given": 2,
+        "disabl": 2,
+        "deliveri": 2,
+        "sent": 2,
+        "title": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "every": 1,
+        "include": 1,
+        "without": 1,
+        "exactly": 1,
+        "did": 1,
+        "exist": 1,
+        "turn": 1,
+        "each": 1,
+        "until": 1,
+        "your": 1,
+        "also": 1,
+        "available": 1,
+        "hipaa": 1,
+        "readines": 1,
+        "path": 1,
+        "parameter": 1,
+        "maxlength": 1
+      },
+      "word_count": 438
+    },
+    {
+      "filename": "docs__en__api__beta__organization__webhooks__update.md",
+      "id": "docs/en/api/beta/organization/webhooks/update",
+      "title": "Update Organization Webhook Endpoint",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/update",
+      "headings": [
+        {
+          "text": "Update Organization Webhook Endpoint",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "endpoint": 21,
+        "organization": 9,
+        "webhook": 9,
+        "update": 4,
+        "beta": 4,
+        "request": 4,
+        "empty": 4,
+        "deliveri": 4,
+        "format": 4,
+        "url": 3,
+        "http": 3,
+        "api": 3,
+        "header": 3,
+        "return": 3,
+        "version": 3,
+        "about": 3,
+        "event": 3,
+        "deliver": 3,
+        "disabl": 3,
+        "sent": 3,
+        "str": 3,
+        "claude": 2,
+        "send": 2,
+        "chang": 2,
+        "must": 2,
+        "anthropic": 2,
+        "enabl": 2,
+        "parameter": 2,
+        "not": 2,
+        "typ": 2,
+        "short": 2,
+        "label": 2,
+        "rfc": 2,
+        "date": 2,
+        "time": 2,
+        "none": 2,
+        "given": 2,
+        "title": 1,
+        "platform": 1,
+        "com": 1,
+        "doc": 1,
+        "post": 1,
+        "only": 1,
+        "field": 1,
+        "every": 1,
+        "include": 1,
+        "without": 1,
+        "exactly": 1,
+        "did": 1,
+        "exist": 1
+      },
+      "word_count": 545
+    },
+    {
       "filename": "docs__en__api__beta__organization__workspaces.md",
       "id": "docs/en/api/beta/organization/workspaces",
       "title": "Workspaces (Beta)",
@@ -84891,6 +86048,34 @@
         },
         {
           "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
+          "text": "Set Workspace Rate Limits",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
           "level": 4
         },
         {
@@ -85179,58 +86364,58 @@
         }
       ],
       "terms": {
-        "workspace": 229,
+        "workspace": 244,
         "key": 171,
-        "default": 65,
-        "value": 58,
+        "default": 75,
+        "value": 65,
+        "organization": 62,
+        "version": 57,
         "account": 57,
-        "version": 54,
         "service": 49,
+        "api": 48,
         "member": 47,
+        "return": 43,
         "aws": 42,
-        "api": 41,
+        "limit": 42,
         "geo": 40,
-        "organization": 39,
-        "return": 39,
-        "claude": 37,
+        "claude": 38,
+        "parameter": 37,
         "configuration": 36,
-        "parameter": 35,
+        "alway": 34,
+        "example": 33,
         "membership": 31,
+        "identifier": 30,
+        "same": 30,
+        "group": 30,
         "platform": 29,
+        "rate": 29,
+        "entry": 29,
         "cmek": 28,
         "attach": 28,
         "data": 28,
         "role": 28,
+        "list": 27,
+        "type": 25,
         "region": 25,
         "compartment": 24,
-        "example": 24,
-        "list": 23,
+        "request": 24,
         "archiv": 23,
-        "alway": 23,
+        "header": 23,
+        "want": 23,
         "inference": 23,
-        "request": 23,
-        "same": 23,
-        "header": 22,
-        "want": 22,
+        "object": 22,
+        "response": 22,
         "str": 22,
         "kms": 22,
-        "object": 21,
-        "response": 21,
         "workspac": 20,
         "encryption": 20,
         "policy": 20,
-        "requir": 19,
-        "cannot": 19,
-        "user": 19,
-        "limit": 19,
-        "page": 18,
-        "type": 18,
-        "identifier": 18,
-        "here": 17,
-        "group": 17,
-        "read": 16
+        "own": 20,
+        "set": 20,
+        "every": 20,
+        "requir": 19
       },
-      "word_count": 8251
+      "word_count": 9164
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__archive.md",
@@ -85402,7 +86587,7 @@
         "appli": 2,
         "omit": 2
       },
-      "word_count": 992
+      "word_count": 994
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
@@ -86120,6 +87305,34 @@
           "level": 4
         },
         {
+          "text": "Set Workspace Rate Limits",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
           "text": "Domain types",
           "level": 2
         },
@@ -86132,6 +87345,14 @@
           "level": 3
         },
         {
+          "text": "Beta Workspace Rate Limit Type",
+          "level": 3
+        },
+        {
+          "text": "Beta Workspace Rate Limit Update Value",
+          "level": 3
+        },
+        {
           "text": "Beta Workspace Rate Limit Value",
           "level": 3
         },
@@ -86141,58 +87362,58 @@
         }
       ],
       "terms": {
-        "organization": 51,
-        "workspace": 44,
-        "limit": 39,
-        "rate": 30,
-        "group": 28,
-        "default": 26,
-        "entry": 26,
-        "alway": 26,
-        "identifier": 24,
-        "limiter": 20,
-        "level": 20,
-        "example": 18,
-        "override": 16,
-        "every": 15,
-        "value": 15,
-        "type": 15,
-        "per": 15,
-        "same": 15,
-        "api": 14,
-        "opaque": 14,
-        "list": 13,
-        "own": 13,
-        "never": 12,
-        "chang": 12,
-        "unlike": 12,
-        "differ": 12,
-        "model": 10,
-        "valu": 9,
-        "equal": 9,
-        "return": 8,
-        "only": 8,
-        "apply": 8,
-        "stor": 8,
-        "appli": 8,
-        "entri": 7,
-        "typ": 6,
-        "beta": 5,
-        "set": 5,
-        "com": 4,
-        "each": 4,
-        "inherit": 4,
-        "page": 4,
-        "family": 4,
-        "batch": 4,
-        "token": 4,
-        "count": 4,
-        "fil": 4,
-        "skill": 4,
-        "web": 4,
-        "search": 4
+        "organization": 75,
+        "limit": 66,
+        "workspace": 62,
+        "rate": 49,
+        "group": 41,
+        "entry": 40,
+        "alway": 37,
+        "default": 36,
+        "identifier": 36,
+        "limiter": 31,
+        "example": 27,
+        "level": 25,
+        "type": 25,
+        "value": 24,
+        "override": 23,
+        "same": 22,
+        "api": 21,
+        "every": 21,
+        "per": 21,
+        "own": 20,
+        "opaque": 20,
+        "chang": 19,
+        "never": 18,
+        "unlike": 18,
+        "differ": 18,
+        "list": 17,
+        "model": 15,
+        "set": 14,
+        "equal": 13,
+        "appli": 13,
+        "return": 12,
+        "only": 12,
+        "valu": 12,
+        "apply": 12,
+        "typ": 11,
+        "stor": 11,
+        "entri": 9,
+        "beta": 7,
+        "version": 6,
+        "family": 6,
+        "batch": 6,
+        "token": 6,
+        "count": 6,
+        "fil": 6,
+        "skill": 6,
+        "web": 6,
+        "search": 6,
+        "deprecat": 6,
+        "instead": 6,
+        "com": 5
       },
-      "word_count": 1758
+      "word_count": 2758
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__rate_limits__list.md",
@@ -86283,6 +87504,96 @@
         "parameter": 2
       },
       "word_count": 963
+    },
+    {
+      "filename": "docs__en__api__beta__organization__workspaces__rate_limits__update.md",
+      "id": "docs/en/api/beta/organization/workspaces/rate_limits/update",
+      "title": "Set Workspace Rate Limits",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits/update",
+      "headings": [
+        {
+          "text": "Set Workspace Rate Limits",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "limit": 25,
+        "organization": 24,
+        "rate": 17,
+        "workspace": 16,
+        "entry": 14,
+        "group": 13,
+        "identifier": 12,
+        "alway": 11,
+        "default": 10,
+        "set": 9,
+        "limiter": 9,
+        "example": 9,
+        "api": 8,
+        "type": 7,
+        "value": 7,
+        "own": 7,
+        "chang": 7,
+        "same": 7,
+        "override": 6,
+        "opaque": 6,
+        "every": 6,
+        "never": 6,
+        "unlike": 6,
+        "differ": 6,
+        "per": 6,
+        "typ": 5,
+        "appli": 5,
+        "model": 5,
+        "level": 5,
+        "clear": 4,
+        "only": 4,
+        "return": 4,
+        "apply": 4,
+        "equal": 4,
+        "list": 4,
+        "nam": 3,
+        "stor": 3,
+        "version": 3,
+        "valu": 3,
+        "claude": 2,
+        "com": 2,
+        "overrid": 2,
+        "change": 2,
+        "still": 2,
+        "about": 2,
+        "parameter": 2,
+        "entri": 2,
+        "family": 2,
+        "batch": 2,
+        "token": 2
+      },
+      "word_count": 910
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__retrieve.md",
@@ -86574,7 +87885,7 @@
         "exist": 5,
         "remov": 5
       },
-      "word_count": 2115
+      "word_count": 2125
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__add.md",
@@ -86664,7 +87975,7 @@
         "manage": 1,
         "wif": 1
       },
-      "word_count": 474
+      "word_count": 476
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
@@ -86754,7 +88065,7 @@
         "manage": 1,
         "wif": 1
       },
-      "word_count": 454
+      "word_count": 456
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
@@ -86840,7 +88151,7 @@
         "against": 1,
         "persist": 1
       },
-      "word_count": 340
+      "word_count": 342
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
@@ -86926,7 +88237,7 @@
         "add": 1,
         "assign": 1
       },
-      "word_count": 403
+      "word_count": 405
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
@@ -87016,7 +88327,7 @@
         "replac": 1,
         "current": 1
       },
-      "word_count": 432
+      "word_count": 434
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
@@ -87848,7 +89159,7 @@
         "far": 286,
         "error": 267
       },
-      "word_count": 123500
+      "word_count": 123538
     },
     {
       "filename": "docs__en__api__beta__sessions__archive.md",
@@ -87934,7 +89245,7 @@
         "creation": 9,
         "principal": 9
       },
-      "word_count": 4386
+      "word_count": 4388
     },
     {
       "filename": "docs__en__api__beta__sessions__create.md",
@@ -88020,7 +89331,7 @@
         "intelligence": 20,
         "claude": 17
       },
-      "word_count": 8772
+      "word_count": 8774
     },
     {
       "filename": "docs__en__api__beta__sessions__delete.md",
@@ -88102,7 +89413,7 @@
         "delet": 1,
         "response": 1
       },
-      "word_count": 270
+      "word_count": 272
     },
     {
       "filename": "docs__en__api__beta__sessions__events.md",
@@ -88704,7 +90015,7 @@
         "message": 124,
         "emitt": 124
       },
-      "word_count": 62228
+      "word_count": 62234
     },
     {
       "filename": "docs__en__api__beta__sessions__events__list.md",
@@ -88794,7 +90105,7 @@
         "same": 21,
         "only": 20
       },
-      "word_count": 10534
+      "word_count": 10536
     },
     {
       "filename": "docs__en__api__beta__sessions__events__send.md",
@@ -88884,7 +90195,7 @@
         "context": 6,
         "correspond": 6
       },
-      "word_count": 2606
+      "word_count": 2608
     },
     {
       "filename": "docs__en__api__beta__sessions__events__stream.md",
@@ -88974,7 +90285,7 @@
         "type": 22,
         "name": 22
       },
-      "word_count": 10739
+      "word_count": 10741
     },
     {
       "filename": "docs__en__api__beta__sessions__list.md",
@@ -89060,7 +90371,7 @@
         "ask": 11,
         "return": 10
       },
-      "word_count": 4670
+      "word_count": 4672
     },
     {
       "filename": "docs__en__api__beta__sessions__resources.md",
@@ -89290,7 +90601,7 @@
         "organization": 7,
         "acces": 7
       },
-      "word_count": 3630
+      "word_count": 3640
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__add.md",
@@ -89380,7 +90691,7 @@
         "sent": 1,
         "match": 1
       },
-      "word_count": 349
+      "word_count": 351
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__delete.md",
@@ -89462,7 +90773,7 @@
         "deletion": 1,
         "response": 1
       },
-      "word_count": 272
+      "word_count": 274
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__list.md",
@@ -89552,7 +90863,7 @@
         "platform": 1,
         "com": 1
       },
-      "word_count": 643
+      "word_count": 645
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__retrieve.md",
@@ -89638,7 +90949,7 @@
         "our": 1,
         "history": 1
       },
-      "word_count": 560
+      "word_count": 562
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__update.md",
@@ -89728,7 +91039,7 @@
         "about": 1,
         "our": 1
       },
-      "word_count": 593
+      "word_count": 595
     },
     {
       "filename": "docs__en__api__beta__sessions__retrieve.md",
@@ -89814,7 +91125,7 @@
         "creation": 9,
         "principal": 9
       },
-      "word_count": 4383
+      "word_count": 4385
     },
     {
       "filename": "docs__en__api__beta__sessions__threads.md",
@@ -90044,7 +91355,7 @@
         "deny": 103,
         "request": 101
       },
-      "word_count": 47142
+      "word_count": 47152
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__archive.md",
@@ -90130,7 +91441,7 @@
         "null": 8,
         "powerful": 7
       },
-      "word_count": 3354
+      "word_count": 3356
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events.md",
@@ -90252,7 +91563,7 @@
         "alway": 42,
         "reach": 42
       },
-      "word_count": 21060
+      "word_count": 21064
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__list.md",
@@ -90342,7 +91653,7 @@
         "same": 21,
         "only": 20
       },
-      "word_count": 10321
+      "word_count": 10323
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__stream.md",
@@ -90432,7 +91743,7 @@
         "type": 22,
         "name": 22
       },
-      "word_count": 10749
+      "word_count": 10751
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__list.md",
@@ -90522,7 +91833,7 @@
         "list": 8,
         "default": 8
       },
-      "word_count": 3438
+      "word_count": 3440
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__retrieve.md",
@@ -90608,7 +91919,7 @@
         "null": 8,
         "powerful": 7
       },
-      "word_count": 3351
+      "word_count": 3353
     },
     {
       "filename": "docs__en__api__beta__sessions__update.md",
@@ -90698,7 +92009,7 @@
         "contribute": 15,
         "claude": 14
       },
-      "word_count": 7288
+      "word_count": 7290
     },
     {
       "filename": "docs__en__api__beta__skills.md",
@@ -91000,7 +92311,7 @@
         "here": 9,
         "specify": 9
       },
-      "word_count": 4181
+      "word_count": 4199
     },
     {
       "filename": "docs__en__api__beta__skills__create.md",
@@ -91086,7 +92397,7 @@
         "sample": 2,
         "resolv": 2
       },
-      "word_count": 533
+      "word_count": 535
     },
     {
       "filename": "docs__en__api__beta__skills__delete.md",
@@ -91172,7 +92483,7 @@
         "object": 1,
         "type": 1
       },
-      "word_count": 298
+      "word_count": 300
     },
     {
       "filename": "docs__en__api__beta__skills__list.md",
@@ -91258,7 +92569,7 @@
         "author": 2,
         "private": 2
       },
-      "word_count": 598
+      "word_count": 600
     },
     {
       "filename": "docs__en__api__beta__skills__retrieve.md",
@@ -91344,7 +92655,7 @@
         "parameter": 1,
         "about": 1
       },
-      "word_count": 482
+      "word_count": 484
     },
     {
       "filename": "docs__en__api__beta__skills__versions.md",
@@ -91542,7 +92853,7 @@
         "specific": 5,
         "omit": 5
       },
-      "word_count": 2166
+      "word_count": 2176
     },
     {
       "filename": "docs__en__api__beta__skills__versions__create.md",
@@ -91632,7 +92943,7 @@
         "one": 1,
         "belong": 1
       },
-      "word_count": 451
+      "word_count": 453
     },
     {
       "filename": "docs__en__api__beta__skills__versions__delete.md",
@@ -91718,7 +93029,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 332
+      "word_count": 334
     },
     {
       "filename": "docs__en__api__beta__skills__versions__download.md",
@@ -91796,7 +93107,7 @@
         "need": 1,
         "act": 1
       },
-      "word_count": 285
+      "word_count": 287
     },
     {
       "filename": "docs__en__api__beta__skills__versions__list.md",
@@ -91886,7 +93197,7 @@
         "previou": 1,
         "read": 1
       },
-      "word_count": 499
+      "word_count": 501
     },
     {
       "filename": "docs__en__api__beta__skills__versions__retrieve.md",
@@ -91972,7 +93283,7 @@
         "specify": 1,
         "select": 1
       },
-      "word_count": 444
+      "word_count": 446
     },
     {
       "filename": "docs__en__api__beta__tunnels.md",
@@ -92306,7 +93617,7 @@
         "about": 10,
         "our": 10
       },
-      "word_count": 4531
+      "word_count": 4551
     },
     {
       "filename": "docs__en__api__beta__tunnels__archive.md",
@@ -92392,7 +93703,7 @@
         "window": 1,
         "archival": 1
       },
-      "word_count": 448
+      "word_count": 450
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates.md",
@@ -92570,7 +93881,7 @@
         "without": 4,
         "deprecation": 4
       },
-      "word_count": 1962
+      "word_count": 1970
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__archive.md",
@@ -92656,7 +93967,7 @@
         "anthropic": 1,
         "record": 1
       },
-      "word_count": 462
+      "word_count": 464
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__create.md",
@@ -92746,7 +94057,7 @@
         "window": 1,
         "public": 1
       },
-      "word_count": 477
+      "word_count": 479
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__list.md",
@@ -92836,7 +94147,7 @@
         "deprecation": 1,
         "period": 1
       },
-      "word_count": 502
+      "word_count": 504
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__retrieve.md",
@@ -92922,7 +94233,7 @@
         "read": 1,
         "about": 1
       },
-      "word_count": 426
+      "word_count": 428
     },
     {
       "filename": "docs__en__api__beta__tunnels__create.md",
@@ -93008,7 +94319,7 @@
         "admin": 1,
         "remain": 1
       },
-      "word_count": 451
+      "word_count": 453
     },
     {
       "filename": "docs__en__api__beta__tunnels__list.md",
@@ -93094,7 +94405,7 @@
         "period": 1,
         "supersed": 1
       },
-      "word_count": 490
+      "word_count": 492
     },
     {
       "filename": "docs__en__api__beta__tunnels__retrieve.md",
@@ -93180,7 +94491,7 @@
         "parameter": 1,
         "want": 1
       },
-      "word_count": 409
+      "word_count": 411
     },
     {
       "filename": "docs__en__api__beta__tunnels__reveal_token.md",
@@ -93266,7 +94577,7 @@
         "until": 1,
         "expos": 1
       },
-      "word_count": 378
+      "word_count": 380
     },
     {
       "filename": "docs__en__api__beta__tunnels__rotate_token.md",
@@ -93356,7 +94667,7 @@
         "sever": 1,
         "restart": 1
       },
-      "word_count": 393
+      "word_count": 395
     },
     {
       "filename": "docs__en__api__beta__user_profiles.md",
@@ -93630,7 +94941,7 @@
         "own": 15,
         "without": 15
       },
-      "word_count": 7678
+      "word_count": 7692
     },
     {
       "filename": "docs__en__api__beta__user_profiles__action_urls.md",
@@ -93740,7 +95051,7 @@
         "our": 1,
         "history": 1
       },
-      "word_count": 501
+      "word_count": 503
     },
     {
       "filename": "docs__en__api__beta__user_profiles__action_urls__create.md",
@@ -93830,7 +95141,7 @@
         "match": 1,
         "body": 1
       },
-      "word_count": 369
+      "word_count": 371
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create.md",
@@ -93916,7 +95227,7 @@
         "statu": 4,
         "restrict": 4
       },
-      "word_count": 1622
+      "word_count": 1624
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create_enrollment_url.md",
@@ -94002,7 +95313,7 @@
         "enroll": 1,
         "program": 1
       },
-      "word_count": 329
+      "word_count": 331
     },
     {
       "filename": "docs__en__api__beta__user_profiles__delete.md",
@@ -94087,7 +95398,7 @@
         "prefix": 1,
         "response": 1
       },
-      "word_count": 285
+      "word_count": 287
     },
     {
       "filename": "docs__en__api__beta__user_profiles__list.md",
@@ -94173,7 +95484,7 @@
         "cursor": 2,
         "response": 2
       },
-      "word_count": 1107
+      "word_count": 1109
     },
     {
       "filename": "docs__en__api__beta__user_profiles__retrieve.md",
@@ -94259,7 +95570,7 @@
         "char": 2,
         "individual": 2
       },
-      "word_count": 981
+      "word_count": 983
     },
     {
       "filename": "docs__en__api__beta__user_profiles__update.md",
@@ -94349,7 +95660,7 @@
         "barr": 4,
         "comput": 4
       },
-      "word_count": 1599
+      "word_count": 1601
     },
     {
       "filename": "docs__en__api__beta__vaults.md",
@@ -94759,7 +96070,7 @@
         "api": 16,
         "beta": 16
       },
-      "word_count": 8227
+      "word_count": 8253
     },
     {
       "filename": "docs__en__api__beta__vaults__archive.md",
@@ -94845,7 +96156,7 @@
         "match": 1,
         "return": 1
       },
-      "word_count": 360
+      "word_count": 362
     },
     {
       "filename": "docs__en__api__beta__vaults__create.md",
@@ -94931,7 +96242,7 @@
         "belong": 1,
         "specific": 1
       },
-      "word_count": 402
+      "word_count": 404
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials.md",
@@ -95321,7 +96632,7 @@
         "example": 23,
         "sent": 23
       },
-      "word_count": 9913
+      "word_count": 9927
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__archive.md",
@@ -95407,7 +96718,7 @@
         "body": 2,
         "variable": 2
       },
-      "word_count": 744
+      "word_count": 746
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__create.md",
@@ -95497,7 +96808,7 @@
         "sent": 3,
         "match": 3
       },
-      "word_count": 1339
+      "word_count": 1341
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__delete.md",
@@ -95580,7 +96891,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 295
+      "word_count": 297
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__list.md",
@@ -95670,7 +96981,7 @@
         "only": 2,
         "belong": 2
       },
-      "word_count": 814
+      "word_count": 816
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md",
@@ -95756,7 +97067,7 @@
         "stor": 2,
         "validation": 2
       },
-      "word_count": 690
+      "word_count": 692
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__retrieve.md",
@@ -95842,7 +97153,7 @@
         "variable": 2,
         "whether": 2
       },
-      "word_count": 741
+      "word_count": 743
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__update.md",
@@ -95932,7 +97243,7 @@
         "sent": 3,
         "current": 3
       },
-      "word_count": 1324
+      "word_count": 1326
     },
     {
       "filename": "docs__en__api__beta__vaults__delete.md",
@@ -96014,7 +97325,7 @@
         "confirmation": 1,
         "response": 1
       },
-      "word_count": 285
+      "word_count": 287
     },
     {
       "filename": "docs__en__api__beta__vaults__list.md",
@@ -96100,7 +97411,7 @@
         "history": 1,
         "here": 1
       },
-      "word_count": 428
+      "word_count": 430
     },
     {
       "filename": "docs__en__api__beta__vaults__retrieve.md",
@@ -96186,7 +97497,7 @@
         "match": 1,
         "return": 1
       },
-      "word_count": 357
+      "word_count": 359
     },
     {
       "filename": "docs__en__api__beta__vaults__update.md",
@@ -96276,7 +97587,7 @@
         "act": 1,
         "one": 1
       },
-      "word_count": 421
+      "word_count": 423
     },
     {
       "filename": "docs__en__api__beta__webhooks.md",
@@ -96450,6 +97761,14 @@
           "level": 3
         },
         {
+          "text": "Beta Webhook User Profile Enforcement Action Opened Event Data",
+          "level": 3
+        },
+        {
+          "text": "Beta Webhook User Profile Enforcement Action Resolved Event Data",
+          "level": 3
+        },
+        {
           "text": "Beta Webhook Vault Archived Event Data",
           "level": 3
         },
@@ -96479,17 +97798,19 @@
         }
       ],
       "terms": {
-        "event": 189,
+        "event": 191,
         "trigger": 132,
         "session": 77,
-        "webhook": 50,
-        "beta": 47,
-        "data": 45,
+        "webhook": 52,
+        "beta": 49,
+        "data": 47,
         "vault": 40,
         "deployment": 36,
         "credential": 28,
         "agent": 16,
         "environment": 16,
+        "action": 15,
+        "enforcement": 14,
         "run": 13,
         "thread": 12,
         "own": 12,
@@ -96497,8 +97818,12 @@
         "store": 12,
         "refer": 9,
         "creat": 8,
+        "user": 8,
+        "profile": 8,
         "archiv": 7,
         "delet": 7,
+        "open": 7,
+        "resolv": 7,
         "updat": 4,
         "statu": 4,
         "idl": 3,
@@ -96522,15 +97847,9 @@
         "type": 1,
         "alway": 1,
         "payload": 1,
-        "unique": 1,
-        "identifier": 1,
-        "idempotency": 1,
-        "rfc": 1,
-        "timestamp": 1,
-        "occurr": 1,
-        "format": 1
+        "unique": 1
       },
-      "word_count": 3704
+      "word_count": 3940
     },
     {
       "filename": "docs__en__api__claude-code__routines-fire.md",
@@ -96916,7 +98235,7 @@
         "additional": 5,
         "option": 5
       },
-      "word_count": 1748
+      "word_count": 1750
     },
     {
       "filename": "docs__en__api__completions__create.md",
@@ -97002,7 +98321,7 @@
         "capable": 4,
         "biology": 4
       },
-      "word_count": 1396
+      "word_count": 1398
     },
     {
       "filename": "docs__en__api__compliance.md",
@@ -98039,7 +99358,7 @@
         "provider": 2229,
         "issuer": 2215,
         "party": 2193,
-        "user": 2087,
+        "user": 2089,
         "api": 1900,
         "email": 1744,
         "anthropic": 1707,
@@ -98051,14 +99370,14 @@
         "customer": 1653,
         "attest": 1649,
         "federat": 1647,
-        "credential": 1340,
+        "credential": 1338,
         "null": 1261,
         "identifier": 1247,
         "token": 1229,
         "service": 1195,
         "via": 1178,
+        "without": 1168,
         "identity": 1167,
-        "without": 1166,
         "external": 1154,
         "system": 1135,
         "device": 1129,
@@ -98077,10 +99396,10 @@
         "admin": 802,
         "key": 765,
         "time": 749,
-        "name": 702,
+        "name": 704,
         "app": 671
       },
-      "word_count": 376702
+      "word_count": 376863
     },
     {
       "filename": "docs__en__api__compliance__activities.md",
@@ -98137,7 +99456,7 @@
         "issuer": 4422,
         "format": 4400,
         "party": 4380,
-        "user": 3804,
+        "user": 3808,
         "api": 3570,
         "email": 3412,
         "anthropic": 3376,
@@ -98149,7 +99468,7 @@
         "customer": 3294,
         "attest": 3294,
         "federat": 3292,
-        "credential": 2614,
+        "credential": 2610,
         "token": 2368,
         "identifier": 2368,
         "null": 2358,
@@ -98159,8 +99478,8 @@
         "via": 2287,
         "system": 2254,
         "device": 2246,
+        "without": 2242,
         "present": 2239,
-        "without": 2238,
         "act": 2222,
         "perform": 2212,
         "register": 2208,
@@ -98173,12 +99492,12 @@
         "request": 1568,
         "admin": 1464,
         "key": 1366,
-        "name": 1332,
+        "name": 1336,
         "claude": 1304,
         "sync": 1256,
         "app": 1242
       },
-      "word_count": 699059
+      "word_count": 699381
     },
     {
       "filename": "docs__en__api__compliance__activities__list.md",
@@ -98223,7 +99542,7 @@
         "issuer": 2215,
         "format": 2205,
         "party": 2191,
-        "user": 1968,
+        "user": 1970,
         "api": 1825,
         "email": 1717,
         "anthropic": 1701,
@@ -98235,7 +99554,7 @@
         "attest": 1649,
         "customer": 1648,
         "federat": 1647,
-        "credential": 1340,
+        "credential": 1338,
         "token": 1202,
         "service": 1191,
         "identifier": 1185,
@@ -98244,8 +99563,8 @@
         "via": 1158,
         "external": 1154,
         "system": 1132,
+        "without": 1130,
         "device": 1129,
-        "without": 1128,
         "present": 1121,
         "act": 1117,
         "perform": 1108,
@@ -98260,11 +99579,11 @@
         "admin": 801,
         "claude": 798,
         "key": 705,
-        "name": 672,
+        "name": 674,
         "sync": 646,
         "app": 642
       },
-      "word_count": 358138
+      "word_count": 358299
     },
     {
       "filename": "docs__en__api__compliance__apps.md",
@@ -108076,7 +109395,7 @@
         }
       ],
       "terms": {
-        "tool": 2424,
+        "tool": 2432,
         "member": 2029,
         "default": 1428,
         "model": 1208,
@@ -108088,27 +109407,27 @@
         "content": 625,
         "pattern": 566,
         "schema": 534,
+        "request": 515,
         "load": 515,
         "value": 482,
         "same": 482,
         "every": 478,
+        "cache": 473,
         "minimum": 472,
         "tab": 458,
         "input": 447,
         "config": 442,
         "whether": 438,
+        "whose": 433,
         "must": 432,
-        "cache": 425,
         "false": 425,
         "serv": 423,
-        "request": 411,
         "server": 396,
         "overrid": 396,
         "documentation": 392,
         "resolv": 392,
         "call": 389,
         "offer": 386,
-        "whose": 385,
         "defer": 384,
         "resolve": 384,
         "withheld": 384,
@@ -108121,13 +109440,13 @@
         "return": 302,
         "create": 296,
         "minlength": 288,
-        "only": 279,
+        "only": 287,
         "source": 274,
         "directly": 264,
         "code": 258,
         "number": 253
       },
-      "word_count": 134296
+      "word_count": 136032
     },
     {
       "filename": "docs__en__api__messages__batches.md",
@@ -108323,15 +109642,16 @@
       ],
       "terms": {
         "default": 424,
-        "tool": 378,
+        "tool": 382,
+        "request": 300,
         "model": 270,
         "member": 258,
-        "request": 248,
         "result": 218,
         "block": 185,
         "message": 182,
         "batch": 181,
         "content": 124,
+        "cache": 113,
         "toolset": 113,
         "number": 112,
         "token": 111,
@@ -108340,9 +109660,8 @@
         "enabl": 98,
         "input": 96,
         "minimum": 95,
-        "cache": 89,
         "end": 86,
-        "process": 81,
+        "process": 85,
         "text": 80,
         "search": 79,
         "used": 77,
@@ -108353,15 +109672,17 @@
         "response": 75,
         "time": 75,
         "schema": 74,
+        "whose": 73,
         "load": 73,
+        "api": 72,
+        "only": 72,
         "cod": 70,
         "think": 69,
-        "only": 68,
         "output": 68,
-        "api": 64,
         "every": 64,
         "must": 62,
         "return": 62,
+        "reason": 60,
         "same": 59,
         "create": 58,
         "whether": 58,
@@ -108369,11 +109690,9 @@
         "generat": 55,
         "agent": 55,
         "intelligence": 55,
-        "web": 54,
-        "serv": 53,
-        "maxlength": 52
+        "see": 54
       },
-      "word_count": 28209
+      "word_count": 29077
     },
     {
       "filename": "docs__en__api__messages__batches__cancel.md",
@@ -108749,9 +110068,9 @@
       ],
       "terms": {
         "default": 79,
+        "request": 52,
         "result": 42,
-        "tool": 40,
-        "request": 39,
+        "tool": 41,
         "model": 34,
         "token": 24,
         "block": 22,
@@ -108760,10 +110079,13 @@
         "execution": 17,
         "text": 17,
         "minimum": 17,
+        "cache": 16,
+        "reason": 15,
         "number": 15,
         "output": 14,
         "input": 14,
         "cod": 14,
+        "api": 13,
         "response": 13,
         "search": 13,
         "think": 13,
@@ -108771,19 +110093,20 @@
         "used": 12,
         "content": 12,
         "pattern": 12,
-        "api": 11,
         "generat": 11,
         "web": 11,
         "agent": 11,
         "intelligence": 11,
         "batch": 10,
-        "cache": 10,
-        "reason": 9,
+        "each": 10,
+        "match": 10,
+        "previou": 10,
         "cit": 9,
         "count": 9,
+        "see": 9,
         "srvtoolu": 9,
         "claude": 8,
-        "match": 8,
+        "learn": 8,
         "type": 8,
         "alway": 8,
         "server": 8,
@@ -108792,14 +110115,10 @@
         "runn": 8,
         "category": 8,
         "doc": 7,
-        "read": 7,
-        "one": 7,
-        "container": 7,
-        "non": 7,
-        "back": 7,
-        "powerful": 7
+        "guide": 7,
+        "read": 7
       },
-      "word_count": 3374
+      "word_count": 3591
     },
     {
       "filename": "docs__en__api__messages__batches__retrieve.md",
@@ -109006,7 +110325,7 @@
         }
       ],
       "terms": {
-        "tool": 260,
+        "tool": 261,
         "member": 255,
         "model": 173,
         "default": 136,
@@ -109017,14 +110336,15 @@
         "content": 94,
         "result": 78,
         "schema": 74,
+        "request": 71,
         "load": 70,
+        "cache": 67,
         "value": 64,
-        "cache": 61,
         "input": 60,
-        "request": 58,
         "whether": 58,
         "every": 58,
         "false": 54,
+        "whose": 54,
         "must": 53,
         "same": 53,
         "serv": 53,
@@ -109037,14 +110357,13 @@
         "config": 48,
         "defer": 48,
         "resolve": 48,
-        "whose": 48,
         "withheld": 48,
         "minimum": 46,
         "used": 45,
         "control": 45,
         "return": 42,
+        "only": 41,
         "breakpoint": 41,
-        "only": 40,
         "search": 40,
         "pattern": 40,
         "true": 39,
@@ -109052,12 +110371,12 @@
         "response": 36,
         "maxlength": 36,
         "number": 35,
-        "includ": 33,
-        "text": 32,
-        "prompt": 32,
-        "minlength": 32
+        "includ": 34,
+        "api": 33,
+        "prompt": 33,
+        "text": 32
       },
-      "word_count": 15715
+      "word_count": 15932
     },
     {
       "filename": "docs__en__api__models.md",
@@ -109211,7 +110530,7 @@
         "every": 10,
         "while": 10
       },
-      "word_count": 5021
+      "word_count": 5025
     },
     {
       "filename": "docs__en__api__models__list.md",
@@ -109297,7 +110616,7 @@
         "reject": 3,
         "turn": 3
       },
-      "word_count": 1527
+      "word_count": 1529
     },
     {
       "filename": "docs__en__api__models__retrieve.md",
@@ -109383,7 +110702,7 @@
         "str": 3,
         "represent": 3
       },
-      "word_count": 1332
+      "word_count": 1334
     },
     {
       "filename": "docs__en__api__opentelemetry__spans.md",
@@ -110731,6 +112050,34 @@
           "level": 5
         },
         {
+          "text": "Set Workspace Rate Limits",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
           "text": "Organization \u203a Workspaces \u203a Members",
           "level": 2
         },
@@ -111081,57 +112428,57 @@
       ],
       "terms": {
         "key": 376,
-        "workspace": 354,
-        "api": 236,
+        "workspace": 370,
+        "api": 243,
         "account": 206,
+        "organization": 201,
+        "default": 193,
         "rule": 190,
         "service": 187,
-        "default": 183,
-        "organization": 178,
-        "version": 174,
+        "version": 177,
         "issuer": 149,
         "time": 126,
-        "return": 121,
+        "return": 125,
         "tagg": 116,
-        "token": 107,
+        "token": 109,
         "federation": 105,
         "format": 103,
-        "claude": 101,
+        "claude": 102,
         "date": 98,
-        "parameter": 83,
+        "example": 90,
+        "parameter": 85,
         "user": 82,
-        "example": 81,
         "aws": 80,
         "archiv": 80,
-        "response": 77,
-        "read": 76,
+        "response": 78,
+        "value": 78,
+        "read": 77,
+        "only": 77,
+        "alway": 76,
         "creat": 74,
-        "only": 73,
         "claim": 72,
-        "value": 71,
         "admin": 70,
         "actor": 68,
         "must": 68,
+        "identifier": 68,
         "jwk": 68,
-        "alway": 65,
+        "list": 66,
+        "object": 65,
         "role": 65,
         "match": 65,
-        "object": 64,
         "identity": 63,
         "member": 63,
-        "list": 62,
+        "about": 62,
+        "type": 62,
         "accept": 62,
+        "limit": 62,
+        "here": 61,
         "maxlength": 61,
-        "about": 60,
-        "here": 60,
-        "name": 59,
-        "header": 58,
-        "want": 58,
-        "our": 58,
-        "history": 58,
-        "single": 58
+        "name": 60,
+        "set": 60,
+        "header": 59
       },
-      "word_count": 27365
+      "word_count": 28278
     },
     {
       "filename": "docs__en__api__organization__api_keys.md",
@@ -115403,7 +116750,7 @@
         "organization": 55,
         "limit": 51,
         "rate": 44,
-        "group": 41,
+        "group": 43,
         "identifier": 40,
         "entry": 30,
         "example": 25,
@@ -115434,6 +116781,7 @@
         "skill": 7,
         "family": 6,
         "equal": 6,
+        "set": 5,
         "valu": 5,
         "list": 4,
         "messag": 4,
@@ -115445,13 +116793,12 @@
         "instead": 4,
         "surface": 3,
         "category": 3,
-        "set": 3,
         "single": 3,
         "remain": 3,
         "nam": 3,
         "alias": 3
       },
-      "word_count": 1644
+      "word_count": 1668
     },
     {
       "filename": "docs__en__api__organization__rate_limits__list.md",
@@ -115489,7 +116836,7 @@
         "organization": 21,
         "limit": 21,
         "rate": 18,
-        "group": 15,
+        "group": 16,
         "entry": 14,
         "identifier": 14,
         "api": 11,
@@ -115517,6 +116864,7 @@
         "batch": 3,
         "web": 3,
         "search": 3,
+        "set": 3,
         "valu": 3,
         "single": 3,
         "remain": 3,
@@ -115531,13 +116879,12 @@
         "message": 2,
         "tool": 2,
         "contain": 2,
-        "set": 2,
         "omitt": 2,
         "result": 2,
         "filter": 2,
         "maximum": 2
       },
-      "word_count": 795
+      "word_count": 807
     },
     {
       "filename": "docs__en__api__organization__retrieve.md",
@@ -117447,6 +118794,34 @@
           "level": 5
         },
         {
+          "text": "Set Workspace Rate Limits",
+          "level": 3
+        },
+        {
+          "text": "Path parameters",
+          "level": 4
+        },
+        {
+          "text": "Headers",
+          "level": 4
+        },
+        {
+          "text": "Body parameters",
+          "level": 4
+        },
+        {
+          "text": "Returns",
+          "level": 4
+        },
+        {
+          "text": "Example",
+          "level": 4
+        },
+        {
+          "text": "Response (200)",
+          "level": 5
+        },
+        {
           "text": "Workspaces \u203a Members",
           "level": 2
         },
@@ -117720,58 +119095,58 @@
         }
       ],
       "terms": {
-        "workspace": 229,
+        "workspace": 244,
         "key": 171,
-        "default": 65,
-        "value": 58,
+        "default": 75,
+        "value": 65,
+        "organization": 62,
         "account": 57,
+        "version": 51,
         "service": 49,
-        "version": 48,
+        "api": 48,
         "member": 47,
+        "return": 43,
         "aws": 42,
-        "api": 41,
+        "limit": 42,
         "geo": 40,
-        "organization": 39,
-        "return": 39,
-        "claude": 37,
+        "claude": 38,
+        "parameter": 37,
         "configuration": 36,
-        "parameter": 35,
+        "alway": 34,
+        "example": 33,
         "membership": 31,
+        "identifier": 30,
+        "same": 30,
+        "group": 30,
         "platform": 29,
+        "rate": 29,
+        "entry": 29,
         "cmek": 28,
         "attach": 28,
         "data": 28,
         "role": 28,
+        "list": 27,
+        "type": 25,
         "region": 25,
         "compartment": 24,
-        "example": 24,
-        "list": 23,
+        "request": 24,
         "archiv": 23,
-        "alway": 23,
         "inference": 23,
-        "request": 23,
-        "same": 23,
+        "object": 22,
+        "response": 22,
         "str": 22,
         "kms": 22,
-        "object": 21,
-        "response": 21,
         "workspac": 20,
         "encryption": 20,
         "policy": 20,
+        "own": 20,
+        "set": 20,
+        "every": 20,
         "requir": 19,
-        "cannot": 19,
-        "user": 19,
-        "limit": 19,
-        "page": 18,
-        "type": 18,
-        "identifier": 18,
-        "here": 17,
-        "group": 17,
-        "header": 16,
-        "want": 16,
-        "read": 16
+        "valu": 19,
+        "appli": 19
       },
-      "word_count": 7517
+      "word_count": 8418
     },
     {
       "filename": "docs__en__api__organization__workspaces__archive.md",
@@ -118657,6 +120032,34 @@
           "level": 4
         },
         {
+          "text": "Set Workspace Rate Limits",
+          "level": 2
+        },
+        {
+          "text": "Path parameters",
+          "level": 3
+        },
+        {
+          "text": "Headers",
+          "level": 3
+        },
+        {
+          "text": "Body parameters",
+          "level": 3
+        },
+        {
+          "text": "Returns",
+          "level": 3
+        },
+        {
+          "text": "Example",
+          "level": 3
+        },
+        {
+          "text": "Response (200)",
+          "level": 4
+        },
+        {
           "text": "Domain types",
           "level": 2
         },
@@ -118669,6 +120072,14 @@
           "level": 3
         },
         {
+          "text": "Workspace Rate Limit Type",
+          "level": 3
+        },
+        {
+          "text": "Workspace Rate Limit Update Value",
+          "level": 3
+        },
+        {
           "text": "Workspace Rate Limit Value",
           "level": 3
         },
@@ -118678,58 +120089,58 @@
         }
       ],
       "terms": {
-        "organization": 51,
-        "workspace": 44,
-        "limit": 39,
-        "rate": 30,
-        "group": 28,
-        "default": 26,
-        "entry": 26,
-        "alway": 26,
-        "identifier": 24,
-        "limiter": 20,
-        "level": 20,
-        "example": 18,
-        "override": 16,
-        "every": 15,
-        "value": 15,
-        "type": 15,
-        "per": 15,
-        "same": 15,
-        "api": 14,
-        "opaque": 14,
-        "list": 13,
-        "own": 13,
-        "never": 12,
-        "chang": 12,
-        "unlike": 12,
-        "differ": 12,
-        "model": 10,
-        "valu": 9,
-        "equal": 9,
-        "return": 8,
-        "only": 8,
-        "apply": 8,
-        "stor": 8,
-        "appli": 8,
-        "entri": 7,
-        "typ": 6,
-        "set": 5,
-        "com": 4,
-        "each": 4,
-        "inherit": 4,
-        "page": 4,
-        "family": 4,
-        "batch": 4,
-        "token": 4,
-        "count": 4,
-        "fil": 4,
-        "skill": 4,
-        "web": 4,
-        "search": 4,
-        "deprecat": 4
+        "organization": 75,
+        "limit": 66,
+        "workspace": 62,
+        "rate": 49,
+        "group": 41,
+        "entry": 40,
+        "alway": 37,
+        "default": 36,
+        "identifier": 36,
+        "limiter": 31,
+        "example": 27,
+        "level": 25,
+        "type": 25,
+        "value": 24,
+        "override": 23,
+        "same": 22,
+        "api": 21,
+        "every": 21,
+        "per": 21,
+        "own": 20,
+        "opaque": 20,
+        "chang": 19,
+        "never": 18,
+        "unlike": 18,
+        "differ": 18,
+        "list": 17,
+        "model": 15,
+        "set": 14,
+        "equal": 13,
+        "appli": 13,
+        "return": 12,
+        "only": 12,
+        "valu": 12,
+        "apply": 12,
+        "typ": 11,
+        "stor": 11,
+        "entri": 9,
+        "version": 6,
+        "family": 6,
+        "batch": 6,
+        "token": 6,
+        "count": 6,
+        "fil": 6,
+        "skill": 6,
+        "web": 6,
+        "search": 6,
+        "deprecat": 6,
+        "instead": 6,
+        "com": 5,
+        "each": 5
       },
-      "word_count": 1754
+      "word_count": 2752
     },
     {
       "filename": "docs__en__api__organization__workspaces__rate_limits__list.md",
@@ -118820,6 +120231,96 @@
         "parameter": 2
       },
       "word_count": 963
+    },
+    {
+      "filename": "docs__en__api__organization__workspaces__rate_limits__update.md",
+      "id": "docs/en/api/organization/workspaces/rate_limits/update",
+      "title": "Set Workspace Rate Limits",
+      "category": "api_reference",
+      "url": "https://platform.claude.com/docs/en/api/organization/workspaces/rate_limits/update",
+      "headings": [
+        {
+          "text": "Set Workspace Rate Limits",
+          "level": 1
+        },
+        {
+          "text": "Path parameters",
+          "level": 2
+        },
+        {
+          "text": "Headers",
+          "level": 2
+        },
+        {
+          "text": "Body parameters",
+          "level": 2
+        },
+        {
+          "text": "Returns",
+          "level": 2
+        },
+        {
+          "text": "Example",
+          "level": 2
+        },
+        {
+          "text": "Response (200)",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "limit": 25,
+        "organization": 24,
+        "rate": 17,
+        "workspace": 16,
+        "entry": 14,
+        "group": 13,
+        "identifier": 12,
+        "alway": 11,
+        "default": 10,
+        "set": 9,
+        "limiter": 9,
+        "example": 9,
+        "api": 8,
+        "type": 7,
+        "value": 7,
+        "own": 7,
+        "chang": 7,
+        "same": 7,
+        "override": 6,
+        "opaque": 6,
+        "every": 6,
+        "never": 6,
+        "unlike": 6,
+        "differ": 6,
+        "per": 6,
+        "typ": 5,
+        "appli": 5,
+        "model": 5,
+        "level": 5,
+        "clear": 4,
+        "only": 4,
+        "return": 4,
+        "apply": 4,
+        "equal": 4,
+        "list": 4,
+        "nam": 3,
+        "stor": 3,
+        "version": 3,
+        "valu": 3,
+        "claude": 2,
+        "com": 2,
+        "overrid": 2,
+        "change": 2,
+        "still": 2,
+        "about": 2,
+        "parameter": 2,
+        "entri": 2,
+        "family": 2,
+        "batch": 2,
+        "token": 2
+      },
+      "word_count": 910
     },
     {
       "filename": "docs__en__api__organization__workspaces__retrieve.md",
@@ -134990,7 +136491,7 @@
         "fail": 4,
         "same": 4
       },
-      "word_count": 1913
+      "word_count": 1921
     },
     {
       "filename": "docs__en__manage-claude__plugins-api.md",
@@ -135323,58 +136824,58 @@
         }
       ],
       "terms": {
-        "limit": 39,
-        "workspace": 35,
-        "organization": 29,
-        "group": 28,
-        "rate": 25,
+        "limit": 44,
+        "workspace": 39,
+        "organization": 32,
+        "group": 29,
+        "rate": 27,
         "api": 24,
+        "endpoint": 16,
         "model": 16,
         "list": 15,
-        "endpoint": 14,
         "codegroup": 12,
+        "see": 11,
         "value": 11,
         "inherit": 11,
-        "see": 10,
+        "one": 10,
+        "entry": 10,
         "valu": 9,
         "return": 9,
-        "one": 9,
-        "entry": 9,
+        "response": 9,
+        "overrid": 8,
         "each": 8,
-        "response": 8,
         "only": 8,
+        "override": 8,
         "parameter": 8,
         "limiter": 8,
         "claude": 7,
         "query": 7,
         "admin": 7,
-        "overrid": 7,
+        "level": 7,
         "every": 7,
-        "override": 7,
         "type": 7,
+        "pas": 7,
+        "set": 6,
         "page": 6,
         "configur": 6,
         "key": 6,
         "default": 6,
         "such": 6,
         "any": 6,
-        "pas": 6,
         "acces": 5,
-        "level": 5,
+        "match": 5,
+        "appli": 5,
+        "also": 5,
         "tip": 4,
-        "set": 4,
         "console": 4,
         "workspac": 4,
         "read": 4,
         "against": 4,
-        "match": 4,
-        "appli": 4,
         "other": 4,
         "includ": 4,
-        "single": 4,
-        "alway": 4
+        "single": 4
       },
-      "word_count": 3872
+      "word_count": 3947
     },
     {
       "filename": "docs__en__manage-claude__spend-limits-api.md",
@@ -144694,57 +146195,57 @@
       ],
       "terms": {
         "claude": 513,
-        "api": 197,
+        "api": 200,
         "model": 155,
-        "beta": 147,
+        "beta": 149,
         "tool": 133,
         "now": 130,
         "opu": 118,
         "see": 114,
-        "header": 89,
-        "request": 87,
+        "header": 90,
+        "request": 89,
         "agent": 84,
         "sonnet": 72,
-        "support": 70,
+        "support": 71,
         "token": 69,
         "session": 64,
         "return": 62,
-        "launch": 60,
+        "launch": 61,
         "think": 57,
         "available": 54,
-        "sdk": 49,
+        "sdk": 50,
         "manag": 48,
+        "add": 45,
         "prompt": 45,
-        "add": 44,
         "error": 44,
         "code": 40,
         "read": 40,
+        "new": 39,
         "output": 38,
-        "new": 38,
         "block": 38,
         "messag": 37,
         "fable": 36,
+        "acces": 35,
         "console": 34,
+        "event": 34,
         "our": 34,
-        "acces": 33,
         "key": 33,
         "limit": 33,
-        "event": 33,
         "context": 33,
         "learn": 33,
         "requir": 33,
-        "platform": 30,
+        "platform": 31,
+        "organization": 31,
+        "endpoint": 30,
         "same": 30,
         "mode": 29,
         "august": 29,
-        "organization": 28,
         "call": 28,
         "parameter": 28,
         "run": 27,
-        "endpoint": 27,
         "fast": 26
       },
-      "word_count": 13892
+      "word_count": 14006
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
