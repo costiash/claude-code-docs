@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T03:18:22.494169Z",
+  "generated_at": "2026-10-21T06:19:21.993650Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9549,30 +9549,30 @@
         }
       ],
       "terms": {
-        "fix": 4866,
-        "session": 2129,
+        "fix": 4868,
+        "session": 2132,
         "now": 1712,
         "claude": 1633,
         "add": 1113,
         "improv": 920,
         "after": 918,
-        "tool": 839,
+        "tool": 840,
         "instead": 817,
         "chang": 805,
-        "prompt": 769,
+        "prompt": 770,
         "command": 711,
         "mode": 706,
         "agent": 689,
-        "being": 687,
+        "being": 688,
         "show": 681,
         "code": 672,
         "fail": 619,
         "plugin": 599,
         "background": 594,
-        "error": 564,
+        "error": 565,
         "model": 559,
         "server": 529,
-        "mcp": 496,
+        "mcp": 497,
         "file": 486,
         "hook": 454,
         "setting": 430,
@@ -9584,7 +9584,7 @@
         "permission": 387,
         "window": 380,
         "runn": 370,
-        "start": 368,
+        "start": 369,
         "auto": 358,
         "message": 357,
         "while": 352,
@@ -9600,7 +9600,7 @@
         "conversation": 296,
         "subagent": 287
       },
-      "word_count": 166212
+      "word_count": 166253
     },
     {
       "filename": "claude-code__channels.md",
@@ -16542,6 +16542,10 @@
           "level": 3
         },
         {
+          "text": "Only a teammate can approve a shutdown request",
+          "level": 3
+        },
+        {
           "text": "Message too large for cross-session delivery",
           "level": 3
         },
@@ -16859,29 +16863,29 @@
         }
       ],
       "terms": {
-        "claude": 505,
+        "claude": 515,
+        "code": 143,
         "error": 143,
-        "code": 134,
+        "anthropic": 106,
         "json": 105,
         "mcp": 104,
         "login": 103,
-        "anthropic": 103,
         "session": 98,
         "model": 91,
-        "name": 88,
+        "name": 89,
         "authentication": 81,
         "api": 80,
         "plugin": 79,
         "setting": 78,
-        "request": 72,
+        "request": 74,
         "path": 68,
         "fail": 59,
         "server": 58,
         "file": 54,
-        "token": 50,
-        "tool": 46,
+        "tool": 54,
+        "token": 51,
+        "read": 44,
         "agent": 43,
-        "read": 43,
         "add": 43,
         "remote": 42,
         "command": 39,
@@ -16898,19 +16902,19 @@
         "control": 32,
         "prompt": 32,
         "couldn": 31,
+        "resume": 31,
+        "compact": 31,
         "network": 30,
         "output": 30,
-        "resume": 30,
         "response": 30,
         "com": 29,
         "refus": 29,
         "debug": 29,
         "git": 29,
         "update": 28,
-        "oauth": 28,
-        "too": 26
+        "oauth": 28
       },
-      "word_count": 76909
+      "word_count": 77477
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -24039,7 +24043,7 @@
       "terms": {
         "mode": 262,
         "claude": 216,
-        "session": 174,
+        "session": 173,
         "code": 168,
         "permission": 122,
         "auto": 119,
@@ -24088,7 +24092,7 @@
         "each": 30,
         "tool": 30
       },
-      "word_count": 13563
+      "word_count": 13555
     },
     {
       "filename": "claude-code__permissions.md",
@@ -24190,6 +24194,10 @@
           "level": 5
         },
         {
+          "text": "Attachments through a symlink",
+          "level": 5
+        },
+        {
           "text": "Writes through a symlink",
           "level": 5
         },
@@ -24279,58 +24287,58 @@
         }
       ],
       "terms": {
-        "claude": 191,
-        "rule": 166,
-        "match": 150,
-        "code": 140,
+        "claude": 197,
+        "rule": 171,
+        "match": 152,
+        "code": 144,
         "command": 137,
-        "tool": 114,
+        "tool": 117,
         "rul": 103,
-        "directory": 98,
-        "prompt": 98,
-        "path": 84,
-        "setting": 76,
+        "prompt": 102,
+        "directory": 100,
+        "path": 92,
+        "setting": 77,
+        "file": 76,
+        "read": 74,
+        "deny": 73,
         "permission": 72,
-        "deny": 71,
         "allow": 70,
-        "read": 69,
         "such": 69,
-        "file": 66,
-        "only": 62,
+        "only": 63,
+        "session": 58,
         "mode": 56,
-        "session": 56,
         "run": 55,
-        "ask": 53,
+        "ask": 54,
         "any": 52,
         "hook": 48,
         "doesn": 44,
         "call": 44,
         "trust": 42,
-        "write": 40,
-        "every": 38,
-        "work": 37,
+        "write": 41,
+        "every": 39,
+        "work": 38,
+        "one": 36,
         "directori": 35,
         "repository": 35,
+        "fil": 35,
+        "still": 35,
+        "add": 35,
         "block": 35,
+        "also": 35,
         "before": 34,
-        "fil": 34,
-        "still": 34,
-        "add": 34,
+        "each": 34,
         "pattern": 34,
-        "one": 33,
+        "server": 34,
         "bash": 33,
         "without": 33,
         "project": 33,
-        "each": 32,
-        "also": 32,
+        "nam": 32,
         "name": 31,
-        "server": 31,
         "check": 29,
-        "nam": 28,
-        "set": 27,
-        "same": 27
+        "where": 28,
+        "cover": 28
       },
-      "word_count": 12106
+      "word_count": 12421
     },
     {
       "filename": "claude-code__platforms.md",
@@ -30585,21 +30593,21 @@
         }
       ],
       "terms": {
-        "sandbox": 312,
-        "command": 249,
-        "claude": 156,
+        "sandbox": 313,
+        "command": 250,
+        "claude": 157,
         "code": 127,
-        "setting": 125,
-        "run": 118,
-        "allow": 99,
-        "mode": 75,
+        "setting": 126,
+        "run": 119,
+        "allow": 100,
+        "mode": 79,
         "proxy": 72,
-        "set": 68,
+        "set": 69,
         "tool": 65,
         "such": 61,
         "host": 60,
+        "permission": 55,
         "manag": 55,
-        "permission": 54,
         "file": 52,
         "prompt": 51,
         "only": 48,
@@ -30623,20 +30631,20 @@
         "rul": 35,
         "list": 35,
         "still": 35,
+        "session": 34,
+        "user": 34,
         "block": 34,
         "fil": 33,
-        "session": 33,
-        "user": 33,
         "rule": 33,
         "each": 31,
         "through": 31,
+        "add": 30,
         "credential": 30,
-        "add": 29,
+        "auto": 30,
         "write": 29,
-        "auto": 29,
         "every": 29
       },
-      "word_count": 12449
+      "word_count": 12522
     },
     {
       "filename": "claude-code__scheduled-tasks.md",
@@ -85105,7 +85113,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks.md",
       "id": "docs/en/api/beta/organization/webhooks",
-      "title": "Webhooks",
+      "title": "Webhooks (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks",
       "headings": [
@@ -85343,7 +85351,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__create.md",
       "id": "docs/en/api/beta/organization/webhooks/create",
-      "title": "Create Organization Webhook Endpoint",
+      "title": "Create Organization Webhook Endpoint (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/create",
       "headings": [
@@ -85429,7 +85437,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__delete.md",
       "id": "docs/en/api/beta/organization/webhooks/delete",
-      "title": "Delete Organization Webhook Endpoint",
+      "title": "Delete Organization Webhook Endpoint (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/delete",
       "headings": [
@@ -85514,7 +85522,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__list.md",
       "id": "docs/en/api/beta/organization/webhooks/list",
-      "title": "List Organization Webhook Endpoints",
+      "title": "List Organization Webhook Endpoints (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/list",
       "headings": [
@@ -85600,7 +85608,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__regenerate_signing_secret.md",
       "id": "docs/en/api/beta/organization/webhooks/regenerate_signing_secret",
-      "title": "Regenerate Organization Webhook Endpoint Signing Secret",
+      "title": "Regenerate Organization Webhook Endpoint Signing Secret (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/regenerate_signing_secret",
       "headings": [
@@ -85686,7 +85694,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__retrieve.md",
       "id": "docs/en/api/beta/organization/webhooks/retrieve",
-      "title": "Get Organization Webhook Endpoint",
+      "title": "Get Organization Webhook Endpoint (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/retrieve",
       "headings": [
@@ -85772,7 +85780,7 @@
     {
       "filename": "docs__en__api__beta__organization__webhooks__update.md",
       "id": "docs/en/api/beta/organization/webhooks/update",
-      "title": "Update Organization Webhook Endpoint",
+      "title": "Update Organization Webhook Endpoint (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/webhooks/update",
       "headings": [
@@ -87508,7 +87516,7 @@
     {
       "filename": "docs__en__api__beta__organization__workspaces__rate_limits__update.md",
       "id": "docs/en/api/beta/organization/workspaces/rate_limits/update",
-      "title": "Set Workspace Rate Limits",
+      "title": "Set Workspace Rate Limits (Beta)",
       "category": "api_reference",
       "url": "https://platform.claude.com/docs/en/api/beta/organization/workspaces/rate_limits/update",
       "headings": [
@@ -124352,7 +124360,7 @@
         "bill": 7,
         "usage": 7
       },
-      "word_count": 3972
+      "word_count": 3964
     },
     {
       "filename": "docs__en__build-with-claude__claude-on-amazon-bedrock-legacy.md",
@@ -133551,6 +133559,10 @@
           "level": 2
         },
         {
+          "text": "Organization webhooks",
+          "level": 2
+        },
+        {
           "text": "Best practices",
           "level": 2
         },
@@ -133563,7 +133575,7 @@
         "key": 66,
         "api": 62,
         "admin": 43,
-        "organization": 33,
+        "organization": 36,
         "codegroup": 30,
         "member": 28,
         "workspace": 26,
@@ -133572,15 +133584,15 @@
         "manage": 18,
         "account": 18,
         "claude": 16,
-        "endpoint": 15,
+        "endpoint": 16,
         "service": 14,
         "only": 13,
         "federation": 13,
         "invit": 11,
+        "user": 11,
         "workspac": 10,
         "oauth": 10,
         "role": 10,
-        "user": 10,
         "list": 10,
         "accordion": 10,
         "owner": 8,
@@ -133611,7 +133623,7 @@
         "each": 5,
         "wif": 5
       },
-      "word_count": 4679
+      "word_count": 4698
     },
     {
       "filename": "docs__en__manage-claude__admin-api-keys.md",
@@ -134326,25 +134338,25 @@
         }
       ],
       "terms": {
-        "claude": 82,
-        "key": 76,
-        "cmek": 38,
-        "data": 33,
+        "claude": 86,
+        "key": 79,
+        "cmek": 40,
+        "data": 34,
         "anthropic": 31,
         "platform": 26,
         "aws": 24,
+        "under": 18,
         "kms": 17,
+        "organization": 16,
         "encryption": 15,
+        "encrypt": 15,
         "workspace": 15,
-        "under": 15,
         "code": 14,
-        "organization": 14,
         "manag": 12,
-        "encrypt": 12,
+        "cannot": 11,
         "service": 11,
         "api": 11,
         "cloud": 10,
-        "cannot": 10,
         "chat": 10,
         "admin": 10,
         "beta": 10,
@@ -134353,6 +134365,7 @@
         "enterprise": 8,
         "region": 8,
         "disabl": 8,
+        "turn": 8,
         "azure": 7,
         "vault": 7,
         "only": 7,
@@ -134360,8 +134373,10 @@
         "such": 7,
         "content": 7,
         "search": 7,
-        "turn": 7,
+        "artifact": 7,
+        "doc": 6,
         "google": 6,
+        "includ": 6,
         "account": 6,
         "set": 6,
         "console": 6,
@@ -134372,12 +134387,9 @@
         "retention": 6,
         "available": 6,
         "skill": 6,
-        "off": 6,
-        "analytic": 6,
-        "requir": 6,
-        "card": 6
+        "conversation": 6
       },
-      "word_count": 2229
+      "word_count": 2312
     },
     {
       "filename": "docs__en__manage-claude__cmek-aws-kms.md",
@@ -134424,20 +134436,20 @@
         }
       ],
       "terms": {
-        "key": 115,
+        "key": 117,
         "step": 54,
         "title": 28,
-        "organization": 24,
+        "organization": 26,
         "policy": 24,
         "aws": 23,
         "click": 21,
         "workspace": 20,
+        "claude": 19,
         "tab": 19,
-        "claude": 17,
         "kms": 15,
         "anthropic": 15,
         "add": 15,
-        "encryption": 13,
+        "encryption": 14,
         "arn": 13,
         "cmek": 12,
         "select": 12,
@@ -134445,23 +134457,25 @@
         "attach": 11,
         "replace": 9,
         "validation": 9,
+        "data": 8,
+        "compartment": 8,
         "region": 8,
-        "data": 7,
+        "under": 7,
         "console": 7,
+        "copy": 7,
         "page": 7,
         "list": 7,
         "see": 7,
         "already": 7,
-        "compartment": 7,
         "next": 7,
         "warn": 6,
-        "under": 6,
         "note": 6,
         "account": 6,
         "acces": 6,
         "any": 6,
-        "copy": 6,
+        "one": 6,
         "field": 6,
+        "setting": 6,
         "open": 6,
         "frame": 6,
         "error": 6,
@@ -134469,13 +134483,11 @@
         "confirm": 6,
         "codegroup": 6,
         "platform": 5,
-        "one": 5,
-        "setting": 5,
         "don": 5,
         "condition": 5,
         "fail": 5
       },
-      "word_count": 2430
+      "word_count": 2456
     },
     {
       "filename": "docs__en__manage-claude__cmek-azure-key-vault.md",
@@ -136299,7 +136311,7 @@
         "disabl": 7,
         "title": 6
       },
-      "word_count": 3629
+      "word_count": 3631
     },
     {
       "filename": "docs__en__manage-claude__opentelemetry__sdk.md",
@@ -136397,12 +136409,12 @@
         "header": 6,
         "doc": 5
       },
-      "word_count": 2905
+      "word_count": 2889
     },
     {
       "filename": "docs__en__manage-claude__organization-webhooks.md",
       "id": "docs/en/manage-claude/organization-webhooks",
-      "title": "Untitled",
+      "title": "Organization webhooks (beta)",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/manage-claude/organization-webhooks",
       "headings": [
@@ -137486,7 +137498,7 @@
     {
       "filename": "docs__en__manage-claude__user-profiles.md",
       "id": "docs/en/manage-claude/user-profiles",
-      "title": "Untitled",
+      "title": "User profiles",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/manage-claude/user-profiles",
       "headings": [
@@ -137540,7 +137552,7 @@
         }
       ],
       "terms": {
-        "profile": 50,
+        "profile": 52,
         "claude": 42,
         "request": 34,
         "organization": 33,
@@ -137563,14 +137575,15 @@
         "account": 11,
         "company": 10,
         "only": 10,
+        "delete": 10,
         "user": 9,
         "manage": 9,
+        "acces": 9,
         "doesn": 9,
-        "delete": 9,
-        "acces": 8,
         "header": 8,
         "every": 8,
         "creat": 8,
+        "program": 8,
         "key": 8,
         "codegroup": 8,
         "card": 8,
@@ -137578,7 +137591,6 @@
         "don": 7,
         "own": 7,
         "usage": 7,
-        "program": 7,
         "same": 7,
         "batch": 7,
         "link": 7,
@@ -137589,14 +137601,14 @@
         "person": 6,
         "see": 6,
         "value": 6,
-        "title": 5
+        "portal": 6
       },
-      "word_count": 3153
+      "word_count": 3174
     },
     {
       "filename": "docs__en__manage-claude__user-profiles-verification-portal.md",
       "id": "docs/en/manage-claude/user-profiles-verification-portal",
-      "title": "Untitled",
+      "title": "Verification Portal links",
       "category": "core_documentation",
       "url": "https://platform.claude.com/docs/en/manage-claude/user-profiles-verification-portal",
       "headings": [
@@ -137618,28 +137630,28 @@
         }
       ],
       "terms": {
-        "link": 48,
-        "profile": 34,
+        "link": 49,
+        "profile": 36,
         "end": 29,
         "customer": 29,
-        "portal": 22,
+        "portal": 23,
         "organization": 21,
         "create": 14,
-        "anthropic": 13,
         "one": 13,
+        "program": 12,
+        "anthropic": 12,
         "see": 11,
-        "program": 11,
         "step": 10,
+        "verification": 9,
         "claude": 9,
-        "verification": 8,
         "apply": 8,
         "request": 8,
         "admin": 8,
         "send": 7,
+        "each": 7,
         "owner": 7,
         "account": 7,
         "user": 6,
-        "each": 6,
         "after": 6,
         "expir": 6,
         "frame": 6,
@@ -137669,7 +137681,7 @@
         "field": 3,
         "show": 3
       },
-      "word_count": 1341
+      "word_count": 1357
     },
     {
       "filename": "docs__en__manage-claude__wif-admin-api.md",
