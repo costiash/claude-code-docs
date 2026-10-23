@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T12:17:55.408759Z",
+  "generated_at": "2026-10-23T15:15:56.650714Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -12280,6 +12280,10 @@
           "level": 2
         },
         {
+          "text": "Add a setup script",
+          "level": 3
+        },
+        {
           "text": "Script requirements",
           "level": 3
         },
@@ -12309,7 +12313,7 @@
         }
       ],
       "terms": {
-        "environment": 218,
+        "environment": 223,
         "session": 170,
         "claude": 98,
         "cloud": 85,
@@ -12319,19 +12323,19 @@
         "run": 69,
         "secret": 67,
         "network": 61,
-        "script": 58,
-        "add": 55,
+        "add": 60,
+        "script": 59,
         "install": 50,
+        "setup": 47,
         "start": 47,
-        "setup": 46,
-        "one": 44,
+        "one": 46,
         "code": 40,
         "anthropic": 40,
         "www": 40,
         "default": 38,
-        "setting": 38,
+        "setting": 37,
         "proxy": 37,
-        "own": 33,
+        "own": 35,
         "list": 33,
         "github": 33,
         "organization": 32,
@@ -12344,23 +12348,23 @@
         "command": 25,
         "admin": 25,
         "set": 24,
+        "such": 24,
         "through": 24,
         "each": 23,
         "don": 23,
-        "such": 23,
         "self": 22,
         "shar": 22,
+        "open": 22,
         "variabl": 21,
         "only": 21,
-        "under": 21,
+        "new": 21,
+        "select": 21,
         "read": 21,
-        "level": 20,
         "see": 20,
-        "new": 20,
-        "open": 20,
+        "under": 20,
         "ask": 20
       },
-      "word_count": 8358
+      "word_count": 8447
     },
     {
       "filename": "claude-code__code-review.md",
@@ -31290,14 +31294,14 @@
         "edit": 17,
         "security": 16,
         "install": 16,
-        "run": 14,
+        "run": 15,
         "match": 14,
         "same": 12,
-        "back": 12,
         "end": 12,
         "each": 12,
         "chang": 11,
         "layer": 11,
+        "back": 11,
         "add": 11,
         "writ": 10,
         "repository": 10,
@@ -31326,7 +31330,7 @@
         "local": 6,
         "setting": 6
       },
-      "word_count": 2642
+      "word_count": 2643
     },
     {
       "filename": "claude-code__self-hosted-environments.md",
@@ -31580,29 +31584,29 @@
       ],
       "terms": {
         "session": 313,
-        "runner": 207,
+        "runner": 208,
         "hook": 169,
-        "claude": 79,
+        "claude": 80,
         "server": 61,
         "environment": 60,
-        "code": 58,
+        "code": 59,
         "run": 56,
+        "file": 53,
         "git": 53,
-        "file": 52,
         "credential": 50,
         "set": 48,
         "start": 42,
         "exit": 42,
         "host": 41,
+        "wrapper": 40,
         "request": 40,
-        "wrapper": 38,
         "repository": 38,
         "one": 38,
         "such": 37,
         "setting": 37,
         "work": 35,
         "see": 35,
-        "don": 34,
+        "don": 35,
         "own": 32,
         "spawn": 29,
         "tool": 29,
@@ -31613,10 +31617,10 @@
         "script": 27,
         "per": 27,
         "each": 27,
+        "child": 27,
         "only": 27,
         "prompt": 27,
         "before": 26,
-        "child": 26,
         "configuration": 25,
         "read": 25,
         "model": 25,
@@ -31630,7 +31634,7 @@
         "orchestrator": 22,
         "fil": 21
       },
-      "word_count": 11796
+      "word_count": 11858
     },
     {
       "filename": "claude-code__self-hosted-environments-deploy.md",
