@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T15:15:56.650714Z",
+  "generated_at": "2026-10-23T18:18:25.755339Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -11461,9 +11461,9 @@
         }
       ],
       "terms": {
-        "claude": 69,
+        "claude": 70,
         "project": 45,
-        "session": 43,
+        "session": 44,
         "code": 40,
         "fil": 35,
         "directory": 28,
@@ -11486,7 +11486,7 @@
         "plugin": 13,
         "tool": 13,
         "delete": 13,
-        "read": 11,
+        "read": 12,
         "data": 11,
         "retention": 11,
         "auto": 10,
@@ -11512,7 +11512,7 @@
         "scratchpad": 8,
         "hook": 7
       },
-      "word_count": 3581
+      "word_count": 3608
     },
     {
       "filename": "claude-code__claude-platform-on-aws.md",
@@ -12750,7 +12750,6 @@
         "post": 7,
         "find": 6,
         "fix": 6,
-        "every": 6,
         "github": 6,
         "commit": 6,
         "appli": 6,
@@ -12762,9 +12761,10 @@
         "ultrareview": 6,
         "where": 5,
         "conversation": 5,
-        "also": 5
+        "also": 5,
+        "note": 5
       },
-      "word_count": 1999
+      "word_count": 1998
     },
     {
       "filename": "claude-code__code-review-pull-requests.md",
@@ -15676,8 +15676,8 @@
       ],
       "terms": {
         "container": 68,
-        "code": 46,
-        "claude": 42,
+        "code": 47,
+        "claude": 43,
         "dev": 27,
         "run": 17,
         "install": 14,
@@ -15777,58 +15777,58 @@
         }
       ],
       "terms": {
-        "claude": 466,
-        "set": 400,
-        "code": 369,
-        "default": 165,
-        "session": 163,
+        "claude": 470,
+        "set": 401,
+        "code": 371,
+        "default": 166,
+        "session": 165,
         "model": 145,
-        "later": 124,
-        "requir": 123,
-        "tool": 113,
+        "later": 125,
+        "requir": 124,
+        "tool": 115,
         "see": 111,
         "setting": 102,
         "variable": 92,
-        "turn": 90,
-        "command": 87,
+        "turn": 91,
+        "command": 88,
         "such": 83,
-        "off": 81,
+        "off": 82,
         "request": 80,
         "server": 77,
         "value": 74,
         "agent": 72,
+        "background": 64,
         "file": 63,
-        "background": 61,
+        "run": 58,
         "instead": 58,
         "api": 58,
         "mode": 58,
-        "run": 56,
+        "mcp": 56,
         "before": 54,
         "ignor": 53,
         "platform": 53,
-        "mcp": 51,
-        "disable": 50,
-        "shell": 48,
+        "shell": 49,
+        "disable": 49,
         "window": 48,
         "only": 48,
         "gateway": 48,
+        "wait": 48,
         "read": 47,
         "sett": 47,
         "override": 47,
         "prompt": 47,
+        "also": 46,
+        "still": 46,
         "bash": 46,
-        "wait": 46,
-        "also": 45,
         "limit": 45,
         "variabl": 44,
-        "still": 44,
         "path": 43,
         "cloud": 42,
         "environment": 41,
         "one": 41,
         "terminal": 41
       },
-      "word_count": 21768
+      "word_count": 21865
     },
     {
       "filename": "claude-code__errors.md",
@@ -18844,6 +18844,10 @@
           "level": 3
         },
         {
+          "text": "MCP work when a non-interactive run ends",
+          "level": 4
+        },
+        {
           "text": "Stop a run with SIGTERM",
           "level": 3
         },
@@ -18917,58 +18921,58 @@
         }
       ],
       "terms": {
-        "claude": 96,
+        "claude": 97,
         "code": 70,
-        "run": 66,
-        "command": 32,
-        "session": 32,
+        "run": 69,
+        "command": 33,
+        "session": 33,
         "prompt": 30,
         "tool": 29,
         "start": 28,
+        "wait": 25,
         "skill": 24,
-        "wait": 24,
         "mode": 23,
         "example": 23,
+        "call": 21,
         "agent": 20,
-        "call": 19,
+        "server": 19,
         "event": 19,
-        "server": 18,
         "read": 18,
         "each": 17,
+        "background": 17,
         "field": 17,
         "sdk": 16,
         "output": 16,
+        "mcp": 16,
+        "work": 16,
         "before": 15,
         "script": 15,
         "conversation": 15,
         "such": 15,
         "without": 15,
         "permission": 15,
+        "turn": 15,
         "later": 15,
         "pas": 14,
         "message": 14,
         "load": 14,
-        "work": 14,
-        "turn": 14,
+        "result": 13,
         "hook": 13,
+        "subagent": 13,
         "plugin": 13,
         "still": 13,
         "set": 13,
-        "background": 13,
         "first": 13,
         "file": 12,
         "flag": 12,
         "instead": 12,
         "exit": 12,
-        "result": 12,
-        "subagent": 12,
-        "mcp": 12,
         "stream": 12,
         "messag": 12,
         "fork": 12,
         "auto": 11
       },
-      "word_count": 4902
+      "word_count": 4977
     },
     {
       "filename": "claude-code__hipaa-setup.md",
@@ -20466,7 +20470,7 @@
         "claude": 231,
         "code": 167,
         "prompt": 104,
-        "command": 95,
+        "command": 97,
         "session": 84,
         "turn": 67,
         "pres": 59,
@@ -20474,19 +20478,19 @@
         "mode": 56,
         "line": 56,
         "run": 50,
+        "background": 49,
         "input": 48,
         "text": 48,
-        "background": 47,
         "open": 47,
         "start": 45,
         "word": 43,
         "after": 40,
         "list": 40,
-        "task": 37,
         "terminal": 36,
         "key": 36,
         "file": 35,
         "while": 35,
+        "task": 35,
         "such": 34,
         "work": 34,
         "show": 32,
@@ -20514,7 +20518,7 @@
         "check": 25,
         "search": 24
       },
-      "word_count": 11540
+      "word_count": 11551
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -22184,8 +22188,56 @@
           "level": 3
         },
         {
+          "text": "Time limits on MCP tool calls",
+          "level": 3
+        },
+        {
           "text": "Automatic backgrounding of long tool calls",
           "level": 3
+        },
+        {
+          "text": "MCP tasks that run on the server",
+          "level": 3
+        },
+        {
+          "text": "Stop an MCP task or get its result",
+          "level": 4
+        },
+        {
+          "text": "Answer a question from an MCP task",
+          "level": 4
+        },
+        {
+          "text": "Exit, clear, or resume while an MCP task runs",
+          "level": 4
+        },
+        {
+          "text": "What a call needs to become an MCP task",
+          "level": 4
+        },
+        {
+          "text": "Status messages on an MCP task",
+          "level": 4
+        },
+        {
+          "text": "Time limits on MCP tasks",
+          "level": 4
+        },
+        {
+          "text": "Make Claude wait for the result of an MCP task",
+          "level": 4
+        },
+        {
+          "text": "MCP tasks for server authors",
+          "level": 3
+        },
+        {
+          "text": "Answer the call with a task",
+          "level": 4
+        },
+        {
+          "text": "Report status, results, and questions",
+          "level": 4
         },
         {
           "text": "Plugin-provided MCP servers",
@@ -22417,58 +22469,58 @@
         }
       ],
       "terms": {
-        "mcp": 207,
-        "claude": 161,
-        "server": 104,
-        "json": 54,
-        "tool": 53,
-        "code": 51,
+        "mcp": 223,
+        "claude": 174,
+        "server": 116,
+        "tool": 61,
+        "code": 58,
+        "json": 57,
+        "task": 37,
+        "name": 34,
         "add": 30,
-        "list": 28,
-        "name": 28,
+        "list": 30,
         "url": 25,
         "plugin": 23,
         "token": 23,
         "anthropic": 22,
         "command": 22,
         "http": 19,
+        "true": 19,
         "header": 18,
-        "true": 18,
+        "timeout": 17,
         "connect": 16,
         "enable": 16,
-        "timeout": 15,
+        "auto": 16,
+        "run": 15,
         "option": 14,
         "project": 14,
         "key": 14,
+        "get": 14,
+        "config": 14,
         "local": 13,
-        "run": 13,
         "oauth": 13,
         "client": 13,
-        "config": 13,
         "search": 13,
         "read": 12,
+        "session": 12,
+        "statu": 12,
         "var": 12,
-        "auto": 12,
         "headershelper": 12,
         "user": 11,
         "remote": 11,
         "stdio": 11,
         "entry": 11,
+        "setting": 11,
+        "background": 11,
         "instead": 10,
         "such": 10,
-        "setting": 10,
         "scop": 10,
         "block": 10,
         "scope": 10,
         "api": 9,
-        "support": 9,
-        "get": 9,
-        "login": 9,
-        "max": 9,
-        "session": 8,
-        "install": 8
+        "support": 9
       },
-      "word_count": 18361
+      "word_count": 20777
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
@@ -34114,7 +34166,7 @@
         "each": 10,
         "git": 10
       },
-      "word_count": 15735
+      "word_count": 15734
     },
     {
       "filename": "claude-code__slack.md",
@@ -34782,11 +34834,11 @@
         "field": 49,
         "work": 47,
         "same": 46,
+        "background": 45,
         "mode": 45,
-        "background": 44,
         "start": 44,
-        "task": 43,
         "server": 43,
+        "task": 42,
         "spawn": 42,
         "fil": 42,
         "own": 41,
@@ -34795,16 +34847,16 @@
         "plugin": 38,
         "see": 37,
         "project": 37,
+        "command": 37,
         "frontmatter": 36,
-        "command": 36,
         "instead": 35,
         "every": 34,
         "list": 34,
         "such": 34,
         "before": 33,
+        "doesn": 33,
         "skill": 33,
         "read": 32,
-        "doesn": 32,
         "also": 31,
         "definition": 31,
         "keep": 30,
@@ -34812,7 +34864,7 @@
         "without": 30,
         "runn": 30
       },
-      "word_count": 15504
+      "word_count": 15510
     },
     {
       "filename": "claude-code__terminal-config.md",
@@ -35270,14 +35322,14 @@
         "set": 43,
         "read": 38,
         "match": 38,
-        "background": 38,
         "list": 37,
         "bash": 37,
+        "background": 37,
         "permission": 34,
         "see": 34,
         "agent": 34,
-        "task": 33,
         "powershell": 33,
+        "task": 32,
         "only": 30,
         "default": 29,
         "one": 29,
@@ -35310,7 +35362,7 @@
         "each": 18,
         "without": 18
       },
-      "word_count": 11878
+      "word_count": 11869
     },
     {
       "filename": "claude-code__troubleshoot-install.md",
