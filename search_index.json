@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T18:18:25.755339Z",
+  "generated_at": "2026-10-23T21:16:26.101664Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14762,7 +14762,7 @@
           "level": 4
         },
         {
-          "text": "Local sessions",
+          "text": "Environment variables in local sessions",
           "level": 3
         },
         {
@@ -14775,6 +14775,10 @@
         },
         {
           "text": "Use the local environment editor",
+          "level": 4
+        },
+        {
+          "text": "Exported variable missing or wrong in commands Claude runs",
           "level": 4
         },
         {
@@ -14791,7 +14795,7 @@
         },
         {
           "text": "Local sessions on managed devices",
-          "level": 4
+          "level": 3
         },
         {
           "text": "Cloud sessions",
@@ -14928,6 +14932,30 @@
         {
           "text": "Open an SSH session from a link",
           "level": 4
+        },
+        {
+          "text": "Create an SSH connection from a command",
+          "level": 4
+        },
+        {
+          "text": "Write the command",
+          "level": 5
+        },
+        {
+          "text": "Connect to a new host",
+          "level": 5
+        },
+        {
+          "text": "Replace the host",
+          "level": 5
+        },
+        {
+          "text": "Distribute commands to your team",
+          "level": 5
+        },
+        {
+          "text": "If a command is missing or gray",
+          "level": 5
         },
         {
           "text": "Pre-configure SSH connections for your team",
@@ -15067,58 +15095,58 @@
         }
       ],
       "terms": {
-        "claude": 145,
+        "claude": 152,
         "session": 65,
-        "ssh": 61,
-        "json": 45,
+        "ssh": 65,
+        "json": 48,
         "browser": 35,
         "mode": 32,
-        "setting": 28,
-        "code": 27,
-        "desktop": 27,
+        "setting": 30,
+        "host": 30,
+        "code": 28,
+        "desktop": 28,
+        "config": 28,
         "prompt": 27,
         "pane": 26,
         "permission": 26,
-        "host": 24,
-        "config": 24,
-        "com": 23,
+        "com": 24,
         "click": 23,
         "cmd": 23,
+        "devbox": 23,
         "file": 22,
         "app": 22,
         "open": 22,
         "auto": 22,
         "run": 21,
-        "devbox": 21,
+        "port": 20,
         "server": 19,
-        "port": 19,
         "chang": 18,
+        "user": 18,
         "remote": 18,
+        "proxycommand": 17,
         "review": 16,
         "edit": 16,
         "fil": 16,
-        "proxycommand": 16,
+        "command": 16,
+        "dev": 16,
         "diff": 15,
         "see": 15,
         "start": 15,
+        "project": 15,
         "external": 15,
         "environment": 15,
-        "user": 15,
+        "true": 15,
+        "hostname": 15,
+        "sshhostallowlist": 15,
         "connection": 15,
         "before": 14,
-        "project": 14,
-        "true": 14,
-        "hostname": 14,
+        "example": 14,
         "tab": 13,
         "window": 13,
         "folder": 13,
-        "box": 13,
-        "plan": 13,
-        "sshd": 13,
-        "example": 13,
-        "sshhostallowlist": 13
+        "box": 13
       },
-      "word_count": 24701
+      "word_count": 27203
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -33677,15 +33705,15 @@
       "terms": {
         "claude": 639,
         "code": 518,
-        "setting": 426,
+        "setting": 427,
         "file": 304,
-        "manag": 255,
+        "manag": 256,
         "sandbox": 245,
         "session": 239,
         "default": 233,
+        "json": 214,
         "model": 214,
-        "json": 212,
-        "command": 212,
+        "command": 214,
         "set": 212,
         "any": 199,
         "key": 194,
@@ -33697,14 +33725,14 @@
         "run": 126,
         "mode": 123,
         "off": 119,
-        "theme": 117,
+        "theme": 118,
         "such": 116,
         "unset": 116,
         "see": 113,
         "every": 111,
+        "user": 109,
         "each": 108,
-        "user": 108,
-        "null": 105,
+        "null": 106,
         "block": 96,
         "path": 94,
         "list": 93,
@@ -33723,10 +33751,10 @@
         "requir": 75,
         "entry": 74,
         "keep": 72,
-        "boolean": 71,
-        "instead": 70
+        "add": 71,
+        "boolean": 71
       },
-      "word_count": 52893
+      "word_count": 53143
     },
     {
       "filename": "claude-code__setup.md",
@@ -134564,7 +134592,7 @@
       ],
       "terms": {
         "key": 64,
-        "api": 62,
+        "api": 63,
         "admin": 43,
         "organization": 36,
         "codegroup": 30,
@@ -134574,7 +134602,7 @@
         "account": 19,
         "see": 19,
         "manage": 18,
-        "claude": 16,
+        "claude": 17,
         "endpoint": 16,
         "service": 15,
         "federation": 15,
@@ -134614,7 +134642,7 @@
         "wif": 5,
         "remov": 5
       },
-      "word_count": 4681
+      "word_count": 4687
     },
     {
       "filename": "docs__en__manage-claude__admin-api-keys.md",
@@ -134649,10 +134677,10 @@
         }
       ],
       "terms": {
-        "api": 70,
+        "api": 75,
         "key": 42,
+        "claude": 41,
         "organization": 36,
-        "claude": 35,
         "admin": 26,
         "step": 21,
         "create": 20,
@@ -134661,46 +134689,46 @@
         "compliance": 15,
         "endpoint": 14,
         "member": 14,
+        "read": 14,
         "title": 13,
         "enterprise": 12,
         "limit": 12,
-        "read": 12,
         "spend": 10,
         "analytic": 9,
         "only": 9,
+        "setting": 9,
         "user": 9,
         "every": 8,
+        "select": 8,
         "secret": 8,
         "card": 8,
         "manage": 7,
         "console": 7,
-        "setting": 7,
         "owner": 7,
-        "select": 7,
         "platform": 6,
+        "tag": 6,
         "role": 6,
         "management": 6,
+        "acces": 6,
+        "set": 6,
         "http": 5,
         "com": 5,
         "doc": 5,
         "one": 5,
+        "scope": 5,
         "see": 5,
         "group": 5,
         "includ": 5,
-        "set": 5,
         "request": 5,
         "file": 5,
         "need": 4,
-        "scope": 4,
         "activity": 4,
         "primary": 4,
         "invite": 4,
         "copy": 4,
-        "store": 4,
-        "call": 4,
-        "delete": 4
+        "store": 4
       },
-      "word_count": 1203
+      "word_count": 1270
     },
     {
       "filename": "docs__en__manage-claude__analytics-api.md",
@@ -135279,6 +135307,240 @@
         "tip": 4
       },
       "word_count": 1665
+    },
+    {
+      "filename": "docs__en__manage-claude__claude-tag-api.md",
+      "id": "docs/en/manage-claude/claude-tag-api",
+      "title": "Claude Tag API",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/claude-tag-api",
+      "headings": [
+        {
+          "text": "Endpoints",
+          "level": 2
+        },
+        {
+          "text": "Prerequisites",
+          "level": 2
+        },
+        {
+          "text": "Quick start",
+          "level": 2
+        },
+        {
+          "text": "Scopes",
+          "level": 2
+        },
+        {
+          "text": "Key concepts",
+          "level": 2
+        },
+        {
+          "text": "Names on this page and in claude.ai",
+          "level": 3
+        },
+        {
+          "text": "Set-up channels and workspaces",
+          "level": 3
+        },
+        {
+          "text": "IDs",
+          "level": 3
+        },
+        {
+          "text": "Settings",
+          "level": 3
+        },
+        {
+          "text": "Stored and inherited values",
+          "level": 3
+        },
+        {
+          "text": "Changing settings",
+          "level": 3
+        },
+        {
+          "text": "Read-only mode",
+          "level": 3
+        },
+        {
+          "text": "Group direct messages",
+          "level": 3
+        },
+        {
+          "text": "Example workflows",
+          "level": 2
+        },
+        {
+          "text": "Turn Claude on only in approved channels",
+          "level": 3
+        },
+        {
+          "text": "Keep configuration in version control",
+          "level": 3
+        },
+        {
+          "text": "Audit what applies everywhere",
+          "level": 3
+        },
+        {
+          "text": "Slack channels",
+          "level": 2
+        },
+        {
+          "text": "Set up a channel",
+          "level": 3
+        },
+        {
+          "text": "List channels",
+          "level": 3
+        },
+        {
+          "text": "Find a channel by its Slack IDs",
+          "level": 3
+        },
+        {
+          "text": "Get a channel",
+          "level": 3
+        },
+        {
+          "text": "Read what applies in a channel",
+          "level": 3
+        },
+        {
+          "text": "Update a channel",
+          "level": 3
+        },
+        {
+          "text": "Remove a channel",
+          "level": 3
+        },
+        {
+          "text": "Slack workspaces",
+          "level": 2
+        },
+        {
+          "text": "List workspaces",
+          "level": 3
+        },
+        {
+          "text": "Get a workspace",
+          "level": 3
+        },
+        {
+          "text": "Update a workspace",
+          "level": 3
+        },
+        {
+          "text": "Bundles",
+          "level": 2
+        },
+        {
+          "text": "List Bundles",
+          "level": 3
+        },
+        {
+          "text": "Get a Bundle",
+          "level": 3
+        },
+        {
+          "text": "Bundle targets",
+          "level": 2
+        },
+        {
+          "text": "List a Bundle's targets",
+          "level": 3
+        },
+        {
+          "text": "Attach a Bundle",
+          "level": 3
+        },
+        {
+          "text": "Get a Bundle target",
+          "level": 3
+        },
+        {
+          "text": "Detach a Bundle",
+          "level": 3
+        },
+        {
+          "text": "Unrecognized values",
+          "level": 2
+        },
+        {
+          "text": "Rate limiting",
+          "level": 2
+        },
+        {
+          "text": "Pagination",
+          "level": 2
+        },
+        {
+          "text": "Error responses",
+          "level": 2
+        },
+        {
+          "text": "Activity Feed events",
+          "level": 2
+        },
+        {
+          "text": "See also",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "channel": 232,
+        "claude": 127,
+        "workspace": 112,
+        "set": 100,
+        "slack": 81,
+        "return": 70,
+        "request": 67,
+        "bundle": 65,
+        "organization": 63,
+        "one": 61,
+        "api": 50,
+        "read": 45,
+        "list": 43,
+        "own": 42,
+        "attach": 42,
+        "stor": 42,
+        "setting": 41,
+        "sett": 40,
+        "doe": 37,
+        "only": 36,
+        "codegroup": 36,
+        "chang": 35,
+        "change": 32,
+        "each": 31,
+        "key": 30,
+        "grid": 28,
+        "tag": 27,
+        "see": 27,
+        "every": 27,
+        "level": 27,
+        "nam": 25,
+        "scope": 24,
+        "hold": 23,
+        "requir": 22,
+        "endpoint": 22,
+        "same": 22,
+        "appli": 21,
+        "target": 21,
+        "first": 21,
+        "remov": 20,
+        "value": 20,
+        "workspac": 19,
+        "owner": 19,
+        "keep": 19,
+        "noth": 19,
+        "default": 19,
+        "enterprise": 18,
+        "detach": 18,
+        "while": 18,
+        "bundl": 17
+      },
+      "word_count": 11342
     },
     {
       "filename": "docs__en__manage-claude__cmek.md",
@@ -139042,7 +139304,7 @@
         "api": 66,
         "organization": 60,
         "role": 44,
-        "claude": 42,
+        "claude": 43,
         "codegroup": 42,
         "invite": 37,
         "return": 34,
@@ -139088,7 +139350,7 @@
         "only": 10,
         "every": 10
       },
-      "word_count": 7512
+      "word_count": 7515
     },
     {
       "filename": "docs__en__manage-claude__user-profiles.md",
@@ -147204,6 +147466,10 @@
           "level": 3
         },
         {
+          "text": "October 20, 2026",
+          "level": 3
+        },
+        {
           "text": "October 15, 2026",
           "level": 3
         },
@@ -147821,17 +148087,17 @@
         }
       ],
       "terms": {
-        "claude": 525,
-        "api": 206,
+        "claude": 531,
+        "api": 208,
         "model": 161,
-        "beta": 149,
+        "beta": 151,
         "tool": 137,
         "now": 132,
         "see": 121,
         "opu": 120,
+        "header": 91,
         "agent": 91,
         "request": 90,
-        "header": 90,
         "support": 73,
         "sonnet": 73,
         "token": 69,
@@ -147839,40 +148105,40 @@
         "return": 63,
         "launch": 62,
         "sdk": 60,
+        "available": 57,
         "think": 57,
-        "available": 55,
         "manag": 53,
         "add": 47,
         "error": 46,
         "prompt": 43,
         "new": 42,
+        "read": 41,
         "code": 40,
-        "read": 40,
+        "organization": 39,
         "block": 39,
+        "console": 38,
         "web": 38,
         "messag": 38,
         "output": 38,
-        "console": 37,
-        "organization": 37,
-        "acces": 36,
+        "acces": 37,
         "event": 36,
         "fable": 36,
-        "key": 34,
+        "key": 35,
         "our": 34,
+        "platform": 33,
         "limit": 33,
         "context": 33,
         "learn": 33,
         "requir": 33,
-        "platform": 32,
+        "endpoint": 31,
         "same": 31,
         "mode": 30,
-        "endpoint": 30,
-        "call": 29,
+        "call": 30,
         "search": 29,
         "august": 29,
         "parameter": 28
       },
-      "word_count": 14443
+      "word_count": 14526
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",

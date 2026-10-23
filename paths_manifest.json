@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T18:18:22.219149Z",
+  "generated_at": "2026-10-23T21:16:21.356320Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "6a841383a378df2fbca34c3ec8f64629699554bc13367402c64c1e91b3f89ad6",
-      "lastmod": "2026-10-23T01:14:24.839Z",
+      "sha256": "cac328c14a3c725e6716cad666f9a6142e289aa5d8b821d718bea210964d4025",
+      "lastmod": "2026-10-23T19:43:28.350Z",
       "fetch_status": "ok"
     },
     {
@@ -2061,8 +2061,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "03e6622e86014b69959e7a3c0825cd7a41662cd8e246d3d5da3622ffd34d523d",
-      "lastmod": "2026-10-23T00:36:20.186Z",
+      "sha256": "d359aa89b2adba5cdf14d3e2f57f51d57629cfec56732bffcb4e1b586589fc2c",
+      "lastmod": "2026-10-23T19:03:35.772Z",
       "fetch_status": "ok"
     },
     {
@@ -9882,7 +9882,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api.md",
       "title": "Admin API",
       "category": "core_documentation",
-      "sha256": "dd85234e1d703cdd49469ceef457395d216476b8ef1d6f944b8dbc343e1a95ad",
+      "sha256": "aae171cbcff0416ec5a6b8072365dd8df671af6a8974e22c0bab8a6a40a2f621",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9893,7 +9893,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api-keys.md",
       "title": "Create an Admin API key",
       "category": "core_documentation",
-      "sha256": "7c82b81b1ebed3164fb0103dd7e2c13387d66338bde624fc351cd16830c1f24c",
+      "sha256": "8b41441cad4a7789a9babc05dd5bb93d018395ec40582a52777bf3d834a0dd12",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9949,6 +9949,17 @@
       "title": "Claude Code Analytics API",
       "category": "core_documentation",
       "sha256": "968b512d6499ef624e9b7915abaca37a9b880c73ca780af7f77d893414b88660",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/claude-tag-api",
+      "filename": "docs__en__manage-claude__claude-tag-api.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/claude-tag-api",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/claude-tag-api.md",
+      "title": "Claude Tag API",
+      "category": "core_documentation",
+      "sha256": "6f94282876d780f3a1546eadf1a4a1ca81ee4d56e83cc56e5653929139459f33",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10333,7 +10344,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/user-management.md",
       "title": "User management",
       "category": "core_documentation",
-      "sha256": "0e80ddb405a0698c4aa6861ab3adb9b73d343576f3143af9596160b87f990561",
+      "sha256": "631cad1d657405ec438e1fa3ad540e427d2d811909f75ebfc5f1e10ef680cb6e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11213,7 +11224,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "86b5800f628df8378837bb051ddb9c4ce1ac6e07bcecc96653ec3da64a4721ce",
+      "sha256": "9254c03e98ba7b435f920bd473165e2b04afe562ce7d016fd8ac8a382fd479bb",
       "lastmod": null,
       "fetch_status": "ok"
     },
