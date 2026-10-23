@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T03:17:29.851359Z",
+  "generated_at": "2026-10-23T06:18:25.701301Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -125552,128 +125552,6 @@
         "converse": 5
       },
       "word_count": 3818
-    },
-    {
-      "filename": "docs__en__build-with-claude__claude-on-vertex-ai.md",
-      "id": "docs/en/build-with-claude/claude-on-vertex-ai",
-      "title": "Google Cloud",
-      "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai",
-      "headings": [
-        {
-          "text": "Install an SDK for accessing Agent Platform",
-          "level": 2
-        },
-        {
-          "text": "Accessing Agent Platform",
-          "level": 2
-        },
-        {
-          "text": "Model availability",
-          "level": 3
-        },
-        {
-          "text": "API model IDs",
-          "level": 4
-        },
-        {
-          "text": "Making requests",
-          "level": 3
-        },
-        {
-          "text": "Data retention",
-          "level": 2
-        },
-        {
-          "text": "Activity logging",
-          "level": 2
-        },
-        {
-          "text": "Feature support",
-          "level": 2
-        },
-        {
-          "text": "Supported feature highlights",
-          "level": 3
-        },
-        {
-          "text": "Features not supported",
-          "level": 3
-        },
-        {
-          "text": "Context window",
-          "level": 3
-        },
-        {
-          "text": "Global, multi-region, and regional endpoints",
-          "level": 2
-        },
-        {
-          "text": "When to use each option",
-          "level": 3
-        },
-        {
-          "text": "Implementation",
-          "level": 3
-        },
-        {
-          "text": "Additional resources",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "claude": 58,
-        "platform": 33,
-        "agent": 30,
-        "model": 21,
-        "endpoint": 20,
-        "tab": 16,
-        "region": 16,
-        "opu": 14,
-        "google": 12,
-        "cloud": 12,
-        "sonnet": 12,
-        "cli": 12,
-        "request": 11,
-        "support": 11,
-        "deprecat": 11,
-        "anthropic": 10,
-        "api": 10,
-        "codegroup": 10,
-        "availability": 9,
-        "tool": 9,
-        "pric": 9,
-        "title": 8,
-        "note": 8,
-        "codegroupitem": 8,
-        "data": 8,
-        "regional": 8,
-        "global": 7,
-        "multi": 7,
-        "client": 6,
-        "sdk": 6,
-        "see": 6,
-        "code": 6,
-        "through": 5,
-        "language": 5,
-        "exclude": 5,
-        "shell": 5,
-        "limit": 5,
-        "available": 4,
-        "set": 4,
-        "using": 4,
-        "requir": 4,
-        "fable": 4,
-        "haiku": 4,
-        "parameter": 4,
-        "feature": 4,
-        "doesn": 4,
-        "rout": 4,
-        "within": 4,
-        "geographic": 4,
-        "residency": 4
-      },
-      "word_count": 2982
     },
     {
       "filename": "docs__en__build-with-claude__claude-platform-on-aws.md",

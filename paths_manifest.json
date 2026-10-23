@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-23T03:17:25.026443Z",
+  "generated_at": "2026-10-23T06:18:21.074268Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -9093,17 +9093,6 @@
       "sha256": "aa17bedf44cd802099ffab9a1a323c66a3cbc68a8ca23b69af0582de21bd7832",
       "lastmod": null,
       "fetch_status": "ok"
-    },
-    {
-      "id": "docs/en/build-with-claude/claude-on-vertex-ai",
-      "filename": "docs__en__build-with-claude__claude-on-vertex-ai.md",
-      "url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai",
-      "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai.md",
-      "title": "Google Cloud",
-      "category": "core_documentation",
-      "sha256": "4d49a554423c298663fad36d051acb5489eed5f903c8c695aaebea6bbc2cc5ea",
-      "lastmod": null,
-      "fetch_status": "stale"
     },
     {
       "id": "docs/en/build-with-claude/claude-platform-on-aws",
