@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-24T03:18:36.770162Z",
+  "generated_at": "2026-10-24T06:18:57.459975Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20657,10 +20657,10 @@
         }
       ],
       "terms": {
-        "claude": 56,
-        "ide": 44,
-        "code": 39,
-        "plugin": 23,
+        "claude": 55,
+        "ide": 42,
+        "code": 38,
+        "plugin": 21,
         "wsl": 20,
         "file": 15,
         "jetbrain": 15,
@@ -20668,18 +20668,17 @@
         "command": 14,
         "network": 14,
         "tool": 13,
-        "install": 13,
         "run": 12,
+        "install": 12,
         "diff": 10,
         "setting": 10,
         "window": 9,
         "cli": 9,
         "selection": 8,
-        "restart": 8,
         "configuration": 8,
         "open": 7,
         "connect": 7,
-        "runn": 7,
+        "restart": 7,
         "only": 7,
         "host": 7,
         "server": 7,
@@ -20691,6 +20690,7 @@
         "prompt": 6,
         "connection": 6,
         "remote": 6,
+        "runn": 6,
         "featur": 5,
         "shar": 5,
         "such": 5,
@@ -20708,7 +20708,7 @@
         "integrat": 4,
         "context": 4
       },
-      "word_count": 1863
+      "word_count": 1838
     },
     {
       "filename": "claude-code__keybindings.md",

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-24T03:18:34.080790Z",
+  "generated_at": "2026-10-24T06:18:52.864011Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1236,8 +1236,8 @@
       "md_url": "https://code.claude.com/docs/en/jetbrains.md",
       "title": "JetBrains IDEs",
       "category": "claude_code",
-      "sha256": "f4af835e8a33b2b0010d15fe84049e4a8daed48d6c21f50912855a668d9cfb35",
-      "lastmod": "2026-10-09T20:45:36.627Z",
+      "sha256": "1d749d341482275601c6f24f6f2e91298285ed5d59268251931f83391be47507",
+      "lastmod": "2026-10-24T03:06:23.675Z",
       "fetch_status": "ok"
     },
     {
