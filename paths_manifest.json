@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-24T00:24:45.261414Z",
+  "generated_at": "2026-10-24T03:18:34.080790Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1027,8 +1027,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "439ba83f5bc1173d53ea0aee85a4caa86bd1e6d603445a85bc2e2e3a6c79116b",
-      "lastmod": "2026-10-23T02:37:12.124Z",
+      "sha256": "bf901502940532ed4306a33fedd572ab445919fc401bef5d8ac859ce70809440",
+      "lastmod": "2026-10-24T03:04:15.024Z",
       "fetch_status": "ok"
     },
     {
@@ -1412,8 +1412,8 @@
       "md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
       "title": "Monitoring",
       "category": "claude_code",
-      "sha256": "3dceb23478eb5ad0099bf68203e019679dca8b029b6296077ee14822346c0a7f",
-      "lastmod": "2026-10-23T02:37:59.329Z",
+      "sha256": "c50c99c7952c8a7660f0564a75de972c38a6423633aad5fff248bc20c7a44860",
+      "lastmod": "2026-10-24T03:04:15.005Z",
       "fetch_status": "ok"
     },
     {
@@ -9651,7 +9651,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "2e6c4684160ae998470bd6518256839b9b844657a18f075fc9958438ec09bae1",
+      "sha256": "4024dcd880627d285e7b9181281632eaab6823eb0eaf5e9f97c987735be72c82",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10696,7 +10696,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "e79652f75b70d4ee23a7bad0a6cafeb820bf2e1e76eed6582b51d633565b4ab4",
+      "sha256": "962bca4fa645dbbbf7caa2d4921ebfdc2b23214276191771f6695919ae5caa79",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10762,7 +10762,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
       "title": "Overview and quickstart",
       "category": "core_documentation",
-      "sha256": "d1b35e2425d00b8aa3b5ce596fa5ad142bc7f3dd5971fbae2764108cc6f83208",
+      "sha256": "e66354e89d1756a0f4150aa0281416a6e2974bfc62b8644b9b622b5208da896c",
       "lastmod": null,
       "fetch_status": "ok"
     },
