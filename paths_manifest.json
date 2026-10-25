@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-25T00:23:08.662435Z",
+  "generated_at": "2026-10-25T06:17:40.240383Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1302,8 +1302,8 @@
       "md_url": "https://code.claude.com/docs/en/llm-gateway-protocol.md",
       "title": "Claude Code gateway compatibility guide",
       "category": "claude_code",
-      "sha256": "ef8ad92ce96b6c320732ec10cef6101c44616c5fc7cb6c9395d7a56bd68a1494",
-      "lastmod": "2026-10-24T23:06:22.083Z",
+      "sha256": "9b7af60f210a11db4fc8939734021ab08cb0706dc0fbb99fce844f2113f0d61e",
+      "lastmod": "2026-10-25T04:18:40.206Z",
       "fetch_status": "ok"
     },
     {
@@ -1412,8 +1412,8 @@
       "md_url": "https://code.claude.com/docs/en/monitoring-usage.md",
       "title": "Monitoring",
       "category": "claude_code",
-      "sha256": "c50c99c7952c8a7660f0564a75de972c38a6423633aad5fff248bc20c7a44860",
-      "lastmod": "2026-10-24T03:04:15.005Z",
+      "sha256": "724557e4ac516929ff398c4daa36420c59bbf170695681b999ba35321bc1905d",
+      "lastmod": "2026-10-25T04:18:40.216Z",
       "fetch_status": "ok"
     },
     {
