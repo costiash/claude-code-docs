@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-25T18:16:16.455000Z",
+  "generated_at": "2026-10-26T06:20:35.327725Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14854,6 +14854,10 @@
           "level": 4
         },
         {
+          "text": "Check a remote machine's host key",
+          "level": 4
+        },
+        {
           "text": "Set a proxy or a CA certificate for SSH sessions",
           "level": 4
         },
@@ -15118,6 +15122,22 @@
           "level": 3
         },
         {
+          "text": "SSH host key verification failed",
+          "level": 3
+        },
+        {
+          "text": "Check the host key from a terminal",
+          "level": 4
+        },
+        {
+          "text": "Check the keys that `ssh` already trusts",
+          "level": 5
+        },
+        {
+          "text": "SSH host key refused on Windows without an OpenSSH client",
+          "level": 3
+        },
+        {
           "text": "SSH connection fails after you log in",
           "level": 3
         },
@@ -15144,35 +15164,37 @@
       ],
       "terms": {
         "claude": 153,
-        "ssh": 72,
+        "ssh": 104,
         "session": 65,
+        "host": 57,
         "json": 48,
         "browser": 35,
-        "host": 33,
         "mode": 32,
         "setting": 30,
+        "config": 30,
         "code": 29,
-        "config": 29,
         "desktop": 28,
         "prompt": 27,
         "pane": 26,
         "permission": 26,
+        "file": 25,
         "com": 24,
         "click": 23,
         "cmd": 23,
         "devbox": 23,
-        "file": 22,
         "app": 22,
+        "chang": 22,
         "open": 22,
         "auto": 22,
+        "port": 22,
         "run": 21,
-        "port": 21,
+        "server": 21,
         "user": 19,
-        "server": 19,
-        "chang": 18,
         "remote": 18,
         "proxycommand": 18,
+        "connection": 18,
         "fil": 17,
+        "key": 17,
         "review": 16,
         "window": 16,
         "edit": 16,
@@ -15187,14 +15209,12 @@
         "environment": 15,
         "true": 15,
         "sshhostallowlist": 15,
-        "connection": 15,
         "before": 14,
         "example": 14,
         "tab": 13,
-        "folder": 13,
-        "box": 13
+        "first": 13
       },
-      "word_count": 27911
+      "word_count": 28991
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
