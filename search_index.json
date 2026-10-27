@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-27T00:23:05.124224Z",
+  "generated_at": "2026-10-27T03:18:25.951041Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -9336,123 +9336,107 @@
           "level": 1
         },
         {
-          "text": "Give Claude a way to verify its work",
+          "text": "Deterministic and non-deterministic instructions",
           "level": 2
         },
         {
-          "text": "Explore first, then plan, then code",
+          "text": "Tell Claude what it can't see",
           "level": 2
         },
         {
-          "text": "Provide specific context in your prompts",
+          "text": "Write a specific prompt",
+          "level": 3
+        },
+        {
+          "text": "Brainstorm with Claude first",
+          "level": 3
+        },
+        {
+          "text": "Keep CLAUDE.md short",
+          "level": 3
+        },
+        {
+          "text": "Scope rules to one part of the codebase",
+          "level": 3
+        },
+        {
+          "text": "Put team procedures in skills",
+          "level": 3
+        },
+        {
+          "text": "Connect the tools Claude needs",
+          "level": 3
+        },
+        {
+          "text": "Give Claude a check to run",
           "level": 2
         },
         {
-          "text": "Provide rich content",
+          "text": "Review against your spec",
           "level": 3
         },
         {
-          "text": "Configure your environment",
+          "text": "Enforce the check with a Stop hook",
+          "level": 3
+        },
+        {
+          "text": "Enforce the rules that can't have exceptions",
           "level": 2
         },
         {
-          "text": "Write an effective CLAUDE.md",
+          "text": "Enforce steps with hooks",
           "level": 3
         },
         {
-          "text": "Configure permissions",
+          "text": "Limit access with permission rules and the sandbox",
           "level": 3
         },
         {
-          "text": "Use CLI tools",
+          "text": "Choose who a rule applies to",
           "level": 3
         },
         {
-          "text": "Connect MCP servers",
-          "level": 3
-        },
-        {
-          "text": "Set up hooks",
-          "level": 3
-        },
-        {
-          "text": "Create skills",
-          "level": 3
-        },
-        {
-          "text": "Create custom subagents",
-          "level": 3
-        },
-        {
-          "text": "Install plugins",
-          "level": 3
-        },
-        {
-          "text": "Communicate effectively",
+          "text": "Change a default",
           "level": 2
         },
         {
-          "text": "Ask codebase questions",
+          "text": "Change the permission mode",
           "level": 3
         },
         {
-          "text": "Let Claude interview you",
+          "text": "Change the model and effort",
           "level": 3
         },
         {
-          "text": "Manage your session",
+          "text": "Know what subagents cost",
+          "level": 3
+        },
+        {
+          "text": "Keep cost and context down",
+          "level": 3
+        },
+        {
+          "text": "Steer the session",
           "level": 2
         },
         {
-          "text": "Course-correct early and often",
-          "level": 3
-        },
-        {
-          "text": "Manage context aggressively",
-          "level": 3
-        },
-        {
-          "text": "Use subagents for investigation",
-          "level": 3
-        },
-        {
-          "text": "Rewind with checkpoints",
-          "level": 3
-        },
-        {
-          "text": "Resume conversations",
-          "level": 3
-        },
-        {
-          "text": "Automate and scale",
+          "text": "Let Claude run without you",
           "level": 2
         },
         {
-          "text": "Run non-interactive mode",
+          "text": "Run Claude from a script",
           "level": 3
         },
         {
-          "text": "Run multiple Claude sessions",
+          "text": "Start runs on a schedule or an event",
           "level": 3
         },
         {
-          "text": "Fan out across files",
+          "text": "Run sessions in parallel",
           "level": 3
         },
         {
-          "text": "Run autonomously with auto mode",
-          "level": 3
-        },
-        {
-          "text": "Add an adversarial review step",
-          "level": 3
-        },
-        {
-          "text": "Avoid common failure patterns",
-          "level": 2
-        },
-        {
-          "text": "Develop your intuition",
+          "text": "What you can stop doing",
           "level": 2
         },
         {
@@ -9461,58 +9445,58 @@
         }
       ],
       "terms": {
-        "claude": 144,
-        "code": 48,
-        "run": 47,
-        "context": 44,
-        "session": 41,
-        "work": 29,
-        "ask": 25,
-        "prompt": 25,
-        "tip": 24,
-        "fil": 23,
-        "check": 22,
-        "file": 19,
-        "subagent": 19,
-        "mode": 19,
-        "test": 18,
-        "task": 18,
-        "read": 17,
-        "one": 17,
-        "conversation": 17,
-        "tool": 17,
-        "plan": 16,
-        "without": 16,
-        "hook": 16,
-        "write": 15,
-        "like": 15,
-        "command": 14,
-        "review": 14,
-        "see": 14,
-        "every": 14,
-        "start": 14,
-        "workflow": 14,
-        "before": 13,
-        "fix": 13,
-        "pattern": 12,
-        "implement": 11,
-        "only": 11,
-        "after": 11,
-        "let": 11,
-        "add": 11,
-        "question": 10,
-        "instead": 10,
-        "each": 10,
-        "keep": 10,
-        "skill": 10,
-        "chang": 9,
-        "step": 9,
-        "need": 9,
-        "loop": 9,
-        "someth": 9,
-        "own": 9
+        "claude": 147,
+        "run": 58,
+        "code": 51,
+        "work": 49,
+        "session": 46,
+        "one": 37,
+        "every": 35,
+        "hook": 35,
+        "file": 32,
+        "prompt": 30,
+        "model": 29,
+        "read": 28,
+        "check": 26,
+        "task": 26,
+        "start": 25,
+        "rule": 25,
+        "like": 25,
+        "keep": 24,
+        "subagent": 24,
+        "only": 23,
+        "before": 21,
+        "rul": 21,
+        "ask": 21,
+        "without": 20,
+        "own": 20,
+        "see": 19,
+        "command": 19,
+        "conversation": 18,
+        "context": 18,
+        "need": 18,
+        "still": 18,
+        "turn": 18,
+        "mode": 17,
+        "time": 17,
+        "test": 17,
+        "add": 17,
+        "back": 17,
+        "thing": 16,
+        "where": 16,
+        "anyth": 16,
+        "same": 16,
+        "rather": 16,
+        "don": 16,
+        "most": 15,
+        "happen": 15,
+        "someth": 15,
+        "block": 15,
+        "also": 15,
+        "fix": 15,
+        "cost": 15
       },
-      "word_count": 5448
+      "word_count": 7915
     },
     {
       "filename": "claude-code__champion-kit.md",
@@ -13245,31 +13229,31 @@
         }
       ],
       "terms": {
-        "claude": 165,
-        "code": 99,
-        "session": 79,
-        "command": 64,
-        "run": 53,
+        "claude": 162,
+        "code": 96,
+        "session": 77,
+        "command": 63,
+        "run": 52,
         "skill": 44,
         "available": 40,
         "open": 39,
-        "see": 36,
+        "see": 37,
         "requir": 36,
-        "current": 33,
-        "turn": 33,
         "conversation": 33,
-        "later": 30,
-        "show": 28,
-        "one": 27,
+        "current": 31,
+        "later": 31,
+        "turn": 30,
+        "show": 27,
+        "work": 27,
+        "one": 26,
         "without": 26,
-        "work": 26,
         "review": 26,
         "also": 25,
-        "before": 24,
         "mode": 24,
         "only": 23,
         "prompt": 23,
         "pas": 23,
+        "before": 22,
         "cloud": 21,
         "name": 20,
         "argument": 20,
@@ -13280,23 +13264,23 @@
         "alia": 19,
         "subagent": 18,
         "own": 18,
-        "set": 17,
-        "such": 16,
+        "set": 16,
         "plan": 16,
         "list": 16,
         "design": 16,
         "view": 16,
         "model": 15,
         "menu": 15,
+        "start": 15,
+        "such": 15,
         "type": 14,
-        "start": 14,
         "terminal": 14,
         "while": 14,
-        "finish": 14,
         "dialog": 14,
-        "project": 14
+        "project": 14,
+        "change": 14
       },
-      "word_count": 7187
+      "word_count": 7104
     },
     {
       "filename": "claude-code__common-workflows.md",
@@ -13766,11 +13750,11 @@
       ],
       "terms": {
         "claude": 33,
-        "context": 21,
+        "context": 20,
         "code": 16,
         "window": 14,
+        "session": 13,
         "read": 13,
-        "session": 12,
         "run": 11,
         "see": 10,
         "compaction": 10,
@@ -13781,12 +13765,12 @@
         "load": 8,
         "token": 8,
         "each": 7,
+        "keep": 7,
         "conversation": 7,
         "before": 6,
         "rul": 6,
         "hook": 6,
         "content": 6,
-        "keep": 6,
         "auto": 6,
         "inject": 6,
         "model": 6,
@@ -13808,13 +13792,13 @@
         "one": 4,
         "pas": 4,
         "fill": 3,
+        "cost": 3,
         "full": 3,
         "same": 3,
         "here": 3,
         "like": 3,
         "output": 3,
-        "path": 3,
-        "prompt": 3
+        "path": 3
       },
       "word_count": 1172
     },
@@ -15237,10 +15221,10 @@
         "host": 57,
         "json": 48,
         "browser": 35,
-        "mode": 32,
+        "mode": 33,
         "setting": 30,
         "config": 30,
-        "code": 29,
+        "code": 28,
         "desktop": 28,
         "prompt": 27,
         "pane": 26,
@@ -15280,9 +15264,9 @@
         "diff": 14,
         "example": 14,
         "tab": 13,
-        "first": 13
+        "folder": 13
       },
-      "word_count": 28992
+      "word_count": 29022
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -18704,7 +18688,7 @@
         "learn": 53,
         "session": 52,
         "tool": 31,
-        "run": 29,
+        "run": 30,
         "prompt": 25,
         "skill": 24,
         "file": 23,
@@ -18720,9 +18704,9 @@
         "mcp": 17,
         "setting": 17,
         "project": 16,
-        "work": 16,
         "hook": 15,
         "agent": 15,
+        "work": 15,
         "system": 15,
         "each": 14,
         "model": 14,
@@ -18750,7 +18734,7 @@
         "desktop": 8,
         "such": 8
       },
-      "word_count": 3763
+      "word_count": 3761
     },
     {
       "filename": "claude-code__goal.md",
@@ -20436,7 +20420,7 @@
         "auto": 6,
         "environment": 6
       },
-      "word_count": 2565
+      "word_count": 2572
     },
     {
       "filename": "claude-code__interactive-mode.md",
@@ -20680,39 +20664,39 @@
       ],
       "terms": {
         "claude": 232,
-        "code": 167,
+        "code": 165,
         "prompt": 104,
         "command": 97,
         "session": 84,
         "turn": 67,
         "pres": 59,
-        "one": 58,
+        "one": 57,
         "mode": 56,
         "line": 56,
-        "run": 50,
+        "run": 51,
         "background": 49,
         "input": 48,
         "text": 48,
         "open": 47,
-        "start": 45,
+        "start": 46,
         "word": 43,
         "after": 41,
         "list": 40,
         "file": 36,
         "terminal": 36,
         "key": 36,
-        "while": 35,
+        "while": 36,
         "task": 35,
+        "work": 35,
         "such": 34,
-        "work": 34,
-        "show": 33,
+        "show": 32,
         "wait": 32,
         "character": 31,
         "queu": 31,
         "end": 31,
         "conversation": 30,
+        "send": 30,
         "doesn": 30,
-        "send": 29,
         "see": 28,
         "cursor": 28,
         "only": 28,
@@ -20728,9 +20712,9 @@
         "off": 25,
         "later": 25,
         "check": 25,
-        "keep": 24
+        "runn": 24
       },
-      "word_count": 11597
+      "word_count": 11602
     },
     {
       "filename": "claude-code__jetbrains.md",
@@ -21236,12 +21220,12 @@
         "only": 22,
         "add": 22,
         "per": 21,
+        "one": 21,
         "each": 21,
         "worktree": 21,
         "session": 21,
-        "one": 20,
-        "such": 20,
         "package": 19,
+        "such": 19,
         "subdirectory": 19,
         "directori": 18,
         "see": 17,
@@ -21253,8 +21237,8 @@
         "large": 14,
         "tree": 14,
         "sett": 14,
+        "example": 14,
         "packag": 13,
-        "example": 13,
         "instead": 13,
         "edit": 13,
         "acces": 13,
@@ -21268,7 +21252,7 @@
         "need": 11,
         "inside": 11
       },
-      "word_count": 4613
+      "word_count": 4614
     },
     {
       "filename": "claude-code__legal-and-compliance.md",
@@ -23446,6 +23430,14 @@
           "level": 4
         },
         {
+          "text": "Check the effort level you set",
+          "level": 4
+        },
+        {
+          "text": "When a new effort level starts",
+          "level": 4
+        },
+        {
           "text": "Adaptive reasoning and fixed thinking budgets",
           "level": 4
         },
@@ -23531,26 +23523,26 @@
         }
       ],
       "terms": {
-        "model": 567,
-        "claude": 280,
-        "code": 224,
-        "session": 171,
+        "model": 566,
+        "claude": 282,
+        "code": 223,
+        "session": 173,
         "default": 170,
-        "set": 153,
+        "set": 154,
         "opu": 130,
-        "level": 98,
+        "level": 104,
         "setting": 94,
         "window": 79,
-        "request": 78,
         "run": 78,
+        "request": 77,
         "version": 76,
         "sonnet": 71,
         "fable": 69,
+        "effort": 68,
         "organization": 68,
+        "provider": 67,
         "manag": 67,
-        "effort": 66,
-        "provider": 66,
-        "such": 63,
+        "such": 65,
         "fallback": 59,
         "anthropic": 55,
         "platform": 53,
@@ -23562,27 +23554,27 @@
         "agent": 49,
         "see": 49,
         "variable": 49,
-        "appli": 47,
+        "start": 47,
         "later": 46,
-        "start": 46,
-        "also": 45,
-        "before": 44,
+        "appli": 46,
+        "before": 45,
+        "also": 44,
         "api": 43,
-        "one": 43,
         "user": 43,
         "only": 43,
+        "one": 42,
         "sett": 41,
         "instead": 41,
-        "show": 41,
+        "show": 40,
+        "doesn": 40,
         "allowlist": 40,
         "through": 39,
-        "doesn": 39,
         "environment": 38,
         "entry": 38,
-        "name": 37,
-        "bedrock": 37
+        "bedrock": 37,
+        "block": 37
       },
-      "word_count": 16945
+      "word_count": 17057
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -31983,7 +31975,7 @@
         }
       ],
       "terms": {
-        "session": 338,
+        "session": 339,
         "runner": 221,
         "hook": 188,
         "claude": 89,
@@ -32034,7 +32026,7 @@
         "log": 24,
         "orchestrator": 24
       },
-      "word_count": 12864
+      "word_count": 12872
     },
     {
       "filename": "claude-code__self-hosted-environments-deploy.md",
@@ -32212,6 +32204,10 @@
           "level": 3
         },
         {
+          "text": "Keep an idle session while its processes run",
+          "level": 3
+        },
+        {
           "text": "Known issues and limitations",
           "level": 2
         },
@@ -32269,58 +32265,58 @@
         }
       ],
       "terms": {
-        "runner": 489,
-        "session": 419,
-        "git": 168,
-        "host": 127,
-        "start": 126,
-        "run": 99,
-        "one": 97,
+        "runner": 504,
+        "session": 440,
+        "git": 171,
+        "start": 134,
+        "host": 133,
+        "run": 109,
+        "one": 100,
+        "claude": 85,
         "anthropic": 85,
-        "claude": 84,
+        "set": 78,
         "environment": 77,
-        "set": 75,
-        "each": 73,
-        "proxy": 70,
-        "hook": 68,
+        "each": 74,
+        "proxy": 71,
+        "hook": 69,
+        "log": 66,
         "container": 63,
-        "own": 61,
-        "log": 61,
+        "own": 63,
+        "repository": 62,
+        "keep": 61,
         "doesn": 58,
-        "repository": 58,
-        "keep": 57,
-        "exit": 56,
-        "before": 55,
+        "exit": 57,
+        "before": 56,
+        "line": 56,
+        "fail": 53,
         "clone": 52,
-        "fail": 51,
-        "line": 50,
-        "credential": 49,
+        "credential": 50,
+        "limit": 49,
+        "file": 48,
         "github": 48,
-        "limit": 47,
-        "code": 46,
+        "code": 47,
+        "check": 47,
         "default": 46,
         "restart": 46,
-        "check": 43,
-        "read": 42,
-        "see": 38,
+        "read": 44,
+        "such": 42,
+        "see": 39,
+        "after": 39,
         "work": 38,
+        "proces": 38,
         "push": 38,
-        "file": 37,
+        "every": 38,
         "need": 37,
-        "proces": 37,
-        "such": 37,
-        "only": 37,
-        "after": 36,
+        "without": 37,
         "image": 36,
         "reach": 36,
-        "without": 36,
-        "every": 36,
+        "only": 36,
+        "directory": 36,
         "wait": 36,
-        "second": 34,
-        "per": 33,
-        "directory": 33
+        "any": 34,
+        "second": 34
       },
-      "word_count": 16367
+      "word_count": 16990
     },
     {
       "filename": "claude-code__self-hosted-environments-identity.md",
@@ -32624,57 +32620,57 @@
       ],
       "terms": {
         "session": 144,
-        "runner": 129,
+        "runner": 126,
         "environment": 42,
         "hook": 35,
         "orchestrator": 33,
         "flag": 33,
-        "after": 28,
         "child": 28,
+        "code": 27,
+        "after": 27,
         "spawn": 27,
         "alert": 27,
+        "claude": 26,
         "before": 26,
-        "code": 25,
-        "host": 25,
-        "set": 25,
-        "claude": 24,
-        "see": 24,
+        "host": 26,
+        "set": 26,
+        "see": 25,
         "each": 24,
         "default": 23,
-        "start": 21,
         "own": 21,
+        "minut": 21,
+        "value": 21,
+        "requir": 21,
         "metric": 20,
-        "same": 20,
-        "minut": 20,
-        "value": 20,
         "poll": 20,
         "wait": 20,
-        "one": 20,
+        "start": 19,
+        "same": 19,
         "second": 19,
-        "exit": 19,
-        "requir": 19,
+        "unset": 19,
         "count": 19,
-        "turn": 18,
+        "one": 19,
         "seri": 18,
         "only": 18,
         "every": 18,
-        "unset": 18,
+        "later": 18,
         "end": 18,
+        "turn": 17,
         "per": 17,
-        "later": 16,
+        "exit": 17,
+        "keep": 17,
         "proces": 16,
         "server": 16,
         "startup": 15,
-        "still": 14,
-        "keep": 14,
         "label": 14,
         "git": 14,
-        "drain": 14,
+        "hold": 14,
         "counter": 14,
         "such": 13,
-        "read": 13
+        "still": 13,
+        "drain": 13
       },
-      "word_count": 7052
+      "word_count": 7045
     },
     {
       "filename": "claude-code__self-hosted-environments-testing.md",
@@ -38750,8 +38746,8 @@
         "workflow": 113,
         "claude": 105,
         "script": 55,
+        "session": 52,
         "code": 51,
-        "session": 51,
         "one": 43,
         "start": 41,
         "prompt": 38,
@@ -38765,17 +38761,17 @@
         "work": 22,
         "limit": 22,
         "list": 21,
+        "set": 20,
         "show": 20,
         "result": 19,
-        "set": 19,
+        "fail": 19,
         "ultracode": 19,
         "relaunch": 19,
         "file": 18,
+        "before": 18,
         "every": 18,
         "instead": 18,
-        "fail": 18,
         "sav": 18,
-        "before": 17,
         "permission": 17,
         "mode": 17,
         "again": 16,
@@ -38796,7 +38792,7 @@
         "directory": 14,
         "only": 13
       },
-      "word_count": 6520
+      "word_count": 6537
     },
     {
       "filename": "claude-code__worktrees.md",
@@ -128644,27 +128640,27 @@
         }
       ],
       "terms": {
-        "claude": 118,
-        "block": 105,
-        "think": 90,
+        "claude": 124,
+        "block": 107,
+        "think": 91,
         "tool": 75,
-        "model": 56,
+        "model": 58,
+        "opu": 32,
         "prefix": 31,
-        "opu": 30,
         "mismatch": 29,
         "drop": 28,
         "system": 28,
         "bind": 27,
-        "api": 24,
-        "reason": 24,
+        "api": 25,
+        "reason": 25,
+        "request": 22,
         "messag": 22,
+        "fable": 21,
         "read": 21,
-        "fable": 20,
-        "request": 20,
-        "sonnet": 20,
-        "account": 18,
+        "sonnet": 21,
+        "account": 20,
+        "haiku": 17,
         "turn": 16,
-        "haiku": 16,
         "error": 15,
         "conversation": 14,
         "keep": 14,
@@ -128673,18 +128669,18 @@
         "earlier": 13,
         "check": 13,
         "each": 13,
+        "mytho": 13,
         "input": 13,
         "one": 12,
-        "mytho": 12,
+        "produc": 12,
         "output": 12,
         "transformation": 12,
         "addition": 12,
         "other": 11,
-        "produc": 11,
+        "without": 11,
         "mov": 11,
         "type": 11,
         "before": 10,
-        "without": 10,
         "see": 10,
         "doe": 10,
         "result": 10,
@@ -128695,7 +128691,7 @@
         "user": 9,
         "message": 9
       },
-      "word_count": 11616
+      "word_count": 11674
     },
     {
       "filename": "docs__en__build-with-claude__prompt-caching.md",
