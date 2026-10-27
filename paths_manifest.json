@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-27T03:18:21.168512Z",
+  "generated_at": "2026-10-27T06:18:48.321687Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1401,8 +1401,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "096af4518ac7af4ab2a4c7055233051c0608ff187a24883ffdd48c4830869a2f",
-      "lastmod": "2026-10-27T01:17:39.026Z",
+      "sha256": "dc68a8ca89a4824b43ab08bccce85d15e0aa389a1e754ac0ada25f2fa313a6fb",
+      "lastmod": "2026-10-27T04:06:17.658Z",
       "fetch_status": "ok"
     },
     {
@@ -1467,8 +1467,8 @@
       "md_url": "https://code.claude.com/docs/en/permissions.md",
       "title": "Configure permissions",
       "category": "claude_code",
-      "sha256": "c161181cf0bb4989c68a81c89e4f5a8e59bcd689ae62f7d51af1b32949a9a335",
-      "lastmod": "2026-10-22T22:52:55.918Z",
+      "sha256": "de3c9f6aaea556426c639fbed3897f9d6527b634bfee234a92aed07012a370fb",
+      "lastmod": "2026-10-27T04:05:42.402Z",
       "fetch_status": "ok"
     },
     {
@@ -2127,8 +2127,8 @@
       "md_url": "https://code.claude.com/docs/en/terminal-config.md",
       "title": "Configure your terminal for Claude Code",
       "category": "claude_code",
-      "sha256": "964f68477b6ba9c9adb6f843e89fd68b2fe9118bbd59ac0091c68ef9432b1fc0",
-      "lastmod": "2026-10-24T23:10:37.372Z",
+      "sha256": "9e1cdd4ce1e8d4274d926539f812d4fcdd9f4a448e642ba6b9a8a5c158fa8d0d",
+      "lastmod": "2026-10-27T04:06:17.652Z",
       "fetch_status": "ok"
     },
     {
