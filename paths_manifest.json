@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-28T00:21:36.428560Z",
+  "generated_at": "2026-10-28T03:16:50.865914Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1225,8 +1225,8 @@
       "md_url": "https://code.claude.com/docs/en/interactive-mode.md",
       "title": "Interactive mode",
       "category": "claude_code",
-      "sha256": "9df0302f9d25ce6edf65c71e55f69d6bc879a489b760df5286d2d31ac35f7b82",
-      "lastmod": "2026-10-27T19:25:38.859Z",
+      "sha256": "924d6623b32f2d81c9ec613289a0ec5198c2ad36bac65eb7c6db5e18f2609eb6",
+      "lastmod": "2026-10-28T02:53:56.336Z",
       "fetch_status": "ok"
     },
     {
@@ -2204,8 +2204,8 @@
       "md_url": "https://code.claude.com/docs/en/vs-code.md",
       "title": "Use Claude Code in VS Code",
       "category": "claude_code",
-      "sha256": "de0c56686158c5687934004cde3d09a43f30c4c227fce82a0363a9dfad5edc8c",
-      "lastmod": "2026-10-26T21:28:52.734Z",
+      "sha256": "5d6357b7b2da1239aee686fae648b246f09708f9f645c349d368bf0c72a74acd",
+      "lastmod": "2026-10-28T02:53:56.335Z",
       "fetch_status": "ok"
     },
     {

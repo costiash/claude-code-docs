@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-28T00:21:41.050001Z",
+  "generated_at": "2026-10-28T03:16:53.597228Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -36736,8 +36736,8 @@
         "requir": 69,
         "prompt": 64,
         "click": 61,
-        "show": 53,
         "tab": 53,
+        "show": 52,
         "file": 50,
         "window": 49,
         "command": 49,
@@ -36776,7 +36776,7 @@
         "read": 23,
         "work": 22
       },
-      "word_count": 14196
+      "word_count": 14187
     },
     {
       "filename": "claude-code__web-quickstart.md",
