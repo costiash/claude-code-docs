@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-29T06:17:37.305592Z",
+  "generated_at": "2026-10-29T15:16:04.137375Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1665,8 +1665,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/api.md",
       "title": "Use the mods API",
       "category": "claude_code",
-      "sha256": "22f65826477f6148930d6bac59c9f2e5ff2effadf7e4f53b9326309ecaeb252b",
-      "lastmod": "2026-10-25T14:35:53.013Z",
+      "sha256": "6b125c4bfc154487f551e8e0e1920d981f17a3ddbc3d05d17ffde3d1d09de9be",
+      "lastmod": "2026-10-29T12:27:48.976Z",
       "fetch_status": "ok"
     },
     {
