@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-28T21:15:56.455503Z",
+  "generated_at": "2026-10-29T06:17:42.206250Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -11557,10 +11557,10 @@
         }
       ],
       "terms": {
-        "claude": 73,
+        "claude": 74,
+        "session": 46,
         "project": 45,
-        "session": 45,
-        "code": 42,
+        "code": 43,
         "fil": 36,
         "directory": 28,
         "file": 26,
@@ -11600,15 +11600,15 @@
         "per": 8,
         "account": 8,
         "cach": 8,
+        "run": 8,
         "state": 8,
         "frontmatter": 8,
         "age": 8,
         "plan": 8,
         "scratchpad": 8,
-        "hook": 7,
-        "configuration": 7
+        "hook": 7
       },
-      "word_count": 3662
+      "word_count": 3699
     },
     {
       "filename": "claude-code__claude-platform-on-aws.md",
