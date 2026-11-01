@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-31T03:14:43.942905Z",
+  "generated_at": "2026-11-01T18:15:47.298405Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/setup.md",
       "title": "Advanced setup",
       "category": "claude_code",
-      "sha256": "34cdae9fb70e93f7fd144efad9e4ec503e6ea0b80f707ea27a9f88217e832c40",
-      "lastmod": "2026-10-30T17:44:30.494Z",
+      "sha256": "652872f26cfd711c4f92351b1ef8338d3f0b6140024c246c42edcbcbdfea172d",
+      "lastmod": "2026-11-01T17:06:16.108Z",
       "fetch_status": "ok"
     },
     {
