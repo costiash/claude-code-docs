@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-01T21:14:27.289918Z",
+  "generated_at": "2026-11-02T18:16:00.697769Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -499,8 +499,8 @@
       "md_url": "https://code.claude.com/docs/en/auto-mode-config.md",
       "title": "Configure auto mode",
       "category": "claude_code",
-      "sha256": "529af1accab89191fe0660ddcd76bae901370eacb122b0d25d14f8b91b425a13",
-      "lastmod": "2026-10-30T17:44:30.847Z",
+      "sha256": "ed00ec1d87312e76b74e3bbc66e70d05c01017577163f70a724f2d3786d77a1c",
+      "lastmod": "2026-11-02T16:51:21.072Z",
       "fetch_status": "ok"
     },
     {
@@ -510,8 +510,8 @@
       "md_url": "https://code.claude.com/docs/en/best-practices.md",
       "title": "Best practices for Claude Code",
       "category": "claude_code",
-      "sha256": "fd4ff73e26f2d0f0a80ac0ca77b60760b4ae2c9d0d282070fa6e406804f98ddc",
-      "lastmod": "2026-10-30T17:44:30.836Z",
+      "sha256": "46081c9a47c71c911a7b300842383268b0808e55625ba5c2ae5afa147274bf84",
+      "lastmod": "2026-11-02T16:51:21.073Z",
       "fetch_status": "ok"
     },
     {
@@ -598,8 +598,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-config.md",
       "title": "Claude apps gateway configuration",
       "category": "claude_code",
-      "sha256": "9a8165cab7c7d17e51650992785a0933f74cbc574f669a9846d5cf8ac43c73a4",
-      "lastmod": "2026-10-28T19:51:18.294Z",
+      "sha256": "69650460d76ad9a753f3322b4e8f2545d845e6e65aa2c4c1f76c6afd5ea23f6d",
+      "lastmod": "2026-11-02T16:50:49.011Z",
       "fetch_status": "ok"
     },
     {
@@ -620,8 +620,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md",
       "title": "Deploy Claude apps gateway on AWS",
       "category": "claude_code",
-      "sha256": "ef0fd2569534fb8a3fbadbef589789bf4e6961891ab9ba2993b76796b9b87d59",
-      "lastmod": "2026-10-21T23:58:06.555Z",
+      "sha256": "d1c2c204c305cc43a2ebf2353f1aadbc7c111272acf643299b1078fdaeac35c8",
+      "lastmod": "2026-11-02T16:50:49.017Z",
       "fetch_status": "ok"
     },
     {
@@ -818,8 +818,8 @@
       "md_url": "https://code.claude.com/docs/en/commands.md",
       "title": "Commands",
       "category": "claude_code",
-      "sha256": "dbeb2b14ca26b6684ea381cd841253b11b299b48eb1eb6a4869a0f8d8ec86831",
-      "lastmod": "2026-10-30T17:44:30.851Z",
+      "sha256": "ee726baa939a8676c77dc35f2eb9b97287634300d262e4f0f85418e10133c71c",
+      "lastmod": "2026-11-02T16:51:21.074Z",
       "fetch_status": "ok"
     },
     {
@@ -1027,8 +1027,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "fbe0ea8e33711df751cade6b6c180e68317137547e1e45be2c2f7911edfa931f",
-      "lastmod": "2026-10-30T17:44:30.741Z",
+      "sha256": "a81a2f01b77c3d9c1e51c3c4d6297b1044266d941b198304222f9041fe60d17f",
+      "lastmod": "2026-11-02T17:30:56.651Z",
       "fetch_status": "ok"
     },
     {
@@ -1456,8 +1456,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "15c45266ded0eb4aaf86b0da1561369981d7d435c44fd7245481ea25fbc06ca3",
-      "lastmod": "2026-10-30T17:44:30.612Z",
+      "sha256": "878df075ec0fdec78c5aff49acae0a41b005d0e27b5318490895f53e63baa9d3",
+      "lastmod": "2026-11-02T17:30:56.629Z",
       "fetch_status": "ok"
     },
     {
@@ -1467,8 +1467,8 @@
       "md_url": "https://code.claude.com/docs/en/permissions.md",
       "title": "Configure permissions",
       "category": "claude_code",
-      "sha256": "a72bafb46a558dec5a641916b6f1482b101a8b4ca7602f0a2d3fb636b0b3c25c",
-      "lastmod": "2026-10-27T21:51:26.983Z",
+      "sha256": "56ae35be29f8ddd49e0b2a0e83bbeccc333a0766ca48fb6dc469501e190f27cb",
+      "lastmod": "2026-11-02T17:30:56.627Z",
       "fetch_status": "ok"
     },
     {
@@ -1764,8 +1764,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/org.md",
       "title": "Manage Claude Code plugins for your organization",
       "category": "claude_code",
-      "sha256": "e5b28bec090cafa81a43c83e2e847127edf40878fc1b9252ab64c40ee9bcd475",
-      "lastmod": "2026-10-26T21:16:37.003Z",
+      "sha256": "61b2a26b374a30fc4e39c14afe43966ec2cce7cf3f354d81f35a53e22b5c2b3d",
+      "lastmod": "2026-11-02T16:50:49.026Z",
       "fetch_status": "ok"
     },
     {
@@ -2039,8 +2039,8 @@
       "md_url": "https://code.claude.com/docs/en/settings.md",
       "title": "Settings files and precedence",
       "category": "claude_code",
-      "sha256": "70064d76e67c335615d678ee493c16e9315e89a17813c31365ffbca673f89d11",
-      "lastmod": "2026-10-27T17:34:35.784Z",
+      "sha256": "1cd4ddf2f97f350d6e6e09d075902fbd3d12ac301ee3bee2a039cf727216fea0",
+      "lastmod": "2026-11-02T17:30:56.615Z",
       "fetch_status": "ok"
     },
     {
@@ -2061,8 +2061,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "44038f95f9386502a05b3b4e6178c6978c19b5700fb8fe734f88c7b02a849505",
-      "lastmod": "2026-10-30T17:44:30.525Z",
+      "sha256": "c65e968f0e5a13a56f2232f390ecb3ace41f33e2d7aa8a2298e26579fe68a14e",
+      "lastmod": "2026-11-02T17:30:56.656Z",
       "fetch_status": "ok"
     },
     {
@@ -2149,8 +2149,8 @@
       "md_url": "https://code.claude.com/docs/en/tools-reference.md",
       "title": "Tools reference",
       "category": "claude_code",
-      "sha256": "9ae5dd8849a7fd22565136df6267aff95c0cbadb06afefb0fe48ccb727bdc72d",
-      "lastmod": "2026-10-30T17:44:30.495Z",
+      "sha256": "52b12130dd11ccae423210b199028f1b5bc5ed244669f5c5adf349d052e6599a",
+      "lastmod": "2026-11-02T17:30:56.615Z",
       "fetch_status": "ok"
     },
     {
@@ -2523,8 +2523,8 @@
       "md_url": "https://code.claude.com/docs/en/worktrees.md",
       "title": "Run parallel sessions with worktrees",
       "category": "claude_code",
-      "sha256": "0935e02d82b584e9613dd1f60283f71eb2ee1f02957e0aa16155d2b5ed85d6a0",
-      "lastmod": "2026-10-28T19:53:34.073Z",
+      "sha256": "0574c192aca7bd4392e5e9f2281d31122bdd2210968024db7659215b554ddfce",
+      "lastmod": "2026-11-02T17:30:56.628Z",
       "fetch_status": "ok"
     },
     {
@@ -9310,7 +9310,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed.md",
       "title": "Anthropic-managed",
       "category": "core_documentation",
-      "sha256": "6fe93109112b574c33a4fa46ed23df3eaae0977e71646620bcbdd2a7b0eea406",
+      "sha256": "9e4ee2f68d91b68c5278f79c4f3b4beb007fc3c79089307c91bc4ba5f0ef17c5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9453,7 +9453,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/effort.md",
       "title": "Effort",
       "category": "core_documentation",
-      "sha256": "64bb06b20fb2352c02771478783d2cfd7ad191121f663d9ac1247cc4213ddcec",
+      "sha256": "5b0109fd746a961e9d080f7f95d604fb106fbe3e4e10a42ab29cf562435a363d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9475,7 +9475,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking.md",
       "title": "Extended thinking (legacy)",
       "category": "core_documentation",
-      "sha256": "2b5c4beef0eea1981f87e039a650b9cf6cb0f7921cd54cde5a379880caf305f0",
+      "sha256": "1119615176f358ed104a9537414ce1ec33f1049a2db9b787da66a3f299884c66",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9541,7 +9541,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages.md",
       "title": "Mid-conversation system messages and tool changes",
       "category": "core_documentation",
-      "sha256": "c983ef88e92729a1390f7eef5a3e511698f38dc7c584a3dbf456a6b9cef3fe1a",
+      "sha256": "67eb50416bf7b89f5690a06a64986d9310ae183161622f882f2466e42cb1dc0a",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9585,7 +9585,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/preserved-thinking.md",
       "title": "Preserved thinking",
       "category": "core_documentation",
-      "sha256": "1124ee9ab74274ec427fee310d32657c9e63944f66d6c1e94b53b567587f8c3f",
+      "sha256": "2265545b6974c1858c0bee50c001cabc08b17e7ed1e4e1cc1621ab55d9062ec5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9651,7 +9651,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md",
       "title": "Prompting Claude Haiku 5.5",
       "category": "core_documentation",
-      "sha256": "c085f17cfac1f6f36ffb1641546adcf3f2a3936075c1b57c843fa93302f1ace1",
+      "sha256": "ed9c6b78a1080524f38115cd4b12760ffcbcd6e0de2e08b7709c090b8051a2c2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9794,7 +9794,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost.md",
       "title": "Steering and cost control",
       "category": "core_documentation",
-      "sha256": "b2f8d095fd50bb982304f656741bddd6a7681ec866cc90958ce92af4b34eae76",
+      "sha256": "f59860709ad89db4f7c04d8931dee051937a78bc46196b01007250da87a57507",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9838,7 +9838,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/vision.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "5fd984ec22d89f8e0d33209302109e91ff17ee5833dbc22fd47d9a5a932fde9f",
+      "sha256": "f67ae8c652f2fc05bf681e7020268d186c5f34b7c713852934b533548c9108ed",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11235,7 +11235,7 @@
       "md_url": "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1.md",
       "title": "What's new",
       "category": "core_documentation",
-      "sha256": "f4753dd8704a81fbe7344e8c0738580d9d584e7a821d2cd4ba961a466f6dcddb",
+      "sha256": "17bd6024e53a3ff4fbe374591195c69783ada7e7fd6c711d97653c79e09efd9f",
       "lastmod": null,
       "fetch_status": "ok"
     },
