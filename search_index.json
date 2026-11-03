@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T18:16:33.426654Z",
+  "generated_at": "2026-11-03T21:16:21.270771Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -116074,10 +116074,10 @@
         "api": 74,
         "title": 54,
         "token": 46,
-        "version": 34,
+        "version": 38,
+        "one": 34,
         "type": 34,
         "request": 33,
-        "one": 32,
         "auth": 31,
         "now": 28,
         "sdk": 27,
@@ -116091,18 +116091,19 @@
         "role": 23,
         "option": 23,
         "header": 22,
+        "same": 22,
         "set": 20,
-        "same": 20,
         "change": 20,
         "union": 20,
         "enum": 20,
+        "still": 19,
         "return": 19,
         "already": 19,
+        "code": 18,
         "only": 18,
         "block": 18,
-        "still": 18,
         "default": 18,
-        "code": 17,
+        "upgrade": 17,
         "chang": 17,
         "call": 17,
         "nam": 17,
@@ -116116,10 +116117,9 @@
         "apikey": 15,
         "authtoken": 15,
         "claude": 14,
-        "upgrade": 14,
         "list": 14
       },
-      "word_count": 9486
+      "word_count": 9571
     },
     {
       "filename": "docs__en__api__models.md",
@@ -130369,7 +130369,7 @@
         "doesn": 11,
         "need": 10
       },
-      "word_count": 5022
+      "word_count": 5026
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__google-managed.md",
@@ -132015,7 +132015,7 @@
         "cache": 10,
         "error": 10
       },
-      "word_count": 5196
+      "word_count": 5192
     },
     {
       "filename": "docs__en__build-with-claude__embeddings.md",
@@ -133139,7 +133139,7 @@
       ],
       "terms": {
         "message": 101,
-        "claude": 94,
+        "claude": 99,
         "tool": 78,
         "turn": 66,
         "conversation": 57,
@@ -133149,9 +133149,9 @@
         "user": 37,
         "after": 35,
         "messag": 34,
+        "model": 32,
         "mid": 31,
         "cach": 28,
-        "model": 27,
         "field": 25,
         "one": 25,
         "cache": 24,
@@ -133163,18 +133163,20 @@
         "level": 22,
         "later": 21,
         "chang": 20,
-        "api": 20,
         "only": 19,
         "header": 19,
+        "api": 18,
         "array": 18,
+        "platform": 16,
         "prefix": 16,
-        "available": 16,
         "content": 16,
         "render": 16,
         "append": 15,
         "send": 15,
         "top": 15,
+        "available": 15,
         "end": 15,
+        "google": 14,
         "every": 14,
         "new": 14,
         "same": 14,
@@ -133185,11 +133187,9 @@
         "clear": 14,
         "change": 13,
         "instead": 13,
-        "add": 13,
-        "result": 13,
-        "platform": 12
+        "add": 13
       },
-      "word_count": 11306
+      "word_count": 11344
     },
     {
       "filename": "docs__en__build-with-claude__multilingual-support.md",
@@ -133705,7 +133705,7 @@
         "type": 10,
         "platform": 9
       },
-      "word_count": 11828
+      "word_count": 11837
     },
     {
       "filename": "docs__en__build-with-claude__prompt-caching.md",
@@ -134527,10 +134527,10 @@
       ],
       "terms": {
         "prompt": 34,
-        "claude": 29,
+        "claude": 31,
         "think": 26,
         "haiku": 24,
-        "model": 21,
+        "model": 22,
         "effort": 20,
         "text": 20,
         "system": 19,
@@ -134543,11 +134543,11 @@
         "conversation": 11,
         "chang": 10,
         "see": 10,
+        "anthropic": 10,
         "also": 10,
         "level": 9,
         "agent": 9,
         "keep": 9,
-        "anthropic": 9,
         "test": 9,
         "mid": 8,
         "off": 8,
@@ -134577,7 +134577,7 @@
         "messag": 5,
         "chatbot": 5
       },
-      "word_count": 2005
+      "word_count": 2016
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__prompting-claude-opus-4-8.md",
@@ -135376,27 +135376,26 @@
         }
       ],
       "terms": {
-        "result": 73,
-        "search": 69,
-        "claude": 54,
-        "block": 41,
-        "citation": 35,
-        "content": 33,
+        "result": 70,
+        "search": 66,
+        "claude": 51,
+        "block": 40,
+        "citation": 34,
+        "content": 32,
         "tool": 29,
         "text": 17,
-        "messag": 15,
+        "messag": 14,
         "cit": 13,
-        "api": 12,
         "return": 12,
         "platform": 11,
         "user": 11,
         "method": 11,
         "source": 10,
+        "api": 10,
         "array": 10,
         "request": 10,
         "card": 10,
         "title": 9,
-        "model": 9,
         "see": 9,
         "str": 9,
         "application": 8,
@@ -135404,7 +135403,7 @@
         "same": 8,
         "must": 8,
         "example": 8,
-        "support": 7,
+        "model": 7,
         "only": 7,
         "both": 7,
         "field": 7,
@@ -135412,8 +135411,7 @@
         "com": 6,
         "doc": 6,
         "opu": 6,
-        "google": 6,
-        "alway": 6,
+        "support": 6,
         "directly": 6,
         "need": 6,
         "call": 6,
@@ -135424,10 +135422,12 @@
         "conversation": 6,
         "build": 5,
         "rag": 5,
-        "amazon": 5,
-        "bedrock": 5
+        "web": 5,
+        "each": 5,
+        "dynamic": 5,
+        "top": 5
       },
-      "word_count": 8095
+      "word_count": 8039
     },
     {
       "filename": "docs__en__build-with-claude__skills-guide.md",
@@ -136823,7 +136823,7 @@
         "conversation": 6,
         "such": 6
       },
-      "word_count": 4632
+      "word_count": 4634
     },
     {
       "filename": "docs__en__build-with-claude__vision-coordinates.md",
@@ -137987,10 +137987,10 @@
       ],
       "terms": {
         "support": 64,
-        "claude": 55,
+        "claude": 56,
         "fully": 44,
         "field": 33,
-        "api": 27,
+        "api": 28,
         "ignor": 27,
         "openai": 21,
         "tab": 20,
@@ -137998,29 +137998,30 @@
         "compatibility": 17,
         "return": 16,
         "error": 16,
-        "model": 14,
+        "model": 15,
         "statu": 13,
         "title": 11,
+        "request": 10,
         "php": 10,
         "system": 10,
         "messag": 10,
-        "request": 9,
         "native": 8,
         "follow": 8,
         "alway": 8,
         "layer": 7,
         "mytho": 7,
         "opu": 7,
+        "set": 7,
         "think": 7,
         "limit": 7,
         "empty": 7,
-        "set": 6,
         "prompt": 6,
         "header": 6,
         "tool": 6,
         "developer": 6,
         "hoist": 6,
         "conversation": 6,
+        "value": 6,
         "info": 6,
         "role": 6,
         "sonnet": 5,
@@ -138029,15 +138030,14 @@
         "using": 5,
         "schema": 5,
         "output": 5,
+        "other": 5,
         "message": 5,
-        "value": 5,
         "anthropic": 4,
         "preview": 4,
         "most": 4,
-        "limitation": 4,
-        "through": 4
+        "limitation": 4
       },
-      "word_count": 2491
+      "word_count": 2530
     },
     {
       "filename": "docs__en__cli-sdks-libraries__middleware.md",
@@ -140619,10 +140619,10 @@
         "organization": 56,
         "retention": 53,
         "yes": 53,
-        "eligible": 51,
         "anthropic": 46,
         "featur": 45,
         "tool": 41,
+        "eligible": 39,
         "readines": 36,
         "feature": 36,
         "cover": 30,
@@ -140662,7 +140662,7 @@
         "console": 12,
         "agent": 12
       },
-      "word_count": 4673
+      "word_count": 4670
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -143872,9 +143872,9 @@
       ],
       "terms": {
         "api": 58,
+        "destination": 45,
         "span": 45,
         "claude": 44,
-        "destination": 44,
         "request": 34,
         "endpoint": 32,
         "platform": 29,
@@ -143909,10 +143909,10 @@
         "session": 9,
         "same": 9,
         "sdk": 9,
+        "after": 9,
         "under": 9,
         "aws": 9,
         "beta": 8,
-        "after": 8,
         "admin": 8,
         "doesn": 8,
         "trace": 8,
@@ -143922,7 +143922,7 @@
         "own": 7,
         "setting": 7
       },
-      "word_count": 3880
+      "word_count": 3893
     },
     {
       "filename": "docs__en__manage-claude__opentelemetry__sdk.md",
@@ -144720,7 +144720,7 @@
         "every": 7,
         "date": 7
       },
-      "word_count": 7025
+      "word_count": 7027
     },
     {
       "filename": "docs__en__manage-claude__usage-cost-analytics-api.md",
@@ -149810,7 +149810,7 @@
       ],
       "terms": {
         "claude": 19,
-        "sandbox": 17,
+        "sandbox": 18,
         "session": 16,
         "tool": 14,
         "environment": 12,
@@ -149860,7 +149860,7 @@
         "url": 2,
         "http": 2
       },
-      "word_count": 785
+      "word_count": 786
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-workers.md",
@@ -151133,13 +151133,13 @@
         }
       ],
       "terms": {
-        "claude": 161,
+        "claude": 165,
         "block": 81,
         "fable": 75,
         "turn": 64,
-        "model": 56,
+        "model": 58,
         "think": 55,
-        "tool": 51,
+        "tool": 52,
         "request": 39,
         "mytho": 35,
         "see": 30,
@@ -151152,9 +151152,9 @@
         "beta": 25,
         "error": 23,
         "keep": 23,
+        "chang": 22,
         "prompt": 22,
         "call": 22,
-        "chang": 21,
         "only": 21,
         "edit": 20,
         "effort": 19,
@@ -151165,9 +151165,9 @@
         "messag": 15,
         "api": 15,
         "append": 15,
+        "send": 15,
         "history": 14,
         "one": 14,
-        "send": 14,
         "name": 13,
         "output": 13,
         "return": 13,
@@ -151184,7 +151184,7 @@
         "header": 13,
         "run": 13
       },
-      "word_count": 9421
+      "word_count": 9449
     },
     {
       "filename": "docs__en__models__fable-5-1__overview.md",
@@ -152649,10 +152649,10 @@
         }
       ],
       "terms": {
-        "claude": 240,
+        "claude": 248,
         "opu": 183,
+        "model": 95,
         "think": 94,
-        "model": 91,
         "tool": 65,
         "block": 47,
         "see": 42,
@@ -152676,6 +152676,7 @@
         "run": 21,
         "api": 20,
         "handle": 20,
+        "google": 20,
         "response": 19,
         "support": 19,
         "parameter": 19,
@@ -152689,18 +152690,17 @@
         "update": 17,
         "conversation": 17,
         "start": 16,
-        "google": 16,
         "break": 16,
         "sonnet": 15,
+        "manag": 15,
         "output": 15,
         "work": 15,
         "reason": 15,
         "stop": 15,
         "change": 14,
-        "level": 13,
-        "computer": 13
+        "cloud": 14
       },
-      "word_count": 9332
+      "word_count": 9377
     },
     {
       "filename": "docs__en__models__opus-5-5__overview.md",
@@ -153798,6 +153798,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "November 3, 2026",
+          "level": 3
+        },
+        {
           "text": "November 2, 2026",
           "level": 3
         },
@@ -154447,19 +154451,19 @@
         }
       ],
       "terms": {
-        "claude": 542,
+        "claude": 547,
         "api": 221,
         "model": 163,
         "beta": 155,
         "tool": 137,
         "now": 134,
-        "see": 122,
-        "opu": 122,
-        "request": 96,
+        "see": 123,
+        "opu": 123,
+        "request": 97,
         "header": 93,
         "agent": 92,
+        "sonnet": 75,
         "support": 75,
-        "sonnet": 73,
         "token": 72,
         "session": 66,
         "return": 64,
@@ -154483,8 +154487,8 @@
         "acces": 37,
         "event": 36,
         "fable": 36,
+        "platform": 35,
         "key": 35,
-        "platform": 34,
         "our": 34,
         "mode": 33,
         "endpoint": 33,
@@ -154498,7 +154502,7 @@
         "call": 30,
         "send": 29
       },
-      "word_count": 14820
+      "word_count": 14878
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
@@ -155742,7 +155746,6 @@
         "stop": 5,
         "reason": 5,
         "haiku": 5,
-        "alway": 5,
         "arriv": 5,
         "see": 5,
         "another": 5,
@@ -155761,9 +155764,10 @@
         "manag": 4,
         "support": 4,
         "usage": 4,
-        "end": 4
+        "end": 4,
+        "classifier": 4
       },
-      "word_count": 1688
+      "word_count": 1684
     },
     {
       "filename": "docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md",
