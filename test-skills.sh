@@ -49,7 +49,7 @@ check "content: vision"            content-search.sh docs__en__build-with-claude
 # === Fuzzy Search Tests ===
 check "fuzzy: hooks"       fuzzy-search.sh claude-code__hooks.md       "hooks"
 check "fuzzy: mcp"         fuzzy-search.sh claude-code__mcp.md         "mcp"
-check "fuzzy: plugins"     fuzzy-search.sh claude-code__plugins.md     "plugins"
+check "fuzzy: plugins"     fuzzy-search.sh claude-code__plugins__overview.md    "plugins"
 check "fuzzy: agent sdk"   fuzzy-search.sh claude-code__agent-sdk      "agent sdk"
 check "fuzzy: streaming"   fuzzy-search.sh streaming                   "streaming"
 check "fuzzy: skills"      fuzzy-search.sh skills                      "skills"

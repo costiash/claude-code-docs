@@ -7,7 +7,7 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)](https://github.com/costiash/claude-code-docs)
 [![Mentioned in Awesome Claude Code](https://awesome.re/mentioned-badge.svg)](https://github.com/hesreallyhim/awesome-claude-code)
 [![Listed on ClaudePluginHub](https://www.claudepluginhub.com/badge/costiash-claude-docs-plugin)](https://www.claudepluginhub.com/plugins/costiash-claude-docs-plugin?ref=badge)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/costiash/claude-code-docs)
+[![Ask DeepWiki](https://img.shields.io/badge/Ask-DeepWiki-blue)](https://deepwiki.com/costiash/claude-code-docs)
 
 **Every official Claude doc page, always live, never redistributed.** Every page across `platform.claude.com` and `code.claude.com`, re-indexed every 3 hours — and your Claude reads the actual current page, not a stale copy or a guess from training data.
 
