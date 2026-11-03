@@ -5,6 +5,11 @@ on:
     branches: [ main, master, development ]
   pull_request:
     branches: [ main, master ]
+  # The 3-hourly manifest bot commits with GITHUB_TOKEN, which never triggers
+  # this workflow, so upstream doc moves can break search tests unnoticed.
+  schedule:
+    - cron: '30 7 * * *'  # Daily at 07:30 UTC
+  workflow_dispatch:
 
 permissions:
   contents: read
