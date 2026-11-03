@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T09:15:42.522132Z",
+  "generated_at": "2026-11-03T18:16:33.426654Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -34568,7 +34568,7 @@
         "apk": 10,
         "before": 9
       },
-      "word_count": 4622
+      "word_count": 4572
     },
     {
       "filename": "claude-code__skills.md",
@@ -130474,10 +130474,10 @@
         "call": 7,
         "sdk": 7,
         "mak": 7,
+        "page": 7,
         "follow": 7,
         "url": 6,
         "need": 6,
-        "page": 6,
         "install": 6,
         "curl": 6,
         "doesn": 6,
@@ -130491,7 +130491,7 @@
         "com": 5,
         "before": 5
       },
-      "word_count": 2834
+      "word_count": 2837
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__overview.md",
@@ -137295,7 +137295,7 @@
         "list": 5,
         "also": 5
       },
-      "word_count": 2343
+      "word_count": 2361
     },
     {
       "filename": "docs__en__cli-sdks-libraries__cli__authentication.md",
@@ -145345,9 +145345,9 @@
         "enforcement": 9,
         "acces": 9,
         "every": 9,
+        "own": 9,
         "key": 9,
         "creat": 8,
-        "own": 8,
         "program": 8,
         "codegroup": 8,
         "value": 8,
@@ -145360,7 +145360,7 @@
         "see": 7,
         "check": 7
       },
-      "word_count": 3722
+      "word_count": 3724
     },
     {
       "filename": "docs__en__manage-claude__user-profiles-verification-portal.md",
@@ -147934,7 +147934,7 @@
         "model": 3,
         "file": 3
       },
-      "word_count": 2510
+      "word_count": 2630
     },
     {
       "filename": "docs__en__managed-agents__mcp-connector.md",
@@ -148405,10 +148405,10 @@
         "claude": 25,
         "see": 22,
         "each": 22,
+        "also": 21,
         "server": 21,
         "set": 21,
         "event": 21,
-        "also": 20,
         "inline": 20,
         "update": 20,
         "sett": 19,
@@ -148438,7 +148438,7 @@
         "manag": 10,
         "system": 10
       },
-      "word_count": 7647
+      "word_count": 7791
     },
     {
       "filename": "docs__en__managed-agents__onboarding.md",
@@ -148795,14 +148795,14 @@
         }
       ],
       "terms": {
-        "agent": 46,
+        "agent": 47,
         "claude": 40,
         "codegroupitem": 40,
         "title": 25,
         "tab": 24,
         "session": 23,
         "manag": 22,
-        "tool": 19,
+        "tool": 21,
         "card": 19,
         "create": 17,
         "environment": 17,
@@ -148814,16 +148814,16 @@
         "com": 11,
         "event": 11,
         "step": 11,
-        "too": 10,
         "chat": 10,
-        "quickstart": 9,
         "stream": 9,
         "github": 9,
         "reference": 9,
         "every": 9,
+        "too": 9,
         "icon": 9,
         "href": 9,
         "platform": 8,
+        "quickstart": 8,
         "codegroup": 8,
         "doc": 7,
         "sdk": 7,
@@ -148831,6 +148831,7 @@
         "host": 6,
         "opu": 6,
         "anthropic": 6,
+        "web": 6,
         "cli": 5,
         "assistant": 5,
         "list": 5,
@@ -148840,13 +148841,12 @@
         "beta": 4,
         "sonnet": 4,
         "configuration": 4,
-        "built": 4,
+        "search": 4,
         "need": 4,
         "render": 4,
-        "cardgroup": 4,
-        "logo": 4
+        "cardgroup": 4
       },
-      "word_count": 2899
+      "word_count": 3048
     },
     {
       "filename": "docs__en__managed-agents__reference.md",
@@ -149492,7 +149492,7 @@
         "only": 4,
         "client": 4
       },
-      "word_count": 3267
+      "word_count": 3371
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-memory.md",
@@ -150531,7 +150531,7 @@
         }
       ],
       "terms": {
-        "tool": 56,
+        "tool": 57,
         "claude": 37,
         "agent": 32,
         "manag": 14,
@@ -150551,7 +150551,6 @@
         "set": 7,
         "return": 7,
         "mcp": 7,
-        "toolset": 7,
         "fetch": 7,
         "each": 7,
         "title": 6,
@@ -150559,6 +150558,7 @@
         "com": 6,
         "doc": 6,
         "opu": 6,
+        "toolset": 6,
         "name": 6,
         "only": 6,
         "description": 5,
@@ -150582,7 +150582,7 @@
         "example": 4,
         "codegroup": 4
       },
-      "word_count": 2178
+      "word_count": 2155
     },
     {
       "filename": "docs__en__managed-agents__tools-web-restrictions.md",
