@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T03:15:31.525604Z",
+  "generated_at": "2026-11-03T09:15:42.522132Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20953,13 +20953,13 @@
         }
       ],
       "terms": {
-        "claude": 55,
+        "claude": 56,
         "ide": 42,
-        "code": 38,
-        "plugin": 21,
+        "code": 39,
+        "plugin": 22,
         "wsl": 20,
+        "jetbrain": 17,
         "file": 15,
-        "jetbrain": 15,
         "terminal": 14,
         "command": 14,
         "network": 14,
@@ -21004,7 +21004,7 @@
         "integrat": 4,
         "context": 4
       },
-      "word_count": 1839
+      "word_count": 1868
     },
     {
       "filename": "claude-code__keybindings.md",
