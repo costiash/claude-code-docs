@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T03:16:52.127967Z",
+  "generated_at": "2026-11-04T15:16:20.300482Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -130198,7 +130198,7 @@
       "terms": {
         "claude": 94,
         "foundry": 61,
-        "azure": 55,
+        "azure": 56,
         "model": 52,
         "deployment": 42,
         "api": 33,
@@ -130218,21 +130218,21 @@
         "key": 14,
         "name": 14,
         "sonnet": 13,
+        "version": 13,
         "acces": 12,
         "through": 12,
         "featur": 12,
         "note": 12,
-        "version": 12,
         "token": 11,
         "available": 11,
+        "entra": 11,
         "http": 10,
+        "authentication": 10,
         "standard": 10,
         "detail": 10,
-        "entra": 10,
         "example": 10,
         "limit": 10,
         "endpoint": 9,
-        "authentication": 9,
         "sdk": 9,
         "option": 9,
         "new": 9,
@@ -130247,7 +130247,7 @@
         "bill": 7,
         "usage": 7
       },
-      "word_count": 3889
+      "word_count": 3881
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__anthropic-managed.md",
@@ -130387,8 +130387,9 @@
         "set": 28,
         "request": 27,
         "console": 25,
+        "title": 24,
         "account": 24,
-        "title": 22,
+        "tab": 23,
         "credential": 22,
         "follow": 21,
         "acces": 20,
@@ -130399,7 +130400,6 @@
         "check": 18,
         "setup": 18,
         "one": 17,
-        "tab": 17,
         "support": 17,
         "open": 16,
         "call": 16,
@@ -130421,7 +130421,7 @@
         "agent": 11,
         "log": 11
       },
-      "word_count": 5127
+      "word_count": 5133
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__google-managed.md",
@@ -130499,14 +130499,14 @@
         "manag": 31,
         "endpoint": 29,
         "region": 23,
+        "tab": 22,
         "request": 21,
+        "title": 19,
         "platform": 19,
         "agent": 19,
-        "title": 17,
         "api": 17,
         "see": 17,
         "step": 16,
-        "tab": 16,
         "global": 14,
         "opu": 13,
         "cli": 12,
@@ -130515,13 +130515,13 @@
         "anthropic": 11,
         "client": 11,
         "support": 11,
-        "codegroup": 10,
         "multi": 10,
         "featur": 10,
         "tool": 10,
         "limit": 9,
         "deprecat": 9,
         "code": 9,
+        "codegroup": 8,
         "card": 8,
         "call": 7,
         "sdk": 7,
@@ -131003,17 +131003,17 @@
         "sdk": 23,
         "note": 22,
         "credential": 22,
+        "tab": 22,
         "agent": 21,
+        "title": 20,
         "follow": 20,
         "spend": 20,
         "party": 19,
         "header": 19,
         "step": 19,
-        "environment": 19,
-        "title": 18,
-        "marketplace": 18
+        "environment": 19
       },
-      "word_count": 8875
+      "word_count": 8881
     },
     {
       "filename": "docs__en__build-with-claude__compaction.md",
@@ -132863,7 +132863,7 @@
         "see": 3,
         "reach": 3
       },
-      "word_count": 12013
+      "word_count": 12027
     },
     {
       "filename": "docs__en__build-with-claude__message-threads.md",
@@ -133937,10 +133937,10 @@
       ],
       "terms": {
         "cache": 243,
-        "cach": 179,
-        "claude": 117,
-        "block": 117,
-        "prompt": 111,
+        "cach": 180,
+        "claude": 118,
+        "block": 118,
+        "prompt": 112,
         "mtok": 105,
         "request": 99,
         "token": 90,
@@ -133960,16 +133960,16 @@
         "think": 32,
         "read": 31,
         "google": 29,
+        "last": 29,
         "note": 28,
         "see": 28,
-        "last": 27,
+        "hour": 27,
         "automatic": 26,
-        "hour": 26,
         "writ": 26,
         "hit": 26,
+        "entry": 25,
         "turn": 24,
         "each": 24,
-        "entry": 24,
         "only": 24,
         "title": 23,
         "sonnet": 23,
@@ -133977,17 +133977,17 @@
         "chang": 23,
         "cost": 22,
         "same": 22,
+        "ttl": 21,
         "follow": 21,
         "different": 21,
         "explicit": 20,
-        "ttl": 20,
+        "minute": 20,
         "level": 20,
         "response": 20,
         "context": 20,
-        "minute": 19,
-        "haiku": 19
+        "after": 19
       },
-      "word_count": 17211
+      "word_count": 17231
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__claude-prompting-best-practices.md",
@@ -137549,11 +137549,11 @@
         "doc": 6,
         "video": 6,
         "card": 6,
+        "install": 5,
         "ant": 5,
         "script": 5,
         "sdk": 4,
         "librari": 4,
-        "install": 4,
         "request": 4,
         "terminal": 4,
         "response": 4,
@@ -137589,7 +137589,7 @@
         "automation": 2,
         "installation": 2
       },
-      "word_count": 592
+      "word_count": 594
     },
     {
       "filename": "docs__en__cli-sdks-libraries__cli__scripting.md",
@@ -138493,7 +138493,7 @@
         "typ": 4,
         "example": 4
       },
-      "word_count": 1926
+      "word_count": 1932
     },
     {
       "filename": "docs__en__cli-sdks-libraries__sdks__go.md",
@@ -138671,6 +138671,10 @@
         {
           "text": "Installation",
           "level": 2
+        },
+        {
+          "text": "Add-ons",
+          "level": 3
         },
         {
           "text": "Requirements",
@@ -138902,39 +138906,40 @@
         }
       ],
       "terms": {
-        "sdk": 51,
+        "sdk": 50,
         "method": 39,
+        "client": 34,
         "tool": 34,
-        "client": 31,
         "api": 29,
         "request": 29,
         "clas": 28,
         "response": 24,
         "using": 23,
+        "version": 22,
         "parameter": 22,
-        "version": 20,
         "stream": 19,
+        "java": 18,
         "call": 18,
         "default": 18,
-        "java": 17,
+        "add": 16,
         "claude": 14,
-        "class": 14,
         "undocument": 14,
         "support": 13,
+        "class": 13,
         "http": 12,
+        "platform": 12,
+        "tab": 12,
         "json": 12,
         "accordion": 12,
+        "title": 11,
         "acces": 11,
         "see": 11,
-        "add": 11,
+        "example": 11,
+        "each": 11,
         "model": 11,
         "error": 11,
-        "platform": 10,
-        "example": 10,
-        "each": 10,
         "also": 10,
         "exception": 10,
-        "title": 9,
         "configuration": 9,
         "set": 9,
         "value": 9,
@@ -138950,10 +138955,9 @@
         "schema": 8,
         "jackson": 8,
         "check": 8,
-        "beta": 8,
-        "anthropic": 7
+        "beta": 8
       },
-      "word_count": 4962
+      "word_count": 5053
     },
     {
       "filename": "docs__en__cli-sdks-libraries__sdks__php.md",
@@ -139309,7 +139313,7 @@
         "extra": 5,
         "chang": 5
       },
-      "word_count": 3174
+      "word_count": 3176
     },
     {
       "filename": "docs__en__cli-sdks-libraries__sdks__ruby.md",
@@ -139785,7 +139789,7 @@
       "url": "https://platform.claude.com/docs/en/get-started",
       "headings": [
         {
-          "text": "Prerequisites",
+          "text": "Before you begin",
           "level": 2
         },
         {
@@ -139798,58 +139802,58 @@
         }
       ],
       "terms": {
-        "step": 86,
-        "title": 52,
-        "tab": 32,
-        "api": 26,
-        "create": 21,
-        "key": 19,
-        "sdk": 17,
-        "claude": 16,
-        "code": 16,
+        "step": 84,
+        "title": 54,
+        "tab": 48,
+        "stepnumber": 27,
+        "create": 24,
+        "claude": 18,
+        "api": 16,
+        "code": 15,
+        "cli": 13,
+        "install": 12,
+        "sdk": 12,
         "call": 10,
-        "set": 10,
         "project": 10,
         "card": 10,
-        "environment": 9,
-        "export": 8,
-        "variable": 8,
-        "read": 8,
-        "install": 8,
+        "key": 9,
         "run": 8,
-        "cli": 7,
-        "automatically": 7,
         "http": 6,
         "platform": 6,
         "com": 6,
         "doc": 6,
+        "messag": 6,
         "file": 6,
-        "messag": 5,
+        "first": 5,
+        "sign": 5,
+        "add": 5,
         "icon": 5,
         "href": 5,
         "overview": 5,
-        "first": 4,
         "build": 4,
-        "anthropic": 4,
+        "console": 4,
+        "linux": 4,
+        "binary": 4,
+        "releas": 4,
+        "source": 4,
         "maven": 4,
-        "get": 3,
         "make": 3,
-        "other": 3,
-        "authentication": 3,
-        "add": 3,
+        "continu": 3,
+        "curl": 3,
+        "environment": 3,
+        "find": 3,
+        "later": 3,
+        "set": 3,
         "java": 3,
         "gradle": 3,
         "directory": 3,
         "save": 3,
         "model": 3,
+        "get": 2,
         "start": 2,
-        "url": 2,
-        "assistant": 2,
-        "console": 2,
-        "account": 2,
-        "curl": 2
+        "assistant": 2
       },
-      "word_count": 1755
+      "word_count": 1921
     },
     {
       "filename": "docs__en__home.md",
@@ -144114,23 +144118,23 @@
         "sdk": 53,
         "span": 53,
         "claude": 40,
+        "tab": 22,
         "opentelemetry": 19,
         "send": 18,
         "exporter": 17,
         "platform": 16,
         "tool": 16,
         "api": 16,
-        "tab": 16,
         "trac": 15,
         "request": 14,
-        "typescript": 13,
+        "title": 13,
         "java": 13,
-        "php": 13,
         "trace": 12,
+        "typescript": 12,
+        "php": 12,
         "each": 12,
         "application": 12,
         "doesn": 12,
-        "title": 11,
         "beta": 11,
         "install": 11,
         "console": 10,
@@ -144146,23 +144150,23 @@
         "yet": 8,
         "next": 8,
         "print": 8,
-        "codegroup": 8,
-        "csharp": 8,
         "one": 8,
         "stream": 8,
-        "python": 7,
         "option": 7,
+        "csharp": 7,
         "read": 7,
         "http": 6,
-        "ruby": 6,
+        "python": 6,
         "opu": 6,
         "nest": 6,
         "version": 6,
         "environment": 6,
         "see": 6,
-        "under": 6
+        "codegroup": 6,
+        "under": 6,
+        "client": 6
       },
-      "word_count": 3053
+      "word_count": 3050
     },
     {
       "filename": "docs__en__manage-claude__organization-webhooks.md",
@@ -145784,7 +145788,7 @@
         "configure": 4,
         "enable": 4
       },
-      "word_count": 3134
+      "word_count": 3133
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__azure.md",
@@ -145996,7 +146000,7 @@
         "console": 3,
         "configure": 3
       },
-      "word_count": 2087
+      "word_count": 2085
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__github-actions.md",
@@ -146176,7 +146180,7 @@
         "wizard": 3,
         "creat": 3
       },
-      "word_count": 1476
+      "word_count": 1474
     },
     {
       "filename": "docs__en__manage-claude__wif-providers__okta.md",
@@ -146368,7 +146372,7 @@
         "title": 7,
         "any": 7
       },
-      "word_count": 3323
+      "word_count": 3321
     },
     {
       "filename": "docs__en__manage-claude__wif-reference.md",
@@ -146522,7 +146526,7 @@
         "each": 8,
         "yes": 8
       },
-      "word_count": 3906
+      "word_count": 3905
     },
     {
       "filename": "docs__en__manage-claude__workload-identity-federation.md",
@@ -148892,11 +148896,7 @@
           "level": 2
         },
         {
-          "text": "Prerequisites",
-          "level": 2
-        },
-        {
-          "text": "Install the CLI",
+          "text": "Before you begin",
           "level": 2
         },
         {
@@ -148922,27 +148922,29 @@
       ],
       "terms": {
         "agent": 47,
-        "claude": 40,
+        "claude": 42,
         "codegroupitem": 40,
-        "title": 25,
-        "tab": 24,
+        "tab": 38,
+        "title": 36,
+        "step": 30,
         "session": 23,
         "manag": 22,
         "tool": 21,
+        "create": 20,
         "card": 19,
-        "create": 17,
-        "environment": 17,
+        "environment": 18,
         "return": 17,
+        "run": 16,
         "save": 16,
-        "run": 15,
         "sandbox": 12,
+        "cli": 12,
         "http": 11,
         "com": 11,
         "event": 11,
-        "step": 11,
+        "github": 10,
         "chat": 10,
         "stream": 9,
-        "github": 9,
+        "sdk": 9,
         "reference": 9,
         "every": 9,
         "too": 9,
@@ -148952,27 +148954,25 @@
         "quickstart": 8,
         "codegroup": 8,
         "doc": 7,
-        "sdk": 7,
+        "one": 7,
+        "install": 7,
         "file": 7,
         "host": 6,
         "opu": 6,
         "anthropic": 6,
         "web": 6,
-        "cli": 5,
+        "api": 5,
+        "key": 5,
         "assistant": 5,
         "list": 5,
-        "one": 5,
         "command": 5,
         "each": 5,
         "beta": 4,
         "sonnet": 4,
         "configuration": 4,
-        "search": 4,
-        "need": 4,
-        "render": 4,
-        "cardgroup": 4
+        "sign": 4
       },
-      "word_count": 3048
+      "word_count": 3278
     },
     {
       "filename": "docs__en__managed-agents__reference.md",
@@ -149496,6 +149496,7 @@
         "create": 7,
         "maco": 7,
         "read": 7,
+        "install": 7,
         "server": 7,
         "note": 6,
         "opu": 6,
@@ -149504,7 +149505,6 @@
         "stor": 6,
         "call": 6,
         "sdk": 6,
-        "install": 6,
         "aws": 6,
         "console": 6,
         "google": 6,
@@ -149516,7 +149516,7 @@
         "memory": 5,
         "support": 5
       },
-      "word_count": 2486
+      "word_count": 2488
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-custom-tools.md",
@@ -151003,9 +151003,9 @@
         }
       ],
       "terms": {
-        "event": 72,
+        "event": 73,
+        "endpoint": 25,
         "claude": 24,
-        "endpoint": 24,
         "agent": 22,
         "archiv": 21,
         "session": 20,
@@ -151017,12 +151017,13 @@
         "trigger": 11,
         "every": 10,
         "delivery": 10,
+        "same": 10,
         "title": 9,
         "object": 9,
+        "new": 9,
         "thread": 9,
         "delet": 9,
         "environment": 9,
-        "same": 9,
         "manag": 8,
         "beta": 8,
         "includ": 8,
@@ -151036,6 +151037,7 @@
         "itself": 7,
         "final": 7,
         "creat": 7,
+        "one": 7,
         "memory": 7,
         "attempt": 7,
         "opu": 6,
@@ -151048,13 +151050,11 @@
         "header": 6,
         "url": 5,
         "platform": 5,
+        "delete": 5,
         "api": 5,
-        "chang": 5,
-        "new": 5,
-        "error": 5,
-        "because": 5
+        "chang": 5
       },
-      "word_count": 2676
+      "word_count": 2704
     },
     {
       "filename": "docs__en__managed-agents__workflow-runs.md",
@@ -152877,30 +152877,30 @@
         }
       ],
       "terms": {
-        "claude": 62,
-        "model": 26,
-        "opu": 23,
+        "claude": 59,
+        "model": 25,
+        "opu": 21,
         "card": 20,
-        "output": 16,
-        "think": 16,
+        "output": 15,
         "platform": 14,
-        "token": 14,
+        "think": 14,
+        "token": 13,
         "prompt": 12,
-        "com": 11,
         "api": 11,
         "title": 10,
         "http": 10,
+        "com": 10,
         "doc": 9,
-        "pric": 9,
         "mtok": 9,
         "effort": 9,
         "adaptive": 9,
         "icon": 9,
         "href": 9,
+        "pric": 8,
         "knowledge": 7,
-        "input": 7,
-        "text": 7,
         "latency": 7,
+        "input": 6,
+        "system": 6,
         "price": 6,
         "jun": 6,
         "batch": 6,
@@ -152909,26 +152909,26 @@
         "context": 5,
         "build": 5,
         "max": 5,
-        "default": 5,
-        "value": 5,
         "cutoff": 5,
         "sonnet": 5,
-        "system": 5,
         "overview": 4,
         "work": 4,
-        "tool": 4,
-        "support": 4,
+        "default": 4,
         "alway": 4,
         "about": 4,
+        "value": 4,
         "cloud": 4,
         "manag": 4,
         "cardgroup": 4,
         "window": 3,
         "limit": 3,
         "september": 3,
-        "runn": 3
+        "cod": 3,
+        "fast": 3,
+        "word": 3,
+        "support": 3
       },
-      "word_count": 1086
+      "word_count": 976
     },
     {
       "filename": "docs__en__models__opus-5-5__whats-new-opus-5-5.md",
@@ -153635,29 +153635,28 @@
         }
       ],
       "terms": {
-        "claude": 62,
-        "model": 28,
-        "sonnet": 21,
-        "think": 19,
+        "claude": 56,
+        "model": 26,
+        "sonnet": 18,
         "card": 18,
+        "think": 16,
         "output": 15,
         "platform": 13,
         "token": 13,
         "prompt": 12,
-        "com": 10,
-        "opu": 10,
         "api": 10,
         "title": 9,
         "http": 9,
+        "com": 9,
         "mtok": 9,
         "effort": 9,
         "adaptive": 9,
         "doc": 8,
+        "opu": 8,
         "icon": 8,
         "href": 8,
         "pric": 7,
         "input": 6,
-        "text": 6,
         "price": 6,
         "latency": 6,
         "jun": 6,
@@ -153666,27 +153665,28 @@
         "ids": 5,
         "context": 5,
         "max": 5,
-        "tool": 5,
-        "value": 5,
         "default": 5,
         "knowledge": 5,
         "cutoff": 5,
         "system": 5,
         "overview": 4,
         "build": 4,
-        "off": 4,
-        "support": 4,
         "about": 4,
+        "value": 4,
         "cloud": 4,
         "manag": 4,
         "cardgroup": 4,
         "window": 3,
         "limit": 3,
         "september": 3,
-        "new": 3,
-        "turn": 3
+        "word": 3,
+        "support": 3,
+        "beta": 3,
+        "cach": 3,
+        "see": 3,
+        "full": 3
       },
-      "word_count": 1095
+      "word_count": 993
     },
     {
       "filename": "docs__en__models__sonnet-5-5__whats-new-sonnet-5-5.md",
