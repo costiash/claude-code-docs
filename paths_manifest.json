@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T15:16:17.512797Z",
+  "generated_at": "2026-11-04T18:16:26.997573Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2556,7 +2556,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers.md",
       "title": "API credits for subscribers",
       "category": "about_claude",
-      "sha256": "a55742b9ca474b9d750e6c8f95373db09deabd5549565dddb99a5e35d4ee2f75",
+      "sha256": "4b64907a52dd79a582fdb6757a6f513820aae908c25e5d434c550362651cb47e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2743,7 +2743,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md",
       "title": "Overview",
       "category": "agents_and_tools",
-      "sha256": "46e245d05b655d427d60dd6080da8522cf4c307e6ce84451c47e90bdfafef896",
+      "sha256": "72e111d404c2f2304159c8340dea47537d05e0816d0b882f8e52fcbaf4f2b160",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2754,7 +2754,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart.md",
       "title": "Quickstart",
       "category": "agents_and_tools",
-      "sha256": "6e067089ca983f7c86474c6bcdff3e3c07f6fb157da435d4951fa88d838841c7",
+      "sha256": "24f45faf73c389ed524e1650943a4e05153e0da0d4405d30a4476c6d3ccc59f2",
       "lastmod": null,
       "fetch_status": "ok"
     },
