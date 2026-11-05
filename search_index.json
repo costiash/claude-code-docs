@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T21:14:39.269679Z",
+  "generated_at": "2026-11-05T00:20:11.943976Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -41904,16 +41904,18 @@
         "skill": 47,
         "step": 25,
         "claude": 22,
+        "api": 21,
         "title": 18,
         "create": 16,
         "tab": 16,
-        "api": 15,
+        "cli": 15,
         "agent": 14,
         "code": 13,
         "codegroup": 12,
+        "key": 11,
         "tool": 10,
+        "sign": 10,
         "card": 10,
-        "cli": 9,
         "presentation": 7,
         "file": 7,
         "execution": 7,
@@ -41928,11 +41930,9 @@
         "document": 5,
         "powerpoint": 5,
         "follow": 5,
-        "key": 5,
         "icon": 5,
         "href": 5,
         "request": 4,
-        "sign": 4,
         "stepnumber": 4,
         "linux": 4,
         "download": 4,
@@ -41952,7 +41952,7 @@
         "also": 3,
         "requir": 3
       },
-      "word_count": 3868
+      "word_count": 4254
     },
     {
       "filename": "docs__en__agents-and-tools__mcp-connector.md",
@@ -44584,7 +44584,7 @@
         "delta": 4,
         "result": 4
       },
-      "word_count": 3600
+      "word_count": 3595
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__handle-tool-calls.md",
@@ -140785,13 +140785,13 @@
         }
       ],
       "terms": {
-        "claude": 114,
+        "claude": 115,
         "zdr": 79,
         "data": 73,
         "hipaa": 73,
         "api": 67,
         "organization": 56,
-        "retention": 53,
+        "retention": 55,
         "yes": 53,
         "anthropic": 46,
         "featur": 45,
@@ -140804,7 +140804,7 @@
         "accordion": 28,
         "retain": 27,
         "arrangement": 26,
-        "see": 25,
+        "see": 26,
         "under": 23,
         "code": 23,
         "title": 21,
@@ -140836,7 +140836,7 @@
         "console": 12,
         "agent": 12
       },
-      "word_count": 4671
+      "word_count": 4687
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -142603,12 +142603,12 @@
         }
       ],
       "terms": {
-        "claude": 55,
+        "claude": 58,
         "compliance": 40,
         "api": 34,
         "organization": 27,
+        "session": 20,
         "key": 20,
-        "session": 19,
         "card": 18,
         "doc": 12,
         "activity": 12,
@@ -142654,7 +142654,7 @@
         "per": 4,
         "analytic": 4
       },
-      "word_count": 1132
+      "word_count": 1150
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -143047,11 +143047,11 @@
         }
       ],
       "terms": {
-        "claude": 90,
+        "claude": 96,
         "api": 80,
         "organization": 75,
         "compliance": 68,
-        "session": 66,
+        "session": 68,
         "accordion": 36,
         "key": 34,
         "endpoint": 32,
@@ -143064,11 +143064,11 @@
         "title": 19,
         "feed": 19,
         "only": 19,
-        "user": 19,
         "code": 19,
         "cloud": 19,
         "parent": 18,
         "yes": 18,
+        "user": 18,
         "through": 18,
         "event": 17,
         "transcript": 17,
@@ -143089,16 +143089,16 @@
         "each": 11,
         "enabl": 10,
         "link": 10,
+        "delet": 10,
         "text": 10,
         "retention": 9,
         "see": 9,
         "owner": 9,
-        "delet": 9,
         "captur": 9,
         "tool": 9,
         "other": 8
       },
-      "word_count": 2978
+      "word_count": 3014
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -143137,35 +143137,37 @@
         }
       ],
       "terms": {
-        "session": 32,
+        "session": 35,
+        "compliance": 27,
         "activity": 27,
-        "compliance": 26,
-        "api": 26,
-        "claude": 23,
+        "api": 27,
+        "claude": 25,
         "content": 22,
+        "transcript": 20,
         "window": 20,
-        "transcript": 18,
         "endpoint": 17,
+        "organization": 16,
+        "retention": 15,
         "local": 15,
-        "organization": 15,
-        "retention": 14,
         "cursor": 13,
         "chat": 13,
-        "user": 13,
         "feed": 12,
         "run": 12,
+        "user": 12,
         "key": 11,
+        "see": 10,
         "page": 10,
-        "see": 9,
+        "return": 10,
+        "delet": 10,
         "retrieve": 9,
-        "return": 9,
+        "export": 9,
         "read": 8,
-        "delete": 8,
         "remote": 8,
         "activiti": 8,
         "record": 8,
         "each": 8,
-        "export": 8,
+        "period": 8,
+        "delete": 7,
         "project": 7,
         "file": 7,
         "one": 7,
@@ -143175,7 +143177,6 @@
         "every": 7,
         "already": 7,
         "data": 7,
-        "period": 7,
         "platform": 6,
         "pattern": 6,
         "between": 6,
@@ -143183,12 +143184,11 @@
         "event": 6,
         "persist": 6,
         "year": 6,
+        "after": 6,
         "doe": 6,
-        "delet": 6,
-        "card": 6,
-        "manage": 5
+        "cloud": 6
       },
-      "word_count": 2100
+      "word_count": 2172
     },
     {
       "filename": "docs__en__manage-claude__compliance-org-data.md",
@@ -143317,12 +143317,12 @@
         }
       ],
       "terms": {
-        "session": 185,
-        "claude": 87,
-        "endpoint": 59,
+        "session": 194,
+        "claude": 102,
+        "endpoint": 60,
         "return": 56,
-        "user": 45,
-        "transcript": 41,
+        "user": 44,
+        "transcript": 43,
         "local": 39,
         "content": 39,
         "api": 34,
@@ -143331,44 +143331,44 @@
         "messag": 30,
         "compliance": 28,
         "list": 28,
+        "retention": 27,
         "request": 27,
         "each": 26,
         "google": 25,
         "tool": 25,
-        "retention": 25,
         "block": 25,
         "code": 23,
         "key": 23,
-        "run": 21,
+        "run": 22,
         "result": 21,
+        "default": 21,
         "message": 21,
-        "remote": 19,
-        "default": 19,
-        "only": 18,
+        "remote": 20,
+        "cowork": 19,
+        "see": 18,
         "captur": 18,
-        "cowork": 17,
-        "see": 17,
+        "only": 17,
+        "period": 17,
+        "one": 17,
         "carri": 17,
         "page": 16,
+        "cloud": 16,
+        "start": 16,
         "response": 16,
+        "tag": 15,
         "client": 15,
-        "cloud": 15,
-        "period": 15,
-        "one": 15,
+        "doe": 15,
+        "app": 14,
         "through": 14,
         "set": 14,
         "conversation": 14,
         "read": 14,
-        "doe": 14,
+        "valu": 14,
         "pas": 14,
-        "app": 13,
-        "valu": 13,
         "example": 13,
-        "bound": 13,
-        "add": 12,
-        "same": 12
+        "bound": 13
       },
-      "word_count": 6007
+      "word_count": 6201
     },
     {
       "filename": "docs__en__manage-claude__data-residency.md",
@@ -147794,7 +147794,7 @@
         "api": 4,
         "one": 4
       },
-      "word_count": 4133
+      "word_count": 4125
     },
     {
       "filename": "docs__en__managed-agents__events-and-streaming.md",
@@ -147916,7 +147916,7 @@
         "arriv": 6,
         "history": 6
       },
-      "word_count": 5772
+      "word_count": 5767
     },
     {
       "filename": "docs__en__managed-agents__files.md",
@@ -148466,7 +148466,7 @@
         "move": 3,
         "resourc": 3
       },
-      "word_count": 4015
+      "word_count": 4012
     },
     {
       "filename": "docs__en__managed-agents__multiagent-orchestration.md",
@@ -148970,38 +148970,41 @@
       ],
       "terms": {
         "agent": 47,
+        "codegroupitem": 44,
         "claude": 42,
-        "codegroupitem": 40,
         "tab": 38,
         "title": 36,
         "step": 30,
-        "session": 23,
+        "session": 24,
         "manag": 22,
+        "create": 21,
         "tool": 21,
-        "create": 20,
+        "return": 19,
         "card": 19,
         "environment": 18,
-        "return": 17,
+        "save": 18,
         "run": 16,
-        "save": 16,
+        "cli": 15,
         "sandbox": 12,
-        "cli": 12,
         "http": 11,
         "com": 11,
         "event": 11,
         "github": 10,
+        "reference": 10,
+        "every": 10,
+        "too": 10,
         "chat": 10,
         "stream": 9,
         "sdk": 9,
-        "reference": 9,
-        "every": 9,
-        "too": 9,
         "icon": 9,
         "href": 9,
         "platform": 8,
         "quickstart": 8,
+        "api": 8,
+        "key": 8,
         "codegroup": 8,
         "doc": 7,
+        "sign": 7,
         "one": 7,
         "install": 7,
         "file": 7,
@@ -149009,18 +149012,15 @@
         "opu": 6,
         "anthropic": 6,
         "web": 6,
-        "api": 5,
-        "key": 5,
         "assistant": 5,
         "list": 5,
         "command": 5,
         "each": 5,
         "beta": 4,
         "sonnet": 4,
-        "configuration": 4,
-        "sign": 4
+        "configuration": 4
       },
-      "word_count": 3278
+      "word_count": 3454
     },
     {
       "filename": "docs__en__managed-agents__reference.md",
@@ -150466,7 +150466,7 @@
         "until": 4,
         "appli": 4
       },
-      "word_count": 3409
+      "word_count": 3408
     },
     {
       "filename": "docs__en__managed-agents__sessions.md",
@@ -151232,7 +151232,7 @@
         "until": 13,
         "phas": 12
       },
-      "word_count": 7457
+      "word_count": 7453
     },
     {
       "filename": "docs__en__models__fable-5-1__migration-guide.md",
@@ -155894,13 +155894,14 @@
         "refusal": 44,
         "stream": 21,
         "fallback": 18,
+        "refus": 16,
         "model": 16,
         "api": 14,
         "retry": 13,
-        "refus": 12,
         "platform": 10,
         "response": 9,
         "request": 8,
+        "turn": 8,
         "card": 8,
         "handle": 7,
         "http": 6,
@@ -155938,10 +155939,9 @@
         "manag": 4,
         "support": 4,
         "usage": 4,
-        "end": 4,
-        "classifier": 4
+        "end": 4
       },
-      "word_count": 1684
+      "word_count": 1719
     },
     {
       "filename": "docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md",
