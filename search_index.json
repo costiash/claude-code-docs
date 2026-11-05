@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T09:16:29.747276Z",
+  "generated_at": "2026-11-05T18:17:48.351961Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -145581,8 +145581,8 @@
         "plugin": 17,
         "scop": 16,
         "compliance": 15,
+        "member": 15,
         "endpoint": 14,
-        "member": 14,
         "read": 14,
         "title": 13,
         "analytic": 13,
@@ -145622,7 +145622,7 @@
         "primary": 4,
         "invite": 4
       },
-      "word_count": 1295
+      "word_count": 1300
     },
     {
       "filename": "docs__en__manage-claude__analytics-api.md",
@@ -146011,7 +146011,7 @@
         }
       ],
       "terms": {
-        "key": 61,
+        "key": 62,
         "workspace": 33,
         "api": 31,
         "claude": 25,
@@ -146025,9 +146025,9 @@
         "attest": 10,
         "token": 10,
         "acces": 10,
+        "work": 10,
         "card": 10,
         "platform": 9,
-        "work": 9,
         "header": 8,
         "personal": 8,
         "create": 8,
@@ -146039,6 +146039,7 @@
         "doc": 6,
         "manage": 6,
         "secret": 6,
+        "where": 6,
         "cloud": 6,
         "ios": 6,
         "maco": 6,
@@ -146046,7 +146047,6 @@
         "console": 6,
         "also": 6,
         "only": 6,
-        "where": 5,
         "liv": 5,
         "provider": 5,
         "end": 5,
@@ -146062,7 +146062,7 @@
         "credential": 4,
         "static": 4
       },
-      "word_count": 3110
+      "word_count": 3121
     },
     {
       "filename": "docs__en__manage-claude__claude-code-analytics-api.md",
@@ -148909,6 +148909,112 @@
       "word_count": 5788
     },
     {
+      "filename": "docs__en__manage-claude__ip-allowlist.md",
+      "id": "docs/en/manage-claude/ip-allowlist",
+      "title": "IP allowlisting (beta)",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/ip-allowlist",
+      "headings": [
+        {
+          "text": "How it works",
+          "level": 2
+        },
+        {
+          "text": "Claude Platform organizations",
+          "level": 2
+        },
+        {
+          "text": "Where the allowlist applies",
+          "level": 3
+        },
+        {
+          "text": "Claude Enterprise organizations",
+          "level": 2
+        },
+        {
+          "text": "Apps that the allowlist covers",
+          "level": 3
+        },
+        {
+          "text": "What users can expect",
+          "level": 3
+        },
+        {
+          "text": "Limitations",
+          "level": 2
+        },
+        {
+          "text": "Turn on the allowlist",
+          "level": 2
+        },
+        {
+          "text": "Entry format",
+          "level": 3
+        },
+        {
+          "text": "Avoid locking yourself out",
+          "level": 2
+        },
+        {
+          "text": "If you are locked out",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 45,
+        "organization": 24,
+        "allowlist": 23,
+        "list": 19,
+        "acces": 18,
+        "owner": 17,
+        "admin": 16,
+        "addres": 16,
+        "api": 13,
+        "user": 13,
+        "cover": 12,
+        "page": 12,
+        "setting": 11,
+        "network": 11,
+        "add": 11,
+        "key": 10,
+        "step": 9,
+        "only": 8,
+        "address": 7,
+        "allow": 7,
+        "rang": 7,
+        "connect": 7,
+        "block": 7,
+        "app": 7,
+        "any": 7,
+        "also": 6,
+        "identity": 6,
+        "anthropic": 6,
+        "see": 6,
+        "console": 6,
+        "enterprise": 6,
+        "turn": 6,
+        "click": 6,
+        "ipv": 6,
+        "platform": 5,
+        "request": 5,
+        "avoid": 5,
+        "agent": 5,
+        "remote": 5,
+        "open": 5,
+        "save": 5,
+        "title": 4,
+        "specific": 4,
+        "attacker": 4,
+        "work": 4,
+        "set": 4,
+        "note": 4,
+        "each": 4,
+        "endpoint": 4,
+        "outside": 4
+      },
+      "word_count": 1456
+    },
+    {
       "filename": "docs__en__manage-claude__opentelemetry.md",
       "id": "docs/en/manage-claude/opentelemetry",
       "title": "Overview",
@@ -150302,6 +150408,30 @@
           "level": 3
         },
         {
+          "text": "Sign a member out everywhere",
+          "level": 3
+        },
+        {
+          "text": "What the request ends",
+          "level": 4
+        },
+        {
+          "text": "What the request doesn\u2019t end",
+          "level": 4
+        },
+        {
+          "text": "Who you can\u2019t sign out",
+          "level": 4
+        },
+        {
+          "text": "Responses",
+          "level": 4
+        },
+        {
+          "text": "Where the sign-out is recorded",
+          "level": 4
+        },
+        {
           "text": "Invites",
           "level": 2
         },
@@ -150382,6 +150512,10 @@
           "level": 3
         },
         {
+          "text": "Respond to a lost or stolen device",
+          "level": 3
+        },
+        {
           "text": "Audit group membership",
           "level": 3
         },
@@ -150410,6 +150544,10 @@
           "level": 3
         },
         {
+          "text": "Does signing a member out keep them out?",
+          "level": 3
+        },
+        {
           "text": "What happens to an Admin API key when the person who created it leaves?",
           "level": 3
         },
@@ -150419,58 +150557,58 @@
         }
       ],
       "terms": {
+        "member": 101,
+        "organization": 94,
         "group": 78,
-        "member": 73,
-        "api": 67,
-        "organization": 61,
-        "role": 45,
-        "claude": 42,
-        "codegroup": 42,
+        "api": 75,
+        "claude": 64,
+        "sign": 59,
+        "role": 50,
+        "request": 46,
+        "key": 46,
+        "codegroup": 44,
+        "return": 42,
+        "scope": 37,
         "invite": 37,
-        "return": 34,
-        "rol": 33,
-        "scope": 33,
-        "endpoint": 30,
-        "key": 28,
-        "see": 26,
-        "list": 25,
-        "custom": 23,
-        "requir": 23,
+        "endpoint": 35,
+        "rol": 34,
+        "see": 30,
+        "list": 28,
+        "person": 27,
+        "requir": 26,
+        "admin": 24,
+        "custom": 24,
+        "response": 24,
         "parameter": 22,
-        "response": 22,
-        "admin": 20,
+        "identity": 22,
+        "provider": 22,
+        "enterprise": 21,
+        "one": 21,
+        "page": 20,
+        "owner": 20,
+        "seat": 20,
         "reference": 20,
-        "enterprise": 19,
         "read": 19,
-        "seat": 19,
+        "creat": 19,
         "complete": 19,
         "detail": 19,
         "schema": 19,
-        "page": 16,
-        "through": 16,
-        "request": 15,
-        "available": 15,
-        "one": 15,
-        "identity": 15,
-        "provider": 15,
-        "invit": 13,
-        "limit": 13,
-        "assign": 13,
-        "create": 13,
-        "creat": 13,
-        "permission": 13,
-        "user": 12,
-        "manag": 12,
-        "each": 12,
-        "change": 11,
-        "withdraw": 11,
-        "remove": 11,
-        "only": 11,
-        "email": 10,
-        "membership": 10,
-        "every": 10
+        "end": 18,
+        "send": 17,
+        "remove": 17,
+        "through": 17,
+        "session": 17,
+        "each": 16,
+        "available": 16,
+        "limit": 16,
+        "create": 16,
+        "account": 16,
+        "only": 15,
+        "every": 15,
+        "permission": 14,
+        "setting": 14
       },
-      "word_count": 7523
+      "word_count": 9294
     },
     {
       "filename": "docs__en__manage-claude__user-profiles.md",
@@ -159018,6 +159156,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "November 5, 2026",
+          "level": 3
+        },
+        {
           "text": "November 3, 2026",
           "level": 3
         },
@@ -159671,48 +159813,48 @@
         }
       ],
       "terms": {
-        "claude": 552,
-        "api": 222,
+        "claude": 556,
+        "api": 225,
         "model": 171,
-        "beta": 155,
+        "beta": 158,
         "tool": 139,
-        "now": 133,
-        "see": 126,
+        "now": 135,
+        "see": 129,
         "opu": 123,
-        "request": 97,
-        "header": 93,
+        "request": 100,
+        "header": 94,
         "agent": 92,
         "sonnet": 75,
         "support": 75,
-        "token": 73,
-        "session": 66,
+        "token": 74,
+        "session": 67,
         "return": 64,
         "launch": 63,
         "sdk": 61,
         "manag": 60,
         "available": 58,
         "think": 57,
-        "add": 48,
+        "add": 49,
         "error": 47,
+        "organization": 45,
         "prompt": 44,
         "new": 43,
         "read": 42,
         "messag": 41,
+        "console": 40,
         "code": 40,
-        "organization": 40,
         "block": 40,
-        "console": 39,
         "web": 38,
         "output": 38,
+        "key": 37,
         "acces": 37,
         "fable": 37,
         "event": 36,
         "platform": 35,
-        "key": 35,
+        "limit": 34,
         "our": 34,
         "mode": 33,
         "endpoint": 33,
-        "limit": 33,
         "context": 33,
         "learn": 33,
         "requir": 33,
@@ -159720,9 +159862,9 @@
         "same": 31,
         "fast": 30,
         "call": 30,
-        "send": 29
+        "set": 29
       },
-      "word_count": 14937
+      "word_count": 15100
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",

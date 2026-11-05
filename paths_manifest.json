@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T09:16:25.076560Z",
+  "generated_at": "2026-11-05T18:17:44.512061Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -10586,7 +10586,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api-keys.md",
       "title": "Create an Admin API key",
       "category": "core_documentation",
-      "sha256": "6728fa7f15ba92384bb036bcd6979c80defc5c539c8a7c1def31df9d9f3cd8df",
+      "sha256": "43b8f72c980802356eef3b0ec5794021c047c9486aab08a2add7e76b2b3a724d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10630,7 +10630,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/authentication.md",
       "title": "Authentication",
       "category": "core_documentation",
-      "sha256": "ea3b86c813bb25350312cc307faa015051b67e84a06d302f4ce3688eabbba0b0",
+      "sha256": "48af5580241c1f2e5f708b7a8e062d25e9e9bbe14b9cc9d61d2c9e0c42d1b67d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10943,6 +10943,17 @@
       "fetch_status": "ok"
     },
     {
+      "id": "docs/en/manage-claude/ip-allowlist",
+      "filename": "docs__en__manage-claude__ip-allowlist.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/ip-allowlist",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/ip-allowlist.md",
+      "title": "IP allowlisting (beta)",
+      "category": "core_documentation",
+      "sha256": "fafafe4ab7a949e03475a5d101a8bab01d8d4ad4187c3232129ee54634dfed41",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
       "id": "docs/en/manage-claude/opentelemetry",
       "filename": "docs__en__manage-claude__opentelemetry.md",
       "url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry",
@@ -11048,7 +11059,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/user-management.md",
       "title": "User management",
       "category": "core_documentation",
-      "sha256": "1a498a640d7bf2e2fbbfd0708cfaf2a1c81532ff0fa77192a9fa24f559e5d51c",
+      "sha256": "9c3bd7437a40baf63967f24771044793d2b97c4c0feb6a04259d421e93462c2d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11928,7 +11939,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "513649064b0fccebfb1f804255abb1ee8136c4430d07ab745428d1e7fa8d554d",
+      "sha256": "cced1589a90b81ea3f0785857bb74374ffeff42f1866800273730c7d02d3112a",
       "lastmod": null,
       "fetch_status": "ok"
     },
