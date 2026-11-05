@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T18:17:48.351961Z",
+  "generated_at": "2026-11-05T21:16:10.711569Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -150593,8 +150593,8 @@
         "complete": 19,
         "detail": 19,
         "schema": 19,
+        "send": 18,
         "end": 18,
-        "send": 17,
         "remove": 17,
         "through": 17,
         "session": 17,
@@ -150608,7 +150608,7 @@
         "permission": 14,
         "setting": 14
       },
-      "word_count": 9294
+      "word_count": 9417
     },
     {
       "filename": "docs__en__manage-claude__user-profiles.md",
