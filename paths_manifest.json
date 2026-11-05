@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T06:17:58.392425Z",
+  "generated_at": "2026-11-05T09:16:25.076560Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop-ios-simulator.md",
       "title": "Test iOS apps in the simulator",
       "category": "claude_code",
-      "sha256": "4b675510b80fa45c90764c58c2b26fab5ceb9c41f9fd61558d2a11c6e9f462e7",
-      "lastmod": "2026-10-30T17:44:30.710Z",
+      "sha256": "bc4092ebda67b85f6f4cbd642e243464a383bb948310a2109fd021999801351b",
+      "lastmod": "2026-11-05T08:50:22.438Z",
       "fetch_status": "ok"
     },
     {
