@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-06T06:16:37.447426Z",
+  "generated_at": "2026-11-06T18:15:23.166315Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "cd5d1dc88811ed306250cbbe0be98d59c72405637ab1b1caaddfd47df1ba5136",
+      "sha256": "7c124cc46a362ab85dddb66b6b9b18efef761578def15c761c164447a125ad03",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9968,7 +9968,7 @@
       "filename": "docs__en__build-with-claude__mid-conversation-system-messages.md",
       "url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages",
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages.md",
-      "title": "Mid-conversation system messages and tool changes",
+      "title": "Mid-conversation messages",
       "category": "core_documentation",
       "sha256": "a47b780e5071e28a55ad008d270294a1b34af05579a96b45373f84211251836d",
       "lastmod": null,
@@ -10014,7 +10014,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/preserved-thinking.md",
       "title": "Preserved thinking",
       "category": "core_documentation",
-      "sha256": "207222c2e1ec72d8775a2950662f6b6374b84b10a9b320b8fb6e2c28ab891d12",
+      "sha256": "099e3a6dffd3b4e2ed6dd21a0086e466913f985fc3ea31b2d26cb11367c202a1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10025,7 +10025,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
       "title": "Prompt caching",
       "category": "core_documentation",
-      "sha256": "639ee2fbd6e64bd3455b058e37772ce6df2527fcb4725e00aff8f3d770024d21",
+      "sha256": "6813de45b9d0cca4b9165a2d77d540f760c911255176e9bc6947cf2a95bf8e0e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10421,7 +10421,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "effc6ecf9f4d2e45a92ff8cba5be84b09ee3d319ade44864998f964c74a3a311",
+      "sha256": "15adb4066614b3eb10f7cacd9c554e2001d74c2e9e103b543800e0066bcc3963",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10883,7 +10883,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-org-data.md",
       "title": "Organizations, users, roles, groups, and settings",
       "category": "core_documentation",
-      "sha256": "32bfe52c0e507fb35e950861ad7fdfc8264415ac9524ecefa7a6a2370105dd21",
+      "sha256": "de6409d1e3ee7b539bf3a48cc8a425411ca914183856754c7059d0ccf289de4f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11059,7 +11059,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/user-management.md",
       "title": "User management",
       "category": "core_documentation",
-      "sha256": "c2fc3c8c14d48e36262dd2e3df52f410e1a879388bacc2d9f56c6c80a4cc59e4",
+      "sha256": "ebaf4461fe70cfdd03989352128e4906cbadf90faa2ef2b1773e751d03230e82",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11092,7 +11092,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-admin-api.md",
       "title": "Manage WIF with the Admin API",
       "category": "core_documentation",
-      "sha256": "294618a193a3e07d3c94976378e3c2caa15937bcb952b1125152b877cd9fbc8a",
+      "sha256": "d727d958fce8457915c8b2d9714d4ac4db3f1d57f1fd6a71867b218382216ea3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11103,7 +11103,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/aws.md",
       "title": "AWS",
       "category": "core_documentation",
-      "sha256": "e14448d20a446d5f78b414e5e4315bed85682b415aab099199d0720ddc3b23cc",
+      "sha256": "b8ab3824b913f2de813dada32fda52ed9929e50b012bcd2fc7ef739b8ae93377",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11114,7 +11114,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/azure.md",
       "title": "Microsoft Entra ID",
       "category": "core_documentation",
-      "sha256": "ab145e1c3a44c18c1e40cad92678d78db9175dbb17bd5c24ad26f25a75c39cd2",
+      "sha256": "62d731d3614ef976427e24e5fdf16d9316dd4e01e2c93b6cdb8dbc362fd8eea6",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11125,7 +11125,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp.md",
       "title": "Google Cloud",
       "category": "core_documentation",
-      "sha256": "eb0893fe86ca076727c88741210b76d52402db4cc07bf05c4cd0e1aecca54ed4",
+      "sha256": "d2e4a94acb53f99fda404aeaab6f4a2a9bffd2cf0c71f612e5da8dfbe0cb542b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11136,7 +11136,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions.md",
       "title": "GitHub Actions",
       "category": "core_documentation",
-      "sha256": "6334add8ec950c087ffeee261dcd77132a579e738c98b6627138e1371d0c7943",
+      "sha256": "1c68384f6e68efc2b5a0e96aa69dcf888e3b8e8070c3352e5188cbfdac04b47c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11147,7 +11147,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes.md",
       "title": "Kubernetes",
       "category": "core_documentation",
-      "sha256": "f688bf28a246a814c1d965110e8ee220dad366aac22c9b6fc15d6a34d17f69cd",
+      "sha256": "61902be7f089af75e958c8bb1646757d6893be6f86a30885025c041275e54f1e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11158,7 +11158,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/okta.md",
       "title": "Okta",
       "category": "core_documentation",
-      "sha256": "eb5f784c7f61efc32bf67768dc6b507d6fa2f7882fb968874bc7180f74cbd842",
+      "sha256": "3ba3410894a513ea41adeacf823789f81013e9c8d94dc8fcd51fbfb935e7d8dc",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11169,7 +11169,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe.md",
       "title": "SPIFFE",
       "category": "core_documentation",
-      "sha256": "0ac61620b87f91dfbaf1583c303c364d81f0710f1e07ac89deed0908f75847f2",
+      "sha256": "e23e44c454807125d13a4b9872a0d0769fe4adfe4e6561ffc2d4db37deac807f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11180,7 +11180,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/wif-reference.md",
       "title": "WIF reference",
       "category": "core_documentation",
-      "sha256": "163e96e2bf856b0639a71f7cf9406f1abb901ee0ec78daed2ad0fe082c31e2b2",
+      "sha256": "2c72a0a16e187ec5417a2a2bd92ce2812c71c0912b530f35705a1e2990bd6c2c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11191,7 +11191,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/workload-identity-federation.md",
       "title": "Workload Identity Federation",
       "category": "core_documentation",
-      "sha256": "f13108c22487d4cf4621a9f605f836f5747dcedeb5b2c43148d3479ec1650f63",
+      "sha256": "f90e2d790bcb46a437c384812a8f7d256bfd7303c9b8f7c8e390deba0babb326",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11939,7 +11939,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "00d45b534eb87e205c1529918fe7105001d2835c941760d3e2f3113e3ae33a87",
+      "sha256": "50248b66c1484a769f1cd196006ddddd4203f36c51e83d8610e5db82eec9e968",
       "lastmod": null,
       "fetch_status": "ok"
     },
