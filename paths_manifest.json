@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-06T21:13:12.873168Z",
+  "generated_at": "2026-11-07T00:18:42.745111Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -236,7 +236,7 @@
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
       "sha256": "9f3b472f55331fb37ca576943b9a3d3a0ab10754e5bc5f5d15cd6a34bf02d26e",
-      "lastmod": "2026-11-06T20:39:32.232Z",
+      "lastmod": "2026-11-06T23:04:23.848Z",
       "fetch_status": "ok"
     },
     {
@@ -379,7 +379,7 @@
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
       "sha256": "e59c1693982cd172828cb43d435d2cc2966302e2730305a632e9e697648da9a4",
-      "lastmod": "2026-11-06T20:39:32.229Z",
+      "lastmod": "2026-11-06T23:04:23.850Z",
       "fetch_status": "ok"
     },
     {
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "35b7c1ee8b3512849a8652bddb08a049d15682dfe6ca06dc99ef1d7447a54b9f",
-      "lastmod": "2026-11-05T03:18:58.312Z",
+      "sha256": "3f1f9c68b029bd8d764737eea843484298a2eb95a855b856c2e3cd18794c9d6a",
+      "lastmod": "2026-11-06T23:56:24.219Z",
       "fetch_status": "ok"
     },
     {
@@ -1456,8 +1456,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "edb107bf4d7dc245bf46c4bfd346b7cf6634b12804611937729603d33eaf4ecc",
-      "lastmod": "2026-11-06T20:30:14.185Z",
+      "sha256": "edb867988c953da995b7b997a626e012c30d4a18693519c1d7f1102df00c75fb",
+      "lastmod": "2026-11-06T22:09:41.171Z",
       "fetch_status": "ok"
     },
     {
@@ -2072,8 +2072,8 @@
       "md_url": "https://code.claude.com/docs/en/setup.md",
       "title": "Advanced setup",
       "category": "claude_code",
-      "sha256": "5760050786d8b0fbbd74d629c75ef5c7132a69322c6fdaa1991625400d9e4744",
-      "lastmod": "2026-11-06T20:35:57.552Z",
+      "sha256": "8dc9f85869815f261b64fed8cf8598e5d77d247d26efa99d32a7f15c61e274ba",
+      "lastmod": "2026-11-06T23:04:21.628Z",
       "fetch_status": "ok"
     },
     {
@@ -9794,7 +9794,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction-background.md",
       "title": "Compact in the background",
       "category": "core_documentation",
-      "sha256": "03357ad4452b0f6aad5982019b7a6fc7eb1bf686676f1b621b88a4fab53b6687",
+      "sha256": "6b6a842ef516625f5de89e9fa057ab397e690c3c338abafd61cd1b8b06785235",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9805,7 +9805,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction-keep-recent-turns.md",
       "title": "Keep recent turns",
       "category": "core_documentation",
-      "sha256": "baa97161aaf5341fe6c97e7678f21bb6cc8e41f3c5d2c20dd249ccd934539f86",
+      "sha256": "5ea10feca62646c9555b2e8f8b26b74be12a89092cc4d0dfc6ae1c36ca0b155b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9816,7 +9816,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand.md",
       "title": "Compact on demand",
       "category": "core_documentation",
-      "sha256": "2109b26ac323fb643f98ffda0e9585ee998b00e32a79f91257b85396c58333a1",
+      "sha256": "a498b905f758b93dbd2fb98e40268ebf565b4779451acb3e8faf299450aabcc6",
       "lastmod": null,
       "fetch_status": "ok"
     },

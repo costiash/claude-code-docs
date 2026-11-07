@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-06T21:13:17.819328Z",
+  "generated_at": "2026-11-07T00:18:45.716017Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14894,6 +14894,10 @@
           "level": 3
         },
         {
+          "text": "Keep sessions off your other devices",
+          "level": 4
+        },
+        {
           "text": "Sessions from Dispatch",
           "level": 3
         },
@@ -15386,6 +15390,7 @@
         "window": 16,
         "project": 16,
         "edit": 16,
+        "true": 16,
         "hostname": 16,
         "sshhostallowlist": 16,
         "before": 15,
@@ -15393,12 +15398,11 @@
         "see": 15,
         "external": 15,
         "environment": 15,
-        "true": 15,
         "chat": 14,
         "show": 14,
         "local": 14
       },
-      "word_count": 31496
+      "word_count": 31670
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -24814,9 +24818,9 @@
       ],
       "terms": {
         "mode": 278,
-        "claude": 232,
+        "claude": 231,
         "session": 202,
-        "code": 192,
+        "code": 191,
         "prompt": 145,
         "permission": 129,
         "auto": 121,
@@ -24841,7 +24845,7 @@
         "ask": 49,
         "mod": 49,
         "model": 47,
-        "later": 47,
+        "later": 46,
         "critical": 46,
         "see": 45,
         "without": 43,
@@ -24864,7 +24868,7 @@
         "each": 34,
         "deni": 34
       },
-      "word_count": 15451
+      "word_count": 15438
     },
     {
       "filename": "claude-code__permissions.md",
@@ -34720,7 +34724,7 @@
         "installer": 10,
         "dnf": 10
       },
-      "word_count": 5163
+      "word_count": 4613
     },
     {
       "filename": "claude-code__skills.md",
@@ -136272,24 +136276,25 @@
         }
       ],
       "terms": {
-        "claude": 36,
+        "claude": 47,
         "request": 25,
         "compaction": 20,
         "history": 16,
+        "opu": 14,
         "while": 13,
+        "beta": 12,
         "messag": 11,
         "summary": 10,
         "swap": 10,
-        "beta": 10,
-        "opu": 10,
         "loop": 10,
         "turn": 9,
         "conversation": 8,
         "block": 8,
+        "mytho": 8,
+        "sonnet": 8,
         "background": 6,
         "full": 6,
-        "mytho": 6,
-        "sonnet": 6,
+        "fable": 6,
         "model": 6,
         "send": 6,
         "think": 6,
@@ -136300,7 +136305,6 @@
         "keep": 5,
         "start": 5,
         "platform": 4,
-        "fable": 4,
         "google": 4,
         "wait": 4,
         "response": 4,
@@ -136308,6 +136312,7 @@
         "pend": 4,
         "continu": 3,
         "compact": 3,
+        "haiku": 3,
         "cloud": 3,
         "until": 3,
         "return": 3,
@@ -136320,10 +136325,9 @@
         "valid": 3,
         "follow": 3,
         "replac": 3,
-        "any": 3,
-        "count": 3
+        "any": 3
       },
-      "word_count": 2693
+      "word_count": 2736
     },
     {
       "filename": "docs__en__build-with-claude__compaction-keep-recent-turns.md",
@@ -136362,15 +136366,17 @@
         }
       ],
       "terms": {
-        "claude": 37,
+        "claude": 48,
         "turn": 26,
         "keep": 14,
+        "opu": 14,
         "compaction": 13,
+        "beta": 13,
         "request": 13,
-        "beta": 11,
         "kept": 11,
         "send": 10,
-        "opu": 10,
+        "mytho": 8,
+        "sonnet": 8,
         "history": 8,
         "api": 7,
         "loop": 7,
@@ -136379,8 +136385,7 @@
         "cut": 7,
         "message": 7,
         "word": 6,
-        "mytho": 6,
-        "sonnet": 6,
+        "fable": 6,
         "model": 6,
         "where": 6,
         "think": 6,
@@ -136390,12 +136395,12 @@
         "compact": 5,
         "recent": 4,
         "platform": 4,
-        "fable": 4,
         "google": 4,
         "two": 4,
         "header": 4,
         "program": 4,
         "conversation": 3,
+        "haiku": 3,
         "cloud": 3,
         "tail": 3,
         "last": 3,
@@ -136409,11 +136414,10 @@
         "new": 3,
         "statu": 2,
         "preview": 2,
-        "haiku": 2,
         "aws": 2,
-        "manag": 2
+        "amazon": 2
       },
-      "word_count": 2544
+      "word_count": 2587
     },
     {
       "filename": "docs__en__build-with-claude__compaction-on-demand.md",
@@ -136484,16 +136488,16 @@
         }
       ],
       "terms": {
+        "claude": 53,
         "request": 53,
         "block": 52,
-        "claude": 42,
         "compaction": 35,
         "send": 33,
         "summary": 32,
         "turn": 25,
         "call": 22,
         "message": 21,
-        "beta": 18,
+        "beta": 20,
         "api": 18,
         "model": 18,
         "messag": 17,
@@ -136501,6 +136505,7 @@
         "after": 16,
         "tool": 16,
         "conversation": 15,
+        "opu": 14,
         "summariz": 14,
         "compact": 13,
         "one": 13,
@@ -136509,11 +136514,12 @@
         "later": 11,
         "think": 11,
         "runner": 11,
-        "opu": 10,
         "prompt": 10,
         "summarization": 10,
         "carri": 9,
         "continue": 8,
+        "mytho": 8,
+        "sonnet": 8,
         "first": 8,
         "every": 8,
         "keep": 8,
@@ -136528,14 +136534,12 @@
         "back": 7,
         "replac": 7,
         "demand": 6,
-        "mytho": 6,
-        "sonnet": 6,
+        "fable": 6,
         "reply": 6,
         "response": 6,
-        "read": 6,
-        "exactly": 6
+        "read": 6
       },
-      "word_count": 5113
+      "word_count": 5156
     },
     {
       "filename": "docs__en__build-with-claude__compaction-thinking-blocks.md",
