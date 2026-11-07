@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T06:15:25.003036Z",
+  "generated_at": "2026-11-07T21:14:19.970991Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20300,7 +20300,7 @@
         "project": 39,
         "allow": 39
       },
-      "word_count": 39637
+      "word_count": 39643
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -20448,21 +20448,21 @@
       ],
       "terms": {
         "hook": 228,
-        "claude": 139,
-        "code": 101,
-        "tool": 73,
+        "claude": 140,
+        "code": 102,
+        "tool": 74,
         "command": 62,
         "see": 54,
         "event": 50,
-        "json": 47,
         "run": 46,
+        "json": 46,
         "file": 42,
         "session": 41,
         "exit": 41,
         "block": 38,
         "call": 38,
         "permission": 31,
-        "prompt": 28,
+        "prompt": 29,
         "mode": 28,
         "field": 28,
         "input": 26,
@@ -20485,20 +20485,20 @@
         "edit": 19,
         "mcp": 19,
         "each": 19,
-        "stdout": 19,
         "shell": 18,
         "start": 18,
         "reference": 18,
         "set": 18,
+        "stdout": 18,
         "model": 17,
         "appear": 17,
+        "show": 17,
         "server": 17,
         "full": 16,
-        "show": 16,
         "check": 16,
         "turn": 16
       },
-      "word_count": 8912
+      "word_count": 8938
     },
     {
       "filename": "claude-code__how-claude-code-works.md",
@@ -22996,7 +22996,7 @@
         "such": 10,
         "scop": 10
       },
-      "word_count": 21731
+      "word_count": 21793
     },
     {
       "filename": "claude-code__mcp-quickstart.md",
