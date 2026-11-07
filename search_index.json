@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T00:18:45.716017Z",
+  "generated_at": "2026-11-07T06:15:25.003036Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -31589,11 +31589,11 @@
         }
       ],
       "terms": {
-        "sandbox": 358,
+        "sandbox": 359,
         "command": 287,
-        "claude": 187,
-        "code": 154,
-        "run": 140,
+        "claude": 188,
+        "code": 156,
+        "run": 141,
         "setting": 129,
         "allow": 100,
         "mode": 81,
@@ -31604,7 +31604,7 @@
         "host": 60,
         "permission": 58,
         "manag": 56,
-        "file": 54,
+        "file": 55,
         "prompt": 54,
         "path": 54,
         "entry": 51,
@@ -31616,18 +31616,18 @@
         "filesystem": 46,
         "session": 45,
         "isolation": 44,
-        "network": 42,
-        "start": 42,
+        "network": 43,
+        "start": 43,
         "directory": 41,
         "match": 41,
+        "inside": 40,
+        "acces": 40,
         "domain": 39,
-        "inside": 39,
-        "acces": 39,
         "list": 39,
+        "see": 38,
         "add": 38,
         "requir": 38,
         "entri": 38,
-        "see": 37,
         "user": 37,
         "still": 37,
         "work": 36,
@@ -31640,7 +31640,7 @@
         "every": 33,
         "block": 33
       },
-      "word_count": 13898
+      "word_count": 13928
     },
     {
       "filename": "claude-code__scheduled-tasks.md",

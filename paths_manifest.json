@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T00:18:42.745111Z",
+  "generated_at": "2026-11-07T06:15:22.174960Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1896,8 +1896,8 @@
       "md_url": "https://code.claude.com/docs/en/sandboxing.md",
       "title": "Configure the sandboxed Bash tool",
       "category": "claude_code",
-      "sha256": "6e1c321f48933ba638084de9533f72d007dc919240aed4195e07664bd2f8b3d7",
-      "lastmod": "2026-11-04T00:34:03.484Z",
+      "sha256": "5052f33f5c9ad369712da4a21e794f9e7b5fc87b9123deb9cb7e4919245e3bca",
+      "lastmod": "2026-11-07T04:00:34.959Z",
       "fetch_status": "ok"
     },
     {
