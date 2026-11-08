@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-07T21:14:19.970991Z",
+  "generated_at": "2026-11-08T21:14:41.616689Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14742,6 +14742,14 @@
           "level": 3
         },
         {
+          "text": "Preview HTML files in SSH and WSL sessions",
+          "level": 4
+        },
+        {
+          "text": "Turn off scripts in SSH and WSL previews for your organization",
+          "level": 4
+        },
+        {
           "text": "Browse external sites",
           "level": 3
         },
@@ -15351,58 +15359,58 @@
         }
       ],
       "terms": {
-        "claude": 158,
-        "ssh": 107,
-        "session": 70,
+        "claude": 164,
+        "ssh": 113,
+        "session": 76,
         "host": 64,
         "json": 49,
-        "pane": 38,
-        "browser": 37,
-        "setting": 37,
+        "setting": 45,
+        "browser": 41,
+        "pane": 40,
+        "desktop": 39,
+        "code": 37,
+        "file": 37,
         "mode": 33,
-        "code": 32,
         "config": 31,
-        "desktop": 29,
-        "server": 28,
+        "run": 29,
+        "server": 29,
+        "click": 27,
+        "open": 27,
         "permission": 27,
         "prompt": 27,
         "cmd": 27,
-        "click": 26,
-        "file": 25,
+        "user": 25,
         "devbox": 25,
         "com": 24,
         "chang": 24,
         "auto": 23,
-        "run": 22,
-        "open": 22,
+        "remote": 22,
         "port": 22,
         "app": 21,
+        "fil": 21,
         "dev": 21,
-        "remote": 21,
-        "user": 20,
         "proxycommand": 20,
         "command": 19,
-        "fil": 18,
         "connection": 18,
+        "before": 17,
+        "preview": 17,
+        "window": 17,
         "start": 17,
         "key": 17,
         "review": 16,
-        "window": 16,
+        "see": 16,
         "project": 16,
+        "external": 16,
         "edit": 16,
+        "manag": 16,
         "true": 16,
         "hostname": 16,
         "sshhostallowlist": 16,
-        "before": 15,
+        "chat": 15,
         "diff": 15,
-        "see": 15,
-        "external": 15,
-        "environment": 15,
-        "chat": 14,
-        "show": 14,
-        "local": 14
+        "environment": 15
       },
-      "word_count": 31670
+      "word_count": 32167
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -34538,7 +34546,7 @@
         "start": 72,
         "own": 72
       },
-      "word_count": 54496
+      "word_count": 54570
     },
     {
       "filename": "claude-code__setup.md",
