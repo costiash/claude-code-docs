@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-08T21:14:36.616268Z",
+  "generated_at": "2026-11-09T15:15:22.918848Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -103,8 +103,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/custom-tools.md",
       "title": "Give Claude custom tools",
       "category": "agent_sdk",
-      "sha256": "f6b169b9e022cc73fef4c079e6bef25aab0d3c003815fab80b9a3cc58518f5bc",
-      "lastmod": "2026-10-26T18:49:58.394Z",
+      "sha256": "67f8005cb6c3d7c2446a15f315643cfb7d518e09f40c62a60535ccfc789ad2c7",
+      "lastmod": "2026-11-09T14:53:56.436Z",
       "fetch_status": "ok"
     },
     {
@@ -158,8 +158,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/mcp.md",
       "title": "Connect to external tools with MCP",
       "category": "agent_sdk",
-      "sha256": "245c0674abd533062a38fc6593631c9a7716e98b903169bc226dbedabc407305",
-      "lastmod": "2026-10-22T17:46:04.126Z",
+      "sha256": "0163d83baa2a5802847161b80dd85386cb604bdb25edb89412152ff37b79b546",
+      "lastmod": "2026-11-09T14:53:56.435Z",
       "fetch_status": "ok"
     },
     {
@@ -213,8 +213,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/permissions.md",
       "title": "Configure permissions",
       "category": "agent_sdk",
-      "sha256": "367bf6cd12a5ee902f5c33453b9c34c6763d42deb3033e0a005b086c1109b46f",
-      "lastmod": "2026-11-04T18:09:34.188Z",
+      "sha256": "ba13522c5b401b52643e724f9ea28b6f1da8fa228e7ea4e54163698dd56c62c1",
+      "lastmod": "2026-11-09T14:53:56.434Z",
       "fetch_status": "ok"
     },
     {
