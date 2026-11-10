@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-10T06:17:18.662250Z",
+  "generated_at": "2026-11-10T09:15:38.563185Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2512,8 +2512,8 @@
       "md_url": "https://code.claude.com/docs/en/workflows.md",
       "title": "Orchestrate subagents at scale with dynamic workflows",
       "category": "claude_code",
-      "sha256": "b940968734f59d5e7f3b58c9513d1b90c69c9a429436eadf6b9d1d95873bf4c5",
-      "lastmod": "2026-10-27T19:25:38.840Z",
+      "sha256": "5b262faf3ba1bb40315a27d560371bed5b4969b7ad6855bbcecf284487a49b54",
+      "lastmod": "2026-11-10T06:21:05.219Z",
       "fetch_status": "ok"
     },
     {
