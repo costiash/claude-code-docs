@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-10T09:15:38.563185Z",
+  "generated_at": "2026-11-10T15:15:21.232877Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -2534,8 +2534,8 @@
       "md_url": "https://code.claude.com/docs/en/zero-data-retention.md",
       "title": "Zero data retention",
       "category": "claude_code",
-      "sha256": "3e201f9929d89530fed35f717403614a3d7bf8346838d50b14f0cb9cebd3d6ea",
-      "lastmod": "2026-11-09T18:57:09.672Z",
+      "sha256": "76ce1148782ed8400e1b1db3aefd8fb3e6c25964b2a9df1f46628c6c3ccecd18",
+      "lastmod": "2026-11-10T12:30:40.746Z",
       "fetch_status": "ok"
     },
     {
