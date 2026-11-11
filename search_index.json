@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T18:15:55.842811Z",
+  "generated_at": "2026-11-11T21:21:57.534410Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -10266,10 +10266,10 @@
         "file": 21,
         "connect": 19,
         "prompt": 19,
-        "run": 17,
         "organization": 17,
         "tool": 17,
         "open": 16,
+        "run": 16,
         "permission": 15,
         "ask": 14,
         "install": 14,
@@ -10308,7 +10308,7 @@
         "app": 7,
         "log": 7
       },
-      "word_count": 3404
+      "word_count": 3401
     },
     {
       "filename": "claude-code__claude-apps-gateway.md",
@@ -17470,7 +17470,7 @@
         "claude": 620,
         "code": 166,
         "error": 153,
-        "json": 133,
+        "json": 132,
         "mcp": 131,
         "anthropic": 121,
         "session": 112,
@@ -17518,7 +17518,7 @@
         "debug": 32,
         "com": 31
       },
-      "word_count": 86470
+      "word_count": 86446
     },
     {
       "filename": "claude-code__fast-mode.md",
@@ -23682,6 +23682,10 @@
           "level": 3
         },
         {
+          "text": "Fix a mistyped model name",
+          "level": 4
+        },
+        {
           "text": "Set a default model for new sessions",
           "level": 4
         },
@@ -23862,10 +23866,6 @@
           "level": 3
         },
         {
-          "text": "Fix a mistyped model name",
-          "level": 4
-        },
-        {
           "text": "Which IDs `CLAUDE_CODE_MAX_CONTEXT_TOKENS` applies to",
           "level": 4
         },
@@ -23933,14 +23933,14 @@
         "appli": 53,
         "list": 53,
         "agent": 51,
+        "see": 50,
         "picker": 50,
-        "see": 49,
         "later": 49,
         "variable": 48,
         "one": 47,
         "instead": 46,
-        "also": 46,
         "before": 45,
+        "also": 45,
         "doesn": 45,
         "sett": 43,
         "api": 43,
@@ -23949,12 +23949,12 @@
         "subagent": 43,
         "turn": 42,
         "show": 41,
+        "name": 40,
         "allowlist": 40,
-        "name": 39,
         "bedrock": 39,
         "through": 39
       },
-      "word_count": 17903
+      "word_count": 17904
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -33111,36 +33111,36 @@
         }
       ],
       "terms": {
-        "session": 145,
-        "runner": 128,
+        "session": 146,
+        "runner": 129,
         "environment": 42,
         "hook": 36,
         "orchestrator": 35,
         "flag": 33,
-        "code": 31,
-        "claude": 29,
+        "code": 32,
+        "claude": 30,
         "alert": 29,
+        "after": 28,
         "child": 28,
         "spawn": 28,
-        "after": 27,
         "before": 26,
         "host": 26,
         "see": 26,
         "set": 26,
-        "each": 24,
-        "requir": 24,
+        "each": 25,
+        "requir": 25,
         "default": 23,
+        "later": 23,
         "poll": 23,
         "value": 22,
-        "later": 22,
         "metric": 21,
         "own": 21,
         "minut": 21,
+        "wait": 21,
         "start": 20,
         "second": 20,
-        "wait": 20,
+        "unset": 20,
         "same": 19,
-        "unset": 19,
         "count": 19,
         "one": 19,
         "seri": 18,
@@ -33162,7 +33162,7 @@
         "still": 13,
         "drain": 13
       },
-      "word_count": 7159
+      "word_count": 7205
     },
     {
       "filename": "claude-code__self-hosted-environments-testing.md",
@@ -35068,9 +35068,9 @@
       ],
       "terms": {
         "skill": 226,
-        "claude": 167,
+        "claude": 168,
         "name": 56,
-        "code": 50,
+        "code": 51,
         "command": 35,
         "run": 34,
         "plugin": 27,
@@ -35080,9 +35080,9 @@
         "tool": 21,
         "file": 20,
         "add": 19,
+        "later": 19,
         "project": 19,
         "anthropic": 19,
-        "later": 18,
         "deploy": 18,
         "bundl": 17,
         "dir": 17,
@@ -35094,11 +35094,11 @@
         "only": 14,
         "fil": 14,
         "invocation": 14,
+        "chang": 14,
         "true": 14,
         "session": 13,
         "list": 13,
         "check": 13,
-        "chang": 13,
         "app": 13,
         "commit": 13,
         "sync": 13,
@@ -35108,6 +35108,7 @@
         "directory": 11,
         "follow": 11,
         "test": 11,
+        "api": 11,
         "review": 11,
         "user": 11,
         "allow": 11,
@@ -35115,10 +35116,9 @@
         "frontmatter": 10,
         "such": 10,
         "off": 10,
-        "each": 10,
-        "git": 10
+        "each": 10
       },
-      "word_count": 15811
+      "word_count": 15839
     },
     {
       "filename": "claude-code__slack.md",
@@ -37230,24 +37230,24 @@
       ],
       "terms": {
         "claude": 327,
-        "code": 242,
+        "code": 240,
         "open": 143,
         "session": 128,
         "conversation": 89,
         "extension": 88,
         "later": 81,
         "plugin": 72,
-        "requir": 69,
+        "requir": 70,
         "prompt": 64,
         "click": 63,
         "tab": 56,
-        "window": 54,
+        "window": 55,
         "show": 53,
+        "command": 53,
         "file": 50,
-        "command": 50,
         "panel": 45,
         "see": 45,
-        "select": 44,
+        "select": 45,
         "setting": 39,
         "install": 38,
         "run": 37,
@@ -37256,17 +37256,17 @@
         "text": 35,
         "such": 35,
         "group": 34,
+        "start": 33,
         "editor": 32,
-        "start": 32,
         "list": 32,
         "turn": 32,
         "add": 31,
+        "mode": 30,
         "while": 29,
         "subagent": 29,
         "instead": 28,
         "new": 28,
         "permission": 28,
-        "mode": 28,
         "terminal": 27,
         "icon": 27,
         "cli": 26,
@@ -37275,12 +37275,12 @@
         "appear": 25,
         "dialog": 25,
         "work": 24,
+        "chat": 24,
         "after": 24,
         "change": 24,
-        "chat": 23,
-        "reload": 23
+        "before": 23
       },
-      "word_count": 14609
+      "word_count": 14675
     },
     {
       "filename": "claude-code__web-quickstart.md",
