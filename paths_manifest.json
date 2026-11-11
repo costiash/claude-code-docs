@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T00:18:49.675256Z",
+  "generated_at": "2026-11-11T15:15:07.282171Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -59,8 +59,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/agent-loop.md",
       "title": "How the agent loop works",
       "category": "agent_sdk",
-      "sha256": "cdcdc82c3740d17b2eaac637c0ab7e7855b98674f01718072b92607a95ae59c9",
-      "lastmod": "2026-11-06T03:17:25.594Z",
+      "sha256": "7a2fe2fc5eb8a5629b3893ad0f07638330eebd5cbe12496de63239701c736d91",
+      "lastmod": "2026-11-11T14:14:25.611Z",
       "fetch_status": "ok"
     },
     {
@@ -235,8 +235,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "05bcb04a4586de2587ba0f61a717236b803191c79181cb16b86402976175bb26",
-      "lastmod": "2026-11-10T17:24:50.504Z",
+      "sha256": "3b0864a09edad8c5f7d04b4e9ce2ad866dd20d29abe3f38eb8a6afa52e3c3c1f",
+      "lastmod": "2026-11-11T14:14:25.625Z",
       "fetch_status": "ok"
     },
     {
@@ -378,8 +378,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/typescript.md",
       "title": "Agent SDK reference - TypeScript",
       "category": "agent_sdk",
-      "sha256": "bd7cea08ed2118c182a46236b71f38d9873520acfc0eec2a3978b08f75911f68",
-      "lastmod": "2026-11-10T19:23:15.025Z",
+      "sha256": "44b865a87857a8bc4e8a4f5133dd624eb063c16fcd9cd67127cbea34d4c588b6",
+      "lastmod": "2026-11-11T14:14:25.644Z",
       "fetch_status": "ok"
     },
     {
@@ -862,8 +862,8 @@
       "md_url": "https://code.claude.com/docs/en/context-window.md",
       "title": "Explore the context window",
       "category": "claude_code",
-      "sha256": "2450823ff3996b2596ef3d1c103fdb74ab9928efeb8bf64db043bd4a4ddc6bd0",
-      "lastmod": "2026-10-27T01:12:56.757Z",
+      "sha256": "d3856dadd0356608b6a2da839a9da4554587ce588b2b3dda43e77152f5784989",
+      "lastmod": "2026-11-11T14:14:25.602Z",
       "fetch_status": "ok"
     },
     {
@@ -1401,8 +1401,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "0e325cb75431cdc7eb73758ee6f8f1b80e2c90e762913c24eb5bebe79b5a831d",
-      "lastmod": "2026-11-10T16:57:28.470Z",
+      "sha256": "5bafe3732adefe6083eb4da3c50f6dd043dc7cf3a3a955f3fa9921318cc3ec98",
+      "lastmod": "2026-11-11T14:14:25.613Z",
       "fetch_status": "ok"
     },
     {

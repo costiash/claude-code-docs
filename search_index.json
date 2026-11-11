@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T00:18:54.412112Z",
+  "generated_at": "2026-11-11T15:15:12.306704Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -2322,7 +2322,7 @@
         "mode": 11,
         "every": 10
       },
-      "word_count": 5343
+      "word_count": 5321
     },
     {
       "filename": "claude-code__agent-sdk__claude-code-features.md",
@@ -4905,7 +4905,7 @@
         "input": 64,
         "description": 60,
         "subagent": 58,
-        "model": 57,
+        "model": 58,
         "message": 56,
         "agent": 55,
         "see": 55,
@@ -4946,7 +4946,7 @@
         "key": 28,
         "one": 28
       },
-      "word_count": 21389
+      "word_count": 21397
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -7524,7 +7524,7 @@
         "claude": 463,
         "code": 393,
         "tool": 306,
-        "session": 302,
+        "session": 300,
         "later": 228,
         "message": 198,
         "server": 198,
@@ -7532,9 +7532,9 @@
         "sdk": 185,
         "requir": 181,
         "field": 181,
-        "call": 167,
+        "call": 168,
         "set": 162,
-        "turn": 155,
+        "turn": 156,
         "return": 140,
         "list": 139,
         "one": 138,
@@ -7545,7 +7545,7 @@
         "task": 113,
         "such": 110,
         "only": 108,
-        "see": 104,
+        "see": 105,
         "subagent": 99,
         "type": 91,
         "prompt": 90,
@@ -7561,18 +7561,18 @@
         "messag": 73,
         "before": 71,
         "report": 70,
+        "pas": 68,
         "carri": 68,
-        "pas": 67,
         "value": 67,
-        "start": 65,
+        "start": 66,
         "background": 65,
         "nam": 64,
         "same": 63,
         "instead": 63,
         "entry": 61,
-        "default": 61
+        "option": 60
       },
-      "word_count": 42525
+      "word_count": 42535
     },
     {
       "filename": "claude-code__agent-sdk__typescript-v2-preview.md",
@@ -13885,32 +13885,31 @@
         "context": 20,
         "code": 16,
         "window": 14,
-        "session": 13,
         "read": 13,
         "run": 11,
+        "session": 10,
         "see": 10,
         "compaction": 10,
         "skill": 10,
         "file": 9,
         "fil": 9,
         "compact": 9,
-        "load": 8,
         "token": 8,
-        "each": 7,
+        "load": 7,
         "keep": 7,
         "conversation": 7,
         "before": 6,
+        "each": 6,
         "rul": 6,
         "hook": 6,
-        "content": 6,
         "auto": 6,
         "inject": 6,
         "model": 6,
+        "content": 5,
         "add": 5,
         "work": 5,
         "subagent": 5,
         "edit": 5,
-        "summary": 5,
         "automatic": 5,
         "automatically": 4,
         "instruction": 4,
@@ -13919,6 +13918,7 @@
         "large": 4,
         "memory": 4,
         "after": 4,
+        "summary": 4,
         "most": 4,
         "start": 4,
         "one": 4,
@@ -13932,7 +13932,7 @@
         "output": 3,
         "path": 3
       },
-      "word_count": 1172
+      "word_count": 1117
     },
     {
       "filename": "claude-code__corporate-launcher.md",
@@ -23818,6 +23818,10 @@
           "level": 3
         },
         {
+          "text": "Where you can't turn thinking off",
+          "level": 4
+        },
+        {
           "text": "Extended context",
           "level": 3
         },
@@ -23899,26 +23903,26 @@
         }
       ],
       "terms": {
-        "model": 595,
-        "claude": 295,
-        "code": 231,
+        "model": 597,
+        "claude": 294,
+        "code": 230,
         "session": 182,
         "default": 174,
-        "set": 167,
-        "opu": 129,
-        "level": 125,
+        "set": 168,
+        "opu": 128,
+        "level": 126,
         "setting": 95,
         "run": 88,
         "window": 81,
         "request": 78,
-        "effort": 76,
+        "effort": 77,
         "version": 76,
-        "sonnet": 71,
+        "such": 72,
+        "provider": 70,
+        "sonnet": 70,
         "organization": 70,
-        "such": 69,
-        "provider": 68,
         "manag": 67,
-        "fable": 65,
+        "fable": 64,
         "fallback": 63,
         "switch": 60,
         "start": 57,
@@ -23934,7 +23938,7 @@
         "later": 49,
         "variable": 48,
         "one": 47,
-        "instead": 47,
+        "instead": 46,
         "also": 46,
         "before": 45,
         "doesn": 45,
@@ -23943,14 +23947,14 @@
         "user": 43,
         "only": 43,
         "subagent": 43,
+        "turn": 42,
         "show": 41,
-        "turn": 41,
         "allowlist": 40,
         "name": 39,
-        "through": 39,
-        "entry": 39
+        "bedrock": 39,
+        "through": 39
       },
-      "word_count": 17859
+      "word_count": 17903
     },
     {
       "filename": "claude-code__monitoring-usage.md",
