@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T21:21:52.647132Z",
+  "generated_at": "2026-11-12T03:15:20.211537Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -939,8 +939,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "cfc3131bd25c1fb47b122908921c47551ccf67339ec81cc357b1f66e9f4b3250",
-      "lastmod": "2026-11-10T16:09:14.837Z",
+      "sha256": "ccd83bf92a2844ebd760c1e326122d5fb1355ec771d9b0625639547ebd105cf1",
+      "lastmod": "2026-11-12T02:41:41.770Z",
       "fetch_status": "ok"
     },
     {
@@ -2061,8 +2061,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "304541915e9965992f707a032e64ce1c070c1084fe0c59d63ff3bae9fd500786",
-      "lastmod": "2026-11-10T22:40:31.869Z",
+      "sha256": "7f0be22ed906e5c3d3df18c791b8716d87f6702a59754b711f98fdb84e2ec2c2",
+      "lastmod": "2026-11-12T01:46:09.319Z",
       "fetch_status": "ok"
     },
     {
@@ -9794,7 +9794,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md",
       "title": "Prompting best practices",
       "category": "core_documentation",
-      "sha256": "29153433acaa24c443860ecee1be6961e8d8524d2e603de540967d9c64fd0118",
+      "sha256": "1b45ffbca510d5ce394b6bb4e92f87d68473aef57fadb573006b18cd2bb2f556",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10377,7 +10377,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention.md",
       "title": "API and data retention",
       "category": "core_documentation",
-      "sha256": "2ef90775e5181bd0825b907b9dd82a50363f1479ae452b8df9e096eefc752bd7",
+      "sha256": "7fc5032ee6054967d0b208472b2eda41371700aaf4db051a31886a4a3b064cff",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11081,7 +11081,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/choosing-an-environment.md",
       "title": "Choose an environment",
       "category": "core_documentation",
-      "sha256": "57af474be6e6a97428ae0e54b25896a669f13b6bfec24a71175a57596d867f12",
+      "sha256": "e416a7881d922308d298695be3b605a69c7bc6ce45afdaeeb8c8349b58888dd1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11235,7 +11235,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/overview.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "01b70668481240d5a51e30c9226bda9ea5129b3bd11283a004f00cc23c085e47",
+      "sha256": "c54265c801d197692387106c86dff3ed85d920cd3e778c966ae65219d33395ce",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11290,7 +11290,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/secure-deployment.md",
       "title": "Secure your deployment",
       "category": "core_documentation",
-      "sha256": "dca0c8d0875c981d4231d17efa4acd629080aa6cbd3897b207b38ae4cfd8f079",
+      "sha256": "fd508ea5565ec673f2b6dbc47e94243eb7c978ad50040ea825c6b4435e9b8d8f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11323,7 +11323,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
       "title": "Overview and quickstart",
       "category": "core_documentation",
-      "sha256": "ad45a5d27b69c6c89b3e8d0db3d21793ae3874ddaa3b50831d525d7480f879d0",
+      "sha256": "43c9e23fe8079814679842d74e3ae54f08523acf77efce06f5928c65403e1f85",
       "lastmod": null,
       "fetch_status": "ok"
     },

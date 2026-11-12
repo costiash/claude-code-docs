@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T21:21:57.534410Z",
+  "generated_at": "2026-11-12T03:15:22.965427Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -14778,6 +14778,10 @@
           "level": 4
         },
         {
+          "text": "Check a computer for scripts that still run",
+          "level": 5
+        },
+        {
           "text": "Browse external sites",
           "level": 3
         },
@@ -15387,27 +15391,27 @@
         }
       ],
       "terms": {
-        "claude": 164,
-        "ssh": 113,
-        "session": 76,
+        "claude": 165,
+        "ssh": 114,
+        "session": 77,
         "host": 64,
-        "json": 49,
+        "json": 50,
         "setting": 45,
-        "browser": 41,
-        "pane": 40,
-        "desktop": 39,
+        "desktop": 43,
+        "browser": 40,
+        "pane": 39,
+        "file": 38,
         "code": 37,
-        "file": 37,
         "mode": 33,
+        "run": 31,
         "config": 31,
-        "run": 29,
         "server": 29,
+        "open": 28,
         "permission": 28,
         "click": 27,
-        "open": 27,
         "prompt": 27,
         "cmd": 27,
-        "user": 25,
+        "user": 26,
         "devbox": 25,
         "com": 24,
         "chang": 24,
@@ -15417,28 +15421,28 @@
         "app": 21,
         "fil": 21,
         "dev": 21,
+        "key": 20,
         "proxycommand": 20,
+        "start": 19,
         "command": 19,
+        "true": 19,
+        "preview": 18,
         "connection": 18,
         "before": 17,
-        "preview": 17,
         "window": 17,
-        "start": 17,
-        "key": 17,
+        "external": 17,
         "chat": 16,
         "review": 16,
         "see": 16,
         "project": 16,
-        "external": 16,
         "edit": 16,
         "manag": 16,
-        "true": 16,
         "hostname": 16,
         "sshhostallowlist": 16,
         "diff": 15,
-        "environment": 15
+        "check": 15
       },
-      "word_count": 32204
+      "word_count": 32529
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -34625,35 +34629,35 @@
       "terms": {
         "claude": 663,
         "code": 539,
-        "setting": 441,
+        "setting": 442,
         "file": 319,
-        "manag": 257,
+        "manag": 259,
         "sandbox": 255,
-        "session": 252,
+        "session": 253,
         "default": 240,
         "command": 222,
         "set": 219,
         "model": 217,
-        "json": 214,
+        "json": 216,
         "any": 207,
         "key": 198,
         "type": 165,
-        "turn": 164,
+        "turn": 165,
         "one": 161,
         "scope": 160,
         "only": 142,
         "run": 134,
         "mode": 132,
         "such": 127,
-        "off": 120,
+        "off": 121,
         "unset": 120,
+        "theme": 119,
         "user": 118,
-        "theme": 118,
         "block": 116,
         "see": 115,
         "every": 114,
         "each": 111,
-        "null": 106,
+        "null": 107,
         "tool": 101,
         "path": 100,
         "list": 97,
@@ -34674,7 +34678,7 @@
         "own": 73,
         "boolean": 73
       },
-      "word_count": 55157
+      "word_count": 55421
     },
     {
       "filename": "claude-code__setup.md",
@@ -138515,6 +138519,10 @@
           "level": 3
         },
         {
+          "text": "Payments, account numbers, and financial records",
+          "level": 3
+        },
+        {
           "text": "Research and information gathering",
           "level": 3
         },
@@ -138623,7 +138631,7 @@
         "follow": 7,
         "calibration": 7
       },
-      "word_count": 9799
+      "word_count": 10418
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__overview.md",
@@ -145293,10 +145301,10 @@
         "platform": 19,
         "doe": 19,
         "phi": 18,
+        "enabl": 17,
         "baa": 17,
         "manag": 16,
         "eligibility": 16,
-        "enabl": 16,
         "available": 16,
         "learn": 15,
         "appli": 15,
@@ -145316,7 +145324,7 @@
         "console": 12,
         "agent": 12
       },
-      "word_count": 4687
+      "word_count": 4689
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -152439,8 +152447,8 @@
       "terms": {
         "claude": 41,
         "sandbox": 31,
+        "agent": 26,
         "manag": 26,
-        "agent": 25,
         "host": 24,
         "environment": 22,
         "anthropic": 21,
@@ -152471,6 +152479,7 @@
         "reach": 5,
         "aren": 5,
         "tunnel": 5,
+        "credential": 5,
         "beta": 4,
         "featur": 4,
         "mytho": 4,
@@ -152485,10 +152494,9 @@
         "don": 4,
         "service": 4,
         "web": 4,
-        "credential": 4,
         "differenc": 4
       },
-      "word_count": 1202
+      "word_count": 1209
     },
     {
       "filename": "docs__en__managed-agents__cloud-sandboxes-reference.md",
@@ -154046,8 +154054,8 @@
       ],
       "terms": {
         "claude": 53,
-        "agent": 43,
-        "manag": 33,
+        "agent": 44,
+        "manag": 34,
         "beta": 15,
         "session": 15,
         "sandbox": 13,
@@ -154062,14 +154070,13 @@
         "cloud": 8,
         "acces": 8,
         "event": 8,
+        "anthropic": 7,
         "data": 7,
         "runn": 6,
         "self": 6,
         "host": 6,
         "opu": 6,
-        "anthropic": 6,
         "card": 6,
-        "server": 6,
         "header": 6,
         "overview": 5,
         "http": 5,
@@ -154083,6 +154090,7 @@
         "environment": 5,
         "see": 5,
         "create": 5,
+        "server": 5,
         "harnes": 4,
         "long": 4,
         "task": 4,
@@ -154096,7 +154104,7 @@
         "google": 4,
         "build": 4
       },
-      "word_count": 1064
+      "word_count": 1072
     },
     {
       "filename": "docs__en__managed-agents__permission-policies.md",
@@ -154547,35 +154555,35 @@
         }
       ],
       "terms": {
-        "agent": 113,
-        "tool": 98,
+        "agent": 114,
+        "tool": 102,
         "session": 73,
         "csharp": 49,
         "host": 47,
         "claude": 43,
         "list": 42,
+        "run": 38,
         "java": 38,
         "php": 38,
-        "run": 37,
         "only": 36,
         "sandbox": 34,
-        "each": 33,
+        "each": 34,
         "web": 31,
-        "set": 29,
+        "set": 30,
         "limit": 28,
         "environment": 28,
+        "see": 27,
         "keep": 26,
         "credential": 26,
         "result": 26,
-        "see": 26,
+        "call": 25,
         "read": 24,
         "mcp": 23,
-        "call": 23,
         "need": 20,
         "search": 20,
+        "text": 20,
         "request": 19,
         "key": 19,
-        "text": 19,
         "server": 19,
         "vault": 18,
         "one": 18,
@@ -154598,7 +154606,7 @@
         "application": 12,
         "end": 12
       },
-      "word_count": 6398
+      "word_count": 6467
     },
     {
       "filename": "docs__en__managed-agents__secure-deployment-monitoring.md",
@@ -154801,37 +154809,36 @@
         }
       ],
       "terms": {
-        "claude": 47,
-        "host": 38,
-        "worker": 37,
+        "claude": 46,
+        "host": 40,
+        "worker": 38,
         "agent": 35,
+        "sandbox": 29,
         "environment": 29,
-        "sandbox": 28,
-        "session": 27,
-        "self": 25,
-        "manag": 25,
+        "session": 28,
+        "self": 26,
+        "manag": 24,
         "title": 22,
         "tab": 20,
-        "step": 19,
+        "step": 18,
         "platform": 17,
         "tool": 16,
-        "run": 14,
-        "model": 14,
-        "anthropic": 13,
+        "run": 15,
+        "model": 13,
+        "own": 12,
+        "anthropic": 12,
         "key": 12,
         "card": 12,
-        "own": 11,
         "api": 10,
-        "cloud": 10,
         "work": 10,
         "http": 9,
         "beta": 9,
+        "cloud": 9,
         "cli": 9,
         "mcp": 9,
         "com": 8,
         "doc": 8,
         "aws": 7,
-        "google": 7,
         "create": 7,
         "maco": 7,
         "read": 7,
@@ -154839,6 +154846,7 @@
         "server": 7,
         "note": 6,
         "opu": 6,
+        "google": 6,
         "see": 6,
         "queue": 6,
         "stor": 6,
@@ -154852,7 +154860,7 @@
         "featur": 5,
         "includ": 5
       },
-      "word_count": 2516
+      "word_count": 2518
     },
     {
       "filename": "docs__en__managed-agents__self-hosted-sandboxes-custom-tools.md",
