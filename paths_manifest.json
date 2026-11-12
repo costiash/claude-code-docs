@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-12T03:15:20.211537Z",
+  "generated_at": "2026-11-12T06:16:39.391871Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1742,8 +1742,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/test.md",
       "title": "Test a mod",
       "category": "claude_code",
-      "sha256": "65d8154fd43d809a68bbb0436fda364f16ccc0b01c7a599097204ad033620ed7",
-      "lastmod": "2026-10-26T21:28:52.731Z",
+      "sha256": "0023ee9e002a888eeeea8652ca40633b4745839efb5e7b3f57a8c297c52fae56",
+      "lastmod": "2026-11-12T04:15:23.502Z",
       "fetch_status": "ok"
     },
     {
@@ -2061,8 +2061,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "7f0be22ed906e5c3d3df18c791b8716d87f6702a59754b711f98fdb84e2ec2c2",
-      "lastmod": "2026-11-12T01:46:09.319Z",
+      "sha256": "164320461acfc2ab93d6f7dfddb859fe3d36aef77ac9aeca28fe744d523c65fd",
+      "lastmod": "2026-11-12T04:17:23.411Z",
       "fetch_status": "ok"
     },
     {

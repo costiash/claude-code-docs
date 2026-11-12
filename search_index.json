@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-12T03:15:22.965427Z",
+  "generated_at": "2026-11-12T06:16:42.942535Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -29052,6 +29052,10 @@
           "level": 3
         },
         {
+          "text": "Check a result with `expect`",
+          "level": 3
+        },
+        {
           "text": "Test a timer",
           "level": 2
         },
@@ -29076,17 +29080,17 @@
         "test": 72,
         "mod": 67,
         "stub": 38,
-        "call": 34,
+        "call": 35,
         "hook": 33,
         "return": 23,
+        "check": 22,
         "run": 19,
         "answer": 18,
-        "check": 17,
         "each": 15,
         "claude": 14,
         "first": 14,
+        "one": 14,
         "code": 13,
-        "one": 13,
         "draw": 13,
         "file": 12,
         "fail": 12,
@@ -29097,34 +29101,34 @@
         "event": 10,
         "such": 10,
         "without": 9,
+        "kit": 9,
         "method": 9,
         "fire": 8,
         "session": 8,
-        "kit": 8,
+        "name": 8,
         "tool": 8,
         "register": 8,
-        "before": 7,
-        "name": 7,
+        "after": 8,
         "add": 7,
         "api": 7,
+        "result": 7,
         "hold": 7,
         "doe": 7,
+        "value": 7,
         "timer": 7,
         "doesn": 7,
-        "after": 7,
         "element": 7,
         "app": 7,
+        "before": 6,
         "shell": 6,
         "module": 6,
         "every": 6,
+        "function": 6,
         "command": 6,
         "count": 6,
-        "nam": 6,
-        "result": 6,
-        "mak": 6,
-        "show": 6
+        "nam": 6
       },
-      "word_count": 4076
+      "word_count": 4198
     },
     {
       "filename": "claude-code__plugins__mods__troubleshoot.md",
