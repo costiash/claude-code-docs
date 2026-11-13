@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-13T00:20:33.274022Z",
+  "generated_at": "2026-11-13T03:15:22.867554Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -532,8 +532,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "ee3ae70deb3cd135e2deeb4ec6391b9d0fcb196f16da4b59463ecf69bb66bd48",
-      "lastmod": "2026-11-10T03:19:16.743Z",
+      "sha256": "51430f3963d598c0301d78b047dddf4144a988bcec15671212d7ce112697718e",
+      "lastmod": "2026-11-13T00:24:48.654Z",
       "fetch_status": "ok"
     },
     {
@@ -1027,8 +1027,8 @@
       "md_url": "https://code.claude.com/docs/en/errors.md",
       "title": "Error reference",
       "category": "claude_code",
-      "sha256": "b5911261577508895017838a58a562daa5e9dee39a7e5376b9925e18f69f3f16",
-      "lastmod": "2026-11-12T23:23:37.205Z",
+      "sha256": "f82b28d0d60a91b57419ef7cf063fa987eee3955fc570427adcaf6e7a278ed7a",
+      "lastmod": "2026-11-13T01:56:32.933Z",
       "fetch_status": "ok"
     },
     {
@@ -1401,8 +1401,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "64ca2a65601db69c550180297107fc7560625adbefd46154c957dfcb0f0d4f2b",
-      "lastmod": "2026-11-12T23:08:19.254Z",
+      "sha256": "b48fe2c7801147806634fbf8fb8e8edd48e92915d40a53b8d5a17630953ad60a",
+      "lastmod": "2026-11-13T01:56:32.933Z",
       "fetch_status": "ok"
     },
     {
@@ -11356,7 +11356,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "558ba9f3f7bf42a80496a4bc04ec384da7388962d1f6a2b6946ea0536b2b6fd6",
+      "sha256": "d8cd76bef5ea3754f010d10ae274991cb1d52b9aacdfb570ab5f920b35729d94",
       "lastmod": null,
       "fetch_status": "ok"
     },
