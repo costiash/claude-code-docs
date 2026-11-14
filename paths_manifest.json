@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T06:15:34.571081Z",
+  "generated_at": "2026-11-14T09:14:44.854089Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -950,8 +950,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "06d179439eeaabd5c2ec13833ad9c364e93dc40e08ad951553292f0cf4c7e283",
-      "lastmod": "2026-11-14T01:08:29.711Z",
+      "sha256": "62babc490508d4d53ed58c8887630131bcf392c0a31e53e81ed8f10dac0b74ac",
+      "lastmod": "2026-11-14T08:14:28.254Z",
       "fetch_status": "ok"
     },
     {

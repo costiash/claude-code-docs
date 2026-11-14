@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T06:15:38.553769Z",
+  "generated_at": "2026-11-14T09:14:49.627731Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -15557,7 +15557,7 @@
         }
       ],
       "terms": {
-        "claude": 159,
+        "claude": 158,
         "ssh": 114,
         "session": 77,
         "host": 64,
@@ -15601,14 +15601,14 @@
         "review": 16,
         "see": 16,
         "project": 16,
+        "check": 16,
         "edit": 16,
         "manag": 16,
         "hostname": 16,
         "sshhostallowlist": 16,
-        "diff": 15,
-        "check": 15
+        "diff": 15
       },
-      "word_count": 32515
+      "word_count": 32520
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
