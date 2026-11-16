@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T18:14:10.733994Z",
+  "generated_at": "2026-11-16T18:15:35.510069Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -20695,7 +20695,7 @@
         "agent": 55,
         "skill": 55,
         "set": 55,
-        "action": 54,
+        "action": 53,
         "matcher": 52,
         "model": 52,
         "server": 51,
@@ -20714,7 +20714,7 @@
         "doesn": 41,
         "before": 40,
         "example": 39,
-        "project": 39
+        "allow": 39
       },
       "word_count": 40163
     },
@@ -135038,12 +135038,12 @@
         "claude": 75,
         "foundry": 58,
         "model": 53,
-        "azure": 47,
+        "azure": 48,
         "deployment": 43,
         "api": 32,
         "microsoft": 30,
         "host": 28,
-        "anthropic": 25,
+        "anthropic": 27,
         "tab": 25,
         "resource": 19,
         "title": 17,
@@ -135070,6 +135070,7 @@
         "note": 10,
         "version": 10,
         "standard": 9,
+        "data": 9,
         "detail": 9,
         "create": 9,
         "error": 9,
@@ -135081,12 +135082,11 @@
         "url": 7,
         "sdk": 7,
         "usage": 7,
-        "data": 7,
+        "bill": 7,
         "creat": 7,
-        "open": 7,
-        "icon": 7
+        "open": 7
       },
-      "word_count": 3589
+      "word_count": 3620
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__anthropic-managed.md",

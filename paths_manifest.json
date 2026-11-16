@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-14T18:14:06.710196Z",
+  "generated_at": "2026-11-16T18:15:31.469540Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1214,8 +1214,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "cf74269ef6d156ca0f965c042b09d57f7a3f4f23731c7bf5b435bb48b764af5e",
-      "lastmod": "2026-11-14T16:02:38.584Z",
+      "sha256": "d736130c7223da8a552e24dcde194346cfa7f2adaad53d705bc7c9404278668e",
+      "lastmod": "2026-11-16T15:23:05.388Z",
       "fetch_status": "ok"
     },
     {
@@ -2490,7 +2490,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart.md",
       "title": "Quickstart",
       "category": "agents_and_tools",
-      "sha256": "7f52a0293fc9a6e6cc673f891767f3d9cd9aae37f4fc4f97eb21a5a45ab2b5a9",
+      "sha256": "e2c67e8e6d24f915100d16e201427a8f63c3a535ddb796a96c8e979bbeec7098",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2501,7 +2501,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md",
       "title": "MCP connector",
       "category": "agents_and_tools",
-      "sha256": "dea6fef9380811b451808da3b8b72b0bedb6959d01c86f1adc8ece5b6a84cdf6",
+      "sha256": "0dc8583630168f797a534ba76e5032344b1712551c92f1be2f92b5379ee0fe78",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9475,7 +9475,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock.md",
       "title": "Amazon Bedrock (mantle)",
       "category": "core_documentation",
-      "sha256": "39969dd496aef901fe39365be490f37f155e9ed410a022e93d7e928b9514de52",
+      "sha256": "c39b262dbb2340ed709d3d7dee98dee2d2a6cb3a1b5483f12bd10d9b2a0eaf5f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9486,7 +9486,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry.md",
       "title": "Microsoft Foundry",
       "category": "core_documentation",
-      "sha256": "7f74ccfc40d36eff2991d3d70c4d72e0d6e4066b3d79bce69179f4f84e827b36",
+      "sha256": "9d93b83c54e6a0e73c616c65cb1cabaf1b791bf10d83ed4a20ae1a483f0c3650",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9497,7 +9497,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed.md",
       "title": "Anthropic-managed",
       "category": "core_documentation",
-      "sha256": "cc844e5e02c9aa09402a445fd4c996072f33301da39d2e084f9f2dfa775555ff",
+      "sha256": "b788b47c085ae47e636ce6d1c1bf5ee536e032c65fc0595e3d31067a143280f0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9508,7 +9508,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed.md",
       "title": "Google-managed",
       "category": "core_documentation",
-      "sha256": "bab35c8c50956dd55a13edbef3cb5c4013853507463f1565922dd91086667540",
+      "sha256": "a3c9ea531c3d1a525f8c7e6995bdd7ed413cd3bfd0103de0af20d5302c7dfab2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9541,7 +9541,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "ff332153f5f6fad0d859dfc9b841369c0369cfcab7a9af84227664560ab497c1",
+      "sha256": "6b932d9154358e9da987bdf80deb5764869c407db34918630dfe26ac77d8f27e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10168,7 +10168,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "f847901e4718a3f59a6892e1fc959c2e042a05610edb7fdb44a3878636f71bd8",
+      "sha256": "2e889f939aab96870238a1495a779ebd662b45be7cf65eca52cda84fd84e77ce",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10245,7 +10245,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "3fb672a8117ccfed8c189cfc9c63663b6eaa1ed38567afc1294c906ebd737d44",
+      "sha256": "e1428a5f09cb98b15130d2206342c2c1ce10292bc706b8d4eb55396b39600174",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10278,7 +10278,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java.md",
       "title": "Java",
       "category": "core_documentation",
-      "sha256": "b182ff9387ff4e411e65ef8db83e5ba37686e439a74f22f82bb8fe842fe08f65",
+      "sha256": "c069d72a10527a021bf593e278da57fc5681c1b2c8db71ff948025681834c7a2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10344,7 +10344,7 @@
       "md_url": "https://platform.claude.com/docs/en/get-started.md",
       "title": "Quickstart",
       "category": "get_started",
-      "sha256": "6b971162b57d664c0606b1524c1710e6a8f87d119fcb5606e1cd42f720d1daf3",
+      "sha256": "86c7a1244cb587200d88bdb8c3d0fbba9f9bfd6014483aa14bac1ea93efe0fc9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10883,7 +10883,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk.md",
       "title": "Get Anthropic SDK spans",
       "category": "core_documentation",
-      "sha256": "b5fabe1326464025d9afc8dee0571603bea5068d2a42fbc8cb2cb3f4c12d19cb",
+      "sha256": "edf7ace2a49fa9988c50a3075810fe4ae61d35df80e969e4ca01d894221ef466",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11312,7 +11312,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "12434d6f5d2380db62184a78e6e46b91f2fc234ab25b571d9a7c1456ecbf4d2d",
+      "sha256": "16c2fec9af42550602f83609088e1385240fde74f3c117b4370ae857ed22514b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11400,7 +11400,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
       "title": "Overview and quickstart",
       "category": "core_documentation",
-      "sha256": "7a19bb43672063433edd55c3061ed1cc5f0ea33895bde98935cbbf658f7e21d4",
+      "sha256": "31990a55394d517abda5682fcdcfe3a46fb4371b9b5963b14317875357a2cb05",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11466,7 +11466,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers.md",
       "title": "Deploy workers",
       "category": "core_documentation",
-      "sha256": "230255ab22bed718a643f5739319ae63f98c33cb35872bcef269ac04404ab54a",
+      "sha256": "592da080f00920ce974cd41b097093912c18f10cccb8809d8bf0aea666ad5e7a",
       "lastmod": null,
       "fetch_status": "ok"
     },
