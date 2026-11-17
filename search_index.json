@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-17T03:15:20.880812Z",
+  "generated_at": "2026-11-17T18:14:54.465617Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -27222,30 +27222,30 @@
       ],
       "terms": {
         "user": 111,
-        "plugin": 110,
-        "marketplace": 96,
-        "claude": 71,
-        "code": 68,
+        "plugin": 108,
+        "marketplace": 94,
+        "claude": 70,
+        "code": 67,
         "command": 66,
-        "entry": 56,
+        "entry": 55,
         "install": 45,
         "run": 42,
         "host": 38,
         "git": 33,
         "set": 33,
-        "each": 31,
-        "one": 30,
         "setting": 30,
         "add": 29,
+        "each": 28,
+        "one": 26,
         "source": 26,
         "update": 25,
         "download": 24,
         "see": 24,
         "only": 23,
-        "version": 23,
         "credential": 23,
         "without": 22,
         "url": 21,
+        "version": 21,
         "keep": 18,
         "directory": 18,
         "who": 17,
@@ -27263,16 +27263,16 @@
         "manag": 14,
         "http": 13,
         "private": 13,
-        "release": 13,
         "other": 13,
         "after": 13,
         "archive": 13,
+        "release": 12,
         "fil": 12,
         "header": 12,
         "place": 12,
         "read": 11
       },
-      "word_count": 5550
+      "word_count": 5521
     },
     {
       "filename": "claude-code__plugins__install.md",
@@ -27795,11 +27795,11 @@
         }
       ],
       "terms": {
-        "plugin": 112,
+        "plugin": 114,
         "path": 73,
-        "field": 61,
-        "claude": 47,
-        "code": 43,
+        "field": 62,
+        "claude": 49,
+        "code": 45,
         "server": 42,
         "each": 40,
         "load": 39,
@@ -27807,15 +27807,15 @@
         "default": 38,
         "component": 35,
         "entry": 34,
-        "manifest": 31,
+        "manifest": 32,
         "array": 31,
         "file": 30,
+        "key": 30,
         "command": 30,
-        "key": 29,
         "directory": 26,
+        "object": 25,
         "hook": 25,
         "name": 24,
-        "object": 24,
         "inline": 22,
         "value": 22,
         "str": 22,
@@ -27831,22 +27831,22 @@
         "set": 17,
         "doesn": 17,
         "run": 17,
+        "such": 17,
         "user": 16,
         "marketplace": 16,
-        "such": 16,
         "reference": 15,
         "start": 15,
         "option": 15,
+        "error": 15,
         "map": 15,
         "see": 14,
-        "error": 14,
         "every": 13,
         "shell": 13,
         "url": 13,
         "monitor": 13,
         "valu": 12
       },
-      "word_count": 5926
+      "word_count": 5988
     },
     {
       "filename": "claude-code__plugins__marketplace-reference.md",
@@ -27977,14 +27977,14 @@
         }
       ],
       "terms": {
-        "plugin": 132,
-        "marketplace": 98,
-        "claude": 77,
-        "code": 70,
-        "entry": 62,
+        "plugin": 133,
+        "marketplace": 99,
+        "claude": 79,
+        "code": 72,
+        "entry": 64,
         "source": 56,
         "directory": 50,
-        "field": 47,
+        "field": 48,
         "path": 44,
         "one": 37,
         "see": 36,
@@ -27995,40 +27995,40 @@
         "load": 31,
         "fetch": 29,
         "install": 29,
-        "such": 26,
-        "error": 26,
+        "such": 27,
+        "error": 27,
         "user": 25,
+        "object": 24,
         "type": 24,
-        "object": 23,
         "link": 21,
         "fail": 20,
         "print": 20,
         "same": 19,
+        "warn": 19,
+        "under": 19,
         "only": 19,
         "own": 19,
         "each": 18,
         "set": 18,
         "relative": 18,
-        "warn": 18,
-        "under": 18,
+        "requir": 18,
         "str": 18,
         "git": 18,
-        "requir": 17,
         "command": 17,
         "submodule": 17,
         "url": 16,
         "host": 15,
         "sourc": 15,
+        "every": 15,
+        "any": 15,
         "list": 15,
         "default": 15,
         "fil": 15,
-        "every": 14,
-        "any": 14,
+        "later": 14,
         "download": 14,
-        "github": 14,
-        "level": 13
+        "github": 14
       },
-      "word_count": 6738
+      "word_count": 6849
     },
     {
       "filename": "claude-code__plugins__measure.md",
@@ -30202,21 +30202,21 @@
         "cli": 7,
         "git": 7,
         "command": 7,
-        "tag": 7,
         "cover": 6,
-        "need": 6,
         "host": 6,
         "auto": 6,
         "new": 6,
         "path": 6,
         "same": 6,
+        "tag": 6,
         "com": 5,
         "choose": 5,
+        "need": 5,
         "reach": 5,
         "check": 5,
         "keep": 5
       },
-      "word_count": 2212
+      "word_count": 2206
     },
     {
       "filename": "claude-code__plugins__relevance.md",
@@ -30838,8 +30838,8 @@
         "plugin": 288,
         "marketplace": 171,
         "install": 168,
-        "claude": 154,
-        "code": 143,
+        "claude": 156,
+        "code": 145,
         "run": 89,
         "add": 84,
         "message": 80,
@@ -30858,12 +30858,12 @@
         "doesn": 43,
         "list": 42,
         "one": 42,
+        "see": 42,
         "hook": 42,
-        "see": 41,
         "shell": 41,
+        "such": 39,
         "tab": 39,
         "fix": 38,
-        "such": 38,
         "line": 38,
         "server": 38,
         "show": 37,
@@ -30874,10 +30874,10 @@
         "same": 33,
         "repository": 33,
         "check": 32,
+        "read": 31,
+        "under": 31,
         "git": 31,
         "instead": 30,
-        "read": 30,
-        "under": 30,
         "skill": 30,
         "print": 29,
         "update": 28,
@@ -30886,7 +30886,7 @@
         "only": 25,
         "after": 25
       },
-      "word_count": 14197
+      "word_count": 14248
     },
     {
       "filename": "claude-code__prompt-caching.md",
@@ -54032,7 +54032,7 @@
         "spend": 11,
         "limit": 11
       },
-      "word_count": 3383
+      "word_count": 3385
     },
     {
       "filename": "docs__en__api__beta__agents__create.md",
@@ -54118,7 +54118,7 @@
         "ask": 22,
         "some": 22
       },
-      "word_count": 7852
+      "word_count": 7854
     },
     {
       "filename": "docs__en__api__beta__agents__list.md",
@@ -54204,7 +54204,7 @@
         "organization": 11,
         "credit": 11
       },
-      "word_count": 3462
+      "word_count": 3464
     },
     {
       "filename": "docs__en__api__beta__agents__retrieve.md",
@@ -54294,7 +54294,7 @@
         "credit": 11,
         "spend": 11
       },
-      "word_count": 3404
+      "word_count": 3406
     },
     {
       "filename": "docs__en__api__beta__agents__update.md",
@@ -54384,7 +54384,7 @@
         "ask": 22,
         "some": 22
       },
-      "word_count": 7984
+      "word_count": 7986
     },
     {
       "filename": "docs__en__api__beta__agents__versions.md",
@@ -54568,7 +54568,7 @@
         "caus": 11,
         "organization": 11
       },
-      "word_count": 3430
+      "word_count": 3432
     },
     {
       "filename": "docs__en__api__beta__deployment_runs.md",
@@ -54856,7 +54856,7 @@
         "send": 3,
         "select": 3
       },
-      "word_count": 1191
+      "word_count": 1193
     },
     {
       "filename": "docs__en__api__beta__deployment_runs__retrieve.md",
@@ -54942,7 +54942,7 @@
         "mov": 2,
         "current": 2
       },
-      "word_count": 1010
+      "word_count": 1012
     },
     {
       "filename": "docs__en__api__beta__deployments.md",
@@ -55426,7 +55426,7 @@
         "rubric": 4,
         "system": 4
       },
-      "word_count": 2079
+      "word_count": 2081
     },
     {
       "filename": "docs__en__api__beta__deployments__create.md",
@@ -55512,7 +55512,7 @@
         "api": 6,
         "fil": 6
       },
-      "word_count": 3430
+      "word_count": 3432
     },
     {
       "filename": "docs__en__api__beta__deployments__list.md",
@@ -55598,7 +55598,7 @@
         "shap": 4,
         "credential": 4
       },
-      "word_count": 2198
+      "word_count": 2200
     },
     {
       "filename": "docs__en__api__beta__deployments__pause.md",
@@ -55684,7 +55684,7 @@
         "rubric": 4,
         "system": 4
       },
-      "word_count": 2079
+      "word_count": 2081
     },
     {
       "filename": "docs__en__api__beta__deployments__retrieve.md",
@@ -55770,7 +55770,7 @@
         "rubric": 4,
         "system": 4
       },
-      "word_count": 2074
+      "word_count": 2076
     },
     {
       "filename": "docs__en__api__beta__deployments__run.md",
@@ -55856,7 +55856,7 @@
         "mov": 2,
         "current": 2
       },
-      "word_count": 1014
+      "word_count": 1016
     },
     {
       "filename": "docs__en__api__beta__deployments__unpause.md",
@@ -55942,7 +55942,7 @@
         "rubric": 4,
         "system": 4
       },
-      "word_count": 2079
+      "word_count": 2081
     },
     {
       "filename": "docs__en__api__beta__deployments__update.md",
@@ -56032,7 +56032,7 @@
         "via": 7,
         "repository": 7
       },
-      "word_count": 3454
+      "word_count": 3456
     },
     {
       "filename": "docs__en__api__beta__dreams.md",
@@ -56372,7 +56372,7 @@
         "cache": 4,
         "int": 4
       },
-      "word_count": 1605
+      "word_count": 1607
     },
     {
       "filename": "docs__en__api__beta__dreams__cancel.md",
@@ -56458,7 +56458,7 @@
         "int": 4,
         "http": 3
       },
-      "word_count": 1602
+      "word_count": 1604
     },
     {
       "filename": "docs__en__api__beta__dreams__create.md",
@@ -56544,7 +56544,7 @@
         "token": 5,
         "api": 4
       },
-      "word_count": 2113
+      "word_count": 2115
     },
     {
       "filename": "docs__en__api__beta__dreams__list.md",
@@ -56630,7 +56630,7 @@
         "hold": 4,
         "referenc": 4
       },
-      "word_count": 1757
+      "word_count": 1759
     },
     {
       "filename": "docs__en__api__beta__dreams__retrieve.md",
@@ -56716,7 +56716,7 @@
         "cache": 4,
         "int": 4
       },
-      "word_count": 1580
+      "word_count": 1582
     },
     {
       "filename": "docs__en__api__beta__environments.md",
@@ -57304,7 +57304,7 @@
         "example": 2,
         "only": 2
       },
-      "word_count": 787
+      "word_count": 789
     },
     {
       "filename": "docs__en__api__beta__environments__create.md",
@@ -57390,7 +57390,7 @@
         "provid": 3,
         "visibility": 3
       },
-      "word_count": 1186
+      "word_count": 1188
     },
     {
       "filename": "docs__en__api__beta__environments__delete.md",
@@ -57476,7 +57476,7 @@
         "here": 1,
         "specify": 1
       },
-      "word_count": 436
+      "word_count": 438
     },
     {
       "filename": "docs__en__api__beta__environments__list.md",
@@ -57562,7 +57562,7 @@
         "step": 2,
         "build": 2
       },
-      "word_count": 854
+      "word_count": 856
     },
     {
       "filename": "docs__en__api__beta__environments__retrieve.md",
@@ -57648,7 +57648,7 @@
         "skill": 2,
         "example": 2
       },
-      "word_count": 776
+      "word_count": 778
     },
     {
       "filename": "docs__en__api__beta__environments__update.md",
@@ -57738,7 +57738,7 @@
         "provid": 3,
         "key": 3
       },
-      "word_count": 1179
+      "word_count": 1181
     },
     {
       "filename": "docs__en__api__beta__environments__work.md",
@@ -58142,7 +58142,7 @@
         "poll": 2,
         "execute": 2
       },
-      "word_count": 681
+      "word_count": 683
     },
     {
       "filename": "docs__en__api__beta__environments__work__heartbeat.md",
@@ -58232,7 +58232,7 @@
         "call": 1,
         "automatically": 1
       },
-      "word_count": 570
+      "word_count": 572
     },
     {
       "filename": "docs__en__api__beta__environments__work__list.md",
@@ -58322,7 +58322,7 @@
         "build": 2,
         "fil": 2
       },
-      "word_count": 696
+      "word_count": 698
     },
     {
       "filename": "docs__en__api__beta__environments__work__poll.md",
@@ -58412,7 +58412,7 @@
         "fil": 2,
         "migrate": 2
       },
-      "word_count": 742
+      "word_count": 744
     },
     {
       "filename": "docs__en__api__beta__environments__work__retrieve.md",
@@ -58498,7 +58498,7 @@
         "fil": 2,
         "migrate": 2
       },
-      "word_count": 722
+      "word_count": 724
     },
     {
       "filename": "docs__en__api__beta__environments__work__stats.md",
@@ -58584,7 +58584,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 515
+      "word_count": 517
     },
     {
       "filename": "docs__en__api__beta__environments__work__stop.md",
@@ -58674,7 +58674,7 @@
         "fil": 2,
         "migrate": 2
       },
-      "word_count": 745
+      "word_count": 747
     },
     {
       "filename": "docs__en__api__beta__environments__work__update.md",
@@ -58764,7 +58764,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 764
+      "word_count": 766
     },
     {
       "filename": "docs__en__api__beta__files.md",
@@ -59044,7 +59044,7 @@
         "only": 1,
         "act": 1
       },
-      "word_count": 432
+      "word_count": 434
     },
     {
       "filename": "docs__en__api__beta__files__download.md",
@@ -59122,7 +59122,7 @@
         "only": 1,
         "act": 1
       },
-      "word_count": 389
+      "word_count": 391
     },
     {
       "filename": "docs__en__api__beta__files__list.md",
@@ -59208,7 +59208,7 @@
         "step": 2,
         "build": 2
       },
-      "word_count": 755
+      "word_count": 757
     },
     {
       "filename": "docs__en__api__beta__files__retrieve_metadata.md",
@@ -59294,7 +59294,7 @@
         "minlength": 2,
         "maxlength": 2
       },
-      "word_count": 604
+      "word_count": 606
     },
     {
       "filename": "docs__en__api__beta__files__upload.md",
@@ -59380,7 +59380,7 @@
         "rfc": 2,
         "datetime": 2
       },
-      "word_count": 672
+      "word_count": 674
     },
     {
       "filename": "docs__en__api__beta__memory_stores.md",
@@ -59928,7 +59928,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 732
+      "word_count": 734
     },
     {
       "filename": "docs__en__api__beta__memory_stores__create.md",
@@ -60014,7 +60014,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 880
+      "word_count": 882
     },
     {
       "filename": "docs__en__api__beta__memory_stores__delete.md",
@@ -60100,7 +60100,7 @@
         "our": 1,
         "history": 1
       },
-      "word_count": 474
+      "word_count": 476
     },
     {
       "filename": "docs__en__api__beta__memory_stores__list.md",
@@ -60186,7 +60186,7 @@
         "remov": 2,
         "mov": 2
       },
-      "word_count": 823
+      "word_count": 825
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories.md",
@@ -60542,7 +60542,7 @@
         "memori": 2,
         "most": 2
       },
-      "word_count": 958
+      "word_count": 960
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__delete.md",
@@ -60632,7 +60632,7 @@
         "path": 1,
         "hold": 1
       },
-      "word_count": 551
+      "word_count": 553
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__list.md",
@@ -60722,7 +60722,7 @@
         "about": 3,
         "send": 3
       },
-      "word_count": 1124
+      "word_count": 1126
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__retrieve.md",
@@ -60812,7 +60812,7 @@
         "endpoint": 2,
         "must": 2
       },
-      "word_count": 851
+      "word_count": 853
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memories__update.md",
@@ -60906,7 +60906,7 @@
         "stor": 2,
         "memori": 2
       },
-      "word_count": 1062
+      "word_count": 1064
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions.md",
@@ -61174,7 +61174,7 @@
         "doc": 3,
         "store": 3
       },
-      "word_count": 1435
+      "word_count": 1437
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__redact.md",
@@ -61260,7 +61260,7 @@
         "mount": 3,
         "user": 3
       },
-      "word_count": 1166
+      "word_count": 1168
     },
     {
       "filename": "docs__en__api__beta__memory_stores__memory_versions__retrieve.md",
@@ -61350,7 +61350,7 @@
         "act": 3,
         "one": 3
       },
-      "word_count": 1248
+      "word_count": 1250
     },
     {
       "filename": "docs__en__api__beta__memory_stores__retrieve.md",
@@ -61436,7 +61436,7 @@
         "guide": 2,
         "example": 2
       },
-      "word_count": 715
+      "word_count": 717
     },
     {
       "filename": "docs__en__api__beta__memory_stores__update.md",
@@ -61526,7 +61526,7 @@
         "remov": 2,
         "mov": 2
       },
-      "word_count": 864
+      "word_count": 866
     },
     {
       "filename": "docs__en__api__beta__messages.md",
@@ -63888,7 +63888,7 @@
         "were": 2,
         "within": 2
       },
-      "word_count": 933
+      "word_count": 935
     },
     {
       "filename": "docs__en__api__beta__messages__batches__create.md",
@@ -63928,11 +63928,11 @@
         "model": 169,
         "block": 153,
         "toolset": 118,
-        "request": 107,
+        "request": 111,
         "per": 107,
         "enabl": 101,
         "content": 99,
-        "default": 89,
+        "default": 91,
         "schema": 85,
         "load": 77,
         "value": 68,
@@ -63969,12 +63969,12 @@
         "includ": 41,
         "response": 40,
         "reference": 39,
-        "nam": 37,
+        "nam": 39,
         "maxlength": 36,
         "batch": 34,
         "minlength": 34
       },
-      "word_count": 17510
+      "word_count": 17656
     },
     {
       "filename": "docs__en__api__beta__messages__batches__delete.md",
@@ -64060,7 +64060,7 @@
         "process": 1,
         "like": 1
       },
-      "word_count": 472
+      "word_count": 474
     },
     {
       "filename": "docs__en__api__beta__messages__batches__list.md",
@@ -64146,7 +64146,7 @@
         "about": 2,
         "our": 2
       },
-      "word_count": 1011
+      "word_count": 1013
     },
     {
       "filename": "docs__en__api__beta__messages__batches__results.md",
@@ -64228,7 +64228,7 @@
         "create": 35,
         "output": 32
       },
-      "word_count": 15690
+      "word_count": 15692
     },
     {
       "filename": "docs__en__api__beta__messages__batches__retrieve.md",
@@ -64314,7 +64314,7 @@
         "send": 2,
         "remov": 2
       },
-      "word_count": 893
+      "word_count": 895
     },
     {
       "filename": "docs__en__api__beta__messages__count_tokens.md",
@@ -64358,7 +64358,7 @@
         "enabl": 101,
         "content": 97,
         "schema": 85,
-        "default": 78,
+        "default": 79,
         "load": 75,
         "value": 65,
         "every": 64,
@@ -64371,9 +64371,9 @@
         "serv": 55,
         "create": 54,
         "offer": 54,
+        "request": 53,
         "false": 53,
         "overrid": 53,
-        "request": 51,
         "input": 51,
         "true": 51,
         "call": 50,
@@ -64393,14 +64393,14 @@
         "minimum": 41,
         "prompt": 38,
         "reference": 38,
-        "nam": 36,
+        "nam": 37,
         "system": 32,
         "search": 32,
         "pattern": 32,
         "via": 32,
-        "minlength": 30
+        "token": 31
       },
-      "word_count": 15529
+      "word_count": 15644
     },
     {
       "filename": "docs__en__api__beta__messages__create.md",
@@ -64439,11 +64439,11 @@
         "member": 507,
         "model": 350,
         "block": 317,
-        "default": 248,
+        "default": 250,
         "toolset": 227,
         "per": 214,
         "enabl": 199,
-        "request": 182,
+        "request": 186,
         "content": 174,
         "schema": 164,
         "load": 152,
@@ -64482,11 +64482,11 @@
         "used": 80,
         "number": 78,
         "entry": 77,
+        "nam": 76,
         "reference": 76,
-        "search": 74,
-        "nam": 74
+        "search": 74
       },
-      "word_count": 33253
+      "word_count": 33399
     },
     {
       "filename": "docs__en__api__beta__models.md",
@@ -64730,7 +64730,7 @@
         "maximum": 3,
         "header": 3
       },
-      "word_count": 1740
+      "word_count": 1742
     },
     {
       "filename": "docs__en__api__beta__models__retrieve.md",
@@ -64816,7 +64816,7 @@
         "strategy": 3,
         "reason": 3
       },
-      "word_count": 1545
+      "word_count": 1547
     },
     {
       "filename": "docs__en__api__beta__organization.md",
@@ -70596,7 +70596,7 @@
         "execution": 7,
         "channel": 7
       },
-      "word_count": 3605
+      "word_count": 3607
     },
     {
       "filename": "docs__en__api__beta__organization__analytics__cost_report.md",
@@ -71500,7 +71500,7 @@
         "day": 7,
         "channel": 7
       },
-      "word_count": 3584
+      "word_count": 3586
     },
     {
       "filename": "docs__en__api__beta__organization__analytics__usage_report.md",
@@ -73514,7 +73514,7 @@
         "get": 1,
         "manag": 1
       },
-      "word_count": 497
+      "word_count": 499
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__bundles__retrieve.md",
@@ -73600,7 +73600,7 @@
         "tag": 1,
         "bundl": 1
       },
-      "word_count": 466
+      "word_count": 468
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__bundles__targets.md",
@@ -73892,7 +73892,7 @@
         "maxlength": 2,
         "two": 2
       },
-      "word_count": 741
+      "word_count": 743
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__bundles__targets__delete.md",
@@ -73978,7 +73978,7 @@
         "list": 1,
         "never": 1
       },
-      "word_count": 423
+      "word_count": 425
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__bundles__targets__list.md",
@@ -74068,7 +74068,7 @@
         "build": 2,
         "fil": 2
       },
-      "word_count": 660
+      "word_count": 662
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__bundles__targets__retrieve.md",
@@ -74154,7 +74154,7 @@
         "after": 2,
         "new": 2
       },
-      "word_count": 627
+      "word_count": 629
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_channels.md",
@@ -74446,7 +74446,7 @@
         "mode": 4,
         "join": 4
       },
-      "word_count": 2043
+      "word_count": 2045
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_channels__delete.md",
@@ -74532,7 +74532,7 @@
         "background": 1,
         "session": 1
       },
-      "word_count": 558
+      "word_count": 560
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_channels__list.md",
@@ -74618,7 +74618,7 @@
         "doc": 3,
         "api": 3
       },
-      "word_count": 1701
+      "word_count": 1703
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_channels__retrieve.md",
@@ -74708,7 +74708,7 @@
         "once": 3,
         "version": 3
       },
-      "word_count": 1585
+      "word_count": 1587
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_channels__update.md",
@@ -74798,7 +74798,7 @@
         "mode": 4,
         "join": 4
       },
-      "word_count": 1901
+      "word_count": 1903
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_workspaces.md",
@@ -75038,7 +75038,7 @@
         "api": 3,
         "enterprise": 3
       },
-      "word_count": 1636
+      "word_count": 1638
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_workspaces__retrieve.md",
@@ -75128,7 +75128,7 @@
         "send": 3,
         "remov": 3
       },
-      "word_count": 1566
+      "word_count": 1568
     },
     {
       "filename": "docs__en__api__beta__organization__claude_tag__slack_workspaces__update.md",
@@ -75218,7 +75218,7 @@
         "paus": 4,
         "available": 4
       },
-      "word_count": 1895
+      "word_count": 1897
     },
     {
       "filename": "docs__en__api__beta__organization__compliance_settings.md",
@@ -75705,7 +75705,7 @@
         "want": 2,
         "specify": 2
       },
-      "word_count": 956
+      "word_count": 958
     },
     {
       "filename": "docs__en__api__beta__organization__external_keys.md",
@@ -77171,7 +77171,7 @@
         "scope": 2,
         "identity": 2
       },
-      "word_count": 950
+      "word_count": 952
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__create.md",
@@ -77257,7 +77257,7 @@
         "last": 4,
         "create": 3
       },
-      "word_count": 1244
+      "word_count": 1246
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__list.md",
@@ -77343,7 +77343,7 @@
         "result": 2,
         "page": 2
       },
-      "word_count": 944
+      "word_count": 946
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__retrieve.md",
@@ -77429,7 +77429,7 @@
         "accept": 2,
         "header": 2
       },
-      "word_count": 911
+      "word_count": 913
     },
     {
       "filename": "docs__en__api__beta__organization__federation__issuers__update.md",
@@ -77519,7 +77519,7 @@
         "must": 4,
         "tagg": 4
       },
-      "word_count": 1273
+      "word_count": 1275
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules.md",
@@ -77899,7 +77899,7 @@
         "ignor": 3,
         "format": 3
       },
-      "word_count": 1093
+      "word_count": 1095
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__create.md",
@@ -77985,7 +77985,7 @@
         "one": 4,
         "other": 4
       },
-      "word_count": 1573
+      "word_count": 1575
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__list.md",
@@ -78071,7 +78071,7 @@
         "organization": 2,
         "oauth": 2
       },
-      "word_count": 1027
+      "word_count": 1029
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__retrieve.md",
@@ -78157,7 +78157,7 @@
         "actor": 3,
         "expression": 3
       },
-      "word_count": 1037
+      "word_count": 1039
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__update.md",
@@ -78247,7 +78247,7 @@
         "send": 4,
         "shap": 4
       },
-      "word_count": 1622
+      "word_count": 1624
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces.md",
@@ -78491,7 +78491,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 586
+      "word_count": 588
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__list.md",
@@ -78581,7 +78581,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 585
+      "word_count": 587
     },
     {
       "filename": "docs__en__api__beta__organization__federation__rules__workspaces__remove.md",
@@ -78667,7 +78667,7 @@
         "scope": 1,
         "workload": 1
       },
-      "word_count": 466
+      "word_count": 468
     },
     {
       "filename": "docs__en__api__beta__organization__invites.md",
@@ -79563,7 +79563,7 @@
         "str": 2,
         "indicat": 2
       },
-      "word_count": 603
+      "word_count": 605
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__list.md",
@@ -79649,7 +79649,7 @@
         "step": 2,
         "build": 2
       },
-      "word_count": 689
+      "word_count": 691
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__retrieve.md",
@@ -79735,7 +79735,7 @@
         "date": 2,
         "time": 2
       },
-      "word_count": 569
+      "word_count": 571
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__reveal_token.md",
@@ -79821,7 +79821,7 @@
         "after": 1,
         "new": 1
       },
-      "word_count": 496
+      "word_count": 498
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__rotate_token.md",
@@ -79911,7 +79911,7 @@
         "post": 1,
         "admin": 1
       },
-      "word_count": 511
+      "word_count": 513
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates.md",
@@ -80175,7 +80175,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 576
+      "word_count": 578
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__create.md",
@@ -80265,7 +80265,7 @@
         "select": 2,
         "mov": 2
       },
-      "word_count": 612
+      "word_count": 614
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__list.md",
@@ -80355,7 +80355,7 @@
         "build": 2,
         "fil": 2
       },
-      "word_count": 627
+      "word_count": 629
     },
     {
       "filename": "docs__en__api__beta__organization__mcp_tunnels__tunnel_certificates__retrieve.md",
@@ -80441,7 +80441,7 @@
         "url": 1,
         "organization": 1
       },
-      "word_count": 547
+      "word_count": 549
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces.md",
@@ -80745,7 +80745,7 @@
         "get": 2,
         "connect": 2
       },
-      "word_count": 1136
+      "word_count": 1138
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__retrieve.md",
@@ -80835,7 +80835,7 @@
         "endpoint": 2,
         "did": 2
       },
-      "word_count": 943
+      "word_count": 945
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__update.md",
@@ -80925,7 +80925,7 @@
         "did": 2,
         "available": 2
       },
-      "word_count": 927
+      "word_count": 929
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_archive.md",
@@ -81011,7 +81011,7 @@
         "validat": 3,
         "set": 3
       },
-      "word_count": 1010
+      "word_count": 1012
     },
     {
       "filename": "docs__en__api__beta__organization__plugin_marketplaces__validate_repository.md",
@@ -81097,7 +81097,7 @@
         "content": 3,
         "key": 3
       },
-      "word_count": 1140
+      "word_count": 1142
     },
     {
       "filename": "docs__en__api__beta__organization__plugins.md",
@@ -81669,7 +81669,7 @@
         "doc": 3,
         "upload": 3
       },
-      "word_count": 1781
+      "word_count": 1783
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__delete.md",
@@ -81755,7 +81755,7 @@
         "permanently": 1,
         "version": 1
       },
-      "word_count": 553
+      "word_count": 555
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings.md",
@@ -82003,7 +82003,7 @@
         "child": 2,
         "given": 2
       },
-      "word_count": 842
+      "word_count": 844
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__remove.md",
@@ -82089,7 +82089,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 708
+      "word_count": 710
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__installation_settings__set.md",
@@ -82179,7 +82179,7 @@
         "remov": 2,
         "mov": 2
       },
-      "word_count": 804
+      "word_count": 806
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__list.md",
@@ -82265,7 +82265,7 @@
         "shap": 4,
         "mov": 4
       },
-      "word_count": 1808
+      "word_count": 1810
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__retrieve.md",
@@ -82355,7 +82355,7 @@
         "where": 3,
         "alway": 3
       },
-      "word_count": 1554
+      "word_count": 1556
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__shares.md",
@@ -82547,7 +82547,7 @@
         "child": 2,
         "pas": 2
       },
-      "word_count": 820
+      "word_count": 822
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__update.md",
@@ -82637,7 +82637,7 @@
         "without": 3,
         "new": 3
       },
-      "word_count": 1693
+      "word_count": 1695
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions.md",
@@ -82905,7 +82905,7 @@
         "none": 3,
         "add": 2
       },
-      "word_count": 1313
+      "word_count": 1315
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__download.md",
@@ -82987,7 +82987,7 @@
         "link": 2,
         "any": 2
       },
-      "word_count": 670
+      "word_count": 672
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__list.md",
@@ -83077,7 +83077,7 @@
         "none": 3,
         "newest": 2
       },
-      "word_count": 1254
+      "word_count": 1256
     },
     {
       "filename": "docs__en__api__beta__organization__plugins__versions__retrieve.md",
@@ -83167,7 +83167,7 @@
         "description": 3,
         "none": 3
       },
-      "word_count": 1191
+      "word_count": 1193
     },
     {
       "filename": "docs__en__api__beta__organization__rate_limits.md",
@@ -85505,7 +85505,7 @@
         "migration": 2,
         "step": 2
       },
-      "word_count": 646
+      "word_count": 648
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__create.md",
@@ -85591,7 +85591,7 @@
         "send": 2,
         "select": 2
       },
-      "word_count": 712
+      "word_count": 714
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__list.md",
@@ -85677,7 +85677,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 658
+      "word_count": 660
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__retrieve.md",
@@ -85763,7 +85763,7 @@
         "skill": 2,
         "org": 2
       },
-      "word_count": 605
+      "word_count": 607
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__update.md",
@@ -85853,7 +85853,7 @@
         "select": 2,
         "remov": 2
       },
-      "word_count": 701
+      "word_count": 703
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces.md",
@@ -86097,7 +86097,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 601
+      "word_count": 603
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__list.md",
@@ -86187,7 +86187,7 @@
         "follow": 2,
         "migration": 2
       },
-      "word_count": 690
+      "word_count": 692
     },
     {
       "filename": "docs__en__api__beta__organization__service_accounts__workspaces__remove.md",
@@ -86273,7 +86273,7 @@
         "organization": 1,
         "requir": 1
       },
-      "word_count": 502
+      "word_count": 504
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits.md",
@@ -87525,7 +87525,7 @@
         "header": 2,
         "remov": 2
       },
-      "word_count": 923
+      "word_count": 925
     },
     {
       "filename": "docs__en__api__beta__organization__spend_limits__retrieve.md",
@@ -87697,7 +87697,7 @@
         "group": 2,
         "monthly": 2
       },
-      "word_count": 1031
+      "word_count": 1033
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations.md",
@@ -88197,7 +88197,7 @@
         "receiv": 6,
         "content": 6
       },
-      "word_count": 2306
+      "word_count": 2308
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__delete.md",
@@ -88283,7 +88283,7 @@
         "see": 1,
         "opentelemetry": 1
       },
-      "word_count": 434
+      "word_count": 436
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__list.md",
@@ -88369,7 +88369,7 @@
         "trac": 4,
         "content": 4
       },
-      "word_count": 1487
+      "word_count": 1489
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__retrieve.md",
@@ -88455,7 +88455,7 @@
         "url": 3,
         "platform": 3
       },
-      "word_count": 1395
+      "word_count": 1397
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__test.md",
@@ -88541,7 +88541,7 @@
         "retri": 1,
         "report": 1
       },
-      "word_count": 576
+      "word_count": 578
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__update.md",
@@ -88631,7 +88631,7 @@
         "deliveri": 6,
         "after": 6
       },
-      "word_count": 2491
+      "word_count": 2493
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces.md",
@@ -88871,7 +88871,7 @@
         "span": 1,
         "start": 1
       },
-      "word_count": 549
+      "word_count": 551
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__list.md",
@@ -88961,7 +88961,7 @@
         "organization": 1,
         "entry": 1
       },
-      "word_count": 516
+      "word_count": 518
     },
     {
       "filename": "docs__en__api__beta__organization__telemetry_destinations__workspaces__remove.md",
@@ -89047,7 +89047,7 @@
         "too": 1,
         "isn": 1
       },
-      "word_count": 481
+      "word_count": 483
     },
     {
       "filename": "docs__en__api__beta__organization__usage_report.md",
@@ -89345,7 +89345,7 @@
         "start": 3,
         "day": 3
       },
-      "word_count": 1398
+      "word_count": 1400
     },
     {
       "filename": "docs__en__api__beta__organization__users.md",
@@ -89889,7 +89889,7 @@
         "fil": 2,
         "migrate": 2
       },
-      "word_count": 698
+      "word_count": 700
     },
     {
       "filename": "docs__en__api__beta__organization__users__update.md",
@@ -90303,7 +90303,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 725
+      "word_count": 727
     },
     {
       "filename": "docs__en__api__beta__organization__webhooks__delete.md",
@@ -90389,7 +90389,7 @@
         "your": 1,
         "also": 1
       },
-      "word_count": 447
+      "word_count": 449
     },
     {
       "filename": "docs__en__api__beta__organization__webhooks__list.md",
@@ -90475,7 +90475,7 @@
         "fil": 2,
         "migrate": 2
       },
-      "word_count": 769
+      "word_count": 771
     },
     {
       "filename": "docs__en__api__beta__organization__webhooks__regenerate_signing_secret.md",
@@ -90561,7 +90561,7 @@
         "include": 1,
         "without": 1
       },
-      "word_count": 473
+      "word_count": 475
     },
     {
       "filename": "docs__en__api__beta__organization__webhooks__retrieve.md",
@@ -90647,7 +90647,7 @@
         "disabl": 2,
         "deliveri": 2
       },
-      "word_count": 592
+      "word_count": 594
     },
     {
       "filename": "docs__en__api__beta__organization__webhooks__update.md",
@@ -90737,7 +90737,7 @@
         "skill": 2,
         "not": 2
       },
-      "word_count": 703
+      "word_count": 705
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces.md",
@@ -91467,7 +91467,7 @@
         "anthropic": 3,
         "customer": 3
       },
-      "word_count": 1259
+      "word_count": 1261
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__list.md",
@@ -92855,7 +92855,7 @@
         "step": 2,
         "build": 2
       },
-      "word_count": 627
+      "word_count": 629
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__list.md",
@@ -92945,7 +92945,7 @@
         "migrate": 2,
         "skill": 2
       },
-      "word_count": 607
+      "word_count": 609
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__remove.md",
@@ -93031,7 +93031,7 @@
         "url": 1,
         "organization": 1
       },
-      "word_count": 493
+      "word_count": 495
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__retrieve.md",
@@ -93117,7 +93117,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 556
+      "word_count": 558
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__service_accounts__update.md",
@@ -93207,7 +93207,7 @@
         "skill": 2,
         "title": 1
       },
-      "word_count": 585
+      "word_count": 587
     },
     {
       "filename": "docs__en__api__beta__organization__workspaces__update.md",
@@ -94125,7 +94125,7 @@
         "execute": 11,
         "judgement": 11
       },
-      "word_count": 4659
+      "word_count": 4661
     },
     {
       "filename": "docs__en__api__beta__sessions__create.md",
@@ -94211,7 +94211,7 @@
         "execute": 22,
         "judgement": 22
       },
-      "word_count": 9323
+      "word_count": 9325
     },
     {
       "filename": "docs__en__api__beta__sessions__delete.md",
@@ -94297,7 +94297,7 @@
         "only": 1,
         "act": 1
       },
-      "word_count": 423
+      "word_count": 425
     },
     {
       "filename": "docs__en__api__beta__sessions__events.md",
@@ -94997,7 +94997,7 @@
         "same": 23,
         "name": 22
       },
-      "word_count": 11261
+      "word_count": 11263
     },
     {
       "filename": "docs__en__api__beta__sessions__events__send.md",
@@ -95087,7 +95087,7 @@
         "claude": 6,
         "regular": 6
       },
-      "word_count": 2759
+      "word_count": 2761
     },
     {
       "filename": "docs__en__api__beta__sessions__events__stream.md",
@@ -95177,7 +95177,7 @@
         "new": 24,
         "send": 23
       },
-      "word_count": 11466
+      "word_count": 11468
     },
     {
       "filename": "docs__en__api__beta__sessions__list.md",
@@ -95263,7 +95263,7 @@
         "decid": 11,
         "individually": 11
       },
-      "word_count": 4943
+      "word_count": 4945
     },
     {
       "filename": "docs__en__api__beta__sessions__resources.md",
@@ -95583,7 +95583,7 @@
         "post": 1,
         "want": 1
       },
-      "word_count": 502
+      "word_count": 504
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__delete.md",
@@ -95669,7 +95669,7 @@
         "guide": 1,
         "optional": 1
       },
-      "word_count": 425
+      "word_count": 427
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__list.md",
@@ -95759,7 +95759,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 800
+      "word_count": 802
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__retrieve.md",
@@ -95845,7 +95845,7 @@
         "skill": 2,
         "example": 2
       },
-      "word_count": 717
+      "word_count": 719
     },
     {
       "filename": "docs__en__api__beta__sessions__resources__update.md",
@@ -95935,7 +95935,7 @@
         "build": 2,
         "fil": 2
       },
-      "word_count": 750
+      "word_count": 752
     },
     {
       "filename": "docs__en__api__beta__sessions__retrieve.md",
@@ -96021,7 +96021,7 @@
         "execute": 11,
         "judgement": 11
       },
-      "word_count": 4656
+      "word_count": 4658
     },
     {
       "filename": "docs__en__api__beta__sessions__threads.md",
@@ -96337,7 +96337,7 @@
         "organization": 11,
         "credit": 11
       },
-      "word_count": 3725
+      "word_count": 3727
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events.md",
@@ -96549,7 +96549,7 @@
         "name": 22,
         "next": 22
       },
-      "word_count": 11048
+      "word_count": 11050
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__events__stream.md",
@@ -96639,7 +96639,7 @@
         "new": 24,
         "send": 23
       },
-      "word_count": 11476
+      "word_count": 11478
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__list.md",
@@ -96729,7 +96729,7 @@
         "caus": 11,
         "organization": 11
       },
-      "word_count": 3809
+      "word_count": 3811
     },
     {
       "filename": "docs__en__api__beta__sessions__threads__retrieve.md",
@@ -96815,7 +96815,7 @@
         "organization": 11,
         "credit": 11
       },
-      "word_count": 3722
+      "word_count": 3724
     },
     {
       "filename": "docs__en__api__beta__sessions__update.md",
@@ -96905,7 +96905,7 @@
         "limit": 22,
         "model": 22
       },
-      "word_count": 7798
+      "word_count": 7800
     },
     {
       "filename": "docs__en__api__beta__skills.md",
@@ -97293,7 +97293,7 @@
         "readable": 2,
         "single": 2
       },
-      "word_count": 686
+      "word_count": 688
     },
     {
       "filename": "docs__en__api__beta__skills__delete.md",
@@ -97379,7 +97379,7 @@
         "about": 1,
         "our": 1
       },
-      "word_count": 451
+      "word_count": 453
     },
     {
       "filename": "docs__en__api__beta__skills__list.md",
@@ -97465,7 +97465,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 751
+      "word_count": 753
     },
     {
       "filename": "docs__en__api__beta__skills__retrieve.md",
@@ -97551,7 +97551,7 @@
         "iso": 2,
         "timestamp": 2
       },
-      "word_count": 635
+      "word_count": 637
     },
     {
       "filename": "docs__en__api__beta__skills__versions.md",
@@ -97839,7 +97839,7 @@
         "top": 2,
         "level": 2
       },
-      "word_count": 604
+      "word_count": 606
     },
     {
       "filename": "docs__en__api__beta__skills__versions__delete.md",
@@ -97925,7 +97925,7 @@
         "carry": 1,
         "addres": 1
       },
-      "word_count": 485
+      "word_count": 487
     },
     {
       "filename": "docs__en__api__beta__skills__versions__download.md",
@@ -98003,7 +98003,7 @@
         "change": 1,
         "time": 1
       },
-      "word_count": 438
+      "word_count": 440
     },
     {
       "filename": "docs__en__api__beta__skills__versions__list.md",
@@ -98093,7 +98093,7 @@
         "step": 2,
         "build": 2
       },
-      "word_count": 652
+      "word_count": 654
     },
     {
       "filename": "docs__en__api__beta__skills__versions__retrieve.md",
@@ -98179,7 +98179,7 @@
         "url": 1,
         "retrieve": 1
       },
-      "word_count": 597
+      "word_count": 599
     },
     {
       "filename": "docs__en__api__beta__tunnels.md",
@@ -98599,7 +98599,7 @@
         "format": 2,
         "date": 2
       },
-      "word_count": 601
+      "word_count": 603
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates.md",
@@ -98863,7 +98863,7 @@
         "title": 1,
         "url": 1
       },
-      "word_count": 615
+      "word_count": 617
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__create.md",
@@ -98953,7 +98953,7 @@
         "credential": 2,
         "one": 2
       },
-      "word_count": 630
+      "word_count": 632
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__list.md",
@@ -99043,7 +99043,7 @@
         "current": 2,
         "follow": 2
       },
-      "word_count": 655
+      "word_count": 657
     },
     {
       "filename": "docs__en__api__beta__tunnels__certificates__retrieve.md",
@@ -99129,7 +99129,7 @@
         "retrieve": 1,
         "research": 1
       },
-      "word_count": 579
+      "word_count": 581
     },
     {
       "filename": "docs__en__api__beta__tunnels__create.md",
@@ -99215,7 +99215,7 @@
         "rfc": 2,
         "datetime": 2
       },
-      "word_count": 604
+      "word_count": 606
     },
     {
       "filename": "docs__en__api__beta__tunnels__list.md",
@@ -99301,7 +99301,7 @@
         "example": 2,
         "credential": 2
       },
-      "word_count": 643
+      "word_count": 645
     },
     {
       "filename": "docs__en__api__beta__tunnels__retrieve.md",
@@ -99387,7 +99387,7 @@
         "title": 1,
         "retrieve": 1
       },
-      "word_count": 562
+      "word_count": 564
     },
     {
       "filename": "docs__en__api__beta__tunnels__reveal_token.md",
@@ -99473,7 +99473,7 @@
         "change": 1,
         "without": 1
       },
-      "word_count": 531
+      "word_count": 533
     },
     {
       "filename": "docs__en__api__beta__tunnels__rotate_token.md",
@@ -99563,7 +99563,7 @@
         "research": 1,
         "preview": 1
       },
-      "word_count": 546
+      "word_count": 548
     },
     {
       "filename": "docs__en__api__beta__user_profiles.md",
@@ -100037,7 +100037,7 @@
         "post": 1,
         "path": 1
       },
-      "word_count": 522
+      "word_count": 524
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create.md",
@@ -100123,7 +100123,7 @@
         "must": 4,
         "default": 4
       },
-      "word_count": 1777
+      "word_count": 1779
     },
     {
       "filename": "docs__en__api__beta__user_profiles__create_enrollment_url.md",
@@ -100209,7 +100209,7 @@
         "our": 1,
         "history": 1
       },
-      "word_count": 482
+      "word_count": 484
     },
     {
       "filename": "docs__en__api__beta__user_profiles__delete.md",
@@ -100295,7 +100295,7 @@
         "guide": 1,
         "only": 1
       },
-      "word_count": 438
+      "word_count": 440
     },
     {
       "filename": "docs__en__api__beta__user_profiles__list.md",
@@ -100381,7 +100381,7 @@
         "build": 3,
         "only": 3
       },
-      "word_count": 1260
+      "word_count": 1262
     },
     {
       "filename": "docs__en__api__beta__user_profiles__retrieve.md",
@@ -100467,7 +100467,7 @@
         "profil": 2,
         "want": 2
       },
-      "word_count": 1134
+      "word_count": 1136
     },
     {
       "filename": "docs__en__api__beta__user_profiles__update.md",
@@ -100557,7 +100557,7 @@
         "build": 4,
         "example": 4
       },
-      "word_count": 1754
+      "word_count": 1756
     },
     {
       "filename": "docs__en__api__beta__vaults.md",
@@ -101053,7 +101053,7 @@
         "want": 1,
         "read": 1
       },
-      "word_count": 513
+      "word_count": 515
     },
     {
       "filename": "docs__en__api__beta__vaults__create.md",
@@ -101139,7 +101139,7 @@
         "rfc": 2,
         "title": 1
       },
-      "word_count": 555
+      "word_count": 557
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials.md",
@@ -101615,7 +101615,7 @@
         "must": 2,
         "remov": 2
       },
-      "word_count": 897
+      "word_count": 899
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__create.md",
@@ -101705,7 +101705,7 @@
         "rfc": 4,
         "key": 4
       },
-      "word_count": 1500
+      "word_count": 1502
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__delete.md",
@@ -101791,7 +101791,7 @@
         "here": 1,
         "endpoint": 1
       },
-      "word_count": 448
+      "word_count": 450
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__list.md",
@@ -101881,7 +101881,7 @@
         "outbound": 3,
         "parameter": 2
       },
-      "word_count": 967
+      "word_count": 969
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__mcp_oauth_validate.md",
@@ -101967,7 +101967,7 @@
         "migration": 2,
         "build": 2
       },
-      "word_count": 815
+      "word_count": 817
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__retrieve.md",
@@ -102053,7 +102053,7 @@
         "remov": 2,
         "mov": 2
       },
-      "word_count": 894
+      "word_count": 896
     },
     {
       "filename": "docs__en__api__beta__vaults__credentials__update.md",
@@ -102143,7 +102143,7 @@
         "substitute": 4,
         "placeholder": 4
       },
-      "word_count": 1483
+      "word_count": 1485
     },
     {
       "filename": "docs__en__api__beta__vaults__delete.md",
@@ -102229,7 +102229,7 @@
         "endpoint": 1,
         "guide": 1
       },
-      "word_count": 438
+      "word_count": 440
     },
     {
       "filename": "docs__en__api__beta__vaults__list.md",
@@ -102315,7 +102315,7 @@
         "timestamp": 2,
         "rfc": 2
       },
-      "word_count": 581
+      "word_count": 583
     },
     {
       "filename": "docs__en__api__beta__vaults__retrieve.md",
@@ -102401,7 +102401,7 @@
         "want": 1,
         "read": 1
       },
-      "word_count": 510
+      "word_count": 512
     },
     {
       "filename": "docs__en__api__beta__vaults__update.md",
@@ -102491,7 +102491,7 @@
         "rfc": 2,
         "title": 1
       },
-      "word_count": 574
+      "word_count": 576
     },
     {
       "filename": "docs__en__api__beta__webhooks.md",
@@ -150052,6 +150052,684 @@
       "word_count": 1459
     },
     {
+      "filename": "docs__en__manage-claude__oauth-apps__app-review.md",
+      "id": "docs/en/manage-claude/oauth-apps/app-review",
+      "title": "App testing and review",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/app-review",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "Manage test users",
+          "level": 2
+        },
+        {
+          "text": "Add test users",
+          "level": 3
+        },
+        {
+          "text": "Link a test user\u2019s organization",
+          "level": 3
+        },
+        {
+          "text": "Remove a test user",
+          "level": 3
+        },
+        {
+          "text": "Publish the app",
+          "level": 2
+        },
+        {
+          "text": "If you can\u2019t prove the domain",
+          "level": 3
+        },
+        {
+          "text": "Domain rules",
+          "level": 3
+        },
+        {
+          "text": "The review",
+          "level": 2
+        },
+        {
+          "text": "If the app isn\u2019t approved",
+          "level": 3
+        },
+        {
+          "text": "Change a live app",
+          "level": 2
+        },
+        {
+          "text": "When the Console asks you to prove a domain",
+          "level": 3
+        },
+        {
+          "text": "Until Anthropic approves the change",
+          "level": 3
+        },
+        {
+          "text": "When the review of the change ends",
+          "level": 3
+        },
+        {
+          "text": "Change an app that isn\u2019t live",
+          "level": 2
+        },
+        {
+          "text": "Invoiced billing",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "app": 86,
+        "domain": 50,
+        "change": 43,
+        "test": 42,
+        "link": 40,
+        "review": 34,
+        "user": 31,
+        "organization": 26,
+        "homepage": 23,
+        "live": 21,
+        "anthropic": 21,
+        "click": 21,
+        "publish": 20,
+        "bill": 19,
+        "approv": 19,
+        "redirect": 19,
+        "uri": 19,
+        "console": 18,
+        "doesn": 16,
+        "show": 15,
+        "chang": 14,
+        "dialog": 14,
+        "box": 14,
+        "proven": 14,
+        "see": 13,
+        "until": 13,
+        "prove": 13,
+        "customer": 12,
+        "statu": 11,
+        "claude": 10,
+        "while": 10,
+        "isn": 10,
+        "list": 10,
+        "remove": 10,
+        "record": 10,
+        "still": 10,
+        "each": 9,
+        "add": 9,
+        "save": 9,
+        "check": 9,
+        "page": 8,
+        "after": 8,
+        "again": 8,
+        "tab": 8,
+        "who": 8,
+        "cap": 8,
+        "rul": 8,
+        "ask": 8,
+        "dns": 8,
+        "new": 7
+      },
+      "word_count": 2350
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__branding-samples.md",
+      "id": "docs/en/manage-claude/oauth-apps/branding-samples",
+      "title": "Branding samples",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/branding-samples",
+      "headings": [
+        {
+          "text": "The buttons",
+          "level": 2
+        },
+        {
+          "text": "Copy the button\u2019s HTML",
+          "level": 3
+        },
+        {
+          "text": "Colors",
+          "level": 3
+        },
+        {
+          "text": "Download the logo",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "button": 20,
+        "claude": 13,
+        "link": 11,
+        "logo": 8,
+        "organization": 6,
+        "html": 6,
+        "accordion": 6,
+        "title": 4,
+        "bill": 4,
+        "css": 4,
+        "color": 4,
+        "dark": 4,
+        "brand": 3,
+        "sampl": 3,
+        "service": 3,
+        "page": 3,
+        "put": 3,
+        "start": 3,
+        "connection": 3,
+        "light": 3,
+        "styl": 3,
+        "file": 3,
+        "platform": 2,
+        "manage": 2,
+        "oauth": 2,
+        "app": 2,
+        "warn": 2,
+        "beta": 2,
+        "anthropic": 2,
+        "term": 2,
+        "change": 2,
+        "where": 2,
+        "back": 2,
+        "end": 2,
+        "frame": 2,
+        "word": 2,
+        "open": 2,
+        "inside": 2,
+        "style": 2,
+        "sheet": 2,
+        "sample": 2,
+        "add": 2,
+        "note": 2,
+        "same": 2,
+        "background": 2,
+        "svg": 2,
+        "url": 1,
+        "http": 1,
+        "com": 1,
+        "doc": 1
+      },
+      "word_count": 963
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__oauth-reference.md",
+      "id": "docs/en/manage-claude/oauth-apps/oauth-reference",
+      "title": "OAuth reference",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/oauth-reference",
+      "headings": [
+        {
+          "text": "Endpoints",
+          "level": 2
+        },
+        {
+          "text": "Discovery document values",
+          "level": 2
+        },
+        {
+          "text": "Client authentication",
+          "level": 2
+        },
+        {
+          "text": "Client assertion claims",
+          "level": 3
+        },
+        {
+          "text": "Authorization request parameters",
+          "level": 2
+        },
+        {
+          "text": "Scopes",
+          "level": 2
+        },
+        {
+          "text": "Token request and response",
+          "level": 2
+        },
+        {
+          "text": "OAuth tokens for a billing connection",
+          "level": 2
+        },
+        {
+          "text": "Revocation",
+          "level": 2
+        },
+        {
+          "text": "Lifetimes",
+          "level": 2
+        },
+        {
+          "text": "Redirect URI rules",
+          "level": 2
+        },
+        {
+          "text": "Errors",
+          "level": 2
+        },
+        {
+          "text": "Errors on the redirect",
+          "level": 3
+        },
+        {
+          "text": "Errors from the PAR and token endpoints",
+          "level": 3
+        },
+        {
+          "text": "Errors from the revocation endpoint",
+          "level": 3
+        },
+        {
+          "text": "Billing errors",
+          "level": 3
+        },
+        {
+          "text": "Standards",
+          "level": 2
+        },
+        {
+          "text": "Terms used on these pages",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "token": 72,
+        "connection": 70,
+        "request": 63,
+        "bill": 57,
+        "app": 34,
+        "endpoint": 33,
+        "organization": 32,
+        "customer": 31,
+        "client": 27,
+        "refresh": 26,
+        "end": 26,
+        "error": 25,
+        "send": 25,
+        "claude": 24,
+        "parameter": 24,
+        "oauth": 23,
+        "link": 23,
+        "return": 20,
+        "code": 20,
+        "acces": 20,
+        "user": 19,
+        "anthropic": 16,
+        "doe": 16,
+        "profile": 16,
+        "response": 16,
+        "service": 15,
+        "one": 15,
+        "requir": 15,
+        "account": 15,
+        "authentication": 14,
+        "uri": 14,
+        "authorization": 14,
+        "redirect": 13,
+        "value": 13,
+        "each": 13,
+        "retry": 13,
+        "revocation": 12,
+        "only": 12,
+        "identity": 12,
+        "second": 12,
+        "assertion": 11,
+        "par": 10,
+        "rfc": 10,
+        "provider": 10,
+        "expir": 10,
+        "http": 9,
+        "see": 9,
+        "api": 9,
+        "match": 9,
+        "set": 9
+      },
+      "word_count": 4087
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__organization-billing-connections.md",
+      "id": "docs/en/manage-claude/oauth-apps/organization-billing-connections",
+      "title": "Linked billing",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/organization-billing-connections",
+      "headings": [
+        {
+          "text": "Eligible customers and endpoints",
+          "level": 2
+        },
+        {
+          "text": "Which credits can pay",
+          "level": 3
+        },
+        {
+          "text": "Setup process",
+          "level": 2
+        },
+        {
+          "text": "Step 1: Create the app",
+          "level": 3
+        },
+        {
+          "text": "Step 2: Set up client authentication",
+          "level": 3
+        },
+        {
+          "text": "Step 3: Set up your back end\u2019s identity",
+          "level": 3
+        },
+        {
+          "text": "Which user profile to link",
+          "level": 3
+        },
+        {
+          "text": "A user profile for each person",
+          "level": 4
+        },
+        {
+          "text": "Link each customer",
+          "level": 2
+        },
+        {
+          "text": "Step 4: Create a user profile for the customer",
+          "level": 3
+        },
+        {
+          "text": "Step 5: Create a pushed authorization request URL",
+          "level": 3
+        },
+        {
+          "text": "Step 6: Send your user to the Claude approval page",
+          "level": 3
+        },
+        {
+          "text": "Step 7: The user approves",
+          "level": 3
+        },
+        {
+          "text": "Step 8: Handle the callback and save the connection",
+          "level": 3
+        },
+        {
+          "text": "Test as a customer",
+          "level": 3
+        },
+        {
+          "text": "If linking doesn\u2019t complete",
+          "level": 3
+        },
+        {
+          "text": "Your redirect URI receives `error=access_denied`",
+          "level": 4
+        },
+        {
+          "text": "Your app receives `user_profile_already_linked`",
+          "level": 4
+        },
+        {
+          "text": "Your redirect URI receives nothing",
+          "level": 4
+        },
+        {
+          "text": "The code exchange returns `unauthorized_client`",
+          "level": 4
+        },
+        {
+          "text": "Publish your app",
+          "level": 3
+        },
+        {
+          "text": "Update calls to Claude",
+          "level": 2
+        },
+        {
+          "text": "Your customer pays",
+          "level": 3
+        },
+        {
+          "text": "You pay",
+          "level": 3
+        },
+        {
+          "text": "OAuth tokens for each connection",
+          "level": 2
+        },
+        {
+          "text": "Set up your app",
+          "level": 3
+        },
+        {
+          "text": "Scopes for a billing connection",
+          "level": 3
+        },
+        {
+          "text": "Store the tokens",
+          "level": 3
+        },
+        {
+          "text": "Call Claude with a connection\u2019s access token",
+          "level": 3
+        },
+        {
+          "text": "Refresh the tokens",
+          "level": 3
+        },
+        {
+          "text": "Run an agent in a sandbox",
+          "level": 3
+        },
+        {
+          "text": "Link a customer again",
+          "level": 3
+        },
+        {
+          "text": "Turn off operator-only authentication",
+          "level": 3
+        },
+        {
+          "text": "OAuth token snippet initialization",
+          "level": 3
+        },
+        {
+          "text": "Managing your connections",
+          "level": 2
+        },
+        {
+          "text": "Viewing customers in Console",
+          "level": 3
+        },
+        {
+          "text": "Monitoring each customer\u2019s usage",
+          "level": 3
+        },
+        {
+          "text": "Unlinking a customer",
+          "level": 3
+        },
+        {
+          "text": "Linking a customer to a different Claude organization",
+          "level": 3
+        },
+        {
+          "text": "Expected errors",
+          "level": 2
+        },
+        {
+          "text": "Causes of `user_profile_not_billable`",
+          "level": 3
+        },
+        {
+          "text": "Your customer\u2019s view",
+          "level": 2
+        },
+        {
+          "text": "Linking",
+          "level": 3
+        },
+        {
+          "text": "After linking",
+          "level": 3
+        },
+        {
+          "text": "Emails about linking and unlinking",
+          "level": 3
+        },
+        {
+          "text": "Spend caps",
+          "level": 3
+        },
+        {
+          "text": "While your app is in testing",
+          "level": 4
+        },
+        {
+          "text": "Supporting your customers",
+          "level": 3
+        },
+        {
+          "text": "Code snippet initialization",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "customer": 212,
+        "app": 149,
+        "user": 137,
+        "link": 136,
+        "token": 128,
+        "request": 126,
+        "connection": 115,
+        "organization": 109,
+        "bill": 98,
+        "claude": 92,
+        "profile": 84,
+        "step": 68,
+        "account": 63,
+        "send": 60,
+        "one": 57,
+        "again": 54,
+        "only": 53,
+        "refresh": 52,
+        "page": 50,
+        "anthropic": 45,
+        "service": 44,
+        "code": 44,
+        "set": 44,
+        "acces": 43,
+        "each": 42,
+        "end": 42,
+        "see": 40,
+        "cap": 40,
+        "after": 36,
+        "unlink": 35,
+        "spend": 34,
+        "api": 33,
+        "refus": 33,
+        "own": 32,
+        "new": 31,
+        "operator": 31,
+        "pay": 30,
+        "doesn": 30,
+        "approval": 30,
+        "back": 30,
+        "header": 30,
+        "client": 27,
+        "console": 26,
+        "limit": 25,
+        "same": 24,
+        "response": 24,
+        "call": 23,
+        "return": 23,
+        "error": 23,
+        "must": 23
+      },
+      "word_count": 13907
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__overview.md",
+      "id": "docs/en/manage-claude/oauth-apps/overview",
+      "title": "Overview",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/overview",
+      "headings": [
+        {
+          "text": "What you can build",
+          "level": 2
+        },
+        {
+          "text": "Let customers pay for their own Claude usage",
+          "level": 3
+        },
+        {
+          "text": "How it works",
+          "level": 2
+        },
+        {
+          "text": "One-time OAuth app setup",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 30,
+        "app": 19,
+        "bill": 16,
+        "oauth": 13,
+        "customer": 11,
+        "organization": 10,
+        "link": 10,
+        "platform": 7,
+        "usage": 7,
+        "com": 6,
+        "pay": 6,
+        "own": 6,
+        "service": 6,
+        "product": 5,
+        "page": 5,
+        "let": 4,
+        "anthropic": 4,
+        "request": 4,
+        "time": 4,
+        "approval": 4,
+        "work": 4,
+        "back": 4,
+        "client": 4,
+        "identity": 4,
+        "card": 4,
+        "title": 3,
+        "http": 3,
+        "doc": 3,
+        "manage": 3,
+        "user": 3,
+        "api": 3,
+        "console": 3,
+        "set": 3,
+        "through": 3,
+        "person": 3,
+        "approv": 3,
+        "end": 3,
+        "one": 3,
+        "setup": 3,
+        "token": 3,
+        "account": 3,
+        "warn": 2,
+        "beta": 2,
+        "provid": 2,
+        "such": 2,
+        "term": 2,
+        "endpoint": 2,
+        "parameter": 2,
+        "admin": 2,
+        "role": 2
+      },
+      "word_count": 592
+    },
+    {
       "filename": "docs__en__manage-claude__opentelemetry.md",
       "id": "docs/en/manage-claude/opentelemetry",
       "title": "Overview",
@@ -151716,13 +152394,13 @@
         }
       ],
       "terms": {
-        "profile": 66,
-        "claude": 54,
-        "request": 45,
+        "profile": 68,
+        "claude": 55,
+        "request": 46,
+        "customer": 40,
         "end": 39,
+        "organization": 39,
         "anthropic": 39,
-        "customer": 38,
-        "organization": 38,
         "api": 31,
         "send": 30,
         "one": 25,
@@ -151734,6 +152412,7 @@
         "platform": 20,
         "each": 16,
         "cloud": 16,
+        "link": 13,
         "company": 13,
         "model": 13,
         "manag": 13,
@@ -151745,20 +152424,19 @@
         "bedrock": 12,
         "open": 12,
         "doesn": 11,
-        "link": 11,
         "header": 10,
+        "own": 10,
         "only": 10,
         "delete": 10,
         "manage": 9,
         "enforcement": 9,
         "acces": 9,
-        "own": 9,
+        "see": 9,
         "key": 9,
         "foundry": 9,
         "com": 8,
         "get": 8,
         "person": 8,
-        "see": 8,
         "usage": 8,
         "workspace": 8,
         "update": 8,
@@ -151767,7 +152445,7 @@
         "codegroup": 8,
         "value": 8
       },
-      "word_count": 3834
+      "word_count": 3864
     },
     {
       "filename": "docs__en__manage-claude__user-profiles-verification-portal.md",
@@ -161717,6 +162395,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "November 17, 2026",
+          "level": 3
+        },
+        {
           "text": "November 16, 2026",
           "level": 3
         },
@@ -162386,58 +163068,58 @@
         }
       ],
       "terms": {
-        "claude": 605,
-        "api": 232,
+        "claude": 608,
+        "api": 233,
         "model": 190,
-        "beta": 161,
+        "beta": 163,
         "tool": 142,
         "see": 140,
-        "now": 137,
+        "now": 138,
         "opu": 126,
-        "request": 107,
+        "request": 108,
+        "header": 96,
         "agent": 95,
-        "header": 95,
         "support": 79,
         "sonnet": 77,
         "token": 76,
         "return": 69,
+        "launch": 68,
         "session": 68,
-        "launch": 67,
         "manag": 65,
         "think": 64,
         "sdk": 61,
         "available": 60,
         "fable": 56,
+        "organization": 51,
         "error": 51,
         "add": 49,
-        "organization": 48,
         "prompt": 47,
         "block": 45,
         "read": 44,
         "output": 43,
         "code": 42,
         "messag": 42,
+        "console": 41,
         "platform": 40,
-        "console": 40,
         "new": 39,
         "acces": 38,
         "web": 38,
         "key": 36,
         "event": 36,
+        "anthropic": 35,
         "mytho": 35,
         "mode": 35,
-        "anthropic": 34,
+        "set": 34,
         "context": 34,
         "endpoint": 34,
         "limit": 34,
         "our": 34,
+        "usage": 33,
         "learn": 33,
         "requir": 33,
-        "set": 32,
-        "same": 32,
-        "fast": 32
+        "same": 32
       },
-      "word_count": 15795
+      "word_count": 15876
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
