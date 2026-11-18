@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-18T15:15:16.248613Z",
+  "generated_at": "2026-11-18T18:14:43.612781Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -499,8 +499,8 @@
       "md_url": "https://code.claude.com/docs/en/auto-mode-config.md",
       "title": "Configure auto mode",
       "category": "claude_code",
-      "sha256": "2bc9fc997cb3a6917c267197c45a8b72ca4a0046b5757e0dd2ae3634b33d328e",
-      "lastmod": "2026-11-17T23:02:49.526Z",
+      "sha256": "4a538750f4ac3cfa6961b1bd88ba4fb8946c9445ab8ed98b96feeebde5c64837",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -917,8 +917,8 @@
       "md_url": "https://code.claude.com/docs/en/cross-session-messaging.md",
       "title": "Message your other Claude Code sessions",
       "category": "claude_code",
-      "sha256": "449c43d3de1524093684183663fa789093fcaf4c6e90a130542aede51feb349a",
-      "lastmod": "2026-11-12T22:56:55.476Z",
+      "sha256": "274418f251d04e79d73e02335e2fa3705f51d194987117cfb779f014f9191bb3",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -1368,8 +1368,8 @@
       "md_url": "https://code.claude.com/docs/en/mcp.md",
       "title": "Connect Claude Code to tools via MCP",
       "category": "claude_code",
-      "sha256": "c8ed8648fee345f8cdd403c1dc7d7e1c936e4e5e8680a8492d8f303323f65702",
-      "lastmod": "2026-11-17T18:21:44.089Z",
+      "sha256": "dafdf588a742e37dddf406d65606f59af2ab9881a7d59d41f0be54b047b54aca",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/permissions.md",
       "title": "Configure permissions",
       "category": "claude_code",
-      "sha256": "58d14027cd7b7e63a023a82e66495204742e51e9fd949df159bfefd3fe454667",
-      "lastmod": "2026-11-17T18:13:11.574Z",
+      "sha256": "282aa5818c638f6f86a21fa1e575047d05469c2a2cdfc22b5ed5d3f3511e3f90",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -1676,8 +1676,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/admin.md",
       "title": "Manage mods for your organization",
       "category": "claude_code",
-      "sha256": "52690c0d121d79d4d07f4e2583843daec9ec17be4ffc7112a5a7cacca038d9a9",
-      "lastmod": "2026-11-16T22:20:32.095Z",
+      "sha256": "eb9350ed8ecb669a8f1463d821dc98a969a358aa5f090424a0e11669bb0c4c26",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -1753,8 +1753,8 @@
       "md_url": "https://code.claude.com/docs/en/plugins/mods/reference.md",
       "title": "Mods reference",
       "category": "claude_code",
-      "sha256": "2543be278f47885df9110875209484b343870cd16fc35dbc42ccd9bfff1e5715",
-      "lastmod": "2026-11-14T00:30:04.064Z",
+      "sha256": "68af2b8c3585c594b6fd2cf5d66f5c3b5075cfb7f1822606dc98ddb5e7b1135f",
+      "lastmod": "2026-11-18T15:11:11.025Z",
       "fetch_status": "ok"
     },
     {
@@ -2292,7 +2292,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers.md",
       "title": "API credits for subscribers",
       "category": "about_claude",
-      "sha256": "4b64907a52dd79a582fdb6757a6f513820aae908c25e5d434c550362651cb47e",
+      "sha256": "fcd2828863c546536ddeedc85d6ab1829669981ae71211ae152e783d0b32f5d7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2314,7 +2314,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "title": "Model deprecations",
       "category": "about_claude",
-      "sha256": "cf4dc6596cae93bc850eb93f6f6d4d1f4df43162bffb6dde54623966dba6c2e4",
+      "sha256": "83b08416da9fbbcbd9ca771e881eca703839588e3385dd3fe5cb6c028471a2e8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2435,7 +2435,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing.md",
       "title": "Ticket routing",
       "category": "about_claude",
-      "sha256": "0efdccc26771f590a008922b1f18a4843eefcdd49b24ebf303a14d9b9d01af18",
+      "sha256": "0135ab29caa45918e3012ed820dabe72688b5226921d679359241c1627be4688",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2501,7 +2501,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md",
       "title": "MCP connector",
       "category": "agents_and_tools",
-      "sha256": "0adc2577a8376519c7c03ab4914d51d215630d52a0e21fc1abf247ae8d9eeaf5",
+      "sha256": "bada21efd7529b8edf6bd4eb53902e8ea79a799c0720ce3a1e0a3a26a973ba54",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2523,7 +2523,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console.md",
       "title": "Manage in the Console",
       "category": "agents_and_tools",
-      "sha256": "a6a05e28ee39a4b29763c8335fda83b2189b773050830c1963b34e4caa1f2290",
+      "sha256": "57a35c7d612586850a630f61a00dfc6cf4333058a0c1ea4deac18e04f5b8050b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2611,7 +2611,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers.md",
       "title": "Remote MCP servers",
       "category": "agents_and_tools",
-      "sha256": "5049c503cf0ba86773ad06f1ee2f85cb635fb6c6732de04e815a337541ceed7d",
+      "sha256": "5c804c26ac9cfdae2dedbcd76fddd164dee7a0fc20a6d3e5e52c23e6a5e5b796",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2688,7 +2688,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool.md",
       "title": "Computer use tool",
       "category": "agents_and_tools",
-      "sha256": "01fb7d422ed9086da094d01e6c783233a9dd3ecd6db47ba70148cf6f2b0b135d",
+      "sha256": "086a722aeb26ac67d84c64cfd5d700d948b84100ec51c28311e86ad0c6aeff84",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2699,7 +2699,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools.md",
       "title": "Define tools",
       "category": "agents_and_tools",
-      "sha256": "5449d207b270f80802465c73167c866e834e28745b77faf2b0c6c920bf384230",
+      "sha256": "bc1d67f30f7e89b7470008d40486823218f77c888db34578fad99cc5e9e2ad4c",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2721,7 +2721,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls.md",
       "title": "Handle tool calls",
       "category": "agents_and_tools",
-      "sha256": "8ca85717b424fbac3c6b0ad97c47ce2c6a940712b84c2fd47a0efc5c45e67dea",
+      "sha256": "9989cc15b908905e4d239dcf50ca83fd6ea45366a330ae6eb19f88828215bc0b",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2798,7 +2798,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools.md",
       "title": "Server tools",
       "category": "agents_and_tools",
-      "sha256": "a2ea03fad77ef84c8d76b7601e3f95d6053af7c445913c2ec6f86d00451c02c5",
+      "sha256": "38c00e90f0f148123bec50bc3a1aafe7d7fb567fde707b73d433dea76999815e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2820,7 +2820,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool.md",
       "title": "Text editor tool",
       "category": "agents_and_tools",
-      "sha256": "2b80815e77b20f920ee23cc4b7ffb7fbaa2a8e2549a2e020c32d7dee4bd33634",
+      "sha256": "92f48201839e0abdaf67f3bf84d20582855285d29b397f7a48e5d0b40d185823",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11500,6 +11500,17 @@
       "title": "Monitor and troubleshoot",
       "category": "core_documentation",
       "sha256": "83735c4ad7879c8dfa5c5c3e8a70e6320a5a244f56ad19eb0074dd9f3fd968b1",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/managed-agents/self-hosted-sandboxes-per-session",
+      "filename": "docs__en__managed-agents__self-hosted-sandboxes-per-session.md",
+      "url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-per-session",
+      "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-per-session.md",
+      "title": "Sandbox per session",
+      "category": "core_documentation",
+      "sha256": "dcc66f68b050cb78dc139e9af0669691ed484a4bbd77266d76363e2c71a229c1",
       "lastmod": null,
       "fetch_status": "ok"
     },
