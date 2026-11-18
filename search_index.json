@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-18T00:20:09.198609Z",
+  "generated_at": "2026-11-18T03:15:57.324089Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -2002,8 +2002,8 @@
         "claude": 98,
         "code": 39,
         "organization": 36,
-        "setting": 31,
-        "manag": 29,
+        "setting": 33,
+        "manag": 30,
         "provider": 28,
         "session": 28,
         "enterprise": 22,
@@ -2045,12 +2045,12 @@
         "spend": 9,
         "key": 9,
         "plan": 9,
-        "sourc": 9,
         "desktop": 9,
         "turn": 9,
-        "login": 9
+        "login": 9,
+        "level": 8
       },
-      "word_count": 3237
+      "word_count": 3243
     },
     {
       "filename": "claude-code__advisor.md",
@@ -9942,7 +9942,7 @@
         "preview": 7,
         "through": 7
       },
-      "word_count": 3235
+      "word_count": 3240
     },
     {
       "filename": "claude-code__channels-reference.md",
@@ -15662,6 +15662,10 @@
           "level": 3
         },
         {
+          "text": "Claude Code is \"newer than the maximum version allowed by your organization\"",
+          "level": 3
+        },
+        {
           "text": "Session not finding installed tools",
           "level": 3
         },
@@ -15766,7 +15770,7 @@
         "sshhostallowlist": 16,
         "environment": 15
       },
-      "word_count": 32584
+      "word_count": 32648
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -35102,7 +35106,7 @@
         "boolean": 73,
         "start": 72
       },
-      "word_count": 55311
+      "word_count": 55361
     },
     {
       "filename": "claude-code__setup.md",
@@ -35254,8 +35258,8 @@
         "linux": 24,
         "command": 24,
         "native": 22,
-        "updat": 20,
         "powershell": 20,
+        "updat": 19,
         "package": 19,
         "npm": 19,
         "wsl": 18,
@@ -35292,7 +35296,7 @@
         "installer": 10,
         "stable": 10
       },
-      "word_count": 4629
+      "word_count": 4688
     },
     {
       "filename": "claude-code__skills.md",

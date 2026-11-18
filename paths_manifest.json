@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-18T00:20:05.515865Z",
+  "generated_at": "2026-11-18T03:15:53.315510Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -37,8 +37,8 @@
       "md_url": "https://code.claude.com/docs/en/admin-setup.md",
       "title": "Set up Claude Code for your organization",
       "category": "claude_code",
-      "sha256": "ff258a7aa3b3f6e7cb72e4d47ba324719df61c3f6787a35934eeba5e0d37ec87",
-      "lastmod": "2026-11-17T02:29:14.018Z",
+      "sha256": "54a57c46a55cd83128f9ac39b2a9a5261c59b5a3c4e33642d81c5c354c2d4284",
+      "lastmod": "2026-11-18T01:21:28.096Z",
       "fetch_status": "ok"
     },
     {
@@ -543,8 +543,8 @@
       "md_url": "https://code.claude.com/docs/en/channels.md",
       "title": "Push events into a running session with channels",
       "category": "claude_code",
-      "sha256": "7a38c1b3e98789b34090b97891b798b0fbd6cf74ff11773be875820e18993c2f",
-      "lastmod": "2026-11-12T22:56:55.476Z",
+      "sha256": "027537644226c1592215c992c6091cc8bd333768c1e222c5ef036f0db126dd8b",
+      "lastmod": "2026-11-18T02:06:43.221Z",
       "fetch_status": "ok"
     },
     {
@@ -961,8 +961,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "35b77248f3f513e476f979a6a86109b504604e0e74be08a29c16b7cd0d941033",
-      "lastmod": "2026-11-17T00:11:29.845Z",
+      "sha256": "bc0295df18527ebbe49c842536670f0859624991d6ed6be0b5475e982bc31816",
+      "lastmod": "2026-11-18T01:21:28.096Z",
       "fetch_status": "ok"
     },
     {
@@ -2083,8 +2083,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "e21f35b55e3e99112b30ec19c0b426c4e86c87f05d9cd91566e6d0c46a9e0093",
-      "lastmod": "2026-11-17T19:06:59.885Z",
+      "sha256": "7b7b9dde44e60d9bea9d2072202e4e452cb3a34cd9adf9adbda6af4f838effbe",
+      "lastmod": "2026-11-18T01:21:28.096Z",
       "fetch_status": "ok"
     },
     {
@@ -2094,8 +2094,8 @@
       "md_url": "https://code.claude.com/docs/en/setup.md",
       "title": "Advanced setup",
       "category": "claude_code",
-      "sha256": "dc409d98be351f99616c9f19e8ea4d762b3f2925c56d6763615bf5e328502975",
-      "lastmod": "2026-11-16T22:58:46.194Z",
+      "sha256": "27ddc5d3a7664856523f8f2d98861ffe6f091f825fd233dcb2d24d8da2a38294",
+      "lastmod": "2026-11-18T01:21:28.096Z",
       "fetch_status": "ok"
     },
     {
