@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-19T03:15:35.789456Z",
+  "generated_at": "2026-11-19T06:16:27.639580Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -42617,7 +42617,7 @@
         }
       ],
       "terms": {
-        "claude": 133,
+        "claude": 135,
         "call": 86,
         "browser": 83,
         "tool": 70,
@@ -42658,6 +42658,7 @@
         "http": 17,
         "runner": 17,
         "write": 17,
+        "mytho": 16,
         "card": 16,
         "input": 16,
         "block": 16,
@@ -42665,10 +42666,9 @@
         "desktop": 15,
         "opu": 15,
         "start": 15,
-        "report": 15,
-        "path": 15
+        "report": 15
       },
-      "word_count": 9101
+      "word_count": 9107
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__browser-use-tool.md",
@@ -42819,7 +42819,7 @@
         }
       ],
       "terms": {
-        "claude": 165,
+        "claude": 167,
         "result": 95,
         "tool": 83,
         "member": 82,
@@ -42857,6 +42857,7 @@
         "action": 17,
         "content": 17,
         "fable": 17,
+        "mytho": 17,
         "see": 17,
         "such": 17,
         "carri": 17,
@@ -42866,11 +42867,10 @@
         "example": 16,
         "batch": 16,
         "line": 16,
-        "mytho": 15,
         "reference": 15,
         "default": 15
       },
-      "word_count": 11152
+      "word_count": 11158
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__build-a-tool-using-agent.md",
@@ -43313,7 +43313,7 @@
         }
       ],
       "terms": {
-        "claude": 242,
+        "claude": 244,
         "tool": 124,
         "computer": 70,
         "action": 61,
@@ -43338,12 +43338,12 @@
         "call": 24,
         "text": 24,
         "fable": 23,
+        "mytho": 23,
         "such": 23,
         "every": 23,
         "agent": 22,
         "limit": 22,
         "before": 22,
-        "mytho": 21,
         "run": 21,
         "image": 21,
         "click": 21,
@@ -43364,7 +43364,7 @@
         "haiku": 15,
         "need": 15
       },
-      "word_count": 12472
+      "word_count": 12478
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__define-tools.md",
@@ -43436,9 +43436,9 @@
       ],
       "terms": {
         "tool": 129,
-        "claude": 66,
+        "claude": 67,
         "call": 17,
-        "model": 16,
+        "model": 17,
         "example": 15,
         "parameter": 14,
         "description": 13,
@@ -43478,15 +43478,15 @@
         "card": 6,
         "fable": 5,
         "sonnet": 5,
+        "cloud": 5,
+        "anthropic": 5,
+        "manag": 5,
         "usage": 5,
         "work": 5,
         "field": 5,
-        "accept": 5,
-        "must": 5,
-        "should": 5,
-        "nam": 5
+        "accept": 5
       },
-      "word_count": 4079
+      "word_count": 4086
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__fine-grained-tool-streaming.md",
@@ -44250,7 +44250,7 @@
       ],
       "terms": {
         "tool": 76,
-        "claude": 49,
+        "claude": 47,
         "call": 41,
         "parallel": 26,
         "run": 13,
@@ -44275,7 +44275,6 @@
         "sdk": 7,
         "title": 6,
         "mytho": 6,
-        "api": 6,
         "model": 6,
         "need": 6,
         "user": 6,
@@ -44284,6 +44283,7 @@
         "card": 6,
         "format": 5,
         "sonnet": 5,
+        "api": 5,
         "anthropic": 5,
         "work": 5,
         "see": 5,
@@ -44300,7 +44300,7 @@
         "doc": 4,
         "cloud": 4
       },
-      "word_count": 5931
+      "word_count": 5928
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__programmatic-tool-calling.md",
@@ -44524,7 +44524,7 @@
       ],
       "terms": {
         "tool": 187,
-        "claude": 121,
+        "claude": 123,
         "call": 108,
         "code": 83,
         "programmatic": 56,
@@ -44547,6 +44547,7 @@
         "field": 12,
         "process": 12,
         "output": 12,
+        "mytho": 11,
         "anthropic": 10,
         "see": 10,
         "step": 10,
@@ -44556,7 +44557,6 @@
         "workflow": 9,
         "note": 9,
         "fable": 9,
-        "mytho": 9,
         "manag": 9,
         "filter": 9,
         "before": 9,
@@ -44574,7 +44574,7 @@
         "card": 8,
         "agent": 7
       },
-      "word_count": 6636
+      "word_count": 6642
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__server-tools.md",
@@ -45689,7 +45689,7 @@
       "terms": {
         "fetch": 94,
         "tool": 88,
-        "claude": 73,
+        "claude": 74,
         "web": 59,
         "url": 40,
         "content": 35,
@@ -45715,20 +45715,20 @@
         "token": 13,
         "user": 12,
         "client": 12,
+        "anthropic": 11,
         "support": 11,
         "document": 11,
         "parameter": 11,
         "domain": 11,
         "page": 11,
         "platform": 10,
+        "model": 10,
         "such": 10,
-        "anthropic": 10,
+        "manag": 10,
         "cache": 10,
         "run": 10,
         "turn": 10,
         "execution": 10,
-        "model": 9,
-        "manag": 9,
         "usage": 9,
         "later": 9,
         "side": 9,
@@ -45738,7 +45738,7 @@
         "specific": 8,
         "add": 8
       },
-      "word_count": 4813
+      "word_count": 4820
     },
     {
       "filename": "docs__en__agents-and-tools__tool-use__web-search-tool.md",
@@ -45846,7 +45846,7 @@
       ],
       "terms": {
         "search": 91,
-        "claude": 70,
+        "claude": 71,
         "tool": 60,
         "web": 58,
         "api": 35,
@@ -45855,27 +45855,28 @@
         "result": 24,
         "dynamic": 21,
         "code": 19,
+        "model": 17,
         "error": 17,
-        "model": 16,
         "turn": 15,
         "response": 14,
         "agent": 13,
         "content": 13,
         "domain": 13,
         "note": 13,
+        "manag": 13,
         "call": 13,
-        "manag": 12,
+        "google": 12,
         "execution": 12,
         "return": 11,
-        "google": 11,
         "without": 11,
         "run": 11,
         "available": 11,
         "see": 11,
         "platform": 10,
-        "cloud": 9,
+        "cloud": 10,
         "later": 9,
         "limit": 9,
+        "anthropic": 8,
         "only": 8,
         "basic": 8,
         "support": 8,
@@ -45884,7 +45885,6 @@
         "block": 8,
         "stable": 7,
         "eligible": 7,
-        "anthropic": 7,
         "add": 7,
         "includ": 7,
         "token": 7,
@@ -45896,7 +45896,7 @@
         "list": 6,
         "toolset": 6
       },
-      "word_count": 3559
+      "word_count": 3566
     },
     {
       "filename": "docs__en__api__beta.md",
@@ -138124,8 +138124,8 @@
       "terms": {
         "batch": 157,
         "request": 82,
-        "claude": 69,
-        "api": 56,
+        "claude": 67,
+        "api": 55,
         "mtok": 46,
         "process": 44,
         "message": 44,
@@ -138135,7 +138135,7 @@
         "accordion": 18,
         "limit": 17,
         "model": 16,
-        "available": 16,
+        "available": 15,
         "large": 14,
         "each": 14,
         "codegroup": 14,
@@ -138157,7 +138157,6 @@
         "because": 9,
         "search": 9,
         "pric": 9,
-        "platform": 8,
         "cost": 8,
         "statu": 8,
         "day": 8,
@@ -138169,11 +138168,12 @@
         "token": 8,
         "list": 8,
         "cancel": 8,
+        "platform": 7,
         "percent": 7,
         "mytho": 7,
         "cloud": 7
       },
-      "word_count": 7245
+      "word_count": 7231
     },
     {
       "filename": "docs__en__build-with-claude__cache-diagnostics.md",
@@ -138884,7 +138884,7 @@
         }
       ],
       "terms": {
-        "claude": 156,
+        "claude": 158,
         "google": 112,
         "cloud": 108,
         "anthropic": 106,
@@ -138896,13 +138896,13 @@
         "step": 42,
         "see": 39,
         "request": 39,
-        "beta": 38,
         "workspace": 37,
+        "beta": 37,
         "client": 33,
         "console": 32,
+        "limit": 30,
         "set": 28,
         "follow": 28,
-        "limit": 28,
         "account": 27,
         "token": 25,
         "title": 24,
@@ -138910,12 +138910,12 @@
         "one": 23,
         "credential": 23,
         "tab": 23,
+        "tool": 22,
         "iam": 21,
-        "tool": 21,
+        "support": 21,
         "check": 20,
         "permission": 20,
         "cli": 20,
-        "support": 20,
         "open": 19,
         "call": 19,
         "data": 19,
@@ -138935,7 +138935,7 @@
         "agent": 14,
         "rol": 14
       },
-      "word_count": 6102
+      "word_count": 6133
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__google-managed.md",
@@ -139852,7 +139852,7 @@
         }
       ],
       "terms": {
-        "claude": 72,
+        "claude": 74,
         "request": 53,
         "block": 51,
         "compaction": 35,
@@ -139874,9 +139874,9 @@
         "compact": 14,
         "summariz": 14,
         "error": 14,
+        "mytho": 13,
         "one": 13,
         "fable": 11,
-        "mytho": 11,
         "sonnet": 11,
         "header": 11,
         "later": 11,
@@ -139903,7 +139903,7 @@
         "demand": 6,
         "google": 6
       },
-      "word_count": 5318
+      "word_count": 5324
     },
     {
       "filename": "docs__en__build-with-claude__compaction-thinking-blocks.md",
@@ -140112,39 +140112,40 @@
         }
       ],
       "terms": {
-        "claude": 111,
+        "claude": 130,
         "compaction": 64,
         "block": 40,
+        "opu": 31,
         "api": 30,
-        "opu": 26,
-        "model": 25,
+        "model": 26,
+        "mytho": 24,
         "codegroup": 22,
         "context": 21,
+        "fable": 21,
         "summary": 21,
-        "beta": 19,
-        "mytho": 19,
+        "beta": 20,
+        "sonnet": 20,
         "prompt": 19,
-        "fable": 18,
         "codegroupitem": 18,
         "conversation": 17,
-        "sonnet": 17,
         "token": 16,
         "shell": 16,
         "request": 14,
         "messag": 14,
         "trigger": 13,
+        "haiku": 12,
         "need": 12,
         "response": 11,
+        "anthropic": 11,
         "usage": 11,
         "threshold": 10,
-        "haiku": 10,
-        "anthropic": 10,
         "content": 10,
         "iteration": 10,
         "single": 10,
         "platform": 9,
         "tool": 9,
         "compact": 8,
+        "manag": 8,
         "default": 8,
         "window": 8,
         "long": 8,
@@ -140160,10 +140161,9 @@
         "sdk": 8,
         "run": 8,
         "cache": 8,
-        "reach": 7,
-        "manag": 7
+        "reach": 7
       },
-      "word_count": 10985
+      "word_count": 11051
     },
     {
       "filename": "docs__en__build-with-claude__context-editing.md",
@@ -140542,20 +140542,20 @@
         }
       ],
       "terms": {
-        "claude": 177,
+        "claude": 194,
         "effort": 116,
+        "opu": 63,
         "think": 58,
-        "opu": 57,
         "level": 48,
-        "model": 45,
+        "model": 46,
         "default": 34,
         "task": 34,
+        "fable": 31,
+        "sonnet": 30,
         "token": 28,
-        "fable": 28,
         "prompt": 28,
-        "sonnet": 27,
+        "mytho": 27,
         "set": 26,
-        "mytho": 24,
         "support": 24,
         "work": 23,
         "see": 21,
@@ -140567,8 +140567,8 @@
         "cod": 18,
         "per": 16,
         "start": 16,
+        "haiku": 15,
         "control": 14,
-        "haiku": 14,
         "conversation": 14,
         "message": 14,
         "platform": 13,
@@ -140593,7 +140593,7 @@
         "adaptive": 9,
         "run": 9
       },
-      "word_count": 3977
+      "word_count": 4037
     },
     {
       "filename": "docs__en__build-with-claude__effort-per-message.md",
@@ -140636,18 +140636,18 @@
         }
       ],
       "terms": {
-        "claude": 45,
+        "claude": 46,
         "beta": 23,
-        "model": 20,
+        "model": 21,
         "message": 19,
         "level": 19,
         "effort": 15,
-        "google": 14,
+        "google": 15,
         "per": 11,
+        "cloud": 11,
+        "manag": 11,
         "new": 11,
         "bedrock": 10,
-        "cloud": 10,
-        "manag": 10,
         "turn": 10,
         "api": 9,
         "change": 8,
@@ -140655,11 +140655,11 @@
         "conversation": 7,
         "amazon": 7,
         "value": 7,
+        "anthropic": 7,
         "top": 7,
         "header": 7,
         "opu": 6,
         "request": 6,
-        "anthropic": 6,
         "platform": 5,
         "mytho": 5,
         "microsoft": 5,
@@ -140687,7 +140687,7 @@
         "input": 3,
         "before": 3
       },
-      "word_count": 1800
+      "word_count": 1807
     },
     {
       "filename": "docs__en__build-with-claude__embeddings.md",
@@ -140962,7 +140962,7 @@
         }
       ],
       "terms": {
-        "claude": 88,
+        "claude": 89,
         "retry": 48,
         "model": 37,
         "token": 34,
@@ -140993,6 +140993,7 @@
         "same": 10,
         "reject": 10,
         "block": 10,
+        "mytho": 9,
         "sonnet": 9,
         "amazon": 9,
         "bedrock": 9,
@@ -141001,7 +141002,6 @@
         "redeem": 9,
         "match": 9,
         "prompt": 8,
-        "mytho": 8,
         "need": 8,
         "only": 8,
         "unchang": 8,
@@ -141013,7 +141013,7 @@
         "response": 7,
         "run": 7
       },
-      "word_count": 3756
+      "word_count": 3759
     },
     {
       "filename": "docs__en__build-with-claude__fast-mode.md",
@@ -141088,24 +141088,24 @@
         }
       ],
       "terms": {
-        "claude": 79,
+        "claude": 80,
         "fast": 55,
         "mode": 53,
-        "model": 40,
+        "model": 41,
         "opu": 34,
         "api": 20,
         "request": 20,
         "token": 15,
+        "google": 15,
         "pric": 15,
         "limit": 15,
         "error": 14,
-        "google": 14,
+        "cloud": 14,
         "available": 14,
-        "cloud": 13,
         "spe": 12,
+        "manag": 12,
         "header": 12,
         "rate": 12,
-        "manag": 11,
         "output": 10,
         "set": 10,
         "standard": 10,
@@ -141118,6 +141118,7 @@
         "card": 8,
         "fable": 7,
         "mytho": 7,
+        "anthropic": 7,
         "microsoft": 7,
         "foundry": 7,
         "deployment": 7,
@@ -141128,7 +141129,6 @@
         "messag": 6,
         "availability": 6,
         "removal": 6,
-        "anthropic": 6,
         "beta": 6,
         "codegroup": 6,
         "title": 5,
@@ -141139,7 +141139,7 @@
         "research": 5,
         "preview": 5
       },
-      "word_count": 3063
+      "word_count": 3070
     },
     {
       "filename": "docs__en__build-with-claude__files.md",
@@ -141916,33 +141916,29 @@
         }
       ],
       "terms": {
-        "claude": 49,
+        "claude": 45,
         "languag": 12,
+        "support": 11,
         "language": 11,
         "platform": 10,
         "model": 10,
-        "support": 9,
-        "stable": 8,
+        "stable": 9,
         "card": 8,
         "multilingual": 7,
         "opu": 7,
         "prompt": 7,
-        "bedrock": 6,
         "overview": 6,
         "title": 5,
         "http": 5,
         "com": 5,
         "doc": 5,
         "sonnet": 5,
-        "api": 5,
         "table": 5,
         "output": 5,
         "build": 4,
         "performance": 4,
         "fable": 4,
         "mytho": 4,
-        "amazon": 4,
-        "google": 4,
         "cloud": 4,
         "test": 4,
         "quality": 4,
@@ -141954,8 +141950,9 @@
         "english": 3,
         "statu": 3,
         "haiku": 3,
-        "runtime": 3,
-        "aws": 3,
+        "api": 3,
+        "bedrock": 3,
+        "google": 3,
         "manag": 3,
         "capabiliti": 3,
         "follow": 3,
@@ -141965,9 +141962,12 @@
         "most": 3,
         "native": 3,
         "general": 3,
-        "engineer": 3
+        "engineer": 3,
+        "availability": 3,
+        "available": 3,
+        "task": 2
       },
-      "word_count": 1227
+      "word_count": 1215
     },
     {
       "filename": "docs__en__build-with-claude__overview.md",
@@ -142274,13 +142274,13 @@
         }
       ],
       "terms": {
-        "claude": 117,
+        "claude": 115,
         "model": 60,
         "think": 34,
         "block": 29,
-        "fable": 21,
+        "fable": 20,
         "opu": 18,
-        "mytho": 17,
+        "mytho": 16,
         "api": 16,
         "platform": 15,
         "request": 14,
@@ -142318,14 +142318,14 @@
         "doesn": 6,
         "another": 6,
         "messag": 6,
-        "available": 6,
         "card": 6,
         "com": 5,
         "amazon": 5,
         "aws": 5,
-        "one": 5
+        "one": 5,
+        "accept": 5
       },
-      "word_count": 1659
+      "word_count": 1648
     },
     {
       "filename": "docs__en__build-with-claude__preserved-thinking__change-tools-or-instructions.md",
@@ -145168,7 +145168,7 @@
         }
       ],
       "terms": {
-        "claude": 101,
+        "claude": 103,
         "budget": 69,
         "request": 40,
         "task": 34,
@@ -145184,11 +145184,11 @@
         "think": 16,
         "header": 16,
         "count": 15,
+        "mytho": 14,
         "countdown": 14,
         "turn": 14,
         "acros": 13,
         "fable": 12,
-        "mytho": 12,
         "side": 12,
         "history": 12,
         "support": 12,
@@ -145219,7 +145219,7 @@
         "output": 6,
         "cap": 6
       },
-      "word_count": 3681
+      "word_count": 3687
     },
     {
       "filename": "docs__en__build-with-claude__text-watermark.md",
@@ -147294,7 +147294,7 @@
         }
       ],
       "terms": {
-        "claude": 27,
+        "claude": 25,
         "middleware": 21,
         "request": 13,
         "sdk": 12,
@@ -147304,8 +147304,8 @@
         "client": 7,
         "platform": 6,
         "opu": 6,
-        "api": 6,
         "http": 5,
+        "api": 5,
         "before": 5,
         "after": 5,
         "fallback": 5,
@@ -147327,10 +147327,10 @@
         "each": 3,
         "php": 3,
         "availability": 3,
+        "support": 3,
         "agent": 3,
         "haiku": 2,
         "amazon": 2,
-        "aws": 2,
         "anthropic": 2,
         "retry": 2,
         "declin": 2,
@@ -147345,7 +147345,7 @@
         "codegroup": 2,
         "codegroupitem": 2
       },
-      "word_count": 984
+      "word_count": 981
     },
     {
       "filename": "docs__en__cli-sdks-libraries__overview.md",
@@ -153181,7 +153181,7 @@
         }
       ],
       "terms": {
-        "claude": 129,
+        "claude": 131,
         "workspace": 53,
         "geo": 44,
         "model": 31,
@@ -153199,7 +153199,7 @@
         "manag": 16,
         "available": 16,
         "note": 15,
-        "mytho": 13,
+        "mytho": 15,
         "control": 11,
         "session": 11,
         "set": 11,
@@ -153232,7 +153232,7 @@
         "sup": 6,
         "manage": 5
       },
-      "word_count": 2380
+      "word_count": 2386
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks.md",
@@ -162810,14 +162810,14 @@
         "java": 42,
         "php": 42,
         "tool": 36,
-        "claude": 31,
+        "claude": 32,
         "session": 28,
         "api": 19,
         "set": 19,
         "web": 18,
         "host": 16,
+        "manag": 14,
         "search": 13,
-        "manag": 13,
         "setting": 13,
         "also": 11,
         "error": 11,
@@ -162831,12 +162831,11 @@
         "path": 9,
         "fetch": 8,
         "url": 8,
+        "cloud": 8,
         "same": 8,
         "environment": 8,
         "allow": 8,
         "doe": 8,
-        "beta": 7,
-        "cloud": 7,
         "messag": 7,
         "own": 7,
         "see": 7,
@@ -162848,13 +162847,14 @@
         "com": 6,
         "doc": 6,
         "opu": 6,
+        "beta": 6,
+        "model": 6,
         "entri": 6,
         "only": 6,
         "organization": 6,
-        "both": 6,
-        "update": 6
+        "both": 6
       },
-      "word_count": 3094
+      "word_count": 3101
     },
     {
       "filename": "docs__en__managed-agents__vaults.md",
@@ -164241,8 +164241,8 @@
         }
       ],
       "terms": {
-        "claude": 53,
-        "model": 26,
+        "claude": 55,
+        "model": 28,
         "mytho": 19,
         "card": 14,
         "output": 11,
@@ -164262,8 +164262,10 @@
         "input": 6,
         "price": 6,
         "think": 6,
+        "google": 6,
         "icon": 6,
         "href": 6,
+        "anthropic": 5,
         "verification": 5,
         "ids": 5,
         "effort": 5,
@@ -164278,21 +164280,19 @@
         "about": 4,
         "batch": 4,
         "value": 4,
-        "google": 4,
+        "cloud": 4,
+        "manag": 4,
         "cardgroup": 4,
         "overview": 3,
         "organization": 3,
         "verifi": 3,
         "through": 3,
-        "anthropic": 3,
         "specification": 3,
         "migration": 3,
         "resourc": 3,
-        "current": 3,
-        "september": 3,
-        "word": 3
+        "current": 3
       },
-      "word_count": 833
+      "word_count": 851
     },
     {
       "filename": "docs__en__models__mythos-5-2__overview.md",
@@ -164425,8 +164425,8 @@
         }
       ],
       "terms": {
-        "claude": 52,
-        "model": 27,
+        "claude": 54,
+        "model": 29,
         "mytho": 19,
         "card": 14,
         "output": 11,
@@ -164445,8 +164445,10 @@
         "input": 6,
         "price": 6,
         "think": 6,
+        "google": 6,
         "icon": 6,
         "href": 6,
+        "anthropic": 5,
         "verification": 5,
         "ids": 5,
         "effort": 5,
@@ -164462,21 +164464,19 @@
         "about": 4,
         "batch": 4,
         "value": 4,
-        "google": 4,
+        "cloud": 4,
+        "manag": 4,
         "cardgroup": 4,
         "overview": 3,
         "work": 3,
         "through": 3,
-        "anthropic": 3,
         "specification": 3,
         "migration": 3,
         "resourc": 3,
         "current": 3,
-        "june": 3,
-        "jan": 3,
-        "word": 3
+        "june": 3
       },
-      "word_count": 838
+      "word_count": 856
     },
     {
       "filename": "docs__en__models__opus-4-5__overview.md",
@@ -168206,26 +168206,25 @@
         }
       ],
       "terms": {
-        "claude": 46,
         "refusal": 44,
+        "claude": 44,
         "stream": 21,
         "fallback": 18,
         "refus": 16,
         "model": 16,
-        "api": 14,
         "retry": 13,
+        "api": 13,
         "platform": 10,
         "response": 9,
         "request": 8,
         "turn": 8,
         "card": 8,
         "handle": 7,
+        "stable": 7,
         "http": 6,
         "detect": 6,
         "respons": 6,
         "opu": 6,
-        "stable": 6,
-        "bedrock": 6,
         "messag": 6,
         "event": 6,
         "server": 6,
@@ -168238,6 +168237,7 @@
         "stop": 5,
         "reason": 5,
         "haiku": 5,
+        "support": 5,
         "arriv": 5,
         "see": 5,
         "another": 5,
@@ -168250,14 +168250,14 @@
         "credit": 5,
         "mytho": 4,
         "sonnet": 4,
-        "amazon": 4,
-        "google": 4,
         "cloud": 4,
+        "anthropic": 4,
         "manag": 4,
-        "support": 4,
-        "usage": 4
+        "usage": 4,
+        "end": 4,
+        "classifier": 4
       },
-      "word_count": 1723
+      "word_count": 1714
     },
     {
       "filename": "docs__en__test-and-evaluate__strengthen-guardrails__increase-consistency.md",
