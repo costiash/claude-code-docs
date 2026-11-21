@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T03:14:56.065524Z",
+  "generated_at": "2026-11-21T18:14:59.553154Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -136,8 +136,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/hooks.md",
       "title": "Intercept and control agent behavior with hooks",
       "category": "agent_sdk",
-      "sha256": "0b2c9a218508ae08aa03a1d9bfe5916d39a56028c80699d2264a63c27a851f84",
-      "lastmod": "2026-11-19T23:04:53.154Z",
+      "sha256": "d055ebbee0f3a1cdab3346db84fb9649c85a2d675f6558ee8bd6172004024053",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -235,8 +235,8 @@
       "md_url": "https://code.claude.com/docs/en/agent-sdk/python.md",
       "title": "Agent SDK reference - Python",
       "category": "agent_sdk",
-      "sha256": "a658fde43f021fe438986ed2b6a6e539fe2f2baa74fce42d6db51ce979b01742",
-      "lastmod": "2026-11-19T23:07:29.004Z",
+      "sha256": "bf6e154f31f555fec9024985f37e2a83d2ee268abde1bfb7fef7f308062838bf",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -1038,8 +1038,8 @@
       "md_url": "https://code.claude.com/docs/en/env-vars.md",
       "title": "Environment variables",
       "category": "claude_code",
-      "sha256": "8a8395c69d9fcdc4686e00307982de9bd426365ba4081a66ffb57db99cfc78ae",
-      "lastmod": "2026-11-20T23:28:17.352Z",
+      "sha256": "0462aa012ee88a27de92fa6d36e3156490d3c7b95c35562becb55516e8e612b0",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -1214,8 +1214,8 @@
       "md_url": "https://code.claude.com/docs/en/hooks.md",
       "title": "Hooks reference",
       "category": "claude_code",
-      "sha256": "f5e1117b35f03ae3a02a97fb2062c700fd2b5047d4a184a6699ab7c6ed5e9a87",
-      "lastmod": "2026-11-21T00:17:02.069Z",
+      "sha256": "fbb1bc85270ef0b086364fe9c413ed1dc1316afe9cbe431e2a02bb361e415afe",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -1478,8 +1478,8 @@
       "md_url": "https://code.claude.com/docs/en/permission-modes.md",
       "title": "Choose a permission mode",
       "category": "claude_code",
-      "sha256": "0477d3baff37f13866bfb5c2ee86038714353a34436ad815830d956099ed1aa0",
-      "lastmod": "2026-11-19T23:06:05.242Z",
+      "sha256": "9acc13d0865c8674bba1d3f44b53112c405890144637cb4d3680e501bdfa3522",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -2138,8 +2138,8 @@
       "md_url": "https://code.claude.com/docs/en/sub-agents.md",
       "title": "Create custom subagents",
       "category": "claude_code",
-      "sha256": "0391a8fbdc9d5cd47c77088b4f8b650bd5038313a9629065c6eb334e797c6cdb",
-      "lastmod": "2026-11-21T00:17:02.069Z",
+      "sha256": "5009da9098bc24888b27a387643a68e7c08b472f7d6e210d6cffe2c556ae4c7a",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -2171,8 +2171,8 @@
       "md_url": "https://code.claude.com/docs/en/tools-reference.md",
       "title": "Tools reference",
       "category": "claude_code",
-      "sha256": "b70a0f34f42a2adc0e99e9442dcf08c4ac58e9dd5e60f4a16e79bad9f5d37304",
-      "lastmod": "2026-11-19T23:07:29.004Z",
+      "sha256": "19cf315b78dd83c63f1cebf477881823e4e79fcd081306f08334c3b9e6e2c1ca",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {
@@ -2226,8 +2226,8 @@
       "md_url": "https://code.claude.com/docs/en/vs-code.md",
       "title": "Use Claude Code in VS Code",
       "category": "claude_code",
-      "sha256": "ae6e70827bfcb4b97154a7f74ebd2887f9af88b79f8da05ca1058aed55006e03",
-      "lastmod": "2026-11-21T00:16:25.432Z",
+      "sha256": "8c07ab8780d6e22561dc13616964ffe9625b2020a306635d3487504405b7ee21",
+      "lastmod": "2026-11-21T17:00:18.688Z",
       "fetch_status": "ok"
     },
     {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T03:15:00.190072Z",
+  "generated_at": "2026-11-21T18:15:02.897879Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -3180,11 +3180,11 @@
         "field": 19,
         "subagent": 18,
         "timeout": 17,
-        "each": 16,
         "file": 15,
         "result": 15,
         "type": 15,
         "example": 15,
+        "each": 15,
         "permission": 15,
         "set": 15,
         "option": 14,
@@ -3208,7 +3208,7 @@
         "such": 10,
         "request": 10
       },
-      "word_count": 6243
+      "word_count": 6242
     },
     {
       "filename": "claude-code__agent-sdk__hosting.md",
@@ -4978,7 +4978,7 @@
         "api": 28,
         "key": 28
       },
-      "word_count": 21458
+      "word_count": 21456
     },
     {
       "filename": "claude-code__agent-sdk__quickstart.md",
@@ -16527,8 +16527,8 @@
       "terms": {
         "claude": 503,
         "set": 427,
-        "code": 399,
-        "session": 169,
+        "code": 398,
+        "session": 168,
         "default": 167,
         "model": 151,
         "later": 148,
@@ -16549,15 +16549,15 @@
         "file": 65,
         "ignor": 62,
         "run": 60,
-        "mode": 59,
         "instead": 58,
+        "mode": 58,
         "api": 57,
         "before": 55,
         "platform": 55,
         "mcp": 54,
         "shell": 52,
         "cloud": 52,
-        "also": 51,
+        "also": 50,
         "gateway": 50,
         "wait": 50,
         "override": 49,
@@ -16574,9 +16574,9 @@
         "path": 45,
         "limit": 45,
         "start": 44,
-        "terminal": 43
+        "environment": 42
       },
-      "word_count": 22785
+      "word_count": 22770
     },
     {
       "filename": "claude-code__errors.md",
@@ -20805,7 +20805,7 @@
         "field": 106,
         "json": 98,
         "exit": 98,
-        "prompt": 95,
+        "prompt": 94,
         "path": 75,
         "decision": 72,
         "setting": 72,
@@ -20822,7 +20822,7 @@
         "output": 57,
         "start": 56,
         "action": 55,
-        "agent": 54,
+        "agent": 53,
         "server": 53,
         "matcher": 52,
         "model": 52,
@@ -20834,9 +20834,9 @@
         "script": 47,
         "text": 45,
         "such": 45,
-        "permission": 44,
         "read": 44,
         "each": 43,
+        "permission": 43,
         "one": 42,
         "doesn": 42,
         "any": 42,
@@ -20844,7 +20844,7 @@
         "example": 39,
         "reason": 39
       },
-      "word_count": 40252
+      "word_count": 40175
     },
     {
       "filename": "claude-code__hooks-guide.md",
@@ -25397,26 +25397,26 @@
         }
       ],
       "terms": {
-        "mode": 273,
-        "claude": 238,
-        "code": 198,
+        "mode": 274,
+        "claude": 240,
+        "code": 199,
         "session": 196,
         "prompt": 150,
         "permission": 127,
+        "start": 119,
         "auto": 117,
-        "start": 117,
         "command": 109,
         "path": 105,
-        "run": 100,
+        "run": 101,
         "classifier": 93,
         "set": 81,
         "read": 78,
-        "check": 70,
+        "check": 72,
         "such": 68,
         "setting": 65,
         "action": 57,
         "block": 57,
-        "allow": 56,
+        "allow": 57,
         "work": 55,
         "plan": 53,
         "file": 52,
@@ -25432,13 +25432,13 @@
         "doesn": 42,
         "default": 42,
         "own": 41,
-        "rul": 39,
+        "rul": 40,
+        "tool": 39,
         "one": 39,
         "terminal": 38,
-        "tool": 38,
+        "deni": 38,
         "approve": 38,
         "only": 37,
-        "deni": 37,
         "target": 37,
         "before": 36,
         "shell": 36,
@@ -25448,7 +25448,7 @@
         "instead": 35,
         "each": 35
       },
-      "word_count": 15565
+      "word_count": 15633
     },
     {
       "filename": "claude-code__permissions.md",
@@ -36353,58 +36353,58 @@
         }
       ],
       "terms": {
-        "subagent": 553,
+        "subagent": 540,
         "claude": 239,
-        "code": 138,
-        "agent": 131,
-        "tool": 127,
-        "run": 114,
-        "conversation": 92,
-        "session": 89,
-        "main": 80,
-        "model": 79,
-        "set": 66,
-        "prompt": 65,
+        "code": 136,
+        "agent": 132,
+        "tool": 128,
+        "run": 110,
+        "conversation": 93,
+        "session": 90,
+        "main": 81,
+        "model": 80,
+        "set": 65,
         "fork": 65,
-        "one": 56,
-        "only": 56,
-        "field": 55,
+        "prompt": 61,
+        "one": 55,
+        "field": 54,
+        "only": 52,
         "name": 52,
-        "hook": 50,
         "file": 49,
-        "work": 46,
-        "spawn": 46,
+        "hook": 46,
+        "work": 45,
+        "spawn": 45,
         "mode": 44,
         "background": 43,
         "start": 43,
         "server": 43,
-        "fil": 42,
-        "task": 41,
+        "task": 40,
         "own": 40,
         "same": 40,
+        "fil": 39,
         "context": 38,
-        "plugin": 38,
-        "project": 37,
-        "command": 37,
-        "see": 36,
+        "see": 37,
+        "plugin": 37,
+        "project": 36,
         "directory": 36,
         "such": 36,
+        "command": 36,
         "skill": 35,
         "list": 35,
         "keep": 32,
-        "read": 31,
-        "every": 31,
+        "read": 32,
         "instead": 31,
-        "frontmatter": 31,
-        "before": 30,
         "permission": 30,
-        "doesn": 30,
-        "each": 29,
-        "also": 29,
+        "frontmatter": 30,
+        "still": 30,
+        "before": 29,
         "level": 29,
-        "without": 29
+        "every": 29,
+        "doesn": 29,
+        "ask": 29,
+        "system": 28
       },
-      "word_count": 15500
+      "word_count": 15258
     },
     {
       "filename": "claude-code__terminal-config.md",
@@ -36846,7 +36846,35 @@
           "level": 2
         },
         {
-          "text": "WebFetch availability",
+          "text": "Allow a domain",
+          "level": 3
+        },
+        {
+          "text": "Block a site or turn WebFetch off",
+          "level": 3
+        },
+        {
+          "text": "When a fetch prompts, fails, or WebFetch is missing",
+          "level": 3
+        },
+        {
+          "text": "The web-fetch subagent",
+          "level": 3
+        },
+        {
+          "text": "Which model the web-fetch subagent runs on",
+          "level": 4
+        },
+        {
+          "text": "Rules, hooks, and CLAUDE.md with the web-fetch subagent",
+          "level": 4
+        },
+        {
+          "text": "Turn off the web-fetch subagent",
+          "level": 4
+        },
+        {
+          "text": "Identify WebFetch requests to your site",
           "level": 3
         },
         {
@@ -36871,23 +36899,23 @@
         }
       ],
       "terms": {
-        "claude": 223,
-        "tool": 175,
-        "code": 112,
-        "command": 94,
-        "session": 86,
+        "claude": 220,
+        "tool": 177,
+        "code": 111,
+        "command": 92,
+        "session": 85,
         "file": 62,
-        "run": 56,
-        "subagent": 55,
+        "run": 55,
+        "subagent": 51,
         "set": 46,
         "read": 43,
         "bash": 41,
+        "agent": 40,
         "list": 38,
         "match": 38,
+        "permission": 36,
         "see": 36,
         "background": 36,
-        "permission": 34,
-        "agent": 34,
         "powershell": 33,
         "rule": 33,
         "only": 32,
@@ -36904,25 +36932,25 @@
         "available": 26,
         "such": 26,
         "rul": 25,
-        "same": 25,
-        "limit": 25,
-        "result": 24,
+        "same": 24,
+        "ask": 23,
         "edit": 23,
-        "end": 23,
+        "result": 23,
         "doesn": 23,
+        "limit": 23,
         "watch": 23,
-        "ask": 22,
         "path": 22,
-        "work": 22,
+        "end": 22,
         "search": 22,
         "other": 22,
+        "deny": 22,
         "before": 21,
+        "work": 21,
         "cloud": 21,
-        "deny": 21,
         "server": 20,
-        "output": 20
+        "also": 20
       },
-      "word_count": 12467
+      "word_count": 13163
     },
     {
       "filename": "claude-code__troubleshoot-install.md",
@@ -37896,7 +37924,7 @@
         "one": 26,
         "chang": 26
       },
-      "word_count": 15426
+      "word_count": 15427
     },
     {
       "filename": "claude-code__web-quickstart.md",
