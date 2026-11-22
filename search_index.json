@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-21T18:15:02.897879Z",
+  "generated_at": "2026-11-22T00:20:02.455095Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -143184,11 +143184,11 @@
         "fable": 8,
         "conversation": 7,
         "amazon": 7,
-        "value": 7,
         "anthropic": 7,
         "top": 7,
         "header": 7,
         "opu": 6,
+        "value": 6,
         "request": 6,
         "platform": 5,
         "mytho": 5,
@@ -143217,7 +143217,7 @@
         "input": 3,
         "before": 3
       },
-      "word_count": 1807
+      "word_count": 1806
     },
     {
       "filename": "docs__en__build-with-claude__embeddings.md",
@@ -143810,10 +143810,10 @@
         "claude": 40,
         "upload": 35,
         "content": 23,
+        "beta": 20,
         "request": 19,
         "download": 18,
         "block": 17,
-        "beta": 17,
         "tool": 16,
         "workspace": 16,
         "code": 15,
@@ -143855,7 +143855,7 @@
         "opu": 6,
         "model": 6
       },
-      "word_count": 4448
+      "word_count": 4445
     },
     {
       "filename": "docs__en__build-with-claude__handling-stop-reasons.md",
@@ -144143,9 +144143,9 @@
         "field": 21,
         "keep": 20,
         "breakpoint": 19,
+        "beta": 18,
         "one": 18,
         "csharp": 18,
-        "beta": 17,
         "replay": 17,
         "sdk": 17,
         "stream": 17,
@@ -144167,7 +144167,7 @@
         "ruby": 12,
         "example": 11
       },
-      "word_count": 6767
+      "word_count": 6770
     },
     {
       "filename": "docs__en__build-with-claude__mid-conversation-effort-example.md",
@@ -144976,8 +144976,8 @@
         "result": 15,
         "instruction": 14,
         "model": 14,
+        "header": 14,
         "every": 13,
-        "header": 13,
         "messag": 12,
         "change": 11,
         "platform": 11,
@@ -144989,10 +144989,10 @@
         "only": 10,
         "code": 10,
         "remove": 10,
+        "beta": 10,
         "preserv": 9,
         "hold": 9,
         "see": 9,
-        "beta": 9,
         "other": 8,
         "stable": 8,
         "each": 8,
@@ -145009,7 +145009,7 @@
         "summary": 7,
         "context": 7
       },
-      "word_count": 2655
+      "word_count": 2658
     },
     {
       "filename": "docs__en__build-with-claude__preserved-thinking__fix-bound-to-a-different-conversation.md",
@@ -145098,8 +145098,8 @@
         "conversation": 21,
         "request": 21,
         "model": 16,
-        "header": 16,
         "chang": 15,
+        "header": 15,
         "every": 14,
         "message": 13,
         "step": 13,
@@ -145112,9 +145112,9 @@
         "fail": 11,
         "check": 11,
         "api": 10,
+        "beta": 10,
         "different": 9,
         "only": 9,
-        "beta": 9,
         "run": 9,
         "first": 9,
         "preserv": 8,
@@ -145139,7 +145139,7 @@
         "title": 6,
         "bound": 6
       },
-      "word_count": 3408
+      "word_count": 3407
     },
     {
       "filename": "docs__en__build-with-claude__preserved-thinking__prefix-checks.md",
@@ -145713,7 +145713,7 @@
         "follow": 7,
         "calibration": 7
       },
-      "word_count": 10406
+      "word_count": 10407
     },
     {
       "filename": "docs__en__build-with-claude__prompt-engineering__overview.md",
@@ -146881,10 +146881,10 @@
       ],
       "terms": {
         "model": 142,
-        "claude": 134,
+        "claude": 139,
         "fallback": 117,
         "request": 90,
-        "refusal": 55,
+        "refusal": 56,
         "block": 51,
         "fable": 40,
         "retry": 32,
@@ -146900,6 +146900,7 @@
         "middleware": 21,
         "read": 20,
         "credit": 20,
+        "mytho": 19,
         "category": 19,
         "attempt": 19,
         "opu": 18,
@@ -146910,8 +146911,8 @@
         "stream": 17,
         "haiku": 16,
         "nam": 16,
+        "turn": 15,
         "entry": 15,
-        "mytho": 14,
         "google": 14,
         "anthropic": 14,
         "set": 14,
@@ -146919,11 +146920,10 @@
         "only": 14,
         "every": 14,
         "tool": 14,
-        "turn": 14,
+        "reason": 13,
         "list": 13,
         "platform": 12,
         "see": 12,
-        "reason": 12,
         "other": 12,
         "back": 12,
         "rout": 12,
@@ -146931,7 +146931,7 @@
         "decline": 11,
         "send": 11
       },
-      "word_count": 7283
+      "word_count": 7317
     },
     {
       "filename": "docs__en__build-with-claude__search-results.md",
@@ -147993,7 +147993,7 @@
         "other": 17,
         "assistant": 17
       },
-      "word_count": 9829
+      "word_count": 9838
     },
     {
       "filename": "docs__en__build-with-claude__thinking-steering-and-cost.md",
@@ -151730,7 +151730,6 @@
         "process": 10,
         "data": 9,
         "manag": 9,
-        "request": 8,
         "visible": 8,
         "generate": 8,
         "after": 8,
@@ -151742,13 +151741,14 @@
         "representative": 7,
         "code": 7,
         "example": 7,
+        "request": 7,
         "might": 7,
         "field": 7,
         "through": 6,
         "reason": 6,
         "contact": 6
       },
-      "word_count": 2894
+      "word_count": 2888
     },
     {
       "filename": "docs__en__manage-claude__access-transparency-log.md",
@@ -151914,7 +151914,7 @@
         "inclusion": 20,
         "start": 20
       },
-      "word_count": 8344
+      "word_count": 8338
     },
     {
       "filename": "docs__en__manage-claude__admin-api.md",
@@ -152953,7 +152953,7 @@
         "organization": 66,
         "bundle": 65,
         "one": 64,
-        "api": 49,
+        "api": 51,
         "read": 46,
         "setting": 45,
         "list": 43,
@@ -152984,7 +152984,6 @@
         "first": 21,
         "owner": 20,
         "remov": 20,
-        "value": 20,
         "workspac": 19,
         "keep": 19,
         "noth": 19,
@@ -152992,6 +152991,7 @@
         "enterprise": 18,
         "detach": 18,
         "while": 18,
+        "value": 18,
         "bundl": 17
       },
       "word_count": 11439
@@ -153025,7 +153025,7 @@
         }
       ],
       "terms": {
-        "claude": 41,
+        "claude": 40,
         "key": 21,
         "platform": 21,
         "cmek": 19,
@@ -153037,9 +153037,9 @@
         "doc": 9,
         "manage": 9,
         "aws": 9,
+        "anthropic": 8,
         "href": 8,
         "kms": 7,
-        "anthropic": 7,
         "enterprise": 6,
         "organization": 6,
         "cloud": 4,
@@ -153056,9 +153056,11 @@
         "also": 3,
         "admin": 3,
         "protect": 3,
+        "see": 3,
         "retention": 3,
         "customer": 2,
         "hold": 2,
+        "about": 2,
         "use": 2,
         "stay": 2,
         "under": 2,
@@ -153072,11 +153074,9 @@
         "attach": 2,
         "api": 2,
         "set": 2,
-        "turn": 2,
-        "work": 2,
-        "tak": 2
+        "turn": 2
       },
-      "word_count": 457
+      "word_count": 467
     },
     {
       "filename": "docs__en__manage-claude__cmek-admin-api.md",
@@ -153571,58 +153571,58 @@
         }
       ],
       "terms": {
-        "claude": 17,
+        "claude": 18,
+        "key": 17,
         "data": 16,
-        "key": 15,
-        "beta": 10,
+        "beta": 12,
         "cmek": 8,
-        "turn": 8,
-        "off": 8,
-        "api": 6,
+        "turn": 7,
+        "off": 7,
+        "api": 7,
+        "organization": 6,
         "platform": 5,
         "encrypt": 5,
+        "anthropic": 5,
+        "webhook": 5,
         "code": 5,
         "telemetry": 5,
-        "anthropic": 4,
         "tool": 4,
         "rest": 4,
-        "organization": 4,
         "such": 4,
         "cover": 3,
+        "description": 3,
         "chang": 3,
+        "stay": 3,
         "under": 3,
-        "request": 3,
         "manag": 3,
         "agent": 3,
         "includ": 3,
+        "event": 3,
         "stor": 3,
+        "endpoint": 3,
+        "secret": 3,
+        "workspace": 3,
         "structur": 3,
         "output": 3,
         "featur": 3,
         "before": 3,
         "store": 3,
-        "return": 3,
         "profile": 3,
-        "stay": 2,
+        "url": 2,
         "enterprise": 2,
         "see": 2,
         "fil": 2,
+        "request": 2,
         "mcp": 2,
         "configuration": 2,
         "environment": 2,
-        "webhook": 2,
         "memory": 2,
         "research": 2,
         "preview": 2,
-        "web": 2,
-        "list": 2,
-        "set": 2,
-        "console": 2,
-        "model": 2,
-        "workspace": 2,
-        "retention": 2
+        "nam": 2,
+        "sign": 2
       },
-      "word_count": 569
+      "word_count": 616
     },
     {
       "filename": "docs__en__manage-claude__cmek-data-retention.md",
@@ -153810,13 +153810,13 @@
       ],
       "terms": {
         "key": 40,
-        "data": 17,
-        "claude": 12,
+        "data": 16,
         "anthropic": 12,
+        "claude": 11,
         "kms": 8,
         "platform": 7,
-        "protect": 7,
-        "each": 6,
+        "each": 7,
+        "protect": 6,
         "workspace": 6,
         "cmek": 5,
         "effect": 5,
@@ -153826,12 +153826,12 @@
         "aws": 5,
         "one": 4,
         "tak": 4,
+        "see": 4,
         "encryption": 4,
-        "read": 4,
         "organization": 4,
         "latency": 4,
         "stor": 3,
-        "see": 3,
+        "read": 3,
         "stay": 3,
         "enterprise": 3,
         "operation": 3,
@@ -153842,7 +153842,8 @@
         "goe": 2,
         "frame": 2,
         "log": 2,
-        "without": 2,
+        "action": 2,
+        "doe": 2,
         "only": 2,
         "depend": 2,
         "carri": 2,
@@ -153857,10 +153858,9 @@
         "written": 2,
         "under": 2,
         "request": 2,
-        "take": 2,
-        "standard": 2
+        "take": 2
       },
-      "word_count": 521
+      "word_count": 516
     },
     {
       "filename": "docs__en__manage-claude__cmek-key-lifecycle.md",
@@ -153887,25 +153887,31 @@
         }
       ],
       "terms": {
-        "key": 41,
+        "key": 45,
         "claude": 12,
-        "anthropic": 9,
+        "anthropic": 11,
         "data": 8,
+        "disabl": 8,
         "request": 7,
         "workspace": 6,
         "action": 5,
-        "disabl": 5,
+        "organization": 5,
+        "acces": 5,
         "delete": 4,
+        "encryption": 4,
         "cmek": 4,
+        "doe": 4,
         "kms": 4,
         "protect": 4,
-        "acces": 4,
+        "after": 4,
+        "hour": 4,
         "fail": 4,
+        "back": 4,
+        "api": 4,
         "happen": 3,
         "rotate": 3,
-        "encryption": 3,
         "platform": 3,
-        "doe": 3,
+        "com": 3,
         "undo": 3,
         "keep": 3,
         "record": 3,
@@ -153915,30 +153921,24 @@
         "way": 3,
         "enabl": 3,
         "enterprise": 3,
-        "organization": 3,
-        "after": 3,
+        "within": 3,
         "change": 3,
-        "hour": 3,
         "apply": 3,
+        "might": 3,
         "while": 3,
-        "back": 3,
         "messag": 3,
-        "api": 3,
+        "event": 3,
         "reach": 3,
         "stop": 3,
         "disable": 2,
-        "com": 2,
         "each": 2,
         "frame": 2,
         "one": 2,
         "recover": 2,
         "retention": 2,
-        "material": 2,
-        "within": 2,
-        "schedule": 2,
-        "might": 2
+        "remov": 2
       },
-      "word_count": 557
+      "word_count": 618
     },
     {
       "filename": "docs__en__manage-claude__cmek-troubleshooting.md",
@@ -154189,29 +154189,29 @@
         "compliance": 42,
         "api": 35,
         "organization": 27,
-        "session": 20,
+        "session": 23,
         "key": 20,
         "card": 20,
         "doc": 13,
+        "endpoint": 13,
         "platform": 12,
         "activity": 12,
         "title": 11,
         "http": 11,
         "com": 11,
         "manage": 11,
-        "endpoint": 11,
         "acces": 10,
         "chat": 10,
         "project": 10,
         "feed": 10,
-        "return": 10,
         "href": 10,
         "user": 9,
         "fil": 8,
+        "content": 8,
+        "return": 8,
         "enterprise": 7,
         "every": 7,
         "security": 7,
-        "content": 7,
         "see": 7,
         "each": 6,
         "cowork": 6,
@@ -154226,6 +154226,7 @@
         "event": 5,
         "only": 5,
         "scope": 5,
+        "remote": 5,
         "audit": 4,
         "rol": 4,
         "group": 4,
@@ -154233,10 +154234,9 @@
         "two": 4,
         "header": 4,
         "parent": 4,
-        "anthropic": 4,
-        "per": 4
+        "local": 4
       },
-      "word_count": 1173
+      "word_count": 1195
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -157264,11 +157264,31 @@
           "level": 2
         },
         {
+          "text": "User profile events",
+          "level": 2
+        },
+        {
           "text": "Before your first event",
           "level": 3
         },
         {
           "text": "What an event contains",
+          "level": 3
+        },
+        {
+          "text": "Encryption key events",
+          "level": 2
+        },
+        {
+          "text": "Respond to an encryption key event",
+          "level": 3
+        },
+        {
+          "text": "When encryption key events arrive",
+          "level": 3
+        },
+        {
+          "text": "When an encryption key event might not arrive",
           "level": 3
         },
         {
@@ -157280,7 +157300,15 @@
           "level": 2
         },
         {
+          "text": "Catch up on missed events",
+          "level": 3
+        },
+        {
           "text": "Manage endpoints",
+          "level": 2
+        },
+        {
+          "text": "If your Default Workspace uses an encryption key",
           "level": 2
         },
         {
@@ -157289,58 +157317,58 @@
         }
       ],
       "terms": {
-        "endpoint": 46,
-        "event": 32,
-        "organization": 29,
-        "request": 21,
-        "webhook": 19,
-        "anthropic": 18,
-        "list": 17,
+        "event": 74,
+        "endpoint": 71,
+        "key": 66,
+        "anthropic": 42,
+        "request": 40,
+        "organization": 37,
+        "list": 25,
+        "webhook": 21,
+        "send": 18,
+        "encryption": 16,
+        "api": 16,
+        "profile": 16,
+        "doesn": 14,
+        "typ": 14,
+        "one": 14,
+        "secret": 14,
         "action": 14,
-        "profile": 10,
-        "return": 10,
-        "send": 9,
-        "typ": 9,
+        "return": 13,
+        "workspace": 13,
+        "any": 12,
+        "might": 12,
+        "after": 12,
+        "user": 11,
+        "each": 11,
+        "create": 11,
+        "fail": 11,
+        "work": 10,
+        "other": 10,
+        "disabl": 10,
+        "before": 9,
+        "update": 9,
+        "field": 9,
+        "use": 9,
+        "error": 9,
         "str": 9,
-        "api": 8,
-        "doesn": 8,
-        "secret": 8,
-        "before": 7,
-        "any": 7,
-        "field": 7,
-        "enforcement": 6,
-        "profil": 6,
-        "one": 6,
-        "key": 6,
-        "make": 6,
-        "get": 6,
-        "open": 6,
-        "disabl": 6,
-        "admin": 5,
-        "two": 5,
-        "account": 5,
-        "workspace": 5,
-        "same": 5,
-        "other": 5,
-        "create": 5,
-        "update": 5,
-        "sign": 5,
-        "header": 5,
-        "response": 5,
-        "deliveri": 5,
-        "error": 5,
-        "url": 4,
-        "claude": 4,
-        "manage": 4,
-        "register": 4,
-        "user": 4,
-        "receiv": 4,
-        "end": 4,
-        "turn": 4,
-        "enabl": 4,
-        "default": 4
+        "about": 8,
+        "profil": 8,
+        "get": 8,
+        "replace": 8,
+        "kms": 8,
+        "because": 8,
+        "deliveri": 8,
+        "arrive": 7,
+        "admin": 7,
+        "start": 7,
+        "make": 7,
+        "sign": 7,
+        "again": 7,
+        "open": 7,
+        "time": 7
       },
-      "word_count": 1931
+      "word_count": 3281
     },
     {
       "filename": "docs__en__manage-claude__plugins-api.md",
@@ -157573,7 +157601,7 @@
         "claude": 92,
         "upload": 91,
         "read": 74,
-        "api": 70,
+        "api": 71,
         "see": 66,
         "sett": 64,
         "own": 61,
@@ -157588,8 +157616,8 @@
         "codegroup": 42,
         "each": 41,
         "default": 41,
-        "value": 40,
         "doe": 39,
+        "value": 39,
         "content": 37,
         "creat": 36,
         "every": 36,
@@ -158610,7 +158638,7 @@
         "get": 8,
         "person": 8
       },
-      "word_count": 4221
+      "word_count": 4219
     },
     {
       "filename": "docs__en__manage-claude__user-profiles-verification-portal.md",
@@ -158688,7 +158716,7 @@
         "until": 3,
         "button": 3
       },
-      "word_count": 1401
+      "word_count": 1399
     },
     {
       "filename": "docs__en__manage-claude__wif-admin-api.md",
@@ -161401,9 +161429,9 @@
         "reference": 14,
         "memori": 14,
         "list": 14,
+        "beta": 13,
         "each": 13,
         "mount": 13,
-        "beta": 12,
         "full": 12,
         "manag": 11,
         "writ": 11,
@@ -169362,7 +169390,7 @@
         "claude": 610,
         "api": 234,
         "model": 190,
-        "beta": 163,
+        "beta": 164,
         "tool": 142,
         "see": 140,
         "now": 138,
@@ -169376,14 +169404,14 @@
         "return": 69,
         "launch": 68,
         "session": 68,
-        "manag": 65,
+        "manag": 66,
         "think": 64,
         "sdk": 61,
         "available": 61,
         "fable": 56,
-        "organization": 51,
+        "organization": 52,
         "error": 51,
-        "add": 49,
+        "add": 50,
         "prompt": 47,
         "block": 45,
         "read": 44,
@@ -169392,12 +169420,12 @@
         "messag": 42,
         "console": 41,
         "platform": 40,
+        "key": 39,
         "acces": 38,
+        "event": 37,
         "web": 37,
         "new": 36,
         "mode": 36,
-        "key": 36,
-        "event": 36,
         "anthropic": 35,
         "mytho": 35,
         "set": 34,
@@ -169410,7 +169438,7 @@
         "learn": 33,
         "requir": 33
       },
-      "word_count": 15879
+      "word_count": 15913
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",
