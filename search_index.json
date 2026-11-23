@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T15:14:35.251439Z",
+  "generated_at": "2026-11-23T18:16:16.120284Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -141438,8 +141438,8 @@
         "step": 42,
         "see": 39,
         "request": 39,
+        "beta": 38,
         "workspace": 37,
-        "beta": 37,
         "client": 33,
         "console": 32,
         "limit": 30,
@@ -141477,7 +141477,7 @@
         "agent": 14,
         "rol": 14
       },
-      "word_count": 6128
+      "word_count": 6133
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__google-managed.md",
@@ -144533,10 +144533,10 @@
       ],
       "terms": {
         "tool": 59,
-        "claude": 46,
+        "claude": 47,
         "agent": 27,
-        "model": 23,
-        "request": 21,
+        "model": 24,
+        "request": 22,
         "session": 21,
         "run": 20,
         "api": 19,
@@ -144554,15 +144554,16 @@
         "code": 10,
         "token": 10,
         "web": 10,
+        "anthropic": 9,
         "messag": 9,
         "cache": 9,
         "cach": 9,
         "search": 9,
         "sandbox": 9,
         "memory": 9,
-        "anthropic": 8,
         "one": 8,
         "read": 8,
+        "own": 8,
         "result": 8,
         "helper": 8,
         "send": 8,
@@ -144575,15 +144576,14 @@
         "system": 7,
         "host": 7,
         "featur": 6,
-        "own": 6,
+        "data": 6,
         "chang": 6,
         "only": 6,
         "before": 6,
         "manag": 6,
-        "writ": 6,
-        "self": 6
+        "writ": 6
       },
-      "word_count": 2419
+      "word_count": 2473
     },
     {
       "filename": "docs__en__build-with-claude__pdf-support.md",
@@ -151709,58 +151709,58 @@
         }
       ],
       "terms": {
-        "acces": 84,
-        "transparency": 63,
+        "acces": 86,
+        "transparency": 65,
         "event": 61,
         "content": 47,
-        "api": 41,
-        "anthropic": 38,
-        "claude": 35,
-        "organization": 33,
+        "api": 42,
+        "anthropic": 39,
+        "claude": 38,
+        "organization": 36,
         "cover": 32,
         "feed": 27,
-        "key": 23,
+        "key": 25,
+        "record": 23,
         "preservation": 23,
-        "record": 22,
         "compliance": 22,
         "see": 22,
         "activity": 20,
         "accordion": 20,
         "cmek": 18,
+        "human": 17,
         "doe": 17,
-        "human": 16,
         "log": 15,
         "title": 14,
+        "platform": 13,
         "enabl": 13,
+        "customer": 13,
+        "data": 12,
         "safety": 12,
         "automat": 12,
-        "platform": 11,
         "only": 11,
         "str": 11,
         "view": 10,
-        "customer": 10,
         "process": 10,
-        "data": 9,
         "manag": 9,
+        "turn": 8,
         "visible": 8,
         "generate": 8,
         "after": 8,
         "read": 8,
+        "request": 8,
         "step": 8,
         "preserv": 8,
         "written": 8,
         "code": 7,
+        "own": 7,
         "example": 7,
-        "request": 7,
+        "time": 7,
         "might": 7,
         "field": 7,
         "through": 6,
-        "reason": 6,
-        "contact": 6,
-        "account": 6,
-        "representative": 6
+        "reason": 6
       },
-      "word_count": 2916
+      "word_count": 2995
     },
     {
       "filename": "docs__en__manage-claude__access-transparency-log.md",
@@ -152029,10 +152029,10 @@
         }
       ],
       "terms": {
-        "api": 71,
-        "key": 66,
-        "organization": 42,
-        "admin": 41,
+        "api": 75,
+        "key": 68,
+        "organization": 43,
+        "admin": 42,
         "codegroup": 30,
         "member": 24,
         "workspace": 23,
@@ -152051,15 +152051,15 @@
         "oauth": 10,
         "accordion": 10,
         "console": 9,
+        "create": 9,
         "usage": 9,
         "role": 9,
         "rol": 9,
         "list": 9,
-        "create": 8,
         "cost": 8,
+        "read": 8,
         "personal": 7,
         "each": 7,
-        "read": 7,
         "bearer": 7,
         "permission": 7,
         "cli": 7,
@@ -152071,16 +152071,16 @@
         "acces": 6,
         "identity": 6,
         "code": 6,
+        "available": 5,
         "enterprise": 5,
         "page": 5,
         "call": 5,
         "analytic": 5,
         "scope": 5,
         "update": 5,
-        "rate": 5,
-        "under": 5
+        "rate": 5
       },
-      "word_count": 5188
+      "word_count": 5227
     },
     {
       "filename": "docs__en__manage-claude__admin-api-keys.md",
@@ -152115,25 +152115,25 @@
         }
       ],
       "terms": {
-        "api": 76,
-        "key": 49,
+        "api": 78,
+        "key": 52,
         "claude": 44,
-        "organization": 34,
-        "create": 21,
+        "organization": 36,
+        "create": 23,
         "admin": 21,
         "compliance": 20,
         "scop": 18,
         "step": 17,
+        "read": 17,
         "plugin": 16,
-        "read": 16,
         "endpoint": 14,
         "enterprise": 13,
         "member": 13,
         "only": 13,
         "title": 11,
         "analytic": 11,
+        "limit": 11,
         "select": 10,
-        "limit": 10,
         "user": 10,
         "console": 9,
         "setting": 9,
@@ -152141,12 +152141,12 @@
         "usage": 9,
         "cost": 9,
         "spend": 9,
+        "acces": 8,
+        "also": 8,
         "secret": 8,
         "card": 8,
         "manage": 7,
         "every": 7,
-        "acces": 7,
-        "also": 7,
         "platform": 6,
         "call": 6,
         "need": 6,
@@ -152166,7 +152166,7 @@
         "work": 4,
         "sign": 4
       },
-      "word_count": 1354
+      "word_count": 1408
     },
     {
       "filename": "docs__en__manage-claude__analytics-api.md",
@@ -152326,6 +152326,10 @@
           "level": 4
         },
         {
+          "text": "Get help enabling in the Console",
+          "level": 4
+        },
+        {
           "text": "Contact sales (custom BAA)",
           "level": 4
         },
@@ -152375,58 +152379,58 @@
         }
       ],
       "terms": {
-        "claude": 121,
-        "zdr": 81,
-        "hipaa": 76,
+        "claude": 123,
+        "zdr": 88,
+        "hipaa": 80,
         "data": 73,
-        "api": 67,
-        "organization": 58,
+        "api": 69,
+        "organization": 60,
+        "anthropic": 54,
         "yes": 53,
         "retention": 52,
-        "anthropic": 46,
         "featur": 45,
-        "eligible": 41,
+        "eligible": 43,
         "tool": 41,
-        "readines": 37,
+        "readines": 40,
         "feature": 36,
         "cover": 30,
+        "see": 28,
         "request": 28,
         "accordion": 28,
         "retain": 26,
-        "arrangement": 26,
-        "see": 25,
-        "under": 24,
+        "arrangement": 25,
+        "under": 25,
+        "model": 23,
         "code": 23,
-        "model": 22,
+        "manag": 22,
         "step": 22,
         "title": 21,
-        "manag": 20,
+        "enabl": 20,
+        "enterprise": 19,
         "doe": 19,
         "platform": 18,
         "phi": 18,
+        "baa": 18,
         "page": 17,
-        "enabl": 17,
-        "baa": 17,
         "learn": 16,
         "eligibility": 16,
-        "available": 16,
+        "agent": 16,
+        "workspace": 16,
         "appli": 15,
+        "account": 15,
+        "console": 15,
         "prompt": 14,
-        "account": 14,
-        "agent": 14,
+        "contact": 14,
+        "available": 14,
         "cloud": 13,
         "table": 13,
         "policy": 13,
         "day": 13,
         "stor": 13,
         "side": 13,
-        "detail": 13,
-        "google": 12,
-        "handl": 12,
-        "output": 12,
-        "same": 12
+        "detail": 13
       },
-      "word_count": 4771
+      "word_count": 4973
     },
     {
       "filename": "docs__en__manage-claude__app-attest.md",
@@ -153038,7 +153042,7 @@
       ],
       "terms": {
         "claude": 40,
-        "key": 21,
+        "key": 22,
         "platform": 21,
         "cmek": 19,
         "card": 16,
@@ -153066,6 +153070,7 @@
         "vault": 3,
         "acces": 3,
         "also": 3,
+        "attach": 3,
         "admin": 3,
         "protect": 3,
         "see": 3,
@@ -153083,12 +153088,11 @@
         "page": 2,
         "col": 2,
         "account": 2,
-        "attach": 2,
         "api": 2,
         "set": 2,
         "turn": 2
       },
-      "word_count": 467
+      "word_count": 475
     },
     {
       "filename": "docs__en__manage-claude__cmek-admin-api.md",
@@ -153586,7 +153590,7 @@
         "claude": 18,
         "key": 17,
         "data": 16,
-        "beta": 12,
+        "beta": 13,
         "cmek": 8,
         "turn": 7,
         "off": 7,
@@ -153606,6 +153610,7 @@
         "chang": 3,
         "stay": 3,
         "under": 3,
+        "enterprise": 3,
         "manag": 3,
         "agent": 3,
         "includ": 3,
@@ -153619,9 +153624,10 @@
         "featur": 3,
         "before": 3,
         "store": 3,
+        "retention": 3,
+        "only": 3,
         "profile": 3,
         "url": 2,
-        "enterprise": 2,
         "see": 2,
         "fil": 2,
         "request": 2,
@@ -153630,11 +153636,9 @@
         "environment": 2,
         "memory": 2,
         "research": 2,
-        "preview": 2,
-        "nam": 2,
-        "sign": 2
+        "preview": 2
       },
-      "word_count": 616
+      "word_count": 632
     },
     {
       "filename": "docs__en__manage-claude__cmek-data-retention.md",
@@ -153657,31 +153661,43 @@
         }
       ],
       "terms": {
-        "data": 11,
-        "anthropic": 10,
+        "data": 14,
+        "key": 12,
+        "workspace": 11,
+        "anthropic": 11,
+        "claude": 10,
         "retention": 9,
         "zdr": 9,
-        "claude": 9,
-        "workspace": 9,
-        "key": 9,
         "cmek": 7,
+        "attach": 6,
+        "efs": 6,
+        "platform": 5,
+        "retain": 5,
+        "under": 5,
         "preservation": 5,
-        "platform": 4,
-        "retain": 4,
+        "manag": 4,
         "organization": 4,
-        "under": 4,
-        "attach": 4,
+        "safety": 4,
         "outside": 3,
-        "manag": 3,
+        "customer": 3,
         "encryption": 3,
+        "enterprise": 3,
+        "one": 3,
         "term": 3,
         "follow": 3,
         "record": 3,
         "doc": 2,
         "preserve": 2,
-        "customer": 2,
         "code": 2,
         "turn": 2,
+        "use": 2,
+        "frontier": 2,
+        "safeguard": 2,
+        "seal": 2,
+        "step": 2,
+        "see": 2,
+        "encrypt": 2,
+        "doesn": 2,
         "standard": 2,
         "after": 2,
         "switch": 2,
@@ -153691,24 +153707,12 @@
         "commercial": 2,
         "screen": 2,
         "content": 2,
-        "safety": 2,
         "title": 1,
         "url": 1,
         "http": 1,
-        "com": 1,
-        "manage": 1,
-        "description": 1,
-        "why": 1,
-        "mean": 1,
-        "zero": 1,
-        "share": 1,
-        "enterprise": 1,
-        "together": 1,
-        "sheet": 1,
-        "need": 1,
-        "encrypt": 1
+        "com": 1
       },
-      "word_count": 364
+      "word_count": 445
     },
     {
       "filename": "docs__en__manage-claude__cmek-google-cloud-kms.md",
@@ -154199,25 +154203,25 @@
       "terms": {
         "claude": 60,
         "compliance": 42,
-        "api": 35,
-        "organization": 27,
+        "api": 42,
+        "organization": 29,
         "session": 23,
-        "key": 20,
+        "key": 22,
         "card": 20,
         "doc": 13,
         "endpoint": 13,
         "platform": 12,
-        "activity": 12,
         "title": 11,
         "http": 11,
         "com": 11,
         "manage": 11,
+        "activity": 11,
         "acces": 10,
         "chat": 10,
         "project": 10,
-        "feed": 10,
         "href": 10,
         "user": 9,
+        "feed": 9,
         "fil": 8,
         "content": 8,
         "return": 8,
@@ -154234,9 +154238,10 @@
         "data": 6,
         "transcript": 6,
         "console": 5,
+        "also": 5,
         "setting": 5,
         "event": 5,
-        "only": 5,
+        "admin": 5,
         "scope": 5,
         "remote": 5,
         "audit": 4,
@@ -154244,11 +154249,10 @@
         "group": 4,
         "link": 4,
         "two": 4,
-        "header": 4,
-        "parent": 4,
-        "local": 4
+        "reach": 4,
+        "create": 4
       },
-      "word_count": 1195
+      "word_count": 1240
     },
     {
       "filename": "docs__en__manage-claude__compliance-api-access.md",
@@ -154283,58 +154287,58 @@
         }
       ],
       "terms": {
-        "key": 96,
-        "api": 78,
-        "organization": 78,
-        "compliance": 63,
+        "key": 108,
+        "api": 98,
+        "organization": 81,
+        "compliance": 62,
         "claude": 58,
+        "admin": 33,
         "acces": 27,
-        "admin": 27,
-        "activity": 24,
+        "activity": 25,
+        "create": 23,
         "step": 22,
-        "create": 19,
         "console": 19,
-        "read": 17,
+        "read": 19,
+        "scop": 18,
         "parent": 16,
         "feed": 16,
-        "scop": 15,
+        "while": 12,
         "title": 11,
-        "only": 11,
         "setting": 11,
         "delete": 11,
         "owner": 10,
         "user": 10,
+        "call": 10,
         "page": 9,
+        "safety": 9,
+        "cas": 9,
+        "only": 9,
+        "creat": 9,
         "session": 9,
-        "call": 9,
+        "off": 9,
         "plugin": 9,
         "set": 8,
+        "one": 8,
+        "also": 8,
         "chat": 8,
         "fil": 8,
         "link": 8,
         "enabl": 8,
         "turn": 8,
-        "off": 8,
+        "new": 8,
         "enable": 7,
         "enterprise": 7,
         "every": 7,
+        "available": 7,
         "project": 7,
         "see": 7,
         "record": 7,
         "scope": 7,
         "primary": 6,
-        "one": 6,
-        "creat": 6,
         "warn": 6,
-        "enablement": 6,
-        "transcript": 6,
-        "cannot": 6,
-        "any": 6,
-        "while": 6,
-        "event": 6,
-        "new": 6
+        "enablement": 6
       },
-      "word_count": 2143
+      "word_count": 2369
     },
     {
       "filename": "docs__en__manage-claude__compliance-content-data.md",
@@ -154571,15 +154575,15 @@
         }
       ],
       "terms": {
-        "key": 109,
+        "key": 113,
         "session": 95,
         "endpoint": 95,
-        "organization": 69,
-        "api": 64,
+        "api": 75,
+        "organization": 72,
         "return": 62,
         "compliance": 60,
         "request": 53,
-        "error": 39,
+        "error": 40,
         "type": 38,
         "fix": 34,
         "cause": 31,
@@ -154602,9 +154606,9 @@
         "body": 22,
         "read": 22,
         "acces": 22,
+        "admin": 22,
         "header": 21,
         "value": 21,
-        "only": 20,
         "transcript": 19,
         "parameter": 19,
         "response": 18,
@@ -154613,16 +154617,16 @@
         "parent": 18,
         "second": 18,
         "without": 18,
-        "admin": 18,
+        "only": 18,
         "same": 17,
         "cursor": 17,
         "found": 16,
         "cannot": 16,
         "call": 15,
         "every": 15,
-        "retention": 15
+        "also": 15
       },
-      "word_count": 6581
+      "word_count": 6665
     },
     {
       "filename": "docs__en__manage-claude__compliance-faq.md",
@@ -154646,42 +154650,42 @@
       ],
       "terms": {
         "claude": 96,
-        "api": 80,
-        "organization": 75,
+        "api": 89,
+        "organization": 76,
         "session": 73,
         "compliance": 68,
+        "key": 38,
         "accordion": 36,
-        "key": 34,
         "endpoint": 32,
-        "activity": 29,
+        "activity": 28,
         "content": 28,
         "console": 26,
-        "acces": 22,
+        "acces": 23,
+        "return": 22,
         "user": 22,
         "record": 20,
-        "return": 20,
         "cloud": 20,
         "title": 19,
-        "feed": 19,
-        "only": 19,
+        "through": 19,
         "code": 19,
         "parent": 18,
-        "yes": 18,
-        "through": 18,
+        "feed": 18,
         "event": 17,
+        "yes": 17,
+        "only": 17,
         "transcript": 17,
+        "admin": 16,
         "cowork": 16,
         "local": 15,
-        "admin": 14,
+        "off": 14,
         "enterprise": 13,
-        "off": 13,
+        "while": 13,
         "file": 13,
         "remote": 13,
         "doe": 12,
+        "turn": 12,
         "appear": 12,
         "chat": 12,
-        "turn": 11,
-        "while": 11,
         "call": 11,
         "run": 11,
         "each": 11,
@@ -154694,9 +154698,9 @@
         "see": 9,
         "captur": 9,
         "other": 9,
-        "tool": 9
+        "create": 9
       },
-      "word_count": 3058
+      "word_count": 3157
     },
     {
       "filename": "docs__en__manage-claude__compliance-integration-patterns.md",
@@ -154738,7 +154742,7 @@
         "session": 36,
         "compliance": 29,
         "activity": 29,
-        "api": 28,
+        "api": 29,
         "claude": 27,
         "content": 22,
         "transcript": 20,
@@ -154753,8 +154757,8 @@
         "see": 12,
         "run": 12,
         "key": 11,
+        "return": 11,
         "page": 10,
-        "return": 10,
         "activiti": 10,
         "user": 10,
         "delet": 10,
@@ -154786,7 +154790,7 @@
         "after": 6,
         "cloud": 6
       },
-      "word_count": 2236
+      "word_count": 2248
     },
     {
       "filename": "docs__en__manage-claude__compliance-org-data.md",
@@ -155775,6 +155779,1461 @@
         "manage": 5
       },
       "word_count": 2386
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__customer-managed-keys.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/customer-managed-keys",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-managed-keys",
+      "headings": [
+        {
+          "text": "Before you attach a key",
+          "level": 2
+        },
+        {
+          "text": "If you use customer-owned storage",
+          "level": 3
+        },
+        {
+          "text": "Attach a customer-managed key",
+          "level": 2
+        },
+        {
+          "text": "Revoke your key",
+          "level": 2
+        },
+        {
+          "text": "If your key stops working",
+          "level": 2
+        },
+        {
+          "text": "Rotate or replace your key",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "key": 94,
+        "claude": 24,
+        "anthropic": 19,
+        "workspace": 18,
+        "customer": 16,
+        "manag": 14,
+        "platform": 14,
+        "attach": 14,
+        "data": 12,
+        "storage": 11,
+        "bucket": 11,
+        "step": 11,
+        "encrypt": 10,
+        "service": 10,
+        "acces": 10,
+        "enterprise": 9,
+        "own": 9,
+        "frontier": 8,
+        "safeguard": 8,
+        "organization": 8,
+        "follow": 8,
+        "set": 8,
+        "management": 7,
+        "request": 7,
+        "title": 6,
+        "cloud": 6,
+        "revok": 6,
+        "stop": 6,
+        "work": 6,
+        "card": 6,
+        "com": 5,
+        "manage": 5,
+        "under": 5,
+        "aws": 5,
+        "hour": 5,
+        "disabl": 5,
+        "decrypt": 5,
+        "use": 5,
+        "efs": 5,
+        "who": 5,
+        "turn": 5,
+        "create": 5,
+        "http": 4,
+        "doc": 4,
+        "warn": 4,
+        "cmek": 4,
+        "kms": 4,
+        "google": 4,
+        "within": 4,
+        "protect": 4
+      },
+      "word_count": 1269
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__customer-owned-storage.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/customer-owned-storage",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-owned-storage",
+      "headings": [
+        {
+          "text": "What\u2019s stored, and where",
+          "level": 2
+        },
+        {
+          "text": "The two storage settings",
+          "level": 3
+        },
+        {
+          "text": "How long Sealed Safety Data stays",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "where": 80,
+        "bucket": 62,
+        "claude": 55,
+        "safety": 53,
+        "storage": 52,
+        "cloud": 47,
+        "anthropic": 47,
+        "label": 38,
+        "platform": 28,
+        "data": 27,
+        "google": 21,
+        "own": 20,
+        "transcript": 20,
+        "cas": 20,
+        "enterprise": 19,
+        "frontier": 19,
+        "safeguard": 19,
+        "aws": 16,
+        "card": 15,
+        "respons": 14,
+        "seal": 14,
+        "manag": 13,
+        "read": 12,
+        "amazon": 12,
+        "after": 11,
+        "model": 11,
+        "manage": 10,
+        "case": 10,
+        "gcs": 10,
+        "set": 10,
+        "request": 10,
+        "customer": 9,
+        "account": 9,
+        "workspace": 9,
+        "team": 9,
+        "key": 9,
+        "stop": 9,
+        "day": 9,
+        "title": 8,
+        "http": 8,
+        "com": 8,
+        "doc": 8,
+        "prompt": 8,
+        "requir": 8,
+        "doesn": 8,
+        "setting": 7,
+        "efs": 7,
+        "see": 7,
+        "icon": 7,
+        "href": 7
+      },
+      "word_count": 1666
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__external-storage.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/external-storage",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage",
+      "headings": [
+        {
+          "text": "Set up customer-owned storage on Amazon S3",
+          "level": 2
+        },
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "Authenticate your requests",
+          "level": 3
+        },
+        {
+          "text": "Register your bucket",
+          "level": 2
+        },
+        {
+          "text": "Create and connect your bucket",
+          "level": 2
+        },
+        {
+          "text": "1. Update your AWS organization\u2019s policies",
+          "level": 3
+        },
+        {
+          "text": "Find out whether the step applies",
+          "level": 4
+        },
+        {
+          "text": "Add Anthropic\u2019s AWS account to the policy",
+          "level": 4
+        },
+        {
+          "text": "Check that it worked",
+          "level": 4
+        },
+        {
+          "text": "2. Create your bucket and its KMS key",
+          "level": 3
+        },
+        {
+          "text": "Get your setup file",
+          "level": 4
+        },
+        {
+          "text": "3. Create the IAM roles",
+          "level": 3
+        },
+        {
+          "text": "4. Connect your bucket in the Claude Console",
+          "level": 3
+        },
+        {
+          "text": "Select your provider",
+          "level": 4
+        },
+        {
+          "text": "Enter your bucket details",
+          "level": 4
+        },
+        {
+          "text": "Create in AWS",
+          "level": 4
+        },
+        {
+          "text": "Test the setup",
+          "level": 4
+        },
+        {
+          "text": "4. Activate your bucket",
+          "level": 3
+        },
+        {
+          "text": "Use your storage destination in a workspace",
+          "level": 2
+        },
+        {
+          "text": "Attach your bucket to a workspace",
+          "level": 3
+        },
+        {
+          "text": "Send Transcripts and Safety Cases to a bucket",
+          "level": 4
+        },
+        {
+          "text": "Create a workspace with your bucket already attached",
+          "level": 4
+        },
+        {
+          "text": "Confirm that the change took effect",
+          "level": 3
+        },
+        {
+          "text": "Transcripts and Safety Cases in your bucket",
+          "level": 2
+        },
+        {
+          "text": "Give your team access to the bucket",
+          "level": 3
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "Template reference",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        },
+        {
+          "text": "Set up customer-owned storage on Google Cloud Storage",
+          "level": 2
+        },
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "1. Check your Google Cloud organization policies",
+          "level": 2
+        },
+        {
+          "text": "Allow the accounts",
+          "level": 3
+        },
+        {
+          "text": "Check your other policies",
+          "level": 3
+        },
+        {
+          "text": "2. Create and test the bucket",
+          "level": 2
+        },
+        {
+          "text": "Supported regions",
+          "level": 3
+        },
+        {
+          "text": "If an apply or Test setup fails",
+          "level": 3
+        },
+        {
+          "text": "Update a bucket from an earlier setup file",
+          "level": 3
+        },
+        {
+          "text": "Delete a storage destination",
+          "level": 3
+        },
+        {
+          "text": "3. Use your Cloud Storage bucket in a workspace",
+          "level": 2
+        },
+        {
+          "text": "Confirm that objects arrive",
+          "level": 3
+        },
+        {
+          "text": "If your bucket stops working",
+          "level": 3
+        },
+        {
+          "text": "Stop using your bucket",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "bucket": 294,
+        "anthropic": 187,
+        "storage": 115,
+        "account": 112,
+        "organization": 94,
+        "setup": 92,
+        "aws": 88,
+        "claude": 87,
+        "workspace": 84,
+        "key": 80,
+        "where": 79,
+        "safety": 77,
+        "cloud": 69,
+        "file": 69,
+        "data": 65,
+        "test": 65,
+        "rol": 64,
+        "team": 64,
+        "check": 62,
+        "under": 59,
+        "create": 58,
+        "change": 55,
+        "own": 54,
+        "new": 52,
+        "select": 51,
+        "apply": 46,
+        "one": 43,
+        "transcript": 43,
+        "policy": 43,
+        "request": 41,
+        "doesn": 41,
+        "console": 40,
+        "name": 38,
+        "read": 38,
+        "fail": 38,
+        "run": 38,
+        "object": 37,
+        "step": 36,
+        "show": 36,
+        "label": 35,
+        "manag": 35,
+        "before": 35,
+        "role": 34,
+        "don": 33,
+        "review": 33,
+        "platform": 32,
+        "google": 32,
+        "set": 31,
+        "delete": 31,
+        "again": 31
+      },
+      "word_count": 11048
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__external-storage-manage.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/external-storage-manage",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage-manage",
+      "headings": [
+        {
+          "text": "Bucket statuses",
+          "level": 2
+        },
+        {
+          "text": "Check your bucket",
+          "level": 2
+        },
+        {
+          "text": "If your bucket stops working",
+          "level": 2
+        },
+        {
+          "text": "Change or stop using your bucket",
+          "level": 2
+        },
+        {
+          "text": "Change your bucket",
+          "level": 3
+        },
+        {
+          "text": "Stop using your bucket",
+          "level": 3
+        },
+        {
+          "text": "Stop using your bucket",
+          "level": 3
+        },
+        {
+          "text": "Remove Anthropic\u2019s access",
+          "level": 4
+        },
+        {
+          "text": "Delete a storage destination",
+          "level": 2
+        },
+        {
+          "text": "What removes data from your bucket",
+          "level": 2
+        },
+        {
+          "text": "What protects object versions in your bucket",
+          "level": 3
+        },
+        {
+          "text": "Anthropic\u2019s calls in AWS CloudTrail",
+          "level": 2
+        },
+        {
+          "text": "Calls from Test setup and the daily check",
+          "level": 3
+        },
+        {
+          "text": "Troubleshooting",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "bucket": 203,
+        "anthropic": 121,
+        "storage": 57,
+        "delete": 54,
+        "where": 51,
+        "check": 44,
+        "workspace": 44,
+        "request": 44,
+        "account": 34,
+        "keep": 32,
+        "rol": 31,
+        "acces": 30,
+        "key": 30,
+        "data": 29,
+        "team": 29,
+        "again": 29,
+        "claude": 28,
+        "new": 28,
+        "object": 27,
+        "setup": 26,
+        "stop": 24,
+        "under": 24,
+        "label": 24,
+        "safety": 22,
+        "don": 22,
+        "aws": 22,
+        "remove": 22,
+        "file": 21,
+        "after": 20,
+        "organization": 20,
+        "set": 20,
+        "before": 19,
+        "own": 18,
+        "change": 18,
+        "each": 18,
+        "drain": 18,
+        "step": 18,
+        "destination": 17,
+        "fail": 17,
+        "one": 17,
+        "delet": 17,
+        "send": 17,
+        "tab": 17,
+        "return": 17,
+        "title": 16,
+        "same": 16,
+        "platform": 15,
+        "external": 15,
+        "statu": 15,
+        "fix": 15
+      },
+      "word_count": 5198
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__faq.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/faq",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/faq",
+      "headings": [
+        {
+          "text": "Data and retention",
+          "level": 2
+        },
+        {
+          "text": "Access and review",
+          "level": 2
+        },
+        {
+          "text": "Storage and keys",
+          "level": 2
+        },
+        {
+          "text": "EFS on Claude Platform on AWS",
+          "level": 2
+        },
+        {
+          "text": "EFS on Claude Models on Google Cloud (Anthropic managed)",
+          "level": 2
+        },
+        {
+          "text": "If your key or bucket stops working",
+          "level": 2
+        },
+        {
+          "text": "How long changes take",
+          "level": 2
+        },
+        {
+          "text": "Glossary",
+          "level": 2
+        },
+        {
+          "text": "Reference",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "anthropic": 59,
+        "data": 44,
+        "efs": 43,
+        "storage": 41,
+        "bucket": 41,
+        "accordion": 40,
+        "claude": 37,
+        "safety": 35,
+        "workspace": 31,
+        "manag": 29,
+        "own": 26,
+        "see": 23,
+        "review": 22,
+        "key": 22,
+        "title": 21,
+        "customer": 20,
+        "cloud": 19,
+        "platform": 18,
+        "acces": 18,
+        "model": 15,
+        "api": 15,
+        "enterprise": 14,
+        "google": 14,
+        "set": 13,
+        "human": 13,
+        "one": 12,
+        "retention": 11,
+        "turn": 11,
+        "off": 11,
+        "team": 11,
+        "safeguard": 10,
+        "zdr": 10,
+        "organization": 10,
+        "seal": 10,
+        "transparency": 10,
+        "transcript": 10,
+        "frontier": 9,
+        "cas": 9,
+        "doe": 9,
+        "request": 9,
+        "stop": 9,
+        "automat": 9,
+        "aws": 9,
+        "where": 8,
+        "workspac": 8,
+        "monitor": 8,
+        "stor": 7,
+        "select": 7,
+        "each": 7,
+        "account": 7
+      },
+      "word_count": 2191
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__flagged-cases.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/flagged-cases",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/flagged-cases",
+      "headings": [
+        {
+          "text": "How Safety Case review works",
+          "level": 2
+        },
+        {
+          "text": "Get Safety Cases",
+          "level": 2
+        },
+        {
+          "text": "In your own storage",
+          "level": 3
+        },
+        {
+          "text": "Through the API",
+          "level": 3
+        },
+        {
+          "text": "How you know when a Safety Case is created",
+          "level": 3
+        },
+        {
+          "text": "Review a Safety Case",
+          "level": 2
+        },
+        {
+          "text": "What a Safety Case includes",
+          "level": 3
+        },
+        {
+          "text": "Investigate a Safety Case",
+          "level": 3
+        },
+        {
+          "text": "Respond to a Safety Case",
+          "level": 2
+        },
+        {
+          "text": "Option 1: Write a response file",
+          "level": 3
+        },
+        {
+          "text": "Option 2: Respond through the API",
+          "level": 3
+        },
+        {
+          "text": "After you respond",
+          "level": 3
+        },
+        {
+          "text": "If Anthropic takes action",
+          "level": 2
+        },
+        {
+          "text": "If you don\u2019t respond",
+          "level": 3
+        },
+        {
+          "text": "If Anthropic suspends access",
+          "level": 3
+        },
+        {
+          "text": "Best practices",
+          "level": 2
+        },
+        {
+          "text": "Reach out for help",
+          "level": 2
+        },
+        {
+          "text": "Questions and troubleshooting",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "safety": 76,
+        "case": 48,
+        "anthropic": 44,
+        "cas": 25,
+        "respond": 21,
+        "bucket": 19,
+        "claude": 18,
+        "storage": 16,
+        "transcript": 15,
+        "review": 14,
+        "api": 14,
+        "team": 13,
+        "own": 13,
+        "send": 12,
+        "platform": 11,
+        "response": 11,
+        "user": 10,
+        "title": 8,
+        "enterprise": 8,
+        "frontier": 8,
+        "safeguard": 8,
+        "only": 8,
+        "monitor": 8,
+        "see": 8,
+        "account": 8,
+        "file": 8,
+        "accordion": 8,
+        "get": 7,
+        "check": 7,
+        "through": 7,
+        "also": 7,
+        "one": 7,
+        "each": 7,
+        "need": 7,
+        "day": 7,
+        "acces": 7,
+        "human": 6,
+        "find": 6,
+        "clos": 6,
+        "read": 6,
+        "workspace": 6,
+        "data": 6,
+        "card": 6,
+        "http": 5,
+        "com": 5,
+        "under": 5,
+        "automat": 5,
+        "off": 5,
+        "organization": 5,
+        "work": 5
+      },
+      "word_count": 1675
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__human-review-and-access-transparency.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency",
+      "headings": [
+        {
+          "text": "When does automated safety monitoring access your data?",
+          "level": 2
+        },
+        {
+          "text": "Turn off Anthropic Human Review",
+          "level": 2
+        },
+        {
+          "text": "Check Access Transparency",
+          "level": 2
+        },
+        {
+          "text": "On Claude Platform on AWS",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "anthropic": 36,
+        "acces": 26,
+        "claude": 24,
+        "review": 22,
+        "data": 19,
+        "transparency": 17,
+        "platform": 16,
+        "event": 16,
+        "human": 15,
+        "enterprise": 14,
+        "turn": 14,
+        "read": 13,
+        "record": 12,
+        "safety": 12,
+        "api": 12,
+        "compliance": 12,
+        "off": 11,
+        "aws": 11,
+        "frontier": 10,
+        "safeguard": 10,
+        "check": 9,
+        "automat": 8,
+        "see": 8,
+        "workspace": 8,
+        "step": 8,
+        "activity": 8,
+        "monitor": 7,
+        "manag": 7,
+        "feed": 7,
+        "team": 6,
+        "storage": 6,
+        "own": 6,
+        "organization": 6,
+        "key": 6,
+        "title": 5,
+        "workspac": 5,
+        "someone": 5,
+        "view": 5,
+        "cover": 5,
+        "reason": 5,
+        "bucket": 5,
+        "http": 4,
+        "only": 4,
+        "term": 4,
+        "new": 4,
+        "get": 4,
+        "page": 4,
+        "customer": 4,
+        "card": 4,
+        "com": 3
+      },
+      "word_count": 1171
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__overview.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/overview",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/overview",
+      "headings": [
+        {
+          "text": "On Claude Platform, EFS applies to a whole workspace",
+          "level": 2
+        },
+        {
+          "text": "Enterprise Data Controls",
+          "level": 2
+        },
+        {
+          "text": "See also",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 20,
+        "efs": 18,
+        "data": 16,
+        "enterprise": 14,
+        "anthropic": 14,
+        "own": 11,
+        "card": 11,
+        "frontier": 10,
+        "safeguard": 10,
+        "platform": 10,
+        "safety": 10,
+        "storage": 9,
+        "manag": 9,
+        "key": 9,
+        "model": 8,
+        "workspace": 8,
+        "review": 7,
+        "api": 7,
+        "title": 6,
+        "http": 6,
+        "com": 6,
+        "doc": 6,
+        "manage": 6,
+        "seal": 6,
+        "cas": 6,
+        "customer": 5,
+        "icon": 5,
+        "href": 5,
+        "retention": 4,
+        "organization": 4,
+        "cloud": 4,
+        "term": 4,
+        "control": 4,
+        "request": 4,
+        "cardgroup": 4,
+        "zdr": 3,
+        "most": 3,
+        "capable": 3,
+        "account": 3,
+        "such": 3,
+        "service": 3,
+        "doesn": 3,
+        "prompt": 3,
+        "respons": 3,
+        "bucket": 3,
+        "encrypt": 3,
+        "flagg": 3,
+        "team": 3,
+        "cover": 3,
+        "faq": 3
+      },
+      "word_count": 572
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__safety-case-files.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/safety-case-files",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-case-files",
+      "headings": [
+        {
+          "text": "What\u2019s in the bucket",
+          "level": 2
+        },
+        {
+          "text": "Alerts for new files",
+          "level": 2
+        },
+        {
+          "text": "Amazon S3",
+          "level": 3
+        },
+        {
+          "text": "Google Cloud Storage",
+          "level": 3
+        },
+        {
+          "text": "Safety Case file",
+          "level": 2
+        },
+        {
+          "text": "Transcript",
+          "level": 2
+        },
+        {
+          "text": "Notice",
+          "level": 2
+        },
+        {
+          "text": "Response file",
+          "level": 2
+        },
+        {
+          "text": "Rules for a valid file",
+          "level": 3
+        },
+        {
+          "text": "Why a Safety Case stays open",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "safety": 51,
+        "anthropic": 45,
+        "case": 43,
+        "file": 41,
+        "bucket": 22,
+        "response": 19,
+        "each": 17,
+        "message": 15,
+        "day": 13,
+        "transcript": 12,
+        "list": 12,
+        "read": 11,
+        "storage": 10,
+        "one": 10,
+        "cas": 9,
+        "after": 9,
+        "workspace": 9,
+        "field": 9,
+        "fil": 8,
+        "respond": 8,
+        "clos": 8,
+        "write": 8,
+        "alert": 8,
+        "writ": 7,
+        "team": 7,
+        "set": 7,
+        "messag": 7,
+        "hold": 7,
+        "notice": 7,
+        "object": 7,
+        "doesn": 7,
+        "api": 7,
+        "sent": 7,
+        "valid": 7,
+        "about": 6,
+        "cloud": 6,
+        "nam": 6,
+        "default": 6,
+        "don": 6,
+        "key": 6,
+        "add": 6,
+        "valu": 6,
+        "claude": 5,
+        "format": 5,
+        "see": 5,
+        "copy": 5,
+        "same": 5,
+        "amazon": 5,
+        "google": 5,
+        "start": 5
+      },
+      "word_count": 2219
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__safety-cases-api.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/safety-cases-api",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-cases-api",
+      "headings": [
+        {
+          "text": "Get access",
+          "level": 2
+        },
+        {
+          "text": "Poll for Safety Cases",
+          "level": 2
+        },
+        {
+          "text": "Poll for notices",
+          "level": 3
+        },
+        {
+          "text": "How the fields differ from the file",
+          "level": 3
+        },
+        {
+          "text": "Read a message",
+          "level": 2
+        },
+        {
+          "text": "Respond to a Safety Case",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "safety": 52,
+        "api": 34,
+        "key": 32,
+        "case": 28,
+        "cas": 27,
+        "message": 24,
+        "read": 23,
+        "anthropic": 23,
+        "organization": 20,
+        "response": 16,
+        "one": 14,
+        "error": 14,
+        "get": 12,
+        "list": 11,
+        "respond": 11,
+        "request": 11,
+        "send": 11,
+        "return": 11,
+        "admin": 10,
+        "only": 9,
+        "acces": 8,
+        "notic": 8,
+        "clos": 8,
+        "notice": 8,
+        "set": 7,
+        "don": 7,
+        "file": 7,
+        "compliance": 6,
+        "each": 6,
+        "messag": 6,
+        "available": 6,
+        "create": 6,
+        "again": 6,
+        "every": 6,
+        "other": 6,
+        "later": 6,
+        "claude": 5,
+        "without": 5,
+        "user": 5,
+        "see": 5,
+        "warn": 5,
+        "such": 5,
+        "turn": 5,
+        "hold": 5,
+        "sender": 5,
+        "flagg": 5,
+        "also": 5,
+        "time": 5,
+        "before": 5,
+        "field": 5
+      },
+      "word_count": 2282
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-claude-models-on-google-cloud-anthropic-managed.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed",
+      "headings": [
+        {
+          "text": "Plan your setup",
+          "level": 2
+        },
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "What getting access changes",
+          "level": 2
+        },
+        {
+          "text": "1. Add cloud resources",
+          "level": 2
+        },
+        {
+          "text": "2. Turn on EFS for a workspace",
+          "level": 2
+        },
+        {
+          "text": "3. Check your setup",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "bucket": 44,
+        "anthropic": 36,
+        "workspace": 36,
+        "organization": 35,
+        "claude": 31,
+        "key": 30,
+        "storage": 26,
+        "efs": 23,
+        "turn": 22,
+        "cloud": 21,
+        "data": 18,
+        "enterprise": 17,
+        "frontier": 17,
+        "safeguard": 17,
+        "select": 17,
+        "acces": 16,
+        "step": 15,
+        "title": 14,
+        "manag": 14,
+        "console": 14,
+        "team": 14,
+        "card": 13,
+        "create": 13,
+        "safety": 13,
+        "google": 12,
+        "setup": 12,
+        "under": 12,
+        "before": 12,
+        "request": 11,
+        "account": 11,
+        "own": 11,
+        "review": 11,
+        "page": 11,
+        "warn": 10,
+        "workspac": 10,
+        "accordion": 10,
+        "send": 10,
+        "check": 9,
+        "off": 9,
+        "transcript": 9,
+        "save": 9,
+        "platform": 8,
+        "new": 8,
+        "customer": 8,
+        "stop": 8,
+        "retention": 7,
+        "read": 7,
+        "compliance": 7,
+        "api": 7,
+        "case": 7
+      },
+      "word_count": 1984
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-claude-platform-on-aws.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws",
+      "headings": [
+        {
+          "text": "Plan your setup",
+          "level": 2
+        },
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "What getting access changes",
+          "level": 2
+        },
+        {
+          "text": "Accept the terms",
+          "level": 3
+        },
+        {
+          "text": "1. Add cloud resources",
+          "level": 2
+        },
+        {
+          "text": "2. Turn on EFS for a workspace",
+          "level": 2
+        },
+        {
+          "text": "3. Check your setup",
+          "level": 2
+        },
+        {
+          "text": "Check who reaches your bucket and key",
+          "level": 2
+        },
+        {
+          "text": "IAM permissions",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "bucket": 55,
+        "anthropic": 51,
+        "workspace": 44,
+        "claude": 40,
+        "key": 39,
+        "organization": 39,
+        "storage": 32,
+        "turn": 29,
+        "efs": 26,
+        "account": 25,
+        "data": 23,
+        "team": 23,
+        "enterprise": 22,
+        "frontier": 22,
+        "safeguard": 22,
+        "aws": 22,
+        "console": 22,
+        "select": 22,
+        "acces": 21,
+        "card": 19,
+        "safety": 17,
+        "setup": 16,
+        "step": 16,
+        "off": 16,
+        "under": 15,
+        "page": 15,
+        "own": 14,
+        "need": 14,
+        "review": 14,
+        "title": 13,
+        "term": 13,
+        "workspac": 13,
+        "create": 13,
+        "manag": 13,
+        "before": 13,
+        "platform": 12,
+        "see": 12,
+        "new": 12,
+        "change": 11,
+        "customer": 11,
+        "once": 11,
+        "accept": 11,
+        "read": 11,
+        "send": 11,
+        "transcript": 11,
+        "request": 10,
+        "check": 10,
+        "accordion": 10,
+        "set": 9,
+        "compliance": 9
+      },
+      "word_count": 2809
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-console.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-console",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-console",
+      "headings": [
+        {
+          "text": "Plan your setup",
+          "level": 2
+        },
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "1. Get access",
+          "level": 2
+        },
+        {
+          "text": "What getting access changes",
+          "level": 3
+        },
+        {
+          "text": "Accept the terms",
+          "level": 3
+        },
+        {
+          "text": "2. Add cloud resources",
+          "level": 2
+        },
+        {
+          "text": "3. Turn on EFS for a workspace",
+          "level": 2
+        },
+        {
+          "text": "4. Set a policy for new workspaces",
+          "level": 2
+        },
+        {
+          "text": "5. Check your setup",
+          "level": 2
+        },
+        {
+          "text": "Check who reaches your bucket and key",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "workspace": 44,
+        "bucket": 44,
+        "anthropic": 43,
+        "organization": 43,
+        "key": 41,
+        "claude": 36,
+        "storage": 31,
+        "turn": 27,
+        "enterprise": 25,
+        "frontier": 25,
+        "safeguard": 25,
+        "acces": 25,
+        "safety": 24,
+        "select": 23,
+        "efs": 22,
+        "data": 22,
+        "card": 18,
+        "team": 18,
+        "review": 18,
+        "off": 17,
+        "setup": 16,
+        "console": 16,
+        "new": 16,
+        "cas": 16,
+        "set": 15,
+        "workspac": 15,
+        "customer": 15,
+        "own": 15,
+        "term": 14,
+        "see": 14,
+        "step": 14,
+        "manag": 14,
+        "account": 14,
+        "title": 13,
+        "cloud": 13,
+        "create": 13,
+        "platform": 12,
+        "accept": 12,
+        "under": 11,
+        "request": 11,
+        "get": 11,
+        "send": 11,
+        "check": 10,
+        "accordion": 10,
+        "read": 10,
+        "only": 9,
+        "change": 9,
+        "policy": 9,
+        "once": 9,
+        "api": 9
+      },
+      "word_count": 2537
+    },
+    {
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-google-cloud-agent-platform.md",
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform",
+      "headings": [],
+      "terms": {
+        "efs": 6,
+        "cloud": 5,
+        "platform": 5,
+        "enterprise": 4,
+        "frontier": 4,
+        "safeguard": 4,
+        "google": 4,
+        "agent": 4,
+        "claude": 4,
+        "cover": 4,
+        "setup": 3,
+        "acces": 3,
+        "storage": 2,
+        "project": 2,
+        "doesn": 2,
+        "account": 2,
+        "team": 2,
+        "guide": 2,
+        "data": 2,
+        "model": 2,
+        "title": 1,
+        "url": 1,
+        "http": 1,
+        "com": 1,
+        "doc": 1,
+        "manage": 1,
+        "description": 1,
+        "get": 1,
+        "bucket": 1,
+        "hold": 1,
+        "encrypt": 1,
+        "copi": 1,
+        "prompt": 1,
+        "respons": 1,
+        "beta": 1,
+        "transparency": 1,
+        "request": 1,
+        "set": 1,
+        "contact": 1,
+        "anthropic": 1,
+        "tell": 1,
+        "first": 1,
+        "retention": 1,
+        "shar": 1,
+        "any": 1,
+        "only": 1,
+        "endpoint": 1,
+        "list": 1,
+        "batch": 1,
+        "prediction": 1
+      },
+      "word_count": 134
     },
     {
       "filename": "docs__en__manage-claude__inference-hooks.md",
@@ -157304,6 +158763,22 @@
           "level": 3
         },
         {
+          "text": "Customer-owned storage events",
+          "level": 2
+        },
+        {
+          "text": "Respond to a storage event",
+          "level": 3
+        },
+        {
+          "text": "When storage events arrive",
+          "level": 3
+        },
+        {
+          "text": "When a storage event might not arrive",
+          "level": 3
+        },
+        {
           "text": "Endpoint fields",
           "level": 2
         },
@@ -157329,58 +158804,58 @@
         }
       ],
       "terms": {
-        "event": 74,
-        "endpoint": 71,
-        "key": 66,
-        "anthropic": 42,
-        "request": 40,
-        "organization": 37,
-        "list": 25,
-        "webhook": 21,
-        "send": 18,
-        "encryption": 16,
-        "api": 16,
+        "event": 103,
+        "endpoint": 73,
+        "key": 71,
+        "anthropic": 52,
+        "request": 42,
+        "organization": 41,
+        "check": 28,
+        "list": 27,
+        "bucket": 26,
+        "fail": 25,
+        "webhook": 22,
+        "send": 22,
+        "might": 19,
+        "api": 18,
+        "one": 18,
+        "after": 18,
+        "encryption": 17,
+        "doesn": 16,
         "profile": 16,
-        "doesn": 14,
-        "typ": 14,
-        "one": 14,
+        "each": 15,
+        "work": 15,
+        "typ": 15,
+        "workspace": 15,
+        "return": 14,
         "secret": 14,
+        "again": 14,
         "action": 14,
-        "return": 13,
-        "workspace": 13,
+        "customer": 12,
+        "storage": 12,
+        "before": 12,
+        "start": 12,
         "any": 12,
-        "might": 12,
-        "after": 12,
+        "about": 11,
         "user": 11,
-        "each": 11,
+        "own": 11,
+        "arrive": 11,
+        "get": 11,
         "create": 11,
-        "fail": 11,
-        "work": 10,
+        "need": 10,
         "other": 10,
+        "only": 10,
+        "time": 10,
+        "field": 10,
+        "don": 10,
         "disabl": 10,
-        "before": 9,
-        "update": 9,
-        "field": 9,
-        "use": 9,
-        "error": 9,
-        "str": 9,
-        "about": 8,
-        "profil": 8,
-        "get": 8,
-        "replace": 8,
-        "kms": 8,
-        "because": 8,
-        "deliveri": 8,
-        "arrive": 7,
-        "admin": 7,
-        "start": 7,
-        "make": 7,
-        "sign": 7,
-        "again": 7,
-        "open": 7,
-        "time": 7
+        "use": 10,
+        "workspac": 10,
+        "such": 9,
+        "admin": 9,
+        "update": 9
       },
-      "word_count": 3281
+      "word_count": 4130
     },
     {
       "filename": "docs__en__manage-claude__plugins-api.md",
@@ -162366,63 +163841,67 @@
           "level": 2
         },
         {
+          "text": "Limit where your Claude API keys work",
+          "level": 2
+        },
+        {
           "text": "Next steps",
           "level": 2
         }
       ],
       "terms": {
-        "agent": 114,
-        "tool": 103,
-        "session": 73,
+        "agent": 120,
+        "tool": 104,
+        "session": 78,
         "csharp": 55,
-        "host": 47,
-        "claude": 43,
+        "claude": 53,
+        "host": 48,
         "list": 42,
         "java": 42,
         "php": 42,
         "run": 37,
+        "sandbox": 36,
         "only": 36,
         "each": 34,
-        "sandbox": 33,
+        "limit": 32,
         "web": 31,
+        "environment": 30,
         "set": 30,
-        "environment": 29,
-        "limit": 28,
-        "see": 27,
-        "credential": 26,
-        "result": 26,
-        "keep": 25,
+        "credential": 28,
+        "keep": 28,
+        "see": 28,
+        "result": 27,
+        "key": 25,
         "call": 25,
+        "api": 24,
+        "request": 24,
         "read": 24,
         "mcp": 23,
-        "need": 20,
+        "need": 21,
+        "vault": 20,
         "search": 20,
         "text": 20,
-        "request": 19,
-        "key": 19,
-        "server": 19,
-        "vault": 18,
-        "one": 18,
+        "server": 20,
+        "one": 19,
+        "network": 18,
+        "every": 18,
         "doe": 18,
         "also": 18,
-        "api": 17,
+        "manag": 17,
         "budget": 17,
-        "manag": 16,
+        "deployment": 16,
         "fetch": 16,
-        "every": 16,
-        "deployment": 15,
         "url": 15,
         "reach": 15,
-        "network": 15,
         "fil": 15,
+        "where": 14,
         "input": 14,
         "code": 14,
         "allow": 14,
-        "check": 13,
-        "application": 12,
-        "end": 12
+        "stop": 13,
+        "add": 13
       },
-      "word_count": 6496
+      "word_count": 6829
     },
     {
       "filename": "docs__en__managed-agents__secure-deployment-monitoring.md",
@@ -168726,6 +170205,10 @@
       "url": "https://platform.claude.com/docs/en/release-notes/overview",
       "headings": [
         {
+          "text": "November 23, 2026",
+          "level": 3
+        },
+        {
           "text": "November 17, 2026",
           "level": 3
         },
@@ -169399,12 +170882,12 @@
         }
       ],
       "terms": {
-        "claude": 610,
+        "claude": 614,
         "api": 234,
-        "model": 190,
-        "beta": 164,
+        "model": 192,
+        "beta": 166,
         "tool": 142,
-        "see": 140,
+        "see": 141,
         "now": 138,
         "opu": 127,
         "request": 108,
@@ -169413,44 +170896,44 @@
         "support": 79,
         "sonnet": 77,
         "token": 76,
+        "launch": 69,
         "return": 69,
-        "launch": 68,
+        "manag": 68,
         "session": 68,
-        "manag": 66,
         "think": 64,
         "sdk": 61,
         "available": 61,
         "fable": 56,
-        "organization": 52,
+        "organization": 54,
+        "add": 51,
         "error": 51,
-        "add": 50,
-        "prompt": 47,
+        "prompt": 48,
         "block": 45,
         "read": 44,
         "output": 43,
+        "platform": 42,
         "code": 42,
         "messag": 42,
         "console": 41,
-        "platform": 40,
+        "anthropic": 39,
+        "acces": 39,
         "key": 39,
-        "acces": 38,
-        "event": 37,
+        "event": 38,
         "web": 37,
         "new": 36,
         "mode": 36,
-        "anthropic": 35,
+        "our": 35,
         "mytho": 35,
         "set": 34,
         "context": 34,
         "endpoint": 34,
         "limit": 34,
-        "our": 34,
+        "send": 33,
         "usage": 33,
         "fast": 33,
-        "learn": 33,
-        "requir": 33
+        "learn": 33
       },
-      "word_count": 15913
+      "word_count": 16037
     },
     {
       "filename": "docs__en__release-notes__system-prompts__claude-fable-5.md",

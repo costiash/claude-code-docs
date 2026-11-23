@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T15:14:31.628971Z",
+  "generated_at": "2026-11-23T18:16:10.680356Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -9651,7 +9651,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed.md",
       "title": "Anthropic-managed",
       "category": "core_documentation",
-      "sha256": "37aa2b03429bc0b6265ea538f8e3033e9d10856229946d9e1d511ffdbf15c6ef",
+      "sha256": "2cddec4fdeb299fb67f8f7441e17f4f3791b8e0ee0a4e91b107e3e0f63100fb4",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9926,7 +9926,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/overview.md",
       "title": "Features overview",
       "category": "core_documentation",
-      "sha256": "cc48ad3d20128a0ac3b618bfb31f599b6ab1f3b721ff4bd67ec64c97c78a6e51",
+      "sha256": "4a3a65a57c0c0b5061e86c90d624d48279b5f7274e9c97daed39ce36a6fb21b8",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10531,7 +10531,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "fa33657e23332c792360abc6ad48b940dd46bf8e32229133e2c2a101fedf3483",
+      "sha256": "3f4c2e32a3d372e6a1766e2d5fe6651add00a1d96ccc66b7a4ead37846a592c5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10553,7 +10553,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api.md",
       "title": "Admin API",
       "category": "core_documentation",
-      "sha256": "30b0e6eb9637d30a1721ad8f84a0a94eacb84665f6c473d90286d459993d4f1c",
+      "sha256": "f90036fa0dc08260231e8b898bc141545cfbd737d6bc8db7484634cb9e6d7641",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10564,7 +10564,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/admin-api-keys.md",
       "title": "Create an Admin API key",
       "category": "core_documentation",
-      "sha256": "c7254fe9dcbeb1495b606544e91c398491b0d90c157c6b25bbcc68b1b1463c5c",
+      "sha256": "2d6e45d6aa1dd23b44ff8efe0bb7ce0c623d18946928273045c473fd68e7cce9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10586,7 +10586,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention.md",
       "title": "API and data retention",
       "category": "core_documentation",
-      "sha256": "f084519488452d8dd44061eb3f7a92afad2205b10ed990f40a48f78ae8381174",
+      "sha256": "d5de2aa8299ca95b52d991866ec1057276327ded1234def21885b0d6eaeec74e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10641,7 +10641,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "c6eb2ce73e97c336f301dbbe7e303375118c07ee0ad0105427f740cc7553204e",
+      "sha256": "41ece6ba569dc90db6e8f18a5dca6c3a0e1a1324d98953c0a1f8e29cf364b3bb",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10718,7 +10718,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-coverage-claude-platform.md",
       "title": "Coverage: Claude Platform",
       "category": "core_documentation",
-      "sha256": "c0eb878c64daebe40835dceb007aa11abfec5eae17ecd03308c2e91ece48b38e",
+      "sha256": "572b8278136792e32e98b1529b0cc7c48d1b26f492ee18887a0fc7da4d8f9e43",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10729,7 +10729,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek-data-retention.md",
       "title": "Data retention and ZDR",
       "category": "core_documentation",
-      "sha256": "26b80d72be561fd3320febec28dacc519521c2170b862a87bee23a446ea5200a",
+      "sha256": "4d86dc5172e1b9749bba65539d25713a0dd47248cd6bef531ca099ed8cc913a2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10795,7 +10795,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-api.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "409a49bbbda6f8f00b943aaaa73b93186d602840011f5b34e4a3578f7cb3f6f5",
+      "sha256": "ade5c15cfcbf38dde9b2c8bbdc644df9c59a73e43d4e8d9260717791e565398f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10806,7 +10806,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md",
       "title": "Set up the Compliance API",
       "category": "core_documentation",
-      "sha256": "ca3649c0911a944778b8af6e8fcebc9779c72f494d54f9cd52a39c3916e61222",
+      "sha256": "93ac5147203e67c8f2610008bc21768d18b932a6099c9199c5ceb30f15e86c46",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10828,7 +10828,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-errors.md",
       "title": "Errors",
       "category": "core_documentation",
-      "sha256": "393c8f3102c813623b7d8f61ffb7609c0ec4ba164413db6d1f9a36a8863f3613",
+      "sha256": "135f1cf338e152a8245a3a150d03dc2c3b421fb3bdb2250f9a92338c31acca7e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10839,7 +10839,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-faq.md",
       "title": "FAQ",
       "category": "core_documentation",
-      "sha256": "4cbee06ca2f142e29daa6fd003d73eb19e86c668428d0d37957ba2365d7333bb",
+      "sha256": "40a1fe518f8f79a0b790c13c7fc9777e50df453c6468f35fb2d4f202b3c5d251",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10850,7 +10850,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns.md",
       "title": "Design your integration",
       "category": "core_documentation",
-      "sha256": "9661e50e6554050cef488dd2852d22eac8282dde1b15eb072ff79e82f6199bcd",
+      "sha256": "325684ce5aac662bb82bf87622e27ee1068f3f1b4ca2f6b487a56313aafc4216",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10961,6 +10961,160 @@
       "title": "Data residency",
       "category": "core_documentation",
       "sha256": "6f0350f5409a6f2541880d140506e805eb789be8f855185c0330b21da53474c4",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/customer-managed-keys",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__customer-managed-keys.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-managed-keys",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-managed-keys.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "11cb57db3d514b43e1fd949b9289efe9c74d26fb1041fb6cc25dd33a8850bade",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/customer-owned-storage",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__customer-owned-storage.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-owned-storage",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/customer-owned-storage.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "6135e77ddac9bc8e35acd2fdc22e3041f3559bb7fb053d8ecea4e810072c407f",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/external-storage",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__external-storage.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "66160644c6d2c0df8a99f0db0f5185c231134ffeff61a547d481f126003cc15a",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/external-storage-manage",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__external-storage-manage.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage-manage",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/external-storage-manage.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "43354a3ef1cc14a910bcce28851856fc03c713c9b3459bd0319d4ec8e3f15dc2",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/faq",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__faq.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/faq",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/faq.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "19228c2fb188dc4d64dbb6b52c44315d3fb532e2588667c403650fbac51869c1",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/flagged-cases",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__flagged-cases.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/flagged-cases",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/flagged-cases.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "1c1da32808e7b139cb08ce988b2950fcf778c02c46c1eeb1e4f141b18996b723",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__human-review-and-access-transparency.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "d7a31e7f881d40a2889d243ee5a075253ede3eb79f6bbb12256a0d65f2711aca",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/overview",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__overview.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/overview",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/overview.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "cb1704239fff745698773d8e77e9b1f1a93955dbba7f5681c7a751bcd31c9168",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/safety-case-files",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__safety-case-files.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-case-files",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-case-files.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "d184c45f35b1c0bac693e3605ac1b0e9d87eb52e9e3d507f1d3b82969a006c73",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/safety-cases-api",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__safety-cases-api.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-cases-api",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/safety-cases-api.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "45e8d0a30a3d80810818099136465a2f6e862d46ee38afbba652efeeb682c891",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-claude-models-on-google-cloud-anthropic-managed.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "176f24b1694870e614ea9218fc413b9ef130699b3857382818fc85a7fac99c87",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-claude-platform-on-aws.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "1b126cff54cefe40f71c776cb5cab25553f74cbd9fb7299176bf0d05016d594c",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-console",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-console.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-console",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-console.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "ad2d4843b85175e7a7d17f02d6838df95601fc2abf4f542ea1ff833cc7fa06fa",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform",
+      "filename": "docs__en__manage-claude__enterprise-frontier-safeguards__setup-google-cloud-agent-platform.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform.md",
+      "title": "Untitled",
+      "category": "core_documentation",
+      "sha256": "1eb85f1d9f652ee7a92bdd631e330faa9db07ec5e3918ea53c280fd2e2b38936",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11103,7 +11257,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/organization-webhooks.md",
       "title": "Organization webhooks (beta)",
       "category": "core_documentation",
-      "sha256": "763af330b0cf799bfe1ed179dbb085298c8c90493f43c713c91aa4ab20d614a2",
+      "sha256": "3f519000a40a697701d9a23ef50a99125142caed1f6922f81ae7d8381bc625e9",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11554,7 +11708,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/secure-deployment.md",
       "title": "Secure your deployment",
       "category": "core_documentation",
-      "sha256": "b60f56b02258502b54735f6ef735158d6b2eae8278067c80d4daa1678335e24d",
+      "sha256": "6aa28a05fa3516c16b3659e946f63af81d7b17397bff2321205672abd5fc15f5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -12214,7 +12368,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "2a8a8d7a43603a8365dece548bd62ed9a92fcbb74ca3519d7d97393430cc0bfe",
+      "sha256": "3cb67f10998c3d1df7fba5bc10e097ed9ca2d7db6bfc506e35b248bb93355279",
       "lastmod": null,
       "fetch_status": "ok"
     },
