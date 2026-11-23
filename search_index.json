@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T06:18:34.271258Z",
+  "generated_at": "2026-11-23T15:14:35.251439Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -141477,7 +141477,7 @@
         "agent": 14,
         "rol": 14
       },
-      "word_count": 6133
+      "word_count": 6128
     },
     {
       "filename": "docs__en__build-with-claude__claude-models-on-google-cloud__google-managed.md",
@@ -151714,16 +151714,16 @@
         "event": 61,
         "content": 47,
         "api": 41,
-        "anthropic": 39,
-        "claude": 34,
+        "anthropic": 38,
+        "claude": 35,
         "organization": 33,
-        "cover": 31,
-        "feed": 26,
+        "cover": 32,
+        "feed": 27,
         "key": 23,
         "preservation": 23,
         "record": 22,
+        "compliance": 22,
         "see": 22,
-        "compliance": 21,
         "activity": 20,
         "accordion": 20,
         "cmek": 18,
@@ -151749,8 +151749,6 @@
         "step": 8,
         "preserv": 8,
         "written": 8,
-        "account": 7,
-        "representative": 7,
         "code": 7,
         "example": 7,
         "request": 7,
@@ -151758,9 +151756,11 @@
         "field": 7,
         "through": 6,
         "reason": 6,
-        "contact": 6
+        "contact": 6,
+        "account": 6,
+        "representative": 6
       },
-      "word_count": 2888
+      "word_count": 2916
     },
     {
       "filename": "docs__en__manage-claude__access-transparency-log.md",

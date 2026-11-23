@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T06:18:31.108076Z",
+  "generated_at": "2026-11-23T15:14:31.628971Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -9651,7 +9651,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed.md",
       "title": "Anthropic-managed",
       "category": "core_documentation",
-      "sha256": "f390ec4819ab7f87368a929bde2819843f556261109030198612e2ab6162aee4",
+      "sha256": "37aa2b03429bc0b6265ea538f8e3033e9d10856229946d9e1d511ffdbf15c6ef",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10531,7 +10531,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "a214252fb5f28dc29a486fdf5f4da57598f7c8ca89be56f8fdff6ec6dc85b3cb",
+      "sha256": "fa33657e23332c792360abc6ad48b940dd46bf8e32229133e2c2a101fedf3483",
       "lastmod": null,
       "fetch_status": "ok"
     },
