@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T21:15:36.675219Z",
+  "generated_at": "2026-11-24T00:19:34.083751Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -15,7 +15,7 @@
       "md_url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
       "title": "Claude Code Changelog",
       "category": "release_notes",
-      "sha256": "5469fbb7031b41a033ab0442b112c50adb9ad7bf4c2ad59181a8fe5c08489032",
+      "sha256": "384e7c027153b3f90fc82f51f043c6a380661e57cc660531ec1848f7227202e0",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -609,8 +609,8 @@
       "md_url": "https://code.claude.com/docs/en/changelog.md",
       "title": "Claude Code changelog",
       "category": "claude_code",
-      "sha256": "bcdb93cb7e0002b8747c3d82508e02d47fc313efa9e4118b8643cbc8d4fc9415",
-      "lastmod": "2026-11-20T22:39:01.713Z",
+      "sha256": "ed4af84e73b69bfa9946be0a42f726eadb3761c3455b481e8831e2fc6d6a944f",
+      "lastmod": "2026-11-23T21:41:02.338Z",
       "fetch_status": "ok"
     },
     {
@@ -907,7 +907,7 @@
       "title": "Set up Code Review",
       "category": "claude_code",
       "sha256": "9f8c9e67dc7e2fcd2dfaa1dca9a4f5d3020a786caf95fae6391f49db7e106553",
-      "lastmod": "2026-11-23T20:37:31.594Z",
+      "lastmod": "2026-11-23T21:03:12.501Z",
       "fetch_status": "ok"
     },
     {
@@ -1974,7 +1974,7 @@
       "title": "Set up PR Steward",
       "category": "claude_code",
       "sha256": "9cfd6be4d816c21168d325f66efdd893ff8151befad5b654fb42bab1d4e4cc37",
-      "lastmod": "2026-11-23T20:46:16.677Z",
+      "lastmod": "2026-11-23T21:03:12.501Z",
       "fetch_status": "ok"
     },
     {
@@ -10784,7 +10784,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "3f4c2e32a3d372e6a1766e2d5fe6651add00a1d96ccc66b7a4ead37846a592c5",
+      "sha256": "996d15e64c309a499164e4bfc54335f7d817e246451ac466d7b5b9ab9f6ffa6f",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10894,7 +10894,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/cmek.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "41ece6ba569dc90db6e8f18a5dca6c3a0e1a1324d98953c0a1f8e29cf364b3bb",
+      "sha256": "4063a58d173ddf51c8933fea935637828eb2ab87286b7daa8756109bbab3c765",
       "lastmod": null,
       "fetch_status": "ok"
     },
