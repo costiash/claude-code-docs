@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-24T00:19:34.083751Z",
+  "generated_at": "2026-11-24T12:15:35.385062Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -840,8 +840,8 @@
       "md_url": "https://code.claude.com/docs/en/code-mode.md",
       "title": "Run tool calls from code with Code Mode",
       "category": "claude_code",
-      "sha256": "9515bd799a2b8c7493c79b1ffc7378482a8646503cc0cc509c44d263ec5e6de1",
-      "lastmod": "2026-11-23T20:45:53.706Z",
+      "sha256": "4ffe4498d642120c441c0a1844405fa81815c928e72ce630524c17e0c13c867e",
+      "lastmod": "2026-11-24T10:39:46.085Z",
       "fetch_status": "ok"
     },
     {
