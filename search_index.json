@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-24T21:16:19.470143Z",
+  "generated_at": "2026-11-25T00:19:42.586966Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -8721,11 +8721,11 @@
         }
       ],
       "terms": {
-        "model": 139,
-        "claude": 94,
-        "code": 88,
-        "amazon": 72,
-        "bedrock": 72,
+        "model": 140,
+        "claude": 96,
+        "code": 90,
+        "amazon": 76,
+        "bedrock": 76,
         "aws": 65,
         "credential": 64,
         "set": 41,
@@ -8772,7 +8772,7 @@
         "wizard": 13,
         "command": 13
       },
-      "word_count": 5956
+      "word_count": 6034
     },
     {
       "filename": "claude-code__analytics.md",
@@ -13206,6 +13206,14 @@
           "level": 2
         },
         {
+          "text": "Watch a running scan",
+          "level": 3
+        },
+        {
+          "text": "Continue a stopped scan",
+          "level": 3
+        },
+        {
           "text": "Scan only your changes",
           "level": 3
         },
@@ -13218,6 +13226,14 @@
           "level": 3
         },
         {
+          "text": "Run a more thorough change scan",
+          "level": 3
+        },
+        {
+          "text": "Tell a scan about your system",
+          "level": 3
+        },
+        {
           "text": "Read the scan results",
           "level": 3
         },
@@ -13226,8 +13242,32 @@
           "level": 2
         },
         {
+          "text": "Patch from an older report",
+          "level": 3
+        },
+        {
           "text": "Patches are never applied automatically",
           "level": 3
+        },
+        {
+          "text": "Triage findings you already have",
+          "level": 2
+        },
+        {
+          "text": "Create a threat model",
+          "level": 2
+        },
+        {
+          "text": "Analyze your attack surface",
+          "level": 2
+        },
+        {
+          "text": "Scan from your shell",
+          "level": 2
+        },
+        {
+          "text": "Scan pull requests in GitHub Actions",
+          "level": 2
         },
         {
           "text": "How the plugin fits with other security tools",
@@ -13243,58 +13283,58 @@
         }
       ],
       "terms": {
-        "scan": 55,
-        "plugin": 39,
-        "code": 34,
-        "claude": 30,
-        "patch": 28,
-        "run": 27,
-        "security": 21,
-        "review": 21,
-        "finding": 19,
-        "report": 17,
-        "install": 15,
-        "repository": 14,
-        "model": 14,
-        "request": 14,
+        "scan": 111,
+        "claude": 53,
+        "plugin": 51,
+        "code": 50,
+        "run": 36,
+        "patch": 35,
+        "report": 29,
+        "finding": 27,
+        "request": 27,
+        "session": 25,
+        "review": 25,
+        "security": 24,
+        "repository": 23,
+        "model": 21,
+        "read": 20,
+        "pull": 19,
+        "start": 18,
+        "commit": 16,
+        "agent": 15,
+        "job": 15,
+        "codebase": 14,
+        "install": 14,
+        "command": 14,
+        "only": 13,
+        "check": 13,
         "one": 13,
-        "session": 12,
-        "agent": 12,
-        "apply": 10,
-        "such": 10,
-        "commit": 10,
+        "before": 12,
+        "chang": 12,
+        "later": 12,
+        "apply": 11,
+        "find": 11,
+        "such": 11,
+        "change": 11,
+        "turn": 10,
+        "choose": 10,
+        "own": 10,
+        "github": 10,
+        "fix": 10,
+        "add": 10,
+        "open": 10,
+        "scann": 10,
         "each": 10,
-        "codebase": 9,
-        "find": 9,
-        "only": 9,
-        "scann": 9,
-        "pull": 8,
-        "tool": 8,
-        "open": 8,
-        "same": 8,
-        "menu": 8,
-        "pick": 8,
-        "read": 8,
-        "turn": 7,
-        "chang": 7,
-        "change": 7,
-        "version": 7,
-        "start": 7,
-        "fix": 7,
-        "vulnerabiliti": 6,
-        "choose": 6,
-        "see": 6,
-        "other": 6,
-        "provider": 6,
-        "directory": 6,
-        "own": 6,
-        "before": 5,
-        "whole": 5,
-        "writ": 5,
-        "set": 5,
-        "branch": 5
+        "branch": 9,
+        "see": 9,
+        "tool": 9,
+        "need": 9,
+        "version": 9,
+        "directory": 9,
+        "enter": 9,
+        "same": 9
       },
-      "word_count": 2236
+      "word_count": 3866
     },
     {
       "filename": "claude-code__claude-ship.md",
@@ -20687,13 +20727,13 @@
         }
       ],
       "terms": {
-        "model": 110,
-        "claude": 70,
-        "code": 58,
-        "google": 46,
-        "cloud": 45,
-        "platform": 42,
-        "agent": 40,
+        "model": 111,
+        "claude": 72,
+        "code": 60,
+        "google": 47,
+        "cloud": 46,
+        "platform": 44,
+        "agent": 42,
         "default": 28,
         "project": 25,
         "set": 24,
@@ -20729,16 +20769,16 @@
         "location": 8,
         "such": 8,
         "back": 8,
-        "instead": 7,
         "acces": 7,
         "garden": 7,
         "endpoint": 7,
         "current": 7,
         "without": 7,
         "window": 7,
-        "available": 6
+        "available": 6,
+        "setup": 6
       },
-      "word_count": 2906
+      "word_count": 2964
     },
     {
       "filename": "claude-code__headless.md",
@@ -25027,11 +25067,11 @@
         }
       ],
       "terms": {
-        "claude": 31,
-        "microsoft": 29,
-        "model": 29,
-        "code": 26,
-        "foundry": 25,
+        "claude": 33,
+        "microsoft": 33,
+        "model": 30,
+        "foundry": 29,
+        "code": 28,
         "deployment": 18,
         "set": 17,
         "name": 14,
@@ -25048,6 +25088,9 @@
         "entra": 6,
         "such": 6,
         "before": 5,
+        "configur": 5,
+        "setup": 5,
+        "configure": 5,
         "create": 5,
         "need": 5,
         "version": 5,
@@ -25056,13 +25099,12 @@
         "see": 5,
         "request": 5,
         "documentation": 4,
-        "configur": 4,
-        "setup": 4,
         "configuration": 4,
+        "note": 4,
+        "app": 4,
         "rbac": 4,
         "pin": 4,
         "portal": 4,
-        "configure": 4,
         "host": 4,
         "run": 4,
         "bearer": 4,
@@ -25072,13 +25114,11 @@
         "available": 3,
         "through": 3,
         "deploy": 3,
-        "acces": 3,
-        "another": 3,
-        "note": 3,
-        "first": 3,
-        "nam": 3
+        "cli": 3,
+        "install": 3,
+        "follow": 3
       },
-      "word_count": 1326
+      "word_count": 1401
     },
     {
       "filename": "claude-code__mobile.md",
@@ -41029,58 +41069,58 @@
         }
       ],
       "terms": {
-        "model": 102,
-        "claude": 88,
+        "model": 91,
+        "claude": 75,
         "retirement": 35,
-        "deprecat": 26,
-        "retir": 24,
-        "replacement": 22,
+        "deprecat": 25,
+        "retir": 22,
         "anthropic": 22,
         "active": 21,
-        "api": 20,
-        "recommend": 19,
+        "replacement": 20,
         "date": 19,
+        "recommend": 18,
+        "api": 18,
         "opu": 18,
         "note": 18,
-        "sonnet": 17,
         "sooner": 16,
+        "sonnet": 16,
         "november": 14,
         "notifi": 13,
-        "using": 13,
         "upcom": 12,
+        "using": 12,
         "june": 12,
         "developer": 11,
-        "see": 10,
-        "code": 10,
         "february": 10,
         "deprecation": 9,
-        "set": 8,
+        "see": 9,
         "haiku": 8,
-        "platform": 7,
-        "dat": 7,
         "september": 7,
         "april": 7,
         "october": 7,
         "usage": 6,
+        "platform": 5,
         "parameter": 5,
-        "apply": 5,
         "google": 5,
-        "migrat": 5,
         "before": 5,
         "help": 5,
         "new": 5,
         "migration": 5,
-        "version": 5,
         "mytho": 5,
         "july": 5,
         "january": 5,
+        "dat": 4,
         "application": 4,
         "updat": 4,
-        "page": 4,
         "follow": 4,
-        "longer": 4
+        "longer": 4,
+        "statu": 4,
+        "migrat": 4,
+        "current": 4,
+        "version": 4,
+        "august": 4,
+        "were": 4
       },
-      "word_count": 2073
+      "word_count": 1878
     },
     {
       "filename": "docs__en__about-claude__models__choosing-a-model.md",
@@ -148053,7 +148093,7 @@
       ],
       "terms": {
         "tool": 59,
-        "claude": 47,
+        "claude": 49,
         "agent": 27,
         "model": 24,
         "request": 21,
@@ -148062,11 +148102,11 @@
         "api": 19,
         "sdk": 16,
         "each": 14,
+        "let": 14,
         "conversation": 14,
         "prompt": 14,
         "call": 14,
         "think": 14,
-        "let": 13,
         "server": 11,
         "mcp": 11,
         "compaction": 11,
@@ -148076,6 +148116,7 @@
         "web": 10,
         "anthropic": 9,
         "messag": 9,
+        "own": 9,
         "cache": 9,
         "cach": 9,
         "search": 9,
@@ -148083,7 +148124,6 @@
         "memory": 9,
         "one": 8,
         "read": 8,
-        "own": 8,
         "result": 8,
         "helper": 8,
         "send": 8,
@@ -148103,7 +148143,7 @@
         "manag": 6,
         "writ": 6
       },
-      "word_count": 2474
+      "word_count": 2495
     },
     {
       "filename": "docs__en__build-with-claude__pdf-support.md",
@@ -155265,20 +155305,20 @@
         }
       ],
       "terms": {
-        "acces": 90,
-        "transparency": 67,
-        "event": 61,
+        "acces": 91,
+        "transparency": 68,
+        "event": 62,
         "content": 47,
-        "api": 42,
-        "claude": 40,
-        "anthropic": 39,
+        "api": 43,
+        "claude": 42,
+        "anthropic": 41,
         "organization": 34,
         "cover": 32,
         "feed": 27,
         "key": 26,
         "record": 23,
+        "compliance": 23,
         "preservation": 23,
-        "compliance": 22,
         "see": 22,
         "activity": 20,
         "accordion": 20,
@@ -155292,31 +155332,31 @@
         "customer": 14,
         "enabl": 13,
         "safety": 12,
+        "manag": 12,
         "automat": 12,
         "only": 11,
         "str": 11,
         "view": 10,
-        "manag": 10,
         "enterprise": 10,
         "turn": 10,
         "process": 10,
+        "read": 9,
         "through": 8,
         "visible": 8,
         "generate": 8,
         "after": 8,
-        "read": 8,
         "request": 8,
         "step": 8,
         "preserv": 8,
         "written": 8,
         "code": 7,
         "own": 7,
+        "google": 7,
+        "cloud": 7,
         "example": 7,
-        "time": 7,
-        "might": 7,
-        "field": 7
+        "time": 7
       },
-      "word_count": 3044
+      "word_count": 3078
     },
     {
       "filename": "docs__en__manage-claude__access-transparency-log.md",
@@ -161317,211 +161357,11 @@
       "word_count": 1459
     },
     {
-      "filename": "docs__en__manage-claude__oauth-apps__app-review.md",
-      "id": "docs/en/manage-claude/oauth-apps/app-review",
-      "title": "App testing and review",
+      "filename": "docs__en__manage-claude__oauth-apps__endpoints-and-parameters.md",
+      "id": "docs/en/manage-claude/oauth-apps/endpoints-and-parameters",
+      "title": "Endpoints and parameters",
       "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/app-review",
-      "headings": [
-        {
-          "text": "Before you begin",
-          "level": 2
-        },
-        {
-          "text": "Manage test users",
-          "level": 2
-        },
-        {
-          "text": "Add test users",
-          "level": 3
-        },
-        {
-          "text": "Link a test user\u2019s organization",
-          "level": 3
-        },
-        {
-          "text": "Remove a test user",
-          "level": 3
-        },
-        {
-          "text": "Publish the app",
-          "level": 2
-        },
-        {
-          "text": "If you can\u2019t prove the domain",
-          "level": 3
-        },
-        {
-          "text": "Domain rules",
-          "level": 3
-        },
-        {
-          "text": "The review",
-          "level": 2
-        },
-        {
-          "text": "If the app isn\u2019t approved",
-          "level": 3
-        },
-        {
-          "text": "Change a live app",
-          "level": 2
-        },
-        {
-          "text": "When the Console asks you to prove a domain",
-          "level": 3
-        },
-        {
-          "text": "Until Anthropic approves the change",
-          "level": 3
-        },
-        {
-          "text": "When the review of the change ends",
-          "level": 3
-        },
-        {
-          "text": "Change an app that isn\u2019t live",
-          "level": 2
-        },
-        {
-          "text": "Invoiced billing",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "app": 86,
-        "domain": 50,
-        "change": 43,
-        "test": 42,
-        "link": 39,
-        "review": 34,
-        "user": 31,
-        "organization": 26,
-        "homepage": 23,
-        "live": 21,
-        "anthropic": 21,
-        "click": 21,
-        "publish": 20,
-        "approv": 19,
-        "redirect": 19,
-        "uri": 19,
-        "bill": 18,
-        "console": 18,
-        "doesn": 16,
-        "show": 15,
-        "chang": 14,
-        "dialog": 14,
-        "box": 14,
-        "proven": 14,
-        "see": 13,
-        "until": 13,
-        "prove": 13,
-        "customer": 12,
-        "statu": 11,
-        "claude": 10,
-        "while": 10,
-        "isn": 10,
-        "list": 10,
-        "remove": 10,
-        "record": 10,
-        "still": 10,
-        "each": 9,
-        "add": 9,
-        "save": 9,
-        "check": 9,
-        "page": 8,
-        "after": 8,
-        "again": 8,
-        "tab": 8,
-        "who": 8,
-        "cap": 8,
-        "rul": 8,
-        "ask": 8,
-        "dns": 8,
-        "new": 7
-      },
-      "word_count": 2348
-    },
-    {
-      "filename": "docs__en__manage-claude__oauth-apps__branding-samples.md",
-      "id": "docs/en/manage-claude/oauth-apps/branding-samples",
-      "title": "Branding samples",
-      "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/branding-samples",
-      "headings": [
-        {
-          "text": "Copy the button\u2019s HTML and CSS",
-          "level": 2
-        },
-        {
-          "text": "Colors",
-          "level": 2
-        },
-        {
-          "text": "Download the logo",
-          "level": 2
-        }
-      ],
-      "terms": {
-        "button": 20,
-        "claude": 12,
-        "link": 10,
-        "logo": 8,
-        "html": 6,
-        "accordion": 6,
-        "organization": 5,
-        "css": 5,
-        "title": 4,
-        "bill": 4,
-        "color": 4,
-        "dark": 4,
-        "service": 3,
-        "add": 3,
-        "put": 3,
-        "start": 3,
-        "connection": 3,
-        "light": 3,
-        "styl": 3,
-        "file": 3,
-        "brand": 2,
-        "sampl": 2,
-        "platform": 2,
-        "manage": 2,
-        "oauth": 2,
-        "app": 2,
-        "warn": 2,
-        "beta": 2,
-        "anthropic": 2,
-        "term": 2,
-        "change": 2,
-        "where": 2,
-        "back": 2,
-        "end": 2,
-        "frame": 2,
-        "word": 2,
-        "open": 2,
-        "page": 2,
-        "inside": 2,
-        "style": 2,
-        "sheet": 2,
-        "sample": 2,
-        "same": 2,
-        "background": 2,
-        "svg": 2,
-        "url": 1,
-        "http": 1,
-        "com": 1,
-        "doc": 1,
-        "description": 1
-      },
-      "word_count": 954
-    },
-    {
-      "filename": "docs__en__manage-claude__oauth-apps__oauth-reference.md",
-      "id": "docs/en/manage-claude/oauth-apps/oauth-reference",
-      "title": "OAuth reference",
-      "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/oauth-reference",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/endpoints-and-parameters",
       "headings": [
         {
           "text": "Endpoints",
@@ -161536,35 +161376,43 @@
           "level": 3
         },
         {
-          "text": "Authorization request parameters",
+          "text": "Authorization requests",
           "level": 2
+        },
+        {
+          "text": "Authorization request parameters",
+          "level": 3
         },
         {
           "text": "Scopes",
-          "level": 2
-        },
-        {
-          "text": "Token request",
-          "level": 2
-        },
-        {
-          "text": "OAuth tokens for a billing connection",
-          "level": 2
-        },
-        {
-          "text": "Revocation",
-          "level": 2
-        },
-        {
-          "text": "Lifetimes",
-          "level": 2
+          "level": 3
         },
         {
           "text": "Redirect URI rules",
+          "level": 3
+        },
+        {
+          "text": "OAuth tokens",
           "level": 2
         },
         {
-          "text": "Errors",
+          "text": "Token request and response",
+          "level": 3
+        },
+        {
+          "text": "OAuth tokens for a billing connection",
+          "level": 3
+        },
+        {
+          "text": "Lifetimes",
+          "level": 3
+        },
+        {
+          "text": "Revocation",
+          "level": 3
+        },
+        {
+          "text": "Protocol errors",
           "level": 2
         },
         {
@@ -161593,152 +161441,474 @@
         }
       ],
       "terms": {
-        "token": 71,
-        "request": 65,
-        "connection": 57,
-        "bill": 36,
-        "app": 35,
-        "endpoint": 30,
-        "organization": 30,
-        "customer": 29,
-        "end": 29,
-        "error": 28,
-        "client": 25,
-        "parameter": 25,
-        "send": 25,
-        "refresh": 25,
-        "claude": 24,
-        "oauth": 21,
-        "acces": 21,
-        "code": 20,
-        "user": 19,
-        "return": 18,
-        "profile": 16,
-        "doe": 16,
-        "service": 15,
-        "anthropic": 15,
-        "authorization": 15,
-        "one": 15,
-        "account": 15,
-        "authentication": 14,
-        "uri": 14,
+        "token": 43,
+        "request": 39,
+        "endpoint": 38,
+        "app": 37,
+        "connection": 37,
+        "client": 31,
+        "parameter": 28,
+        "customer": 25,
+        "refresh": 21,
+        "claude": 20,
+        "oauth": 19,
+        "send": 19,
+        "one": 19,
+        "end": 19,
+        "code": 17,
+        "error": 16,
+        "authorization": 16,
+        "bill": 16,
+        "organization": 16,
+        "assertion": 14,
+        "value": 13,
         "redirect": 13,
-        "link": 13,
-        "each": 13,
-        "retry": 13,
-        "value": 12,
-        "identity": 12,
-        "response": 12,
+        "user": 12,
+        "authentication": 12,
+        "match": 12,
+        "uri": 12,
+        "return": 12,
+        "retry": 12,
         "revocation": 11,
-        "assertion": 11,
-        "rfc": 10,
-        "provider": 10,
-        "after": 10,
-        "second": 10,
+        "identity": 11,
+        "each": 11,
+        "see": 11,
+        "profile": 11,
+        "acces": 11,
+        "par": 10,
+        "must": 10,
+        "any": 10,
+        "only": 10,
+        "fail": 10,
         "http": 9,
-        "see": 9,
-        "par": 9,
-        "api": 9,
-        "match": 9,
-        "set": 9,
-        "expir": 9,
-        "json": 9
+        "provider": 9,
+        "key": 9,
+        "approv": 9,
+        "link": 9,
+        "anthropic": 8,
+        "rfc": 8,
+        "register": 8,
+        "claim": 8,
+        "doesn": 8,
+        "exchange": 8
       },
-      "word_count": 3747
+      "word_count": 3170
     },
     {
-      "filename": "docs__en__manage-claude__oauth-apps__organization-billing-connections.md",
-      "id": "docs/en/manage-claude/oauth-apps/organization-billing-connections",
-      "title": "Linked billing",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing",
+      "title": "Overview",
       "category": "core_documentation",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/organization-billing-connections",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing",
       "headings": [
         {
-          "text": "Eligible customers and endpoints",
+          "text": "How it works",
           "level": 2
+        },
+        {
+          "text": "How a connection starts and ends",
+          "level": 3
+        },
+        {
+          "text": "Choose who pays on each request",
+          "level": 3
+        },
+        {
+          "text": "When a request is refused",
+          "level": 3
+        },
+        {
+          "text": "When to use it",
+          "level": 2
+        },
+        {
+          "text": "Eligible customers",
+          "level": 3
         },
         {
           "text": "Which credits can pay",
           "level": 3
         },
         {
-          "text": "Setup process",
+          "text": "Which endpoints can bill a customer",
+          "level": 3
+        },
+        {
+          "text": "Whose terms and limits apply",
           "level": 2
         },
         {
-          "text": "Step 1: Create the app",
-          "level": 3
-        },
-        {
-          "text": "Step 2: Set up client authentication",
-          "level": 3
-        },
-        {
-          "text": "Step 3: Set up your back end\u2019s identity",
-          "level": 3
-        },
-        {
-          "text": "Which user profile to link",
-          "level": 3
-        },
-        {
-          "text": "A user profile for each person",
-          "level": 4
-        },
-        {
-          "text": "Link each customer",
+          "text": "What you may bill",
           "level": 2
         },
         {
-          "text": "Step 4: Create a user profile for the customer",
+          "text": "Who supports the customer",
+          "level": 2
+        },
+        {
+          "text": "Rules and special cases",
+          "level": 2
+        },
+        {
+          "text": "If you use Message Batches",
           "level": 3
         },
         {
-          "text": "Step 5: Create a pushed authorization request URL",
+          "text": "If you use code execution",
           "level": 3
         },
         {
-          "text": "Step 6: Send your user to the Claude approval page",
+          "text": "If you count tokens",
           "level": 3
         },
         {
-          "text": "Step 7: The user approves",
+          "text": "Availability",
+          "level": 2
+        },
+        {
+          "text": "API support",
           "level": 3
         },
         {
-          "text": "Step 8: Handle the callback and save the connection",
-          "level": 3
-        },
-        {
-          "text": "Test as a customer",
-          "level": 3
-        },
-        {
-          "text": "If linking doesn\u2019t complete",
-          "level": 3
-        },
-        {
-          "text": "Your redirect URI receives `error=access_denied`",
+          "text": "[Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)",
           "level": 4
         },
         {
-          "text": "Your app receives `user_profile_already_linked`",
-          "level": 4
+          "text": "Required beta headers",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "claude": 52,
+        "customer": 52,
+        "bill": 48,
+        "request": 35,
+        "organization": 31,
+        "pay": 24,
+        "link": 20,
+        "api": 17,
+        "app": 15,
+        "beta": 14,
+        "usage": 13,
+        "anthropic": 11,
+        "own": 11,
+        "credit": 10,
+        "only": 9,
+        "spend": 9,
+        "send": 8,
+        "acme": 8,
+        "end": 8,
+        "header": 7,
+        "through": 7,
+        "account": 7,
+        "connection": 7,
+        "refus": 7,
+        "platform": 6,
+        "term": 6,
+        "user": 6,
+        "opu": 6,
+        "service": 6,
+        "endpoint": 6,
+        "product": 6,
+        "set": 6,
+        "monthly": 6,
+        "cap": 6,
+        "way": 6,
+        "limit": 6,
+        "yes": 6,
+        "oauth": 5,
+        "who": 5,
+        "need": 5,
+        "each": 5,
+        "acces": 5,
+        "token": 5,
+        "count": 5,
+        "some": 5,
+        "batch": 5,
+        "whose": 4,
+        "whether": 4,
+        "mytho": 4,
+        "sonnet": 4
+      },
+      "word_count": 1596
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__credential-for-each-customer.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/credential-for-each-customer",
+      "title": "Per-customer credentials",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/credential-for-each-customer",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
         },
         {
-          "text": "Your redirect URI receives nothing",
-          "level": 4
+          "text": "Keep the OAuth tokens secret",
+          "level": 2
         },
         {
-          "text": "The code exchange returns `unauthorized_client`",
-          "level": 4
+          "text": "Call Claude with a customer\u2019s access token",
+          "level": 2
         },
         {
-          "text": "Publish your app",
+          "text": "Refresh the OAuth tokens",
+          "level": 2
+        },
+        {
+          "text": "Run an agent in a sandbox",
+          "level": 2
+        },
+        {
+          "text": "Check the result",
+          "level": 2
+        },
+        {
+          "text": "Decide whether to turn off operator-only authentication",
+          "level": 2
+        },
+        {
+          "text": "Implementation details, rules, and special cases",
+          "level": 2
+        },
+        {
+          "text": "If a refresh fails",
           "level": 3
         },
         {
-          "text": "Update calls to Claude",
+          "text": "Full refresh sample",
+          "level": 3
+        },
+        {
+          "text": "If an API key can reach the process",
+          "level": 3
+        },
+        {
+          "text": "When you write each new access token to a sandbox",
+          "level": 3
+        },
+        {
+          "text": "For agents",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "token": 106,
+        "customer": 75,
+        "refresh": 72,
+        "send": 39,
+        "request": 37,
+        "acces": 35,
+        "again": 34,
+        "bill": 25,
+        "only": 24,
+        "second": 24,
+        "client": 23,
+        "sandbox": 22,
+        "link": 21,
+        "new": 20,
+        "each": 19,
+        "one": 18,
+        "every": 18,
+        "write": 18,
+        "claude": 16,
+        "app": 16,
+        "service": 16,
+        "read": 15,
+        "file": 15,
+        "code": 14,
+        "before": 14,
+        "codegroupitem": 14,
+        "fail": 14,
+        "see": 13,
+        "after": 13,
+        "operator": 12,
+        "account": 12,
+        "authentication": 12,
+        "shell": 12,
+        "sdk": 12,
+        "cli": 12,
+        "language": 12,
+        "step": 12,
+        "own": 11,
+        "don": 11,
+        "connection": 11,
+        "get": 11,
+        "other": 11,
+        "java": 11,
+        "credential": 10,
+        "oauth": 10,
+        "agent": 10,
+        "header": 10,
+        "codegroup": 10,
+        "sent": 10,
+        "time": 10
+      },
+      "word_count": 10901
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__errors.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/errors",
+      "title": "Errors",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/errors",
+      "headings": [
+        {
+          "text": "While linking",
+          "level": 2
+        },
+        {
+          "text": "`access_denied`",
+          "level": 3
+        },
+        {
+          "text": "`user_profile_already_linked`",
+          "level": 3
+        },
+        {
+          "text": "No redirect",
+          "level": 3
+        },
+        {
+          "text": "`unauthorized_client` from the code exchange",
+          "level": 3
+        },
+        {
+          "text": "While billing",
+          "level": 2
+        },
+        {
+          "text": "403 `user_profile_billing_not_authorized`",
+          "level": 3
+        },
+        {
+          "text": "403 `user_profile_not_billable`",
+          "level": 3
+        },
+        {
+          "text": "402 `linked_organization_spend_limit_reached`",
+          "level": 3
+        },
+        {
+          "text": "402 `linked_organization_billing_unavailable`",
+          "level": 3
+        },
+        {
+          "text": "400 `user_profile_required`",
+          "level": 3
+        },
+        {
+          "text": "401 `authentication_error`",
+          "level": 3
+        },
+        {
+          "text": "429 `enforced_spend_limit_reached`",
+          "level": 3
+        },
+        {
+          "text": "503 `overloaded_error`",
+          "level": 3
+        },
+        {
+          "text": "Other errors with no code",
+          "level": 3
+        }
+      ],
+      "terms": {
+        "customer": 56,
+        "request": 50,
+        "claude": 37,
+        "link": 35,
+        "bill": 35,
+        "error": 34,
+        "app": 30,
+        "organization": 30,
+        "connection": 25,
+        "send": 24,
+        "token": 23,
+        "account": 22,
+        "one": 21,
+        "again": 20,
+        "service": 18,
+        "code": 17,
+        "doesn": 17,
+        "profile": 17,
+        "only": 16,
+        "anthropic": 15,
+        "acces": 15,
+        "check": 14,
+        "statu": 14,
+        "user": 14,
+        "person": 14,
+        "get": 14,
+        "see": 12,
+        "isn": 12,
+        "operator": 12,
+        "page": 11,
+        "another": 11,
+        "caus": 10,
+        "ask": 10,
+        "refus": 10,
+        "pay": 10,
+        "credit": 10,
+        "return": 9,
+        "header": 9,
+        "such": 9,
+        "refresh": 9,
+        "new": 9,
+        "after": 9,
+        "through": 9,
+        "set": 9,
+        "cap": 9,
+        "each": 8,
+        "profil": 8,
+        "reply": 8,
+        "oauth": 7,
+        "beta": 7
+      },
+      "word_count": 2946
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__link-and-bill-a-customer.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer",
+      "title": "Link and bill a customer",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "Sample setup",
+          "level": 3
+        },
+        {
+          "text": "Choose the user profile",
+          "level": 2
+        },
+        {
+          "text": "Link the customer",
+          "level": 2
+        },
+        {
+          "text": "Create the user profile",
+          "level": 3
+        },
+        {
+          "text": "Send the customer to approve",
+          "level": 3
+        },
+        {
+          "text": "Save the connection and its OAuth tokens",
+          "level": 3
+        },
+        {
+          "text": "Bill a request",
           "level": 2
         },
         {
@@ -161750,83 +161920,561 @@
           "level": 3
         },
         {
-          "text": "OAuth tokens for each connection",
+          "text": "Check the result",
           "level": 2
         },
         {
-          "text": "Set up your app",
+          "text": "What to tell your customers",
+          "level": 2
+        },
+        {
+          "text": "Rules and special cases",
+          "level": 2
+        },
+        {
+          "text": "If your federation rule and client authentication expect different audiences",
           "level": 3
         },
         {
-          "text": "Scopes for a billing connection",
+          "text": "If the code exchange times out",
           "level": 3
         },
         {
-          "text": "Store the tokens",
+          "text": "If you have a profile for each person",
           "level": 3
         },
         {
-          "text": "Call Claude with a connection\u2019s access token",
+          "text": "If you resell API access",
           "level": 3
         },
         {
-          "text": "Refresh the tokens",
+          "text": "If a customer approves again",
           "level": 3
         },
         {
-          "text": "Run an agent in a sandbox",
+          "text": "For agents",
           "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "customer": 83,
+        "link": 49,
+        "claude": 48,
+        "request": 43,
+        "bill": 42,
+        "profile": 38,
+        "organization": 31,
+        "send": 28,
+        "app": 22,
+        "connection": 21,
+        "one": 21,
+        "see": 21,
+        "user": 18,
+        "token": 18,
+        "code": 18,
+        "each": 16,
+        "new": 16,
+        "again": 16,
+        "exchange": 15,
+        "oauth": 13,
+        "end": 13,
+        "account": 13,
+        "client": 13,
+        "pay": 13,
+        "page": 12,
+        "codegroup": 12,
+        "only": 11,
+        "need": 11,
+        "service": 11,
+        "approv": 11,
+        "back": 11,
+        "test": 11,
+        "person": 11,
+        "who": 11,
+        "own": 10,
+        "check": 10,
+        "return": 10,
+        "header": 9,
+        "set": 9,
+        "cli": 9,
+        "jwt": 9,
+        "acces": 9,
+        "redirect": 9,
+        "already": 9,
+        "store": 9,
+        "response": 9,
+        "approve": 8,
+        "api": 8,
+        "beta": 8,
+        "once": 8
+      },
+      "word_count": 6403
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__link-button.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/link-button",
+      "title": "Link button",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-button",
+      "headings": [
+        {
+          "text": "HTML and CSS",
+          "level": 2
+        },
+        {
+          "text": "Colors and sizes",
+          "level": 2
+        },
+        {
+          "text": "Logo file",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "claude": 35,
+        "button": 28,
+        "logo": 14,
+        "pixel": 13,
+        "size": 11,
+        "link": 10,
+        "color": 9,
+        "html": 8,
+        "bill": 7,
+        "css": 7,
+        "siz": 7,
+        "title": 6,
+        "app": 6,
+        "page": 6,
+        "beta": 6,
+        "opu": 6,
+        "dark": 6,
+        "accordion": 6,
+        "such": 5,
+        "change": 5,
+        "word": 5,
+        "font": 5,
+        "element": 5,
+        "platform": 4,
+        "oauth": 4,
+        "customer": 4,
+        "mytho": 4,
+        "sonnet": 4,
+        "light": 4,
+        "sample": 4,
+        "route": 4,
+        "see": 4,
+        "file": 4,
+        "card": 4,
+        "organization": 3,
+        "http": 3,
+        "com": 3,
+        "doc": 3,
+        "manage": 3,
+        "add": 3,
+        "approval": 3,
+        "fable": 3,
+        "only": 3,
+        "need": 3,
+        "service": 3,
+        "term": 3,
+        "part": 3,
+        "styl": 3,
+        "form": 3,
+        "text": 3
+      },
+      "word_count": 1334
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__manage-customers.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/manage-customers",
+      "title": "Manage customers",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/manage-customers",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "View customers and usage",
+          "level": 2
+        },
+        {
+          "text": "Check whether a customer is linked",
+          "level": 2
+        },
+        {
+          "text": "Unlink a customer",
+          "level": 2
         },
         {
           "text": "Link a customer again",
-          "level": 3
-        },
-        {
-          "text": "Turn off operator-only authentication",
-          "level": 3
-        },
-        {
-          "text": "OAuth token snippet initialization",
-          "level": 3
-        },
-        {
-          "text": "Managing your connections",
           "level": 2
         },
         {
-          "text": "Viewing customers in Console",
-          "level": 3
-        },
-        {
-          "text": "Monitoring each customer\u2019s usage",
-          "level": 3
-        },
-        {
-          "text": "Reading a customer\u2019s link status",
-          "level": 3
-        },
-        {
-          "text": "Unlinking a customer",
-          "level": 3
-        },
-        {
-          "text": "Linking a customer to a different Claude organization",
-          "level": 3
-        },
-        {
-          "text": "Expected errors",
+          "text": "Move a customer to another organization",
           "level": 2
         },
         {
-          "text": "Causes of `user_profile_not_billable`",
-          "level": 3
-        },
-        {
-          "text": "Your customer\u2019s view",
+          "text": "Move a customer from their API key to Linked billing",
           "level": 2
         },
         {
-          "text": "Linking",
+          "text": "Decide how often to check whether customers are linked",
+          "level": 2
+        },
+        {
+          "text": "Implementation details, rules, and special cases",
+          "level": 2
+        },
+        {
+          "text": "If you unlink through the Claude API",
+          "level": 3
+        },
+        {
+          "text": "If the unlink endpoint returns a 503",
+          "level": 3
+        },
+        {
+          "text": "If a status check or the unlink endpoint refuses a request",
+          "level": 3
+        },
+        {
+          "text": "If you read usage from your back end",
+          "level": 3
+        },
+        {
+          "text": "For agents",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "customer": 74,
+        "unlink": 47,
+        "link": 35,
+        "request": 34,
+        "profile": 33,
+        "connection": 30,
+        "app": 28,
+        "end": 24,
+        "token": 23,
+        "bill": 22,
+        "organization": 16,
+        "user": 16,
+        "api": 15,
+        "endpoint": 14,
+        "doesn": 14,
+        "claude": 13,
+        "usage": 13,
+        "one": 13,
+        "check": 12,
+        "again": 12,
+        "service": 12,
+        "send": 12,
+        "refresh": 11,
+        "see": 10,
+        "account": 10,
+        "page": 10,
+        "list": 10,
+        "new": 10,
+        "oauth": 9,
+        "admin": 9,
+        "operator": 8,
+        "acces": 8,
+        "through": 8,
+        "client": 8,
+        "spend": 8,
+        "cost": 8,
+        "key": 7,
+        "back": 7,
+        "don": 7,
+        "approve": 7,
+        "same": 7,
+        "manage": 6,
+        "beta": 6,
+        "console": 6,
+        "statu": 6,
+        "read": 6,
+        "only": 6,
+        "pay": 6,
+        "add": 6,
+        "stop": 6
+      },
+      "word_count": 3270
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__set-up-your-app.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/set-up-your-app",
+      "title": "Set up your app",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/set-up-your-app",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "Create the app",
+          "level": 2
+        },
+        {
+          "text": "Set up client authentication",
+          "level": 2
+        },
+        {
+          "text": "Give your back end an identity",
+          "level": 2
+        },
+        {
+          "text": "Choose the operator service account",
+          "level": 3
+        },
+        {
+          "text": "Choose the default workspace",
+          "level": 3
+        },
+        {
+          "text": "Choose whether to get refresh tokens",
+          "level": 2
+        },
+        {
+          "text": "Check the result",
+          "level": 2
+        },
+        {
+          "text": "Decide whether to use a separate test app",
+          "level": 2
+        },
+        {
+          "text": "Rules and special cases",
+          "level": 2
+        },
+        {
+          "text": "If you change scopes",
+          "level": 3
+        },
+        {
+          "text": "If you change the service account",
+          "level": 3
+        },
+        {
+          "text": "If you move to another workspace",
+          "level": 3
+        },
+        {
+          "text": "If you still use the deprecated scope",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "app": 65,
+        "customer": 59,
+        "account": 40,
+        "token": 39,
+        "bill": 37,
+        "claude": 37,
+        "service": 37,
+        "link": 35,
+        "workspace": 29,
+        "client": 23,
+        "operator": 22,
+        "end": 20,
+        "back": 18,
+        "change": 17,
+        "own": 17,
+        "default": 17,
+        "refresh": 17,
+        "new": 17,
+        "acces": 17,
+        "tab": 16,
+        "one": 16,
+        "authentication": 15,
+        "again": 15,
+        "click": 14,
+        "oauth": 13,
+        "identity": 13,
+        "only": 13,
+        "scope": 13,
+        "each": 13,
+        "organization": 12,
+        "turn": 11,
+        "request": 10,
+        "need": 10,
+        "warn": 10,
+        "every": 10,
+        "provider": 10,
+        "set": 9,
+        "get": 9,
+        "see": 9,
+        "approve": 9,
+        "select": 9,
+        "console": 8,
+        "user": 8,
+        "send": 8,
+        "under": 8,
+        "anthropic": 8,
+        "before": 8,
+        "page": 8,
+        "after": 8,
+        "choose": 8
+      },
+      "word_count": 2662
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__test-and-publish.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/test-and-publish",
+      "title": "Test and publish",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/test-and-publish",
+      "headings": [
+        {
+          "text": "Before you begin",
+          "level": 2
+        },
+        {
+          "text": "Manage test users",
+          "level": 2
+        },
+        {
+          "text": "Add test users",
+          "level": 3
+        },
+        {
+          "text": "Remove a test user",
+          "level": 3
+        },
+        {
+          "text": "Publish the app",
+          "level": 2
+        },
+        {
+          "text": "Change a live app",
+          "level": 2
+        },
+        {
+          "text": "Change an app in testing or in review",
+          "level": 2
+        },
+        {
+          "text": "Delete the app",
+          "level": 2
+        },
+        {
+          "text": "Rules and special cases",
+          "level": 2
+        },
+        {
+          "text": "Domain rules",
+          "level": 3
+        },
+        {
+          "text": "If you can\u2019t prove the domain",
+          "level": 3
+        },
+        {
+          "text": "If the app isn\u2019t approved",
+          "level": 3
+        },
+        {
+          "text": "While a change is in review or not approved",
+          "level": 3
+        },
+        {
+          "text": "Caps while testing",
+          "level": 3
+        },
+        {
+          "text": "If your organization has invoiced billing",
+          "level": 3
+        },
+        {
+          "text": "Next steps",
+          "level": 2
+        }
+      ],
+      "terms": {
+        "app": 86,
+        "test": 45,
+        "change": 40,
+        "domain": 38,
+        "review": 34,
+        "claude": 31,
+        "link": 31,
+        "user": 29,
+        "publish": 27,
+        "customer": 27,
+        "bill": 23,
+        "organization": 21,
+        "click": 21,
+        "anthropic": 20,
+        "cap": 20,
+        "approv": 18,
+        "homepage": 18,
+        "console": 17,
+        "live": 17,
+        "chang": 17,
+        "doesn": 16,
+        "redirect": 15,
+        "uri": 15,
+        "each": 14,
+        "while": 13,
+        "see": 13,
+        "page": 12,
+        "rul": 12,
+        "new": 11,
+        "prove": 11,
+        "who": 11,
+        "remove": 11,
+        "proven": 11,
+        "add": 10,
+        "statu": 10,
+        "until": 10,
+        "list": 10,
+        "tab": 10,
+        "record": 10,
+        "dialog": 10,
+        "box": 10,
+        "oauth": 9,
+        "save": 9,
+        "check": 9,
+        "again": 9,
+        "only": 8,
+        "warn": 8,
+        "cover": 8,
+        "display": 8,
+        "invoic": 8
+      },
+      "word_count": 2494
+    },
+    {
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__what-your-customers-see.md",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/what-your-customers-see",
+      "title": "What your customers see",
+      "category": "core_documentation",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/what-your-customers-see",
+      "headings": [
+        {
+          "text": "How it works",
+          "level": 2
+        },
+        {
+          "text": "Approving your app",
           "level": 3
         },
         {
@@ -161834,79 +162482,75 @@
           "level": 3
         },
         {
-          "text": "Emails about linking and unlinking",
-          "level": 3
-        },
-        {
           "text": "Spend caps",
           "level": 3
         },
         {
-          "text": "While your app is in testing",
-          "level": 4
-        },
-        {
-          "text": "Supporting your customers",
+          "text": "Emails",
           "level": 3
         },
         {
-          "text": "Code snippet initialization",
+          "text": "Decide how to keep customers informed",
+          "level": 2
+        },
+        {
+          "text": "Next steps",
           "level": 2
         }
       ],
       "terms": {
-        "customer": 224,
-        "app": 159,
-        "user": 147,
-        "link": 144,
-        "request": 140,
-        "token": 134,
-        "connection": 128,
-        "organization": 115,
-        "bill": 102,
-        "claude": 95,
-        "profile": 94,
-        "step": 71,
-        "account": 67,
-        "send": 65,
-        "one": 60,
-        "again": 58,
-        "only": 55,
-        "end": 53,
-        "refresh": 52,
-        "page": 51,
-        "service": 48,
-        "acces": 48,
-        "set": 46,
-        "anthropic": 45,
-        "each": 44,
-        "code": 44,
-        "see": 42,
-        "cap": 40,
-        "after": 38,
-        "unlink": 38,
-        "api": 37,
-        "spend": 35,
-        "operator": 35,
-        "doesn": 34,
-        "header": 34,
-        "refus": 33,
-        "new": 33,
-        "own": 32,
-        "client": 32,
-        "back": 32,
-        "pay": 30,
-        "approval": 30,
-        "console": 27,
-        "limit": 26,
-        "response": 26,
-        "same": 25,
-        "return": 25,
-        "must": 25,
-        "every": 25,
-        "error": 24
+        "cap": 46,
+        "customer": 39,
+        "app": 39,
+        "claude": 38,
+        "link": 34,
+        "bill": 26,
+        "organization": 19,
+        "spend": 18,
+        "email": 18,
+        "page": 14,
+        "end": 13,
+        "unlink": 13,
+        "connection": 12,
+        "set": 12,
+        "request": 11,
+        "limit": 11,
+        "platform": 10,
+        "see": 9,
+        "admin": 9,
+        "approv": 9,
+        "person": 9,
+        "anthropic": 8,
+        "account": 8,
+        "click": 8,
+        "back": 7,
+        "approval": 6,
+        "opu": 6,
+        "monthly": 6,
+        "sign": 6,
+        "default": 6,
+        "get": 5,
+        "beta": 5,
+        "change": 5,
+        "member": 5,
+        "screen": 5,
+        "still": 5,
+        "again": 5,
+        "error": 5,
+        "com": 4,
+        "oauth": 4,
+        "user": 4,
+        "mytho": 4,
+        "sonnet": 4,
+        "send": 4,
+        "also": 4,
+        "work": 4,
+        "acme": 4,
+        "who": 4,
+        "role": 4,
+        "button": 4
       },
-      "word_count": 14690
+      "word_count": 1618
     },
     {
       "filename": "docs__en__manage-claude__oauth-apps__overview.md",
@@ -161916,75 +162560,75 @@
       "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/overview",
       "headings": [
         {
-          "text": "Let customers pay for their own Claude usage",
-          "level": 2
-        },
-        {
           "text": "How it works",
           "level": 2
         },
         {
-          "text": "One-time OAuth app setup",
-          "level": 2
+          "text": "Your OAuth app",
+          "level": 3
         },
         {
-          "text": "Next steps",
+          "text": "An identity provider instead of a client secret",
+          "level": 3
+        },
+        {
+          "text": "Choose your path",
           "level": 2
         }
       ],
       "terms": {
-        "claude": 30,
-        "app": 19,
+        "claude": 29,
+        "app": 22,
+        "link": 21,
+        "customer": 21,
+        "oauth": 20,
         "bill": 17,
-        "oauth": 12,
-        "customer": 12,
-        "organization": 10,
-        "link": 10,
-        "platform": 7,
-        "com": 7,
-        "usage": 7,
-        "pay": 6,
-        "own": 6,
-        "service": 6,
-        "product": 5,
-        "page": 5,
-        "back": 5,
-        "let": 4,
-        "anthropic": 4,
-        "request": 4,
-        "time": 4,
+        "card": 12,
+        "platform": 11,
+        "com": 9,
+        "manage": 9,
+        "organization": 9,
+        "back": 8,
+        "end": 8,
+        "product": 8,
+        "see": 8,
+        "title": 7,
+        "http": 7,
+        "doc": 7,
+        "icon": 6,
+        "href": 6,
+        "anthropic": 5,
+        "identity": 5,
         "approval": 4,
-        "end": 4,
-        "client": 4,
+        "endpoint": 4,
+        "parameter": 4,
+        "provider": 4,
         "token": 4,
-        "identity": 4,
-        "card": 4,
-        "title": 3,
-        "http": 3,
-        "doc": 3,
-        "manage": 3,
-        "api": 3,
-        "console": 3,
-        "set": 3,
-        "work": 3,
-        "through": 3,
-        "person": 3,
+        "code": 4,
+        "test": 4,
+        "error": 4,
+        "service": 3,
         "approv": 3,
-        "one": 3,
-        "use": 3,
-        "setup": 3,
-        "step": 3,
-        "create": 3,
-        "account": 3,
+        "need": 3,
+        "page": 3,
+        "client": 3,
+        "set": 3,
+        "start": 2,
         "warn": 2,
         "beta": 2,
-        "provid": 2,
-        "such": 2,
         "term": 2,
-        "endpoint": 2,
-        "parameter": 2
+        "pay": 2,
+        "through": 2,
+        "own": 2,
+        "work": 2,
+        "creat": 2,
+        "connection": 2,
+        "until": 2,
+        "user": 2,
+        "send": 2,
+        "admin": 2
       },
-      "word_count": 588
+      "word_count": 584
     },
     {
       "filename": "docs__en__manage-claude__opentelemetry.md",

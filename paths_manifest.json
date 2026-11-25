@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-24T21:16:13.866249Z",
+  "generated_at": "2026-11-25T00:19:37.458990Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -444,8 +444,8 @@
       "md_url": "https://code.claude.com/docs/en/amazon-bedrock.md",
       "title": "Claude Code on Amazon Bedrock",
       "category": "claude_code",
-      "sha256": "bf97c0351fbb18b8a8435014287aeb76bc77fa1ba950656d3bbc83d49fed5f7f",
-      "lastmod": "2026-11-16T21:01:03.520Z",
+      "sha256": "d0629cf8d2287fac4f04898da0701ade07ea38448ecbfb389951c0522eb47f9c",
+      "lastmod": "2026-11-24T21:13:32.712Z",
       "fetch_status": "ok"
     },
     {
@@ -610,7 +610,7 @@
       "title": "Claude Code changelog",
       "category": "claude_code",
       "sha256": "ed4af84e73b69bfa9946be0a42f726eadb3761c3455b481e8831e2fc6d6a944f",
-      "lastmod": "2026-11-23T21:41:02.338Z",
+      "lastmod": "2026-11-24T22:32:13.808Z",
       "fetch_status": "ok"
     },
     {
@@ -785,8 +785,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-security.md",
       "title": "Scan your codebase for vulnerabilities",
       "category": "claude_code",
-      "sha256": "066e0c992efe84f483e98caecd1b0d9166cffbb694fd8ad1d02bf49031aa4fc3",
-      "lastmod": "2026-11-12T22:56:55.476Z",
+      "sha256": "5b7324657a5045492c3be3097a95f55262051e1e53356c1cc09882258e1e8757",
+      "lastmod": "2026-11-24T21:04:45.366Z",
       "fetch_status": "ok"
     },
     {
@@ -830,7 +830,7 @@
       "title": "Configure cloud environments",
       "category": "claude_code",
       "sha256": "fe6eecbd603f6c424fe6d0916cb93af263358d0bf97137a5c34d7dd9682d816b",
-      "lastmod": "2026-11-23T20:38:10.597Z",
+      "lastmod": "2026-11-24T22:32:13.808Z",
       "fetch_status": "ok"
     },
     {
@@ -874,7 +874,7 @@
       "title": "Customize Code Review",
       "category": "claude_code",
       "sha256": "c91cb33597d17add203a617da2cbf2582fce7f072ceb6312efc9c70d216c7224",
-      "lastmod": "2026-11-12T22:56:55.476Z",
+      "lastmod": "2026-11-24T22:32:13.808Z",
       "fetch_status": "ok"
     },
     {
@@ -918,7 +918,7 @@
       "title": "Troubleshoot Code Review",
       "category": "claude_code",
       "sha256": "14401c8dc09337727d3a2d4bc5c01af3b138d72b61cf2ca23b0417e711524a32",
-      "lastmod": "2026-11-23T20:05:00.596Z",
+      "lastmod": "2026-11-24T22:32:13.808Z",
       "fetch_status": "ok"
     },
     {
@@ -1269,8 +1269,8 @@
       "md_url": "https://code.claude.com/docs/en/google-vertex-ai.md",
       "title": "Claude Code on Google Cloud's Agent Platform",
       "category": "claude_code",
-      "sha256": "31f11029f9f8f8d474bdf81a2355dcd12459fbeb55db6ed864844295ade2c7ef",
-      "lastmod": "2026-11-23T05:19:30.065Z",
+      "sha256": "a403446c53e31661ba47c8f77b39924fa69431c9ff24ebe798257a18fa4188a9",
+      "lastmod": "2026-11-24T21:13:32.712Z",
       "fetch_status": "ok"
     },
     {
@@ -1489,8 +1489,8 @@
       "md_url": "https://code.claude.com/docs/en/microsoft-foundry.md",
       "title": "Claude Code on Microsoft Foundry",
       "category": "claude_code",
-      "sha256": "0f033cdc09ba33b988e4524fe11f8f201cdb563fdf839d60cdd0c351d349a9b3",
-      "lastmod": "2026-11-21T00:13:40.376Z",
+      "sha256": "6b8dfe12055e61487361dfdf0ca283d623cdad90a8b4017fb100f2a9b33dba80",
+      "lastmod": "2026-11-24T21:13:32.712Z",
       "fetch_status": "ok"
     },
     {
@@ -2490,7 +2490,7 @@
       "md_url": "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
       "title": "Model deprecations",
       "category": "about_claude",
-      "sha256": "035274dd190aeed4914c26cf72b5d17cfcb7ea81138c6c63e5b1b7c0372d217e",
+      "sha256": "0289ee368d522d984505015751c7ddddb394d05a12caa205253e38f40606f4e3",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2666,7 +2666,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart.md",
       "title": "Quickstart",
       "category": "agents_and_tools",
-      "sha256": "10f3a982dd95ec3ce5fef63c416b14fb8145ce40a3684efd7ccc78b438562ea1",
+      "sha256": "a0b21713005d74ffacaf0d6cb22101034fb9bb6f4ffbb17974e493a35fea07e5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -2677,7 +2677,7 @@
       "md_url": "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector.md",
       "title": "MCP connector",
       "category": "agents_and_tools",
-      "sha256": "327445d6da5ded3dc51372dc8f97570ea82ceee9a43883cf9b9b9b7c25f8f483",
+      "sha256": "c490dfa1143c0175daafa01f5e4f20d0f16d695270ddea59b638f78e78e17989",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9904,7 +9904,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed.md",
       "title": "Anthropic-managed",
       "category": "core_documentation",
-      "sha256": "db2f9d2167cf3fa9b40af57ca4a92c869bbb722600d14058be2c6dffcb89194e",
+      "sha256": "334bd54ba799bcbf41a038c6680772e5b4ed5d4ea43a145d15f4c247c4b0ff7e",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -9948,7 +9948,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws.md",
       "title": "Claude Platform on AWS",
       "category": "core_documentation",
-      "sha256": "058a4c60f96becad49a2c862dcebd6949de91d079f70fac57d1e72a0c8d72367",
+      "sha256": "ebf212c87cac0a1fb17f8f961fb519abb8273706f32c7115a8ad1c70bb082473",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10179,7 +10179,7 @@
       "md_url": "https://platform.claude.com/docs/en/build-with-claude/overview.md",
       "title": "Features overview",
       "category": "core_documentation",
-      "sha256": "c4a235cd54767f0ea12a15b88adbe6743a4fa077cb05217163cbeeee655e3f9a",
+      "sha256": "5ce74eb435ed412ae99c230dbea78c0e1d34600e5d23247e845405f1d8d218e2",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10575,7 +10575,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "feec71e877036144156986078f4b80baae8c9a26a9d7befd7f3a61b746c749ba",
+      "sha256": "1d59df611e248f08ab6c551db367766698a0ed7eff07229fff16496f9ba1f1de",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10652,7 +10652,7 @@
       "md_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/overview.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "5d29325554e874e50aee20c3bef492c632e39eb5e2065a4a9ad931b21f2795fd",
+      "sha256": "777267a2f2c173f9a63bc0681321e0d01d4c86f83007d6233f23415846782803",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10751,7 +10751,7 @@
       "md_url": "https://platform.claude.com/docs/en/get-started.md",
       "title": "Quickstart",
       "category": "get_started",
-      "sha256": "b9228e98fbce264c2e211357be80e844e7abf3c96ba45881b322da856e725e1e",
+      "sha256": "8346bb0d3f6b3eb83ef121573219994caad7c469d29769b9f9227aabc2d752c5",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -10784,7 +10784,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/access-transparency.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "996d15e64c309a499164e4bfc54335f7d817e246451ac466d7b5b9ab9f6ffa6f",
+      "sha256": "fe6cf46dd0b9f89b5be08b7b3134232ecb36745d3d67eb690d862515a3ec6450",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11427,46 +11427,112 @@
       "fetch_status": "ok"
     },
     {
-      "id": "docs/en/manage-claude/oauth-apps/app-review",
-      "filename": "docs__en__manage-claude__oauth-apps__app-review.md",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/app-review",
-      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/app-review.md",
-      "title": "App testing and review",
+      "id": "docs/en/manage-claude/oauth-apps/endpoints-and-parameters",
+      "filename": "docs__en__manage-claude__oauth-apps__endpoints-and-parameters.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/endpoints-and-parameters",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/endpoints-and-parameters.md",
+      "title": "Endpoints and parameters",
       "category": "core_documentation",
-      "sha256": "5b169b34e489880144ef368845f2858320484eaa1c3dfbdbcd89af780bb39a32",
+      "sha256": "cf90be16024bc43e3e3e02154ece23cbd4ce8ab12a3f2cdb6e9162d79c2388ac",
       "lastmod": null,
       "fetch_status": "ok"
     },
     {
-      "id": "docs/en/manage-claude/oauth-apps/branding-samples",
-      "filename": "docs__en__manage-claude__oauth-apps__branding-samples.md",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/branding-samples",
-      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/branding-samples.md",
-      "title": "Branding samples",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing.md",
+      "title": "Overview",
       "category": "core_documentation",
-      "sha256": "b4e2bcccdcba491dcc9dc738c601173fdfd013559104fa4376e31738f46af07e",
+      "sha256": "42b4f953e4dca6c28c93d69a02b8d21f3b4807d544ef0d0b02c896b414e73157",
       "lastmod": null,
       "fetch_status": "ok"
     },
     {
-      "id": "docs/en/manage-claude/oauth-apps/oauth-reference",
-      "filename": "docs__en__manage-claude__oauth-apps__oauth-reference.md",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/oauth-reference",
-      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/oauth-reference.md",
-      "title": "OAuth reference",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/credential-for-each-customer",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__credential-for-each-customer.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/credential-for-each-customer",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/credential-for-each-customer.md",
+      "title": "Per-customer credentials",
       "category": "core_documentation",
-      "sha256": "b196a48b4cc0576233d80ae27e49490aea8ece292f5bbdc52218242a81f6f64f",
+      "sha256": "e0cdc6dfbb684d3159752f8a48fc4e80b01120a570a0346fe79232d25b398e9f",
       "lastmod": null,
       "fetch_status": "ok"
     },
     {
-      "id": "docs/en/manage-claude/oauth-apps/organization-billing-connections",
-      "filename": "docs__en__manage-claude__oauth-apps__organization-billing-connections.md",
-      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/organization-billing-connections",
-      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/organization-billing-connections.md",
-      "title": "Linked billing",
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/errors",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__errors.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/errors",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/errors.md",
+      "title": "Errors",
       "category": "core_documentation",
-      "sha256": "7d489055093e243c86715fc467885be6bcd6478d0b33d975d62458db52ab62dd",
+      "sha256": "12a6dafabba8c2599678cd3fda0e2cb1547061dd198221cbd07b603d7472e34d",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__link-and-bill-a-customer.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer.md",
+      "title": "Link and bill a customer",
+      "category": "core_documentation",
+      "sha256": "470ab035aeda80ce50667e6d8a04e7b286f02696834cda71924872de73804e6f",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/link-button",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__link-button.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-button",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/link-button.md",
+      "title": "Link button",
+      "category": "core_documentation",
+      "sha256": "101ec35c50c7e49d68ce6aeb415764cbe5d6f0f44affdff848674beee46dc0e7",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/manage-customers",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__manage-customers.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/manage-customers",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/manage-customers.md",
+      "title": "Manage customers",
+      "category": "core_documentation",
+      "sha256": "06f41bcdf09456c1e9204bda89f7588423871b80f9bc6b7b5271d8f7a1f0827a",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/set-up-your-app",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__set-up-your-app.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/set-up-your-app",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/set-up-your-app.md",
+      "title": "Set up your app",
+      "category": "core_documentation",
+      "sha256": "f3d25968b2a96be0e30b3e62bee8a2496f308c3519e064892568ddae5f4fa945",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/test-and-publish",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__test-and-publish.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/test-and-publish",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/test-and-publish.md",
+      "title": "Test and publish",
+      "category": "core_documentation",
+      "sha256": "a1016bbbb7eeec98a797dfff09933733aa2d92324e4630ce9dfc2c129c50aa70",
+      "lastmod": null,
+      "fetch_status": "ok"
+    },
+    {
+      "id": "docs/en/manage-claude/oauth-apps/linked-billing/what-your-customers-see",
+      "filename": "docs__en__manage-claude__oauth-apps__linked-billing__what-your-customers-see.md",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/what-your-customers-see",
+      "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/linked-billing/what-your-customers-see.md",
+      "title": "What your customers see",
+      "category": "core_documentation",
+      "sha256": "82ea24ee33b34332a7ace965fab969fe12f3a4b7a0a2c1e7861bfa867727ea71",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11477,7 +11543,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/overview.md",
       "title": "Overview",
       "category": "core_documentation",
-      "sha256": "feb5181a2019c39b4c95525df3dc55365338f81267c338a709e3606017bf6daf",
+      "sha256": "192e7de0f672082ff0541ff537f9ac159d26b2b029454ce9881225c0b454b96d",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11598,7 +11664,7 @@
       "md_url": "https://platform.claude.com/docs/en/manage-claude/user-profiles.md",
       "title": "User profiles",
       "category": "core_documentation",
-      "sha256": "392ecc983ea2f487d3e837bbf7a1132166849c9b46d61459ae9e1071217b28fd",
+      "sha256": "5a633bbee7fbed6c34efa1b66032b327e9b5a72245548e6d0809ec59214aecef",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -11939,7 +12005,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/quickstart.md",
       "title": "Quickstart",
       "category": "core_documentation",
-      "sha256": "c4849fc457bbfcb3f899925034b3d047e8b48504a6ac4b431f91679276f35efe",
+      "sha256": "fe59398110e79885850254e751e35bbbc446b532e6fe2240a06c8da139319185",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -12027,7 +12093,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes.md",
       "title": "Overview and quickstart",
       "category": "core_documentation",
-      "sha256": "12a98f6f642a179cc3ef911908b956242a6f50b8ad1621ec8960de25bfba01c2",
+      "sha256": "874e24062929cc43d6ae8acc85e08b70277950367f9f908a056750da1eb031b7",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -12071,7 +12137,7 @@
       "md_url": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-per-session.md",
       "title": "Sandbox per session",
       "category": "core_documentation",
-      "sha256": "dfb9f9ca5dd8dc79d773fc09756a21264bdf11c382fab8c6769d251141bfb26c",
+      "sha256": "4d4a575f508431645f8731cbb41f5673eab40311c87d3a5728ea5a789b1a10e1",
       "lastmod": null,
       "fetch_status": "ok"
     },
@@ -12632,7 +12698,7 @@
       "md_url": "https://platform.claude.com/docs/en/release-notes/overview.md",
       "title": "Overview",
       "category": "release_notes",
-      "sha256": "90cfa2196e8091c113777fa3a6799d5894c7bccb7a32b1ad2529bbf6a87bd2c1",
+      "sha256": "1d3fb48bc2ac8490f4d465c93a101a7a1b7d3ba469c4ee31807d40f86270ba80",
       "lastmod": null,
       "fetch_status": "ok"
     },
