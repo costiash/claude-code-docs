@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-25T09:15:07.269741Z",
+  "generated_at": "2026-11-25T18:16:18.204223Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -23617,7 +23617,7 @@
         "set": 48,
         "every": 46,
         "entry": 45,
-        "only": 44,
+        "only": 43,
         "appli": 39,
         "each": 38,
         "invalid": 38,

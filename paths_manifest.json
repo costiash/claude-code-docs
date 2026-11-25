@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-25T09:15:02.982127Z",
+  "generated_at": "2026-11-25T18:16:12.668239Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1445,8 +1445,8 @@
       "md_url": "https://code.claude.com/docs/en/managed-settings.md",
       "title": "Deploy managed settings",
       "category": "claude_code",
-      "sha256": "7a54e72aee8a05d8cd9134fc07dcf6e93774bffdb25b6aff36ac524eea601489",
-      "lastmod": "2026-11-25T00:36:12.273Z",
+      "sha256": "b1630f0456ed3a8fb47117beb5084e1f4e33fa7bc0fcb9b59d4bdce092e21300",
+      "lastmod": "2026-11-25T16:53:15.184Z",
       "fetch_status": "ok"
     },
     {
