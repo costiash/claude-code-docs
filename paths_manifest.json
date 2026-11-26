@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-25T18:16:12.668239Z",
+  "generated_at": "2026-11-26T06:17:14.524255Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -785,8 +785,8 @@
       "md_url": "https://code.claude.com/docs/en/claude-security.md",
       "title": "Scan your codebase for vulnerabilities",
       "category": "claude_code",
-      "sha256": "5b7324657a5045492c3be3097a95f55262051e1e53356c1cc09882258e1e8757",
-      "lastmod": "2026-11-24T21:04:45.366Z",
+      "sha256": "8cc2ed048d551f7f3e3e12e8b13e0c17562ff43b6e20da6d8d8c92023d03cbce",
+      "lastmod": "2026-11-26T03:59:22.239Z",
       "fetch_status": "ok"
     },
     {
