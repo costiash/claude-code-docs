@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-26T06:17:18.793269Z",
+  "generated_at": "2026-11-28T06:17:03.631883Z",
   "pages": [
     {
       "filename": "changelog.md",
@@ -16698,6 +16698,18 @@
           "level": 3
         },
         {
+          "text": "Keys that apply from server-managed settings and managed settings on a computer",
+          "level": 4
+        },
+        {
+          "text": "Which SSH host allowlists apply",
+          "level": 5
+        },
+        {
+          "text": "Set the model that new sessions start on",
+          "level": 4
+        },
+        {
           "text": "Deploy skills for all users",
           "level": 4
         },
@@ -16859,10 +16871,11 @@
         "cmd": 27,
         "prompt": 26,
         "user": 26,
+        "com": 25,
         "click": 25,
         "chang": 25,
         "devbox": 25,
-        "com": 24,
+        "true": 24,
         "auto": 23,
         "fil": 22,
         "remote": 22,
@@ -16874,23 +16887,22 @@
         "proxycommand": 20,
         "show": 19,
         "command": 19,
-        "true": 19,
         "before": 18,
         "preview": 18,
         "start": 18,
         "connection": 18,
         "see": 17,
         "external": 17,
+        "sshhostallowlist": 17,
         "chat": 16,
         "review": 16,
         "window": 16,
         "project": 16,
         "check": 16,
         "edit": 16,
-        "manag": 16,
-        "hostname": 16
+        "manag": 16
       },
-      "word_count": 32917
+      "word_count": 33851
     },
     {
       "filename": "claude-code__desktop-ios-simulator.md",
@@ -25043,11 +25055,11 @@
         }
       ],
       "terms": {
-        "model": 597,
+        "model": 598,
         "claude": 307,
         "code": 241,
-        "session": 194,
-        "set": 174,
+        "session": 195,
+        "set": 175,
         "default": 171,
         "opu": 130,
         "level": 129,
@@ -25066,7 +25078,7 @@
         "manag": 64,
         "fallback": 62,
         "anthropic": 57,
-        "start": 56,
+        "start": 57,
         "later": 55,
         "list": 55,
         "platform": 54,
@@ -25078,8 +25090,8 @@
         "appli": 49,
         "picker": 49,
         "variable": 48,
-        "instead": 46,
         "before": 45,
+        "instead": 45,
         "doesn": 45,
         "turn": 44,
         "sett": 43,
@@ -25094,7 +25106,7 @@
         "cloud": 39,
         "gateway": 39
       },
-      "word_count": 18030
+      "word_count": 18039
     },
     {
       "filename": "claude-code__monitoring-usage.md",
@@ -36544,7 +36556,7 @@
         "boolean": 73,
         "start": 72
       },
-      "word_count": 55812
+      "word_count": 55919
     },
     {
       "filename": "claude-code__setup.md",

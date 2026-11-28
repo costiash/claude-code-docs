@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-26T06:17:14.524255Z",
+  "generated_at": "2026-11-28T06:16:59.396555Z",
   "sources": [
     "https://platform.claude.com/sitemap.xml",
     "https://code.claude.com/docs/sitemap.xml",
@@ -1049,8 +1049,8 @@
       "md_url": "https://code.claude.com/docs/en/desktop.md",
       "title": "Desktop application",
       "category": "claude_code",
-      "sha256": "325175a43f4c3422a98213b46dceeb1aaed0484aa93091dfe7b4b2418a4b4054",
-      "lastmod": "2026-11-25T02:08:23.355Z",
+      "sha256": "ee2bb007396744a721c4e0220f9841c76863aceaab525fe0da6e92a292fd1368",
+      "lastmod": "2026-11-28T04:59:57.935Z",
       "fetch_status": "ok"
     },
     {
@@ -1511,8 +1511,8 @@
       "md_url": "https://code.claude.com/docs/en/model-config.md",
       "title": "Model configuration",
       "category": "claude_code",
-      "sha256": "5af716d1c4a3db4f932fc9dd5400403f50f335d67a737ff1134dac8757eab0da",
-      "lastmod": "2026-11-25T00:36:12.273Z",
+      "sha256": "4f10981d5b2b5d11244d105a916276423e05feea7a3780667473a42c938ca06a",
+      "lastmod": "2026-11-28T03:40:09.261Z",
       "fetch_status": "ok"
     },
     {
@@ -2226,8 +2226,8 @@
       "md_url": "https://code.claude.com/docs/en/settings-reference.md",
       "title": "All settings",
       "category": "claude_code",
-      "sha256": "f87b28f014d323f1d99655f4dd8f329693e8295eec0f1cecf8af0bcc534a5249",
-      "lastmod": "2026-11-25T02:25:02.447Z",
+      "sha256": "955ec60686c2bc0f4cc32590eac6a791f78794d824380a5c06c86a263eaee2f2",
+      "lastmod": "2026-11-28T04:59:57.935Z",
       "fetch_status": "ok"
     },
     {
